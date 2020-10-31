@@ -1,0 +1,81 @@
+﻿<Window x:Class="HealthClinic.View.AddNewEquipment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Unos nove opreme u magacin" Height="260" Width="350" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Šifra:" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Vrsta opreme:" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Naziv:" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Količina:" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <TextBox  Grid.Row="1" Grid.Column="1" x:Name="InputCodeOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Unesite šifru"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,3,10,3" />
+        <TextBox  Grid.Row="2" Grid.Column="1" x:Name="InputTypeOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Unesite vrstu opreme"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,3,10,3" />
+        <TextBox  Grid.Row="3" Grid.Column="1" x:Name="InputNameOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Unesite naziv"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,3,10,3" />
+        <TextBox  Grid.Row="4" Grid.Column="1" x:Name="InputAmountOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Unesite količinu"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,3,10,3" />
+        <Grid Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Potvrdi" Margin="45,0,5,0" Click="Button_Click_Potvrdi"/>
+            <Button Grid.Column="1" Content="Odustani" Margin="5,0,45,0" Click="Button_Click_Odustani"/>
+        </Grid>
+        
+    </Grid>
+</Window>

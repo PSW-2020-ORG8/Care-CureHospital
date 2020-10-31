@@ -1,0 +1,105 @@
+﻿<Window x:Class="HealthClinic.View.DoctorAccounts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Nalozi lekara" Height="494" Width="840" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Zaposleni lekari" FontSize="22" Margin="10,5,0,0" />
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Style="{DynamicResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" BorderBrush="Black" />
+                </Button>
+                <TextBox x:Name="InputSearch" 
+                    Grid.Column="1"
+                    Margin="8,0,10,0"
+                    materialDesign:HintAssist.Hint="Pretraži"
+                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                    BorderThickness="1"
+                    MinWidth="200"
+                    VerticalAlignment="Center" Background="{x:Null}" KeyUp="Search_KeyUp"/>
+            </Grid>
+        </Grid>
+
+        <DataGrid x:Name="DataGridDoctors" Grid.Row="1" ItemsSource="{Binding DoctorsView}" AutoGenerateColumns="False" 
+                  SelectionMode="Single" IsReadOnly="True" Margin="10,0,10,1" BorderThickness="1" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" />
+                <DataGridTextColumn Header="Zvanje" Binding="{Binding Spetialitation}" Width="*"/>
+                <DataGridTemplateColumn Header="Prikaži ceo nalog">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Prikaži" Click="Button_Click_Prikazi"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Izmeni nalog">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Izmeni" Click="Button_Click_Izmeni"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Obriši nalog">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Obriši" Click="Button_Click_Obrisi"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Grid.Row="2" FontSize="16" Margin="10,0,0,0">
+            <Run >Držite </Run>
+            <Run Foreground="Red">Ctrl</Run>
+            <Run > i pritisnite </Run>
+            <Run Foreground="Red">H </Run>
+            <Run >za pomoć pri kretanju kroz prozor</Run>
+        </TextBlock>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="190"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Margin="10,0,0,0" Click="Button_Click_KreirajNoviNalog" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PersonAddOutline" Margin="0,2,5,0" />
+                    <TextBlock Text="Kreiraj novi nalog"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="4" Margin="0,0,10,0" Click="Button_Click_PocetnaStrana">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Home" Margin="0,2,5,0"/>
+                    <TextBlock Text="Početna strana"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

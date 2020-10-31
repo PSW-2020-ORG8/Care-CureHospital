@@ -1,0 +1,129 @@
+﻿<Window x:Class="HealthClinic.View.RelocationEquipmentFromWarehouse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Premeštanje opreme iz magacina" Height="490" Width="840" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontSize="24" Margin="10,0,0,0">Sala u koju se dodaje oprema</TextBlock>
+            <TextBlock Grid.Column="1" FontSize="24" Margin="5,0,0,0">Magacin</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="DataGridEquipmentInRoom" Grid.Column="0" ItemsSource="{Binding InRoomView}" AutoGenerateColumns="False" 
+                  SelectionMode="Single" IsReadOnly="True" BorderThickness="1" Margin="10,0,5,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naziv opreme" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="DataGridEquipmentFromRoom" Grid.Column="1" ItemsSource="{Binding WarehouseView}" AutoGenerateColumns="False" 
+                  SelectionMode="Single" IsReadOnly="True" BorderThickness="1" Margin="5,0,10,0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naziv opreme" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Količina" Binding="{Binding Amount}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" Margin="10,1,0,0">Izaberite salu u koju želite da dodate opremu:</TextBlock>
+            <ComboBox x:Name="ComboBoxInRoom" ItemsSource="{Binding Path=RoomsView}" Grid.Column="1" Margin="0,3,6,3" SelectedIndex="0" SelectionChanged="EquipmentInRoom_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=RoomID}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" Margin="10,1,0,0">Unesite naziv opreme za premeštanje:</TextBlock>
+            <TextBox  Grid.Column="1" x:Name="InputNameOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Naziv opreme"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,0,0,0.5" />
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0">Unesite količinu koju želite da premestite:</TextBlock>
+            <TextBox  Grid.Column="1" x:Name="InputAmountOfEquipment"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    FontSize="16"
+                    materialDesign:HintAssist.Hint="Količina"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=JmbgBox}" 
+                    CaretBrush="#FF131619" Margin="0,0.5,0,0" />
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="170"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="10,0,0,0" Click="Button_Click_Premesti" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ShuffleVariant" Margin="0,2,6,0"/>
+                    <TextBlock Text="Premesti"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Margin="0,0,10,0" Click="Button_Click_PocetnaStrana" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Home" Margin="0,2,6,0"/>
+                    <TextBlock Text="Početna strana"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

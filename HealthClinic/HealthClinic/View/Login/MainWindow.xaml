@@ -1,0 +1,79 @@
+﻿<Window x:Class="HealthClinic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Health Clinic" Height="400" Width="550" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="LoginGrid">
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <Separator/>
+                <TextBlock Text="Za prelazak na naredno polje/dugme pritistine TAB" HorizontalAlignment="Center" FontSize="16" Margin="0,-1,0,0"/>
+                <Separator/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="1" Text="Health Clinic" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+            <materialDesign:PackIcon Grid.Row="2" Kind="AccountCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Width="130" Height="130" Margin="0,0,0,10"/>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="Korisničko ime:" FontSize="20" Margin="0,5,0,0" />
+                <TextBox Grid.Column="2" x:Name="InputUsername"
+                Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}"
+                materialDesign:HintAssist.Hint="Unesite korisničko ime" Margin="0"/>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="Lozinka:" FontSize="20" Margin="0,5,0,0" />
+                <PasswordBox Grid.Column="2" x:Name="InputPassword"
+                Style="{StaticResource MaterialDesignOutlinedPasswordFieldPasswordBox}"
+                VerticalAlignment="Top"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
+                materialDesign:HintAssist.Hint="Unesite lozinku" Margin="0" />
+            </Grid>
+
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"  HorizontalAlignment="Left" Height="Auto" Margin="10,5,0,9.6" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_ZaboravljenaLozinka">
+                    <TextBlock Text="Zaboravljena lozinka?" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Foreground="#DD1D0376" TextDecorations="Underline" />
+                </Button>
+                <Button Grid.Column="2" Content="Uloguj se" Margin="0,0,10,0" Click="Button_Click_UlogujSe" />
+                <Button Grid.Column="3" Content="Izađi" Margin="0,0,10,0" Click="Button_Click_Izadji" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

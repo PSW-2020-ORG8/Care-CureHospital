@@ -1,0 +1,49 @@
+﻿<Window x:Class="HealthClinic.View.Tutorial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Tutorijal" Height="450" Width="700" WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <MediaElement  x:Name="TutorialVideo" Margin="5,5,5,0" 
+                       Source="Tutorijal.mp4" 
+                       LoadedBehavior="Manual"    
+                       Stretch="Fill" />
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Margin="10,0,0,0" Click="Button_Click_Pusti" DragOver="Button_Click_Pusti" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Play" Margin="0,2,3,0"  />
+                    <TextBlock Text="Pusti"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="1" Margin="10,0,0,0" Click="Button_Click_Pauziraj" DragOver="Button_Click_Pauziraj" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Pause" Margin="0,2,3,0"  />
+                    <TextBlock Text="Pauziraj"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="3" Margin="0,0,10,0" Click="Button_Click_PocetnaStrana" DragOver="Button_Click_PocetnaStrana">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Home" Margin="0,2,3,0"  />
+                    <TextBlock Text="Početna strana"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

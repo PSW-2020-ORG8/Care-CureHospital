@@ -1,0 +1,100 @@
+﻿<Window x:Class="HealthClinic.View.ChangeWorkinTimeForDoctor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Izmena radnog vremena lekara" Height="320" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="405"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite lekara čije radno vreme želite da izmenite:</TextBlock>
+            <ComboBox x:Name="ComboBoxDoctors" ItemsSource="{Binding Path= DoctorsView}" Grid.Column="1" Margin="0,3,6,3" SelectedIndex="0" SelectedItem="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path= Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path= Surname}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="405"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite dan za koji želite da promenite radno vreme:</TextBlock>
+            <ComboBox Grid.Column="1"  Margin="1,0,10,1" x:Name="ComboBoxDaysOfTheWeek">
+                <ComboBoxItem IsSelected="True">Ponedeljak</ComboBoxItem>
+                <ComboBoxItem>Utorak</ComboBoxItem>
+                <ComboBoxItem>Sreda</ComboBoxItem>
+                <ComboBoxItem>Četvrtak</ComboBoxItem>
+                <ComboBoxItem>Petak</ComboBoxItem>
+                <ComboBoxItem>Subota</ComboBoxItem>
+                <ComboBoxItem>Nedelja</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="405"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite vreme početka radnog vremena:</TextBlock>
+            <materialDesign:TimePicker  Margin="1,0,10,1"
+                x:Name="TimePickerStartWorkingTime" Grid.Column="1" Is24Hours="True"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="405"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite vreme kraja radnog vremena:</TextBlock>
+            <materialDesign:TimePicker  Margin="1,0,10,1"
+                x:Name="TimePickerEndWorkingTime" Grid.Column="1" Is24Hours="True"/>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="405"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox x:Name="CheckBoxDoctorDontWork" Grid.Column="0" FontSize="16" Margin="10,0,0,0">Izabrani lekar ne radi za izabrani dan</CheckBox>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Potvrdi" Margin="170,0,5,0" Click="Button_Click_Potvrdi"/>
+            <Button Grid.Column="1" Content="Odustani" Margin="5,0,170,1" Click="Button_Click_Odustani"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,61 @@
+﻿<Window x:Class="HealthClinic.View.Notifications"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Obaveštenja" Height="490" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="230"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Vaša obaveštenja" FontSize="22" Margin="10,5,0,0" />
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Style="{DynamicResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" BorderBrush="Black" />
+                </Button>
+                <TextBox x:Name="InputSearch" 
+                    Grid.Column="1"
+                    Margin="8,0,10,0"
+                    materialDesign:HintAssist.Hint="Pretraži"
+                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                    BorderThickness="1"
+                    VerticalAlignment="Center" Background="{x:Null}" KeyUp="Search_KeyUp"/>
+            </Grid>
+        </Grid>
+
+        <DataGrid x:Name="DataGridNotifications" Grid.Row="1" ItemsSource="{Binding NotificationView}" AutoGenerateColumns="False" 
+                  SelectionMode="Single" IsReadOnly="True" BorderThickness="1" Margin="10,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naslov" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Poslao obaveštenje" Binding="{Binding Sent}"/>
+                <DataGridTextColumn Header="Datum objave" Binding="{Binding Date}" Width="*"/>
+                <DataGridTemplateColumn Header="Sadržaj obaveštenja" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Prikaži"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="2" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0">Za zatvaranje prozora pritisnite ESC</TextBlock>
+    </Grid>
+</Window>

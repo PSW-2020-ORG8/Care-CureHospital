@@ -1,0 +1,158 @@
+﻿<Window x:Class="HealthClinic.View.Account.Account"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View.Account"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Moj nalog" Height="510" Width="470" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon Grid.Row="2" Kind="AccountCircle" Width="60" Height="60" VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">Upravnik</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Ime:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelName"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Prezime:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelSurname"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">JMBG:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelJmbg"/>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Datum rođenja:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelDateOfBirthday"/>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Mesto stanovanja:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelCity"/>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Adresa stanovanja:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelAddress"/>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Država:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelCountry"/>
+        </Grid>
+
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">E-mail adresa:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelEmailAddress"/>
+        </Grid>
+
+        <Grid Grid.Row="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Kontakt telefon:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelMobilePhone"/>
+        </Grid>
+
+        <Grid Grid.Row="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Korisničko ime:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold"  x:Name="LabelUsername"/>
+        </Grid>
+
+        <Grid Grid.Row="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18">Lozinka:</Label>
+            <Label Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" FontWeight="Bold" x:Name="LabelPassword"/>
+        </Grid>
+
+        <Grid Grid.Row="13" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="160"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Margin="10,0,0,0" Click="Button_Click_IzmeniNalog" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="AccountEdit" Margin="0,3,5,0" />
+                    <TextBlock Text="Izmeni nalog"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="4" Margin="0,0,10,0" Click="Button_Click_PocetnaStrana">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Home" Margin="0,2,5,0"/>
+                    <TextBlock Text="Početna strana"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

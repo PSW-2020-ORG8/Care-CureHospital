@@ -1,0 +1,150 @@
+﻿<Window x:Class="HealthClinic.View.Reports"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Izveštaji" Height="490" Width="520" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock VerticalAlignment="Center" TextDecorations="Underline" FontSize="20" Margin="10,0,0,0">Unesite vremeski period za generisanje izveštaja:</TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite početni datum:</TextBlock>
+            <DatePicker x:Name="DataPickerFromDataTime" Grid.Column="1" SelectedDateChanged="FromDateTime_SelectedDataChanged"></DatePicker>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite krajnji datum:</TextBlock>
+            <DatePicker x:Name="DataPickerToDataTime" Grid.Column="1"></DatePicker>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite lekara:</TextBlock>
+            <ComboBox x:Name="ComboBoxDoctors" ItemsSource="{Binding Path= DoctorsView}" Grid.Column="1" Margin="0,3,6,3" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path= Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path= Surname}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" FontSize="16" Margin="10,0,0,0">Izaberite salu:</TextBlock>
+            <ComboBox x:Name="ComboBoxRooms" ItemsSource="{Binding Path=RoomsView}" Grid.Column="1" Margin="0,3,6,3" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=RoomID}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="7">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"  FontSize="16" VerticalAlignment="Center" Margin="10,0,0,2" >Izaberite izveštaj:</TextBlock>
+                <RadioButton x:Name="Report1" Grid.Column="1" Content="Izveštaj o zauzetosti sale za uneti period" FontSize="14"
+                             GroupName="Reports" IsChecked="True"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="Report2" Grid.Column="1" Content="Izveštaj o zauzetosti lekara za uneti period" FontSize="14"
+                             GroupName="Reports" />
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="Report3" Grid.Column="1" Content="Izveštaj o planu rada lekara uneti period" FontSize="14"
+                             GroupName="Reports"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="Report4" Grid.Column="1" Content="Izveštaj o količini lekova (trenutno stanje)" FontSize="14"
+                             GroupName="Reports"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="170"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="10,0,0,0" Click="Button_Click_GenerisiIzvestaj" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ClipboardTextOutline" Margin="0,2,6,0"/>
+                    <TextBlock Text="Generiši izveštaj"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Margin="0,0,10,0" Click="Button_Click_PocetnaStrana" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Home" Margin="0,2,6,0"/>
+                    <TextBlock Text="Početna strana"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

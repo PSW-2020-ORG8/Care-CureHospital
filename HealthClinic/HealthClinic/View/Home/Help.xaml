@@ -1,0 +1,57 @@
+﻿<Window x:Class="HealthClinic.View.Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View"
+       mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Pomoć" Height="350" Width="670" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontWeight="Bold" FontSize="24">
+            <TextBlock TextDecorations="Underline">Pritiskom na:</TextBlock>
+        </Label>
+        <TextBlock x:Name="drugi" Grid.Row="1"  FontSize="18" Margin="10,0,0,0">
+            <Run >Dugme</Run>
+            <Run Foreground="Red">TAB</Run>
+            <Run > - prelazak na naredno polje/dugme.</Run>
+        </TextBlock>
+        <TextBlock x:Name="prvi" Grid.Row="2" FontSize="18" Margin="10,0,0,0" >
+            <Run Foreground="Red">SHIFT</Run>
+            <Run > + </Run>
+            <Run Foreground="Red">TAB</Run>
+            <Run > (Držite </Run>
+            <Run Foreground="Red">SHIFT </Run>
+            <Run > i stisnite</Run>
+            <Run Foreground="Red"> TAB</Run>
+            <Run >) - povratak na prethodno polje/dugme.</Run>
+        </TextBlock>
+
+        <TextBlock x:Name="treci" Grid.Row="3" FontSize="18" Margin="10,0,0,0">
+            <Run >Dugme</Run>
+            <Run Foreground="Red">ENTER</Run>
+            <Run > ili </Run>
+            <Run Foreground="Red">SPACE</Run>
+            <Run > - ulazak u selektovano dugme.</Run>
+        </TextBlock>
+        <TextBlock x:Name="cetvrti" Grid.Row="4" FontSize="18" Margin="10,0,0,0">
+            <Run Foreground="Red">STRELICE</Run>
+            <Run > - listanje tabele, listanje polja iz padajućeg menija</Run>
+        </TextBlock>
+        <Button Grid.Row="5" Margin="460,0,10,0" Click="Button_Click_PocetnaStrana">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Home" Margin="0,2,5,0"/>
+                <TextBlock Text="Početna strana"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>
