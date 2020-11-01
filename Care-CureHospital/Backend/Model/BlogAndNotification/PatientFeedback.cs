@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Backend.Model.BlogAndNotification
 {
-    class PatientFeedback : Content
+    public class PatientFeedback : Content
     {
         private int id;
         private bool isForPublishing;
