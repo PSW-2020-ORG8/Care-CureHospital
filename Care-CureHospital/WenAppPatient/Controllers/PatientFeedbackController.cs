@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Backend.Model;
 
 namespace WenAppPatient.Controllers
 {
@@ -11,8 +12,10 @@ namespace WenAppPatient.Controllers
     [ApiController]
     public class PatientFeedbackController : ControllerBase
     {
-        public PatientFeedbackController()
+        private readonly HealthClinicDbContext dbContext;
+        public PatientFeedbackController(HealthClinicDbContext context)
         {
+            this.dbContext = context;
         }
     }
 }
