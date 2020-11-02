@@ -17,5 +17,19 @@ namespace WenAppPatient.Controllers
         {
             this.dbContext = context;
         }
+
+        [HttpPost]
+        public IActionResult Add(PatientFeedbackDto dto)
+        {
+            if (dto.text.Length <= 0)
+            {
+                return BadRequest();
+            }
+
+            PatientFeedback patientFeedback = PatientFeedbackAdapter.PatientFeedbackDtoToPatientFeedback(dto);
+            dbContext.PatientFeedbacks.Add(patientFeedback);
+            dbContext.SaveChanges();
+            return Ok();
+        }
     }
 }
