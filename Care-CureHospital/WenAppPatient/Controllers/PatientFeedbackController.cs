@@ -18,7 +18,7 @@ namespace WenAppPatient.Controllers
             this.dbContext = context;
         }
 
-        [HttpPost]
+        [HttpPost]      // POST /api/patientFeedback
         public IActionResult Add(PatientFeedbackDto dto)
         {
             if (dto.text.Length <= 0)
@@ -30,6 +30,27 @@ namespace WenAppPatient.Controllers
             dbContext.PatientFeedbacks.Add(patientFeedback);
             dbContext.SaveChanges();
             return Ok();
+        }
+
+        [HttpPut("modifyPublishedStatus")]       // PUT /api/patientFeedback/modifyPublishedStatus  
+        public IActionResult ModifyPublishedStatus(PatientFeedbackDto dto)
+        {
+            if (dto.Id <= 0)
+            {
+                return BadRequest();
+            }
+            PatientFeedback patientFeedback = dbContext.PatientFeedbacks.SingleOrDefault(patientFeedback => patientFeedback.Id == dto.Id);
+            if (patientFeedback == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                patientFeedback.isPublished = true;	// change published status and save
+                dbContext.SaveChanges();
+                return Ok(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(patientFeedback));
+            }
+
         }
     }
 }
