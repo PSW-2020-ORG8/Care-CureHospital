@@ -10,10 +10,8 @@ namespace Model.PatientDoctor
 {
     public class Symptoms : IIdentifiable<int>
     {
-        private String name;
-        private int id;
-
-        public string Name { get => name; set => name = value; }
+        public int id { get; set; }
+        public String Name { get; set; }
 
         public Symptoms(int id)
         {

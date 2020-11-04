@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.UserRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.BlogAndNotification;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -13,7 +15,7 @@ using System;
 
 namespace Repository.BlogNotificationRepository
 {
-    public class NotificationRepository : CSVRepository<Notification, int>, INotificationRepository
+    public class NotificationRepository : MySQLRepository<Notification, int>, INotificationRepository
     {
         private const string NOTIFICATION_FILE = "../../Resources/Data/notifications.csv";
         private static NotificationRepository instance;
@@ -22,14 +24,12 @@ namespace Repository.BlogNotificationRepository
         {
             if (instance == null)
             {
-                instance = new NotificationRepository(
-                new CSVStream<Notification>(NOTIFICATION_FILE, new NotificationCSVConverter(",")),
-                new IntSequencer());
+                instance = new NotificationRepository(new MySQLStream<Notification>(), new IntSequencer());
             }
             return instance;
         }
 
-        public NotificationRepository(ICSVStream<Notification> stream, ISequencer<int> sequencer)
+        public NotificationRepository(IMySQLStream<Notification> stream, ISequencer<int> sequencer)
              : base(stream, sequencer)
         {
         }

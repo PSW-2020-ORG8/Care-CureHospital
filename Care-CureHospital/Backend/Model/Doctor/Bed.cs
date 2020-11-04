@@ -11,12 +11,11 @@ namespace Model.Doctor
 {
     public class Bed
     {
-        private int id;
-        private bool taken;       
-        private AllActors.Patient patient;
+        public int id { get; set; }
+        public bool Taken { get; set; }
+        public int patientID { get; set; }
+        public virtual AllActors.Patient Patient { get; set; }
 
-        public bool Taken { get => taken; set => taken = value; }
-        public AllActors.Patient Patient { get => patient; set => patient = value; }
 
         public Bed(int id)
         {

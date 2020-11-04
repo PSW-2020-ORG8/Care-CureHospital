@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.UserRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.Patient;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -13,7 +15,7 @@ using System;
 
 namespace Repository.BlogNotificationRepository
 {
-    public class SurveyRepository : CSVRepository<Survey, int>, ISurveyRepository
+    public class SurveyRepository : MySQLRepository<Survey, int>, ISurveyRepository
     {
         private const string SURVEY_FILE = "../../Resources/Data/surveys.csv";
         private static SurveyRepository instance;
@@ -22,14 +24,12 @@ namespace Repository.BlogNotificationRepository
         {
             if (instance == null)
             {
-                instance = new SurveyRepository(
-                new CSVStream<Survey>(SURVEY_FILE, new SurveyCSVConverter(",")),
-                new IntSequencer());
+                instance = new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer());
             }
             return instance;
         }
 
-        public SurveyRepository(ICSVStream<Survey> stream, ISequencer<int> sequencer)
+        public SurveyRepository(IMySQLStream<Survey> stream, ISequencer<int> sequencer)
              : base(stream, sequencer)
         {
         }

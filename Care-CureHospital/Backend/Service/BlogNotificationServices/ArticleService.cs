@@ -14,7 +14,6 @@ namespace Service.BlogNotificationServices
     public class ArticleService : IService<Article, int>
     {
         public IArticleRepository articleRepository;
-        //public CommentService commentService;
 
         public ArticleService(IArticleRepository articleRepository)
         {

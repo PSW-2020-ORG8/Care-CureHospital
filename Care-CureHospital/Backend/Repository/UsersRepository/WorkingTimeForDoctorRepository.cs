@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.WorkingTimeForDoctorRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.AllActors;
 using Model.Term;
 using Repository.Csv;
@@ -15,7 +17,7 @@ using System.Collections.Generic;
 
 namespace Repository.UsersRepository
 {
-   public class WorkingTimeForDoctorRepository : CSVRepository<WorkingTimeForDoctor,int>, IWorkingTimeForDoctorRepository
+   public class WorkingTimeForDoctorRepository : MySQLRepository<WorkingTimeForDoctor,int>, IWorkingTimeForDoctorRepository
    {
         private const string WORKINGTIMEFORDOCTOR_FILE = "../../Resources/Data/workingtimefordoctor.csv";
         private static WorkingTimeForDoctorRepository instance;
@@ -24,14 +26,12 @@ namespace Repository.UsersRepository
         {
             if (instance == null)
             {
-                instance = new WorkingTimeForDoctorRepository(
-               new CSVStream<WorkingTimeForDoctor>(WORKINGTIMEFORDOCTOR_FILE, new WorkingTimeForDoctorCSVConverter(",")),
-               new IntSequencer());
+                instance = new WorkingTimeForDoctorRepository(new MySQLStream<WorkingTimeForDoctor>(), new IntSequencer());
             }
             return instance;
         }
 
-        public WorkingTimeForDoctorRepository(ICSVStream<WorkingTimeForDoctor> stream, ISequencer<int> sequencer)
+        public WorkingTimeForDoctorRepository(IMySQLStream<WorkingTimeForDoctor> stream, ISequencer<int> sequencer)
          : base(stream, sequencer)
         {
         }

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Backend.Model;
 
-namespace WenAppPatient
+namespace Backend
 {
     public class Startup
     {
@@ -27,8 +28,9 @@ namespace WenAppPatient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddScoped<IMySQLStream<>>();
             services.AddDbContext<HealthClinicDbContext>(options =>
-                    options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "HealthClinicDbContextConnectionString")).UseLazyLoadingProxies());
+                    options.UseSqlServer(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

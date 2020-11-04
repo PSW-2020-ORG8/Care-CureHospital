@@ -11,7 +11,7 @@ namespace Model.Doctor
 {
    public class DoctorSpecialist : AllActors.Doctor
    {
-      public List<Specialitation> specialitation;
+      public virtual List<Specialitation> specialitation { get; set; }
 
         public DoctorSpecialist()
         {

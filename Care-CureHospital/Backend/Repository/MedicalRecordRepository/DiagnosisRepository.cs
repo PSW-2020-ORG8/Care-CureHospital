@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.DiagnosisRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.PatientDoctor;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -13,7 +15,7 @@ using System;
 
 namespace Repository.MedicalRecordRepository
 {
-    public class DiagnosisRepository : CSVRepository<Diagnosis, int>, IDiagnosisRepository
+    public class DiagnosisRepository : MySQLRepository<Diagnosis, int>, IDiagnosisRepository
     {
 
         private const string DIAGNOSIS_FILE = "../../Resources/Data/diagnosis.csv";
@@ -23,14 +25,12 @@ namespace Repository.MedicalRecordRepository
         {
             if (instance == null)
             {
-                instance = new DiagnosisRepository(
-                new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(",")),
-                new IntSequencer());
+                instance = new DiagnosisRepository(new MySQLStream<Diagnosis>(), new IntSequencer());
             }
             return instance;
         }
 
-        public DiagnosisRepository(ICSVStream<Diagnosis> stream, ISequencer<int> sequencer)
+        public DiagnosisRepository(IMySQLStream<Diagnosis> stream, ISequencer<int> sequencer)
             : base(stream, sequencer)
         {
         }

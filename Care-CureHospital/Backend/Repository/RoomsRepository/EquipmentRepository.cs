@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.UserRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.Manager;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -13,7 +15,7 @@ using System;
 
 namespace Repository.RoomsRepository
 {
-    public class EquipmentRepository : CSVRepository<Equipment, int>, IEquipmentRepository
+    public class EquipmentRepository : MySQLRepository<Equipment, int>, IEquipmentRepository
     {
         private const string EQUIPMENT_FILE = "../../Resources/Data/equipment.csv";
         private static EquipmentRepository instance;
@@ -22,14 +24,12 @@ namespace Repository.RoomsRepository
         {
             if (instance == null)
             {
-                instance = new EquipmentRepository(
-               new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(",")),
-               new IntSequencer());
+                instance = new EquipmentRepository(new MySQLStream<Equipment>(), new IntSequencer());
             }
             return instance;
         }
 
-        public EquipmentRepository(ICSVStream<Equipment> stream, ISequencer<int> sequencer)
+        public EquipmentRepository(IMySQLStream<Equipment> stream, ISequencer<int> sequencer)
            : base(stream, sequencer)
         {
         }

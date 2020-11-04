@@ -14,16 +14,14 @@ namespace Model.PatientDoctor
 {
     public class MedicalRecord : IIdentifiable<int>
     {
-        private int id;
-        private Model.AllActors.Patient patient;
-        private Anamnesis anamnesis;
-        private List<Allergies> allergies;
-        private List<Medicament> medicament;
+        public int id { get; set; }
+        public int patientID { get; set; }
+        public virtual AllActors.Patient Patient { get; set; }
+        public int anamnesisID { get; set; }
+        public virtual Anamnesis Anamnesis { get; set; }
+        public virtual List<Allergies> Allergies { get; set; }
+        public virtual List<Medicament> Medicament { get; set; }
 
-        public AllActors.Patient Patient { get => patient; set => patient = value; }
-        public Anamnesis Anamnesis { get => anamnesis; set => anamnesis = value; }
-        public List<Allergies> Allergies { get => allergies; set => allergies = value; }
-        public List<Medicament> Medicament { get => medicament; set => medicament = value; }
 
         public MedicalRecord(int id)
         {

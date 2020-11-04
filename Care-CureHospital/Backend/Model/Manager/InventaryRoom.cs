@@ -9,26 +9,23 @@ namespace Model.Manager
 {
     public class InventaryRoom : IIdentifiable<int>
     {
-        private int id;
-        private String name;
-        private int quantity;
-
-        public string Name { get => name; set => name = value; }
-        public int Quantity { get => quantity; set => quantity = value; }
+        public int id { get; set; }
+        public String Name { get; set; }
+        public int Quantity { get; set; }
 
         private InventaryRoom() { }
 
         public InventaryRoom(string name, int quantity)
         {
-            this.name = name;
-            this.quantity = quantity;
+            this.Name = name;
+            this.Quantity = quantity;
         }
 
         public InventaryRoom(int id, string name, int quantity)
         {
             this.id = id;
-            this.name = name;
-            this.quantity = quantity;
+            this.Name = name;
+            this.Quantity = quantity;
         }
 
         public int GetId()

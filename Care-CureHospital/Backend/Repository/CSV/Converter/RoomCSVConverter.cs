@@ -5,9 +5,7 @@
 
 using Model.Manager;
 using Repository.RoomsRepository;
-using Model.Manager;
 using Model.Term;
-using Repository.RoomsRepository;
 using System;
 using System.Collections.Generic;
 

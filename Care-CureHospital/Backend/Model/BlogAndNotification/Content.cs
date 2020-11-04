@@ -10,11 +10,8 @@ namespace Model.BlogAndNotification
 {
     public class Content
     {
-        private String text;
-        private DateTime publishingDate;
-
-        public string Text { get => text; set => text = value; }
-        public DateTime PublishingDate { get => publishingDate; set => publishingDate = value; }
+        public String Text { get; set; }
+        public DateTime PublishingDate { get; set; }
 
         public Content()
         {

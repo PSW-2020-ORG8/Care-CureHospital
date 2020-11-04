@@ -10,8 +10,7 @@ namespace Model.DoctorMenager
 {
     public class FeedbackOfValidation
     {
-        private String comment;
-        public string Comment { get => comment; set => comment = value; }
+        public String Comment { get; set; }
         public FeedbackOfValidation()
         {
         }

@@ -1,41 +1,56 @@
-﻿using Model.AllActors;
+﻿using HealthClinic.Repository;
+using Model.AllActors;
 using Model.BlogAndNotification;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Backend.Model.BlogAndNotification
 {
-    public class PatientFeedback : Content
+    public class PatientFeedback : Content, IIdentifiable<int>
     {
-        private int id;
-        private bool isForPublishing;
-        private bool isPublished;
-        private bool isAnonymous;
-        private Patient patient;
+        public int Id { get; set; }
+        public bool IsForPublishing { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsAnonymous { get; set; }
+        public int PatientID { get; set; }
+        [NotMapped]
+        public virtual Patient Patient { get; set; }
 
-        public bool IsForPublishing { get => isForPublishing; set => isForPublishing = value; }
-
-        public bool IsPublished { get => isPublished; set => isPublished = value; }
-
-        public bool IsAnonymous { get => isAnonymous; set => isAnonymous = value; }
-
-        public Patient Patient { get => patient; set => patient = value; }
-
-        public int Id { get => id; set => id = value; }
-
+        
         public PatientFeedback()
         {
         }
 
-        public PatientFeedback(string text, DateTime publishingDate, bool isForPublishing, bool isPublished, bool isAnonymous, Patient patient) : base(text, publishingDate)
+        public PatientFeedback(int id, string text, DateTime publishingDate, bool isForPublishing, bool isPublished, bool isAnonymous, Patient patient)
+            : base(text, publishingDate)
         {
-            this.isForPublishing = isForPublishing;
-            this.isPublished = isPublished;
-            this.isAnonymous = isAnonymous;
-            this.patient = patient;
+            this.Id = id;
+            this.IsForPublishing = isForPublishing;
+            this.IsPublished = isPublished;
+            this.IsAnonymous = isAnonymous;
+            this.PatientID = patient.Id;
+            this.Patient = patient;
         }
 
-       
+        public PatientFeedback(int id, string text, DateTime publishingDate, bool isForPublishing, bool isPublished, bool isAnonymous, int patientID)
+            : base(text, publishingDate)
+        {
+            this.Id = id;
+            this.IsForPublishing = isForPublishing;
+            this.IsPublished = isPublished;
+            this.IsAnonymous = isAnonymous;
+            this.PatientID = patientID;
+        }
+        public int GetId()
+        {
+            return Id;
+        }
+
+        public void SetId(int id)
+        {
+            this.Id = id;
+        }
     }
 }

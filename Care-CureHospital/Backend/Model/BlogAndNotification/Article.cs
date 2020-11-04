@@ -13,14 +13,12 @@ namespace Model.BlogAndNotification
 {
     public class Article : Content, IIdentifiable<int>
     {
-        private int id;
-        private String title;
-        private Blog blog;
-        private List<Comment> comments;
+        public int id { get; set; }
 
-        public string Title { get => title; set => title = value; }
-        public Blog Blog { get => blog; set => blog = value; }
-        public List<Comment> Comments { get => comments; set => comments = value; }
+        public String Title { get; set; }
+        public int blogID { get; set; }
+        public virtual Blog Blog { get; set; }
+        public virtual List<Comment> Comments { get; set; }
 
         public Article(int id)
         {

@@ -10,11 +10,8 @@ namespace Model.Term
 {
     public abstract class Term
     {
-        private DateTime fromDateTime;
-        private DateTime toDateTime;
-
-        public DateTime FromDateTime { get => fromDateTime; set => fromDateTime = value; }
-        public DateTime ToDateTime { get => toDateTime; set => toDateTime = value; }
+        public DateTime FromDateTime { get; set; }
+        public DateTime ToDateTime { get; set; }
 
         public Term(DateTime fromDateTime, DateTime toDateTime)
         {

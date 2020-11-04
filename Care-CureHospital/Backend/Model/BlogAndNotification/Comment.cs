@@ -11,9 +11,11 @@ namespace Model.BlogAndNotification
 {
     public class Comment : Content
     {
-        private int id;
-        public AllActors.Patient patient;
-        public AllActors.Doctor doctor;
+        public int id { get; set; }
+        public int patientID { get; set; }
+        public int doctorID { get; set; }
+        public virtual AllActors.Patient patient { get; set; }
+        public virtual AllActors.Doctor doctor { get; set; }
 
         public Comment(int id)
         {
@@ -44,39 +46,6 @@ namespace Model.BlogAndNotification
         public void SetId(int id)
         {
             this.id = id;
-        }
-
-        /// <summary>
-        /// Property for Model.AllActors.Doctor
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
-        public Model.AllActors.Doctor Doctor
-        {
-            get
-            {
-                return doctor;
-            }
-            set
-            {
-                this.doctor = value;
-            }
-        }
-
-
-        /// <summary>
-        /// Property for Model.AllActors.Patient
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
-        public Model.AllActors.Patient Patient
-        {
-            get
-            {
-                return patient;
-            }
-            set
-            {
-                this.patient = value;
-            }
         }
 
     }

@@ -11,12 +11,10 @@ namespace Model.Term
 {
     public class Renovation : Term, IIdentifiable<int>
     {
-        private int id;
-        private String descriptionOfRenovation;     
-        private Room room;
-
-        public string DescriptionOfRenovation { get => descriptionOfRenovation; set => descriptionOfRenovation = value; }
-        public Room Room { get => room; set => room = value; }
+        public int id { get; set; }
+        public String DescriptionOfRenovation { get; set; }
+        public int roomID { get; set; }
+        public virtual Room Room { get; set; }
 
         public Renovation(int id)
         {

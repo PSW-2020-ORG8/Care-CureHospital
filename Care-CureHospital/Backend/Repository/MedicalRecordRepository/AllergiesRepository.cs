@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.AllergiesRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.PatientDoctor;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -14,7 +16,7 @@ using System.Collections.Generic;
 
 namespace Repository.MedicalRecordRepository
 {
-    public class AllergiesRepository : CSVRepository<Allergies, int>, IAllergiesRepository
+    public class AllergiesRepository : MySQLRepository<Allergies, int>, IAllergiesRepository
     {
         private const string ALLERGIES_FILE = "../../Resources/Data/allergies.csv";
         private static AllergiesRepository instance;
@@ -23,14 +25,12 @@ namespace Repository.MedicalRecordRepository
         {
             if (instance == null)
             {
-                instance = new AllergiesRepository(
-                new CSVStream<Allergies>(ALLERGIES_FILE, new AlergiesCSVConverter(",")),
-                new IntSequencer());
+                instance = new AllergiesRepository(new MySQLStream<Allergies>(), new IntSequencer());
             }
             return instance;
         }
 
-        public AllergiesRepository(ICSVStream<Allergies> stream, ISequencer<int> sequencer)
+        public AllergiesRepository(IMySQLStream<Allergies> stream, ISequencer<int> sequencer)
             : base(stream, sequencer)
         {
         }

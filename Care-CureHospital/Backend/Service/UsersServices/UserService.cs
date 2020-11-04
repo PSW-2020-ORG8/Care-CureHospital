@@ -32,7 +32,7 @@ namespace Service.UsersServices
         public String FindPasswordByUsername(String username)
         {
             foreach(User user in this.GetAllEntities())
-                if (user.UserName.Equals(username))
+                if (user.Username.Equals(username))
                     return user.Password;
             return "";
         }
@@ -45,7 +45,7 @@ namespace Service.UsersServices
         public bool IsUsernameExist(String username)
         {
             foreach (User user in this.GetAllEntities())
-                if (user.UserName.Equals(username))
+                if (user.Username.Equals(username))
                     return true;
             return false;
         }

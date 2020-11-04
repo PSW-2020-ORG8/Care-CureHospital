@@ -3,6 +3,8 @@
 // Created: cetvrtak, 28. maj 2020. 02:04:51
 // Purpose: Definition of Class ValidationOfMedicamentRepository
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.AllActors;
 using Model.DoctorMenager;
 using Repository.Csv;
@@ -14,7 +16,7 @@ using System.Collections.Generic;
 
 namespace Repository.MedicamentRepository
 {
-    public class ValidationOfMedicamentRepository : CSVRepository<ValidationOfMedicament, int>, IValidationOfMedicamentRepository
+    public class ValidationOfMedicamentRepository : MySQLRepository<ValidationOfMedicament, int>, IValidationOfMedicamentRepository
     {
         private const string VALIDATIONOFMEDICAMENT_FILE = "../../Resources/Data/validationofmedicament.csv";
         private static ValidationOfMedicamentRepository instance;
@@ -23,14 +25,12 @@ namespace Repository.MedicamentRepository
         {
             if (instance == null)
             {
-                instance = new ValidationOfMedicamentRepository(
-               new CSVStream<ValidationOfMedicament>(VALIDATIONOFMEDICAMENT_FILE, new ValidationMedicamentCSVConverter(",")),
-               new IntSequencer());
+                instance = new ValidationOfMedicamentRepository(new MySQLStream<ValidationOfMedicament>(), new IntSequencer());
             }
             return instance;
         }
 
-        public ValidationOfMedicamentRepository(ICSVStream<ValidationOfMedicament> stream, ISequencer<int> sequencer)
+        public ValidationOfMedicamentRepository(IMySQLStream<ValidationOfMedicament> stream, ISequencer<int> sequencer)
             : base(stream, sequencer)
         {
         }

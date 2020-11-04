@@ -14,14 +14,10 @@ namespace Model.Term
 {
     public class Room : Term, IIdentifiable<int>
     {
-        private int id;
-        private String roomID;
-        private TypeOfRoom typeOfRoom;
-        private List<InventaryRoom> equipment;
-
-        public string RoomID { get => roomID; set => roomID = value; }
-        public TypeOfRoom TypeOfRoom { get => typeOfRoom; set => typeOfRoom = value; }
-        public List<InventaryRoom> Equipment { get => equipment; set => equipment = value; }
+        public int id { get; set; }
+        public String RoomID { get; set; }
+        public TypeOfRoom TypeOfRoom { get; set; }
+        public virtual List<InventaryRoom> Equipment { get; set; }
       
         public Room(int id)
         {

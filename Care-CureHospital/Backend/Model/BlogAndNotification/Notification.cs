@@ -13,14 +13,11 @@ namespace Model.BlogAndNotification
 {
     public class Notification : Content, IIdentifiable<int>
     {
-        private int id;
-        private String title;
-        private User sendNotificationByUser;
-        private List<User> receiveNotifications;
-
-        public string Title { get => title; set => title = value; }
-        public User SendNotificationByUser { get => sendNotificationByUser; set => sendNotificationByUser = value; }
-        public List<User> ReceiveNotifications { get => receiveNotifications; set => receiveNotifications = value; }
+        public int id { get; set; }
+        public String Title { get; set; }
+        public int userID { get; set; }
+        public virtual User SendNotificationByUser { get; set; }
+        public virtual List<User> ReceiveNotifications { get; set; }
 
         public Notification(int id)
         {

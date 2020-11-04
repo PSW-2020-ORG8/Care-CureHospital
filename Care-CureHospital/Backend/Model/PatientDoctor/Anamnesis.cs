@@ -11,13 +11,11 @@ namespace Model.PatientDoctor
 {
     public class Anamnesis
     {
-        private String description;
-        private List<Diagnosis> diagnosis;
-        private List<Symptoms> symptoms;
+        public int id { get; set; }
 
-        public string Description { get => description; set => description = value; }
-        public List<Diagnosis> Diagnosis { get => diagnosis; set => diagnosis = value; }
-        public List<Symptoms> Symptoms { get => symptoms; set => symptoms = value; }
+        public String Description { get; set; }
+        public virtual List<Diagnosis> Diagnosis { get; set; }
+        public virtual List<Symptoms> Symptoms { get; set; }
 
         public Anamnesis()
         {

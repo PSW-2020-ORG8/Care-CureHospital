@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.RenovationRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.Term;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -14,7 +16,7 @@ using System.Collections.Generic;
 
 namespace Repository.RoomsRepository
 {
-    public class RenovationRepository : CSVRepository<Renovation, int>, IRenovationRepository
+    public class RenovationRepository : MySQLRepository<Renovation, int>, IRenovationRepository
     {
         private const string RENOVATION_FILE = "../../Resources/Data/renovation.csv";
         private static RenovationRepository instance;
@@ -23,14 +25,12 @@ namespace Repository.RoomsRepository
         {
             if (instance == null)
             {
-                instance = new RenovationRepository(
-               new CSVStream<Renovation>(RENOVATION_FILE, new RenovationCSVConverter(",")),
-               new IntSequencer());
+                instance = new RenovationRepository(new MySQLStream<Renovation>(), new IntSequencer());
             }
             return instance;
         }
 
-        public RenovationRepository(ICSVStream<Renovation> stream, ISequencer<int> sequencer)
+        public RenovationRepository(IMySQLStream<Renovation> stream, ISequencer<int> sequencer)
            : base(stream, sequencer)
         {
         }
