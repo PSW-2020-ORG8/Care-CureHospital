@@ -13,43 +13,47 @@ namespace Model.DoctorMenager
 {
     public class Medicament : IIdentifiable<int>
     {
-        private int id;
-        private String code;
-        private String name;
-        private String producer;
-        private State stateOfValidation;
-        private int quantity;
-        private String ingredients;
+        public int id { get; set; }
+        public String Code { get; set; }
+        public String Name { get; set; }
+        public String Producer { get; set; }
+        public State StateOfValidation { get; set; }
+        public int Quantity { get; set; }
+        public String Ingredients { get; set; }
 
-        public Medicament(int id)
+        /*public Medicament(int id)
         {
             this.id = id;
-        }
+        }*/
 
         public Medicament(int id, string code, string name, string producer, State stateOfValidation, int quantity, string ingredients)
         {
-            this.code = code;
-            this.name = name;
-            this.producer = producer;
-            this.stateOfValidation = stateOfValidation;
-            this.quantity = quantity;
+            this.Code = code;
+            this.Name = name;
+            this.Producer = producer;
+            this.StateOfValidation = stateOfValidation;
+            this.Quantity = quantity;
             this.id = id;
             this.Ingredients = ingredients;
         }
 
         public Medicament(string code, string name, string producer, State stateOfValidation, int quantity, string ingredients)
         {
-            this.code = code;
-            this.name = name;
-            this.producer = producer;
-            this.stateOfValidation = stateOfValidation;
-            this.quantity = quantity;
+            this.Code = code;
+            this.Name = name;
+            this.Producer = producer;
+            this.StateOfValidation = stateOfValidation;
+            this.Quantity = quantity;
             this.Ingredients = ingredients;
         }
 
         public Medicament(String name)
         {
-            this.name = name;
+            this.Name = name;
+        }
+
+        public Medicament()
+        {
         }
 
         public int GetId()
@@ -62,35 +66,6 @@ namespace Model.DoctorMenager
             this.id = id;
         }
 
-        public string Code
-        {
-            get { return code; }
-            set { code = value; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public string Producer
-        {
-            get { return producer; }
-            set { producer = value; }
-        }
-
-        public State StateOfValidation
-        {
-            get { return stateOfValidation; }
-            set { stateOfValidation = value; }
-        }
-        public int Quantity
-        {
-            get { return quantity; }
-            set { quantity = value; }
-        }
-
-        public string Ingredients { get => ingredients; set => ingredients = value; }
+        
     }
 }

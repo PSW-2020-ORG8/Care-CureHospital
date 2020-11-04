@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 
 namespace Repository.RoomsRepository
 {
-    public class InventaryRoomRepository : CSVRepository<InventaryRoom, int>, IInventaryRoomRepository
+    public class InventaryRoomRepository : MySQLRepository<InventaryRoom, int>, IInventaryRoomRepository
     {
         private const string INVENTARY_FILE = "../../Resources/Data/inventaryRoom.csv";
         private static InventaryRoomRepository instance;
@@ -20,14 +22,12 @@ namespace Repository.RoomsRepository
         {
             if (instance == null)
             {
-                instance = new InventaryRoomRepository(
-               new CSVStream<InventaryRoom>(INVENTARY_FILE, new InventaryRoomCSVConverter(",")),
-               new IntSequencer());
+                instance = new InventaryRoomRepository(new MySQLStream<InventaryRoom>(), new IntSequencer());
             }
             return instance;
         }
 
-        public InventaryRoomRepository(ICSVStream<InventaryRoom> stream, ISequencer<int> sequencer)
+        public InventaryRoomRepository(IMySQLStream<InventaryRoom> stream, ISequencer<int> sequencer)
            : base(stream, sequencer)
         {
         }

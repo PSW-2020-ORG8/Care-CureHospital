@@ -11,15 +11,12 @@ namespace Model.AllActors
 {
     public class City
     {
-        private String name;
-        private int postCode;
-        private String adress;
-        private Country country;
-
-        public string Name { get => name; set => name = value; }
-        public int PostCode { get => postCode; set => postCode = value; }
-        public string Adress { get => adress; set => adress = value; }
-        public Country Country { get => country; set => country = value; }
+        public int id { get; set; }
+        public String Name { get; set; }
+        public int PostCode { get; set; }
+        public String Adress { get; set; }
+        public int CountryID { get; set; }
+        public virtual Country Country { get; set; }
 
         public City()
         {
@@ -29,6 +26,7 @@ namespace Model.AllActors
         {
             this.Name = name;
             this.Adress = adress;
+            this.CountryID = country.id;
             this.Country = country;
         }
 
@@ -37,6 +35,7 @@ namespace Model.AllActors
             this.Name = name;
             this.PostCode = postCode;
             this.Adress = adress;
+            this.CountryID = country.id;
             this.Country = country;
         }
 

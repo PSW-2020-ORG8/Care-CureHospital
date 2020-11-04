@@ -5,26 +5,21 @@
  ***********************************************************************/
 
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.AllActors
 {
     public class Person
     {
-        private String name;
-        private String surname;
-        private String jmbg;
-        private DateTime dateOfBirth;
-        private String contactNumber;
-        private String emailAddress;
-        private City city;
-
-        public string Name { get => name; set => name = value; }
-        public string Surname { get => surname; set => surname = value; }
-        public string Jmbg { get => jmbg; set => jmbg = value; }
-        public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
-        public string ContactNumber { get => contactNumber; set => contactNumber = value; }
-        public string EMail { get => emailAddress; set => emailAddress = value; }
-        public City City { get => city; set => city = value; }
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public String Jmbg { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public String ContactNumber { get; set; }
+        public String EMail { get; set; }
+        public int cityID { get; set; }
+        [NotMapped]
+        public virtual City City { get; set; }
 
         public Person()
         {
@@ -37,7 +32,7 @@ namespace Model.AllActors
             this.Jmbg = jmbg;
             this.DateOfBirth = dateOfBirth;
             this.ContactNumber = contactNumber;
-            this.emailAddress = emailAddress;
+            this.EMail = emailAddress;
             this.City = city;
         }
     

@@ -10,8 +10,7 @@ namespace Model.DoctorMenager
 {
     public class Ingredient
     {
-        private String name;
-        public string Name { get => name; set => name = value; }
+        public String Name { get; set; }
 
         public Ingredient()
         {

@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.UserRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.AllActors;
 using Model.Doctor;
 using Repository.Csv;
@@ -15,7 +17,7 @@ using System.Collections.Generic;
 
 namespace Repository.UsersRepository
 {
-    public class UserRepository : CSVRepository<User, int>, IUserRepository
+    public class UserRepository : MySQLRepository<User, int>, IUserRepository
     {
         private const string USER_FILE = "../../Resources/Data/users.csv";
         private static UserRepository instance;
@@ -24,14 +26,12 @@ namespace Repository.UsersRepository
         {
             if (instance == null)
             {
-                instance = new UserRepository(
-               new CSVStream<User>(USER_FILE, new UserCSVConverter(",")),
-               new IntSequencer());
+                instance = new UserRepository(new MySQLStream<User>(), new IntSequencer());
             }
             return instance;
         }
 
-        public UserRepository(ICSVStream<User> stream, ISequencer<int> sequencer)
+        public UserRepository(IMySQLStream<User> stream, ISequencer<int> sequencer)
          : base(stream, sequencer)
         {
         }
@@ -84,7 +84,7 @@ namespace Repository.UsersRepository
         {
             foreach (User user in this.GetAllEntities())
             {
-                if (user.UserName.Equals(username))
+                if (user.Username.Equals(username))
                     return user;
             }
             return null;

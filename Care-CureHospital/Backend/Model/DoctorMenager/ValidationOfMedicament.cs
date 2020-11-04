@@ -11,16 +11,14 @@ namespace Model.DoctorMenager
 {
     public class ValidationOfMedicament : IIdentifiable<int>
     {
-        private int id;
-        private bool approved;
-        private Medicament medicament;
-        private Model.AllActors.Doctor doctor;
-        private FeedbackOfValidation feedbackOfValidation;
-
-        public bool Approved { get => approved; set => approved = value; }
-        public Medicament Medicament { get => medicament; set => medicament = value; }
-        public FeedbackOfValidation FeedbackOfValidation { get => feedbackOfValidation; set => feedbackOfValidation = value; }
-        public Model.AllActors.Doctor Doctor { get => doctor; set => doctor = value; }
+        public int id { get; set; }
+        public bool Approved { get; set; }
+        public int medicamentID { get; set; }
+        public int doctorID { get; set; }
+        public int feedbackOfValidationID { get; set; }
+        public virtual Medicament Medicament { get; set; }
+        public virtual Model.AllActors.Doctor Doctor { get; set; }
+        public virtual FeedbackOfValidation FeedbackOfValidation { get; set; }
 
         public ValidationOfMedicament(int id)
         {
@@ -37,7 +35,7 @@ namespace Model.DoctorMenager
             this.id = id;
             this.Medicament = medicament;
             this.FeedbackOfValidation = feedbackOfValidation;
-            this.doctor = doctor;
+            this.Doctor = doctor;
         }
 
 
@@ -46,7 +44,7 @@ namespace Model.DoctorMenager
             this.Approved = approved;
             this.Medicament = medicament;
             this.FeedbackOfValidation = feedbackOfValidation;
-            this.doctor = doctor;
+            this.Doctor = doctor;
         }
 
         public int GetId()

@@ -10,12 +10,10 @@ namespace Model.Patient
 {
     public class Question
     {
-        private int id;
-        private String questionText;
-        private GradeOfQuestion answer;
-    
-        public string QuestionText { get => questionText; set => questionText = value; }
-        public GradeOfQuestion Answer { get => answer; set => answer = value; }
+        public int id { get; set; }
+        public String QuestionText { get; set; }
+        public int answerID { get; set; }
+        public virtual GradeOfQuestion Answer { get; set; }  
 
         public Question(int id)
         {

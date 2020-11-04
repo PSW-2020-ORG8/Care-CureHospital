@@ -10,10 +10,9 @@ namespace Model.PatientDoctor
 {
     public class Allergies : IIdentifiable<int>
     {
-        private int id;
-        private String name;
+        public int id { get; set; }
+        public String Name { get; set; }
 
-        public string Name { get => name; set => name = value; }
 
         public Allergies(int id)
         {

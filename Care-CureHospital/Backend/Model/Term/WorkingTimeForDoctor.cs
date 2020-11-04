@@ -12,14 +12,11 @@ namespace Model.Term
 {
     public class WorkingTimeForDoctor : Term, IIdentifiable<int>
     {
-        private int id;
-        private DaysInWeek day;
-        private Boolean doesWork;
-        private AllActors.Doctor doctor;
-
-        public DaysInWeek Day { get => day; set => day = value; }
-        public bool DoesWork { get => doesWork; set => doesWork = value; }
-        public AllActors.Doctor Doctor { get => doctor; set => doctor = value; }
+        public int id { get; set; }
+        public DaysInWeek Day { get; set; }
+        public Boolean DoesWork { get; set; }
+        public int doctorID { get; set; }
+        public virtual AllActors.Doctor Doctor { get; set; }
 
         public WorkingTimeForDoctor(int id)
         {

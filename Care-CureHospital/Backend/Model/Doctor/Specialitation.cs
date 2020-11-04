@@ -11,9 +11,8 @@ namespace Model.Doctor
     public class Specialitation : IIdentifiable<int>
     {
         public int Id { get; set; }
-        //private String specialitationForDoctor; // promenjen naziv
 
-        public string SpecialitationForDoctor { get; set ; }
+        public string SpecialitationForDoctor { get; set; }
 
         public Specialitation(int id)
         {

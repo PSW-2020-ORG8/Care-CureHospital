@@ -12,18 +12,13 @@ namespace Model.Patient
 {
     public class Survey : IIdentifiable<int>
     {
-        private int id;
-        private String title;
-        private DateTime publishingDate;
-        private String commentSurvey;
-        private Model.AllActors.Patient patient;
-        private List<Question> question;
-
-        public string Title { get => title; set => title = value; }
-        public DateTime PublishingDate { get => publishingDate; set => publishingDate = value; }
-        public string CommentSurvey { get => commentSurvey; set => commentSurvey = value; }
-        public AllActors.Patient Patient { get => patient; set => patient = value; }
-        public List<Question> Question { get => question; set => question = value; }
+        public int id { get; set; }
+        public String Title { get; set; }
+        public DateTime PublishingDate { get; set; }
+        public String CommentSurvey { get; set; }
+        public int patientID {get;set;}
+        public virtual Model.AllActors.Patient Patient { get; set; }
+        public virtual List<Question> Question { get; set; }
 
         public Survey(int id)
         {

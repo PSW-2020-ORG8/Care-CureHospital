@@ -13,12 +13,9 @@ namespace Model.AllActors
 {
     public class Blog : IIdentifiable<int>
     {
-        private int id;
-        private String name;
-        private List<Article> articles;
-
-        public string Name { get => name; set => name = value; }
-        public List<Article> Articles { get => articles; set => articles = value; }
+        public int id { get; set; }
+        public String Name { get; set; }
+        public virtual List<Article> Articles { get; set; }
 
         public Blog(int id)
         {

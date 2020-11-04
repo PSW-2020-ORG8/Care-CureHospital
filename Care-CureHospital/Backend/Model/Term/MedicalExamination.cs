@@ -11,17 +11,15 @@ namespace Model.Term
 {
     public class MedicalExamination : Term, IIdentifiable<int>
     {
-        private bool urgency;
-        private String shortDescription;
-        private int id;
-        private Room room;
-        private AllActors.Doctor doctor;
-        public AllActors.Patient Patient { get; set; }
-
-        public bool Urgency { get => urgency; set => urgency = value; }
-        public string ShortDescription { get => shortDescription; set => shortDescription = value; }
-        public Room Room { get => room; set => room = value; }
-        public AllActors.Doctor Doctor { get => doctor; set => doctor = value; }
+        public int id { get; set; }
+        public bool Urgency { get; set; }
+        public String ShortDescription { get; set; }
+        public int roomID { get; set; }
+        public int doctorID { get; set; }
+        public int patientID { get; set; }
+        public virtual Room Room { get; set; }
+        public virtual AllActors.Doctor Doctor { get; set; }
+        public virtual AllActors.Patient Patient { get; set; }
 
         public MedicalExamination(int id)
         {

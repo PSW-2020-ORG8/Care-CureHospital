@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Repository.HospitalitationRepository
  ***********************************************************************/
 
+using Backend.Repository.MySQL;
+using Backend.Repository.MySQL.Stream;
 using Model.Term;
 using Repository.Csv;
 using Repository.Csv.Converter;
@@ -14,7 +16,7 @@ using System.Collections.Generic;
 
 namespace Repository.ExaminationSurgeryRepository
 {
-    public class HospitalitationRepository : CSVRepository<Hospitalitation, int>, IHospitalitationRepository
+    public class HospitalitationRepository : MySQLRepository<Hospitalitation, int>, IHospitalitationRepository
     {
         private string path;
         private const string HOSPITALITATION_FILE = "../../Resources/Data/hospitalitations.csv";
@@ -24,14 +26,12 @@ namespace Repository.ExaminationSurgeryRepository
         {
             if (instance == null)
             {
-                instance = new HospitalitationRepository(
-                new CSVStream<Hospitalitation>(HOSPITALITATION_FILE, new HospitalitationCSVConverter(",")),
-                new IntSequencer());
+                instance = new HospitalitationRepository(new MySQLStream<Hospitalitation>(), new IntSequencer());
             }
             return instance;
         }
 
-        public HospitalitationRepository(ICSVStream<Hospitalitation> stream, ISequencer<int> sequencer)
+        public HospitalitationRepository(IMySQLStream<Hospitalitation> stream, ISequencer<int> sequencer)
             : base(stream, sequencer)
         {
         }

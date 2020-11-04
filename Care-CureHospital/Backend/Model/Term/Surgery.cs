@@ -13,17 +13,15 @@ namespace Model.Term
 {
     public class Surgery : Term, IIdentifiable<int>
     {
-        private bool urgency;
-        private String shortDescription;
-        private int id;
-        private Room room;
-        private AllActors.Doctor doctorSpecialist;
-        public AllActors.Patient patient;
-
-        public bool Urgency { get => urgency; set => urgency = value; }
-        public string ShortDescription { get => shortDescription; set => shortDescription = value; }
-        public Room Room { get => room; set => room = value; }
-        public Model.AllActors.Doctor DoctorSpecialist { get => doctorSpecialist; set => doctorSpecialist = value; }
+        public int id { get; set; }
+        public bool Urgency { get; set; }
+        public String ShortDescription { get; set; }
+        public int roomID { get; set; }
+        public int doctorSpecialistID { get; set; }
+        public int patientID { get; set; }
+        public virtual Room Room { get; set; }
+        public virtual AllActors.Doctor DoctorSpecialist { get; set; }
+        public virtual AllActors.Patient Patient { get; set; }
 
         public Surgery(int id)
         {
@@ -42,7 +40,7 @@ namespace Model.Term
             this.id = id;
             this.Room = room;
             this.DoctorSpecialist = doctorSpecialist;
-            this.patient = patient;
+            this.Patient = patient;
         }
 
         public Surgery(bool urgency, string shortDescription, Room room, Model.AllActors.Doctor doctorSpecialist, AllActors.Patient patient, DateTime fromDateTime, DateTime toDateTime)
@@ -52,23 +50,7 @@ namespace Model.Term
             this.ShortDescription = shortDescription;
             this.Room = room;
             this.DoctorSpecialist = doctorSpecialist;
-            this.patient = patient;
-        }
-
-        /// <summary>
-        /// Property for Model.AllActors.Patient
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
-        public Model.AllActors.Patient Patient
-        {
-            get
-            {
-                return patient;
-            }
-            set
-            {
-                this.patient = value;
-            }
+            this.Patient = patient;
         }
 
         public int GetId()
