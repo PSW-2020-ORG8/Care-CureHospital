@@ -35,24 +35,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PatientFeedbacks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(nullable: true),
-                    PublishingDate = table.Column<DateTime>(nullable: false),
-                    IsForPublishing = table.Column<bool>(nullable: false),
-                    IsPublished = table.Column<bool>(nullable: false),
-                    IsAnonymous = table.Column<bool>(nullable: false),
-                    PatientID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PatientFeedbacks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Patients",
                 columns: table => new
                 {
@@ -163,6 +145,30 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PatientFeedbacks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(nullable: true),
+                    PublishingDate = table.Column<DateTime>(nullable: false),
+                    IsForPublishing = table.Column<bool>(nullable: false),
+                    IsPublished = table.Column<bool>(nullable: false),
+                    IsAnonymous = table.Column<bool>(nullable: false),
+                    PatientID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientFeedbacks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PatientFeedbacks_Patients_PatientID",
+                        column: x => x.PatientID,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Allergiess",
                 columns: table => new
                 {
@@ -233,14 +239,15 @@ namespace Backend.Migrations
                 values: new object[] { 1, "c35", "sastojak1, sastojak2, sastojak3", null, "Brufen", "Hemofarm", 10, 0 });
 
             migrationBuilder.InsertData(
-                table: "PatientFeedbacks",
-                columns: new[] { "Id", "IsAnonymous", "IsForPublishing", "IsPublished", "PatientID", "PublishingDate", "Text" },
-                values: new object[] { 1, true, true, false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Text" });
-
-            migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "Id", "ContactNumber", "DateOfBirth", "EMail", "GuestAccount", "Jmbg", "MedicalRecordID", "Name", "Password", "Surname", "Username", "cityID" },
-                values: new object[] { 1, "063555333", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "pera@gmail.com", false, "123", 1, "Petar", "123", "Petrovic", "pera", 1 });
+                values: new object[,]
+                {
+                    { 1, "063555333", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "pera@gmail.com", false, "123", 1, "Petar", "123", "Petrovic", "pera", 1 },
+                    { 2, "063555333", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "pera@gmail.com", false, "123", 1, "Milos", "123", "Mitrovic", "pera", 1 },
+                    { 3, "063555333", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "pera@gmail.com", false, "123", 1, "Jovan", "123", "Jovanovic", "pera", 1 },
+                    { 4, "063555333", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "pera@gmail.com", false, "123", 1, "Milica", "123", "Micic", "pera", 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Symptomes",
@@ -260,6 +267,19 @@ namespace Backend.Migrations
                 table: "MedicalRecords",
                 columns: new[] { "id", "anamnesisID", "patientID" },
                 values: new object[] { 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "PatientFeedbacks",
+                columns: new[] { "Id", "IsAnonymous", "IsForPublishing", "IsPublished", "PatientID", "PublishingDate", "Text" },
+                values: new object[,]
+                {
+                    { 1, false, true, true, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 2, true, true, true, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 5, false, false, false, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 3, true, true, false, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 4, false, false, false, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 6, true, true, false, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Allergiess_MedicalRecordid",
@@ -285,6 +305,11 @@ namespace Backend.Migrations
                 name: "IX_Medicaments_MedicalRecordid",
                 table: "Medicaments",
                 column: "MedicalRecordid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientFeedbacks_PatientID",
+                table: "PatientFeedbacks",
+                column: "PatientID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Symptomes_Anamnesisid",

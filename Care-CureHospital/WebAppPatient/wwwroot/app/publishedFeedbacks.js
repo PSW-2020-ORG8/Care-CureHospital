@@ -66,7 +66,7 @@ Vue.component("publishedFeedbacks", {
 		    <div class="feedback-info">
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
-					<h1 v-else >{{pf.patient.user.person.name}} {{pf.patient.user.person.surname}}</h1>
+					<h1 v-else ></h1> <!-- OBRISAN: {{pf.patient.Name}} {{pf.patient.Surname}} -->
 		            <h2></h2>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:11em;width:20em;">

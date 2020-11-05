@@ -36,7 +36,6 @@ Vue.component("patientsFeedbacks", {
 	 </div>
 	 
 
-
 	 <div class="verticalLine"></div>
 	
 	 <div class="sideComponents">      
@@ -46,9 +45,7 @@ Vue.component("patientsFeedbacks", {
 			<div><li><a href="">Postavi komentar</a></li></div><br/>
 	     </ul>
 	 </div>
-	 
-		 
-
+	 		 
 
 	 <div class="titleForPublishedFeedbackPreview">
 		 <h1>Pregled komentara</h1>
@@ -66,12 +63,15 @@ Vue.component("patientsFeedbacks", {
 		    <div class="feedback-info">
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
-					<h1 v-else >{{pf.patient.user.person.name}} {{pf.patient.user.person.surname}}</h1>
+					<h1 v-else ></h1> <!-- OBRISAN {{pf.patient.Name}} {{pf.patient.Surname}} -->
 		            <h2></h2>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:11em;width:20em;">
 						{{pf.text}}
 				    </div>
+					<div v-if="pf.isForPublishing === true && pf.isPublished === false" class="publishFeedback-btn">
+                            <button type="button" @click="publishFeedback(pf)">Podeli javno</button>
+                    </div>
 		         </div>
 			</div>
 	     </div>
@@ -92,9 +92,16 @@ Vue.component("patientsFeedbacks", {
 	`	
 	,
 	methods: {
-		
-	
-		},
+		publishFeedback: function (patientFeedback) {
+			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
+				.then(response => {
+					axios.get('api/patientFeedback').then(response => {
+						this.patientFeedbacks = response.data;
+					});	
+					router.reload();
+			});	
+		}	
+	},
 	mounted(){
 
 		axios.get('api/patientFeedback').then(response => {

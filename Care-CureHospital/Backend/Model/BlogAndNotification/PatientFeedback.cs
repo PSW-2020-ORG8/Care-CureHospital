@@ -15,9 +15,7 @@ namespace Backend.Model.BlogAndNotification
         public bool IsPublished { get; set; }
         public bool IsAnonymous { get; set; }
         public int PatientID { get; set; }
-        [NotMapped]
         public virtual Patient Patient { get; set; }
-
         
         public PatientFeedback()
         {
