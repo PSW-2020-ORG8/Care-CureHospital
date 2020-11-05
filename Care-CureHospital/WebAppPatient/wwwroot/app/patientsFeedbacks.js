@@ -1,4 +1,4 @@
-Vue.component("publishedFeedbacks", {
+Vue.component("patientsFeedbacks", {
 	data: function (){
 		return {
 			patientFeedbacks : []
@@ -41,8 +41,8 @@ Vue.component("publishedFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
-		    <div><li class="active" ><a href="#/">Komentari</a></li></div><br/>
+		    <div><li class="active"><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
+		    <div><li><a href="#/">Komentari</a></li></div><br/>
 			<div><li><a href="">Postavi komentar</a></li></div><br/>
 	     </ul>
 	 </div>
@@ -97,7 +97,7 @@ Vue.component("publishedFeedbacks", {
 		},
 	mounted(){
 
-		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
+		axios.get('api/patientFeedback').then(response => {
 			this.patientFeedbacks = response.data;
 		});	
 	
