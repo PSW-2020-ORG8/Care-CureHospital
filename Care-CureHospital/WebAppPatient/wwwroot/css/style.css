@@ -336,7 +336,7 @@ label {
     margin-top: 220px;
 }
 
-.publishFeedback-btn {
+.publishFeedback-btn, .post-feedback-btn {
     height: 280px;
     width: 325px;
     margin-top: 17px;
@@ -344,7 +344,12 @@ label {
     position: relative;
 }
 
-.publishFeedback-btn p {
+.post-feedback-btn {
+    margin-top: 30%;
+    margin-right: -80%;
+}
+
+.publishFeedback-btn p, .post-feedback-btn p{
     display: inline-block;
     position: absolute;
     top: 7px;
@@ -356,7 +361,7 @@ label {
     color: #054f5294;
 }
 
-.publishFeedback-btn button {
+.publishFeedback-btn button, .post-feedback-btn button{
     float: right;
     display: inline-block;
     height: 50px;
@@ -376,6 +381,77 @@ label {
     outline: none;
 }
 
-.publishFeedback-btn button:hover {
+.publishFeedback-btn button:hover, .post-feedback-btn button:hover{
     background-color: #054f5294;
+}
+
+.formForPublishingFeedback{
+    position: fixed;
+    width: 350px;
+    height: 450px;
+    padding: 20px;
+    margin-top: 0%;
+    margin-left: 70%;
+    background-color: #afd0c7;
+    z-index: 3;
+    border-radius: 30px 30px 30px 30px;
+    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    transition: 0.5 ease;
+    cursor: pointer;
+}
+
+.form-title h1{
+    padding-top: 52px;
+    font-size: 30px;
+    color: #474747;
+    text-align: center
+}
+
+.form-title h1 {
+    padding-top: 12px;
+}
+
+.form-title input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 16px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Bentham', serif;
+}
+
+    .form-title input[type="text"]::placeholder {
+        text-align: center;
+    }
+
+
+#formForSearch {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#labelForGender {
+    margin-left: 130px;
+}
+
+.publishingFeedbackCheckBox {
+    display: block;
+    height: 50px;
+    font-family: 'Suranna', serif;
+    font-size: 34px;
+}
+
+.text-checkbox {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Bentham', serif;
+    text-align: left;
+    padding-bottom: 20px;
 }

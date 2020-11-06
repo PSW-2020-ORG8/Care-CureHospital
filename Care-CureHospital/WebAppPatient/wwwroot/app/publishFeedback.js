@@ -1,7 +1,10 @@
-Vue.component("publishedFeedbacks", {
+Vue.component("publishFeedback", {
 	data: function (){
 		return {
-			patientFeedbacks : []
+			patientFeedbacks: [],
+			inputFeedback: '',
+			anonymous: false,
+			isForPublishing: false
 		}
 	},
 	template:`
@@ -35,7 +38,26 @@ Vue.component("publishedFeedbacks", {
 	    </div>
 	 </div>
 	 
+	<div class="formForPublishingFeedback">
+                 <div class="form-title">
+                     <h1>Ostavite utisak</h1>
+                          <br><br>
+                        <input type="text" v-model="inputFeedback" placeholder="Ostavite Vas utisak...">                 											
 
+						<input type="checkbox" id="anonymous" name="anonymous" value="Anonymous" v-model = "anonymous">
+						<label for="vehicle1"> Anonimno</label><br>
+						<input type="checkbox" id="isForPublishing" name="isForPublishing" value="isForPublishing" v-model = "isForPublishing">
+						<label for="vehicle2">Dozvoli objavljivanje</label><br>	
+			
+                         <div class="post-feedback-btn">
+                             <button type="button" @click="postFeedback">Posalji</button>
+                         </div>
+
+
+
+                     </form>
+                 </div>
+             </div>
 
 	 <div class="verticalLine"></div>
 	
@@ -43,7 +65,7 @@ Vue.component("publishedFeedbacks", {
 	     <ul class="ulForSideComponents">
 		    <div><li><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
 		    <div><li class="active" ><a href="#/">Komentari</a></li></div><br/>
-			<div><li><a href="#/publishFeedback">Postavi komentar</a></li></div><br/>
+			<div><li><a href="">Postavi komentar</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -92,7 +114,8 @@ Vue.component("publishedFeedbacks", {
 	`	
 	,
 	methods: {
-		
+		postFeedback: function () {
+		}	
 	
 		},
 	mounted(){
