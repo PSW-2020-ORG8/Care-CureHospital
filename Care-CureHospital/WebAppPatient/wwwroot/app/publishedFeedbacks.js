@@ -19,7 +19,7 @@ Vue.component("publishedFeedbacks", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/">Komentari</a></li>
+	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
 	         </ul>
 	     </div>
  
@@ -41,9 +41,9 @@ Vue.component("publishedFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
-		    <div><li class="active" ><a href="#/">Komentari</a></li></div><br/>
-			<div><li><a href="#/publishFeedback">Postavi komentar</a></li></div><br/>
+		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
+		    <div><li class="active" ><a href="#/">Objavljeni utisci</a></li></div><br/>
+			<div><li><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -61,7 +61,7 @@ Vue.component("publishedFeedbacks", {
 	 	 
 		<div class="wrapper">
 		    <div class="feedback-img">
-		        <img src="./pictures/comment.png" height="270" width="270" style="margin-left: 15%; margin-top: 25%;">
+		        <img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
 		    </div>
 		    <div class="feedback-info">
 		        <div class="feedback-text">
@@ -69,7 +69,7 @@ Vue.component("publishedFeedbacks", {
 					<h1 v-else ></h1> <!-- OBRISAN: {{pf.patient.Name}} {{pf.patient.Surname}} -->
 		            <h2></h2>
 					<h3></h3>
-					<div  style="overflow-y:scroll;height:11em;width:20em;">
+					<div  style="overflow-y:scroll;height:100px;width:450px;">
 						{{pf.text}}
 				    </div>
 		         </div>

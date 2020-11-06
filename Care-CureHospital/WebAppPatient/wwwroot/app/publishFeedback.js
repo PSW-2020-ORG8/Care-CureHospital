@@ -22,7 +22,7 @@ Vue.component("publishFeedback", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/">Komentari</a></li>
+	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
 	         </ul>
 	     </div>
  
@@ -42,7 +42,7 @@ Vue.component("publishFeedback", {
                  <div class="form-title">
                      <h1>Ostavite utisak</h1>
                           <br><br>
-                        <input type="text" v-model="inputFeedback" placeholder="Ostavite Vas utisak...">                 											
+						<input type="text" v-model="inputFeedback" placeholder="Ostavite Vas utisak...">                 											
 
 						<input type="checkbox" id="anonymous" name="anonymous" value="Anonymous" v-model = "anonymous">
 						<label for="vehicle1"> Anonimno</label><br>
@@ -63,9 +63,9 @@ Vue.component("publishFeedback", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
-		    <div><li class="active" ><a href="#/">Komentari</a></li></div><br/>
-			<div><li><a href="">Postavi komentar</a></li></div><br/>
+		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
+		    <div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
+			<div><li class="active" ><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -83,7 +83,7 @@ Vue.component("publishFeedback", {
 	 	 
 		<div class="wrapper">
 		    <div class="feedback-img">
-		        <img src="./pictures/comment.png" height="270" width="270" style="margin-left: 15%; margin-top: 25%;">
+		        <img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
 		    </div>
 		    <div class="feedback-info">
 		        <div class="feedback-text">
@@ -91,7 +91,7 @@ Vue.component("publishFeedback", {
 					<h1 v-else ></h1> <!-- OBRISAN: {{pf.patient.Name}} {{pf.patient.Surname}} -->
 		            <h2></h2>
 					<h3></h3>
-					<div  style="overflow-y:scroll;height:11em;width:20em;">
+					<div  style="overflow-y:scroll;height:100px;width:450px;">
 						{{pf.text}}
 				    </div>
 		         </div>

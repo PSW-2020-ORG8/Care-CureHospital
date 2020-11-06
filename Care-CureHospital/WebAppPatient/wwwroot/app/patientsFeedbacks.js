@@ -19,7 +19,7 @@ Vue.component("patientsFeedbacks", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/">Komentari</a></li>
+	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
 	         </ul>
 	     </div>
  
@@ -40,15 +40,15 @@ Vue.component("patientsFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li class="active"><a href="#/patientsFeedbacks">Admin</a></li></div><br/>
-		    <div><li><a href="#/">Komentari</a></li></div><br/>
-			<div><li><a href="">Postavi komentar</a></li></div><br/>
+		    <div><li class="active"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
+		    <div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
+			<div><li><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 		 
 
 	 <div class="titleForPublishedFeedbackPreview">
-		 <h1>Pregled komentara</h1>
+		 <h1>Utisci pacijenata</h1>
 	 </div> 
 		 
 
@@ -58,7 +58,7 @@ Vue.component("patientsFeedbacks", {
 	 	 
 		<div class="wrapper">
 		    <div class="feedback-img">
-		        <img src="./pictures/comment.png" height="270" width="270" style="margin-left: 15%; margin-top: 25%;">
+		        <img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
 		    </div>
 		    <div class="feedback-info">
 		        <div class="feedback-text">
@@ -66,7 +66,7 @@ Vue.component("patientsFeedbacks", {
 					<h1 v-else ></h1> <!-- OBRISAN {{pf.patient.Name}} {{pf.patient.Surname}} -->
 		            <h2></h2>
 					<h3></h3>
-					<div  style="overflow-y:scroll;height:11em;width:20em;">
+					<div  style="overflow-y:scroll;height:100px;width:450px;">
 						{{pf.text}}
 				    </div>
 					<div v-if="pf.isForPublishing === true && pf.isPublished === false" class="publishFeedback-btn">
