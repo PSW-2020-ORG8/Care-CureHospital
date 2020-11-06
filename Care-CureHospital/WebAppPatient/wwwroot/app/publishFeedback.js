@@ -2,8 +2,8 @@ Vue.component("publishFeedback", {
 	data: function (){
 		return {
 			patientFeedbacks: [],
-			inputFeedback: '',
-			anonymous: false,
+			text: '',
+			isAnonymous: false,
 			isForPublishing: false
 		}
 	},
@@ -42,9 +42,9 @@ Vue.component("publishFeedback", {
                  <div class="form-title">
                      <h1>Ostavite utisak</h1>
                           <br><br>
-						<input type="text" v-model="inputFeedback" placeholder="Ostavite Vas utisak...">                 											
+						<input type="text" v-model="text" placeholder="Ostavite Vas utisak...">                 											
 
-						<input type="checkbox" id="anonymous" name="anonymous" value="Anonymous" v-model = "anonymous">
+						<input type="checkbox" id="isAnonymous" name="isAnonymous" value="isAnonymous" v-model = "isAnonymous">
 						<label for="vehicle1"> Anonimno</label><br>
 						<input type="checkbox" id="isForPublishing" name="isForPublishing" value="isForPublishing" v-model = "isForPublishing">
 						<label for="vehicle2">Dozvoli objavljivanje</label><br>	
@@ -115,8 +115,17 @@ Vue.component("publishFeedback", {
 	,
 	methods: {
 		postFeedback: function () {
+			axios.post('/api/patientFeedback', {
+				text: this.text,
+				isForPublishing: this.isForPublishing,
+				isPublished: false,
+				isAnonymous: this.isAnonymous,
+				patientID: 1,
+				patient: null,
+				publishingDate: "0001-01-01T00:00:00"
+			});
 		}	
-	
+			
 		},
 	mounted(){
 
