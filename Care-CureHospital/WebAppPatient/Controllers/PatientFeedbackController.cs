@@ -49,7 +49,7 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
-        [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback{id}
+        [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {
             if (id < 0)

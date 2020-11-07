@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201103220755_FirstMigration")]
+    [Migration("20201106234943_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,18 +48,70 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PatientID");
+
                     b.ToTable("PatientFeedbacks");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            IsAnonymous = false,
+                            IsForPublishing = true,
+                            IsPublished = true,
+                            PatientID = 1,
+                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsAnonymous = true,
+                            IsForPublishing = true,
+                            IsPublished = true,
+                            PatientID = 2,
+                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        },
+                        new
+                        {
+                            Id = 3,
                             IsAnonymous = true,
                             IsForPublishing = true,
                             IsPublished = false,
-                            PatientID = 1,
+                            PatientID = 3,
                             PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Text"
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsAnonymous = false,
+                            IsForPublishing = false,
+                            IsPublished = false,
+                            PatientID = 4,
+                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsAnonymous = false,
+                            IsForPublishing = false,
+                            IsPublished = false,
+                            PatientID = 2,
+                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsAnonymous = true,
+                            IsForPublishing = true,
+                            IsPublished = false,
+                            PatientID = 4,
+                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         });
                 });
 
@@ -181,6 +233,51 @@ namespace Backend.Migrations
                             Name = "Petar",
                             Password = "123",
                             Surname = "Petrovic",
+                            Username = "pera",
+                            cityID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContactNumber = "063555333",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EMail = "pera@gmail.com",
+                            GuestAccount = false,
+                            Jmbg = "123",
+                            MedicalRecordID = 1,
+                            Name = "Milos",
+                            Password = "123",
+                            Surname = "Mitrovic",
+                            Username = "pera",
+                            cityID = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ContactNumber = "063555333",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EMail = "pera@gmail.com",
+                            GuestAccount = false,
+                            Jmbg = "123",
+                            MedicalRecordID = 1,
+                            Name = "Jovan",
+                            Password = "123",
+                            Surname = "Jovanovic",
+                            Username = "pera",
+                            cityID = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ContactNumber = "063555333",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EMail = "pera@gmail.com",
+                            GuestAccount = false,
+                            Jmbg = "123",
+                            MedicalRecordID = 1,
+                            Name = "Milica",
+                            Password = "123",
+                            Surname = "Micic",
                             Username = "pera",
                             cityID = 1
                         });
@@ -365,6 +462,15 @@ namespace Backend.Migrations
                             id = 3,
                             Name = "kijanje"
                         });
+                });
+
+            modelBuilder.Entity("Backend.Model.BlogAndNotification.PatientFeedback", b =>
+                {
+                    b.HasOne("Model.AllActors.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.AllActors.City", b =>

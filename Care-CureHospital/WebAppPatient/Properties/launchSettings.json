@@ -10,21 +10,21 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "commandName": "IISExpress",
+        "launchBrowser": true,
+        "launchUrl": "index.html",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     },
     "WebAppPatient": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:5000",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "index.html",
+        "applicationUrl": "http://localhost:5000",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     }
   }
 }
