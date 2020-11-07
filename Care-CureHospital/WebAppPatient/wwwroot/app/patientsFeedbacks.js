@@ -1,7 +1,8 @@
 Vue.component("patientsFeedbacks", {
 	data: function (){
 		return {
-			patientFeedbacks : []
+			patientFeedbacks: [],
+			typeOfFeedback: 'Svi utisci'
 		}
 	},
 	template:`
@@ -34,6 +35,17 @@ Vue.component("patientsFeedbacks", {
 		    </div>
 	    </div>
 	 </div>
+
+	 
+	<div class="formForPublishingFeedback">
+            <div class="form-title">
+                <h1>Filtriraj utiske pacijenata:</h1>
+                <select v-model="typeOfFeedback">
+                <option value="Svi utisci" selected>Svi utisci</option>
+                <option value="Utisci za objavljivanje">Utisci za objavljivanje</option>
+                </select>
+		    </div>
+     </div>
 	 
 
 	 <div class="verticalLine"></div>
@@ -54,8 +66,8 @@ Vue.component("patientsFeedbacks", {
 
 	 <div class="listOfFeedbacks">
 		 
-	 <div v-for="pf in patientFeedbacks" >	
-	 	 
+	 <div v-for="pf in filterPatientFeedbacks" >	
+ 	 
 		<div class="wrapper">
 		    <div class="feedback-img">
 		        <img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
@@ -74,8 +86,7 @@ Vue.component("patientsFeedbacks", {
                     </div>
 		         </div>
 			</div>
-	     </div>
-		
+	     </div>		
 	 </div>
 	<!--
 	<template v-if="!patientFeedbacks || !patientFeedbacks.length"> 
@@ -98,9 +109,22 @@ Vue.component("patientsFeedbacks", {
 					axios.get('api/patientFeedback').then(response => {
 						this.patientFeedbacks = response.data;
 					});	
-					router.reload();
+					$router.go();
 			});	
 		}	
+	},
+	computed: {
+		filterPatientFeedbacks() {
+			if (this.typeOfFeedback === "Svi utisci") {
+				return this.patientFeedbacks.filter(feedback => {
+					return feedback.isForPublishing === true || feedback.isForPublishing === false
+				});
+			} else if (this.typeOfFeedback === "Utisci za objavljivanje") {
+				return this.patientFeedbacks.filter(feedback => {
+					return feedback.isForPublishing === true && feedback.isPublished === false
+				});
+			}
+		}
 	},
 	mounted(){
 

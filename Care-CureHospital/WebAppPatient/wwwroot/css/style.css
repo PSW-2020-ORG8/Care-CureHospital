@@ -385,7 +385,7 @@ label {
     background-color: #054f5294;
 }
 
-.formForPublishingFeedback{
+.formForPublishingFeedback {
     position: fixed;
     width: 350px;
     height: 450px;
@@ -402,7 +402,7 @@ label {
     cursor: pointer;
 }
 
-.form-title h1{
+.form-title h1 {
     padding-top: 52px;
     font-size: 30px;
     color: #474747;
@@ -426,9 +426,9 @@ label {
     font-family: 'Bentham', serif;
 }
 
-    .form-title input[type="text"]::placeholder {
-        text-align: center;
-    }
+.form-title input[type="text"]::placeholder {
+    text-align: center;
+}
 
 
 #formForSearch {
