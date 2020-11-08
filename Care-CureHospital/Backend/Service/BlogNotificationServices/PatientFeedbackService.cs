@@ -41,6 +41,8 @@ namespace Backend.Service.BlogNotificationServices
             patientFeedbackRepository.UpdateEntity(entity);
         }
 
+        /// <summary> This method calls <c>PatientFeedbackRepository</c> to get list of <c>PatientFeedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <returns> List of published feedbacks. </returns>
         public IEnumerable<PatientFeedback> GetPublishedFeedbacks()
         {
             return patientFeedbackRepository.GetAllEntities().Where(patientFeedback => patientFeedback.IsPublished.Equals(true));

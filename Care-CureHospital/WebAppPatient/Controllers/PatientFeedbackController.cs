@@ -26,7 +26,8 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
-        
+        /// <summary> This method calls <c>PatientFeedbackService</c> to get list of <c>PatientFeedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <returns> List of published feedbacks. </returns>
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {

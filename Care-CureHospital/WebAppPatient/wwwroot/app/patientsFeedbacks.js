@@ -118,7 +118,7 @@ Vue.component("patientsFeedbacks", {
 						toast('Utisak je uspešno objavljen!')
 						this.patientFeedbacks = response.data;
 					});
-					$router.go();
+					$this.router.go();
 				});
 		}
 	},
