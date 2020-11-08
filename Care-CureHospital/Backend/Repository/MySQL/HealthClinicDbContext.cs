@@ -31,7 +31,7 @@ namespace Backend.Repository.MySQL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=HealthClinicDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseMySql("server=localhost;port=3306;database=HealthClinicDB;user=root;password=root");
             }
         }
 
