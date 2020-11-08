@@ -46,12 +46,17 @@ namespace Backend.Service.BlogNotificationServices
             return patientFeedbackRepository.GetAllEntities().Where(patientFeedback => patientFeedback.IsPublished.Equals(true));
         }
 
+        /// <summary>This method changed satus of <c>PatientFeedback</c> atribute <c>isPublished</c> on True></summary>
+        /// <param name="id"> id of PatientFeedback</param>
+        /// <returns> changed <c>PatientFeedback</c> object</returns>
         public PatientFeedback PublishPatientFeedback(int id)
         {
             PatientFeedback patientFeedback = patientFeedbackRepository.GetEntity(id);
             
             if (patientFeedback == null)
+            {
                 return null;
+            }       
             
             patientFeedback.IsPublished = true;
             patientFeedbackRepository.UpdateEntity(patientFeedback);

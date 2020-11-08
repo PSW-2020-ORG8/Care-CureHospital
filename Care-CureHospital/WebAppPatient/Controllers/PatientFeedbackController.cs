@@ -49,16 +49,18 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
+        /// <summary>This method changes status of <c>PatientFeedback</c> into published Feedback <c>isPublished<c>></summary>
+        /// <param name="id"> id of PatientFeedback</param>
+        /// <returns> changed <c>PatientFeedbackDto</c> object</returns>
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
-        {
-            if (id < 0)
-                return BadRequest();
-            
+        {     
             PatientFeedback result = App.Instance().patientFeedbackService.PublishPatientFeedback(id);
             if (result == null)
+            {
                 return NotFound();
-
+            }
+            
             return Ok(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(result));
         }
         
