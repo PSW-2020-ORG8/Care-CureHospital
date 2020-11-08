@@ -1,47 +1,50 @@
 Vue.component("publishFeedback", {
-	data: function (){
+	data: function () {
 		return {
 			patientFeedbacks: [],
 			text: '',
 			isAnonymous: false,
-			isForPublishing: false
+			isForPublishing: false,
+			feedbackError: false
 		}
 	},
-	template:`
+	template: `
 	<div>
 	
-	     <div class="logoAndNamePublish">
-	         <div class="logo">        
-	             <img src="pictures/clinic.png"/>
-	         </div>
-	         <div class="webName">
-	             <h3></h3>
-	         </div>  
-	     </div>
+		<div class="boundaryForScrollPublish">
+			<div class="logoAndName">
+					<div class="logo">        
+						<img src="pictures/clinic.png"/>
+					</div>
+					<div class="webName">
+						<h3></h3>
+					</div>  
+				</div>
 	 
-	     <div class="main">     
-	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
-	         </ul>
-	     </div>
+				<div class="main">     
+					<ul class="menu-contents">
+					<li  class="active"><a href="#/">Utisci pacijenata</a></li>
+					</ul>
+				</div>
  
-	     <div class="dropdown">
-	        <button class="dropbtn">
-	        	<img id="menuIcon" src="pictures/menuIcon.png" />
-	        	<img id="userIcon" src="pictures/user.png" />
-	        </button>
-		    <div class="dropdown-content">
-		        <a href="">Registruj se</a>
-	            <a href="">Prijavi se</a>
-		    </div>
-	    </div>
-	 
+				<div class="dropdown">
+					<button class="dropbtn">
+						<img id="menuIcon" src="pictures/menuIcon.png" />
+						<img id="userIcon" src="pictures/user.png" />
+					</button>
+				<div class="dropdown-content">
+					<a >Registruj se</a>
+					<a >Prijavi se</a>
+				</div>
+			</div>
+		</div>
 	 
 	<div class="formForPublishingFeedback">
                  <div class="form-title">
                      <h1>Ostavite utisak</h1>
                           <br><br>
-						<input type="text" v-model="text" placeholder="Ostavite Vas utisak...">                 											
+						<input type="text" id="feedbackID" v-model="text" placeholder="Ostavite Vas utisak..." >  
+						<label v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 16%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
 						
 						<input type="checkbox" id="isAnonymous" name="isAnonymous" value="isAnonymous" v-model = "isAnonymous">
 						<label for="vehicle1"> Anonimno</label><br>
@@ -58,7 +61,7 @@ Vue.component("publishFeedback", {
                  </div>
              </div>
 
-	 <div class="verticalLinePublish"></div>
+	 <div class="verticalLinePublishFeedback"></div>
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
@@ -81,28 +84,48 @@ Vue.component("publishFeedback", {
 		  
 	</div>
         
-	`	
+	`
 	,
 	methods: {
 		postFeedback: function () {
-			axios.post('/api/patientFeedback', {
-				text: this.text,
-				isForPublishing: this.isForPublishing,
-				isPublished: false,
-				isAnonymous: this.isAnonymous,
-				patientID: 1,
-				patient: null,
-				publishingDate: "0001-01-01T00:00:00"
-			});
-		}	
-			
-		},
-	mounted(){
+			this.feedbackError = false;
+			var empty = false;
+
+
+			if (this.text.length === 0) {
+				empty = true;
+				this.feedbackError = true;
+			}
+
+			if (empty === false) {
+				if (confirm('Da li ste sigurni da zelite da se ostavite utisak?') == true) {
+					axios.post('/api/patientFeedback', {
+						text: this.text,
+						isForPublishing: this.isForPublishing,
+						isPublished: false,
+						isAnonymous: this.isAnonymous,
+						patientID: 1,
+						patient: null,
+						publishingDate: "0001-01-01T00:00:00"
+					});
+					toast('Utisak je uspesno ostavljen')
+				}
+				else {
+					this.$router.push({ name: 'publishFeedback' })
+
+				}
+			}
+
+
+		}
+
+	},
+	mounted() {
 
 		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
 			this.patientFeedbacks = response.data;
-		});	
-	
+		});
+
 	}
-	
+
 });

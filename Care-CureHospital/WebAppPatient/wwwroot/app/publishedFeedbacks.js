@@ -1,10 +1,10 @@
 Vue.component("publishedFeedbacks", {
-	data: function (){
+	data: function () {
 		return {
-			patientFeedbacks : []
+			patientFeedbacks: []
 		}
 	},
-	template:`
+	template: `
 	<div>
 	
 	 <div class="boundaryForScroll">
@@ -17,6 +17,7 @@ Vue.component("publishedFeedbacks", {
 	         </div>  
 	     </div>
 	 
+		
 	     <div class="main">     
 	         <ul class="menu-contents">
 	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
@@ -29,8 +30,8 @@ Vue.component("publishedFeedbacks", {
 	        	<img id="userIcon" src="pictures/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="">Registruj se</a>
-	            <a href="">Prijavi se</a>
+		        <a >Registruj se</a>
+	            <a >Prijavi se</a>
 		    </div>
 	    </div>
 	 </div>
@@ -49,11 +50,11 @@ Vue.component("publishedFeedbacks", {
 	 
 		 
 
-
+	<!--
 	 <div class="titleForPublishedFeedbackPreview">
 		 <h1>Utisci pacijenata</h1>
 	 </div> 
-		 
+	-->	 
 
 	 <div class="listOfFeedbacks">
 		 
@@ -66,7 +67,7 @@ Vue.component("publishedFeedbacks", {
 		    <div class="feedback-info">
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
-					<h1 v-else >{{pf.patient}} </h1> 
+					<h1 v-else >{{pf.patient}}</h1>
 		            <h2></h2>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:100px;width:460px;border:1px solid;padding: 10px 10px 15px 10px;">
@@ -89,18 +90,18 @@ Vue.component("publishedFeedbacks", {
 		  
 	</div>
         
-	`	
+	`
 	,
 	methods: {
-		
-	
-		},
-	mounted(){
+
+
+	},
+	mounted() {
 
 		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
 			this.patientFeedbacks = response.data;
-		});	
-	
+		});
+
 	}
-	
+
 });

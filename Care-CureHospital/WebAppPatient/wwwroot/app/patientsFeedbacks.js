@@ -1,11 +1,11 @@
 Vue.component("patientsFeedbacks", {
-	data: function (){
+	data: function () {
 		return {
 			patientFeedbacks: [],
 			typeOfFeedback: 'Svi utisci'
 		}
 	},
-	template:`
+	template: `
 	<div>
 	
 	 <div class="boundaryForScroll">
@@ -30,14 +30,14 @@ Vue.component("patientsFeedbacks", {
 	        	<img id="userIcon" src="pictures/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="">Registruj se</a>
-	            <a href="">Prijavi se</a>
+		        <a >Registruj se</a>
+	            <a >Prijavi se</a>
 		    </div>
 	    </div>
 	 </div>
 
 	 
-	<div class="formForPublishingFeedback">
+	<div class="filterFeedbacks">
             <div class="form-title">
                 <h1>Filtriraj utiske pacijenata:</h1>
                 <select v-model="typeOfFeedback">
@@ -59,9 +59,11 @@ Vue.component("patientsFeedbacks", {
 	 </div>
 	 		 
 
+	<!--
 	 <div class="titleForPublishedFeedbackPreview">
 		 <h1>Utisci pacijenata</h1>
 	 </div> 
+	-->	 
 		 
 
 	 <div class="listOfFeedbacks">
@@ -75,8 +77,8 @@ Vue.component("patientsFeedbacks", {
 		    <div class="feedback-info">
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
-					<h1 v-else >{{pf.patient.Name}}</h1>
-					<h2></h2>
+					<h1 v-else >{{pf.patient}}</h1> 
+		            <h2></h2>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:100px;width:460px;border:1px solid;padding: 10px 10px 15px 10px;">
 						{{pf.text}}
@@ -100,18 +102,19 @@ Vue.component("patientsFeedbacks", {
 		  
 	</div>
         
-	`	
+	`
 	,
 	methods: {
 		publishFeedback: function (patientFeedback) {
 			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
 				.then(response => {
 					axios.get('api/patientFeedback').then(response => {
+						toast('Utisak je uspesno objavljen!')
 						this.patientFeedbacks = response.data;
-					});	
+					});
 					$router.go();
-			});	
-		}	
+				});
+		}
 	},
 	computed: {
 		filterPatientFeedbacks() {
@@ -126,12 +129,12 @@ Vue.component("patientsFeedbacks", {
 			}
 		}
 	},
-	mounted(){
+	mounted() {
 
 		axios.get('api/patientFeedback').then(response => {
 			this.patientFeedbacks = response.data;
-		});	
-	
+		});
+
 	}
-	
+
 });
