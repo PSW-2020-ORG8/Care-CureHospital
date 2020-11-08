@@ -30,6 +30,8 @@ namespace Backend.Service.BlogNotificationServices
             patientFeedbackRepository.DeleteEntity(entity);
         }
 
+        /// <summary> This method calls <c>PatientFeedbackRepository</c> to get list of all <c>PatientFeedback</c>. </summary>
+        /// <returns> List of all feedbacks. </returns>
         public IEnumerable<PatientFeedback> GetAllEntities()
         {
             return patientFeedbackRepository.GetAllEntities();

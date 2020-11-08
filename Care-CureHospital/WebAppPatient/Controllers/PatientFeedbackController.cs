@@ -18,6 +18,8 @@ namespace WebAppPatient.Controllers
 
         public PatientFeedbackController() {}
 
+        /// <summary> This method calls <c>PatientFeedbackService</c> to get list of all <c>PatientFeedback</c>. </summary>
+        /// <returns> List of all feedbacks. </returns>
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
