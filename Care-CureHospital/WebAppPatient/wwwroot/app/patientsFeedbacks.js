@@ -75,10 +75,10 @@ Vue.component("patientsFeedbacks", {
 		    <div class="feedback-info">
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
-					<h1 v-else ></h1> <!-- OBRISAN {{pf.patient.Name}} {{pf.patient.Surname}} -->
-		            <h2></h2>
+					<h1 v-else >{{pf.patient.Name}}</h1>
+					<h2></h2>
 					<h3></h3>
-					<div  style="overflow-y:scroll;height:100px;width:450px;">
+					<div  style="overflow-y:scroll;height:100px;width:460px;border:1px solid;padding: 10px 10px 15px 10px;">
 						{{pf.text}}
 				    </div>
 					<div v-if="pf.isForPublishing === true && pf.isPublished === false" class="publishFeedback-btn">

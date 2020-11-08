@@ -16,7 +16,7 @@ namespace Backend.Dto
         public bool IsAnonymous { get; set; }
         public int PatientId { get; set; }
 
-        public Patient Patient { get; set; }
+        public string Patient { get; set; }
 
         public DateTime PublishingDate { get; set; }
 

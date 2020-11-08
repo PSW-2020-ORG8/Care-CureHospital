@@ -31,6 +31,7 @@ namespace Backend.Repository.MySQL
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseLazyLoadingProxies();
                 optionsBuilder.UseMySql("server=localhost;port=3306;database=HealthClinicDB;user=root;password=root");
             }
         }

@@ -14,6 +14,7 @@ namespace Model.AllActors
     {
         public Boolean GuestAccount { get; set; }
         public int MedicalRecordID { get; set; }
+
         [NotMapped]
         public virtual MedicalRecord MedicalRecord { get; set; }
 
@@ -37,6 +38,7 @@ namespace Model.AllActors
         public Patient(int id) : base(id)
         {
         }
+
 
         public Patient()
         {

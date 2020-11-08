@@ -21,17 +21,17 @@ namespace WebAppPatient.Controllers
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
-            List<PatientFeedback> result = new List<PatientFeedback>();
-            App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(feedback));
-            return Ok(result);
+            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
+            App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(feedback)));
+            return Ok();
         }
 
         
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {
-            List<PatientFeedback> result = new List<PatientFeedback>();
-            App.Instance().patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(feedback));
+            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
+            App.Instance().patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
 
@@ -59,7 +59,7 @@ namespace WebAppPatient.Controllers
             if (result == null)
                 return NotFound();
 
-            return Ok(result);
+            return Ok(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(result));
         }
         
         
