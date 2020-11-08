@@ -1,0 +1,13 @@
+﻿<Window x:Class="Hospital_map.radiologija"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_map"
+        mc:Ignorable="d"
+      Title="Radiologija" Height="250" Width="300"  WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox Background="White"  HorizontalAlignment="Left" Height="250" TextWrapping="Wrap" Text="Radno vreme:&#xA;Svaki dan: 7:00-20:00&#xA;&#xA;Pre podne 7:00-13:00:&#xD;&#xA;Boki Kamera&#xA;&#xA;Posle podne 13:30-20:00:&#xD;&#xA;Pera Perić&#xA;&#xA;" VerticalAlignment="Top" Width="300" Margin="0,0,-8,-31" Foreground="#FF060606"/>
+
+    </Grid>
+</Window>
