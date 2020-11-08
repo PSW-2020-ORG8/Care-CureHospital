@@ -18,24 +18,29 @@ namespace WebAppPatient.Controllers
 
         public PatientFeedbackController() {}
 
+        /// <summary> This method calls <c>PatientFeedbackService</c> to get list of all <c>PatientFeedback</c>. </summary>
+        /// <returns> List of all feedbacks. </returns>
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
-            List<PatientFeedback> result = new List<PatientFeedback>();
-            App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(feedback));
+            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
+            App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
 
-        
+        /// <summary> This method calls <c>PatientFeedbackService</c> to get list of <c>PatientFeedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <returns> List of published feedbacks. </returns>
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {
-            List<PatientFeedback> result = new List<PatientFeedback>();
-            App.Instance().patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(feedback));
+            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
+            App.Instance().patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
 
-
+        /// <summary> This method calls <c>PatientFeedbackService</c> to post new <c>PatientFeedback</c>. </summary>
+        /// <param name="dto"> Data transfer object for <c>PatientFeedback</c>. </param>
+        /// <returns> 200 ok </returns>
         [HttpPost]
         public IActionResult Add(PatientFeedbackDto dto)
         {
@@ -49,17 +54,19 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
-        [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback{id}
+        /// <summary> This method calls <c>PatientFeedbackService</c> to change status of <c>PatientFeedback</c> into published Feedback <c>isPublished<c>> </summary>
+        /// <param name="id"> id of PatientFeedback </param>
+        /// <returns> Changed <c>PatientFeedbackDto</c> object </returns>
+        [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
-        {
-            if (id < 0)
-                return BadRequest();
-            
+        {     
             PatientFeedback result = App.Instance().patientFeedbackService.PublishPatientFeedback(id);
             if (result == null)
+            {
                 return NotFound();
-
-            return Ok(result);
+            }
+            
+            return Ok(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(result));
         }
         
         

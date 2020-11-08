@@ -18,8 +18,7 @@ namespace Backend.Adapters
             patientFeedback.IsPublished = dto.IsPublished;
             patientFeedback.IsAnonymous = dto.IsAnonymous;
             patientFeedback.PatientID = dto.PatientId;
-            patientFeedback.Patient = patient;
-            patientFeedback.PublishingDate = dto.PublishingDate;
+            patientFeedback.Patient = null;
             patientFeedback.Text = dto.Text;
 
             return patientFeedback;
@@ -28,12 +27,13 @@ namespace Backend.Adapters
         public static PatientFeedbackDto PatientFeedbackToPatientFeedbackDto(PatientFeedback patientFeedback)
         {
             PatientFeedbackDto dto = new PatientFeedbackDto();
+            dto.Id = patientFeedback.Id;
             dto.IsForPublishing = patientFeedback.IsForPublishing;
             dto.IsPublished = patientFeedback.IsPublished;
             dto.IsAnonymous = patientFeedback.IsAnonymous;
             dto.PatientId = patientFeedback.PatientID;
-            dto.Patient = patientFeedback.Patient;
-            dto.PublishingDate = patientFeedback.PublishingDate;
+            dto.Patient = patientFeedback.Patient.Name + " " + patientFeedback.Patient.Surname;
+            dto.PublishingDate = patientFeedback.PublishingDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Text = patientFeedback.Text;
 
             return dto;

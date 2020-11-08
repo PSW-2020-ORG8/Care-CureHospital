@@ -30,7 +30,7 @@ namespace Backend
             services.AddControllers();
             //services.AddScoped<IMySQLStream<>>();
             services.AddDbContext<HealthClinicDbContext>(options =>
-                    options.UseSqlServer(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());  
+                    options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
