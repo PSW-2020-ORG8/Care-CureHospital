@@ -23,7 +23,7 @@ namespace WebAppPatient.Controllers
         {
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
             App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(feedback)));
-            return Ok();
+            return Ok(result);
         }
 
         

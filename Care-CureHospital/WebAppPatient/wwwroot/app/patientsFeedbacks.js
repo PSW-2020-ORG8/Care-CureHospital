@@ -52,9 +52,9 @@ Vue.component("patientsFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
+			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
 		    <div><li class="active"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-		    <div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
-			<div><li><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 		 
@@ -78,14 +78,20 @@ Vue.component("patientsFeedbacks", {
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
 					<h1 v-else >{{pf.patient}}</h1> 
-		            <h2></h2>
+		            <p>{{pf.publishingDate}}</p>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:100px;width:460px;border:1px solid;padding: 10px 10px 15px 10px;">
 						{{pf.text}}
-				    </div>
+					</div>
 					<div v-if="pf.isForPublishing === true && pf.isPublished === false" class="publishFeedback-btn">
                             <button type="button" @click="publishFeedback(pf)">Podeli javno</button>
-                    </div>
+					</div>
+					<div v-else-if="pf.isForPublishing === true && pf.isPublished === true" class="publishFeedbackParagraph1">
+                            <p>Utisak je objavljen</p>
+					</div>
+					<div v-else-if="pf.isForPublishing === false && pf.isPublished === false" class="publishFeedbackParagraph2">
+                            <p>Utisak nije moguće objaviti</p>
+					</div>
 		         </div>
 			</div>
 	     </div>		
@@ -109,7 +115,7 @@ Vue.component("patientsFeedbacks", {
 			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
 				.then(response => {
 					axios.get('api/patientFeedback').then(response => {
-						toast('Utisak je uspesno objavljen!')
+						toast('Utisak je uspešno objavljen!')
 						this.patientFeedbacks = response.data;
 					});
 					$router.go();

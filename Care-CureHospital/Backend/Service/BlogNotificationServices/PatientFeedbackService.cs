@@ -17,6 +17,7 @@ namespace Backend.Service.BlogNotificationServices
         }
         public PatientFeedback AddEntity(PatientFeedback entity)
         {
+            entity.PublishingDate = DateTime.Now;
             return patientFeedbackRepository.AddEntity(entity);
         }
 

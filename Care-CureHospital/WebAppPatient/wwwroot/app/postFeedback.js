@@ -1,4 +1,4 @@
-Vue.component("publishFeedback", {
+Vue.component("postFeedback", {
 	data: function () {
 		return {
 			patientFeedbacks: [],
@@ -43,16 +43,17 @@ Vue.component("publishFeedback", {
                  <div class="form-title">
                      <h1>Ostavite utisak</h1>
                           <br><br>
-						<input type="text" id="feedbackID" v-model="text" placeholder="Ostavite Vas utisak..." >  
-						<label v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 16%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
+						<!--<input type="text" id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." >  -->
+						<textarea id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." rows="9" cols="92" style="resize: none;"></textarea>
+						<label v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 23%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
 						
 						<input type="checkbox" id="isAnonymous" name="isAnonymous" value="isAnonymous" v-model = "isAnonymous">
-						<label for="vehicle1"> Anonimno</label><br>
+						<label> Anonimno</label><br>
 						<input type="checkbox" id="isForPublishing" name="isForPublishing" value="isForPublishing" v-model = "isForPublishing">
-						<label for="vehicle2">Dozvoli objavljivanje</label><br>	
-			
+						<label>Dozvoli objavljivanje</label><br>	
+
                          <div class="post-feedback-btn">
-                             <button type="button" @click="postFeedback">Posalji</button>
+                             <button type="button" @click="postFeedback">Pošalji</button>
                          </div>
 
 
@@ -65,9 +66,9 @@ Vue.component("publishFeedback", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
+			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
 		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-		    <div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
-			<div><li class="active" ><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li class="active" ><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -98,22 +99,20 @@ Vue.component("publishFeedback", {
 			}
 
 			if (empty === false) {
-				if (confirm('Da li ste sigurni da zelite da se ostavite utisak?') == true) {
-					axios.post('/api/patientFeedback', {
-						text: this.text,
-						isForPublishing: this.isForPublishing,
-						isPublished: false,
-						isAnonymous: this.isAnonymous,
-						patientID: 1,
-						patient: null,
-						publishingDate: "0001-01-01T00:00:00"
-					});
-					toast('Utisak je uspesno ostavljen')
-				}
-				else {
-					this.$router.push({ name: 'publishFeedback' })
-
-				}
+				 
+				axios.post('/api/patientFeedback', {
+					text: this.text,
+					isForPublishing: this.isForPublishing,
+					isPublished: false,
+					isAnonymous: this.isAnonymous,
+					patientID: 1,
+					patient: null,
+					publishingDate: null
+				});
+				toast('Utisak je uspešno ostavljen')
+				this.text = '';
+				this.isAnonymous = false;
+				this.isForPublishing = false;
 			}
 
 

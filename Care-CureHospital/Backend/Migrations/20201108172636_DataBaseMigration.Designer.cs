@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201108001723_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201108172636_DataBaseMigration")]
+    partial class DataBaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,7 @@ namespace Backend.Migrations
                             IsForPublishing = true,
                             IsPublished = true,
                             PatientID = 1,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
                         new
@@ -67,7 +67,7 @@ namespace Backend.Migrations
                             IsForPublishing = true,
                             IsPublished = true,
                             PatientID = 2,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 8, 15, 9, 17, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
                         new
@@ -77,7 +77,7 @@ namespace Backend.Migrations
                             IsForPublishing = true,
                             IsPublished = false,
                             PatientID = 3,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 9, 3, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
                         new
@@ -87,7 +87,7 @@ namespace Backend.Migrations
                             IsForPublishing = false,
                             IsPublished = false,
                             PatientID = 4,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
                         new
@@ -97,7 +97,7 @@ namespace Backend.Migrations
                             IsForPublishing = false,
                             IsPublished = false,
                             PatientID = 2,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 10, 18, 7, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
                         new
@@ -107,7 +107,7 @@ namespace Backend.Migrations
                             IsForPublishing = true,
                             IsPublished = false,
                             PatientID = 4,
-                            PublishingDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingDate = new DateTime(2020, 10, 15, 6, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         });
                 });

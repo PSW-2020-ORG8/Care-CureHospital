@@ -42,9 +42,9 @@ Vue.component("publishedFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
+			<div><li class="active" ><a href="#/">Objavljeni utisci</a></li></div><br/>
 		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-		    <div><li class="active" ><a href="#/">Objavljeni utisci</a></li></div><br/>
-			<div><li><a href="#/publishFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -68,7 +68,7 @@ Vue.component("publishedFeedbacks", {
 		        <div class="feedback-text">
 		            <h1 v-if="pf.isAnonymous === true">Anonimni pacijent</h1>
 					<h1 v-else >{{pf.patient}}</h1>
-		            <h2></h2>
+		            <p>{{pf.publishingDate}}</p>
 					<h3></h3>
 					<div  style="overflow-y:scroll;height:100px;width:460px;border:1px solid;padding: 10px 10px 15px 10px;">
 						{{pf.text}}
