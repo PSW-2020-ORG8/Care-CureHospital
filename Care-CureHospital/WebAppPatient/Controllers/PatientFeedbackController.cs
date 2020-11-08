@@ -36,7 +36,9 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
-
+        /// <summary> This method calls <c>PatientFeedbackService</c> to post new <c>PatientFeedback</c>. </summary>
+        /// <param name="dto"> Data transfer object for <c>PatientFeedback</c>. </param>
+        /// <returns> 200 ok </returns>
         [HttpPost]
         public IActionResult Add(PatientFeedbackDto dto)
         {
@@ -50,9 +52,9 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
-        /// <summary>This method changes status of <c>PatientFeedback</c> into published Feedback <c>isPublished<c>></summary>
-        /// <param name="id"> id of PatientFeedback</param>
-        /// <returns> changed <c>PatientFeedbackDto</c> object</returns>
+        /// <summary> This method calls <c>PatientFeedbackService</c> to change status of <c>PatientFeedback</c> into published Feedback <c>isPublished<c>> </summary>
+        /// <param name="id"> id of PatientFeedback </param>
+        /// <returns> Changed <c>PatientFeedbackDto</c> object </returns>
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {     

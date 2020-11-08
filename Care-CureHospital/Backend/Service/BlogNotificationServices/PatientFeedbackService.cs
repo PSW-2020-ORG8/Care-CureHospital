@@ -15,6 +15,10 @@ namespace Backend.Service.BlogNotificationServices
         {
             this.patientFeedbackRepository = patientFeedbackRepository;
         }
+
+        /// <summary> This method calls <c>PatientFeedbackRepository</c> to post new <c>PatientFeedback</c>. </summary>
+        /// <param name="entity"> Entity of type <c>PatientFeedback</c>. </param>
+        /// <returns> Entity of type <c>PatientFeedback</c>. </returns>
         public PatientFeedback AddEntity(PatientFeedback entity)
         {
             entity.PublishingDate = DateTime.Now;
@@ -48,7 +52,7 @@ namespace Backend.Service.BlogNotificationServices
             return patientFeedbackRepository.GetAllEntities().Where(patientFeedback => patientFeedback.IsPublished.Equals(true));
         }
 
-        /// <summary>This method changed satus of <c>PatientFeedback</c> atribute <c>isPublished</c> on True></summary>
+        /// <summary>This method calls <c>PatientFeedbackRepository</c> to change satus of <c>PatientFeedback</c> atribute <c>isPublished</c> on True></summary>
         /// <param name="id"> id of PatientFeedback</param>
         /// <returns> changed <c>PatientFeedback</c> object</returns>
         public PatientFeedback PublishPatientFeedback(int id)
