@@ -1,0 +1,13 @@
+﻿<Window x:Class="Hospital_map.infoLekar1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_map"
+        mc:Ignorable="d"
+        Title="infoLekar1" Height="250" Width="300"  WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox Background="White"  HorizontalAlignment="Left" Height="250" TextWrapping="Wrap" Text="&#xA;ime: Žaki&#xA;prezime: Prevara&#xA;&#xA;titula: dr &#xA;specijalizacija: kardiohirurg&#xA;&#xA;radno vreme:&#xA;radni rani: 7:00-14:00&#xA;vikend: ne radan&#xA;&#xA;" VerticalAlignment="Top" Width="300" Margin="0,0,-0.4,0" Foreground="#FF060606"/>
+
+    </Grid>
+</Window>
