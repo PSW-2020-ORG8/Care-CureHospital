@@ -7,7 +7,7 @@ repos = g.get_user().get_repos()
 r = None
 
 for repo in repos:
-    if repo.name == 'HealthCare-Clinic':
+    if repo.name == 'Care-CureHospital':
         r = repo
 developers = None
 for t in r.get_teams():
