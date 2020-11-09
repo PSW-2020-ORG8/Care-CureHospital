@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
     <Canvas Background="Gray" >
-        <Rectangle Fill="Blue" Height="140" Canvas.Left="393"  Canvas.Top="118" Width="107"  RadiusY="8.03" RadiusX="8.03" MouseDown="RadnoVreme">
+        <Rectangle Fill="Blue" Height="140" Canvas.Left="393"  Canvas.Top="118" Width="107"  RadiusY="8.03" RadiusX="8.03" MouseDown="Wokrtime">
 
         </Rectangle>
         <Rectangle Fill="LightBlue" Height="28" Canvas.Left="215"  Canvas.Top="284" Width="738"  RadiusY="8.753" RadiusX="8.753">
@@ -20,7 +20,7 @@
 
         </Rectangle>
         <Rectangle Fill="LightBlue" Height="29" Canvas.Left="215"  Canvas.Top="60" Width="737" />
-        <Rectangle Fill="Blue" Height="65" Canvas.Left="274" Canvas.Top="194" Width="147"  RadiusY="15.777" RadiusX="15.777" MouseDown="RadnoVreme">
+        <Rectangle Fill="Blue" Height="65" Canvas.Left="274" Canvas.Top="194" Width="147"  RadiusY="15.777" RadiusX="15.777" MouseDown="Wokrtime">
 
         </Rectangle>
         <Rectangle Fill="Green" Height="54" Canvas.Left="512"  Canvas.Top="122" Width="56"  RadiusY="12.609" RadiusX="12.609">
@@ -52,11 +52,11 @@
 
                     <MenuItem Header="     Izaberite" Width="97" Height="32" RenderTransformOrigin="0.522,0.898">
 
-                        <MenuItem Header=" K1 : Prizemlje" Background="LightGray" Click="Prizemlje1_Click"/>
+                        <MenuItem Header=" K1 : Prizemlje" Background="LightGray" Click="groundFloorClick"/>
 
-                        <MenuItem Header=" K1 : Prvi sprat" Height="18"  Background="LightGray" Click="Sprat1"/>
+                        <MenuItem Header=" K1 : Prvi sprat" Height="18"  Background="LightGray" Click="FirstFloor"/>
 
-                        <MenuItem Header=" Mapa kompleksa" Height="18"  Background="LightGray" Click="Mapa"/>
+                        <MenuItem Header=" Mapa kompleksa" Height="18"  Background="LightGray" Click="Map"/>
 
                     </MenuItem>
                 </Menu>
@@ -69,11 +69,11 @@
 
                     <MenuItem Header="     Izaberite" Width="95" Height="33" RenderTransformOrigin="0.522,0.898">
 
-                        <MenuItem Header=" K2 : Prizemlje" Background="LightGray" Click="Prizemlje2"/>
+                        <MenuItem Header=" K2 : Prizemlje" Background="LightGray" Click="groundFloor2"/>
 
-                        <MenuItem Header=" K2 : Prvi sprat" Height="18"  Background="LightGray" Click="Sprat2"/>
+                        <MenuItem Header=" K2 : Prvi sprat" Height="18"  Background="LightGray" Click="SecondFloor"/>
 
-                        <MenuItem Header=" Mapa kompleksa" Height="18"  Background="LightGray" Click="Mapa"/>
+                        <MenuItem Header=" Mapa kompleksa" Height="18"  Background="LightGray" Click="Map"/>
 
                     </MenuItem>
                 </Menu>
@@ -150,10 +150,10 @@
         <Rectangle Fill="Yellow" Height="27" Canvas.Left="328" Canvas.Top="156" Width="13" />
         <Rectangle Fill="Yellow" Height="27" Canvas.Left="350" Canvas.Top="156" Width="13" />
         <Rectangle Fill="Yellow" Height="27" Canvas.Left="369" Canvas.Top="156" Width="14" />
-        <Rectangle Fill="Blue" Height="140" Canvas.Left="669"  Canvas.Top="118" Width="107"  RadiusY="8.03" RadiusX="8.03" MouseDown="RadnoVreme">
+        <Rectangle Fill="Blue" Height="140" Canvas.Left="669"  Canvas.Top="118" Width="107"  RadiusY="8.03" RadiusX="8.03" MouseDown="Wokrtime">
             
         </Rectangle>
-        <Rectangle Fill="Blue" Height="63" Canvas.Left="744" Canvas.Top="194" Width="148"  RadiusY="17.25" RadiusX="17.25" MouseDown="RadnoVreme">
+        <Rectangle Fill="Blue" Height="63" Canvas.Left="744" Canvas.Top="194" Width="148"  RadiusY="17.25" RadiusX="17.25" MouseDown="Wokrtime">
 
         </Rectangle>
         <Image Source="Images/hospital.jpg"  Width="32" Height="41" Canvas.Left="712" Canvas.Top="173"/>

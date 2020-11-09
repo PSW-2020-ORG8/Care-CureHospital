@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D798454B-3D09-451D-BD45-2FB5687BE708}</ProjectGuid>
+    <ProjectGuid>{A612B58C-7312-484B-A2F0-625755032D06}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Hospital_map</RootNamespace>
     <AssemblyName>Hospital map</AssemblyName>
@@ -55,76 +55,89 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="infoApoteka.xaml.cs">
-      <DependentUpon>infoApoteka.xaml</DependentUpon>
+    <Compile Include="Neurology.xaml.cs">
+      <DependentUpon>Neurology.xaml</DependentUpon>
     </Compile>
-    <Compile Include="infoLekar1.xaml.cs">
-      <DependentUpon>infoLekar1.xaml</DependentUpon>
+    <Compile Include="infoPharmacy.xaml.cs">
+      <DependentUpon>infoPharmacy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="infoLekar2.xaml.cs">
-      <DependentUpon>infoLekar2.xaml</DependentUpon>
+    <Compile Include="infoDoctor1.xaml.cs">
+      <DependentUpon>infoDoctor1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="infoLekar3.xaml.cs">
-      <DependentUpon>infoLekar3.xaml</DependentUpon>
+    <Compile Include="infoDoctor2.xaml.cs">
+      <DependentUpon>infoDoctor2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="infoLekar4.xaml.cs">
-      <DependentUpon>infoLekar4.xaml</DependentUpon>
+    <Compile Include="infoDoctor3.xaml.cs">
+      <DependentUpon>infoDoctor3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InfoZaSobe.xaml.cs">
-      <DependentUpon>InfoZaSobe.xaml</DependentUpon>
+    <Compile Include="infoDoctor4.xaml.cs">
+      <DependentUpon>infoDoctor4.xaml</DependentUpon>
     </Compile>
-    <Compile Include="kardiologija.xaml.cs">
-      <DependentUpon>kardiologija.xaml</DependentUpon>
+    <Compile Include="infoRooms.xaml.cs">
+      <DependentUpon>infoRooms.xaml</DependentUpon>
     </Compile>
-    <Compile Include="operacionaSala1.xaml.cs">
-      <DependentUpon>operacionaSala1.xaml</DependentUpon>
+    <Compile Include="Cardiology.xaml.cs">
+      <DependentUpon>Cardiology.xaml</DependentUpon>
     </Compile>
-    <Compile Include="operacionasala2.xaml.cs">
-      <DependentUpon>operacionasala2.xaml</DependentUpon>
+    <Compile Include="Psychiatric.xaml.cs">
+      <DependentUpon>Psychiatric.xaml</DependentUpon>
     </Compile>
-    <Compile Include="patologija.xaml.cs">
-      <DependentUpon>patologija.xaml</DependentUpon>
+    <Compile Include="surgeryRoom3.xaml.cs">
+      <DependentUpon>surgeryRoom3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="prizemlje2.xaml.cs">
-      <DependentUpon>prizemlje2.xaml</DependentUpon>
+    <Compile Include="surgeryRoom1.xaml.cs">
+      <DependentUpon>surgeryRoom1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="prizemlje.xaml.cs">
-      <DependentUpon>prizemlje.xaml</DependentUpon>
+    <Compile Include="surgeryRoom2.xaml.cs">
+      <DependentUpon>surgeryRoom2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="prviSprat.xaml.cs">
-      <DependentUpon>prviSprat.xaml</DependentUpon>
+    <Compile Include="patology.xaml.cs">
+      <DependentUpon>patology.xaml</DependentUpon>
     </Compile>
-    <Compile Include="radiologija.xaml.cs">
-      <DependentUpon>radiologija.xaml</DependentUpon>
+    <Compile Include="groundFloor2.xaml.cs">
+      <DependentUpon>groundFloor2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Radno vreme bolnice.xaml.cs">
-      <DependentUpon>Radno vreme bolnice.xaml</DependentUpon>
+    <Compile Include="groundFloor.xaml.cs">
+      <DependentUpon>groundFloor.xaml</DependentUpon>
     </Compile>
-    <Page Include="infoApoteka.xaml">
+    <Compile Include="firstFloor.xaml.cs">
+      <DependentUpon>firstFloor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="radiology.xaml.cs">
+      <DependentUpon>radiology.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="worktime.xaml.cs">
+      <DependentUpon>worktime.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Neurology.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="infoPharmacy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="infoLekar1.xaml">
+    <Page Include="infoDoctor1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="infoLekar2.xaml">
+    <Page Include="infoDoctor2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="infoLekar3.xaml">
+    <Page Include="infoDoctor3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="infoLekar4.xaml">
+    <Page Include="infoDoctor4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InfoZaSobe.xaml">
+    <Page Include="infoRooms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="kardiologija.xaml">
+    <Page Include="Cardiology.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,35 +153,43 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="operacionaSala1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="operacionasala2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="patologija.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="prizemlje2.xaml">
+    <Page Include="Psychiatric.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="prizemlje.xaml">
+    <Page Include="surgeryRoom3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="prviSprat.xaml">
+    <Page Include="surgeryRoom1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="radiologija.xaml">
+    <Page Include="surgeryRoom2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Radno vreme bolnice.xaml">
+    <Page Include="patology.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="groundFloor2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="groundFloor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="firstFloor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="radiology.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="worktime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
