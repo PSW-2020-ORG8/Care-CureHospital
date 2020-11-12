@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppPatient", "WebAppPatient\WebAppPatient.csproj", "{3A14E9E1-B590-484E-B0FF-CD82314BAB03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital map", "Hospital map\Hospital map.csproj", "{D798454B-3D09-451D-BD45-2FB5687BE708}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital map", "Hospital map\Hospital map.csproj", "{A612B58C-7312-484B-A2F0-625755032D06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D798454B-3D09-451D-BD45-2FB5687BE708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D798454B-3D09-451D-BD45-2FB5687BE708}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D798454B-3D09-451D-BD45-2FB5687BE708}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D798454B-3D09-451D-BD45-2FB5687BE708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A612B58C-7312-484B-A2F0-625755032D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A612B58C-7312-484B-A2F0-625755032D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A612B58C-7312-484B-A2F0-625755032D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A612B58C-7312-484B-A2F0-625755032D06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

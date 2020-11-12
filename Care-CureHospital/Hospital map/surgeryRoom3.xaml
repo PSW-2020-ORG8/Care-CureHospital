@@ -1,0 +1,13 @@
+﻿<Window x:Class="Hospital_map.surgeryRoom3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_map"
+        mc:Ignorable="d"
+       Title="Surgery Room " Height="250" Width="300"  WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox Background="White"  HorizontalAlignment="Left" Height="250" TextWrapping="Wrap" Text="Radno vreme:&#xA;Ponedaljak, Sreda, Petak: 7:00-14:00&#xA;Ostali dani su neradni&#xA;&#xA;Lekar: dr Milica Todorovic&#xA;&#xA;Raspored operacija:&#xA;7:30-10:00&#xA;10:45-11:55&#xA;12:20-13:45&#xA;&#xA;" VerticalAlignment="Top" Width="300" Margin="0,0,-8,-31" Foreground="#FF060606"/>
+
+    </Grid>
+</Window>
