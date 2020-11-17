@@ -1,0 +1,84 @@
+#beginning {
+    background-repeat: no-repeat;
+    background-position: top center;
+    height: 400px;
+    min-height: 650px;
+    position: relative;
+    width: 1350px;
+    background: linear-gradient(
+      to top right,
+      rgba(56, 80, 112, 0.6),
+      rgba(0,0, 20, 400)
+    ),url("https://previews.123rf.com/images/everythingpossible/everythingpossible1511/everythingpossible151100206/47329591-medicine-doctor-hand-working-with-modern-computer-interface-and-digital-layer-effect-as-medical-netw.jpg");
+   /* background-size: 1350px 600px;*/
+  }
+
+  /*h1 {
+    text-align: center;
+    color: white;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    padding: 15%;
+    font-weight: bold;
+   }*/
+
+   button{
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    padding: 8px 50px;
+    margin-top: 50px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    border-color: rgb(58, 180, 180);
+    margin-left: 1000px;
+    border-width: 2px;
+    display: inline-block;
+    font-size: 16px;
+    background: linear-gradient(
+      to top right,
+      rgba(119, 198, 235, 0.6),
+      rgba(0,0, 10, 600)
+    )
+  }
+
+  .button2{
+
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    width: 160px;
+    padding: 8px 50px;
+    margin-top: 50px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    border-color: rgb(58, 180, 180);
+    margin-left: 1000px;
+    border-width: 2px;
+    display: inline-block;
+    font-size: 16px;
+    background: linear-gradient(
+      to top right,
+      rgba(119, 198, 235, 0.6),
+      rgba(0,0, 10, 600)
+    )
+  }
+
+  .button3{
+
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    width: 160px;
+    padding: 8px 50px;
+    margin-top: 50px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    border-color: rgb(58, 180, 180);
+    margin-left: 1000px;
+    border-width: 2px;
+    display: inline-block;
+    font-size: 16px;
+    background: linear-gradient(
+      to top right,
+      rgba(119, 198, 235, 0.6),
+      rgba(0,0, 10, 600)
+    )
+
+  }

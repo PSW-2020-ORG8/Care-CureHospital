@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -7,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppPatient", "WebAppPatient\WebAppPatient.csproj", "{3A14E9E1-B590-484E-B0FF-CD82314BAB03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationAdapters", "IntegrationAdapters\IntegrationAdapters.csproj", "{AA22518D-ABC2-435C-9C83-1C30B071A36B}"
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMap", "HospitalMap\HospitalMap.csproj", "{EC4CD704-B4A5-42BE-AF63-727C0DFB04D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPatientTests", "WebAppPatientTests\WebAppPatientTests.csproj", "{AC19086B-E267-4AF0-82FE-9F23DDC6B20F}"
@@ -27,6 +28,12 @@ Global
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A14E9E1-B590-484E-B0FF-CD82314BAB03}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{AA22518D-ABC2-435C-9C83-1C30B071A36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA22518D-ABC2-435C-9C83-1C30B071A36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA22518D-ABC2-435C-9C83-1C30B071A36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA22518D-ABC2-435C-9C83-1C30B071A36B}.Release|Any CPU.Build.0 = Release|Any CPU
+
 		{EC4CD704-B4A5-42BE-AF63-727C0DFB04D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC4CD704-B4A5-42BE-AF63-727C0DFB04D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC4CD704-B4A5-42BE-AF63-727C0DFB04D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +46,7 @@ Global
 		{4D04592A-F8DC-40B9-9AC8-EFBC9C54491D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D04592A-F8DC-40B9-9AC8-EFBC9C54491D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D04592A-F8DC-40B9-9AC8-EFBC9C54491D}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
