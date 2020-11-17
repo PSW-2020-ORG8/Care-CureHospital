@@ -1,7 +1,7 @@
-﻿<Application x:Class="Hospital_map.App"
+﻿<Application x:Class="HospitalMap.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Hospital_map"
+             xmlns:local="clr-namespace:HospitalMap"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

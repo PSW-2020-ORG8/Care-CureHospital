@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital_map
+namespace HospitalMap
 {
     /// <summary>
-    /// Interaction logic for operacionasala2.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Psychiatric : Window
+    public partial class MainWindow : Window
     {
-        public Psychiatric()
+        public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
