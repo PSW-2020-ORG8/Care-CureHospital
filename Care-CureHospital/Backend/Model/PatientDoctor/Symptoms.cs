@@ -12,6 +12,8 @@ namespace Model.PatientDoctor
     {
         public int id { get; set; }
         public String Name { get; set; }
+        public int anamnesisID { get; set; }
+        public virtual Anamnesis Anamnesis { get; set; }
 
         public Symptoms(int id)
         {
@@ -31,6 +33,11 @@ namespace Model.PatientDoctor
         public Symptoms(string name)
         {
             this.Name = name;
+        }
+
+        public Symptoms(int id, string name, int anamnesisID) : this(id, name)
+        {
+            this.anamnesisID = anamnesisID;
         }
 
         public int GetId()

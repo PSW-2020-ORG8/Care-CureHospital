@@ -14,7 +14,6 @@ namespace Model.BlogAndNotification
     public class Article : Content, IIdentifiable<int>
     {
         public int id { get; set; }
-
         public String Title { get; set; }
         public int blogID { get; set; }
         public virtual Blog Blog { get; set; }

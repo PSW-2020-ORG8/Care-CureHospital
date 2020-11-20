@@ -17,8 +17,6 @@ namespace Backend.Service.BlogNotificationServices
         }
 
         /// <summary> This method calls <c>PatientFeedbackRepository</c> to post new <c>PatientFeedback</c>. </summary>
-        /// <param name="entity"> Entity of type <c>PatientFeedback</c>. </param>
-        /// <returns> Entity of type <c>PatientFeedback</c>. </returns>
         public PatientFeedback AddEntity(PatientFeedback entity)
         {
             entity.PublishingDate = DateTime.Now;
@@ -30,8 +28,6 @@ namespace Backend.Service.BlogNotificationServices
             patientFeedbackRepository.DeleteEntity(entity);
         }
 
-        /// <summary> This method calls <c>PatientFeedbackRepository</c> to get list of all <c>PatientFeedback</c>. </summary>
-        /// <returns> List of all feedbacks. </returns>
         public IEnumerable<PatientFeedback> GetAllEntities()
         {
             return patientFeedbackRepository.GetAllEntities();
@@ -48,15 +44,12 @@ namespace Backend.Service.BlogNotificationServices
         }
 
         /// <summary> This method calls <c>PatientFeedbackRepository</c> to get list of <c>PatientFeedback</c> where paramter <c>IsPublished</c> is true. </summary>
-        /// <returns> List of published feedbacks. </returns>
         public IEnumerable<PatientFeedback> GetPublishedFeedbacks()
         {
             return patientFeedbackRepository.GetAllEntities().Where(patientFeedback => patientFeedback.IsPublished.Equals(true));
         }
 
         /// <summary>This method calls <c>PatientFeedbackRepository</c> to change satus of <c>PatientFeedback</c> atribute <c>isPublished</c> on True></summary>
-        /// <param name="id"> id of PatientFeedback</param>
-        /// <returns> changed <c>PatientFeedback</c> object</returns>
         public PatientFeedback PublishPatientFeedback(int id)
         {
             PatientFeedback patientFeedback = patientFeedbackRepository.GetEntity(id);

@@ -24,22 +24,12 @@ namespace Repository.Csv.Converter
        
         public string ConvertEntityToCSVFormat(Survey entity)
         {
-            String questionsCSV = "";
-            foreach (Question question in entity.Question)
-            {
-                questionsCSV += string.Join(delimiter, question.QuestionText);
-                questionsCSV += delimiter;
-            }
-            return string.Join(delimiter, entity.GetId(), entity.Title, entity.PublishingDate, entity.CommentSurvey, entity.Patient, questionsCSV);
+            throw new NotImplementedException();
         }
 
         public Survey ConvertCSVFormatToEntity(string entityCSVFormat)
         {
-            string[] tokens = entityCSVFormat.Split(delimiter.ToCharArray());
-            List<Question> questions = new List<Question>();
-            FillList(questions, tokens);
-            return new Survey(int.Parse(tokens[0]), tokens[1], Convert.ToDateTime(tokens[2]), tokens[3], 
-                (Patient)UserRepository.Instance().GetEntity(int.Parse(tokens[4])), questions);
+            throw new NotImplementedException();
         }
 
         private void FillList(List<Question> questions, string[] tokens)

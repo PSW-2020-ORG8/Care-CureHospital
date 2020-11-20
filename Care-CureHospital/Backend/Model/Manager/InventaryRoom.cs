@@ -1,4 +1,5 @@
 ﻿using HealthClinic.Repository;
+using Model.Term;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,10 @@ namespace Model.Manager
         public int id { get; set; }
         public String Name { get; set; }
         public int Quantity { get; set; }
+        public int roomID { get; set; }
+        public virtual Room Room { get; set; }
 
-        private InventaryRoom() { }
+        public InventaryRoom() { }
 
         public InventaryRoom(string name, int quantity)
         {

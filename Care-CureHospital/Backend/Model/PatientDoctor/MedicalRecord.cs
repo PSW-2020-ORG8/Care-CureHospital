@@ -22,7 +22,6 @@ namespace Model.PatientDoctor
         public virtual List<Allergies> Allergies { get; set; }
         public virtual List<Medicament> Medicament { get; set; }
 
-
         public MedicalRecord(int id)
         {
             this.id = id;
@@ -46,6 +45,14 @@ namespace Model.PatientDoctor
             this.Anamnesis = anamnesis;
             this.Allergies = allergies;
             this.Medicament = medicament;
+        }
+
+        public MedicalRecord(int id, int patientID, int anamnesisID, List<Allergies> allergies, List<Medicament> medicament) : this(id)
+        {
+            this.patientID = patientID;
+            this.anamnesisID = anamnesisID;
+            Allergies = allergies;
+            Medicament = medicament;
         }
 
         public void Review()
