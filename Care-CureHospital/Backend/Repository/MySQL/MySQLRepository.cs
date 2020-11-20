@@ -24,7 +24,6 @@ namespace Backend.Repository.MySQL
             //InitializeId();
         }
 
-
         public E AddEntity(E entity)
         {
             //entity.SetId(sequencer.GenerateID());

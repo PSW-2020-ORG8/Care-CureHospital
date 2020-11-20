@@ -11,7 +11,8 @@ namespace Model.AllActors
 {
    public class Doctor : User
    {
-        public Specialitation Specialitation { get; set; }
+        public int specialitationID { get; set; }
+        public virtual Specialitation Specialitation { get; set; }
 
         public Doctor(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city, Specialitation specialitation)
             : base(id, username, password, name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
@@ -24,6 +25,7 @@ namespace Model.AllActors
         {
             this.Specialitation = specialitation;
         }
+
 
         public Doctor(int id) : base(id)
         {

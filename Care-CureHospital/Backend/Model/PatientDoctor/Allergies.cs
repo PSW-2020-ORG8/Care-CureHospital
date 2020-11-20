@@ -12,7 +12,8 @@ namespace Model.PatientDoctor
     {
         public int id { get; set; }
         public String Name { get; set; }
-
+        public int medicalRecordID { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
 
         public Allergies(int id)
         {
@@ -32,6 +33,11 @@ namespace Model.PatientDoctor
         public Allergies(string name)
         {
             this.Name = name;
+        }
+
+        public Allergies(int id, string name, int medicalRecordID) : this(id, name)
+        {
+            this.medicalRecordID = medicalRecordID;
         }
 
         public int GetId()

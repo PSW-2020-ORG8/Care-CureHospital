@@ -16,7 +16,8 @@ namespace Model.Term
     {
         public int id { get; set; }
         public String RoomID { get; set; }
-        public TypeOfRoom TypeOfRoom { get; set; }
+        public int typeOfRoomID { get; set; }
+        public virtual TypeOfRoom TypeOfRoom { get; set; }
         public virtual List<InventaryRoom> Equipment { get; set; }
       
         public Room(int id)
@@ -41,6 +42,13 @@ namespace Model.Term
             this.RoomID = roomID;
             this.TypeOfRoom = typeOfRoom;
             this.Equipment = equipment;
+        }
+
+        public Room(int id, string roomID, int typeOfRoomID, List<InventaryRoom> equipment) : this(id)
+        {
+            RoomID = roomID;
+            this.typeOfRoomID = typeOfRoomID;
+            Equipment = equipment;
         }
 
         public int GetId()

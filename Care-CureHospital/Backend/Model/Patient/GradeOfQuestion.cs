@@ -11,7 +11,9 @@ namespace Model.Patient
     public enum GradeOfQuestion
     {
         Poor,
+        Fair,
         Good,
+        VeryGood,
         Excellent
     }
 }

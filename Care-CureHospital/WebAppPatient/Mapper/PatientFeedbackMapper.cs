@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Adapters
 {
-    public class PatientFeedbackAdapter
+    public class PatientFeedbackMapper
     {
         public static PatientFeedback PatientFeedbackDtoToPatientFeedback(PatientFeedbackDto dto, Patient patient)
         {

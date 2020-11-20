@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.Repository;
+using Model.PatientDoctor;
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +21,9 @@ namespace Model.DoctorMenager
         public State StateOfValidation { get; set; }
         public int Quantity { get; set; }
         public String Ingredients { get; set; }
+        public int medicalRecordID { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
 
-        /*public Medicament(int id)
-        {
-            this.id = id;
-        }*/
 
         public Medicament(int id, string code, string name, string producer, State stateOfValidation, int quantity, string ingredients)
         {
