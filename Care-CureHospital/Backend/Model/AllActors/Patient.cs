@@ -13,8 +13,7 @@ namespace Model.AllActors
     public class Patient : User
     {
         public Boolean GuestAccount { get; set; }
-        public int MedicalRecordID { get; set; }
-
+        public int MedicalRecordId { get; set; }
         [NotMapped]
         public virtual MedicalRecord MedicalRecord { get; set; }
 

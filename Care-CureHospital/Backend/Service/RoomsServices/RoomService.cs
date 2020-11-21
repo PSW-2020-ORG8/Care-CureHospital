@@ -51,7 +51,7 @@ namespace Service.RoomsServices
         public bool RoomWithRoomIDExist(String roomID)
         {
             foreach (Room room in roomRepository.GetAllEntities())
-                if (room.RoomID.Equals(roomID))
+                if (room.RoomId.Equals(roomID))
                     return true;
             return false;
         }
@@ -59,7 +59,7 @@ namespace Service.RoomsServices
         public void DetermineTypeOfRoom(TypeOfRoom typeOfRoom, String roomID)
         {
             foreach (Room room in roomRepository.GetAllEntities())
-                if (room.RoomID.Equals(roomID))
+                if (room.RoomId.Equals(roomID))
                 {
                     room.TypeOfRoom = typeOfRoom;
                     break;
@@ -69,14 +69,14 @@ namespace Service.RoomsServices
         public void AddEquipmentInRoom(InventaryRoom equipment, String roomID)
         {
             foreach (Room room in roomRepository.GetAllEntities())
-                if (room.RoomID == roomID)
+                if (room.RoomId == roomID)
                     room.Equipment.Add(equipment);        
         }
 
         public List<InventaryRoom> GetEquipmentForRoom(Room room) 
         {
             foreach (Room oneRoom in roomRepository.GetAllEntities())
-                if (oneRoom.RoomID == room.RoomID)
+                if (oneRoom.RoomId == room.RoomId)
                     return oneRoom.Equipment;
             return null;
         }
@@ -84,7 +84,7 @@ namespace Service.RoomsServices
         public Room GetRoomByRoomID(String roomID)
         {
             foreach (Room oneRoom in roomRepository.GetAllEntities())
-                if (oneRoom.RoomID == roomID)
+                if (oneRoom.RoomId == roomID)
                     return oneRoom;
             return null;
         }

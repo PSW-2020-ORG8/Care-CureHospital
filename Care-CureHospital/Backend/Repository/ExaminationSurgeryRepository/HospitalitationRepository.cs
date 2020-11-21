@@ -40,7 +40,7 @@ namespace Repository.ExaminationSurgeryRepository
         {
             List<Hospitalitation> hospitalitations = new List<Hospitalitation>();
             foreach(Hospitalitation hospitalitation in GetAllEntities())
-                if(hospitalitation.Room.RoomID == room.RoomID)
+                if(hospitalitation.Room.RoomId == room.RoomId)
                     hospitalitations.Add(hospitalitation);
             return hospitalitations;
         }

@@ -14,17 +14,17 @@ namespace Model.PatientDoctor
 {
     public class MedicalRecord : IIdentifiable<int>
     {
-        public int id { get; set; }
-        public int patientID { get; set; }
+        public int Id { get; set; }
+        public int PatientId { get; set; }
         public virtual AllActors.Patient Patient { get; set; }
-        public int anamnesisID { get; set; }
+        public int AnamnesisId { get; set; }
         public virtual Anamnesis Anamnesis { get; set; }
         public virtual List<Allergies> Allergies { get; set; }
         public virtual List<Medicament> Medicament { get; set; }
 
         public MedicalRecord(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public MedicalRecord()
@@ -49,8 +49,8 @@ namespace Model.PatientDoctor
 
         public MedicalRecord(int id, int patientID, int anamnesisID, List<Allergies> allergies, List<Medicament> medicament) : this(id)
         {
-            this.patientID = patientID;
-            this.anamnesisID = anamnesisID;
+            this.PatientId = patientID;
+            this.AnamnesisId = anamnesisID;
             Allergies = allergies;
             Medicament = medicament;
         }
@@ -62,12 +62,12 @@ namespace Model.PatientDoctor
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Model.DoctorMenager
 {
     public class Medicament : IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String Code { get; set; }
         public String Name { get; set; }
         public String Producer { get; set; }
         public State StateOfValidation { get; set; }
         public int Quantity { get; set; }
         public String Ingredients { get; set; }
-        public int medicalRecordID { get; set; }
+        public int MedicalRecordId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
 
 
@@ -32,7 +32,7 @@ namespace Model.DoctorMenager
             this.Producer = producer;
             this.StateOfValidation = stateOfValidation;
             this.Quantity = quantity;
-            this.id = id;
+            this.Id = id;
             this.Ingredients = ingredients;
         }
 
@@ -57,12 +57,12 @@ namespace Model.DoctorMenager
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         
