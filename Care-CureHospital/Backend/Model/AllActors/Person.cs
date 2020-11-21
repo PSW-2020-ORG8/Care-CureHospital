@@ -17,7 +17,7 @@ namespace Model.AllActors
         public DateTime DateOfBirth { get; set; }
         public String ContactNumber { get; set; }
         public String EMail { get; set; }
-        public int cityID { get; set; }
+        public int CityId { get; set; }
         [NotMapped]
         public virtual City City { get; set; }
 

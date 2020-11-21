@@ -11,7 +11,7 @@ namespace Model.Term
 {
     public class TypeOfRoom : IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String NameOfType { get; set; }
 
         public TypeOfRoom()
@@ -25,18 +25,18 @@ namespace Model.Term
 
         public TypeOfRoom(int id, string nameOfType)
         {
-            this.id = id;
+            this.Id = id;
             NameOfType = nameOfType;
         }
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
     }

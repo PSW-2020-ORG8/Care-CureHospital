@@ -14,17 +14,17 @@ namespace Model.Doctor
 {
     public class IssueOfMedicaments : IIdentifiable<int>
     {
-        public int id;
+        public int Id;
         public String Receipt { get; set; }
-        public int medicalRecordID { get; set; }
-        public int doctorID { get; set; }
+        public int MedicalRecordId { get; set; }
+        public int DoctorId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
         public virtual AllActors.Doctor Doctor { get; set; }
         public virtual List<Medicament> Medicaments { get; set; }
 
         public IssueOfMedicaments(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public IssueOfMedicaments()
@@ -34,7 +34,7 @@ namespace Model.Doctor
         public IssueOfMedicaments(int id, string receipt, MedicalRecord medicalRecord, AllActors.Doctor doctor, List<Medicament> medicaments)
         {
             this.Receipt = receipt;
-            this.id = id;
+            this.Id = id;
             this.MedicalRecord = medicalRecord;
             this.Doctor = doctor;
             this.Medicaments = medicaments;
@@ -50,12 +50,12 @@ namespace Model.Doctor
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }          
 
     }

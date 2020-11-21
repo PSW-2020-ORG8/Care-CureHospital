@@ -12,15 +12,15 @@ namespace Model.Term
 {
     public class WorkingTimeForDoctor : Term, IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public DaysInWeek Day { get; set; }
         public Boolean DoesWork { get; set; }
-        public int doctorID { get; set; }
+        public int DoctorId { get; set; }
         public virtual AllActors.Doctor Doctor { get; set; }
 
         public WorkingTimeForDoctor(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public WorkingTimeForDoctor()
@@ -32,7 +32,7 @@ namespace Model.Term
         {
             this.Day = day;
             this.DoesWork = doesWork;
-            this.id = id;
+            this.Id = id;
             this.Doctor = doctor;
         }
 
@@ -46,12 +46,12 @@ namespace Model.Term
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
     }
 }

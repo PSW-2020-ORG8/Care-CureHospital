@@ -11,15 +11,15 @@ namespace Model.BlogAndNotification
 {
     public class Comment : Content
     {
-        public int id { get; set; }
-        public int patientID { get; set; }
-        public int doctorID { get; set; }
-        public virtual AllActors.Patient patient { get; set; }
-        public virtual AllActors.Doctor doctor { get; set; }
+        public int Id { get; set; }
+        public int PatientId { get; set; }
+        public int DoctorId { get; set; }
+        public virtual AllActors.Patient Patient { get; set; }
+        public virtual AllActors.Doctor Doctor { get; set; }
 
         public Comment(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public Comment()
@@ -28,24 +28,24 @@ namespace Model.BlogAndNotification
 
         public Comment(int id, AllActors.Patient patient, AllActors.Doctor doctor) : this(id)
         {
-            this.patient = patient;
-            this.doctor = doctor;
+            this.Patient = patient;
+            this.Doctor = doctor;
         }
 
         public Comment(AllActors.Patient patient, AllActors.Doctor doctor)
         {
-            this.patient = patient;
-            this.doctor = doctor;
+            this.Patient = patient;
+            this.Doctor = doctor;
         }
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
     }

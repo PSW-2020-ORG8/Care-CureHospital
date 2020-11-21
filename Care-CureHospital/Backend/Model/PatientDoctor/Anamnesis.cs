@@ -11,7 +11,7 @@ namespace Model.PatientDoctor
 {
     public class Anamnesis
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String Description { get; set; }
         public virtual List<Diagnosis> Diagnosis { get; set; }
         public virtual List<Symptoms> Symptoms { get; set; }
