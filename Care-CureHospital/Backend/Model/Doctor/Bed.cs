@@ -11,15 +11,15 @@ namespace Model.Doctor
 {
     public class Bed
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public bool Taken { get; set; }
-        public int patientID { get; set; }
+        public int PatientId { get; set; }
         public virtual AllActors.Patient Patient { get; set; }
 
 
         public Bed(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public Bed()
@@ -29,7 +29,7 @@ namespace Model.Doctor
         public Bed(int id, bool taken, AllActors.Patient patient)
         {
             this.Taken = taken;
-            this.id = id;
+            this.Id = id;
             this.Patient = patient;
         }
 
@@ -41,12 +41,12 @@ namespace Model.Doctor
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
     }
 }

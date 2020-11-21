@@ -29,7 +29,7 @@ namespace Repository.Csv.Converter
                 equipmentCSV += string.Join(delimiter, equipment.GetId());
                 equipmentCSV += delimiter;
             }
-            return string.Join(delimiter, entity.GetId(), entity.RoomID, entity.TypeOfRoom.NameOfType, entity.FromDateTime.ToString(DATETIME_FORMAT), entity.ToDateTime.ToString(DATETIME_FORMAT), equipmentCSV);
+            return string.Join(delimiter, entity.GetId(), entity.RoomId, entity.TypeOfRoom.NameOfType, entity.FromDateTime.ToString(DATETIME_FORMAT), entity.ToDateTime.ToString(DATETIME_FORMAT), equipmentCSV);
         }
 
         public Room ConvertCSVFormatToEntity(string entityCSVFormat)

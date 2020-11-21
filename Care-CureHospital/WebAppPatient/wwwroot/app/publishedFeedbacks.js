@@ -30,7 +30,7 @@ Vue.component("publishedFeedbacks", {
 	        	<img id="userIcon" src="pictures/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
+		        <a href="#/patientRegistration">Registruj se</a>
 	            <a >Prijavi se</a>
 		    </div>
 	    </div>
