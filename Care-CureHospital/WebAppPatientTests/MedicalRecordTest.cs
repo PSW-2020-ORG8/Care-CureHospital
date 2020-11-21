@@ -27,7 +27,7 @@ namespace WebAppPatientTests
         {
             MedicalRecordService medicalRecordService = new MedicalRecordService(CreateStubRepository());
 
-            MedicalRecord medicalRecord = medicalRecordService.GetMedicalRecordForPatient(1);
+            MedicalRecord medicalRecord = medicalRecordService.GetMedicalRecordForPatient(10);
 
             Assert.Null(medicalRecord);
         }
@@ -37,9 +37,9 @@ namespace WebAppPatientTests
             var stubRepository = new Mock<IMedicalRecordRepository>();
 
             var medicalRecords = new List<MedicalRecord>();
-            medicalRecords.Add(new MedicalRecord(1, new Patient(1), new Anamnesis(1, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
-            medicalRecords.Add(new MedicalRecord(2, new Patient(2), new Anamnesis(2, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
-            medicalRecords.Add(new MedicalRecord(3, new Patient(3), new Anamnesis(3, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(1, 1, 1, new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(2, 2, 2, new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(3, 3, 3, new List<Allergies>(), new List<Medicament>()));
 
             stubRepository.Setup(medicalRecordRepository => medicalRecordRepository.GetAllEntities()).Returns(medicalRecords);
 
