@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class DataBaseMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -435,7 +435,6 @@ namespace Backend.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     QuestionText = table.Column<string>(nullable: true),
-                    answerID = table.Column<int>(nullable: false),
                     Answer = table.Column<int>(nullable: false),
                     surveyID = table.Column<int>(nullable: false)
                 },
@@ -626,14 +625,19 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Question",
-                columns: new[] { "id", "Answer", "QuestionText", "answerID", "surveyID" },
+                columns: new[] { "id", "Answer", "QuestionText", "surveyID" },
                 values: new object[,]
                 {
-                    { 1, 0, "Pitanje1", 1, 1 },
-                    { 2, 0, "Pitanje2", 1, 1 },
-                    { 5, 0, "Pitanje5", 1, 1 },
-                    { 3, 0, "Pitanje3", 1, 2 },
-                    { 4, 0, "Pitanje4", 1, 2 }
+                    { 1, 1, "Pitanje1", 1 },
+                    { 2, 0, "Pitanje2", 1 },
+                    { 3, 1, "Pitanje3", 1 },
+                    { 4, 0, "Pitanje4", 1 },
+                    { 5, 1, "Pitanje5", 1 },
+                    { 6, 0, "Pitanje1", 2 },
+                    { 7, 3, "Pitanje2", 2 },
+                    { 8, 4, "Pitanje3", 2 },
+                    { 9, 1, "Pitanje4", 2 },
+                    { 10, 1, "Pitanje5", 2 }
                 });
 
             migrationBuilder.CreateIndex(

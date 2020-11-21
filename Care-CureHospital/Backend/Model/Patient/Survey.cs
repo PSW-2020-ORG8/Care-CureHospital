@@ -19,7 +19,7 @@ namespace Model.Patient
         public DateTime PublishingDate { get; set; }
         public int medicalExaminationID { get; set; }
         public virtual MedicalExamination MedicalExamination { get; set; }
-        public virtual List<Question> Question { get; set; }
+        public virtual List<Question> Questions { get; set; }
 
         public Survey(int id)
         {
@@ -36,7 +36,7 @@ namespace Model.Patient
             this.PublishingDate = publishingDate;
             this.CommentSurvey = commentSurvey;
             this.id = id;
-            this.Question = question;
+            this.Questions = question;
         }
 
         public Survey(string title, DateTime publishingDate, string commentSurvey, List<Question> question)
@@ -44,7 +44,7 @@ namespace Model.Patient
             this.Title = title;
             this.PublishingDate = publishingDate;
             this.CommentSurvey = commentSurvey;
-            this.Question = question;
+            this.Questions = question;
         }
 
         public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination, List<Question> question) : this(id)
@@ -54,7 +54,7 @@ namespace Model.Patient
             PublishingDate = publishingDate;
             this.medicalExaminationID = medicalExaminationID;
             MedicalExamination = medicalExamination;
-            Question = question;
+            Questions = question;
         }
 
         public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, List<Question> question) : this(id)
@@ -63,7 +63,7 @@ namespace Model.Patient
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
             this.medicalExaminationID = medicalExaminationID;
-            Question = question;
+            Questions = question;
         }
 
         public int GetId()

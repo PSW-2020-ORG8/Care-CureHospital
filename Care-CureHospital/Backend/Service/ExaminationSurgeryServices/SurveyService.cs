@@ -42,5 +42,25 @@ namespace Backend.Service.ExaminationSurgeryServices
             surveyRepository.DeleteEntity(entity);
         }
 
+       /* public void GetSurveyResults()
+        {
+            Dictionary<int, Dictionary<int, int>> results = new Dictionary<int, Dictionary<int, int>>();
+            foreach (Survey survey in surveyRepository.GetAllEntities())
+            {
+                for (int i = 0; i < survey.Questions.Count; i++)
+                {
+                    int grade = (int)survey.Questions[i].Answer;
+                    if (results[i].ContainsKey(grade))
+                    {
+                        results[i][grade] = results[i][grade] + 1;
+                    }
+                    else
+                    {
+                        results[i].Add(grade, 1);
+                    }
+                }
+            }
+        }
+       */
     }
 }

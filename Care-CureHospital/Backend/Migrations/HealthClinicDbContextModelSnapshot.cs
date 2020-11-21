@@ -612,9 +612,6 @@ namespace Backend.Migrations
                     b.Property<string>("QuestionText")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("answerID")
-                        .HasColumnType("int");
-
                     b.Property<int>("surveyID")
                         .HasColumnType("int");
 
@@ -628,9 +625,8 @@ namespace Backend.Migrations
                         new
                         {
                             id = 1,
-                            Answer = 0,
+                            Answer = 1,
                             QuestionText = "Pitanje1",
-                            answerID = 1,
                             surveyID = 1
                         },
                         new
@@ -638,32 +634,63 @@ namespace Backend.Migrations
                             id = 2,
                             Answer = 0,
                             QuestionText = "Pitanje2",
-                            answerID = 1,
                             surveyID = 1
                         },
                         new
                         {
                             id = 3,
-                            Answer = 0,
+                            Answer = 1,
                             QuestionText = "Pitanje3",
-                            answerID = 1,
-                            surveyID = 2
+                            surveyID = 1
                         },
                         new
                         {
                             id = 4,
                             Answer = 0,
                             QuestionText = "Pitanje4",
-                            answerID = 1,
-                            surveyID = 2
+                            surveyID = 1
                         },
                         new
                         {
                             id = 5,
-                            Answer = 0,
+                            Answer = 1,
                             QuestionText = "Pitanje5",
-                            answerID = 1,
                             surveyID = 1
+                        },
+                        new
+                        {
+                            id = 6,
+                            Answer = 0,
+                            QuestionText = "Pitanje1",
+                            surveyID = 2
+                        },
+                        new
+                        {
+                            id = 7,
+                            Answer = 3,
+                            QuestionText = "Pitanje2",
+                            surveyID = 2
+                        },
+                        new
+                        {
+                            id = 8,
+                            Answer = 4,
+                            QuestionText = "Pitanje3",
+                            surveyID = 2
+                        },
+                        new
+                        {
+                            id = 9,
+                            Answer = 1,
+                            QuestionText = "Pitanje4",
+                            surveyID = 2
+                        },
+                        new
+                        {
+                            id = 10,
+                            Answer = 1,
+                            QuestionText = "Pitanje5",
+                            surveyID = 2
                         });
                 });
 
@@ -1153,7 +1180,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Model.Patient.Question", b =>
                 {
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany("Question")
+                        .WithMany("Questions")
                         .HasForeignKey("surveyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

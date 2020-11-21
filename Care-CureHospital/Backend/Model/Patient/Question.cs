@@ -12,7 +12,6 @@ namespace Model.Patient
     {
         public int id { get; set; }
         public String QuestionText { get; set; }
-        public int answerID { get; set; }
         public virtual GradeOfQuestion Answer { get; set; }
         public int surveyID { get; set; }
         public virtual Survey Survey { get; set; }
@@ -26,17 +25,16 @@ namespace Model.Patient
         {
         }
 
-        public Question(int id, string questionText, int answerID, int surveyID) : this(id)
+
+        public Question(int id, string questionText, int surveyID) : this(id)
         {
             QuestionText = questionText;
-            this.answerID = answerID;
             this.surveyID = surveyID;
         }
 
-        public Question(int id, string questionText, int answerID, GradeOfQuestion answer, int surveyID, Survey survey) : this(id)
+        public Question(int id, string questionText, GradeOfQuestion answer, int surveyID, Survey survey) : this(id)
         {
             QuestionText = questionText;
-            this.answerID = answerID;
             Answer = answer;
             this.surveyID = surveyID;
             Survey = survey;

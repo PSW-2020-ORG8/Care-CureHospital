@@ -162,16 +162,21 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Survey>().HasData(
-                new Survey { id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 1, Question = new List<Question>() },
-                new Survey { id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 2, Question = new List<Question>() }
+                new Survey { id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 1, Questions = new List<Question>() },
+                new Survey { id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 2, Questions = new List<Question>() }
             );
 
             modelBuilder.Entity<Question>().HasData(
-                new Question { id = 1, QuestionText = "Pitanje1", answerID = 1, surveyID = 1 },
-                new Question { id = 2, QuestionText = "Pitanje2", answerID = 1, surveyID = 1 },
-                new Question { id = 3, QuestionText = "Pitanje3", answerID = 1, surveyID = 2 },
-                new Question { id = 4, QuestionText = "Pitanje4", answerID = 1, surveyID = 2 },
-                new Question { id = 5, QuestionText = "Pitanje5", answerID = 1, surveyID = 1 }
+                new Question { id = 1, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Fair, surveyID = 1 },
+                new Question { id = 2, QuestionText = "Pitanje2", Answer = GradeOfQuestion.Poor, surveyID = 1 },
+                new Question { id = 3, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Fair, surveyID = 1 },
+                new Question { id = 4, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Poor, surveyID = 1 },
+                new Question { id = 5, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, surveyID = 1 },
+                new Question { id = 6, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Poor, surveyID = 2 },
+                new Question { id = 7, QuestionText = "Pitanje2", Answer = GradeOfQuestion.VeryGood, surveyID = 2 },
+                new Question { id = 8, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Excellent, surveyID = 2 },
+                new Question { id = 9, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Fair, surveyID = 2 },
+                 new Question { id = 10, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, surveyID = 2 }
             );
 
             /*modelBuilder.Entity<MedicalRecord>().HasData(
