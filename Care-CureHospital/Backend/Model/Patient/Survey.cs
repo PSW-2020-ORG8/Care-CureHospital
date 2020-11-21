@@ -13,17 +13,17 @@ namespace Model.Patient
 {
     public class Survey : IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String Title { get; set; }
         public String CommentSurvey { get; set; }
         public DateTime PublishingDate { get; set; }
-        public int medicalExaminationID { get; set; }
+        public int MedicalExaminationId { get; set; }
         public virtual MedicalExamination MedicalExamination { get; set; }
         public virtual List<Question> Questions { get; set; }
 
         public Survey(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public Survey()
@@ -35,7 +35,8 @@ namespace Model.Patient
             this.Title = title;
             this.PublishingDate = publishingDate;
             this.CommentSurvey = commentSurvey;
-            this.id = id;
+
+            this.Id = id;
             this.Questions = question;
         }
 
@@ -52,7 +53,7 @@ namespace Model.Patient
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
-            this.medicalExaminationID = medicalExaminationID;
+            this.MedicalExaminationId = medicalExaminationID;
             MedicalExamination = medicalExamination;
             Questions = question;
         }
@@ -62,18 +63,18 @@ namespace Model.Patient
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
-            this.medicalExaminationID = medicalExaminationID;
+            this.MedicalExaminationId = medicalExaminationID;
             Questions = question;
         }
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
     }
 }

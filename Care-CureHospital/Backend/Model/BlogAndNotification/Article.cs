@@ -13,15 +13,15 @@ namespace Model.BlogAndNotification
 {
     public class Article : Content, IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String Title { get; set; }
-        public int blogID { get; set; }
+        public int BlogId { get; set; }
         public virtual Blog Blog { get; set; }
         public virtual List<Comment> Comments { get; set; }
 
         public Article(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public Article()
@@ -31,7 +31,7 @@ namespace Model.BlogAndNotification
         public Article(int id, string title, Blog blog, List<Comment> comments)
         {
             this.Title = title;
-            this.id = id;
+            this.Id = id;
             this.Blog = blog;
             this.Comments = comments;
         }
@@ -45,12 +45,12 @@ namespace Model.BlogAndNotification
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }                  
 
     }

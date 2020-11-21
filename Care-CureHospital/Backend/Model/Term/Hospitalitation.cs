@@ -12,19 +12,19 @@ namespace Model.Term
 {
     public class Hospitalitation : Term, IIdentifiable<int>
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public bool Urgency { get; set; }
         public String ShortDescription { get; set; }
-        public int roomID { get; set; }
-        public int doctorID { get; set; }
-        public int bedForLayingID { get; set; }
+        public int RoomId { get; set; }
+        public int DoctorId { get; set; }
+        public int BedForLayingId { get; set; }
         public virtual Room Room { get; set; }
         public virtual AllActors.Doctor Doctor { get; set; }
         public virtual Bed BedForLaying { get; set; }
 
         public Hospitalitation(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public Hospitalitation()
@@ -36,7 +36,7 @@ namespace Model.Term
         {
             this.Urgency = urgency;
             this.ShortDescription = shortDescription;
-            this.id = id;
+            this.Id = id;
             this.Room = room;
             this.Doctor = doctor;
             this.BedForLaying = bedForLaying;
@@ -54,12 +54,12 @@ namespace Model.Term
 
         public int GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
     }
 }

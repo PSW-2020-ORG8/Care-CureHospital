@@ -17,7 +17,7 @@ namespace Backend.Adapters
             patientFeedback.IsForPublishing = dto.IsForPublishing;
             patientFeedback.IsPublished = dto.IsPublished;
             patientFeedback.IsAnonymous = dto.IsAnonymous;
-            patientFeedback.PatientID = dto.PatientId;
+            patientFeedback.PatientId = dto.PatientId;
             patientFeedback.Patient = null;
             patientFeedback.Text = dto.Text;
 
@@ -31,7 +31,7 @@ namespace Backend.Adapters
             dto.IsForPublishing = patientFeedback.IsForPublishing;
             dto.IsPublished = patientFeedback.IsPublished;
             dto.IsAnonymous = patientFeedback.IsAnonymous;
-            dto.PatientId = patientFeedback.PatientID;
+            dto.PatientId = patientFeedback.PatientId;
             dto.Patient = patientFeedback.Patient.Name + " " + patientFeedback.Patient.Surname;
             dto.PublishingDate = patientFeedback.PublishingDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Text = patientFeedback.Text;

@@ -27,7 +27,7 @@ namespace Service.RoomsServices
         {
             Room[] rooms = new Room[2];
             rooms[0] = roomForRenovation;
-            rooms[1] = new Room(roomForRenovation.RoomID.Replace("a", "b"),
+            rooms[1] = new Room(roomForRenovation.RoomId.Replace("a", "b"),
                 new TypeOfRoom(roomForRenovation.TypeOfRoom.ToString()), new List<InventaryRoom>());
             return rooms;
         }
@@ -36,7 +36,7 @@ namespace Service.RoomsServices
         {
             List<InventaryRoom> equipmentForRelocate = secondPartOfRoom.Equipment;
             foreach (InventaryRoom equipment in equipmentForRelocate)
-                roomService.AddEquipmentInRoom(equipment, firstPartOfRoom.RoomID);
+                roomService.AddEquipmentInRoom(equipment, firstPartOfRoom.RoomId);
             roomService.DeleteEntity(secondPartOfRoom);
         }
 
@@ -58,7 +58,7 @@ namespace Service.RoomsServices
         public Room FindSecondPart(Room room)
         {
             foreach(Room oneRoom in roomService.GetAllEntities())
-                if (room.RoomID.Replace("a", "b").Equals(oneRoom.RoomID))
+                if (room.RoomId.Replace("a", "b").Equals(oneRoom.RoomId))
                     return room;
             return null;
         }

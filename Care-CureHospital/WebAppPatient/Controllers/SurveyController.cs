@@ -29,7 +29,7 @@ namespace WebAppPatient.Controllers
         [HttpGet("getSurveyResults")] // GET /api/survey/getSurveyResults
         public IActionResult getSurveyResults()
         {
-            return Ok(App.Instance().surveyService.GetSurveyResults());
+            return Ok(App.Instance().questionService.GetAnswersByQuestion());
         }
     }
 }

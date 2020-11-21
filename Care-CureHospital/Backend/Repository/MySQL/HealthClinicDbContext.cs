@@ -53,20 +53,20 @@ namespace Backend.Repository.MySQL
             modelBuilder.Entity<Patient>()
             .HasOne(b => b.MedicalRecord)
             .WithOne(i => i.Patient)
-            .HasForeignKey<MedicalRecord>(b => b.id);
+            .HasForeignKey<MedicalRecord>(b => b.Id);
 
             modelBuilder.Entity<Patient>().HasData(
-                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordID = 1, cityID = 1 },
-                new Patient { Id = 2, Name = "Milos", Surname = "Mitrovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordID = 2, cityID = 1 },
-                new Patient { Id = 3, Name = "Jovan", Surname = "Jovanovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordID = 3, cityID = 1 },
-                new Patient { Id = 4, Name = "Milica", Surname = "Micic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordID = 4, cityID = 1 }
+                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordId = 1, CityId = 1 },
+                new Patient { Id = 2, Name = "Milos", Surname = "Mitrovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordId = 2, CityId = 1 },
+                new Patient { Id = 3, Name = "Jovan", Surname = "Jovanovic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordId = 3, CityId = 1 },
+                new Patient { Id = 4, Name = "Milica", Surname = "Micic", Jmbg = "123", ContactNumber = "063555333", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, MedicalRecordId = 4, CityId = 1 }
             );
 
             modelBuilder.Entity<Doctor>().HasData(
-                new Doctor { Id = 1, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", cityID = 1, specialitationID = 1 },
-                new Doctor { Id = 2, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", cityID = 1, specialitationID = 1 },
-                new Doctor { Id = 3, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", cityID = 1, specialitationID = 1 },
-                new Doctor { Id = 4, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", cityID = 1, specialitationID = 1 }
+                new Doctor { Id = 1, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", CityId = 1, SpecialitationId = 1 },
+                new Doctor { Id = 2, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", CityId = 1, SpecialitationId = 1 },
+                new Doctor { Id = 3, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", CityId = 1, SpecialitationId = 1 },
+                new Doctor { Id = 4, Username = "pera", Password = "123", Name = "Petar", Surname = "Petrovic", Jmbg = "123", DateOfBirth = new DateTime(), ContactNumber = "06345111144", EMail = "pera@gmail.com", CityId = 1, SpecialitationId = 1 }
            );
 
             modelBuilder.Entity<Specialitation>().HasData(
@@ -74,109 +74,110 @@ namespace Backend.Repository.MySQL
             );           
 
             modelBuilder.Entity<MedicalRecord>().HasData(
-                new MedicalRecord { id = 1, patientID = 1, anamnesisID = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
-                new MedicalRecord { id = 2, patientID = 2, anamnesisID = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
-                new MedicalRecord { id = 3, patientID = 3, anamnesisID = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
-                new MedicalRecord { id = 4, patientID = 4, anamnesisID = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() }
+                new MedicalRecord { Id = 1, PatientId = 1, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
+                new MedicalRecord { Id = 2, PatientId = 2, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
+                new MedicalRecord { Id = 3, PatientId = 3, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() },
+                new MedicalRecord { Id = 4, PatientId = 4, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicament = new List<Medicament>() }
             );
 
             modelBuilder.Entity<MedicalExamination>().HasData(
-                new MedicalExamination { id = 1, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", roomID = 1, doctorID = 1, patientID = 2 },
-                new MedicalExamination { id = 2, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", roomID = 2, doctorID = 2, patientID = 1 },
-                new MedicalExamination { id = 3, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", roomID = 3, doctorID = 2, patientID = 3 }
+                new MedicalExamination { Id = 1, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
+                new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", RoomId = 2, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo uredu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
-                new MedicalExaminationReport { id = 1, Comment = "Pacijent je dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), medicalExaminationID = 1 },
-                new MedicalExaminationReport { id = 2, Comment = "Pacijent je veoma dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), medicalExaminationID = 2 },
-                new MedicalExaminationReport { id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), medicalExaminationID = 3 }
+                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1 },
+                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 3 }
             );
 
             modelBuilder.Entity<Medicament>().HasData(
-                new Medicament { id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 1 },
-                new Medicament { id = 2, Code = "L233", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 2 },
-                new Medicament { id = 3, Code = "L523", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 3 },
-                new Medicament { id = 4, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 4 },
-                new Medicament { id = 5, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 2 },
-                new Medicament { id = 6, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 1 },
-                new Medicament { id = 7, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", medicalRecordID = 1 }
+                new Medicament { Id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1 },
+                new Medicament { Id = 2, Code = "L233", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 2 },
+                new Medicament { Id = 3, Code = "L523", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 3 },
+                new Medicament { Id = 4, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 4 },
+                new Medicament { Id = 5, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 2 },
+                new Medicament { Id = 6, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1 },
+                new Medicament { Id = 7, Code = "L423", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1 }
             );
 
             modelBuilder.Entity<Room>().HasData(
-                new Room { id = 1, RoomID = "101", typeOfRoomID = 1, Equipment = new List<InventaryRoom>() },
-                new Room { id = 2, RoomID = "201", typeOfRoomID = 1, Equipment = new List<InventaryRoom>() },
-                new Room { id = 3, RoomID = "301", typeOfRoomID = 1, Equipment = new List<InventaryRoom>() }
+                new Room { Id = 1, RoomId = "101", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() },
+                new Room { Id = 2, RoomId = "201", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() },
+                new Room { Id = 3, RoomId = "301", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() }
             );
 
             modelBuilder.Entity<InventaryRoom>().HasData(
-               new InventaryRoom { id = 1, Name = "Stolovi", Quantity = 1, roomID = 1 },
-               new InventaryRoom { id = 2, Name = "Stolice", Quantity = 1, roomID = 1 },
-               new InventaryRoom { id = 3, Name = "Kreveti", Quantity = 1, roomID = 2 }
+               new InventaryRoom { Id = 1, Name = "Stolovi", Quantity = 1, RoomId = 1 },
+               new InventaryRoom { Id = 2, Name = "Stolice", Quantity = 1, RoomId = 1 },
+               new InventaryRoom { Id = 3, Name = "Kreveti", Quantity = 1, RoomId = 2 }
            );
 
             modelBuilder.Entity<TypeOfRoom>().HasData(
-                new TypeOfRoom { id = 1, NameOfType = "Soba za preglede" },
-                new TypeOfRoom { id = 2, NameOfType = "Soba za operacije" }
+                new TypeOfRoom { Id = 1, NameOfType = "Soba za preglede" },
+                new TypeOfRoom { Id = 2, NameOfType = "Soba za operacije" }
             );
 
             modelBuilder.Entity<Allergies>().HasData(
-                new Allergies { id = 1, Name = "Penicilin", medicalRecordID = 1 },
-                new Allergies { id = 2, Name = "Penicilin", medicalRecordID = 3 },
-                new Allergies { id = 3, Name = "Penicilin", medicalRecordID = 2 },
-                new Allergies { id = 4, Name = "Penicilin", medicalRecordID = 1 }
+                new Allergies { Id = 1, Name = "Penicilin", MedicalRecordId = 1 },
+                new Allergies { Id = 2, Name = "Penicilin", MedicalRecordId = 3 },
+                new Allergies { Id = 3, Name = "Penicilin", MedicalRecordId = 2 },
+                new Allergies { Id = 4, Name = "Penicilin", MedicalRecordId = 1 }
             );
 
             modelBuilder.Entity<Anamnesis>().HasData(
-              new Anamnesis { id = 1, Description = "Pacijent je dobro", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() },
-              new Anamnesis { id = 2, Description = "Pacijent je loše", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() },
-              new Anamnesis { id = 3, Description = "Pacijent je vrlo dobro", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() }
+              new Anamnesis { Id = 1, Description = "Pacijent je dobro", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() },
+              new Anamnesis { Id = 2, Description = "Pacijent je loše", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() },
+              new Anamnesis { Id = 3, Description = "Pacijent je vrlo dobro", Diagnosis = new List<Diagnosis>(), Symptoms = new List<Symptoms>() }
             );
 
             modelBuilder.Entity<Symptoms>().HasData(
-                new Symptoms { id = 1, Name = "Temperatura", anamnesisID = 2 },
-                new Symptoms { id = 2, Name = "Kašalj", anamnesisID = 1 },
-                new Symptoms { id = 3, Name = "Glavobolja", anamnesisID = 2 }
+                new Symptoms { Id = 1, Name = "Temperatura", AnamnesisId = 2 },
+                new Symptoms { Id = 2, Name = "Kašalj", AnamnesisId = 1 },
+                new Symptoms { Id = 3, Name = "Glavobolja", AnamnesisId = 2 }
             );
 
             modelBuilder.Entity<Diagnosis>().HasData(
-                new Diagnosis { id = 1, Name = "Prehlada", anamnesisID = 1 },
-                new Diagnosis { id = 2, Name = "Virus", anamnesisID = 2 },
-                new Diagnosis { id = 3, Name = "Migrena", anamnesisID = 2 }
+                new Diagnosis { Id = 1, Name = "Prehlada", AnamnesisId = 1 },
+                new Diagnosis { Id = 2, Name = "Virus", AnamnesisId = 2 },
+                new Diagnosis { Id = 3, Name = "Migrena", AnamnesisId = 2 }
             );
 
             modelBuilder.Entity<City>().HasData(
-                new City { id = 1, Name = "Beograd", Country = null, Adress = null, PostCode = 11000, CountryID = 1 }
+                new City { Id = 1, Name = "Beograd", Country = null, Adress = null, PostCode = 11000, CountryId = 1 }
             );
 
             modelBuilder.Entity<Country>().HasData(
-                new Country { id = 1, Name = "Srbija", Code = "SRB" }
+                new Country { Id = 1, Name = "Srbija", Code = "SRB" }
             );
             
             modelBuilder.Entity<PatientFeedback>().HasData(
-                new PatientFeedback { Id = 1, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), IsForPublishing = true, IsPublished = true, IsAnonymous = false, PatientID = 1 },
-                new PatientFeedback { Id = 2, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 8, 15, 9, 17, 0), IsForPublishing = true, IsPublished = true, IsAnonymous = true, PatientID = 2 },
-                new PatientFeedback { Id = 3, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 9, 3, 11, 30, 0), IsForPublishing = true, IsPublished = false, IsAnonymous = true, PatientID = 3 },
-                new PatientFeedback { Id = 4, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), IsForPublishing = false, IsPublished = false, IsAnonymous = false, PatientID = 4 },
-                new PatientFeedback { Id = 5, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 18, 7, 30, 0), IsForPublishing = false, IsPublished = false, IsAnonymous = false, PatientID = 2 },
-                new PatientFeedback { Id = 6, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 15, 6, 30, 0), IsForPublishing = true, IsPublished = false, IsAnonymous = true, PatientID = 4 }
+                new PatientFeedback { Id = 1, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), IsForPublishing = true, IsPublished = true, IsAnonymous = false, PatientId = 1 },
+                new PatientFeedback { Id = 2, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 8, 15, 9, 17, 0), IsForPublishing = true, IsPublished = true, IsAnonymous = true, PatientId = 2 },
+                new PatientFeedback { Id = 3, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 9, 3, 11, 30, 0), IsForPublishing = true, IsPublished = false, IsAnonymous = true, PatientId = 3 },
+                new PatientFeedback { Id = 4, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), IsForPublishing = false, IsPublished = false, IsAnonymous = false, PatientId = 4 },
+                new PatientFeedback { Id = 5, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 18, 7, 30, 0), IsForPublishing = false, IsPublished = false, IsAnonymous = false, PatientId = 2 },
+                new PatientFeedback { Id = 6, Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika.", PublishingDate = new DateTime(2020, 10, 15, 6, 30, 0), IsForPublishing = true, IsPublished = false, IsAnonymous = true, PatientId = 4 }
             );
 
             modelBuilder.Entity<Survey>().HasData(
-                new Survey { id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 1, Questions = new List<Question>() },
-                new Survey { id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", medicalExaminationID = 2, Questions = new List<Question>() }
+                new Survey { Id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 1, Questions = new List<Question>() },
+                new Survey { Id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 2, Questions = new List<Question>() }
             );
 
             modelBuilder.Entity<Question>().HasData(
-                new Question { id = 1, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Fair, surveyID = 1 },
-                new Question { id = 2, QuestionText = "Pitanje2", Answer = GradeOfQuestion.Poor, surveyID = 1 },
-                new Question { id = 3, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Fair, surveyID = 1 },
-                new Question { id = 4, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Poor, surveyID = 1 },
-                new Question { id = 5, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, surveyID = 1 },
-                new Question { id = 6, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Poor, surveyID = 2 },
-                new Question { id = 7, QuestionText = "Pitanje2", Answer = GradeOfQuestion.VeryGood, surveyID = 2 },
-                new Question { id = 8, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Excellent, surveyID = 2 },
-                new Question { id = 9, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Fair, surveyID = 2 },
-                 new Question { id = 10, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, surveyID = 2 }
+                new Question { Id = 1, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 2, QuestionText = "Pitanje2", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 3, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 4, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 5, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 6, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Poor, SurveyId = 2 },
+                new Question { Id = 7, QuestionText = "Pitanje2", Answer = GradeOfQuestion.VeryGood, SurveyId = 2 },
+                new Question { Id = 8, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
+                new Question { Id = 9, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                 new Question { Id = 10, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, SurveyId = 2 }
+
             );
 
             /*modelBuilder.Entity<MedicalRecord>().HasData(

@@ -33,8 +33,8 @@ Vue.component("postFeedback", {
 						<img id="userIcon" src="pictures/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a >Registruj se</a>
-					<a >Prijavi se</a>
+					<a  href="#/patientRegistration">Registruj se</a>
+					<a>Prijavi se</a>
 				</div>
 			</div>
 		</div>
@@ -99,7 +99,7 @@ Vue.component("postFeedback", {
 			}
 
 			if (empty === false) {
-				 
+
 				axios.post('/api/patientFeedback', {
 					text: this.text,
 					isForPublishing: this.isForPublishing,

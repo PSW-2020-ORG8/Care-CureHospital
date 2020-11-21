@@ -14,7 +14,7 @@ namespace Backend.Model.BlogAndNotification
         public bool IsForPublishing { get; set; }
         public bool IsPublished { get; set; }
         public bool IsAnonymous { get; set; }
-        public int PatientID { get; set; }
+        public int PatientId { get; set; }
         
         public virtual Patient Patient { get; set; }
         
@@ -29,7 +29,7 @@ namespace Backend.Model.BlogAndNotification
             this.IsForPublishing = isForPublishing;
             this.IsPublished = isPublished;
             this.IsAnonymous = isAnonymous;
-            this.PatientID = patient.Id;
+            this.PatientId = patient.Id;
             this.Patient = patient;
         }
 
@@ -40,7 +40,7 @@ namespace Backend.Model.BlogAndNotification
             this.IsForPublishing = isForPublishing;
             this.IsPublished = isPublished;
             this.IsAnonymous = isAnonymous;
-            this.PatientID = patientID;
+            this.PatientId = patientID;
         }
         public int GetId()
         {
