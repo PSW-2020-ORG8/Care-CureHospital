@@ -35,7 +35,7 @@ namespace Backend
             medicalRecordService = new MedicalRecordService(
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
             surveyService = new SurveyService(
-               new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
+               new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()), new QuestionRepository(new MySQLStream<Question>(), new IntSequencer()));
         }
 
         public static App Instance()

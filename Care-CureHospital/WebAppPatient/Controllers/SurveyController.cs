@@ -25,5 +25,11 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("getSurveyResults")] // GET /api/survey/getSurveyResults
+        public IActionResult getSurveyResults()
+        {
+            return Ok(App.Instance().surveyService.GetSurveyResults());
+        }
     }
 }

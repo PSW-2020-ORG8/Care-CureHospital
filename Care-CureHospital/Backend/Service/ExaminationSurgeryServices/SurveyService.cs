@@ -11,10 +11,12 @@ namespace Backend.Service.ExaminationSurgeryServices
     public class SurveyService : IService<Survey, int>
     {
         public ISurveyRepository surveyRepository;
+        public IQuestionRepository questionRepository;
 
-        public SurveyService(ISurveyRepository surveyRepository)
+        public SurveyService(ISurveyRepository surveyRepository, IQuestionRepository questionRepository)
         {
             this.surveyRepository = surveyRepository;
+            this.questionRepository = questionRepository;
         }
 
         public Survey GetEntity(int id)
@@ -42,25 +44,24 @@ namespace Backend.Service.ExaminationSurgeryServices
             surveyRepository.DeleteEntity(entity);
         }
 
-       /* public void GetSurveyResults()
+        public Dictionary<string, List<int>> GetSurveyResults()
         {
-            Dictionary<int, Dictionary<int, int>> results = new Dictionary<int, Dictionary<int, int>>();
-            foreach (Survey survey in surveyRepository.GetAllEntities())
+            IEnumerable<Question> questions = questionRepository.GetAllEntities();
+            Dictionary<string, List<int>> results = new Dictionary<string, List<int>>();
+            foreach (Question question in questions)
             {
-                for (int i = 0; i < survey.Questions.Count; i++)
+                if (!results.ContainsKey(question.QuestionText))
                 {
-                    int grade = (int)survey.Questions[i].Answer;
-                    if (results[i].ContainsKey(grade))
-                    {
-                        results[i][grade] = results[i][grade] + 1;
-                    }
-                    else
-                    {
-                        results[i].Add(grade, 1);
-                    }
+                    results.Add(question.QuestionText, new List<int>() { 0, 0, 0, 0, 0 });
                 }
+
+                int grade = (int)question.Answer;
+
+                results[question.QuestionText][grade]++;
             }
+
+            return results;
         }
-       */
+       
     }
 }

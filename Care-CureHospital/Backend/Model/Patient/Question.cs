@@ -4,11 +4,12 @@
  * Purpose: Definition of the Class Patient.Question
  ***********************************************************************/
 
+using HealthClinic.Repository;
 using System;
 
 namespace Model.Patient
 {
-    public class Question
+    public class Question : IIdentifiable<int>
     {
         public int id { get; set; }
         public String QuestionText { get; set; }
