@@ -10,7 +10,7 @@ using Xunit;
 
 namespace WebAppPatientTests
 {
-    public class UnitTest1
+    public class MedicalRecordTest
     {
         [Fact]
         public void Find_medical_record_for_patient()
@@ -37,9 +37,9 @@ namespace WebAppPatientTests
             var stubRepository = new Mock<IMedicalRecordRepository>();
 
             var medicalRecords = new List<MedicalRecord>();
-            medicalRecords.Add(new MedicalRecord(1, new Patient(1), new Anamnesis(), new List<Allergies>(), new List<Medicament>()));
-            medicalRecords.Add(new MedicalRecord(2, new Patient(2), new Anamnesis(), new List<Allergies>(), new List<Medicament>()));
-            medicalRecords.Add(new MedicalRecord(3, new Patient(3), new Anamnesis(), new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(1, new Patient(1), new Anamnesis(1, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(2, new Patient(2), new Anamnesis(2, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
+            medicalRecords.Add(new MedicalRecord(3, new Patient(3), new Anamnesis(3, "Sve je u redu", new List<Diagnosis>(), new List<Symptoms>()), new List<Allergies>(), new List<Medicament>()));
 
             stubRepository.Setup(medicalRecordRepository => medicalRecordRepository.GetAllEntities()).Returns(medicalRecords);
 
