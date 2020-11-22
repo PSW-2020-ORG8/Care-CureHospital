@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Patient;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
 
@@ -30,6 +31,14 @@ namespace WebAppPatient.Controllers
         public IActionResult getSurveyResults()
         {
             return Ok(App.Instance().questionService.GetAnswersByQuestion());
+        }
+
+        [HttpPost]      // POST /api/survey
+        public IActionResult Add(SurveyDto dto)
+        {
+            Survey survey = SurveyMapper.SurveyDtoToSurvey(dto, null);
+            App.Instance().surveyService.AddEntity(survey);
+            return Ok();
         }
     }
 }

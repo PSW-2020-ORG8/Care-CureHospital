@@ -15,9 +15,9 @@ namespace WebAppPatient.Mapper
 
             survey.Title = dto.Title;
             survey.CommentSurvey = dto.CommentSurvey;
-            survey.PublishingDate = dto.PublishingDate;
+            survey.PublishingDate = DateTime.Now;
             survey.Questions = dto.Questions;
-
+            survey.MedicalExaminationId = 1;
             return survey;
         }
 
