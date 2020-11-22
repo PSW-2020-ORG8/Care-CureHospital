@@ -21,12 +21,10 @@ namespace Backend.Repository.MySQL
         {
             this.stream = stream;
             this.sequencer = sequencer;
-            //InitializeId();
         }
 
         public E AddEntity(E entity)
         {
-            //entity.SetId(sequencer.GenerateID());
             stream.Add(entity);
             stream.SaveAll();
             return entity;

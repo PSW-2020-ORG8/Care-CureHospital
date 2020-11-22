@@ -10,7 +10,7 @@ namespace Model.DoctorMenager
 {
     public class Ingredient
     {
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         public Ingredient()
         {
@@ -18,7 +18,7 @@ namespace Model.DoctorMenager
 
         public Ingredient(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         

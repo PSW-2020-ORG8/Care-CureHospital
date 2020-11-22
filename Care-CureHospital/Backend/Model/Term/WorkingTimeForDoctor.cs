@@ -14,13 +14,13 @@ namespace Model.Term
     {
         public int Id { get; set; }
         public DaysInWeek Day { get; set; }
-        public Boolean DoesWork { get; set; }
+        public bool DoesWork { get; set; }
         public int DoctorId { get; set; }
         public virtual AllActors.Doctor Doctor { get; set; }
 
         public WorkingTimeForDoctor(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public WorkingTimeForDoctor()
@@ -30,18 +30,18 @@ namespace Model.Term
         public WorkingTimeForDoctor(int id, DaysInWeek day, bool doesWork, AllActors.Doctor doctor, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            this.Day = day;
-            this.DoesWork = doesWork;
-            this.Id = id;
-            this.Doctor = doctor;
+            Day = day;
+            DoesWork = doesWork;
+            Id = id;
+            Doctor = doctor;
         }
 
         public WorkingTimeForDoctor(DaysInWeek day, bool doesWork, AllActors.Doctor doctor, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            this.Day = day;
-            this.DoesWork = doesWork;
-            this.Doctor = doctor;
+            Day = day;
+            DoesWork = doesWork;
+            Doctor = doctor;
         }
 
         public int GetId()
@@ -51,7 +51,7 @@ namespace Model.Term
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Model.BlogAndNotification
     public class Notification : Content, IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Title { get; set; }
+        public string Title { get; set; }
         public int UserId { get; set; }
         public virtual User SendNotificationByUser { get; set; }
         public virtual List<User> ReceiveNotifications { get; set; }
 
         public Notification(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Notification()
@@ -30,17 +30,17 @@ namespace Model.BlogAndNotification
 
         public Notification(int id, string title, User sendNotificationByUser, List<User> receiveNotifications)
         {
-            this.Title = title;
-            this.Id = id;
-            this.SendNotificationByUser = sendNotificationByUser;
-            this.ReceiveNotifications = receiveNotifications;
+            Title = title;
+            Id = id;
+            SendNotificationByUser = sendNotificationByUser;
+            ReceiveNotifications = receiveNotifications;
         }
 
         public Notification(string title, User sendNotificationByUser, List<User> receiveNotifications)
         {
-            this.Title = title;
-            this.SendNotificationByUser = sendNotificationByUser;
-            this.ReceiveNotifications = receiveNotifications;
+            Title = title;
+            SendNotificationByUser = sendNotificationByUser;
+            ReceiveNotifications = receiveNotifications;
         }
 
         public int GetId()
@@ -50,7 +50,7 @@ namespace Model.BlogAndNotification
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }              
 
     }

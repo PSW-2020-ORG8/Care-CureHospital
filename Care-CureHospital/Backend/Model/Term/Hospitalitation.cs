@@ -14,7 +14,7 @@ namespace Model.Term
     {
         public int Id { get; set; }
         public bool Urgency { get; set; }
-        public String ShortDescription { get; set; }
+        public string ShortDescription { get; set; }
         public int RoomId { get; set; }
         public int DoctorId { get; set; }
         public int BedForLayingId { get; set; }
@@ -24,7 +24,7 @@ namespace Model.Term
 
         public Hospitalitation(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Hospitalitation()
@@ -34,22 +34,22 @@ namespace Model.Term
         public Hospitalitation(int id, bool urgency, string shortDescription, Room room, AllActors.Doctor doctor, Bed bedForLaying, DateTime fromDateTime, DateTime toDateTime) 
             : base(fromDateTime, toDateTime)
         {
-            this.Urgency = urgency;
-            this.ShortDescription = shortDescription;
-            this.Id = id;
-            this.Room = room;
-            this.Doctor = doctor;
-            this.BedForLaying = bedForLaying;
+            Urgency = urgency;
+            ShortDescription = shortDescription;
+            Id = id;
+            Room = room;
+            Doctor = doctor;
+            BedForLaying = bedForLaying;
         }
 
         public Hospitalitation(bool urgency, string shortDescription, Room room, AllActors.Doctor doctor, Bed bedForLaying, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            this.Urgency = urgency;
-            this.ShortDescription = shortDescription;
-            this.Room = room;
-            this.Doctor = doctor;
-            this.BedForLaying = bedForLaying;
+            Urgency = urgency;
+            ShortDescription = shortDescription;
+            Room = room;
+            Doctor = doctor;
+            BedForLaying = bedForLaying;
         }
 
         public int GetId()
@@ -59,7 +59,7 @@ namespace Model.Term
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

@@ -32,6 +32,16 @@ namespace WebAppPatientTests
             Assert.Null(medicalRecord);
         }
 
+        [Fact]
+        public void Register_patient()
+        {
+            MedicalRecordService medicalRecordService = new MedicalRecordService(CreateStubRepository());
+
+            MedicalRecord medicalRecord = medicalRecordService.AddEntity(new MedicalRecord(5, new Patient(5, "misa", "123", "Misa", "Misic", "123123123123", new DateTime(), "066123123", "misa@gmail.com", new City("Novi Sad", "Mise Dim", new Country("Srbija")), false), new Anamnesis(), new List<Allergies>(), new List<Medicament>()));
+
+            Assert.NotNull(medicalRecord);
+        }
+
         private static IMedicalRecordRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IMedicalRecordRepository>();
@@ -42,6 +52,7 @@ namespace WebAppPatientTests
             medicalRecords.Add(new MedicalRecord(3, 3, 3, new List<Allergies>(), new List<Medicament>()));
 
             stubRepository.Setup(medicalRecordRepository => medicalRecordRepository.GetAllEntities()).Returns(medicalRecords);
+            stubRepository.Setup(medicalRecord => medicalRecord.AddEntity(It.IsAny<MedicalRecord>())).Returns(new MedicalRecord(5, new Patient(5, "misa", "123", "Misa", "Misic", "123123123123", new DateTime(), "066123123", "misa@gmail.com", new City("Novi Sad", "Mise Dim", new Country("Srbija")), false), new Anamnesis(), new List<Allergies>(), new List<Medicament>()));
 
             return stubRepository.Object;
         }
