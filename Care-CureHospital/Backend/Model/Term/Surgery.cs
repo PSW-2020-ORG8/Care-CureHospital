@@ -15,7 +15,7 @@ namespace Model.Term
     {
         public int Id { get; set; }
         public bool Urgency { get; set; }
-        public String ShortDescription { get; set; }
+        public string ShortDescription { get; set; }
         public int RoomId { get; set; }
         public int DoctorSpecialistId { get; set; }
         public int PatientId { get; set; }
@@ -25,7 +25,7 @@ namespace Model.Term
 
         public Surgery(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Surgery()
@@ -35,22 +35,22 @@ namespace Model.Term
         public Surgery(int id, bool urgency, string shortDescription, Room room, Model.AllActors.Doctor doctorSpecialist, AllActors.Patient patient, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            this.Urgency = urgency;
-            this.ShortDescription = shortDescription;
-            this.Id = id;
-            this.Room = room;
-            this.DoctorSpecialist = doctorSpecialist;
-            this.Patient = patient;
+            Urgency = urgency;
+            ShortDescription = shortDescription;
+            Id = id;
+            Room = room;
+            DoctorSpecialist = doctorSpecialist;
+            Patient = patient;
         }
 
         public Surgery(bool urgency, string shortDescription, Room room, Model.AllActors.Doctor doctorSpecialist, AllActors.Patient patient, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            this.Urgency = urgency;
-            this.ShortDescription = shortDescription;
-            this.Room = room;
-            this.DoctorSpecialist = doctorSpecialist;
-            this.Patient = patient;
+            Urgency = urgency;
+            ShortDescription = shortDescription;
+            Room = room;
+            DoctorSpecialist = doctorSpecialist;
+            Patient = patient;
         }
 
         public int GetId()
@@ -60,7 +60,7 @@ namespace Model.Term
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

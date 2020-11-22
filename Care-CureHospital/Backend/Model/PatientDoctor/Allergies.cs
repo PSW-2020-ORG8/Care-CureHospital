@@ -11,13 +11,13 @@ namespace Model.PatientDoctor
     public class Allergies : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public int MedicalRecordId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
 
         public Allergies(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Allergies()
@@ -26,18 +26,18 @@ namespace Model.PatientDoctor
 
         public Allergies(int id, string name)
         {
-            this.Name = name;
-            this.Id = id;
+            Name = name;
+            Id = id;
         }
 
         public Allergies(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public Allergies(int id, string name, int medicalRecordID) : this(id, name)
         {
-            this.MedicalRecordId = medicalRecordID;
+            MedicalRecordId = medicalRecordID;
         }
 
         public int GetId()
@@ -47,7 +47,7 @@ namespace Model.PatientDoctor
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

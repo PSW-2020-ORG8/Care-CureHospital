@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class AllActors.Actor
  ***********************************************************************/
 
+using Backend.Model.AllActors;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,14 +12,18 @@ namespace Model.AllActors
 {
     public class Person
     {
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public String Jmbg { get; set; }
+        public string Name { get; set; }
+        public string ParentName { get; set; }
+        public string Surname { get; set; }
+        public Gender Gender { get; set; }
+        public string Jmbg { get; set; }
+        public string IdentityCard { get; set; }
+        public string HealthInsuranceCard { get; set; }
+        public BloodGroup BloodGroup { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public String ContactNumber { get; set; }
-        public String EMail { get; set; }
+        public string ContactNumber { get; set; }
+        public string EMail { get; set; }
         public int CityId { get; set; }
-        [NotMapped]
         public virtual City City { get; set; }
 
         public Person()
@@ -27,13 +32,29 @@ namespace Model.AllActors
 
         public Person(string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
         {
-            this.Name = name;
-            this.Surname = surname;
-            this.Jmbg = jmbg;
-            this.DateOfBirth = dateOfBirth;
-            this.ContactNumber = contactNumber;
-            this.EMail = emailAddress;
-            this.City = city;
+            Name = name;
+            Surname = surname;
+            Jmbg = jmbg;
+            DateOfBirth = dateOfBirth;
+            ContactNumber = contactNumber;
+            EMail = emailAddress;
+            City = city;
+        }
+
+        public Person(string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
+        {
+            Name = name;
+            ParentName = parentName;
+            Surname = surname;
+            Gender = gender;
+            Jmbg = jmbg;
+            IdentityCard = identityCard;
+            HealthInsuranceCard = healthInsuranceCard;
+            BloodGroup = bloodGroup;
+            DateOfBirth = dateOfBirth;
+            ContactNumber = contactNumber;
+            EMail = emailAddress;
+            City = city;
         }
     
     }
