@@ -135,22 +135,95 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Comment = "Pacijent je dobro i nema većih problema",
+                            Comment = "Pacijent je dobro i nema vecih problema",
                             MedicalExaminationId = 1,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            Comment = "Pacijent je veoma dobro i nema većih problema",
+                            Comment = "Pacijent je veoma dobro i nema vecih problema",
                             MedicalExaminationId = 2,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Comment = "Pacijent ima virus",
                             MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Pacijent je lose",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Pacijent ima virus",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("Prescription");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Svakodnevno koristite prepisani lek",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Ne preskacite konzumiranje leka",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
                             PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -323,7 +396,7 @@ namespace Backend.Migrations
                             Jmbg = "13312367312312",
                             Name = "Jovan",
                             Password = "123",
-                            SpecialitationId = 1,
+                            SpecialitationId = 2,
                             Surname = "Jovic",
                             Username = "jovan"
                         },
@@ -498,6 +571,11 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            SpecialitationForDoctor = "Lekar opste prakse"
+                        },
+                        new
+                        {
+                            Id = 2,
                             SpecialitationForDoctor = "Hirurg"
                         });
                 });
@@ -520,6 +598,9 @@ namespace Backend.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Producer")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -533,6 +614,8 @@ namespace Backend.Migrations
 
                     b.HasIndex("MedicalRecordId");
 
+                    b.HasIndex("PrescriptionId");
+
                     b.ToTable("Medicaments");
 
                     b.HasData(
@@ -543,6 +626,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 1,
                             Name = "Brufen",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -554,6 +638,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 2,
                             Name = "Panadol",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -565,6 +650,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 3,
                             Name = "Paracetamol",
+                            PrescriptionId = 3,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -576,6 +662,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 4,
                             Name = "Vitamin B",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -587,6 +674,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 1,
                             Name = "Panadol",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
                             Quantity = 14,
                             StateOfValidation = 0
@@ -991,7 +1079,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("MedicalExamination");
+                    b.ToTable("MedicalExaminations");
 
                     b.HasData(
                         new
@@ -1012,7 +1100,7 @@ namespace Backend.Migrations
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
                             RoomId = 2,
-                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ShortDescription = "Pacijent je imao glavobolju",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Urgency = false
                         },
@@ -1020,6 +1108,39 @@ namespace Backend.Migrations
                         {
                             Id = 3,
                             DoctorId = 2,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoctorId = 3,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            RoomId = 2,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoctorId = 2,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 2,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 3,
                             RoomId = 3,
@@ -1162,6 +1283,15 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
+                        .WithMany()
+                        .HasForeignKey("MedicalExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model.AllActors.City", b =>
                 {
                     b.HasOne("Model.AllActors.Country", "Country")
@@ -1200,6 +1330,12 @@ namespace Backend.Migrations
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
                         .WithMany("Medicaments")
                         .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Model.PatientDoctor.Prescription", "Prescription")
+                        .WithMany("Medicaments")
+                        .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

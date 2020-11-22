@@ -23,6 +23,7 @@ namespace Backend
 
         public PatientFeedbackService PatientFeedbackService;
         public MedicalExaminationReportService MedicalExaminationReportService;
+        public PrescriptionService PrescriptionService;
         public MedicalRecordService MedicalRecordService;
         public SurveyService SurveyService;
         public AllergiesService AllergiesService;
@@ -33,6 +34,8 @@ namespace Backend
                 new PatientFeedbackRepository(new MySQLStream<PatientFeedback>(), new IntSequencer()));
             MedicalExaminationReportService = new MedicalExaminationReportService(
                new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>(), new IntSequencer()));
+            PrescriptionService = new PrescriptionService(
+               new PrescriptionRepository(new MySQLStream<Prescription>(), new IntSequencer()));
             MedicalRecordService = new MedicalRecordService(
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
             SurveyService = new SurveyService(

@@ -26,5 +26,19 @@ namespace WebAppPatient.Mapper
 
             return medicalRecord;
         }
+
+        public static MedicalRecordDto MedicalRecordToMedicalRecordDto(MedicalRecord medicalRecord)
+        {
+            MedicalRecordDto dto = new MedicalRecordDto();
+            dto.Id = medicalRecord.Id;
+            dto.Patient = medicalRecord.Patient;
+            dto.PatientId = medicalRecord.PatientId;
+            dto.Anamnesis = medicalRecord.Anamnesis;
+            dto.Allergies = medicalRecord.Allergies;
+            dto.Medicaments = medicalRecord.Medicaments;
+            dto.DateOfBirthday = medicalRecord.Patient.DateOfBirth.ToString("dd.MM.yyyy.");
+
+            return dto;
+        }
     }
 }

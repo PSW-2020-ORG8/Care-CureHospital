@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class OtherClasses.Medicament
  ***********************************************************************/
 
+using Backend.Model.PatientDoctor;
 using HealthClinic.Repository;
 using Model.PatientDoctor;
 using System;
@@ -23,6 +24,8 @@ namespace Model.DoctorMenager
         public string Ingredients { get; set; }
         public int MedicalRecordId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
+        public int PrescriptionId { get; set; }
+        public virtual Prescription Prescription { get; set; }
 
 
         public Medicament(int id, string code, string name, string producer, State stateOfValidation, int quantity, string ingredients)

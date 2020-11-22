@@ -22,8 +22,9 @@ namespace Backend.Repository.MySQL
         public DbSet<Patient> Doctors { get; set; }
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
-        public DbSet<MedicalExamination> MedicalExamination { get; set; }
+        public DbSet<MedicalExamination> MedicalExaminations { get; set; }
         public DbSet<MedicalExaminationReport> MedicalExaminationReport { get; set; }
+        public DbSet<MedicalExaminationReport> Prescriptions { get; set; }
         public DbSet<Medicament> Medicaments { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<InventaryRoom> InventaryRoom { get; set; }
@@ -61,12 +62,13 @@ namespace Backend.Repository.MySQL
             modelBuilder.Entity<Doctor>().HasData(
                 new Doctor { Id = 1, Username = "milan", Password = "123", Name = "Milan", Surname = "Petrovic", Jmbg = "13312312312312", DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "milan@gmail.com", CityId = 2, SpecialitationId = 1 },
                 new Doctor { Id = 2, Username = "aca", Password = "123", Name = "Aleksandar", Surname = "Aleksic", Jmbg = "13212312312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "aca@gmail.com", CityId = 1, SpecialitationId = 1 },
-                new Doctor { Id = 3, Username = "jovan", Password = "123", Name = "Jovan", Surname = "Jovic", Jmbg = "13312367312312", DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "jovan@gmail.com", CityId = 2, SpecialitationId = 1 },
+                new Doctor { Id = 3, Username = "jovan", Password = "123", Name = "Jovan", Surname = "Jovic", Jmbg = "13312367312312", DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "jovan@gmail.com", CityId = 2, SpecialitationId = 2 },
                 new Doctor { Id = 4, Username = "nikola", Password = "123", Name = "Nikola", Surname = "Nikic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "nikola@gmail.com", CityId = 1, SpecialitationId = 1 }
            );
 
             modelBuilder.Entity<Specialitation>().HasData(
-                new Specialitation { Id = 1, SpecialitationForDoctor = "Hirurg" }
+                new Specialitation { Id = 1, SpecialitationForDoctor = "Lekar opste prakse" },
+                new Specialitation { Id = 2, SpecialitationForDoctor = "Hirurg" }
             );           
 
             modelBuilder.Entity<MedicalRecord>().HasData(
@@ -78,22 +80,35 @@ namespace Backend.Repository.MySQL
 
             modelBuilder.Entity<MedicalExamination>().HasData(
                 new MedicalExamination { Id = 1, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
-                new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 2, DoctorId = 2, PatientId = 1 },
-                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 3 }
+                new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 3 },
+                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 2, DoctorId = 3, PatientId = 1 },
+                new MedicalExamination { Id = 5, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
+                new MedicalExamination { Id = 6, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
-                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1 },
-                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema većih problema", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2 },
-                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 3 }
+                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema vecih problema", PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0), MedicalExaminationId = 1 },
+                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema vecih problema", PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0), MedicalExaminationId = 3 },
+                new MedicalExaminationReport { Id = 4, Comment = "Pacijent je lose", PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0), MedicalExaminationId = 3 },
+                new MedicalExaminationReport { Id = 5, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0), MedicalExaminationId = 3 }
+            );
+
+            modelBuilder.Entity<Prescription>().HasData(
+                new Prescription { Id = 1, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 2, Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 3, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 4, Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() }
             );
 
             modelBuilder.Entity<Medicament>().HasData(
-                new Medicament { Id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1 },
-                new Medicament { Id = 2, Code = "L233", Name = "Panadol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 2 },
-                new Medicament { Id = 3, Code = "L523", Name = "Paracetamol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 3 },
-                new Medicament { Id = 4, Code = "L423", Name = "Vitamin B", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 4 },
-                new Medicament { Id = 5, Code = "L233", Name = "Panadol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 14, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1 }
+                new Medicament { Id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1, PrescriptionId = 1 },
+                new Medicament { Id = 2, Code = "L233", Name = "Panadol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 2, PrescriptionId = 1 },
+                new Medicament { Id = 3, Code = "L523", Name = "Paracetamol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 3, PrescriptionId = 3 },
+                new Medicament { Id = 4, Code = "L423", Name = "Vitamin B", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 4, PrescriptionId = 2 },
+                new Medicament { Id = 5, Code = "L233", Name = "Panadol", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 14, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1, PrescriptionId = 2 }
             );
 
             modelBuilder.Entity<Room>().HasData(

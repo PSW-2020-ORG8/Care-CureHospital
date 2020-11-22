@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,7 +238,7 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalExamination",
+                name: "MedicalExaminations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -253,21 +253,21 @@ namespace Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalExamination", x => x.Id);
+                    table.PrimaryKey("PK_MedicalExaminations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicalExamination_Doctor_DoctorId",
+                        name: "FK_MedicalExaminations_Doctor_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MedicalExamination_Patient_PatientId",
+                        name: "FK_MedicalExaminations_Patient_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MedicalExamination_Rooms_RoomId",
+                        name: "FK_MedicalExaminations_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
@@ -376,9 +376,30 @@ namespace Backend.Migrations
                 {
                     table.PrimaryKey("PK_MedicalExaminationReport", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicalExaminationReport_MedicalExamination_MedicalExaminati~",
+                        name: "FK_MedicalExaminationReport_MedicalExaminations_MedicalExaminat~",
                         column: x => x.MedicalExaminationId,
-                        principalTable: "MedicalExamination",
+                        principalTable: "MedicalExaminations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Prescription",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Comment = table.Column<string>(nullable: true),
+                    PublishingDate = table.Column<DateTime>(nullable: false),
+                    MedicalExaminationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescription", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Prescription_MedicalExaminations_MedicalExaminationId",
+                        column: x => x.MedicalExaminationId,
+                        principalTable: "MedicalExaminations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -398,9 +419,9 @@ namespace Backend.Migrations
                 {
                     table.PrimaryKey("PK_Survey1", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Survey1_MedicalExamination_MedicalExaminationId",
+                        name: "FK_Survey1_MedicalExaminations_MedicalExaminationId",
                         column: x => x.MedicalExaminationId,
-                        principalTable: "MedicalExamination",
+                        principalTable: "MedicalExaminations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -437,7 +458,8 @@ namespace Backend.Migrations
                     StateOfValidation = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     Ingredients = table.Column<string>(nullable: true),
-                    MedicalRecordId = table.Column<int>(nullable: false)
+                    MedicalRecordId = table.Column<int>(nullable: false),
+                    PrescriptionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -446,6 +468,12 @@ namespace Backend.Migrations
                         name: "FK_Medicaments_MedicalRecords_MedicalRecordId",
                         column: x => x.MedicalRecordId,
                         principalTable: "MedicalRecords",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Medicaments_Prescription_PrescriptionId",
+                        column: x => x.PrescriptionId,
+                        principalTable: "Prescription",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -490,7 +518,11 @@ namespace Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Specialitations",
                 columns: new[] { "Id", "SpecialitationForDoctor" },
-                values: new object[] { 1, "Hirurg" });
+                values: new object[,]
+                {
+                    { 1, "Lekar opste prakse" },
+                    { 2, "Hirurg" }
+                });
 
             migrationBuilder.InsertData(
                 table: "TypesOfRoom",
@@ -548,7 +580,7 @@ namespace Backend.Migrations
                     { 2, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "aca@gmail.com", 0, null, null, "13212312312312", "Aleksandar", null, "123", 1, "Aleksic", "aca" },
                     { 4, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "nikola@gmail.com", 0, null, null, "13316712312312", "Nikola", null, "123", 1, "Nikic", "nikola" },
                     { 1, 0, 2, "06345111144", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "milan@gmail.com", 0, null, null, "13312312312312", "Milan", null, "123", 1, "Petrovic", "milan" },
-                    { 3, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "jovan@gmail.com", 0, null, null, "13312367312312", "Jovan", null, "123", 1, "Jovic", "jovan" }
+                    { 3, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "jovan@gmail.com", 0, null, null, "13312367312312", "Jovan", null, "123", 2, "Jovic", "jovan" }
                 });
 
             migrationBuilder.InsertData(
@@ -573,12 +605,15 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MedicalExamination",
+                table: "MedicalExaminations",
                 columns: new[] { "Id", "DoctorId", "FromDateTime", "PatientId", "RoomId", "ShortDescription", "ToDateTime", "Urgency" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
                     { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, "Pacijenta je boleo stomak", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
                     { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false }
                 });
 
@@ -622,21 +657,23 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
-                    { 2, "Pacijent je veoma dobro i nema većih problema", 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Pacijent ima virus", 3, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, "Pacijent je dobro i nema većih problema", 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, "Pacijent je veoma dobro i nema vecih problema", 2, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Pacijent ima virus", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Pacijent je lose", 3, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Pacijent ima virus", 3, new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "Pacijent je dobro i nema vecih problema", 1, new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
-                table: "Medicaments",
-                columns: new[] { "Id", "Code", "Ingredients", "MedicalRecordId", "Name", "Producer", "Quantity", "StateOfValidation" },
+                table: "Prescription",
+                columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
-                    { 1, "L123", "sastojak1, sastojak2, sastojak3", 1, "Brufen", "Hemofarm", 10, 0 },
-                    { 5, "L233", "sastojak1, sastojak2, sastojak3", 1, "Panadol", "Hemofarm", 14, 0 },
-                    { 3, "L523", "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", "Hemofarm", 10, 0 },
-                    { 2, "L233", "sastojak1, sastojak2, sastojak3", 2, "Panadol", "Hemofarm", 10, 0 },
-                    { 4, "L423", "sastojak1, sastojak2, sastojak3", 4, "Vitamin B", "Hemofarm", 10, 0 }
+                    { 3, "Redovno koristite prepisane lekove", 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Ne preskacite konzumiranje leka", 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "Redovno koristite prepisane lekove", 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Redovno koristite prepisane lekove", 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -646,6 +683,18 @@ namespace Backend.Migrations
                 {
                     { 2, "Sve je super u bolnici", 2, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" },
                     { 1, "Sve je super u bolnici", 1, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Medicaments",
+                columns: new[] { "Id", "Code", "Ingredients", "MedicalRecordId", "Name", "PrescriptionId", "Producer", "Quantity", "StateOfValidation" },
+                values: new object[,]
+                {
+                    { 3, "L523", "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", 3, "Hemofarm", 10, 0 },
+                    { 4, "L423", "sastojak1, sastojak2, sastojak3", 4, "Vitamin B", 2, "Hemofarm", 10, 0 },
+                    { 5, "L233", "sastojak1, sastojak2, sastojak3", 1, "Panadol", 2, "Hemofarm", 14, 0 },
+                    { 1, "L123", "sastojak1, sastojak2, sastojak3", 1, "Brufen", 1, "Hemofarm", 10, 0 },
+                    { 2, "L233", "sastojak1, sastojak2, sastojak3", 2, "Panadol", 1, "Hemofarm", 10, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -691,24 +740,24 @@ namespace Backend.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalExamination_DoctorId",
-                table: "MedicalExamination",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicalExamination_PatientId",
-                table: "MedicalExamination",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicalExamination_RoomId",
-                table: "MedicalExamination",
-                column: "RoomId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MedicalExaminationReport_MedicalExaminationId",
                 table: "MedicalExaminationReport",
                 column: "MedicalExaminationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalExaminations_DoctorId",
+                table: "MedicalExaminations",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalExaminations_PatientId",
+                table: "MedicalExaminations",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalExaminations_RoomId",
+                table: "MedicalExaminations",
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalRecords_AnamnesisId",
@@ -726,6 +775,11 @@ namespace Backend.Migrations
                 column: "MedicalRecordId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medicaments_PrescriptionId",
+                table: "Medicaments",
+                column: "PrescriptionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Patient_CityId",
                 table: "Patient",
                 column: "CityId");
@@ -734,6 +788,11 @@ namespace Backend.Migrations
                 name: "IX_PatientFeedbacks_PatientId",
                 table: "PatientFeedbacks",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescription_MedicalExaminationId",
+                table: "Prescription",
+                column: "MedicalExaminationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Question_SurveyId",
@@ -804,13 +863,16 @@ namespace Backend.Migrations
                 name: "MedicalRecords");
 
             migrationBuilder.DropTable(
+                name: "Prescription");
+
+            migrationBuilder.DropTable(
                 name: "Survey1");
 
             migrationBuilder.DropTable(
                 name: "Anamnesies");
 
             migrationBuilder.DropTable(
-                name: "MedicalExamination");
+                name: "MedicalExaminations");
 
             migrationBuilder.DropTable(
                 name: "Doctor");
