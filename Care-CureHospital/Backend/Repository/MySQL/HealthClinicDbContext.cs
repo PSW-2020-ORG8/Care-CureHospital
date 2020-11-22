@@ -167,16 +167,26 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Question>().HasData(
-                new Question { Id = 1, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
-                new Question { Id = 2, QuestionText = "Pitanje2", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
-                new Question { Id = 3, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
-                new Question { Id = 4, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
-                new Question { Id = 5, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
-                new Question { Id = 6, QuestionText = "Pitanje1", Answer = GradeOfQuestion.Poor, SurveyId = 2 },
-                new Question { Id = 7, QuestionText = "Pitanje2", Answer = GradeOfQuestion.VeryGood, SurveyId = 2 },
-                new Question { Id = 8, QuestionText = "Pitanje3", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
-                new Question { Id = 9, QuestionText = "Pitanje4", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
-                 new Question { Id = 10, QuestionText = "Pitanje5", Answer = GradeOfQuestion.Fair, SurveyId = 2 }
+                new Question { Id = 1, QuestionText = "Ljubaznost doktora prema pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 2, QuestionText = "Posvećenost doktora pacijentu", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 3, QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 4, QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 5, QuestionText = "Posvećenost medicinskog osoblja pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 6, QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 7, QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", Answer = GradeOfQuestion.VeryGood, SurveyId = 1 },
+                new Question { Id = 8, QuestionText = "Higijena unutar bolnice", Answer = GradeOfQuestion.Excellent, SurveyId = 1 },
+                new Question { Id = 9, QuestionText = "Opremljenost bolnice", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 10, QuestionText = "Ljubaznost doktora prema pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 11, QuestionText = "Posvećenost doktora pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 12, QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", Answer = GradeOfQuestion.Poor, SurveyId = 2 },
+                new Question { Id = 13, QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu", Answer = GradeOfQuestion.VeryGood, SurveyId = 2 },
+                new Question { Id = 14, QuestionText = "Posvećenost medicinskog osoblja pacijentu", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
+                new Question { Id = 15, QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
+                new Question { Id = 16, QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", Answer = GradeOfQuestion.Good, SurveyId = 2 },
+                new Question { Id = 17, QuestionText = "Higijena unutar bolnice", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 18, QuestionText = "Opremljenost bolnice", Answer = GradeOfQuestion.Good, SurveyId = 2 }
+
+
 
             );
 
