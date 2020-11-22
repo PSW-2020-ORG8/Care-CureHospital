@@ -132,9 +132,9 @@ Vue.component("surveyAfterExamination", {
 			</tr>
 			<tr>
 			<td v-model="textOfQuestion1">Ljubaznost doktora prema pacijentu</td>
-			<td><input type="radio" id="poor1" name="gradeOfQuestion1" value="poor" v-model="poor1"></td>
+			<td><input type="radio" id="poor" name="gradeOfQuestion1" value="poor" v-model="poor1"></td>
 			<td><input v-model="fair1" type="radio" id="fair" name="gradeOfQuestion1" value="fair"></td>
-			<td><input v-model="good1" type="radio" checked="true" id="good" name="gradeOfQuestion1" value="good"></td>
+			<td><input v-model="good1" type="radio" id="good" name="gradeOfQuestion1" value="good"></td>
 			<td><input v-model="veryGood1" type="radio" id="veryGood" name="gradeOfQuestion1" value="veryGood"></td>
 			<td><input v-model="excellent1" type="radio" id="excellent" name="gradeOfQuestion1" value="excellent"></td>
 			</tr>
@@ -142,7 +142,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion2">Posvećenost doktora pacijentu</td>
 			<td><input v-model="poor2" type="radio" id="poor" name="gradeOfQuestion2" value="poor"></td>
 			<td><input v-model="fair2" type="radio" id="fair" name="gradeOfQuestion2" value="fair"></td>
-			<td><input v-model="good2" type="radio" checked="true" id="good" name="gradeOfQuestion2" value="good"></td>
+			<td><input v-model="good2" type="radio" id="good" name="gradeOfQuestion2" value="good"></td>
 			<td><input v-model="veryGood2" type="radio" id="veryGood" name="gradeOfQuestion2" value="veryGood"></td>
 			<td><input v-model="excellent2" type="radio" id="excellent" name="gradeOfQuestion2" value="excellent"></td>
 			</tr>
@@ -150,7 +150,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion3">Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja</td>
 			<td><input v-model="poor3" type="radio" id="poor" name="gradeOfQuestion3" value="poor"></td>
 			<td><input v-model="fair3" type="radio" id="fair" name="gradeOfQuestion3" value="fair"></td>
-			<td><input v-model="good3" type="radio" checked="true" id="good" name="gradeOfQuestion3" value="good"></td>
+			<td><input v-model="good3" type="radio" id="good" name="gradeOfQuestion3" value="good"></td>
 			<td><input v-model="veryGood3" type="radio" id="veryGood" name="gradeOfQuestion3" value="veryGood"></td>
 			<td><input v-model="excellent3" type="radio" id="excellent" name="gradeOfQuestion3" value="excellent"></td>
 			</tr>
@@ -169,7 +169,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion4">Ljubaznost medicinskog osoblja prema pacijentu</td>
 			<td><input v-model="poor4" type="radio" id="poor" name="gradeOfQuestion4" value="poor"></td>
 			<td><input v-model="fair4" type="radio" id="fair" name="gradeOfQuestion4" value="fair"></td>
-			<td><input v-model="good4" type="radio" checked="true" id="good" name="gradeOfQuestion4" value="good"></td>
+			<td><input v-model="good4" type="radio" id="good" name="gradeOfQuestion4" value="good"></td>
 			<td><input v-model="veryGood4" type="radio" id="veryGood" name="gradeOfQuestion4" value="veryGood"></td>
 			<td><input v-model="excellent4" type="radio" id="excellent" name="gradeOfQuestion4" value="excellent"></td>
 			</tr>
@@ -177,7 +177,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion5">Posvećenost medicinskog osoblja pacijentu</td>
 			<td><input v-model="poor5" type="radio" id="poor" name="gradeOfQuestion5" value="poor"></td>
 			<td><input v-model="fair5" type="radio" id="fair" name="gradeOfQuestion5" value="fair"></td>
-			<td><input v-model="good5" type="radio" checked="true" id="good" name="gradeOfQuestion5" value="good"></td>
+			<td><input v-model="good5" type="radio" id="good" name="gradeOfQuestion5" value="good"></td>
 			<td><input v-model="veryGood5" type="radio" id="veryGood" name="gradeOfQuestion5" value="veryGood"></td>
 			<td><input v-model="excellent5" type="radio" id="excellent" name="gradeOfQuestion5" value="excellent"></td>
 			</tr>
@@ -185,7 +185,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion6">Profesionalizam u obavljanju svoji duznosti medicinskog osoblja</td>
 			<td><input v-model="poor6" type="radio" id="poor" name="gradeOfQuestion6" value="poor"></td>
 			<td><input v-model="fair6" type="radio" id="fair" name="gradeOfQuestion6" value="fair"></td>
-			<td><input v-model="good6" type="radio" checked="true" id="good" name="gradeOfQuestion6" value="good"></td>
+			<td><input v-model="good6" type="radio" id="good" name="gradeOfQuestion6" value="good"></td>
 			<td><input v-model="veryGood6" type="radio" id="veryGood" name="gradeOfQuestion6" value="veryGood"></td>
 			<td><input v-model="excellent6" type="radio" id="excellent" name="gradeOfQuestion6" value="excellent"></td>
 			</tr>
@@ -204,7 +204,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion7">Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici</td>
 			<td><input v-model="poor7" type="radio" id="poor" name="gradeOfQuestion7" value="poor"></td>
 			<td><input v-model="fair7" type="radio" id="fair" name="gradeOfQuestion7" value="fair"></td>
-			<td><input v-model="good7" type="radio" checked="true" id="good" name="gradeOfQuestion7" value="good"></td>
+			<td><input v-model="good7" type="radio" id="good" name="gradeOfQuestion7" value="good"></td>
 			<td><input v-model="veryGood7" type="radio" id="veryGood" name="gradeOfQuestion7" value="veryGood"></td>
 			<td><input v-model="excellent7" type="radio" id="excellent" name="gradeOfQuestion7" value="excellent"></td>
 			</tr>
@@ -212,7 +212,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion8">Higijena unutar bolnice</td>
 			<td><input v-model="poor8" type="radio" id="poor" name="gradeOfQuestion8" value="poor"></td>
 			<td><input v-model="fair8" type="radio" id="fair" name="gradeOfQuestion8" value="fair"></td>
-			<td><input v-model="good8" type="radio" checked="true" id="good" name="gradeOfQuestion8" value="good"></td>
+			<td><input v-model="good8" type="radio" id="good" name="gradeOfQuestion8" value="good"></td>
 			<td><input v-model="veryGood8" type="radio" id="veryGood" name="gradeOfQuestion8" value="veryGood"></td>
 			<td><input v-model="excellent8" type="radio" id="excellent" name="gradeOfQuestion8" value="excellent"></td>
 			</tr>
@@ -220,7 +220,7 @@ Vue.component("surveyAfterExamination", {
 			<td v-model="textOfQuestion9">Opremljenost bolnice</td>
 			<td><input v-model="poor9" type="radio" id="poor" name="gradeOfQuestion9" value="poor"></td>
 			<td><input v-model="fair9" type="radio" id="fair" name="gradeOfQuestion9" value="fair"></td>
-			<td><input v-model="good9" type="radio" checked="true" id="good" name="gradeOfQuestion9" value="good"></td>
+			<td><input v-model="good9" type="radio" id="good" name="gradeOfQuestion9" value="good"></td>
 			<td><input v-model="veryGood9" type="radio" id="veryGood" name="gradeOfQuestion9" value="veryGood"></td>
 			<td><input v-model="excellent9" type="radio" id="excellent" name="gradeOfQuestion9" value="excellent"></td>
 			</tr>
