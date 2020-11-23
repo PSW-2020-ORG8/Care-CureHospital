@@ -23,8 +23,21 @@ namespace WebAppPatient.Mapper
             medicalRecord.Allergies = dto.Allergies;
             medicalRecord.Medicaments = new List<Medicament>();
             medicalRecord.ActiveMedicalRecord = false;
-
+            
             return medicalRecord;
+        }
+
+        public static MedicalRecordDto MedicalRecordToMedicalRecordDto(MedicalRecord medicalRecord)
+        {
+            MedicalRecordDto dto = new MedicalRecordDto();
+
+            dto.Id = medicalRecord.Id;
+            dto.Patient = medicalRecord.Patient;
+            medicalRecord.Patient.Id = medicalRecord.PatientId;
+            dto.Allergies = medicalRecord.Allergies;
+            dto.ActiveMedicalRecord = medicalRecord.ActiveMedicalRecord;
+
+            return dto;
         }
     }
 }

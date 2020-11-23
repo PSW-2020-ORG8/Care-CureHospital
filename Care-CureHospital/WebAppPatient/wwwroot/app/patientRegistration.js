@@ -135,8 +135,8 @@ Vue.component("patientRegistration", {
                         <div class="scroll-in-patient-registration">
                             <label v-if="emptyUsername" style="color:red;">Korisničko ime*:</label>
                             <label v-if="!emptyUsername">Korisničko ime*:</label>
-                            <input v-model="usernameInputField" type="text" placeholder="Unesite korisničko ime..." pattern="[A-Za-z0-9ŠšĐđŽžČčĆć]*" title="Možete uneti slova i brojeve!">
-                            <label v-if="errorForUsername" style="color:red; font-size: 16px">Možete uneti slova i brojeve!</label><br><br>
+                            <input v-model="usernameInputField" type="text" placeholder="Unesite korisničko ime..." pattern="[A-Za-zŠšĐđŽžČčĆć][A-Za-z0-9ŠšĐđŽžČčĆć]*" title="Možete uneti slova i brojeve!">
+                            <label v-if="errorForUsername" style="color:red; font-size: 16px">Možete uneti slova i brojeve, prvi karakter mora biti slovo!</label><br><br>
                         
                             <label v-if="emptyPassword" style="color:red;">Lozinka*:</label>
                             <label v-else>Lozinka*:</label>
@@ -294,7 +294,7 @@ Vue.component("patientRegistration", {
                 empty = true;
                 this.emptyUsername = true;
 			} else {
-				if(!this.usernameInputField.match(/^[A-Za-z0-9ŠšĐđŽžČčĆć]*$/)){
+				if(!this.usernameInputField.match(/^[A-Za-zŠšĐđŽžČčĆć][A-Za-z0-9ŠšĐđŽžČčĆć]*$/)){
 					this.errorForUsername = true;
                     empty = true;
                     this.emptyUsername = true;
@@ -460,13 +460,14 @@ Vue.component("patientRegistration", {
                         "BloodGroup" : this.bloodGroupInputField, "DateOfBirth" : madeDateOfBirth, "Gender" : this.genderSelectField, "ContactNumber" : this.contactNumberField, "EMail" : this.emailField, 
                         "City" : {"Name" : this.city, "PostCode" : this.zipCode, "Address" : this.street + ' ' + this.number, 
                         "Country" : {"Name" : this.country}}},
-                        "allergies" : this.finalAllergiesLists
+                        "allergies" : this.finalAllergiesLists,
+                        "ConfirmedPassword" : this.confirmPasswordInputField
 
                     })
                     .then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
-                            this.$router.go()
+                            //this.$router.go()
                         } else {
                             toast('Registracija nije uspešno izvršena!')
                         }

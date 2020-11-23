@@ -17,6 +17,8 @@ namespace WebAppPatient.Dto
         public Anamnesis Anamnesis { get; set; }
         public List<Allergies> Allergies { get; set; }
         public List<Medicament> Medicament { get; set; }
+        public bool ActiveMedicalRecord { get; set; }
+        public string ConfirmedPassword { get; set; }
 
         public MedicalRecordDto() { }
     }
