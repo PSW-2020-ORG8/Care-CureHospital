@@ -25,5 +25,19 @@ namespace WebAppPatient.Controllers
             App.Instance().MedicalRecordService.AddEntity(medicalRecord);
             return Ok(200);
         }
+
+        [HttpGet("getForPatient/{patientID}")]       // GET /api/medicalRecord/getForPatient/{id}
+        public IActionResult GetMedicalRecordForPatient(int patientID) 
+        {
+            MedicalRecord medicalRecord = App.Instance().MedicalRecordService.GetMedicalRecordForPatient(patientID);
+            if (medicalRecord == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(MedicalRecordMapper.MedicalRecordToMedicalRecordDto(medicalRecord));
+            }
+        }
     }
 }

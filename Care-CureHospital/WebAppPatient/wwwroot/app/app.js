@@ -2,6 +2,7 @@ const publishedFeedbacks = { template: '<publishedFeedbacks></publishedFeedbacks
 const patientsFeedbacks = { template: '<patientsFeedbacks></patientsFeedbacks>' }
 const postFeedback = { template: '<postFeedback></postFeedback>' }
 const patientRegistration = { template: '<patientRegistration></patientRegistration>' }
+const medicalRecordReview = { template: '<medicalRecordReview></medicalRecordReview>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -9,7 +10,8 @@ const router = new VueRouter({
 		{ path: '/', name: 'publishedFeedbacks', component: publishedFeedbacks },
 		{ path: '/patientsFeedbacks', name: 'patientsFeedbacks', component: patientsFeedbacks },
 		{ path: '/postFeedback', name: 'postFeedback', component: postFeedback },
-		{ path: '/patientRegistration', name: 'patientRegistration', component: patientRegistration }
+		{ path: '/patientRegistration', name: 'patientRegistration', component: patientRegistration },
+		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview }
 	]
 });
 
