@@ -50,6 +50,8 @@ namespace Repository.Csv
             return stream.ReadAll();
         }
 
+        
+
         public E GetEntity(ID id)
         {
             return stream.ReadAll().SingleOrDefault(entity => entity.GetId().CompareTo(id) == 0);

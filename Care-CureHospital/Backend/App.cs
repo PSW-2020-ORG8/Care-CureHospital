@@ -5,11 +5,14 @@ using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.ExaminationSurgeryServices;
+using Model.DoctorMenager;
 using Model.Patient;
 using Model.PatientDoctor;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
+using Repository.MedicamentRepository;
 using Service.MedicalRecordService;
+using Service.MedicamentService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +28,8 @@ namespace Backend
         public MedicalExaminationReportService medicalExaminationReportService;
         public MedicalRecordService medicalRecordService;
         public SurveyService surveyService;
+        public object medicamentService;
+        public MedicamentService medService;
 
         private App()
         {
@@ -36,6 +41,8 @@ namespace Backend
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
             surveyService = new SurveyService(
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
+            medService = new MedicamentService(
+                new MedicamentRepository(new MySQLStream<Medicament>(), new IntSequencer()));
         }
 
         public static App Instance()
