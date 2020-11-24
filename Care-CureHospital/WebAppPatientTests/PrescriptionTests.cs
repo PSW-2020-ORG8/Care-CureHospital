@@ -57,6 +57,16 @@ namespace WebAppPatientTests
             Assert.NotEmpty(searchResult);
         }
 
+        [Fact]
+        public void Not_Found_Prescriptions_With_Medicines_Searh_Parameter()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> searchResult = service.FindPrescriptionsForMedicamentsParameter(1, "Kafetin");
+
+            Assert.Empty(searchResult);
+        }
+
         private static IPrescriptionRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IPrescriptionRepository>();
