@@ -1,0 +1,72 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
+(click)="addclick()" data-backdrop='static' data-keybord="false">
+    Add report
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-report [rep]="rep" *ngIf="ActivateAddEditRepComp">
+
+            </app-report>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<table class="table table-striped" matTableExporter #exporter="matTableExporter" >
+  <caption>Table of report</caption>
+    <thead>
+        <tr>
+            <th id="MedicationName">MedicationName</th>
+            <th id="ConsumedMedication">ConsumedMedication</th>
+            <th id="FromDate">FromDate</th>
+            <th id="ToDate">ToDate</th>
+        </tr>
+    </thead>
+    <tbody>
+      <!--  <tr *ngFor="let dataItem of EmployeeList">
+            <td>{{dataItem.EmployeeId}}</td>
+            <td>{{dataItem.EmployeeName}}</td>
+            <td>{{dataItem.Department}}</td>
+            <td>{{dataItem.DateOfJoining}}</td>
+            <td> 
+              
+            </td>
+        </tr>-->
+
+        <!--<tr *ngFor =" let dataItem of MedicationList">
+          <td>{{dataItem.MedicationName}}</td>
+          <td>{{dataItem.ConsumedMedication}}</td>
+          <td></td>
+        </tr>-->
+
+        <tr >
+          <td>Brufen</td>
+          <td>15</td>
+          <td>15:2:2020</td>
+          <td>20:11:2020</td>
+          
+        </tr>
+    </tbody>
+</table>
+
+<!--
+<button mat-raised-button (click)="exporter.exportTable('json', {fileName:'report'})" class="btn btn-primary float-right">Save</button>
+-->

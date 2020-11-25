@@ -13,7 +13,6 @@ namespace WebAppPatient.Dto
         public string PublishingDate { get; set; }
         public string Doctor { get; set; }
         public string Room { get; set; }
-
         public MedicalExaminationReportDto() { }
     }
 }

@@ -71,6 +71,8 @@ namespace Service.MedicamentService
             return medicamentRepository.GetAllEntities();
         }
 
+        
+
         public Medicament AddEntity(Medicament entity)
         {
             return medicamentRepository.AddEntity(entity);

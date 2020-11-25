@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201124214404_NewMigration")]
+    [Migration("20201125232610_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,35 +138,35 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Comment = "Pacijent je dobro i nema vecih problema",
-                            MedicalExaminationId = 1,
-                            PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 9, 20, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             Comment = "Pacijent je veoma dobro i nema vecih problema",
-                            MedicalExaminationId = 2,
+                            MedicalExaminationId = 4,
                             PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Comment = "Pacijent ima virus",
-                            MedicalExaminationId = 3,
+                            MedicalExaminationId = 2,
                             PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             Comment = "Pacijent je lose",
-                            MedicalExaminationId = 3,
+                            MedicalExaminationId = 2,
                             PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             Comment = "Pacijent ima virus",
-                            MedicalExaminationId = 3,
+                            MedicalExaminationId = 2,
                             PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -197,36 +197,36 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Comment = "Redovno koristite prepisane lekove",
-                            MedicalExaminationId = 1,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            MedicalExaminationId = 4,
+                            PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             Comment = "Svakodnevno koristite prepisani lek",
                             MedicalExaminationId = 3,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Comment = "Redovno koristite prepisane lekove",
                             MedicalExaminationId = 2,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             Comment = "Ne preskacite konzumiranje leka",
                             MedicalExaminationId = 2,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             Comment = "Redovno koristite prepisane lekove",
-                            MedicalExaminationId = 1,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            MedicalExaminationId = 4,
+                            PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -737,9 +737,6 @@ namespace Backend.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("QuestionText")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -756,42 +753,128 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje1",
+                            Answer = 1,
+                            QuestionText = "Ljubaznost doktora prema pacijentu",
                             SurveyId = 1
                         },
                         new
                         {
                             Id = 2,
                             Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje2",
+                            QuestionText = "Posvećenost doktora pacijentu",
                             SurveyId = 1
                         },
                         new
                         {
                             Id = 3,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje3",
-                            SurveyId = 2
+                            Answer = 1,
+                            QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 4,
                             Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje4",
-                            SurveyId = 2
+                            QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 5,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje5",
+                            Answer = 1,
+                            QuestionText = "Posvećenost medicinskog osoblja pacijentu",
                             SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Answer = 0,
+                            QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Answer = 3,
+                            QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Answer = 4,
+                            QuestionText = "Higijena unutar bolnice",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Answer = 1,
+                            QuestionText = "Opremljenost bolnice",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Answer = 1,
+                            QuestionText = "Ljubaznost doktora prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Answer = 1,
+                            QuestionText = "Posvećenost doktora pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Answer = 0,
+                            QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Answer = 3,
+                            QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Answer = 4,
+                            QuestionText = "Posvećenost medicinskog osoblja pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Answer = 4,
+                            QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Answer = 2,
+                            QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Answer = 1,
+                            QuestionText = "Higijena unutar bolnice",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Answer = 2,
+                            QuestionText = "Opremljenost bolnice",
+                            SurveyId = 2
                         });
                 });
 
@@ -1111,7 +1194,7 @@ namespace Backend.Migrations
                             Id = 3,
                             DoctorId = 2,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 3,
+                            PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1124,7 +1207,7 @@ namespace Backend.Migrations
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
                             RoomId = 2,
-                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ShortDescription = "Pacijenta je boleo stomak",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Urgency = false
                         },
@@ -1354,7 +1437,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Model.Patient.Question", b =>
                 {
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany("Question")
+                        .WithMany("Questions")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
