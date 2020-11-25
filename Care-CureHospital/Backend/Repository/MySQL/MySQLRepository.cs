@@ -21,12 +21,10 @@ namespace Backend.Repository.MySQL
         {
             this.stream = stream;
             this.sequencer = sequencer;
-            //InitializeId();
         }
 
         public E AddEntity(E entity)
         {
-            //entity.SetId(sequencer.GenerateID());
             stream.Add(entity);
             stream.SaveAll();
             return entity;
@@ -46,6 +44,16 @@ namespace Backend.Repository.MySQL
         public IEnumerable<E> GetAllEntities()
         {
             return stream.ReadAll();
+        }
+
+        public IEnumerable<E> GetAllNames(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<E> GetAllNames()
+        {
+            throw new NotImplementedException();
         }
 
         public E GetEntity(ID id)

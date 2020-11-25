@@ -20,11 +20,12 @@ namespace Model.PatientDoctor
         public int AnamnesisId { get; set; }
         public virtual Anamnesis Anamnesis { get; set; }
         public virtual List<Allergies> Allergies { get; set; }
-        public virtual List<Medicament> Medicament { get; set; }
+        public virtual List<Medicament> Medicaments { get; set; }
+        public bool ActiveMedicalRecord { get; set; }
 
         public MedicalRecord(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public MedicalRecord()
@@ -33,26 +34,53 @@ namespace Model.PatientDoctor
 
         public MedicalRecord(int id, AllActors.Patient patient, Anamnesis anamnesis, List<Allergies> allergies, List<Medicament> medicament) : this(id)
         {
-            this.Patient = patient;
-            this.Anamnesis = anamnesis;
-            this.Allergies = allergies;
-            this.Medicament = medicament;
+            Patient = patient;
+            Anamnesis = anamnesis;
+            Allergies = allergies;
+            Medicaments = medicament;
         }
 
         public MedicalRecord(AllActors.Patient patient, Anamnesis anamnesis, List<Allergies> allergies, List<Medicament> medicament)
         {
-            this.Patient = patient;
-            this.Anamnesis = anamnesis;
-            this.Allergies = allergies;
-            this.Medicament = medicament;
+            Patient = patient;
+            Anamnesis = anamnesis;
+            Allergies = allergies;
+            Medicaments = medicament;
         }
 
-        public MedicalRecord(int id, int patientID, int anamnesisID, List<Allergies> allergies, List<Medicament> medicament) : this(id)
+        public MedicalRecord(int id, int patientId, int anamnesisId, List<Allergies> allergies, List<Medicament> medicament) : this(id)
         {
-            this.PatientId = patientID;
-            this.AnamnesisId = anamnesisID;
+            PatientId = patientId;
+            AnamnesisId = anamnesisId;
             Allergies = allergies;
-            Medicament = medicament;
+            Medicaments = medicament;
+        }
+
+        public MedicalRecord(int id, AllActors.Patient patient, Anamnesis anamnesis, List<Allergies> allergies, List<Medicament> medicament, bool activeMedicalRecord) : this(id)
+        {
+            Patient = patient;
+            Anamnesis = anamnesis;
+            Allergies = allergies;
+            Medicaments = medicament;
+            ActiveMedicalRecord = activeMedicalRecord;
+        }
+
+        public MedicalRecord(AllActors.Patient patient, Anamnesis anamnesis, List<Allergies> allergies, List<Medicament> medicament, bool activeMedicalRecord)
+        {
+            Patient = patient;
+            Anamnesis = anamnesis;
+            Allergies = allergies;
+            Medicaments = medicament;
+            ActiveMedicalRecord = activeMedicalRecord;
+        }
+
+        public MedicalRecord(int id, int patientId, int anamnesisId, List<Allergies> allergies, List<Medicament> medicament, bool activeMedicalRecord) : this(id)
+        {
+            PatientId = patientId;
+            AnamnesisId = anamnesisId;
+            Allergies = allergies;
+            Medicaments = medicament;
+            ActiveMedicalRecord = activeMedicalRecord;
         }
 
         public void Review()
@@ -67,7 +95,7 @@ namespace Model.PatientDoctor
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

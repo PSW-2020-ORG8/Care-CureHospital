@@ -19,7 +19,7 @@ namespace Model.BlogAndNotification
 
         public Comment(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Comment()
@@ -28,14 +28,14 @@ namespace Model.BlogAndNotification
 
         public Comment(int id, AllActors.Patient patient, AllActors.Doctor doctor) : this(id)
         {
-            this.Patient = patient;
-            this.Doctor = doctor;
+            Patient = patient;
+            Doctor = doctor;
         }
 
         public Comment(AllActors.Patient patient, AllActors.Doctor doctor)
         {
-            this.Patient = patient;
-            this.Doctor = doctor;
+            Patient = patient;
+            Doctor = doctor;
         }
 
         public int GetId()
@@ -45,7 +45,7 @@ namespace Model.BlogAndNotification
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
     }

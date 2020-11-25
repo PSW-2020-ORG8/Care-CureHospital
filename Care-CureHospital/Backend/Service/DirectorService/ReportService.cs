@@ -23,9 +23,9 @@ namespace Backend.Service.DirectorService
             return reportRepository.GetEntity(id);
         }
 
-        public IEnumerable<Report> GetAllNames(string name)
+        public IEnumerable<Report> GetAllNames()
         {
-            return reportRepository.GetAllNames(name);
+            return reportRepository.GetAllNames();
         }
 
         public IEnumerable<Report> GetAllEntities()

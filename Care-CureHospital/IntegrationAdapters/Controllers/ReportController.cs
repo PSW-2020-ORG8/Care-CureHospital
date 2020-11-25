@@ -26,8 +26,9 @@ namespace IntegrationAdapters.Controllers
 
         public IActionResult GetAllMedicament()
         {
-            List<ReportDto> result = new List<ReportDto>();
-            
+            List<Report> result = new List<Report>();
+
+            App.Instance().ReportService.GetAllNames().ToList().ForEach(medication => result.Add(medication));
             return Ok(result);
            
         }

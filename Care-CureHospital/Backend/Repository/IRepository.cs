@@ -17,7 +17,7 @@ namespace Repository
 
         IEnumerable<E> GetAllEntities();
 
-        IEnumerable<E> GetAllNames(string name);
+        IEnumerable<E> GetAllNames();
 
         E AddEntity(E entity);
 

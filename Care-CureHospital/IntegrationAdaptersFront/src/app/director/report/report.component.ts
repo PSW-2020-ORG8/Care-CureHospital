@@ -19,13 +19,13 @@ export class ReportComponent implements OnInit {
   MedicationList:any=[];
 
   ngOnInit(): void {
-    this.loadMedicationList();
+    //.loadMedicationList();
   }
 
-  loadMedicationList(){
+  /*loadMedicationList(){
     this.service.getMedList().subscribe((data:any)=>{
-      this.MedicationList=data
-    })
+      this.MedicationList=data;
+    });
   }
 
   addReport(){
@@ -34,6 +34,6 @@ export class ReportComponent implements OnInit {
 
     this.service.addReport(val).subscribe(res=>{alert(res.toString())});
     alert("abgdfvdsa");
-  }
+  }*/
 
 }

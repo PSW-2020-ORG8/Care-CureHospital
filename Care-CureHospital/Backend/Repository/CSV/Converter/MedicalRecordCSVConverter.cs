@@ -32,7 +32,7 @@ namespace Repository.Csv.Converter
                 listOfAllergies += ",";
             }
 
-            foreach (Medicament medicament in entity.Medicament)
+            foreach (Medicament medicament in entity.Medicaments)
             {
                 listOfMedicaments += string.Join("-", medicament.Name);
                 listOfMedicaments += "-";

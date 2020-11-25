@@ -57,5 +57,6 @@ namespace Backend.Model.DoctorMenager
             this.Id = id;
         }
 
+
     }
 }

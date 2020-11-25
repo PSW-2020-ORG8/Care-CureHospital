@@ -17,7 +17,7 @@ export class DirectorComponent implements OnInit {
   rep:any;
 
   ngOnInit(): void {
-    this.refreshMedList();
+   // this.refreshMedList();
   }
 
 
@@ -40,10 +40,10 @@ export class DirectorComponent implements OnInit {
     
   }
 
-  refreshMedList(){
+  /*refreshMedList(){
     this.service.getMedList().subscribe(data=>{this.MedicationList=data;});
 
-  }
+  }*/
 
 
   saveTxt(){

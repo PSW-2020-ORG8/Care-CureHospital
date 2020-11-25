@@ -10,13 +10,13 @@ export class DirectorServiceService {
   readonly APIUrl = "http://localhost:51492/api";
 
   constructor(private http:HttpClient) { }
-
+/*
   getMedList():Observable<any[]>{
-    return this.http.get<any>(this.APIUrl+'/getAll');
-  }
+    return this.http.get<any>(this.APIUrl);
+
 
   addReport(val:any){
     return this.http.post(this.APIUrl+'/Repost', val);
-  }
+  }*/
   
 }

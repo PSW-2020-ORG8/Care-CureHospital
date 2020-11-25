@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
-(click)="addclick()" data-backdrop='static' data-keybord="false">
+ data-backdrop='static' data-keybord="false">
     Add report
   </button>
   
@@ -36,7 +36,8 @@
             <th>MedicationName</th>
             <th>ConsumedMedication</th>
             
-            <th>Date</th>
+            <th>FromDate</th>
+            <th>ToDate</th>
             
         </tr>
     </thead>
@@ -61,9 +62,12 @@
           <td>Brufen</td>
           <td>15</td>
           <td>15:2:2020</td>
+          <td>20:11:2020</td>
+          
         </tr>
     </tbody>
 </table>
 
-
+<!--
 <button mat-raised-button (click)="exporter.exportTable('json', {fileName:'report'})" class="btn btn-primary float-right">Save</button>
+-->

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201120185620_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201122211545_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace Backend.Migrations
                     b.Property<bool>("IsPublished")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("PatientID")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PublishingDate")
@@ -45,7 +45,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientID");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("PatientFeedbacks");
 
@@ -56,7 +56,7 @@ namespace Backend.Migrations
                             IsAnonymous = false,
                             IsForPublishing = true,
                             IsPublished = true,
-                            PatientID = 1,
+                            PatientId = 1,
                             PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
@@ -66,7 +66,7 @@ namespace Backend.Migrations
                             IsAnonymous = true,
                             IsForPublishing = true,
                             IsPublished = true,
-                            PatientID = 2,
+                            PatientId = 2,
                             PublishingDate = new DateTime(2020, 8, 15, 9, 17, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
@@ -76,7 +76,7 @@ namespace Backend.Migrations
                             IsAnonymous = true,
                             IsForPublishing = true,
                             IsPublished = false,
-                            PatientID = 3,
+                            PatientId = 3,
                             PublishingDate = new DateTime(2020, 9, 3, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
@@ -86,7 +86,7 @@ namespace Backend.Migrations
                             IsAnonymous = false,
                             IsForPublishing = false,
                             IsPublished = false,
-                            PatientID = 4,
+                            PatientId = 4,
                             PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
@@ -96,7 +96,7 @@ namespace Backend.Migrations
                             IsAnonymous = false,
                             IsForPublishing = false,
                             IsPublished = false,
-                            PatientID = 2,
+                            PatientId = 2,
                             PublishingDate = new DateTime(2020, 10, 18, 7, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         },
@@ -106,7 +106,7 @@ namespace Backend.Migrations
                             IsAnonymous = true,
                             IsForPublishing = true,
                             IsPublished = false,
-                            PatientID = 4,
+                            PatientId = 4,
                             PublishingDate = new DateTime(2020, 10, 15, 6, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
                         });
@@ -114,59 +114,132 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("PublishingDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("medicalExaminationID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("medicalExaminationID");
+                    b.HasIndex("MedicalExaminationId");
 
                     b.ToTable("MedicalExaminationReport");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Comment = "Pacijent je dobro i nema većih problema",
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            medicalExaminationID = 1
+                            Id = 1,
+                            Comment = "Pacijent je dobro i nema vecih problema",
+                            MedicalExaminationId = 1,
+                            PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            id = 2,
-                            Comment = "Pacijent je veoma dobro i nema većih problema",
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            medicalExaminationID = 2
+                            Id = 2,
+                            Comment = "Pacijent je veoma dobro i nema vecih problema",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Comment = "Pacijent ima virus",
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            medicalExaminationID = 3
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Pacijent je lose",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Pacijent ima virus",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("Prescription");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Svakodnevno koristite prepisani lek",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Ne preskacite konzumiranje leka",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
             modelBuilder.Entity("Model.AllActors.City", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CountryID")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -175,43 +248,48 @@ namespace Backend.Migrations
                     b.Property<int>("PostCode")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CountryID");
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            CountryID = 1,
+                            Id = 1,
+                            Address = "Brace Jerkovic 1",
+                            CountryId = 1,
                             Name = "Beograd",
                             PostCode = 11000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Bulevar Cara Lazara 1",
+                            CountryId = 1,
+                            Name = "Novi Sad",
+                            PostCode = 22100
                         });
                 });
 
             modelBuilder.Entity("Model.AllActors.Country", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Countries");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Code = "SRB",
+                            Id = 1,
                             Name = "Srbija"
                         });
                 });
@@ -222,6 +300,12 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -231,14 +315,29 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Password")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("SpecialitationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -246,15 +345,11 @@ namespace Backend.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("cityID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("specialitationID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("specialitationID");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("SpecialitationId");
 
                     b.ToTable("Doctor");
 
@@ -262,58 +357,66 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            BloodGroup = 0,
+                            CityId = 2,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "milan@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312312312312",
+                            Name = "Milan",
                             Password = "123",
+                            SpecialitationId = 1,
                             Surname = "Petrovic",
-                            Username = "pera",
-                            cityID = 1,
-                            specialitationID = 1
+                            Username = "milan"
                         },
                         new
                         {
                             Id = 2,
+                            BloodGroup = 0,
+                            CityId = 1,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "aca@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13212312312312",
+                            Name = "Aleksandar",
                             Password = "123",
-                            Surname = "Petrovic",
-                            Username = "pera",
-                            cityID = 1,
-                            specialitationID = 1
+                            SpecialitationId = 1,
+                            Surname = "Aleksic",
+                            Username = "aca"
                         },
                         new
                         {
                             Id = 3,
+                            BloodGroup = 0,
+                            CityId = 2,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "jovan@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312367312312",
+                            Name = "Jovan",
                             Password = "123",
-                            Surname = "Petrovic",
-                            Username = "pera",
-                            cityID = 1,
-                            specialitationID = 1
+                            SpecialitationId = 2,
+                            Surname = "Jovic",
+                            Username = "jovan"
                         },
                         new
                         {
                             Id = 4,
+                            BloodGroup = 0,
+                            CityId = 1,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "nikola@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13316712312312",
+                            Name = "Nikola",
                             Password = "123",
-                            Surname = "Petrovic",
-                            Username = "pera",
-                            cityID = 1,
-                            specialitationID = 1
+                            SpecialitationId = 1,
+                            Surname = "Nikic",
+                            Username = "nikola"
                         });
                 });
 
@@ -323,6 +426,12 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -332,16 +441,25 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<bool>("GuestAccount")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("MedicalRecordID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
@@ -353,10 +471,9 @@ namespace Backend.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("cityID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Patient");
 
@@ -364,62 +481,78 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BloodGroup = 2,
+                            CityId = 1,
+                            ContactNumber = "063554533",
+                            DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
                             EMail = "pera@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordID = 1,
+                            HealthInsuranceCard = "32312312312",
+                            IdentityCard = "123123123",
+                            Jmbg = "13312312312312",
                             Name = "Petar",
+                            ParentName = "Zika",
                             Password = "123",
                             Surname = "Petrovic",
-                            Username = "pera",
-                            cityID = 1
+                            Username = "pera"
                         },
                         new
                         {
                             Id = 2,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "0635235333",
+                            DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "zika@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordID = 2,
-                            Name = "Milos",
+                            HealthInsuranceCard = "712312312312",
+                            IdentityCard = "124123123",
+                            Jmbg = "12342312312312",
+                            Name = "Zika",
+                            ParentName = "Pera",
                             Password = "123",
-                            Surname = "Mitrovic",
-                            Username = "pera",
-                            cityID = 1
+                            Surname = "Zikic",
+                            Username = "zika"
                         },
                         new
                         {
                             Id = 3,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "0635557673",
+                            DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "mica@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordID = 3,
-                            Name = "Jovan",
+                            HealthInsuranceCard = "62312312312",
+                            IdentityCard = "163123123",
+                            Jmbg = "12312512312312",
+                            Name = "Mica",
+                            ParentName = "Jelena",
                             Password = "123",
-                            Surname = "Jovanovic",
-                            Username = "pera",
-                            cityID = 1
+                            Surname = "Micic",
+                            Username = "mica"
                         },
                         new
                         {
                             Id = 4,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063555356",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "luna@gmail.com",
+                            Gender = 1,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordID = 4,
-                            Name = "Milica",
+                            HealthInsuranceCard = "52312312312",
+                            IdentityCard = "127123123",
+                            Jmbg = "12312316712312",
+                            Name = "Luna",
+                            ParentName = "Jovan",
                             Password = "123",
-                            Surname = "Micic",
-                            Username = "pera",
-                            cityID = 1
+                            Surname = "Lunic",
+                            Username = "luna"
                         });
                 });
 
@@ -440,13 +573,18 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            SpecialitationForDoctor = "Lekar opste prakse"
+                        },
+                        new
+                        {
+                            Id = 2,
                             SpecialitationForDoctor = "Hirurg"
                         });
                 });
 
             modelBuilder.Entity("Model.DoctorMenager.Medicament", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -456,8 +594,14 @@ namespace Backend.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Producer")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -468,98 +612,80 @@ namespace Backend.Migrations
                     b.Property<int>("StateOfValidation")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalRecordID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
+                    b.HasIndex("MedicalRecordId");
 
-                    b.HasIndex("medicalRecordID");
+                    b.HasIndex("PrescriptionId");
 
                     b.ToTable("Medicaments");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Code = "L123",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
+                            MedicalRecordId = 1,
                             Name = "Brufen",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 1
+                            StateOfValidation = 0
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Code = "L233",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
+                            MedicalRecordId = 2,
+                            Name = "Panadol",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 2
+                            StateOfValidation = 0
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Code = "L523",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
+                            MedicalRecordId = 3,
+                            Name = "Paracetamol",
+                            PrescriptionId = 3,
                             Producer = "Hemofarm",
                             Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 3
+                            StateOfValidation = 0
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             Code = "L423",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
+                            MedicalRecordId = 4,
+                            Name = "Vitamin B",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
                             Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 4
+                            StateOfValidation = 0
                         },
                         new
                         {
-                            id = 5,
-                            Code = "L423",
+                            Id = 5,
+                            Code = "L233",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
+                            MedicalRecordId = 1,
+                            Name = "Panadol",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
-                            Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 2
-                        },
-                        new
-                        {
-                            id = 6,
-                            Code = "L423",
-                            Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
-                            Producer = "Hemofarm",
-                            Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 1
-                        },
-                        new
-                        {
-                            id = 7,
-                            Code = "L423",
-                            Ingredients = "sastojak1, sastojak2, sastojak3",
-                            Name = "Brufen",
-                            Producer = "Hemofarm",
-                            Quantity = 10,
-                            StateOfValidation = 0,
-                            medicalRecordID = 1
+                            Quantity = 14,
+                            StateOfValidation = 0
                         });
                 });
 
             modelBuilder.Entity("Model.Manager.InventaryRoom", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -569,114 +695,117 @@ namespace Backend.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("roomID")
+                    b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("roomID");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("InventaryRoom");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Name = "Stolovi",
                             Quantity = 1,
-                            roomID = 1
+                            RoomId = 1
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Name = "Stolice",
                             Quantity = 1,
-                            roomID = 1
+                            RoomId = 1
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Name = "Kreveti",
                             Quantity = 1,
-                            roomID = 2
+                            RoomId = 2
                         });
                 });
 
             modelBuilder.Entity("Model.Patient.Question", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
+                    b.Property<int>("AnswerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("QuestionText")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("answerID")
+                    b.Property<int>("SurveyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("surveyID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("surveyID");
+                    b.HasIndex("SurveyId");
 
                     b.ToTable("Question");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Answer = 0,
+                            AnswerId = 1,
                             QuestionText = "Pitanje1",
-                            answerID = 1,
-                            surveyID = 1
+                            SurveyId = 1
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Answer = 0,
+                            AnswerId = 1,
                             QuestionText = "Pitanje2",
-                            answerID = 1,
-                            surveyID = 1
+                            SurveyId = 1
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Answer = 0,
+                            AnswerId = 1,
                             QuestionText = "Pitanje3",
-                            answerID = 1,
-                            surveyID = 2
+                            SurveyId = 2
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             Answer = 0,
+                            AnswerId = 1,
                             QuestionText = "Pitanje4",
-                            answerID = 1,
-                            surveyID = 2
+                            SurveyId = 2
                         },
                         new
                         {
-                            id = 5,
+                            Id = 5,
                             Answer = 0,
+                            AnswerId = 1,
                             QuestionText = "Pitanje5",
-                            answerID = 1,
-                            surveyID = 1
+                            SurveyId = 1
                         });
                 });
 
             modelBuilder.Entity("Model.Patient.Survey", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("CommentSurvey")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PublishingDate")
                         .HasColumnType("datetime(6)");
@@ -684,240 +813,256 @@ namespace Backend.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("medicalExaminationID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("medicalExaminationID");
+                    b.HasIndex("MedicalExaminationId");
 
                     b.ToTable("Survey1");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             CommentSurvey = "Sve je super u bolnici",
+                            MedicalExaminationId = 1,
                             PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Naslov",
-                            medicalExaminationID = 1
+                            Title = "Naslov"
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             CommentSurvey = "Sve je super u bolnici",
+                            MedicalExaminationId = 2,
                             PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Naslov",
-                            medicalExaminationID = 2
+                            Title = "Naslov"
                         });
                 });
 
             modelBuilder.Entity("Model.PatientDoctor.Allergies", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalRecordId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("medicalRecordID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("medicalRecordID");
+                    b.HasIndex("MedicalRecordId");
 
                     b.ToTable("Allergies");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Name = "Penicilin",
-                            medicalRecordID = 1
+                            Id = 1,
+                            MedicalRecordId = 1,
+                            Name = "Penicilin"
                         },
                         new
                         {
-                            id = 2,
-                            Name = "Penicilin",
-                            medicalRecordID = 3
+                            Id = 2,
+                            MedicalRecordId = 3,
+                            Name = "Brufen"
                         },
                         new
                         {
-                            id = 3,
-                            Name = "Penicilin",
-                            medicalRecordID = 2
+                            Id = 3,
+                            MedicalRecordId = 2,
+                            Name = "Panadol"
                         },
                         new
                         {
-                            id = 4,
-                            Name = "Penicilin",
-                            medicalRecordID = 1
+                            Id = 4,
+                            MedicalRecordId = 1,
+                            Name = "Ambrozija"
                         });
                 });
 
             modelBuilder.Entity("Model.PatientDoctor.Anamnesis", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Anamnesies");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Description = "Pacijent je dobro"
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Description = "Pacijent je loše"
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Description = "Pacijent je vrlo dobro"
                         });
                 });
 
             modelBuilder.Entity("Model.PatientDoctor.Diagnosis", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AnamnesisId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("anamnesisID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("anamnesisID");
+                    b.HasIndex("AnamnesisId");
 
                     b.ToTable("Diagnosies");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Name = "Prehlada",
-                            anamnesisID = 1
+                            Id = 1,
+                            AnamnesisId = 1,
+                            Name = "Prehlada"
                         },
                         new
                         {
-                            id = 2,
-                            Name = "Virus",
-                            anamnesisID = 2
+                            Id = 2,
+                            AnamnesisId = 2,
+                            Name = "Virus"
                         },
                         new
                         {
-                            id = 3,
-                            Name = "Migrena",
-                            anamnesisID = 2
+                            Id = 3,
+                            AnamnesisId = 2,
+                            Name = "Migrena"
                         });
                 });
 
             modelBuilder.Entity("Model.PatientDoctor.MedicalRecord", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("anamnesisID")
+                    b.Property<bool>("ActiveMedicalRecord")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("AnamnesisId")
                         .HasColumnType("int");
 
-                    b.Property<int>("patientID")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("anamnesisID");
+                    b.HasIndex("AnamnesisId");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("MedicalRecords");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            anamnesisID = 1,
-                            patientID = 1
+                            Id = 1,
+                            ActiveMedicalRecord = false,
+                            AnamnesisId = 1,
+                            PatientId = 1
                         },
                         new
                         {
-                            id = 2,
-                            anamnesisID = 1,
-                            patientID = 2
+                            Id = 2,
+                            ActiveMedicalRecord = true,
+                            AnamnesisId = 1,
+                            PatientId = 2
                         },
                         new
                         {
-                            id = 3,
-                            anamnesisID = 1,
-                            patientID = 3
+                            Id = 3,
+                            ActiveMedicalRecord = true,
+                            AnamnesisId = 1,
+                            PatientId = 3
                         },
                         new
                         {
-                            id = 4,
-                            anamnesisID = 1,
-                            patientID = 4
+                            Id = 4,
+                            ActiveMedicalRecord = true,
+                            AnamnesisId = 1,
+                            PatientId = 4
                         });
                 });
 
             modelBuilder.Entity("Model.PatientDoctor.Symptoms", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AnamnesisId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("anamnesisID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("anamnesisID");
+                    b.HasIndex("AnamnesisId");
 
                     b.ToTable("Symptomes");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Name = "Temperatura",
-                            anamnesisID = 2
+                            Id = 1,
+                            AnamnesisId = 2,
+                            Name = "Temperatura"
                         },
                         new
                         {
-                            id = 2,
-                            Name = "Kašalj",
-                            anamnesisID = 1
+                            Id = 2,
+                            AnamnesisId = 1,
+                            Name = "Kašalj"
                         },
                         new
                         {
-                            id = 3,
-                            Name = "Glavobolja",
-                            anamnesisID = 2
+                            Id = 3,
+                            AnamnesisId = 2,
+                            Name = "Glavobolja"
                         });
                 });
 
             modelBuilder.Entity("Model.Term.MedicalExamination", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromDateTime")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ShortDescription")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -928,120 +1073,153 @@ namespace Backend.Migrations
                     b.Property<bool>("Urgency")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("doctorID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<int>("patientID")
-                        .HasColumnType("int");
+                    b.HasIndex("DoctorId");
 
-                    b.Property<int>("roomID")
-                        .HasColumnType("int");
+                    b.HasIndex("PatientId");
 
-                    b.HasKey("id");
+                    b.HasIndex("RoomId");
 
-                    b.HasIndex("doctorID");
-
-                    b.HasIndex("patientID");
-
-                    b.HasIndex("roomID");
-
-                    b.ToTable("MedicalExamination");
+                    b.ToTable("MedicalExaminations");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
+                            DoctorId = 1,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            PatientId = 2,
+                            RoomId = 1,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false,
-                            doctorID = 1,
-                            patientID = 2,
-                            roomID = 1
+                            Urgency = false
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
+                            DoctorId = 2,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            PatientId = 1,
+                            RoomId = 2,
+                            ShortDescription = "Pacijent je imao glavobolju",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false,
-                            doctorID = 2,
-                            patientID = 1,
-                            roomID = 2
+                            Urgency = false
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
+                            DoctorId = 2,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            PatientId = 3,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false,
-                            doctorID = 2,
-                            patientID = 3,
-                            roomID = 3
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoctorId = 3,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            RoomId = 2,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoctorId = 2,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 2,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoctorId = 4,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
                         });
                 });
 
             modelBuilder.Entity("Model.Term.Room", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromDateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("RoomID")
+                    b.Property<string>("RoomId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("ToDateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("typeOfRoomID")
+                    b.Property<int>("TypeOfRoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("typeOfRoomID");
+                    b.HasIndex("TypeOfRoomId");
 
                     b.ToTable("Rooms");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoomID = "101",
+                            RoomId = "101",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            typeOfRoomID = 1
+                            TypeOfRoomId = 1
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoomID = "201",
+                            RoomId = "201",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            typeOfRoomID = 1
+                            TypeOfRoomId = 1
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoomID = "301",
+                            RoomId = "301",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            typeOfRoomID = 1
+                            TypeOfRoomId = 1
                         });
                 });
 
             modelBuilder.Entity("Model.Term.Surgery", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorSpecialistId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromDateTime")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ShortDescription")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -1052,48 +1230,39 @@ namespace Backend.Migrations
                     b.Property<bool>("Urgency")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("doctorSpecialistID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<int>("patientID")
-                        .HasColumnType("int");
+                    b.HasIndex("DoctorSpecialistId");
 
-                    b.Property<int>("roomID")
-                        .HasColumnType("int");
+                    b.HasIndex("PatientId");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("doctorSpecialistID");
-
-                    b.HasIndex("patientID");
-
-                    b.HasIndex("roomID");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Survey");
                 });
 
             modelBuilder.Entity("Model.Term.TypeOfRoom", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("NameOfType")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("TypesOfRoom");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             NameOfType = "Soba za preglede"
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             NameOfType = "Soba za operacije"
                         });
                 });
@@ -1102,7 +1271,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.AllActors.Patient", "Patient")
                         .WithMany()
-                        .HasForeignKey("PatientID")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1111,7 +1280,16 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
                         .WithMany()
-                        .HasForeignKey("medicalExaminationID")
+                        .HasForeignKey("MedicalExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
+                        .WithMany()
+                        .HasForeignKey("MedicalExaminationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1120,16 +1298,31 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.AllActors.Country", "Country")
                         .WithMany()
-                        .HasForeignKey("CountryID")
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Model.AllActors.Doctor", b =>
                 {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Model.Doctor.Specialitation", "Specialitation")
                         .WithMany()
-                        .HasForeignKey("specialitationID")
+                        .HasForeignKey("SpecialitationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.AllActors.Patient", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1137,8 +1330,14 @@ namespace Backend.Migrations
             modelBuilder.Entity("Model.DoctorMenager.Medicament", b =>
                 {
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
-                        .WithMany("Medicament")
-                        .HasForeignKey("medicalRecordID")
+                        .WithMany("Medicaments")
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Model.PatientDoctor.Prescription", "Prescription")
+                        .WithMany("Medicaments")
+                        .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1147,7 +1346,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.Term.Room", "Room")
                         .WithMany("Equipment")
-                        .HasForeignKey("roomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1156,7 +1355,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.Patient.Survey", "Survey")
                         .WithMany("Question")
-                        .HasForeignKey("surveyID")
+                        .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1165,7 +1364,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
                         .WithMany()
-                        .HasForeignKey("medicalExaminationID")
+                        .HasForeignKey("MedicalExaminationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1174,7 +1373,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
                         .WithMany("Allergies")
-                        .HasForeignKey("medicalRecordID")
+                        .HasForeignKey("MedicalRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1183,7 +1382,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.PatientDoctor.Anamnesis", "Anamnesis")
                         .WithMany("Diagnosis")
-                        .HasForeignKey("anamnesisID")
+                        .HasForeignKey("AnamnesisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1192,13 +1391,13 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.PatientDoctor.Anamnesis", "Anamnesis")
                         .WithMany()
-                        .HasForeignKey("anamnesisID")
+                        .HasForeignKey("AnamnesisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.AllActors.Patient", "Patient")
-                        .WithOne("MedicalRecord")
-                        .HasForeignKey("Model.PatientDoctor.MedicalRecord", "id")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1207,7 +1406,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.PatientDoctor.Anamnesis", "Anamnesis")
                         .WithMany("Symptoms")
-                        .HasForeignKey("anamnesisID")
+                        .HasForeignKey("AnamnesisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1216,19 +1415,19 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.AllActors.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("doctorID")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.AllActors.Patient", "Patient")
                         .WithMany()
-                        .HasForeignKey("patientID")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Term.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("roomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1237,7 +1436,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.Term.TypeOfRoom", "TypeOfRoom")
                         .WithMany()
-                        .HasForeignKey("typeOfRoomID")
+                        .HasForeignKey("TypeOfRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1246,19 +1445,19 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Model.AllActors.Doctor", "DoctorSpecialist")
                         .WithMany()
-                        .HasForeignKey("doctorSpecialistID")
+                        .HasForeignKey("DoctorSpecialistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.AllActors.Patient", "Patient")
                         .WithMany()
-                        .HasForeignKey("patientID")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Term.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("roomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

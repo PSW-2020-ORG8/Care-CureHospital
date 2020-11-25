@@ -50,7 +50,15 @@ namespace Repository.Csv
             return stream.ReadAll();
         }
 
-        
+        public IEnumerable<E> GetAllNames(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<E> GetAllNames()
+        {
+            throw new NotImplementedException();
+        }
 
         public E GetEntity(ID id)
         {

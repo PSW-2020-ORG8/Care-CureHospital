@@ -14,12 +14,12 @@ namespace Model.AllActors
     public class Blog : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public virtual List<Article> Articles { get; set; }
 
         public Blog(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Blog()
@@ -28,15 +28,15 @@ namespace Model.AllActors
 
         public Blog(int id, string name, List<Article> articles)
         {
-            this.Name = name;
-            this.Articles = articles;
-            this.Id = id;
+            Name = name;
+            Articles = articles;
+            Id = id;
         }
 
         public Blog(string name, List<Article> articles)
         {
-            this.Name = name;
-            this.Articles = articles;
+            Name = name;
+            Articles = articles;
         }
 
         public int GetId()
@@ -46,7 +46,7 @@ namespace Model.AllActors
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }
