@@ -22,7 +22,7 @@ namespace WebAppPatient.Controllers
         public IActionResult getAllSurveys()
         {
             List<SurveyDto> result = new List<SurveyDto>();
-            App.Instance().surveyService.GetAllEntities().ToList().ForEach(survey => result.Add(SurveyMapper.SurveyToSurveyDto(survey)));
+            App.Instance().SurveyService.GetAllEntities().ToList().ForEach(survey => result.Add(SurveyMapper.SurveyToSurveyDto(survey)));
             return Ok(result);
         }
 
@@ -30,14 +30,14 @@ namespace WebAppPatient.Controllers
         [HttpGet("getSurveyResults")] // GET /api/survey/getSurveyResults
         public IActionResult getSurveyResults()
         {
-            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().questionService.GetAnswersByQuestion()));
+            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().QuestionService.GetAnswersByQuestion()));
         }
 
         [HttpPost]      // POST /api/survey
         public IActionResult Add(SurveyDto dto)
         {
             Survey survey = SurveyMapper.SurveyDtoToSurvey(dto, null);
-            App.Instance().surveyService.AddEntity(survey);
+            App.Instance().SurveyService.AddEntity(survey);
             return Ok();
         }
     }

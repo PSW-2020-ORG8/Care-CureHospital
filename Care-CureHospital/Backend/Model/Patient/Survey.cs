@@ -14,8 +14,8 @@ namespace Model.Patient
     public class Survey : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Title { get; set; }
-        public String CommentSurvey { get; set; }
+        public string Title { get; set; }
+        public string CommentSurvey { get; set; }
         public DateTime PublishingDate { get; set; }
         public int MedicalExaminationId { get; set; }
         public virtual MedicalExamination MedicalExamination { get; set; }
@@ -23,48 +23,47 @@ namespace Model.Patient
 
         public Survey(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Survey()
         {
         }
 
-        public Survey(int id, string title, DateTime publishingDate, string commentSurvey, List<Question> question)
+        public Survey(int id, string title, DateTime publishingDate, string commentSurvey, List<Question> questions)
         {
-            this.Title = title;
-            this.PublishingDate = publishingDate;
-            this.CommentSurvey = commentSurvey;
-
-            this.Id = id;
-            this.Questions = question;
+            Id = id;
+            Title = title;
+            PublishingDate = publishingDate;
+            CommentSurvey = commentSurvey;
+            Questions = questions;
         }
 
-        public Survey(string title, DateTime publishingDate, string commentSurvey, List<Question> question)
+        public Survey(string title, DateTime publishingDate, string commentSurvey, List<Question> questions)
         {
-            this.Title = title;
-            this.PublishingDate = publishingDate;
-            this.CommentSurvey = commentSurvey;
-            this.Questions = question;
+            Title = title;
+            PublishingDate = publishingDate;
+            CommentSurvey = commentSurvey;
+            Questions = questions;
         }
 
-        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination, List<Question> question) : this(id)
+        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination, List<Question> questions) : this(id)
         {
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
-            this.MedicalExaminationId = medicalExaminationID;
+            MedicalExaminationId = medicalExaminationID;
             MedicalExamination = medicalExamination;
-            Questions = question;
+            Questions = questions;
         }
 
-        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, List<Question> question) : this(id)
+        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, List<Question> questions) : this(id)
         {
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
-            this.MedicalExaminationId = medicalExaminationID;
-            Questions = question;
+            MedicalExaminationId = medicalExaminationID;
+            Questions = questions;
         }
 
         public int GetId()
@@ -74,7 +73,7 @@ namespace Model.Patient
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

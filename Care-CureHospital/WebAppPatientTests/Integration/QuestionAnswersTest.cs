@@ -8,13 +8,13 @@ namespace WebAppPatientTests.Integration
     public class QuestionAnswersTest
     {
 
-        private readonly WebApplicationFactory<>
+       /* private readonly WebApplicationFactory<>
 
         [Fact]
         public void Get_survey_results()
         {
 
         }
-
+       */
     }
 }

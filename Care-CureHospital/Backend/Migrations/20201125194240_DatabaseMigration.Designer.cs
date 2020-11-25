@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201122192559_DatabaseMigration")]
+    [Migration("20201125194240_DatabaseMigration")]
     partial class DatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,22 +137,95 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Comment = "Pacijent je dobro i nema većih problema",
+                            Comment = "Pacijent je dobro i nema vecih problema",
                             MedicalExaminationId = 1,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            Comment = "Pacijent je veoma dobro i nema većih problema",
+                            Comment = "Pacijent je veoma dobro i nema vecih problema",
                             MedicalExaminationId = 2,
-                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                            PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Comment = "Pacijent ima virus",
                             MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Pacijent je lose",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Pacijent ima virus",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("Prescription");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Svakodnevno koristite prepisani lek",
+                            MedicalExaminationId = 3,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Ne preskacite konzumiranje leka",
+                            MedicalExaminationId = 2,
+                            PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 1,
                             PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -163,7 +236,7 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Adress")
+                    b.Property<string>("Address")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("CountryId")
@@ -185,9 +258,18 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "Brace Jerkovic 1",
                             CountryId = 1,
                             Name = "Beograd",
                             PostCode = 11000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Bulevar Cara Lazara 1",
+                            CountryId = 1,
+                            Name = "Novi Sad",
+                            PostCode = 22100
                         });
                 });
 
@@ -196,9 +278,6 @@ namespace Backend.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -211,7 +290,6 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Code = "SRB",
                             Name = "Srbija"
                         });
                 });
@@ -220,6 +298,9 @@ namespace Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
                     b.Property<int>("CityId")
@@ -234,10 +315,22 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
@@ -254,6 +347,8 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.HasIndex("SpecialitationId");
 
                     b.ToTable("Doctor");
@@ -262,58 +357,66 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            CityId = 1,
+                            BloodGroup = 0,
+                            CityId = 2,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "milan@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312312312312",
+                            Name = "Milan",
                             Password = "123",
                             SpecialitationId = 1,
                             Surname = "Petrovic",
-                            Username = "pera"
+                            Username = "milan"
                         },
                         new
                         {
                             Id = 2,
+                            BloodGroup = 0,
                             CityId = 1,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "aca@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13212312312312",
+                            Name = "Aleksandar",
                             Password = "123",
                             SpecialitationId = 1,
-                            Surname = "Petrovic",
-                            Username = "pera"
+                            Surname = "Aleksic",
+                            Username = "aca"
                         },
                         new
                         {
                             Id = 3,
-                            CityId = 1,
+                            BloodGroup = 0,
+                            CityId = 2,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "jovan@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312367312312",
+                            Name = "Jovan",
                             Password = "123",
-                            SpecialitationId = 1,
-                            Surname = "Petrovic",
-                            Username = "pera"
+                            SpecialitationId = 2,
+                            Surname = "Jovic",
+                            Username = "jovan"
                         },
                         new
                         {
                             Id = 4,
+                            BloodGroup = 0,
                             CityId = 1,
                             ContactNumber = "06345111144",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
-                            Jmbg = "123",
-                            Name = "Petar",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "nikola@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13316712312312",
+                            Name = "Nikola",
                             Password = "123",
                             SpecialitationId = 1,
-                            Surname = "Petrovic",
-                            Username = "pera"
+                            Surname = "Nikic",
+                            Username = "nikola"
                         });
                 });
 
@@ -321,6 +424,9 @@ namespace Backend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
                     b.Property<int>("CityId")
@@ -335,16 +441,25 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<bool>("GuestAccount")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("MedicalRecordId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
@@ -358,20 +473,26 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("Patient");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            BloodGroup = 2,
                             CityId = 1,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactNumber = "063554533",
+                            DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
                             EMail = "pera@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordId = 1,
+                            HealthInsuranceCard = "32312312312",
+                            IdentityCard = "123123123",
+                            Jmbg = "13312312312312",
                             Name = "Petar",
+                            ParentName = "Zika",
                             Password = "123",
                             Surname = "Petrovic",
                             Username = "pera"
@@ -379,47 +500,59 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
-                            CityId = 1,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "0635235333",
+                            DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "zika@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordId = 2,
-                            Name = "Milos",
+                            HealthInsuranceCard = "712312312312",
+                            IdentityCard = "124123123",
+                            Jmbg = "12342312312312",
+                            Name = "Zika",
+                            ParentName = "Pera",
                             Password = "123",
-                            Surname = "Mitrovic",
-                            Username = "pera"
+                            Surname = "Zikic",
+                            Username = "zika"
                         },
                         new
                         {
                             Id = 3,
+                            BloodGroup = 0,
                             CityId = 1,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            ContactNumber = "0635557673",
+                            DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "mica@gmail.com",
+                            Gender = 0,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordId = 3,
-                            Name = "Jovan",
+                            HealthInsuranceCard = "62312312312",
+                            IdentityCard = "163123123",
+                            Jmbg = "12312512312312",
+                            Name = "Mica",
+                            ParentName = "Jelena",
                             Password = "123",
-                            Surname = "Jovanovic",
-                            Username = "pera"
+                            Surname = "Micic",
+                            Username = "mica"
                         },
                         new
                         {
                             Id = 4,
-                            CityId = 1,
-                            ContactNumber = "063555333",
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EMail = "pera@gmail.com",
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063555356",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "luna@gmail.com",
+                            Gender = 1,
                             GuestAccount = false,
-                            Jmbg = "123",
-                            MedicalRecordId = 4,
-                            Name = "Milica",
+                            HealthInsuranceCard = "52312312312",
+                            IdentityCard = "127123123",
+                            Jmbg = "12312316712312",
+                            Name = "Luna",
+                            ParentName = "Jovan",
                             Password = "123",
-                            Surname = "Micic",
-                            Username = "pera"
+                            Surname = "Lunic",
+                            Username = "luna"
                         });
                 });
 
@@ -440,6 +573,11 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            SpecialitationForDoctor = "Lekar opste prakse"
+                        },
+                        new
+                        {
+                            Id = 2,
                             SpecialitationForDoctor = "Hirurg"
                         });
                 });
@@ -462,6 +600,9 @@ namespace Backend.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Producer")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -475,6 +616,8 @@ namespace Backend.Migrations
 
                     b.HasIndex("MedicalRecordId");
 
+                    b.HasIndex("PrescriptionId");
+
                     b.ToTable("Medicaments");
 
                     b.HasData(
@@ -485,6 +628,7 @@ namespace Backend.Migrations
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 1,
                             Name = "Brufen",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -495,7 +639,8 @@ namespace Backend.Migrations
                             Code = "L233",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 2,
-                            Name = "Brufen",
+                            Name = "Panadol",
+                            PrescriptionId = 1,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -506,7 +651,8 @@ namespace Backend.Migrations
                             Code = "L523",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 3,
-                            Name = "Brufen",
+                            Name = "Paracetamol",
+                            PrescriptionId = 3,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -517,7 +663,8 @@ namespace Backend.Migrations
                             Code = "L423",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 4,
-                            Name = "Brufen",
+                            Name = "Vitamin B",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
                             Quantity = 10,
                             StateOfValidation = 0
@@ -525,34 +672,13 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
-                            Code = "L423",
-                            Ingredients = "sastojak1, sastojak2, sastojak3",
-                            MedicalRecordId = 2,
-                            Name = "Brufen",
-                            Producer = "Hemofarm",
-                            Quantity = 10,
-                            StateOfValidation = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Code = "L423",
+                            Code = "L233",
                             Ingredients = "sastojak1, sastojak2, sastojak3",
                             MedicalRecordId = 1,
-                            Name = "Brufen",
+                            Name = "Panadol",
+                            PrescriptionId = 2,
                             Producer = "Hemofarm",
-                            Quantity = 10,
-                            StateOfValidation = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Code = "L423",
-                            Ingredients = "sastojak1, sastojak2, sastojak3",
-                            MedicalRecordId = 1,
-                            Name = "Brufen",
-                            Producer = "Hemofarm",
-                            Quantity = 10,
+                            Quantity = 14,
                             StateOfValidation = 0
                         });
                 });
@@ -824,19 +950,19 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             MedicalRecordId = 3,
-                            Name = "Penicilin"
+                            Name = "Brufen"
                         },
                         new
                         {
                             Id = 3,
                             MedicalRecordId = 2,
-                            Name = "Penicilin"
+                            Name = "Panadol"
                         },
                         new
                         {
                             Id = 4,
                             MedicalRecordId = 1,
-                            Name = "Penicilin"
+                            Name = "Ambrozija"
                         });
                 });
 
@@ -913,7 +1039,11 @@ namespace Backend.Migrations
             modelBuilder.Entity("Model.PatientDoctor.MedicalRecord", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<bool>("ActiveMedicalRecord")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("AnamnesisId")
                         .HasColumnType("int");
@@ -925,30 +1055,36 @@ namespace Backend.Migrations
 
                     b.HasIndex("AnamnesisId");
 
+                    b.HasIndex("PatientId");
+
                     b.ToTable("MedicalRecords");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            ActiveMedicalRecord = false,
                             AnamnesisId = 1,
                             PatientId = 1
                         },
                         new
                         {
                             Id = 2,
+                            ActiveMedicalRecord = true,
                             AnamnesisId = 1,
                             PatientId = 2
                         },
                         new
                         {
                             Id = 3,
+                            ActiveMedicalRecord = true,
                             AnamnesisId = 1,
                             PatientId = 3
                         },
                         new
                         {
                             Id = 4,
+                            ActiveMedicalRecord = true,
                             AnamnesisId = 1,
                             PatientId = 4
                         });
@@ -1028,7 +1164,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("MedicalExamination");
+                    b.ToTable("MedicalExaminations");
 
                     b.HasData(
                         new
@@ -1038,7 +1174,7 @@ namespace Backend.Migrations
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 2,
                             RoomId = 1,
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            ShortDescription = "Sve je bilo u redu na pregledu",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Urgency = false
                         },
@@ -1049,7 +1185,7 @@ namespace Backend.Migrations
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
                             RoomId = 2,
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            ShortDescription = "Pacijent je imao glavobolju",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Urgency = false
                         },
@@ -1060,7 +1196,40 @@ namespace Backend.Migrations
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 3,
                             RoomId = 3,
-                            ShortDescription = "Sve je bilo uredu na pregledu",
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoctorId = 3,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            RoomId = 2,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoctorId = 2,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 2,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Urgency = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoctorId = 4,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 3,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Urgency = false
                         });
@@ -1199,6 +1368,15 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Model.PatientDoctor.Prescription", b =>
+                {
+                    b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
+                        .WithMany()
+                        .HasForeignKey("MedicalExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model.AllActors.City", b =>
                 {
                     b.HasOne("Model.AllActors.Country", "Country")
@@ -1210,6 +1388,12 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Model.AllActors.Doctor", b =>
                 {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Model.Doctor.Specialitation", "Specialitation")
                         .WithMany()
                         .HasForeignKey("SpecialitationId")
@@ -1217,11 +1401,26 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Model.AllActors.Patient", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model.DoctorMenager.Medicament", b =>
                 {
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
-                        .WithMany("Medicament")
+                        .WithMany("Medicaments")
                         .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Model.PatientDoctor.Prescription", "Prescription")
+                        .WithMany("Medicaments")
+                        .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1280,8 +1479,8 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.HasOne("Model.AllActors.Patient", "Patient")
-                        .WithOne("MedicalRecord")
-                        .HasForeignKey("Model.PatientDoctor.MedicalRecord", "Id")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

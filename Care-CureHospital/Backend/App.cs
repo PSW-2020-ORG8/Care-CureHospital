@@ -19,35 +19,41 @@ namespace Backend
 {
     public class App
     {
-        private static App instance = null;
+        private static App _instance = null;
 
-        public PatientFeedbackService patientFeedbackService;
-        public MedicalExaminationReportService medicalExaminationReportService;
-        public MedicalRecordService medicalRecordService;
-        public SurveyService surveyService;
-        public QuestionService questionService;
+        public SurveyService SurveyService;
+        public QuestionService QuestionService;
+        public PatientFeedbackService PatientFeedbackService;
+        public MedicalExaminationReportService MedicalExaminationReportService;
+        public PrescriptionService PrescriptionService;
+        public MedicalRecordService MedicalRecordService;
+        public AllergiesService AllergiesService;
 
         private App()
         {
-            patientFeedbackService = new PatientFeedbackService(
+            PatientFeedbackService = new PatientFeedbackService(
                 new PatientFeedbackRepository(new MySQLStream<PatientFeedback>(), new IntSequencer()));
-            medicalExaminationReportService = new MedicalExaminationReportService(
+            MedicalExaminationReportService = new MedicalExaminationReportService(
                new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>(), new IntSequencer()));
-            medicalRecordService = new MedicalRecordService(
+            PrescriptionService = new PrescriptionService(
+               new PrescriptionRepository(new MySQLStream<Prescription>(), new IntSequencer()));
+            MedicalRecordService = new MedicalRecordService(
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
-            surveyService = new SurveyService(
+            SurveyService = new SurveyService(
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
-            questionService = new QuestionService(
+            QuestionService = new QuestionService(
                 new QuestionRepository(new MySQLStream<Question>(), new IntSequencer()));
+            AllergiesService = new AllergiesService(
+               new AllergiesRepository(new MySQLStream<Allergies>(), new IntSequencer()));
         }
 
         public static App Instance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new App();
+                _instance = new App();
             }
-            return instance;
+            return _instance;
 
         }
         

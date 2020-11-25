@@ -25,22 +25,22 @@ namespace Backend.Model.BlogAndNotification
         public PatientFeedback(int id, string text, DateTime publishingDate, bool isForPublishing, bool isPublished, bool isAnonymous, Patient patient)
             : base(text, publishingDate)
         {
-            this.Id = id;
-            this.IsForPublishing = isForPublishing;
-            this.IsPublished = isPublished;
-            this.IsAnonymous = isAnonymous;
-            this.PatientId = patient.Id;
-            this.Patient = patient;
+            Id = id;
+            IsForPublishing = isForPublishing;
+            IsPublished = isPublished;
+            IsAnonymous = isAnonymous;
+            PatientId = patient.Id;
+            Patient = patient;
         }
 
         public PatientFeedback(int id, string text, DateTime publishingDate, bool isForPublishing, bool isPublished, bool isAnonymous, int patientID)
             : base(text, publishingDate)
         {
-            this.Id = id;
-            this.IsForPublishing = isForPublishing;
-            this.IsPublished = isPublished;
-            this.IsAnonymous = isAnonymous;
-            this.PatientId = patientID;
+            Id = id;
+            IsForPublishing = isForPublishing;
+            IsPublished = isPublished;
+            IsAnonymous = isAnonymous;
+            PatientId = patientID;
         }
         public int GetId()
         {
@@ -49,7 +49,7 @@ namespace Backend.Model.BlogAndNotification
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

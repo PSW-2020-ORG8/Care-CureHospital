@@ -8,6 +8,7 @@ using Model.PatientDoctor;
 using Repository.MedicalRecordRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Service.MedicalRecordService
 {
@@ -20,9 +21,9 @@ namespace Service.MedicalRecordService
             this.medicalRecordRepository = medicalRecordRepository;
         }
 
-        public MedicalRecord GetMedicalRecordByPatient(Model.AllActors.Patient patient)
+        public MedicalRecord GetMedicalRecordForPatient(int patientID)
         {
-            return medicalRecordRepository.GetMedicalRecordByPatient(patient);
+            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID); ;
         }
 
         public MedicalRecord GetEntity(int id)
@@ -48,6 +49,11 @@ namespace Service.MedicalRecordService
         public void DeleteEntity(MedicalRecord entity)
         {
             medicalRecordRepository.DeleteEntity(entity);
+        }
+
+        public MedicalRecord GetMedicalRecordByPatient(Model.AllActors.Patient patient)
+        {
+            return medicalRecordRepository.GetMedicalRecordByPatient(patient);
         }
     }
 }

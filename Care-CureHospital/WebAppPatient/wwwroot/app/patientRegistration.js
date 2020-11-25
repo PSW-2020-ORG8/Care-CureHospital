@@ -22,24 +22,30 @@ Vue.component("patientRegistration", {
             errorDifferentPassword : false,
             nameInputField : '',
             errorName : false,
+            parentNameInputField : '',
+            errorParentName : false,
             surnameInputField : '',
             errorSurname : false,
+            genderSelectField : 'gender',
             jmbgInputField : '',
             errorJMBG : false,
+            personalCardInputField : '',
+            errorPersonalCard : false,
+            healthBookletNumberInputField : '',
+            errorHealthBookletNumber : false,
             dateOfBirthDatePicker : '',
             state : {
                 disabledDates: {
                     from: new Date(),
                 }
             },
-
             contactNumberField : '',
             errorContactNumber : false,
             emailField : '',
             errorEmail : false,
             places : null,
 		    city : '',
-		    zipCode : '',
+		    zipCode : 0,
 		    longitude : '',
 		    latitude : '',
 		    street : '',
@@ -51,12 +57,33 @@ Vue.component("patientRegistration", {
             imagesShow : [],
 		    sendImages : [],
 		    countImage : 0,
-		    disable : false
-
+            disable : false,
+            allergies : [],
+            checkedAllergies : [],
+            finalCheckedAllergies : [],
+            modalDialog : false,
+            allergyInputField : 'Bez alergija',
+            bloodGroupInputField : 'unknown',
+            emptyUsername : false,
+            emptyPassword : false,
+            emptyConfirmPassword : false,
+            emptyName : false,
+            emptyParentName : false,
+            emptySurname : false,
+            emptyGander : false,
+            emptyJmbg : false,
+            emptyPersonalCard : false,
+            emptyHealthBookletNumber : false,
+            emptyDateOfBirth : false,
+            emptyContactNumber : false,
+            emptyEmail : false,
+            emptyAddress : false,
+            finalAllergiesLists : [],
+            foundAllergy : null
 		}
 	},
 	template: `
-    <div>
+    <div style="overflow: hidden">
     
     <div class="logo-and-name-patient-registration">
             <div class="logo-patient-registration ">        
@@ -80,7 +107,7 @@ Vue.component("patientRegistration", {
             </button>
         <div class="dropdown-content">
             <a>Registruj se</a>
-            <a >Prijavi se</a>
+            <a>Prijavi se</a>
         </div>
     </div>
 	 
@@ -90,7 +117,7 @@ Vue.component("patientRegistration", {
         <div class="confirm-cancel-field-patient-registration-title">
             <h1>Popunili ste potrebne podatke?</h1>
             <div class="add-btn-patient-registration">
-                <button type="submit" v-on:click="registerPatient()">Registruj se</button>
+                <button type="submit" @click="registerPatient()">Registruj se</button>
             </div>
             <div class="cancle-btn-patient-registration">
                 <button type="button" @click="previousButtonClicked()">Odustani</button>
@@ -106,41 +133,74 @@ Vue.component("patientRegistration", {
                 <div class="text-for-patient-registration">
                     <h1>Podaci za registraciju</h1>
                         <div class="scroll-in-patient-registration">
-                            <label>Korisničko ime:</label>
+                            <label v-if="emptyUsername" style="color:red;">Korisničko ime*:</label>
+                            <label v-if="!emptyUsername">Korisničko ime*:</label>
                             <input v-model="usernameInputField" type="text" placeholder="Unesite korisničko ime..." pattern="[A-Za-z0-9ŠšĐđŽžČčĆć]*" title="Možete uneti slova i brojeve!">
                             <label v-if="errorForUsername" style="color:red; font-size: 16px">Možete uneti slova i brojeve!</label><br><br>
                         
-                            <label>Lozinka:</label>
+                            <label v-if="emptyPassword" style="color:red;">Lozinka*:</label>
+                            <label v-else>Lozinka*:</label>
                             <input v-model="passwordInputField" type="password" placeholder="Unesite lozinku..."><br><br>
 
-                            <label>Potvrda lozinke:</label>
+                            <label v-if="emptyConfirmPassword" style="color:red;">Potvrda lozinke*:</label>
+                            <label v-else>Potvrda lozinke*:</label>
                             <input v-model="confirmPasswordInputField" type="password" placeholder="Unesite ponovo lozinku...">
                             <label v-if="errorDifferentPassword" style="color:red; font-size: 16px">Lozinke se ne poklapaju!</label><br><br>
 
-                            <label>Ime:</label>
+                            <label v-if="emptyName" style="color:red;">Ime*:</label>
+                            <label v-else>Ime*:</label>
                             <input v-model="nameInputField" type="text" placeholder="Unesite ime..." pattern="[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*" title="Prvo slovo mora biti veliko!">
                             <label v-if="errorName" style="color:red; font-size: 16px">Prvo slovo mora biti veliko!</label><br><br>
 
-                            <label>Prezime:</label>
-                            <input v-model="surnameInputField" type="text" placeholder="Unesite ime..." pattern="[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*" title="Prvo slovo mora biti veliko!">
+                            <label v-if="emptyParentName" style="color:red;">Ime jednog roditelja*:</label>
+                            <label v-else>Ime jednog roditelja*:</label>
+                            <input v-model="parentNameInputField" type="text" placeholder="Unesite ime jednog roditelja..." pattern="[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*" title="Prvo slovo mora biti veliko!">
+                            <label v-if="errorParentName" style="color:red; font-size: 16px">Prvo slovo mora biti veliko!</label><br><br>
+
+                            <label v-if="emptySurname" style="color:red;">Prezime*:</label>
+                            <label v-else>Prezime*:</label>
+                            <input v-model="surnameInputField" type="text" placeholder="Unesite prezime..." pattern="[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*" title="Prvo slovo mora biti veliko!">
                             <label v-if="errorSurname" style="color:red; font-size: 16px">Prvo slovo mora biti veliko!</label><br><br>
 
-                            <label>JMBG:</label>
-                            <input v-model="jmbgInputField" type="text" placeholder="Unesite ime..." pattern="[0-9]{13}" title="Možete uneti slova i brojeve!">
+                            <label v-if="emptyGander" style="color:red;">Pol*:</label>
+                            <label v-else>Pol*:</label>
+                            <select v-model="genderSelectField">
+                              <option value="gender">Izaberite pol...</option>
+                              <option value="Male">Muško</option>
+                              <option value="Female">Žensko</option>
+                            </select><br><br>
+
+                            <label v-if="emptyJmbg" style="color:red;">JMBG*:</label>
+                            <label v-else>JMBG*:</label>
+                            <input v-model="jmbgInputField" type="text" placeholder="Unesite JMBG..." pattern="[0-9]{13}" title="Možete uneti samo brojeve!">
                             <label v-if="errorJMBG" style="color:red; font-size: 16px">JMBG se sastoji od 13 cifara!</label><br><br>
 
-                            <label>Datum rođenja:</label><br/>
+                            <label v-if="emptyPersonalCard" style="color:red;">Broj lične karte*:</label>
+                            <label v-else>Broj lične karte*:</label>
+                            <input v-model="personalCardInputField" type="text" placeholder="Unesite broj lične karte..." pattern="[0-9]{9}" title="Možete uneti samo brojeve!">
+                            <label v-if="errorPersonalCard" style="color:red; font-size: 16px">Lična karta se sastoji od 9 cifara!</label><br><br>
+
+                            <label v-if="emptyHealthBookletNumber" style="color:red;">Broj zdravstvene knjižice*:</label>
+                            <label v-else>Broj zdravstvene knjižice*:</label>
+                            <input v-model="healthBookletNumberInputField" type="text" placeholder="Unesite broj zdravstvene knjižice..." pattern="[0-9]{11}" title="Možete uneti samo brojeve!">
+                            <label v-if="errorHealthBookletNumber" style="color:red; font-size: 16px">JMBG se sastoji od 11 cifara!</label><br><br>
+
+                            <label v-if="emptyDateOfBirth" style="color:red;">Datum rođenja*:</label>
+                            <label v-if="!emptyDateOfBirth" >Datum rođenja*:</label>
                             <vuejs-datepicker v-model="dateOfBirthDatePicker" type="date"  format="dd.MM.yyyy." :disabledDates="state.disabledDates" placeholder="Izaberite datum rođenja..." ></vuejs-datepicker><br>
                             
-                            <label>Kontakt telefon:</label>
+                            <label v-if="emptyContactNumber" style="color:red;">Kontakt telefon*:</label>
+                            <label v-else>Kontakt telefon*:</label>
                             <input v-model="contactNumberField" type="text" placeholder="Unesite kontakt telefon..." pattern="[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*" title="Primer validnog kontakt telefona: +38166/123-123" >
                             <label v-if="errorContactNumber" style="color:red; font-size: 16px">Neispravan oblik kontakt telefona!</label><br><br>
 
-                            <label>E-mail:</label>
+                            <label v-if="emptyEmail" style="color:red;">E-mail*:</label>
+                            <label v-else>E-mail*:</label>
                             <input v-model="emailField" type="text" placeholder="Unesite e-mail..." pattern="[\w-\.]+@([\w-]+\.)+[\w-]{2,4}" title="Primer za validan e-mail: pera.peric@gmail.com">
                             <label v-if="errorEmail" style="color:red; font-size: 16px">Neispravan oblik za e-mail!</label><br><br>
 
-                            <label for="address">Adresa:</label><br><br>
+                            <label for="address" v-if="emptyAddress" style="color:red;">Adresa*:</label>
+                            <label for="address" v-if="!emptyAddress">Adresa*:</label>
                             <input id="address" v-model="addressInput" placeholder="Unesite adresu apartmana..." type="search" ><br><br>
                             
                             <input id="latitude" hidden>
@@ -149,8 +209,38 @@ Vue.component("patientRegistration", {
                             <input id="zipCode" hidden>
                             <input id="country" hidden>
                             <input id="number" hidden>
-                        
-                            <br/><label>Profilna slika:</label><br/><br>
+
+                            <label>Alergije:</label>
+                            <input v-if="this.modalDialog === false" v-model="allergyInputField" :placeholder="[[ this.allergyInputField ]]" type="text"  @click="openModal()" >
+
+                            <div v-if="this.modalDialog" class="modal-dialog-patient-registration">
+                                <span class="span-allergies-patient-registration" v-for="allergy in allergies">        
+                                    <label class="container-patient-registration">
+                                    <input type="checkbox" :value="allergy.id" v-model="checkedAllergies">
+                                    <div class="text-checkbox-patient-registration">{{allergy.name}}</div>
+                                    <span class="checkmark-patient-registration"></span>
+                                    </label>
+                                </span>
+
+                                <div class="close-btn-patient-registration">
+                                    <button type="button" @click="closeModal()">Sačuvaj</button>
+                                </div>
+                            </div>
+
+                            <br><br><label>Krvna grupa:</label>
+                            <select v-model="bloodGroupInputField">
+                              <option value="unknown">Nepoznato</option>
+                              <option value="AbPlus">AB+</option>
+                              <option value="AbMinus">AB-</option>
+                              <option value="APlus">A+</option>
+                              <option value="AMinus">A-</option>
+                              <option value="BPlus">B+</option>
+                              <option value="BMinus">B-</option>
+                              <option value="OPlus">O+</option>
+                              <option value="OMinus">O-</option>
+                            </select><br><br>
+
+                            <br><br><label>Profilna slika:</label><br><br>
                             <input v-if="this.countImage <= 1" type="file"   @change="addImage" >
                             <input v-else type="file" disabled  @change="addImage" name="imagesForApartmentName"><br><br><br>
                         </div>
@@ -170,92 +260,165 @@ Vue.component("patientRegistration", {
     }
     ,
 	methods: {
-		registerPatient: function () {
+		registerPatient : function () {
             var empty = false;
-            var differentPasswords = false
             var madeDateOfBirth = null;
             this.showNotification = false;
             this.errorForUsername = false;
             this.errorDifferentPassword = false;
             this.errorName = false;
+            this.errorParentName = false;
             this.errorSurname = false;
             this.errorJMBG = false;
+            this.errorHealthBookletNumber = false;
             this.errorContactNumber = false;
             this.errorEmail = false;
             this.errorAddress = false;
+            this.errorPersonalCard = false;
+            this.emptyUsername = false;
+            this.emptyPassword = false;
+            this.emptyConfirmPassword = false;
+            this.emptyName = false;
+            this.emptyParentName = false;
+            this.emptySurname = false;
+            this.emptyGander = false;
+            this.emptyJmbg = false;
+            this.emptyPersonalCard = false;
+            this.emptyHealthBookletNumber = false;
+            this.emptyDateOfBirth = false;
+            this.emptyContactNumber = false;
+            this.emptyEmail = false;
+            this.emptyAddress = false;
 
             if(this.usernameInputField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyUsername = true;
 			} else {
 				if(!this.usernameInputField.match(/^[A-Za-z0-9ŠšĐđŽžČčĆć]*$/)){
 					this.errorForUsername = true;
-					empty = true;
-				}
+                    empty = true;
+                    this.emptyUsername = true;
+                }               
             }
             
-            if(this.passwordInputField.length === 0 || this.confirmPasswordInputField.length === 0) {
-				empty = true;
-			} else {
+            if(this.passwordInputField.length === 0) {
+                empty = true;
+                this.emptyPassword = true;
+                if(this.confirmPasswordInputField.length === 0) {
+                    this.emptyConfirmPassword = true;
+                }
+            } else {
 				if(this.passwordInputField !== this.confirmPasswordInputField){
                     this.errorDifferentPassword = true;
-                    differentPasswords = true
+                    this.emptyPassword = true;
+                    this.emptyConfirmPassword = true;
 				}
             }
 
             if(this.nameInputField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyName = true;
 			} else {
 				if(!this.nameInputField.match(/^[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*$/)){
 					this.errorName = true;
-					empty = true;
+                    empty = true;
+                    this.emptyName = true;
+				}
+            }
+
+            if(this.parentNameInputField.length === 0) {
+                empty = true;
+                this.emptyParentName = true;
+			} else {
+				if(!this.parentNameInputField.match(/^[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*$/)){
+					this.errorParentName = true;
+                    empty = true;
+                    this.emptyParentName = true;
 				}
             }
 
             if(this.surnameInputField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptySurname = true;
 			} else {
 				if(!this.surnameInputField.match(/^[A-ZŠĐŽČĆ][A-Za-zŠšĐđŽžČčĆć ]*$/)){
 					this.errorSurname = true;
-					empty = true;
+                    empty = true;
+                    this.emptySurname = true;
 				}
             }
+
+            if(this.genderSelectField === 'gender') {
+                empty = true;
+                this.emptyGander = true;
+			} 
             
             if(this.jmbgInputField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyJmbg = true;
 			} else {
 				if(!this.jmbgInputField.match(/^[0-9]{13}$/)){
 					this.errorJMBG = true;
-					empty = true;
+                    empty = true;
+                    this.emptyJmbg = true;
+				}
+            }
+
+            if(this.personalCardInputField.length === 0) {
+                empty = true;
+                this.emptyPersonalCard = true;
+			} else {
+				if(!this.personalCardInputField.match(/^[0-9]{9}$/)){
+					this.errorPersonalCard = true;
+                    empty = true;
+                    this.emptyPersonalCard = true;
+				}
+            }
+
+            if(this.healthBookletNumberInputField.length === 0) {
+                empty = true;
+                this.emptyHealthBookletNumber = true;
+			} else {
+				if(!this.healthBookletNumberInputField.match(/^[0-9]{11}$/)){
+					this.errorHealthBookletNumber = true;
+                    empty = true;
+                    this.emptyHealthBookletNumber = true;
 				}
             }
             
             if(this.dateOfBirthDatePicker === null || this.dateOfBirthDatePicker.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyDateOfBirth = true;
 			} else {
 				let date = moment(this.dateOfBirthDatePicker).format("YYYY-MM-DD");
 				madeDateOfBirth = new Date(date);	
             }
             
             if(this.contactNumberField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyContactNumber = true;
 			} else {
 				if(!this.contactNumberField.match(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)){
 					this.errorContactNumber = true;
-					empty = true;
+                    empty = true;
+                    this.emptyContactNumber = true;
 				}
             }
 
             if(this.emailField.length === 0) {
-				empty = true;
+                empty = true;
+                this.emptyEmail = true;
 			} else {
 				if(!this.emailField.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)){
 					this.errorEmail = true;
-					empty = true;
+                    empty = true;
+                    this.emptyEmail = true;
 				}
             }
 
             if(this.addressInput.length === 0 ){
-				empty = true;			
+                empty = true;	
+                this.emptyAddress = true;		
 			}else{
 				this.address = toLatinConvert(document.querySelector('#address').value);
 				this.longitude = toLatinConvert(document.querySelector('#longitude').value);
@@ -264,10 +427,15 @@ Vue.component("patientRegistration", {
 				this.zipCode = toLatinConvert(document.querySelector('#zipCode').value);
 				this.country = toLatinConvert(document.querySelector('#country').value);
 				//this.number = document.querySelector('#number').value;
-				
-				var streetAndNumber = this.addressInput.split(/(\d+)/);
-				this.street = streetAndNumber[0].trim();
-				this.number = streetAndNumber[1].trim();	
+				try {
+                    var streetAndNumber = this.address.split(/(\d+)/);
+                    this.street = streetAndNumber[0].trim();
+                    this.number = streetAndNumber[1].trim();
+                } catch (error) {
+                    this.street = this.address;
+                    this.number = '';
+                }
+	
 				
 				if(this.country === "Serbia"){
 					this.country = "Srbija";
@@ -276,35 +444,29 @@ Vue.component("patientRegistration", {
 			}
 
 			if (empty === false) {	
-                if(!differentPasswords){
-                    axios.post('/api/patientRegistration', {
-                        username: this.usernameInputField,
-                        password: this.passwordInputField,
-                        name: this.nameInputField,
-                        surname: this.surnameInputField,
-                        jmbg: this.jmbgInputField,
-                        dateOfBirth: madeDateOfBirth,
-                        contactNumber: this.contactNumberField,
-                        email: this.emailField,
-                        address: {"street" : this.street, "houseNumber" : this.number, "city" : this.city, "postCode" : this.zipCode, "country" : this.country } 
+                if(!this.errorDifferentPassword){
+                    for(allergyId in this.checkedAllergies){
+                        
+                        var allergy = {
+                            Name: allergyId
+                        }
+                        this.finalAllergiesLists.push(allergy)
+                    }
+
+                    axios.post('/api/medicalRecord', {
+                        "Patient" : {"Username" : this.usernameInputField, "Password" : this.passwordInputField, "GuestAccount" : false,
+                        "Name" : this.nameInputField , "ParentName" : this.parentNameInputField, "Surname" : this.surnameInputField,
+                        "Jmbg" : this.jmbgInputField, "IdentityCard" : this.personalCardInputField, "HealthInsuranceCard" : this.healthBookletNumberInputField, 
+                        "BloodGroup" : this.bloodGroupInputField, "DateOfBirth" : madeDateOfBirth, "Gender" : this.genderSelectField, "ContactNumber" : this.contactNumberField, "EMail" : this.emailField, 
+                        "City" : {"Name" : this.city, "PostCode" : this.zipCode, "Address" : this.street + ' ' + this.number, 
+                        "Country" : {"Name" : this.country}}},
+                        "allergies" : this.finalAllergiesLists
+
                     })
                     .then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
-                            this.usernameInputField = '';
-                            this.passwordInputField = '';
-                            this.confirmPasswordInputField = '';
-                            this.nameInputField = '';
-                            this.surnameInputField = '';
-                            this.jmbgInputField = '';
-                            this.dateOfBirthDatePicker = '';
-                            this.contactNumberField = '';
-                            this.emailField = '';
-                            this.addressInput = '';
-                            this.showNotification = false;
-                            this.imagesShow = [],
-                            this.sendImages = [],
-                            this.countImage = 0
+                            this.$router.go()
                         } else {
                             toast('Registracija nije uspešno izvršena!')
                         }
@@ -314,22 +476,22 @@ Vue.component("patientRegistration", {
 			} else {
                 this.showNotification = true; 
             }
-
-
+        },
+        openModal : function(){
+            this.modalDialog = true;
+        },
+        closeModal : function(){
+            this.modalDialog = false;
+            if(this.checkedAllergies.length > 0 ){
+                this.allergyInputField = 'Alergije su uspešno izabrane';    
+            } else {
+                this.allergyInputField = 'Bez alergija';
+            }          
         },
         previousButtonClicked : function(){	
 
             if(confirm('Da li ste sigurni da želite da odustanete od registracije?') === true){ 
-                this.usernameInputField = '';
-                this.passwordInputField = '';
-                this.confirmPasswordInputField = '';
-                this.nameInputField = '';
-                this.surnameInputField = '';
-                this.jmbgInputField = '';
-                this.dateOfBirthDatePicker = '';
-                this.contactNumberField = '';
-                this.emailField = '';
-                this.addressInput = ''; 
+                this.$router.go()
             }
         },
         
@@ -358,6 +520,13 @@ Vue.component("patientRegistration", {
 
 	},
 	mounted() {
+
+        axios.get('api/allergies').then(response => {
+            this.allergies = response.data;
+            for(a in this.allergies){
+                console.log(a)
+            }
+		});
 
         this.places = places({
 			appId: 'plQ4P1ZY8JUZ',

@@ -115,6 +115,47 @@
     background-color: #054f5294;
 }
 
+
+.close-btn-patient-registration {
+    height: 103px;
+    width: 327px;
+    position: relative;
+}
+
+.close-btn-patient-registration p {
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    font-family: 'Trocchi', serif;
+    margin: 0 0 0 110px;
+    font-size: 28px;
+    font-weight: lighter;
+    color: #054f5294;
+}
+
+.close-btn-patient-registration button  {
+    display: inline-block;
+    height: 50px;
+    width: 106px;
+    margin: 0 35px 0 216px; 
+    box-sizing: border-box;
+    border: transparent;
+    border-radius: 60px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #79b0a1;
+    cursor: pointer;
+    outline: none;
+}
+
+.close-btn-patient-registration button:hover{
+    background-color: #054f5294;
+}
+
 /* PART FOR FILLING PATIENT INFORMATIONS */
 
 .fields-to-fill-patient-registration {
@@ -172,11 +213,28 @@
     font-size: 16px;
 }
 
+.text-for-patient-registration select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align-last: center;
+    font-size: 16px;
+    color: gray
+}
+
+.text-for-patient-registration select option {
+    color: black
+}
+
 .text-for-patient-registration input[type="text"]::placeholder {  
     text-align: center; 
-} 
+}
 
-.text-for-patient-registration input[type=password], select {
+.text-for-patient-registration input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -190,7 +248,7 @@
 
 .text-for-patient-registration input[type="password"]::placeholder {  
     text-align: center; 
-} 
+}
 
 .text-for-patient-registration input[type=date]  {
     width: 100%;
@@ -246,6 +304,93 @@
     background: white;
 }
 
+.span-allergies-patient-registration {
+    display: block;
+    height: 50px;
+    font-family: 'Suranna', serif;
+    font-size: 34px;
+}
+
+.container-patient-registration {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
+}
+  
+.container-patient-registration input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark-patient-registration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: lightgray;
+}
+
+.container-patient-registration:hover input ~ .checkmark-patient-registration {
+    background-color: gray;
+}
+
+.container-patient-registration input:checked ~ .checkmark-patient-registration {
+    background-color: #054f5294;
+}
+
+.checkmark-patient-registration:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container-patient-registration input:checked ~ .checkmark-patient-registration:after {
+    display: block;
+}
+
+.container-patient-registration .checkmark-patient-registration:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.text-checkbox-patient-registration {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    padding-bottom: 20px;
+}
+
+.modal-dialog-patient-registration {
+    overflow-y:scroll;
+    background-color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    width: 100%;
+    height: 200px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 16px;
+}
 
 /* STATIC MENU ITEMS */
 
@@ -255,7 +400,7 @@
     margin: auto;
     position: fixed;
     z-index: 5;
-    margin-top: -11%
+    margin-top: 1%
 }
 
 .logo-patient-registration img {
@@ -264,11 +409,11 @@
     height: 60px;
     position: fixed;
     z-index: 5;
-    margin-top: -10%
+    margin-top: 1.5%
 }
 
 .web-name-patient-registration {
-    position: relative;
+    position: fixed;
     z-index: 5;
 }
 
@@ -287,12 +432,11 @@
 
 /* SCROLL */
 
-
 .scroll-in-patient-registration {
     overflow-y: scroll;
     height: 450px;
     width: 600px;
-    border: 1px solid #054f5294;
+    /* border: 1px solid #054f5294; */
     padding: 20px 20px 35px 20px;
     margin-left: -16%;
 }

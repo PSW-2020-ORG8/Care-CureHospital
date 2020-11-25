@@ -11,7 +11,7 @@ namespace Model.Manager
     public class InventaryRoom : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public int Quantity { get; set; }
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
@@ -20,15 +20,15 @@ namespace Model.Manager
 
         public InventaryRoom(string name, int quantity)
         {
-            this.Name = name;
-            this.Quantity = quantity;
+            Name = name;
+            Quantity = quantity;
         }
 
         public InventaryRoom(int id, string name, int quantity)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Quantity = quantity;
+            Id = id;
+            Name = name;
+            Quantity = quantity;
         }
 
         public int GetId()
@@ -38,7 +38,7 @@ namespace Model.Manager
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }
