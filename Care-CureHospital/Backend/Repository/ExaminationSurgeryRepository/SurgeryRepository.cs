@@ -19,7 +19,6 @@ namespace Repository.ExaminationSurgeryRepository
 {
     public class SurgeryRepository : MySQLRepository<Surgery, int>, ISurgeryRepository
     {
-        private string path;
         private const string SURGERY_FILE = "../../Resources/Data/surgeries.csv";
         private static SurgeryRepository instance;
 

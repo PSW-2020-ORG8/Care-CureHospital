@@ -21,7 +21,7 @@ namespace WebAppPatient.Controllers
         public IActionResult GetAllFeedbacks()
         {
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
-            App.Instance().patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
+            App.Instance().PatientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
 
@@ -30,7 +30,7 @@ namespace WebAppPatient.Controllers
         public IActionResult GetPublishedFeedbacks()
         {
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
-            App.Instance().patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
+            App.Instance().PatientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
 
@@ -43,7 +43,7 @@ namespace WebAppPatient.Controllers
             }
 
             PatientFeedback patientFeedback = PatientFeedbackMapper.PatientFeedbackDtoToPatientFeedback(dto, null);
-            App.Instance().patientFeedbackService.AddEntity(patientFeedback);
+            App.Instance().PatientFeedbackService.AddEntity(patientFeedback);
             return Ok();
         }
 
@@ -51,7 +51,7 @@ namespace WebAppPatient.Controllers
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {     
-            PatientFeedback result = App.Instance().patientFeedbackService.PublishPatientFeedback(id);
+            PatientFeedback result = App.Instance().PatientFeedbackService.PublishPatientFeedback(id);
             if (result == null)
             {
                 return NotFound();

@@ -1,15 +1,21 @@
 ﻿using Backend.Model.BlogAndNotification;
+using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
 using Backend.Repository.BlogNotificationRepository;
+using Backend.Repository.DirectorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
 using Backend.Service.BlogNotificationServices;
+using Backend.Service.DirectorService;
 using Backend.Service.ExaminationSurgeryServices;
+using Model.DoctorMenager;
 using Model.Patient;
 using Model.PatientDoctor;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
+using Repository.MedicamentRepository;
 using Service.MedicalRecordService;
+using Service.MedicamentService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,32 +25,46 @@ namespace Backend
 {
     public class App
     {
-        private static App instance = null;
+        private static App _instance = null;
 
-        public PatientFeedbackService patientFeedbackService;
-        public MedicalExaminationReportService medicalExaminationReportService;
-        public MedicalRecordService medicalRecordService;
-        public SurveyService surveyService;
+
+        public PatientFeedbackService PatientFeedbackService;
+        public MedicalExaminationReportService MedicalExaminationReportService;
+        public PrescriptionService PrescriptionService;
+        public MedicalRecordService MedicalRecordService;
+        public SurveyService SurveyService;
+        public AllergiesService AllergiesService;
+        public ReportService ReportService;
+
 
         private App()
         {
-            patientFeedbackService = new PatientFeedbackService(
+            PatientFeedbackService = new PatientFeedbackService(
                 new PatientFeedbackRepository(new MySQLStream<PatientFeedback>(), new IntSequencer()));
-            medicalExaminationReportService = new MedicalExaminationReportService(
+            MedicalExaminationReportService = new MedicalExaminationReportService(
                new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>(), new IntSequencer()));
-            medicalRecordService = new MedicalRecordService(
+            PrescriptionService = new PrescriptionService(
+               new PrescriptionRepository(new MySQLStream<Prescription>(), new IntSequencer()));
+            MedicalRecordService = new MedicalRecordService(
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
-            surveyService = new SurveyService(
+            SurveyService = new SurveyService(
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
+
+            AllergiesService = new AllergiesService(
+               new AllergiesRepository(new MySQLStream<Allergies>(), new IntSequencer()));
+
+            ReportService = new ReportService(
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
+
         }
 
         public static App Instance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new App();
+                _instance = new App();
             }
-            return instance;
+            return _instance;
 
         }
         

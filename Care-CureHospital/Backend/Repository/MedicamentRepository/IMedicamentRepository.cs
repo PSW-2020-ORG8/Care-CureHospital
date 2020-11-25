@@ -10,5 +10,6 @@ namespace Repository.MedicamentRepository
 {
     public interface IMedicamentRepository : IRepository<Medicament, int>
     {
+        
     }
 }

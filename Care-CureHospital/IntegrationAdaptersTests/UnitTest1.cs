@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace WebAppPatientTests
+namespace IntegrationAdaptersTests
 {
     public class UnitTest1
     {
