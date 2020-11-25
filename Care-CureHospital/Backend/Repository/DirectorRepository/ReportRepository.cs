@@ -14,6 +14,16 @@ namespace Backend.Repository.DirectorRepository
 {
     public class ReportRepository : MySQLRepository<Report, int>, IReportRepository
     {
+        private static ReportRepository instance;
+
+        public static ReportRepository Instance()
+        {
+            if (instance == null)
+            {
+                instance = new ReportRepository(new MySQLStream<Report>(), new IntSequencer());
+            }
+            return instance;
+        }
 
         public ReportRepository(IMySQLStream<Report> stream, ISequencer<int> sequencer):base(stream, sequencer)
         {

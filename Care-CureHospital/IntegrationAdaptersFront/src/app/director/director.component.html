@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
- data-backdrop='static' data-keybord="false">
+(click)="addclick()" data-backdrop='static' data-keybord="false">
     Add report
   </button>
   
@@ -31,14 +31,13 @@
 
 
 <table class="table table-striped" matTableExporter #exporter="matTableExporter" >
+  <caption>Table of report</caption>
     <thead>
         <tr>
-            <th>MedicationName</th>
-            <th>ConsumedMedication</th>
-            
-            <th>FromDate</th>
-            <th>ToDate</th>
-            
+            <th id="MedicationName">MedicationName</th>
+            <th id="ConsumedMedication">ConsumedMedication</th>
+            <th id="FromDate">FromDate</th>
+            <th id="ToDate">ToDate</th>
         </tr>
     </thead>
     <tbody>

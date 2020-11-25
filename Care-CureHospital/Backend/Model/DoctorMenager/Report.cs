@@ -18,30 +18,29 @@ namespace Backend.Model.DoctorMenager
 
         public Report(int id, string name, int quantity)
         {
-            this.Id = id;
+            Id = id;
 
-            this.MedicationName = name;
+            MedicationName = name;
 
-            this.Quantity = quantity;
-
+            Quantity = quantity;
 
         }
 
         public Report(string name, int quantity)
         {
 
-            this.MedicationName = name;
+            MedicationName = name;
 
-            this.Quantity = quantity;
+            Quantity = quantity;
             
-
         }
 
 
         public Report(String name)
         {
-            this.MedicationName = name;
+            MedicationName = name;
         }
+
         public Report()
         {
 
@@ -54,7 +53,7 @@ namespace Backend.Model.DoctorMenager
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
 
