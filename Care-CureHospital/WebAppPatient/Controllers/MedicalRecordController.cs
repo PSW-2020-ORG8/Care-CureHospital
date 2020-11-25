@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Model.PatientDoctor;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
+using WebAppPatient.Validation;
 
 namespace WebAppPatient.Controllers
 {
@@ -20,7 +21,12 @@ namespace WebAppPatient.Controllers
         [HttpPost]      // POST /api/medicalRecord
         public IActionResult Add(MedicalRecordDto dto)
         {
-            // validacije
+            MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation();
+            if (!medicalRecordValidation.ValidateMedicalRecord(dto))
+            {
+                return BadRequest("The data which were entered are incorrect!");
+            }
+
             MedicalRecord medicalRecord = MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto);
             App.Instance().MedicalRecordService.AddEntity(medicalRecord);
             return Ok(200);

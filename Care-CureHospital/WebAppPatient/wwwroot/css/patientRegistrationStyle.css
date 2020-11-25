@@ -2,11 +2,11 @@
 
 .confirm-cancel-field-patient-registration{
     position: fixed;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     padding: 20px;
     margin-top: 0%;
-    margin-left: 73%;
+    margin-left: 72%;
     background-color: #afd0c7;
     z-index: 3;
     border-radius: 30px 30px 30px 30px;
@@ -54,7 +54,7 @@
     display: inline-block;
     height: 50px;
     width: 176px;
-    margin: 20px 35px 0 106px; 
+    margin: 20px 35px 0 86px; 
     box-sizing: border-box;
     border: transparent;
     border-radius: 60px;
@@ -96,7 +96,7 @@
     display: inline-block;
     height: 50px;
     width: 176px;
-    margin: -20px 35px 0 106px; 
+    margin: -20px 35px 0 86px; 
     box-sizing: border-box;
     border: transparent;
     border-radius: 60px;
@@ -165,7 +165,7 @@
 .wrapper-form-patient-registration {
     position: fixed;
     z-index: 1;
-    height: 700px;
+    height: 630px;
     width: 854px;
     margin: 50px auto;
     margin-left: 21%;
@@ -180,7 +180,7 @@
 }
 
 .data-for-patient-registration {
-    height: 700px;
+    height: 630px;
     width: 854px;
     border-radius: 0 7px 10px 7px;
     background-color: #afd0c7;
@@ -434,7 +434,7 @@
 
 .scroll-in-patient-registration {
     overflow-y: scroll;
-    height: 450px;
+    height: 400px;
     width: 600px;
     /* border: 1px solid #054f5294; */
     padding: 20px 20px 35px 20px;
