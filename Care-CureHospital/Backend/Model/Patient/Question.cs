@@ -4,15 +4,15 @@
  * Purpose: Definition of the Class Patient.Question
  ***********************************************************************/
 
+using HealthClinic.Repository;
 using System;
 
 namespace Model.Patient
 {
-    public class Question
+    public class Question : IIdentifiable<int>
     {
         public int Id { get; set; }
         public string QuestionText { get; set; }
-        public int AnswerId { get; set; }
         public virtual GradeOfQuestion Answer { get; set; }
         public int SurveyId { get; set; }
         public virtual Survey Survey { get; set; }
@@ -26,17 +26,16 @@ namespace Model.Patient
         {
         }
 
-        public Question(int id, string questionText, int answerID, int surveyID) : this(id)
+
+        public Question(int id, string questionText, int surveyID) : this(id)
         {
             QuestionText = questionText;
-            AnswerId = answerID;
             SurveyId = surveyID;
         }
 
-        public Question(int id, string questionText, int answerID, GradeOfQuestion answer, int surveyID, Survey survey) : this(id)
+        public Question(int id, string questionText, GradeOfQuestion answer, int surveyID, Survey survey) : this(id)
         {
             QuestionText = questionText;
-            AnswerId = answerID;
             Answer = answer;
             SurveyId = surveyID;
             Survey = survey;

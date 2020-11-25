@@ -42,5 +42,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             surveyRepository.DeleteEntity(entity);
         }
 
+        
+       
     }
 }

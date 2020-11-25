@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201122211545_NewMigration")]
-    partial class NewMigration
+    [Migration("20201125194240_DatabaseMigration")]
+    partial class DatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -737,9 +737,6 @@ namespace Backend.Migrations
                     b.Property<int>("Answer")
                         .HasColumnType("int");
 
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("QuestionText")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -756,42 +753,128 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje1",
+                            Answer = 1,
+                            QuestionText = "Ljubaznost doktora prema pacijentu",
                             SurveyId = 1
                         },
                         new
                         {
                             Id = 2,
                             Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje2",
+                            QuestionText = "Posvećenost doktora pacijentu",
                             SurveyId = 1
                         },
                         new
                         {
                             Id = 3,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje3",
-                            SurveyId = 2
+                            Answer = 1,
+                            QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 4,
                             Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje4",
-                            SurveyId = 2
+                            QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 5,
-                            Answer = 0,
-                            AnswerId = 1,
-                            QuestionText = "Pitanje5",
+                            Answer = 1,
+                            QuestionText = "Posvećenost medicinskog osoblja pacijentu",
                             SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Answer = 0,
+                            QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Answer = 3,
+                            QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Answer = 4,
+                            QuestionText = "Higijena unutar bolnice",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Answer = 1,
+                            QuestionText = "Opremljenost bolnice",
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Answer = 1,
+                            QuestionText = "Ljubaznost doktora prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Answer = 1,
+                            QuestionText = "Posvećenost doktora pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Answer = 0,
+                            QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Answer = 3,
+                            QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Answer = 4,
+                            QuestionText = "Posvećenost medicinskog osoblja pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Answer = 4,
+                            QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Answer = 2,
+                            QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Answer = 1,
+                            QuestionText = "Higijena unutar bolnice",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Answer = 2,
+                            QuestionText = "Opremljenost bolnice",
+                            SurveyId = 2
                         });
                 });
 
@@ -1354,7 +1437,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Model.Patient.Question", b =>
                 {
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany("Question")
+                        .WithMany("Questions")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
