@@ -21,6 +21,16 @@ namespace WebAppPatientTests
             Assert.NotNull(results);
         }
 
+        [Fact]
+        public void Validate_survey_results()
+        {
+            QuestionService questionService = new QuestionService(CreateStubRepository());
+
+            Dictionary<string, List<int>> results = questionService.GetAnswersByQuestion();
+
+            Assert.Equal(5, results.Keys.Count);
+        }
+
         private static IQuestionRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IQuestionRepository>();
