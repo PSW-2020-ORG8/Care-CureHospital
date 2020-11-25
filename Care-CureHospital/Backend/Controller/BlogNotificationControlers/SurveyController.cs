@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Service.SurveyService
  ***********************************************************************/
 
+using Backend.Service.ExaminationSurgeryServices;
 using Model.Patient;
-using Service.BlogNotificationServices;
 using System;
 using System.Collections.Generic;
 
