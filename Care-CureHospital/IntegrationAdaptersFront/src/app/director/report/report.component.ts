@@ -12,28 +12,32 @@ export class ReportComponent implements OnInit {
   constructor(private service:DirectorServiceService) { }
 
   @Input() rep:any;
-  MedicationId:string;
   MedicationName:string;
-  Date:string;
+  ConsumedMedication:string;
+  FromDate:string;
+  ToDate:string;
 
   MedicationList:any=[];
 
   ngOnInit(): void {
-    //.loadMedicationList();
+    //this.loadReportList();
   }
 
   /*loadMedicationList(){
-    this.service.getMedList().subscribe((data:any)=>{
-      this.MedicationList=data;
+    this.service.getReportList().subscribe((data:any)=>{
+      this.ReportList=data;
     });
-  }
+  }*/
 
   addReport(){
-    var val = {MedicationId:this.MedicationList, 
-              MedicationName:this.MedicationName};
+    var val = {MedicationName:this.MedicationName,
+              ConsumedMedication:this.ConsumedMedication,
+              FromDate:this.FromDate,
+              ToDate:this.ToDate};
 
-    this.service.addReport(val).subscribe(res=>{alert(res.toString())});
-    alert("abgdfvdsa");
-  }*/
+    this.service.addReport(val).subscribe(res=>{
+      alert(res.toString())});
+    alert("Successfully added report");
+  }
 
 }

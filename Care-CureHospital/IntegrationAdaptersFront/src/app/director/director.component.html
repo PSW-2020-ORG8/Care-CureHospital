@@ -41,32 +41,16 @@
         </tr>
     </thead>
     <tbody>
-      <!--  <tr *ngFor="let dataItem of EmployeeList">
-            <td>{{dataItem.EmployeeId}}</td>
-            <td>{{dataItem.EmployeeName}}</td>
-            <td>{{dataItem.Department}}</td>
-            <td>{{dataItem.DateOfJoining}}</td>
+       <tr *ngFor="let dataItem of ReportList">
+            <td>{{dataItem.MedicationName}}</td>
+            <td>{{dataItem.ConsumedMedication}}</td>
+            <td>{{dataItem.FromDate}}</td>
+            <td>{{dataItem.ToDate}}</td>
             <td> 
               
             </td>
-        </tr>-->
-
-        <!--<tr *ngFor =" let dataItem of MedicationList">
-          <td>{{dataItem.MedicationName}}</td>
-          <td>{{dataItem.ConsumedMedication}}</td>
-          <td></td>
-        </tr>-->
-
-        <tr >
-          <td>Brufen</td>
-          <td>15</td>
-          <td>15:2:2020</td>
-          <td>20:11:2020</td>
-          
         </tr>
     </tbody>
 </table>
 
-<!--
-<button mat-raised-button (click)="exporter.exportTable('json', {fileName:'report'})" class="btn btn-primary float-right">Save</button>
--->
+<button (click)="saveReport()" class="btn btn-primary float-right">Save</button>

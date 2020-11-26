@@ -10,13 +10,24 @@ export class DirectorServiceService {
   readonly APIUrl = "http://localhost:51492/api";
 
   constructor(private http:HttpClient) { }
-/*
-  getMedList():Observable<any[]>{
-    return this.http.get<any>(this.APIUrl);
 
+  getReportList():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/report');
+  }
 
   addReport(val:any){
-    return this.http.post(this.APIUrl+'/Repost', val);
+    return this.http.post(this.APIUrl+'/report', val);
+  }
+
+  updateReport(val:any){
+    return this.http.put(this.APIUrl+'/report', val);
+  }
+
+ /* getAllMedicamentNames():Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl+'/Report/GetAll');
   }*/
   
+  saveReport(val:any){
+   // return this.http.post(this.APIUrl+'/saveInfos', val);
+  }
 }
