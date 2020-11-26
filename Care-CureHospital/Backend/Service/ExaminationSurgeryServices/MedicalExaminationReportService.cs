@@ -48,7 +48,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.PublishingDate.ToString("dd.MM.yyyy.").Equals(publishingDate)))
+                if ((report.PublishingDate.ToString("yyyy-MM-dd").Equals(publishingDate)))
                 {
                     searchResult.Add(report);
                 }
