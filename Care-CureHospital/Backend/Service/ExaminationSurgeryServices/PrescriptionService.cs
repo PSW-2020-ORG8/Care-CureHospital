@@ -49,7 +49,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if ((prescription.PublishingDate.ToString("dd.MM.yyyy.").Equals(publishingDate)))
+                if ((prescription.PublishingDate.ToString("yyyy-MM-dd").Equals(publishingDate)))
                 {
                     searchResult.Add(prescription);
                 }

@@ -28,6 +28,16 @@ namespace WebAppPatientTests
         }
 
         [Fact]
+        public void Not_Found_Prescriptions_With_Doctor_Searh_Parameter()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> searchResult = service.FindPrescriptionsForDoctorParameter(1, "Milorad");
+
+            Assert.Empty(searchResult);
+        }
+
+        [Fact]
         public void Find_Prescriptions_With_Comment_Searh_Parameter()
         {
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
@@ -38,13 +48,33 @@ namespace WebAppPatientTests
         }
 
         [Fact]
+        public void Not_Found_Prescriptions_With_Comment_Searh_Parameter()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> searchResult = service.FindPrescriptionsForCommentParameter(1, "Bolnica");
+
+            Assert.Empty(searchResult);
+        }
+
+        [Fact]
         public void Find_Prescriptions_With_Date_Searh_Parameter()
         {
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> searchResult = service.FindPrescriptionsForDateParameter(1, "23.12.2020.");
+            List<Prescription> searchResult = service.FindPrescriptionsForDateParameter(1, "2020-12-23");
 
             Assert.NotEmpty(searchResult);
+        }
+
+        [Fact]
+        public void Not_Found_Prescriptions_With_Date_Searh_Parameter()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> searchResult = service.FindPrescriptionsForDateParameter(1, "2021-12-23");
+
+            Assert.Empty(searchResult);
         }
 
         [Fact]

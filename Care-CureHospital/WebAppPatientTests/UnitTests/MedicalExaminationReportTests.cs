@@ -36,16 +36,6 @@ namespace WebAppPatientTests
         }
 
         [Fact]
-        public void Not_Find_Reports_With_Doctor_Searh_Parameter()
-        {
-            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
-
-            List<MedicalExaminationReport> searchResult = service.FindReportsForDoctorParameter(1, "Milan");
-
-            Assert.NotEmpty(searchResult);
-        }
-
-        [Fact]
         public void Find_Reports_With_Comment_Searh_Parameter()
         {
             MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
@@ -56,13 +46,33 @@ namespace WebAppPatientTests
         }
 
         [Fact]
+        public void Not_Found_Reports_With_Comment_Searh_Parameter()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsForCommentParameter(1, "Bolnica");
+
+            Assert.Empty(searchResult);
+        }
+
+        [Fact]
         public void Find_Reports_With_Date_Searh_Parameter()
         {
             MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
 
-            List<MedicalExaminationReport> searchResult = service.FindReportsForDateParameter(1, "23.12.2020.");
+            List<MedicalExaminationReport> searchResult = service.FindReportsForDateParameter(1, "2020-12-23");
 
             Assert.NotEmpty(searchResult);
+        }
+
+        [Fact]
+        public void Not_Found_Reports_With_Date_Searh_Parameter()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsForDateParameter(1, "2021-12-23");
+
+            Assert.Empty(searchResult);
         }
 
         [Fact]
@@ -73,6 +83,15 @@ namespace WebAppPatientTests
             List<MedicalExaminationReport> searchResult = service.FindReportsForRoomParameter(1, "101");
 
             Assert.NotEmpty(searchResult);
+        }
+
+        public void Not_Found_Reports_With_Room_Searh_Parameter()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsForRoomParameter(1, "501");
+
+            Assert.Empty(searchResult);
         }
 
         private static IMedicalExaminationReportRepository CreateStubRepository()
