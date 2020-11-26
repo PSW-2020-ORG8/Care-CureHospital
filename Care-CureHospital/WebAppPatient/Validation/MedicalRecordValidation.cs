@@ -1,4 +1,5 @@
-﻿using Backend.Model.AllActors;
+﻿using Backend;
+using Backend.Model.AllActors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,14 @@ namespace WebAppPatient.Validation
         public MedicalRecordValidation() { }
 
         public bool ValidateMedicalRecord(MedicalRecordDto medicalRecordDto)
-        {      
+        {
             if (!ValidateUsername(medicalRecordDto.Patient.Username) || !ValidatePassword(medicalRecordDto.Patient.Password, medicalRecordDto.ConfirmedPassword)
                 || !ValidateLettersOnly(medicalRecordDto) || !ValidateJmbg(medicalRecordDto.Patient.Jmbg) || !ValidateIdentityCard(medicalRecordDto.Patient.IdentityCard)
                 || !ValidateHealthInsuranceCard(medicalRecordDto.Patient.HealthInsuranceCard) || !ValidateDateOfBirth(medicalRecordDto.Patient.DateOfBirth)
                 || !ValidateContactNumber(medicalRecordDto.Patient.ContactNumber) || !ValidateEMail(medicalRecordDto.Patient.EMail) || !EmptyAddress(medicalRecordDto))
             {
                 return false;
-            } 
+            }
             else
             {
                 return true;
@@ -39,9 +40,13 @@ namespace WebAppPatient.Validation
         {
             try
             {
-                Match match = usernameRegex.Match(username);     
-                
+                Match match = usernameRegex.Match(username);
+
                 if (string.IsNullOrEmpty(username))
+                {
+                    return false;
+                }
+                else if (App.Instance().PatientService.DoesUsernameExist(username))
                 {
                     return false;
                 }

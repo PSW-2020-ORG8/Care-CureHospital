@@ -183,7 +183,7 @@ Vue.component("patientRegistration", {
                             <label v-if="emptyHealthBookletNumber" style="color:red;">Broj zdravstvene knjižice*:</label>
                             <label v-else>Broj zdravstvene knjižice*:</label>
                             <input v-model="healthBookletNumberInputField" type="text" placeholder="Unesite broj zdravstvene knjižice..." pattern="[0-9]{11}" title="Možete uneti samo brojeve!">
-                            <label v-if="errorHealthBookletNumber" style="color:red; font-size: 16px">JMBG se sastoji od 11 cifara!</label><br><br>
+                            <label v-if="errorHealthBookletNumber" style="color:red; font-size: 16px">Zdravstvene knjižice se sastoji od 11 cifara!</label><br><br>
 
                             <label v-if="emptyDateOfBirth" style="color:red;">Datum rođenja*:</label>
                             <label v-if="!emptyDateOfBirth" >Datum rođenja*:</label>
@@ -216,7 +216,7 @@ Vue.component("patientRegistration", {
                             <div v-if="this.modalDialog" class="modal-dialog-patient-registration">
                                 <span class="span-allergies-patient-registration" v-for="allergy in allergies">        
                                     <label class="container-patient-registration">
-                                    <input type="checkbox" :value="allergy.id" v-model="checkedAllergies">
+                                    <input type="checkbox" :value="allergy.name" v-model="checkedAllergies">
                                     <div class="text-checkbox-patient-registration">{{allergy.name}}</div>
                                     <span class="checkmark-patient-registration"></span>
                                     </label>
@@ -462,17 +462,46 @@ Vue.component("patientRegistration", {
                         "Country" : {"Name" : this.country}}},
                         "allergies" : this.finalAllergiesLists,
                         "ConfirmedPassword" : this.confirmPasswordInputField
-
                     })
                     .then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
-                            //this.$router.go()
-                        } else {
-                            toast('Registracija nije uspešno izvršena!')
-                        }
-                        
-                    });
+                            this.usernameInputField = '';
+                            this.passwordInputField = '';
+                            this.confirmPasswordInputField =  '';
+                            this.nameInputField =  '';
+                            this.parentNameInputField =  '';
+                            this.surnameInputField =  '';
+                            this.genderSelectField =  'gender';
+                            this.jmbgInputField =  '';
+                            this.personalCardInputField =  '';
+                            this.healthBookletNumberInputField =  '';
+                            this.dateOfBirthDatePicker =  '';
+                            this.contactNumberField = '';
+                            this.emailField = '';
+                            this.places = null;
+                            this.city = '';
+                            this.zipCode = 0;
+                            this.longitude = '';
+                            this.latitude = '';
+                            this.street = '';
+                            this.number = '';
+                            this.address = '';
+                            this.country = '';
+                            this.addressInput = '';
+                            this.checkedAllergies =  [];
+                            this.finalCheckedAllergies =  [];
+                            this.modalDialog = false;
+                            this.allergyInputField = 'Bez alergija';
+                            this.bloodGroupInputField = 'unknown';          
+                        }           
+                    }).catch(error => {
+
+			            if(error.response.status === 400){
+                            toast('Korisničko ime već postoji!')
+                            this.emptyUsername = true;
+			            }});
+                    
                 }		 	
 			} else {
                 this.showNotification = true; 
@@ -492,7 +521,34 @@ Vue.component("patientRegistration", {
         previousButtonClicked : function(){	
 
             if(confirm('Da li ste sigurni da želite da odustanete od registracije?') === true){ 
-                this.$router.go()
+                this.usernameInputField = '';
+                this.passwordInputField = '';
+                this.confirmPasswordInputField =  '';
+                this.nameInputField =  '';
+                this.parentNameInputField =  '';
+                this.surnameInputField =  '';
+                this.genderSelectField =  'gender';
+                this.jmbgInputField =  '';
+                this.personalCardInputField =  '';
+                this.healthBookletNumberInputField =  '';
+                this.dateOfBirthDatePicker =  '';
+                this.contactNumberField = '';
+                this.emailField = '';
+                this.places = null;
+                this.city = '';
+                this.zipCode = 0;
+                this.longitude = '';
+                this.latitude = '';
+                this.street = '';
+                this.number = '';
+                this.address = '';
+                this.country = '';
+                this.addressInput = '';
+                this.checkedAllergies =  [];
+                this.finalCheckedAllergies =  [];
+                this.modalDialog = false;
+                this.allergyInputField = 'Bez alergija';
+                this.bloodGroupInputField = 'unknown';
             }
         },
         
@@ -522,6 +578,12 @@ Vue.component("patientRegistration", {
 	},
 	mounted() {
 
+        // axios.get('api/allergies').then(response => {
+        //     this.allergies = response.data;
+        //     for(a in this.allergies){
+        //         console.log(a.name)
+        //     }
+        // });
         axios.get('api/allergies').then(response => {
             this.allergies = response.data;
             for(a in this.allergies){

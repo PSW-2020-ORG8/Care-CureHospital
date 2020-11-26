@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201125194240_DatabaseMigration")]
-    partial class DatabaseMigration
+    [Migration("20201125214607_DbMigration")]
+    partial class DbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
