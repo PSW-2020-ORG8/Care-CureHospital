@@ -74,17 +74,13 @@ namespace Backend.Service.ExaminationSurgeryServices
         public List<Prescription> FindPrescriptionsForMedicamentsParameter(int patientID, string medicaments)
         {
             List<Prescription> searchResult = new List<Prescription>();
-            string[] namesOfMedicaments = medicaments.Split(",");
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                foreach (string nameOfMedicament in namesOfMedicaments)
+                foreach (Medicament medicament in prescription.Medicaments)
                 {
-                    foreach (Medicament medicament in prescription.Medicaments)
+                    if (medicaments.ToString().Contains(medicament.Name.ToString()))
                     {
-                        if (medicament.Name.ToString().Equals(nameOfMedicament.Trim()))
-                        {
-                            searchResult.Add(prescription);
-                        }
+                        searchResult.Add(prescription);
                     }
                 }
             }
