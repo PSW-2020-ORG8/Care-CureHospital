@@ -10,7 +10,7 @@ namespace Model.BlogAndNotification
 {
     public class Content
     {
-        public String Text { get; set; }
+        public string Text { get; set; }
         public DateTime PublishingDate { get; set; }
 
         public Content()
@@ -19,8 +19,8 @@ namespace Model.BlogAndNotification
 
         public Content(string text, DateTime publishingDate)
         {
-            this.Text = text;
-            this.PublishingDate = publishingDate;
+            Text = text;
+            PublishingDate = publishingDate;
         }
     }
 }

@@ -12,15 +12,14 @@ namespace Model.Patient
     public class Question : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String QuestionText { get; set; }
-
+        public string QuestionText { get; set; }
         public virtual GradeOfQuestion Answer { get; set; }
         public int SurveyId { get; set; }
         public virtual Survey Survey { get; set; }
 
         public Question(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Question()
@@ -31,26 +30,26 @@ namespace Model.Patient
         public Question(int id, string questionText, int surveyID) : this(id)
         {
             QuestionText = questionText;
-            this.SurveyId = surveyID;
+            SurveyId = surveyID;
         }
 
         public Question(int id, string questionText, GradeOfQuestion answer, int surveyID, Survey survey) : this(id)
         {
             QuestionText = questionText;
             Answer = answer;
-            this.SurveyId = surveyID;
+            SurveyId = surveyID;
             Survey = survey;
         }
 
         public Question(string questionText, GradeOfQuestion answer)
         {
-            this.QuestionText = questionText;
-            this.Answer = answer;
+            QuestionText = questionText;
+            Answer = answer;
         }
 
         public Question(string questionText)
         {
-            this.QuestionText = questionText;
+            QuestionText = questionText;
         }
 
         public int GetId()
@@ -60,7 +59,7 @@ namespace Model.Patient
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

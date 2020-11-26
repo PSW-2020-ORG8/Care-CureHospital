@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class AllActors.Patient
  ***********************************************************************/
 
+using Backend.Model.AllActors;
 using Model.PatientDoctor;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,26 +13,36 @@ namespace Model.AllActors
 {
     public class Patient : User
     {
-        public Boolean GuestAccount { get; set; }
-        public int MedicalRecordId { get; set; }
-        [NotMapped]
-        public virtual MedicalRecord MedicalRecord { get; set; }
+        public bool GuestAccount { get; set; }
 
         public Patient(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city,
-            bool guestAccount, MedicalRecord medicalRecord)
+            bool guestAccount)
             : base(id, username, password, name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
         {
-            this.GuestAccount = guestAccount;
-            this.MedicalRecord = medicalRecord;
+            GuestAccount = guestAccount;
         }
 
         public Patient(string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city,
-            bool guestAccount, MedicalRecord medicalRecord)
+            bool guestAccount)
             : base(username, password, name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
 
         {
-            this.GuestAccount = guestAccount;
-            this.MedicalRecord = medicalRecord;
+            GuestAccount = guestAccount;
+        }
+
+        public Patient(int id, string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, 
+            string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city, bool guestAccount)
+            : base(id, username, password, name, parentName, surname, gender, jmbg, identityCard, healthInsuranceCard, bloodGroup, dateOfBirth, contactNumber, emailAddress, city)
+        {
+            GuestAccount = guestAccount;
+        }
+
+        public Patient(string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, 
+            string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city, bool guestAccount)
+            : base(username, password, name, parentName, surname, gender, jmbg, identityCard, healthInsuranceCard, bloodGroup, dateOfBirth, contactNumber, emailAddress, city)
+
+        {
+            GuestAccount = guestAccount;
         }      
 
         public Patient(int id) : base(id)

@@ -12,7 +12,7 @@ namespace Model.PatientDoctor
     public class Anamnesis
     {
         public int Id { get; set; }
-        public String Description { get; set; }
+        public string Description { get; set; }
         public virtual List<Diagnosis> Diagnosis { get; set; }
         public virtual List<Symptoms> Symptoms { get; set; }
 
@@ -22,21 +22,21 @@ namespace Model.PatientDoctor
 
         public Anamnesis(string description, List<Diagnosis> diagnosis, List<Symptoms> symptoms)
         {
-            this.Description = description;
-            this.Diagnosis = diagnosis;
-            this.Symptoms = symptoms;
+            Description = description;
+            Diagnosis = diagnosis;
+            Symptoms = symptoms;
         }
 
         public Anamnesis(int id, string description, List<Diagnosis> diagnosis, List<Symptoms> symptoms)
         {
-            this.Description = description;
-            this.Diagnosis = diagnosis;
-            this.Symptoms = symptoms;
+            Description = description;
+            Diagnosis = diagnosis;
+            Symptoms = symptoms;
         }
 
         public Anamnesis(string description)
         {
-            this.Description = description;
+            Description = description;
             
         }
     }

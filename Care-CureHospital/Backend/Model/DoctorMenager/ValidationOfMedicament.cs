@@ -22,7 +22,7 @@ namespace Model.DoctorMenager
 
         public ValidationOfMedicament(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public ValidationOfMedicament()
@@ -31,20 +31,20 @@ namespace Model.DoctorMenager
 
         public ValidationOfMedicament(int id, bool approved, Medicament medicament, FeedbackOfValidation feedbackOfValidation, Model.AllActors.Doctor doctor)
         {
-            this.Approved = approved;
-            this.Id = id;
-            this.Medicament = medicament;
-            this.FeedbackOfValidation = feedbackOfValidation;
-            this.Doctor = doctor;
+            Approved = approved;
+            Id = id;
+            Medicament = medicament;
+            FeedbackOfValidation = feedbackOfValidation;
+            Doctor = doctor;
         }
 
 
         public ValidationOfMedicament(bool approved, Medicament medicament, FeedbackOfValidation feedbackOfValidation, Model.AllActors.Doctor doctor)
         {
-            this.Approved = approved;
-            this.Medicament = medicament;
-            this.FeedbackOfValidation = feedbackOfValidation;
-            this.Doctor = doctor;
+            Approved = approved;
+            Medicament = medicament;
+            FeedbackOfValidation = feedbackOfValidation;
+            Doctor = doctor;
         }
 
         public int GetId()
@@ -54,7 +54,7 @@ namespace Model.DoctorMenager
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

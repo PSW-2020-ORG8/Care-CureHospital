@@ -12,9 +12,9 @@ namespace Model.AllActors
     public class City
     {
         public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public int PostCode { get; set; }
-        public String Adress { get; set; }
+        public string Address { get; set; }
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
 
@@ -22,21 +22,21 @@ namespace Model.AllActors
         {
         }
 
-        public City(string name, string adress, Country country)
+        public City(string name, string address, Country country)
         {
-            this.Name = name;
-            this.Adress = adress;
-            this.CountryId = country.Id;
-            this.Country = country;
+            Name = name;
+            Address = address;
+            CountryId = country.Id;
+            Country = country;
         }
 
-        public City(string name, int postCode, string adress, Country country)
+        public City(string name, int postCode, string address, Country country)
         {
-            this.Name = name;
-            this.PostCode = postCode;
-            this.Adress = adress;
-            this.CountryId = country.Id;
-            this.Country = country;
+            Name = name;
+            PostCode = postCode;
+            Address = address;
+            CountryId = country.Id;
+            Country = country;
         }
 
     }

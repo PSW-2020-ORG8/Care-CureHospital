@@ -11,22 +11,15 @@ namespace Model.AllActors
     public class Country
     {
         public int Id { get; set; }
-        public String Name { get; set; }
-        public String Code { get; set; }
+        public string Name { get; set; }
 
         public Country()
         {
         }
 
-        public Country(string name, string code)
-        {
-            this.Name = name;
-            this.Code = code;
-        }
-
         public Country(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
     }

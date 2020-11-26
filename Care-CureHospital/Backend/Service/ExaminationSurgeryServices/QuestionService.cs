@@ -45,18 +45,15 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public Dictionary<string, List<int>> GetAnswersByQuestion()
         {
-            IEnumerable<Question> questions = questionRepository.GetAllEntities();
             Dictionary<string, List<int>> results = new Dictionary<string, List<int>>();
-            foreach (Question question in questions)
+            foreach (Question question in questionRepository.GetAllEntities())
             {
                 if (!results.ContainsKey(question.QuestionText))
                 {
                     results.Add(question.QuestionText, new List<int>() { 0, 0, 0, 0, 0 });
                 }
 
-                int grade = (int)question.Answer;
-
-                results[question.QuestionText][grade]++;
+                results[question.QuestionText][(int)question.Answer]++;
             }
 
             return results;

@@ -19,7 +19,7 @@ namespace Model.Doctor
 
         public Bed(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Bed()
@@ -28,15 +28,15 @@ namespace Model.Doctor
 
         public Bed(int id, bool taken, AllActors.Patient patient)
         {
-            this.Taken = taken;
-            this.Id = id;
-            this.Patient = patient;
+            Taken = taken;
+            Id = id;
+            Patient = patient;
         }
 
         public Bed(bool taken, AllActors.Patient patient)
         {
-            this.Taken = taken;
-            this.Patient = patient;
+            Taken = taken;
+            Patient = patient;
         }
 
         public int GetId()
@@ -46,7 +46,7 @@ namespace Model.Doctor
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

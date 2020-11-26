@@ -11,13 +11,13 @@ namespace Model.PatientDoctor
     public class Diagnosis : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         public int AnamnesisId { get; set; }
         public virtual Anamnesis Anamnesis { get; set; }
 
         public Diagnosis(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         public Diagnosis()
@@ -26,18 +26,18 @@ namespace Model.PatientDoctor
 
         public Diagnosis(int id, string name)
         {
-            this.Name = name;
-            this.Id = id;
+            Name = name;
+            Id = id;
         }
 
         public Diagnosis(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public Diagnosis(int id, string name, int anamnesisID) : this(id, name)
         {
-            this.AnamnesisId = anamnesisID;
+            AnamnesisId = anamnesisID;
         }
 
         public int GetId()
@@ -47,7 +47,7 @@ namespace Model.PatientDoctor
 
         public void SetId(int id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }
