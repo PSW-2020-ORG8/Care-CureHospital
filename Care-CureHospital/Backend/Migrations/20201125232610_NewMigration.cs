@@ -4,28 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class DatabaseMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-            migrationBuilder.CreateTable(
-                name: "MedicamentReport",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MedicamentName = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    ToDate = table.Column<DateTime>(nullable: false)
-
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicamentReport", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Anamnesies",
                 columns: table => new
@@ -517,18 +499,6 @@ namespace Backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-
-            migrationBuilder.InsertData(
-                table: "MedicamentReport",
-                columns: new[] { "Id", "MedicamentName", "Quantity", "FromDate", "ToDate" },
-                values: new object[,]
-                {
-                    { 1, "Brufen", 10, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 2, "Panadol", 15, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 3, "Vitamin B", 120, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                    { 4, "Paracetamol", 24, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                });
-
             migrationBuilder.InsertData(
                 table: "Anamnesies",
                 columns: new[] { "Id", "Description" },
@@ -639,10 +609,10 @@ namespace Backend.Migrations
                 values: new object[,]
                 {
                     { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
-                    { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
                     { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, "Pacijenta je boleo stomak", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
                     { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
-                    { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijenta je boleo stomak", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false },
                     { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, "Sve je bilo u redu na pregledu", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false }
                 });
 
@@ -686,11 +656,11 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
-                    { 2, "Pacijent je veoma dobro i nema vecih problema", 2, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Pacijent ima virus", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "Pacijent je lose", 3, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "Pacijent ima virus", 3, new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, "Pacijent je dobro i nema vecih problema", 1, new DateTime(2020, 10, 10, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 3, "Pacijent ima virus", 2, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Pacijent je lose", 2, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Pacijent ima virus", 2, new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "Pacijent je dobro i nema vecih problema", 3, new DateTime(2020, 9, 20, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Pacijent je veoma dobro i nema vecih problema", 4, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -698,11 +668,11 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
-                    { 3, "Redovno koristite prepisane lekove", 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "Ne preskacite konzumiranje leka", 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, "Redovno koristite prepisane lekove", 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "Redovno koristite prepisane lekove", 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 3, "Redovno koristite prepisane lekove", 2, new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Ne preskacite konzumiranje leka", 2, new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -750,11 +720,6 @@ namespace Backend.Migrations
                     { 13, 3, "Ljubaznost medicinskog osoblja prema pacijentu", 2 },
                     { 9, 1, "Opremljenost bolnice", 1 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicamentReport_MedicamentId",
-                table: "MedicamentReport",
-                column: "MedicamentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Allergies_MedicalRecordId",
@@ -879,9 +844,6 @@ namespace Backend.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "MedicamentReport");
-
             migrationBuilder.DropTable(
                 name: "Allergies");
 

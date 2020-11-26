@@ -21,8 +21,6 @@ namespace WebAppPatientTests
             Assert.NotNull(survey);
         }
 
-
-
         private static ISurveyRepository CreateStubRepository()
         {
             var stubRepository = new Mock<ISurveyRepository>();
@@ -31,7 +29,6 @@ namespace WebAppPatientTests
             surveys.Add(new Survey(1, "Naslov ankete 1", new DateTime(2020, 11, 6, 8, 30, 0), "Komentar ankete 1", new List<Question>()));
             surveys.Add(new Survey(2, "Naslov ankete 2", new DateTime(2020, 11, 9, 9, 30, 0), "Komentar ankete 2", new List<Question>()));
             surveys.Add(new Survey(3, "Naslov ankete 3", new DateTime(2020, 11, 11, 7, 30, 0), "Komentar ankete 3", new List<Question>()));
-
 
             stubRepository.Setup(surveyRepository => surveyRepository.GetAllEntities()).Returns(surveys);
             stubRepository.Setup(survey => survey.AddEntity(It.IsAny<Survey>())).Returns(new Survey(1, "Naslov ankete 1", new DateTime(2020, 11, 6, 8, 30, 0), "Komentar ankete 1", new List<Question>()));

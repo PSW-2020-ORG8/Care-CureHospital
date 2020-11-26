@@ -23,5 +23,14 @@ namespace WebAppPatient.Controllers
             App.Instance().MedicalExaminationReportService.GetAllEntities().ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
             return Ok(result);
         }
+
+        [HttpGet("getForPatient/{patientID}")]       // GET /api/medicalExaminationReport/getForPatient/{id}
+        public IActionResult GetMedicalExaminationReportsForPatient(int patientID)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.GetMedicalExaminationReportsForPatient(patientID).ToList().ForEach(
+                medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
     }
 }
