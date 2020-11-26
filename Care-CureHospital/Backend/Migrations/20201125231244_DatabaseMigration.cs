@@ -485,14 +485,41 @@ namespace Backend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     QuestionText = table.Column<string>(nullable: true),
-                    Answer = table.Column<int>(nullable: false),
-                    SurveyId = table.Column<int>(nullable: false)
+                    QuestionType = table.Column<int>(nullable: false),
+                    SurveyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Question", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Question_Survey1_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Survey1",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Answer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Grade = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<int>(nullable: false),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Answer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Answer_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Answer_Survey1_SurveyId",
                         column: x => x.SurveyId,
                         principalTable: "Survey1",
                         principalColumn: "Id",
@@ -504,9 +531,9 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
                 {
-                    { 1, "Pacijent je dobro" },
+                    { 3, "Pacijent je vrlo dobro" },
                     { 2, "Pacijent je loše" },
-                    { 3, "Pacijent je vrlo dobro" }
+                    { 1, "Pacijent je dobro" }
                 });
 
             migrationBuilder.InsertData(
@@ -515,12 +542,28 @@ namespace Backend.Migrations
                 values: new object[] { 1, "Srbija" });
 
             migrationBuilder.InsertData(
+                table: "Question",
+                columns: new[] { "Id", "QuestionText", "QuestionType", "SurveyId" },
+                values: new object[,]
+                {
+                    { 9, "Opremljenost bolnice", 2, null },
+                    { 8, "Higijena unutar bolnice", 2, null },
+                    { 7, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2, null },
+                    { 6, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1, null },
+                    { 4, "Ljubaznost medicinskog osoblja prema pacijentu", 1, null },
+                    { 3, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 0, null },
+                    { 2, "Posvećenost doktora pacijentu", 0, null },
+                    { 1, "Ljubaznost doktora prema pacijentu", 0, null },
+                    { 5, "Posvećenost medicinskog osoblja pacijentu", 1, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Specialitations",
                 columns: new[] { "Id", "SpecialitationForDoctor" },
                 values: new object[,]
                 {
-                    { 1, "Lekar opste prakse" },
-                    { 2, "Hirurg" }
+                    { 2, "Hirurg" },
+                    { 1, "Lekar opste prakse" }
                 });
 
             migrationBuilder.InsertData(
@@ -685,46 +728,56 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Answer",
+                columns: new[] { "Id", "Grade", "QuestionId", "SurveyId" },
+                values: new object[,]
+                {
+                    { 8, 1, 8, 1 },
+                    { 1, 1, 1, 1 },
+                    { 4, 3, 4, 1 },
+                    { 5, 0, 5, 1 },
+                    { 6, 4, 6, 1 },
+                    { 7, 1, 7, 1 },
+                    { 18, 3, 9, 2 },
+                    { 17, 4, 8, 2 },
+                    { 16, 2, 7, 2 },
+                    { 15, 2, 6, 2 },
+                    { 14, 1, 5, 2 },
+                    { 13, 3, 4, 2 },
+                    { 12, 4, 3, 2 },
+                    { 11, 4, 2, 2 },
+                    { 10, 2, 1, 2 },
+                    { 9, 3, 9, 2 },
+                    { 2, 4, 2, 1 },
+                    { 3, 2, 3, 1 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Medicaments",
                 columns: new[] { "Id", "Code", "Ingredients", "MedicalRecordId", "Name", "PrescriptionId", "Producer", "Quantity", "StateOfValidation" },
                 values: new object[,]
                 {
-                    { 3, "L523", "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", 3, "Hemofarm", 10, 0 },
-                    { 2, "L233", "sastojak1, sastojak2, sastojak3", 2, "Panadol", 1, "Hemofarm", 10, 0 },
-                    { 1, "L123", "sastojak1, sastojak2, sastojak3", 1, "Brufen", 1, "Hemofarm", 10, 0 },
                     { 4, "L423", "sastojak1, sastojak2, sastojak3", 4, "Vitamin B", 2, "Hemofarm", 10, 0 },
-                    { 5, "L233", "sastojak1, sastojak2, sastojak3", 1, "Panadol", 2, "Hemofarm", 14, 0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Question",
-                columns: new[] { "Id", "Answer", "QuestionText", "SurveyId" },
-                values: new object[,]
-                {
-                    { 14, 4, "Posvećenost medicinskog osoblja pacijentu", 2 },
-                    { 7, 3, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 1 },
-                    { 6, 0, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1 },
-                    { 5, 1, "Posvećenost medicinskog osoblja pacijentu", 1 },
-                    { 4, 0, "Ljubaznost medicinskog osoblja prema pacijentu", 1 },
-                    { 3, 1, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 1 },
-                    { 2, 0, "Posvećenost doktora pacijentu", 1 },
-                    { 1, 1, "Ljubaznost doktora prema pacijentu", 1 },
-                    { 10, 1, "Ljubaznost doktora prema pacijentu", 2 },
-                    { 11, 1, "Posvećenost doktora pacijentu", 2 },
-                    { 8, 4, "Higijena unutar bolnice", 1 },
-                    { 12, 0, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 2 },
-                    { 18, 2, "Opremljenost bolnice", 2 },
-                    { 17, 1, "Higijena unutar bolnice", 2 },
-                    { 16, 2, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2 },
-                    { 15, 4, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 2 },
-                    { 13, 3, "Ljubaznost medicinskog osoblja prema pacijentu", 2 },
-                    { 9, 1, "Opremljenost bolnice", 1 }
+                    { 1, "L123", "sastojak1, sastojak2, sastojak3", 1, "Brufen", 1, "Hemofarm", 10, 0 },
+                    { 5, "L233", "sastojak1, sastojak2, sastojak3", 1, "Panadol", 2, "Hemofarm", 14, 0 },
+                    { 2, "L233", "sastojak1, sastojak2, sastojak3", 2, "Panadol", 1, "Hemofarm", 10, 0 },
+                    { 3, "L523", "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", 3, "Hemofarm", 10, 0 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Allergies_MedicalRecordId",
                 table: "Allergies",
                 column: "MedicalRecordId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answer_QuestionId",
+                table: "Answer",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answer_SurveyId",
+                table: "Answer",
+                column: "SurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
@@ -848,6 +901,9 @@ namespace Backend.Migrations
                 name: "Allergies");
 
             migrationBuilder.DropTable(
+                name: "Answer");
+
+            migrationBuilder.DropTable(
                 name: "Diagnosies");
 
             migrationBuilder.DropTable(
@@ -863,13 +919,13 @@ namespace Backend.Migrations
                 name: "PatientFeedbacks");
 
             migrationBuilder.DropTable(
-                name: "Question");
-
-            migrationBuilder.DropTable(
                 name: "Survey");
 
             migrationBuilder.DropTable(
                 name: "Symptomes");
+
+            migrationBuilder.DropTable(
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");

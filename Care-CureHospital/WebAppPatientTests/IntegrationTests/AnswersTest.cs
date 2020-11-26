@@ -8,14 +8,14 @@ using System.Text;
 using WebAppPatient;
 using Xunit;
 
-namespace WebAppPatientTests.Integration
+namespace WebAppPatientTests.IntegrationTests
 {
-    public class QuestionAnswersTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class AnswersTest : IClassFixture<WebApplicationFactory<Startup>>
     {
-
+        
         private readonly WebApplicationFactory<Startup> factory;
 
-        public QuestionAnswersTest(WebApplicationFactory<Startup> factory)
+        public AnswersTest(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
         }
@@ -36,6 +36,6 @@ namespace WebAppPatientTests.Integration
         {
             new object[] {  HttpStatusCode.OK }
         };
-
+        
     }
 }

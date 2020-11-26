@@ -43,20 +43,10 @@ namespace Backend.Service.ExaminationSurgeryServices
             questionRepository.UpdateEntity(entity);
         }
 
-        public Dictionary<string, List<int>> GetAnswersByQuestion()
+
+        public List<int> GetDoctorTypeQuestionsIds()
         {
-            Dictionary<string, List<int>> results = new Dictionary<string, List<int>>();
-            foreach (Question question in questionRepository.GetAllEntities())
-            {
-                if (!results.ContainsKey(question.QuestionText))
-                {
-                    results.Add(question.QuestionText, new List<int>() { 0, 0, 0, 0, 0 });
-                }
-
-                results[question.QuestionText][(int)question.Answer]++;
-            }
-
-            return results;
+            return questionRepository.GetAllEntities().Where(q => q.QuestionType == QuestionType.Doctor).Select(q => q.Id).ToList();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace WebAppPatient.Dto
     public class QuestionResultDto
     {
 
-        public String QuestionText { get; set; }
+        public int QuestionId { get; set; }
 
         public List<int> Grades { get; set; }
 

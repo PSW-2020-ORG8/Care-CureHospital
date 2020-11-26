@@ -29,10 +29,11 @@ namespace WebAppPatient.Mapper
             dto.CommentSurvey = survey.CommentSurvey;
             dto.PublishingDate = survey.PublishingDate;
             dto.Questions = new List<Question>();
+            /*
             foreach(Question question in survey.Questions)
             {
-                dto.Questions.Add(new Question(question.QuestionText, question.Answer));
-            }
+                dto.Questions.Add(new Question(question.QuestionText, question.Answer, question.QuestionType));
+            }*/
 
             return dto;
         }
