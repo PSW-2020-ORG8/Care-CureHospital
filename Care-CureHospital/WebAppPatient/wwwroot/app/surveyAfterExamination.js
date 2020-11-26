@@ -112,9 +112,7 @@ Vue.component("surveyAfterExamination", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li class="active" ><a href="#/">Objavljeni utisci</a></li></div><br/>
-		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+			
 	     </ul>
 	 </div>
 
