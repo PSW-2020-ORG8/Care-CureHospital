@@ -1,7 +1,8 @@
 Vue.component("patientDocumentsAdvancedSearch", {
 	data: function () {
 		return {
-			patientDocuments: [],
+			reportsForPatient: [],
+			prescriptionsForPatient : [],
 			firstSearchParams: 'Doktoru',
 			secondSearchParams: 'Doktoru',
 			thirdSearchParams: 'Doktoru',
@@ -15,6 +16,10 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			secondInput: '',
 			thirdInput: '',
 			fourthInput: '',
+			firstPublishingDate: '',
+			secondPublishingDate: '',
+			thirdPublishingDate: '',
+			fourthPublishingDate: '',
 			firstResult: [],
 			secondResult: [],
 			thirdResult: [],
@@ -73,17 +78,20 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					<button type="button" @click="prescriptionsSearchButton">Recepti</button>
 				</div>
 
-                <select v-model="firstSearchParams" name="firstRow">
+                <select v-if="this.reportsButtonSelected === true" v-model="firstSearchParams" name="firstRow">
 					<option value="Doktoru" selected>Doktoru</option>
 					<option value="Datumu">Datumu</option>
-					<option value="Sobi">Sobi</option>
 					<option value="Sadržaju">Sadržaju</option>
+					<option value="Sobi">Sobi</option>
+				</select>
+				<select v-if="this.prescriptionsButtonSelected === true" v-model="firstSearchParams" name="firstRow">
+					<option value="Doktoru" selected>Doktoru</option>
+					<option value="Datumu">Datumu</option>
+					<option value="Sadržaju">Sadržaju</option>
+					<option value="Lekovima">Lekovima</option>
 				</select>
 
-				<div v-if="firstSearchParams === 'Datumu'">
-					<input type="date" style="width:150px">
-				</div>
-
+				<input v-if="firstSearchParams === 'Datumu'" v-model="firstPublishingDate" type="date" style="width:150px;height:42px">
 				<input v-else v-model="firstInput" type="text" style="width:150px" placeholder="">
 
 				<select v-model="firstLogicOperators" style="width:90px" name="firstRow">
@@ -106,7 +114,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 						<option value="Sadržaju">Sadržaju</option>
 					</select>
 
-					<input v-model="secondInput" type="text" style="width:150px" placeholder="">
+					<input v-if="secondSearchParams === 'Datumu'" v-model="secondPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="secondInput" type="text" style="width:150px" placeholder="">
 
 					<select v-model="secondLogicOperators" style="width:90px" name="secondRow">
 						<option value="I" selected>I</option>
@@ -129,7 +138,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 						<option value="Sadržaju">Sadržaju</option>
 					</select>
 
-					<input v-model="thirdInput" type="text" style="width:150px" placeholder="">
+					<input v-if="thirdSearchParams === 'Datumu'" v-model="thirdPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="thirdInput" type="text" style="width:150px" placeholder="">
 
 					<select v-model="thirdLogicOperators" style="width:90px">
 						<option value="I" selected>I</option>
@@ -152,7 +162,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 						<option value="Sadržaju">Sadržaju</option>
 					</select>
 
-					<input v-model="fourthInput" type="text" style="width:150px" placeholder="">
+					<input v-if="fourthSearchParams === 'Datumu'" v-model="fourthPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="fourthInput" type="text" style="width:150px" placeholder="">
 				
 					<div v-if="this.count == 3" class="add-param-btn">
 						<button type="button" @click="dec">-</button>
@@ -170,7 +181,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Obična</a></li></div><br/>
+			<div><li><a href="#/patientDocumentsSimpleSearch">Obična</a></li></div><br/>
 		    <div><li class="active"><a href="#/patientDocumentsAdvancedSearch">Napredna</a></li></div><br/>
 	     </ul>
 	 </div>
@@ -209,7 +220,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					</div>
 					<div class="report-info">
 						<div class="report-text">
-							<h1>Izveštaj od doktora: {{prescription.doctor}}</h1></br>		
+							<h1>Recept od doktora: {{prescription.doctor}}</h1></br>		
 							<p>{{prescription.publishingDate}}</p>
 							<div  style="overflow-y:scroll;height:90px;width:400px;border:1px solid;padding: 5px 5px 10px 5px">
 								{{prescription.comment}}
@@ -251,12 +262,48 @@ Vue.component("patientDocumentsAdvancedSearch", {
 
 		reportsSearchButton: function () {
 			this.prescriptionsButtonSelected = false;
-			this.reportsButtonSelected = true;			
+			this.reportsButtonSelected = true;	
+			this.count = 0,
+			this.firstSearchParams = 'Doktoru',
+			this.secondSearchParams = 'Doktoru',
+			this.thirdSearchParams = 'Doktoru',
+			this.fourthSearchParams = 'Doktoru',
+			this.firstLogicOperators = 'I',
+			this.secondLogicOperators = 'I',
+			this.thirdLogicOperators = 'I',
+			this.fourthLogicOperators = 'I',
+			this.firstInput = '',
+			this.secondInput = '',
+			this.thirdInput = '',
+			this.fourthInput = '',
+			this.firstPublishingDate = '',
+			this.secondPublishingDate = '',
+			this.thirdPublishingDate = '',
+			this.fourthPublishingDate = '',
+			this.reportsResult = this.reportsForPatient
 		},
 
 		prescriptionsSearchButton: function () {
 			this.reportsButtonSelected = false;	
-			this.prescriptionsButtonSelected = true;					
+			this.prescriptionsButtonSelected = true;
+			this.count = 0,
+			this.firstSearchParams = 'Doktoru',
+			this.secondSearchParams = 'Doktoru',
+			this.thirdSearchParams = 'Doktoru',
+			this.fourthSearchParams = 'Doktoru',
+			this.firstLogicOperators = 'I',
+			this.secondLogicOperators = 'I',
+			this.thirdLogicOperators = 'I',
+			this.fourthLogicOperators = 'I',
+			this.firstInput = '',
+			this.secondInput = '',
+			this.thirdInput = '',
+			this.fourthInput = '',
+			this.firstPublishingDate = '',
+			this.secondPublishingDate = '',
+			this.thirdPublishingDate = '',
+			this.fourthPublishingDate = '',
+			this.prescriptionsResult = this.prescriptionsForPatient						
 		}
 	},
 	computed: {
@@ -264,10 +311,13 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	},
 	mounted() {
 		axios.get('api/medicalExaminationReport/getForPatient/' + 1).then(response => {
-			this.reportsResult = response.data;
+			this.reportsForPatient = response.data;
+			this.reportsResult = this.reportsForPatient;
+			
 		});
 		axios.get('api/prescription/getForPatient/' + 1).then(response => {
-			this.prescriptionsResult = response.data;
+			this.prescriptionsForPatient = response.data;
+			this.prescriptionsResult = this.prescriptionsForPatient;			
 		});
 	}
 });
