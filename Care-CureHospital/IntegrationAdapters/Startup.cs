@@ -51,6 +51,7 @@ namespace IntegrationAdapters
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

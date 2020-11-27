@@ -22,16 +22,6 @@ namespace IntegrationAdapters.Controllers
 
         public ReportController() { }
         
-        [HttpGet]
-
-        public IActionResult GetAllMedicament()
-        {
-            List<Report> result = new List<Report>();
-
-            App.Instance().ReportService.GetAllNames().ToList().ForEach(medication => result.Add(medication));
-            return Ok(result);
-           
-        }
 
     }
 }

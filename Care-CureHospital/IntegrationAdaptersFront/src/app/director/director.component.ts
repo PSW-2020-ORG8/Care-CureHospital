@@ -46,4 +46,7 @@ export class DirectorComponent implements OnInit {
     alert("Report saved.");
   }
 
+  generate(){
+    alert("Generated.");
+  }
 }

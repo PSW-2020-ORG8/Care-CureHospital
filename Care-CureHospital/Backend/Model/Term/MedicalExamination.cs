@@ -49,7 +49,18 @@ namespace Model.Term
             Room = room;
             Doctor = doctor;
             Patient = patient;
+        }
 
+        public MedicalExamination(int id, bool urgency, string shortDescription, int roomId, int doctorId, int patientId, Room room, AllActors.Doctor doctor, AllActors.Patient patient) : this(id)
+        {
+            Urgency = urgency;
+            ShortDescription = shortDescription;
+            RoomId = roomId;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            Room = room;
+            Doctor = doctor;
+            Patient = patient;
         }
 
         public int GetId()

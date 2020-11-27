@@ -91,26 +91,26 @@ namespace Backend.Repository.MySQL
             modelBuilder.Entity<MedicalExamination>().HasData(
                 new MedicalExamination { Id = 1, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
                 new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
-                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 3 },
-                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 2, DoctorId = 3, PatientId = 1 },
+                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
                 new MedicalExamination { Id = 5, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
                 new MedicalExamination { Id = 6, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
-                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema vecih problema", PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0), MedicalExaminationId = 1 },
-                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema vecih problema", PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0), MedicalExaminationId = 2 },
-                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0), MedicalExaminationId = 3 },
-                new MedicalExaminationReport { Id = 4, Comment = "Pacijent je lose", PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0), MedicalExaminationId = 3 },
-                new MedicalExaminationReport { Id = 5, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0), MedicalExaminationId = 3 }
+                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema vecih problema", PublishingDate = new DateTime(2020, 09, 20, 10, 30, 0), MedicalExaminationId = 3 },
+                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema vecih problema", PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0), MedicalExaminationId = 4 },
+                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 4, Comment = "Pacijent je lose", PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 5, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0), MedicalExaminationId = 2 }
             );
 
             modelBuilder.Entity<Prescription>().HasData(
-                new Prescription { Id = 1, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 2, Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 3, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 4, Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() }
+                new Prescription { Id = 1, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 2, Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 3, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 4, Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 12, 03, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() }
             );
 
             modelBuilder.Entity<Medicament>().HasData(
@@ -182,16 +182,29 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Survey>().HasData(
-                new Survey { Id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 1, Question = new List<Question>() },
-                new Survey { Id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 2, Question = new List<Question>() }
+                new Survey { Id = 1, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 1, Questions = new List<Question>() },
+                new Survey { Id = 2, Title = "Naslov", PublishingDate = new DateTime(2020, 11, 6, 8, 30, 0), CommentSurvey = "Sve je super u bolnici", MedicalExaminationId = 2, Questions = new List<Question>() }
             );
 
             modelBuilder.Entity<Question>().HasData(
-                new Question { Id = 1, QuestionText = "Pitanje1", AnswerId = 1, SurveyId = 1 },
-                new Question { Id = 2, QuestionText = "Pitanje2", AnswerId = 1, SurveyId = 1 },
-                new Question { Id = 3, QuestionText = "Pitanje3", AnswerId = 1, SurveyId = 2 },
-                new Question { Id = 4, QuestionText = "Pitanje4", AnswerId = 1, SurveyId = 2 },
-                new Question { Id = 5, QuestionText = "Pitanje5", AnswerId = 1, SurveyId = 1 }
+                new Question { Id = 1, QuestionText = "Ljubaznost doktora prema pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 2, QuestionText = "Posvećenost doktora pacijentu", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 3, QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 4, QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 5, QuestionText = "Posvećenost medicinskog osoblja pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 6, QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", Answer = GradeOfQuestion.Poor, SurveyId = 1 },
+                new Question { Id = 7, QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", Answer = GradeOfQuestion.VeryGood, SurveyId = 1 },
+                new Question { Id = 8, QuestionText = "Higijena unutar bolnice", Answer = GradeOfQuestion.Excellent, SurveyId = 1 },
+                new Question { Id = 9, QuestionText = "Opremljenost bolnice", Answer = GradeOfQuestion.Fair, SurveyId = 1 },
+                new Question { Id = 10, QuestionText = "Ljubaznost doktora prema pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 11, QuestionText = "Posvećenost doktora pacijentu", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 12, QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", Answer = GradeOfQuestion.Poor, SurveyId = 2 },
+                new Question { Id = 13, QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu", Answer = GradeOfQuestion.VeryGood, SurveyId = 2 },
+                new Question { Id = 14, QuestionText = "Posvećenost medicinskog osoblja pacijentu", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
+                new Question { Id = 15, QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", Answer = GradeOfQuestion.Excellent, SurveyId = 2 },
+                new Question { Id = 16, QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", Answer = GradeOfQuestion.Good, SurveyId = 2 },
+                new Question { Id = 17, QuestionText = "Higijena unutar bolnice", Answer = GradeOfQuestion.Fair, SurveyId = 2 },
+                new Question { Id = 18, QuestionText = "Opremljenost bolnice", Answer = GradeOfQuestion.Good, SurveyId = 2 }
             );
         }
     }

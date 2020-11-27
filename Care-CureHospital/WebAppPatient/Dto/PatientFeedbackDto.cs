@@ -16,7 +16,6 @@ namespace Backend.Dto
         public int PatientId { get; set; }
         public string Patient { get; set; }
         public string PublishingDate { get; set; }
-
         public PatientFeedbackDto() { }
     }
 }

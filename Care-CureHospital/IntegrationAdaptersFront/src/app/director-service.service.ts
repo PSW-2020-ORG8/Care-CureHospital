@@ -30,4 +30,8 @@ export class DirectorServiceService {
   saveReport(val:any){
    // return this.http.post(this.APIUrl+'/saveInfos', val);
   }
+
+  generate(val:any){
+    return this.http.get<any[]>(this.APIUrl+'/sftp');
+  }
 }

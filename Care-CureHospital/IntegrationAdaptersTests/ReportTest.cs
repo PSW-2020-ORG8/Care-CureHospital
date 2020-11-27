@@ -31,23 +31,24 @@ namespace IntegrationAdaptersTests
         }
 
         [Fact]
-        public void Get_medications()
-        {
-            ReportService reportService = new ReportService(CreateStubRepository());
-
-            List<string> results = (List<string>)reportService.GetAllNames();
-
-            Assert.NotNull(results);
-        }
-
-        /*public void Report_saved()
-        {
-            ReportService reportService = new ReportService(CreateStubRepository());
-            ;
-        }*/
-
         public void Find_medicament_for_the_certain_period()
         {
+            ReportService reportService = new ReportService(CreateStubRepository());
+
+            List<Report> reports = (List<Report>)reportService.GetReportForCertainPeriod(new DateTime(2019, 11, 6, 8, 30, 0), new DateTime(2019, 12, 6, 8, 30, 0));
+
+            Assert.NotEmpty(reports);
+
+        }
+
+        [Fact]
+        public void Not_found_medicament_for_the_certain_period()
+        {
+            ReportService reportService = new ReportService(CreateStubRepository());
+
+            List<Report> reports = (List<Report>)reportService.GetReportForCertainPeriod(new DateTime(2018, 11, 6, 8, 30, 0), new DateTime(2018, 12, 6, 8, 30, 0));
+
+            Assert.Empty(reports);
 
         }
 

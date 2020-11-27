@@ -11,7 +11,6 @@ namespace WebAppPatient.Dto
         public string Name { get; set; }
         public int MedicalRecordId { get; set; }
         public string MedicalRecord { get; set; }
-
         public AllergiesDto() { }
     }
 }

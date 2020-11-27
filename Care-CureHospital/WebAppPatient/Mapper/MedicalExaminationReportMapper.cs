@@ -14,7 +14,7 @@ namespace WebAppPatient.Mapper
             MedicalExaminationReportDto dto = new MedicalExaminationReportDto();
             dto.Id = medicalExaminationReport.Id;
             dto.Comment = medicalExaminationReport.Comment;
-            dto.PublishingDate = medicalExaminationReport.PublishingDate.ToString("dd.MM.yyyy. HH:mm");
+            dto.PublishingDate = medicalExaminationReport.PublishingDate.ToString("dd.MM.yyyy.");
             dto.Doctor = medicalExaminationReport.MedicalExamination.Doctor.Name + " " + medicalExaminationReport.MedicalExamination.Doctor.Surname;
             dto.Room = medicalExaminationReport.MedicalExamination.Room.RoomId;
             return dto;
