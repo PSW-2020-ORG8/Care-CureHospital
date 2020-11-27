@@ -40,10 +40,15 @@ namespace IntegrationAdaptersTests
             Assert.NotNull(results);
         }
 
-        public void Report_saved()
+        /*public void Report_saved()
         {
             ReportService reportService = new ReportService(CreateStubRepository());
             ;
+        }*/
+
+        public void Find_medicament_for_the_certain_period()
+        {
+
         }
 
         private static IReportRepository CreateStubRepository()
