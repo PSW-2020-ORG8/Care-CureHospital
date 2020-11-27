@@ -34,34 +34,34 @@ ul {
     transform: translateX(-50%);
 }
 
-    ul li {
-        display: inline-block;
-        align-items: center;
-        padding: 5px 10px;
-    }
+ul li {
+    display: inline-block;
+    align-items: center;
+    padding: 5px 10px;
+}
 
-        ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: large;
-            padding: 5px 35px;
-            border: 1px solid white;
-            border-radius: 25px;
-            transition: 0.5s ease;
-            cursor: pointer;
-        }
+ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    padding: 5px 35px;
+    border: 1px solid white;
+    border-radius: 25px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
 
-            ul li a:hover {
-                background-color: white;
-                color: black;
-                transform: scale(1.6);
-                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
-            }
+ul li a:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.6);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
 
-        ul li.active a {
-            background-color: white;
-            color: black;
-        }
+ul li.active a {
+    background-color: white;
+    color: black;
+}
 
 .ulForSideComponents, .ulForSideComponentsHostReservation {
     float: left;
@@ -73,35 +73,33 @@ ul {
     align-content: center;
 }
 
+.ulForSideComponents div li {
+    display: block;
+    align-items: center;
+}
 
-    .ulForSideComponents div li {
-        display: block;
-        align-items: center;
-    }
+.ulForSideComponents div li a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    padding: 5px 35px;
+    border: 1px solid white;
+    border-radius: 25px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
 
-        .ulForSideComponents div li a {
-            text-decoration: none;
-            color: white;
-            font-size: large;
-            padding: 5px 35px;
-            border: 1px solid white;
-            border-radius: 25px;
-            transition: 0.5s ease;
-            cursor: pointer;
-        }
+.ulForSideComponents div li a:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.6);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
 
-            .ulForSideComponents div li a:hover {
-                background-color: white;
-                color: black;
-                transform: scale(1.6);
-                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
-            }
-
-        .ulForSideComponents div li.active a {
-            background-color: white;
-            color: black;
-        }
-
+.ulForSideComponents div li.active a {
+    background-color: white;
+    color: black;
+}
 
 .main {
     max-width: 1200px;
@@ -127,18 +125,17 @@ ul {
     z-index: 5;
 }
 
-
 .webName {
     position: relative;
     z-index: 5;
 }
 
-    .webName h3 {
-        color: black;
-        font-size: 18px;
-        margin-left: -10%;
-        z-index: 5;
-    }
+.webName h3 {
+    color: black;
+    font-size: 18px;
+    margin-left: -10%;
+    z-index: 5;
+}
 
 .logoAndName {
     position: fixed;
@@ -183,21 +180,21 @@ ul {
     z-index: 5;
 }
 
-    .dropdown-content a {
-        color: black;
-        padding: 16px 12px;
-        text-decoration: none;
-        display: block;
-        border-radius: 25px;
-        z-index: 5;
-    }
+.dropdown-content a {
+    color: black;
+    padding: 16px 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 25px;
+    z-index: 5;
+}
 
-        .dropdown-content a:hover {
-            background-color: lightgray;
-            color: black;
-            border: 1px solid black;
-            z-index: 5;
-        }
+.dropdown-content a:hover {
+    background-color: lightgray;
+    color: black;
+    border: 1px solid black;
+    z-index: 5;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -279,9 +276,9 @@ ul {
     background-color: #afd0c7;
 }
 
-    .feedback-img img {
-        border-radius: 7px 0 0 7px;
-    }
+.feedback-img img {
+    border-radius: 7px 0 0 7px;
+}
 
 .feedback-info {
     float: left;
@@ -295,7 +292,6 @@ ul {
     height: 100px;
     width: 527px;
 }
-
 
 .feedback-text h1 {
     margin: 0 0 0 23px;
@@ -378,7 +374,6 @@ label {
     margin-left: 135px;
 }
 
-
 .publishFeedback-btn p, .post-feedback-btn p {
     display: inline-block;
     position: absolute;
@@ -416,7 +411,7 @@ label {
     display: inline-block;
     height: 60px;
     width: 156px;
-    margin-top: 10%;
+    margin-top: 6.5%;
     margin-right: -90%;
     box-sizing: border-box;
     border: transparent;
@@ -436,11 +431,10 @@ label {
     background-color: #054f5294;
 }
 
-
 .formForPublishingFeedback {
     position: fixed;
     width: 700px;
-    height: 500px;
+    height: 480px;
     padding: 20px;
     margin-top: 12%;
     margin-left: 28%;
@@ -474,6 +468,7 @@ label {
 .filterFeedbacks .form-title select {
     text-align: center;
     margin: 30px 0px;
+    width: 350px;
 }
 
 .form-title h1 {
@@ -486,7 +481,6 @@ label {
 .form-title h1 {
     padding-top: 12px;
 }
-
 
 .form-title input[type=text], select {
     width: 100%;
@@ -524,7 +518,6 @@ label {
     text-align: center;
 }
 
-
 #formForSearch {
     margin-top: 10px;
     margin-left: 50px;
@@ -549,5 +542,3 @@ label {
     text-align: left;
     padding-bottom: 20px;
 }
-
-
