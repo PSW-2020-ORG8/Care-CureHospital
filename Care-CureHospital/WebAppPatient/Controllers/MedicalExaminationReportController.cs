@@ -32,5 +32,37 @@ namespace WebAppPatient.Controllers
                 medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
             return Ok(result);
         }
+
+        [HttpGet("findReportsByDoctor")]       // GET /api/medicalExaminationReport/findReportsByDoctor
+        public IActionResult FindMedicalExaminationReportsByDoctor([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "doctor")] string doctor)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsForDoctorParameter(patientId, doctor).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
+
+        [HttpGet("findReportsByDate")]       // GET /api/medicalExaminationReport/findReportsByDate
+        public IActionResult FindMedicalExaminationReportsByDate([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "date")] string date)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsForDateParameter(patientId, date).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
+
+        [HttpGet("findReportsByComment")]       // GET /api/medicalExaminationReport/findReportsByComment
+        public IActionResult FindMedicalExaminationReportsByComment([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "comment")] string comment)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsForCommentParameter(patientId, comment).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
+
+        [HttpGet("findReportsByRoom")]       // GET /api/medicalExaminationReport/findReportsByRoom
+        public IActionResult FindMedicalExaminationReportsByRoom([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "room")] string room)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsForRoomParameter(patientId, room).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
     }
 }
