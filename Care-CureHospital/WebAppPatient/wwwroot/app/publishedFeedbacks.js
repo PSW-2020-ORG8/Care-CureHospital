@@ -36,8 +36,6 @@ Vue.component("publishedFeedbacks", {
 	    </div>
 	 </div>
 	 
-
-
 	 <div class="verticalLine"></div>
 	
 	 <div class="sideComponents">      
@@ -46,9 +44,7 @@ Vue.component("publishedFeedbacks", {
 		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
 			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
-	 </div>
-	 
-		 
+	 </div>	 
 
 	<!--
 	 <div class="titleForPublishedFeedbackPreview">

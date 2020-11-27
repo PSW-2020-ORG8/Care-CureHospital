@@ -32,19 +32,19 @@
     cursor: pointer;
 }
 
-.filterReports .form-title select {
+.filterReports .form-title-search select {
     text-align: center;
     margin: 30px 0px;
 }
 
-.form-title h1 {
+.form-title-search h1 {
     padding-top: 52px;
     font-size: 30px;
     color: #474747;
     text-align: center
 }
 
-.form-title h1 {
+.form-title-search h1 {
     padding-top: 12px;
 }
 
@@ -138,19 +138,19 @@
     background-color: #054f5294;
 }
 
-.form-title .second-row {
+.form-title-search .second-row {
     margin-top: -12%;
 }
 
-.form-title .third-row {
+.form-title-search .third-row {
     margin-top: -12%;
 }
 
-.form-title .fourth-row {
+.form-title-search .fourth-row {
     margin-top: -12%;
 }
 
-.form-title input[type=text], select {
+.form-title-search input[type=text], select {
     width: 30%;
     padding: 12px 20px;
     margin: 16px 0px;
@@ -163,7 +163,7 @@
     font-family: 'Bentham', serif;
 }
 
-.form-title textarea {
+.form-title-search textarea {
     width: 90%;
     padding: 12px 40px;
     margin: 0px 25px;
@@ -176,7 +176,7 @@
     font-family: 'Bentham', serif;
 }
 
-.form-title input[type="text"]::placeholder {
+.form-title-search input[type="text"]::placeholder {
     text-align: center;
 }
 

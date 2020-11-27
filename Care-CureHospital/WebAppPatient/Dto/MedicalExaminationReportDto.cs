@@ -14,6 +14,8 @@ namespace WebAppPatient.Dto
         public string PublishingDate { get; set; }
         public string Doctor { get; set; }
         public string Room { get; set; }
+        public Dictionary<string, string> SearchParams { get; set; }
+        public List<string> LogicOperators { get; set; }
         public MedicalExaminationReportDto() { }
     }
 }
