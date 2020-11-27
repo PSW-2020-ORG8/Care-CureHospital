@@ -12,7 +12,7 @@ namespace Model.Patient
     public class Answer : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public virtual GradeOfQuestion Grade { get; set; }
+        public GradeOfQuestion Grade { get; set; }
         public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
         public int SurveyId { get; set; }
