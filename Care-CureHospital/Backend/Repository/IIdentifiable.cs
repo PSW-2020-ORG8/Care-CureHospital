@@ -10,5 +10,7 @@ namespace HealthClinic.Repository
     {
         T GetId();
         void SetId(T id);
+
+
     }
 }

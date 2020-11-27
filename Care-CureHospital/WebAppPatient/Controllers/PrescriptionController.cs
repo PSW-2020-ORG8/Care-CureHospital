@@ -23,5 +23,13 @@ namespace WebAppPatient.Controllers
             App.Instance().PrescriptionService.GetAllEntities().ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
             return Ok(result);
         }
+
+        [HttpGet("getForPatient/{patientID}")]       // GET /api/prescription/getForPatient/{id}
+        public IActionResult GetPrescriptionsForPatient(int patientID)
+        {
+            List<PrescriptionDto> prescriptionsForPatient = new List<PrescriptionDto>();
+            App.Instance().PrescriptionService.GetPrescriptionsForPatient(patientID).ToList().ForEach(prescription => prescriptionsForPatient.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            return Ok(prescriptionsForPatient);
+        }
     }
 }
