@@ -15,7 +15,7 @@ namespace WebAppPatient.Dto
         public String CommentSurvey { get; set; }
         public DateTime PublishingDate { get; set; }
         public int medicalExaminationID { get; set; }
-        public List<Question> Questions { get; set; }
+        public List<Answer> Answers { get; set; }
 
 
         public SurveyDto() { }

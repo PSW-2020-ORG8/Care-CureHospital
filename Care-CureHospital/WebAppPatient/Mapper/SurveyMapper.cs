@@ -16,7 +16,7 @@ namespace WebAppPatient.Mapper
             survey.Title = dto.Title;
             survey.CommentSurvey = dto.CommentSurvey;
             survey.PublishingDate = DateTime.Now;
-            survey.Questions = dto.Questions;
+            survey.Answers = dto.Answers;
             survey.MedicalExaminationId = 1;
             return survey;
         }
@@ -28,12 +28,11 @@ namespace WebAppPatient.Mapper
             dto.Title = survey.Title;
             dto.CommentSurvey = survey.CommentSurvey;
             dto.PublishingDate = survey.PublishingDate;
-            dto.Questions = new List<Question>();
-            /*
-            foreach(Question question in survey.Questions)
+            dto.Answers = new List<Answer>();
+            foreach(Answer answer in survey.Answers)
             {
-                dto.Questions.Add(new Question(question.QuestionText, question.Answer, question.QuestionType));
-            }*/
+                dto.Answers.Add(new Answer(answer.QuestionId, answer.Grade));
+            }
 
             return dto;
         }

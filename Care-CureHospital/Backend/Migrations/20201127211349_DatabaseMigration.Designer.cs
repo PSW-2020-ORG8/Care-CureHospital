@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201125231244_DatabaseMigration")]
+    [Migration("20201127211349_DatabaseMigration")]
     partial class DatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -892,12 +892,7 @@ namespace Backend.Migrations
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SurveyId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SurveyId");
 
                     b.ToTable("Question");
 
@@ -1523,17 +1518,10 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Patient.Question", b =>
-                {
-                    b.HasOne("Model.Patient.Survey", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("SurveyId");
                 });
 
             modelBuilder.Entity("Model.Patient.Survey", b =>

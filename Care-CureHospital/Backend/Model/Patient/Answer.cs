@@ -38,6 +38,12 @@ namespace Model.Patient
         
         }
 
+        public Answer(int questionId, GradeOfQuestion grade)
+        {
+            Grade = grade;
+            QuestionId = questionId;
+        }
+
         public int GetId()
         {
             return Id;

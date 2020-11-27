@@ -35,6 +35,20 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    QuestionText = table.Column<string>(nullable: true),
+                    QuestionType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Specialitations",
                 columns: table => new
                 {
@@ -479,27 +493,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Question",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    QuestionText = table.Column<string>(nullable: true),
-                    QuestionType = table.Column<int>(nullable: false),
-                    SurveyId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Question", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Question_Survey1_SurveyId",
-                        column: x => x.SurveyId,
-                        principalTable: "Survey1",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Answer",
                 columns: table => new
                 {
@@ -543,18 +536,18 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Question",
-                columns: new[] { "Id", "QuestionText", "QuestionType", "SurveyId" },
+                columns: new[] { "Id", "QuestionText", "QuestionType" },
                 values: new object[,]
                 {
-                    { 9, "Opremljenost bolnice", 2, null },
-                    { 8, "Higijena unutar bolnice", 2, null },
-                    { 7, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2, null },
-                    { 6, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1, null },
-                    { 4, "Ljubaznost medicinskog osoblja prema pacijentu", 1, null },
-                    { 3, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 0, null },
-                    { 2, "Posvećenost doktora pacijentu", 0, null },
-                    { 1, "Ljubaznost doktora prema pacijentu", 0, null },
-                    { 5, "Posvećenost medicinskog osoblja pacijentu", 1, null }
+                    { 9, "Opremljenost bolnice", 2 },
+                    { 8, "Higijena unutar bolnice", 2 },
+                    { 7, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2 },
+                    { 6, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1 },
+                    { 4, "Ljubaznost medicinskog osoblja prema pacijentu", 1 },
+                    { 3, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 0 },
+                    { 2, "Posvećenost doktora pacijentu", 0 },
+                    { 1, "Ljubaznost doktora prema pacijentu", 0 },
+                    { 5, "Posvećenost medicinskog osoblja pacijentu", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -860,11 +853,6 @@ namespace Backend.Migrations
                 column: "MedicalExaminationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Question_SurveyId",
-                table: "Question",
-                column: "SurveyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_TypeOfRoomId",
                 table: "Rooms",
                 column: "TypeOfRoomId");
@@ -928,13 +916,13 @@ namespace Backend.Migrations
                 name: "Question");
 
             migrationBuilder.DropTable(
+                name: "Survey1");
+
+            migrationBuilder.DropTable(
                 name: "MedicalRecords");
 
             migrationBuilder.DropTable(
                 name: "Prescription");
-
-            migrationBuilder.DropTable(
-                name: "Survey1");
 
             migrationBuilder.DropTable(
                 name: "Anamnesies");

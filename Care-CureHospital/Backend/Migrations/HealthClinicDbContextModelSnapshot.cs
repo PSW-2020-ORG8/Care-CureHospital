@@ -890,12 +890,7 @@ namespace Backend.Migrations
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SurveyId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SurveyId");
 
                     b.ToTable("Question");
 
@@ -1521,17 +1516,10 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Patient.Question", b =>
-                {
-                    b.HasOne("Model.Patient.Survey", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("SurveyId");
                 });
 
             modelBuilder.Entity("Model.Patient.Survey", b =>
