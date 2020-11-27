@@ -19,7 +19,7 @@ namespace Model.Patient
         public DateTime PublishingDate { get; set; }
         public int MedicalExaminationId { get; set; }
         public virtual MedicalExamination MedicalExamination { get; set; }
-        public virtual List<Question> Questions { get; set; }
+        public virtual List<Answer> Answers { get; set; }
 
         public Survey(int id)
         {
@@ -30,40 +30,40 @@ namespace Model.Patient
         {
         }
 
-        public Survey(int id, string title, DateTime publishingDate, string commentSurvey, List<Question> questions)
+        public Survey(int id, string title, DateTime publishingDate, string commentSurvey, List<Answer> answers)
         {
             Id = id;
             Title = title;
             PublishingDate = publishingDate;
             CommentSurvey = commentSurvey;
-            Questions = questions;
+            Answers = answers;
         }
 
-        public Survey(string title, DateTime publishingDate, string commentSurvey, List<Question> questions)
+        public Survey(string title, DateTime publishingDate, string commentSurvey, List<Answer> answers)
         {
             Title = title;
             PublishingDate = publishingDate;
             CommentSurvey = commentSurvey;
-            Questions = questions;
+            Answers = answers;
         }
 
-        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination, List<Question> questions) : this(id)
+        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination, List<Answer> answers) : this(id)
         {
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
             MedicalExaminationId = medicalExaminationID;
             MedicalExamination = medicalExamination;
-            Questions = questions;
+            Answers = answers;
         }
 
-        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, List<Question> questions) : this(id)
+        public Survey(int id, string title, string commentSurvey, DateTime publishingDate, int medicalExaminationID, List<Answer> answers) : this(id)
         {
             Title = title;
             CommentSurvey = commentSurvey;
             PublishingDate = publishingDate;
             MedicalExaminationId = medicalExaminationID;
-            Questions = questions;
+            Answers = answers;
         }
 
         public int GetId()

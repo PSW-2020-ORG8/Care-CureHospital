@@ -8,14 +8,14 @@ namespace WebAppPatient.Mapper
 {
     public class QuestionResultMapper
     {
-        public static List<QuestionResultDto> CreateQuestionResultsDto (Dictionary<string, List<int>> results)
+        public static List<QuestionResultDto> CreateQuestionResultsDto (Dictionary<int, List<int>> results)
         {
             List<QuestionResultDto> questionResults = new List<QuestionResultDto>();
-            foreach (string key in results.Keys)
+            foreach (int key in results.Keys)
             {
                 QuestionResultDto dto = new QuestionResultDto();
 
-                dto.QuestionText = key;
+                dto.QuestionId = key;
                 dto.Grades = new List<int>(results[key]);
                 for (int i = 0; i < dto.Grades.Count; i++)
                 {
