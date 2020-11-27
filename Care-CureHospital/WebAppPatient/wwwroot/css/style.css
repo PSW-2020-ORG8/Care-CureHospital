@@ -411,7 +411,7 @@ label {
     display: inline-block;
     height: 60px;
     width: 156px;
-    margin-top: 10%;
+    margin-top: 6.5%;
     margin-right: -90%;
     box-sizing: border-box;
     border: transparent;
@@ -434,7 +434,7 @@ label {
 .formForPublishingFeedback {
     position: fixed;
     width: 700px;
-    height: 500px;
+    height: 480px;
     padding: 20px;
     margin-top: 12%;
     margin-left: 28%;
@@ -468,6 +468,7 @@ label {
 .filterFeedbacks .form-title select {
     text-align: center;
     margin: 30px 0px;
+    width: 350px;
 }
 
 .form-title h1 {
@@ -480,7 +481,6 @@ label {
 .form-title h1 {
     padding-top: 12px;
 }
-
 
 .form-title input[type=text], select {
     width: 100%;

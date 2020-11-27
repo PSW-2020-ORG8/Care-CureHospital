@@ -44,7 +44,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 	 </div>	
 
 	<div class="patients-docs-simple-search">
-            <div class="form-title">
+            <div class="form-title-search">
 				<h1>Pretraži po:</h1>
 
 				<div class="reports-btn" v-if="this.reportsButtonSelected === true">
@@ -74,15 +74,11 @@ Vue.component("patientDocumentsSimpleSearch", {
 					<option value="Sadržaju">Sadržaju</option>
 					<option value="Lekovima">Lekovima</option>
 				</select>
-                
-
-				
+                			
 				<input v-model="publishingDate" v-if="firstSearchParams === 'Datumu'" type="date" format="dd.MM.yyyy." style="width:250px; height:42px">
 				<!--<vuejs-datepicker v-if="firstSearchParams === 'Datumu'"></vuejs-datepicker>-->
-
 				
 				<input v-else v-model="firstInput" type="text" style="width:250px" placeholder="">
-
 
 				<div class="search-btn">
 					<button type="button" @click="simpleSearch()" style="margin-top:3%">Potvrdi</button>
