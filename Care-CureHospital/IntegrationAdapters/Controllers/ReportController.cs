@@ -11,6 +11,7 @@ using Service.MedicamentService;
 using Backend.Model.DoctorMenager;
 using IntegrationAdapters.Dto;
 using Backend.Service.DirectorService;
+using IntegrationAdapters.Mapper;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -22,6 +23,16 @@ namespace IntegrationAdapters.Controllers
 
         public ReportController() { }
         
+        [HttpGet]   //GET /api/report
+
+        public IActionResult GetAllReports()
+        {
+            List<ReportDto> result = new List<ReportDto>();
+
+            App.Instance().ReportService.GetAllEntities().ToList().ForEach(report => result.Add(ReportMapper.ReportToReportDto(report)));
+            return Ok(result);
+           
+        }
 
     }
 }

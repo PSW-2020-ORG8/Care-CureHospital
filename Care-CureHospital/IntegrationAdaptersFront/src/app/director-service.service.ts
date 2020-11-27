@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DirectorServiceService {
   readonly APIUrl = "http://localhost:51492/api";
 
@@ -32,6 +33,7 @@ export class DirectorServiceService {
   }
 
   generate(val:any){
-    return this.http.get<any[]>(this.APIUrl+'/sftp');
+      return this.http.get<any[]>(this.APIUrl+'/sftp');
   }
+  
 }

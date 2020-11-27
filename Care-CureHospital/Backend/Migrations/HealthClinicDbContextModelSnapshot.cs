@@ -110,6 +110,70 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Backend.Model.DoctorMenager.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("MedicamentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicamentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Report");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FromDate = new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 1,
+                            MedicamentName = "Brufen",
+                            Quantity = 10,
+                            ToDate = new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FromDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 2,
+                            MedicamentName = "Panadol",
+                            Quantity = 15,
+                            ToDate = new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FromDate = new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 4,
+                            MedicamentName = "Vitamin B",
+                            Quantity = 120,
+                            ToDate = new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FromDate = new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 3,
+                            MedicamentName = "Paracetamol",
+                            Quantity = 24,
+                            ToDate = new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
                 {
                     b.Property<int>("Id")

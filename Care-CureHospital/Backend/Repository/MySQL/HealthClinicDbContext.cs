@@ -19,7 +19,7 @@ namespace Backend.Repository.MySQL
     public class HealthClinicDbContext : DbContext
     {
 
-        public DbSet<Report> Reports { get; set; }
+        public DbSet<Report> Report { get; set; }
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Patient> Doctors { get; set; }
@@ -63,10 +63,10 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Report>().HasData(
-                new Report { Id = 1, MedicamentName = "Brufen", Quantity = 10, FromDate = new DateTime(2019, 5, 1, 6, 30, 0), ToDate = new DateTime(2019, 10, 1, 6, 10, 0)},
-                new Report { Id = 2, MedicamentName = "Panadol", Quantity = 15, FromDate = new DateTime(2020, 10, 30, 10, 30, 0), ToDate = new DateTime(2020, 2, 5, 6, 10, 0)},
-                new Report { Id = 3, MedicamentName = "Vitamin B", Quantity = 120, FromDate = new DateTime(2019, 1, 10, 3, 30, 0), ToDate = new DateTime(2019, 5, 10, 6, 30, 0)},
-                new Report { Id = 4, MedicamentName = "Paracetamol", Quantity = 24, FromDate = new DateTime(2020, 1, 5, 8, 30, 0), ToDate = new DateTime(2020, 12, 10, 6, 30, 0)}
+                new Report { Id = 1, MedicamentId = 1,  MedicamentName = "Brufen", Quantity = 10, FromDate = new DateTime(2019, 5, 1, 6, 30, 0), ToDate = new DateTime(2019, 10, 1, 6, 10, 0)},
+                new Report { Id = 2, MedicamentId = 2,  MedicamentName = "Panadol", Quantity = 15, FromDate = new DateTime(2020, 10, 30, 10, 30, 0), ToDate = new DateTime(2020, 2, 5, 6, 10, 0)},
+                new Report { Id = 3, MedicamentId = 4,  MedicamentName = "Vitamin B", Quantity = 120, FromDate = new DateTime(2019, 1, 10, 3, 30, 0), ToDate = new DateTime(2019, 5, 10, 6, 30, 0)},
+                new Report { Id = 4, MedicamentId = 3, MedicamentName = "Paracetamol", Quantity = 24, FromDate = new DateTime(2020, 1, 5, 8, 30, 0), ToDate = new DateTime(2020, 12, 10, 6, 30, 0)}
             );
 
             modelBuilder.Entity<Doctor>().HasData(
