@@ -8,32 +8,6 @@ namespace Backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-            migrationBuilder.CreateTable(
-                name: "Report",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MedicamentId = table.Column<int>(nullable: false),
-                    MedicamentName = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    ToDate = table.Column<DateTime>(nullable: false)
-
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Report", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Report_Medicaments_MedicamentId",
-                        column: x => x.MedicamentId,
-                        principalTable: "Medicaments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-
             migrationBuilder.CreateTable(
                 name: "Anamnesies",
                 columns: table => new
@@ -58,6 +32,23 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Report",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    MedicamentId = table.Column<int>(nullable: false),
+                    MedicamentName = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    FromDate = table.Column<DateTime>(nullable: false),
+                    ToDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Report", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -525,20 +516,6 @@ namespace Backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-
-
-            migrationBuilder.InsertData(
-                table: "Report",
-                columns: new[] { "Id", "MedicamentName", "Quantity", "FromDate", "ToDate" },
-                values: new object[,]
-                {
-                    { 1, 1, "Brufen", 10, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 2, 2, "Panadol", 15, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 3, 4, "Vitamin B", 120, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                    { 4, 3, "Paracetamol", 24, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                });
-
-
             migrationBuilder.InsertData(
                 table: "Anamnesies",
                 columns: new[] { "Id", "Description" },
@@ -553,6 +530,17 @@ namespace Backend.Migrations
                 table: "Countries",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 1, "Srbija" });
+
+            migrationBuilder.InsertData(
+                table: "Report",
+                columns: new[] { "Id", "FromDate", "MedicamentId", "MedicamentName", "Quantity", "ToDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), 1, "Brufen", 10, new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), 2, "Panadol", 15, new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), 4, "Vitamin B", 120, new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), 3, "Paracetamol", 24, new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified) }
+                });
 
             migrationBuilder.InsertData(
                 table: "Specialitations",
@@ -777,12 +765,6 @@ namespace Backend.Migrations
                 column: "AnamnesisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Report_MedicamentId",
-                table: "Report",
-                column: "MedicamentId"
-                );
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Doctor_CityId",
                 table: "Doctor",
                 column: "CityId");
@@ -891,9 +873,6 @@ namespace Backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Report");
-
-            migrationBuilder.DropTable(
                 name: "Allergies");
 
             migrationBuilder.DropTable(
@@ -913,6 +892,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Question");
+
+            migrationBuilder.DropTable(
+                name: "Report");
 
             migrationBuilder.DropTable(
                 name: "Survey");

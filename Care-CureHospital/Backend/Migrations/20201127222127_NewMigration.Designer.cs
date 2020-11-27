@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201125232610_NewMigration")]
+    [Migration("20201127222127_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,70 @@ namespace Backend.Migrations
                             PatientId = 4,
                             PublishingDate = new DateTime(2020, 10, 15, 6, 30, 0, 0, DateTimeKind.Unspecified),
                             Text = "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika."
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.DoctorMenager.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("MedicamentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicamentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Report");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FromDate = new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 1,
+                            MedicamentName = "Brufen",
+                            Quantity = 10,
+                            ToDate = new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FromDate = new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 2,
+                            MedicamentName = "Panadol",
+                            Quantity = 15,
+                            ToDate = new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FromDate = new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 4,
+                            MedicamentName = "Vitamin B",
+                            Quantity = 120,
+                            ToDate = new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FromDate = new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicamentId = 3,
+                            MedicamentName = "Paracetamol",
+                            Quantity = 24,
+                            ToDate = new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -293,7 +357,6 @@ namespace Backend.Migrations
                             Name = "Srbija"
                         });
                 });
-
 
             modelBuilder.Entity("Model.AllActors.Doctor", b =>
                 {

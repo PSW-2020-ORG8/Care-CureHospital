@@ -34,16 +34,20 @@
   <caption>Table of report</caption>
     <thead>
         <tr>
+            <th id="Id">Id </th>
+            <th id="MedicationId">MedicationId</th>
             <th id="MedicationName">MedicationName</th>
-            <th id="ConsumedMedication">ConsumedMedication</th>
+            <th id="ConsumedMedication">Quantity</th>
             <th id="FromDate">FromDate</th>
             <th id="ToDate">ToDate</th>
         </tr>
     </thead>
     <tbody>
        <tr *ngFor="let dataItem of ReportList">
+            <td>{{dataItem.Id}}</td>
+            <td>{{dataItem.MedicationId}}</td>
             <td>{{dataItem.MedicationName}}</td>
-            <td>{{dataItem.ConsumedMedication}}</td>
+            <td>{{dataItem.Quantity}}</td>
             <td>{{dataItem.FromDate}}</td>
             <td>{{dataItem.ToDate}}</td>
             <td> 

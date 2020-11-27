@@ -17,17 +17,17 @@ export class ReportComponent implements OnInit {
   FromDate:string;
   ToDate:string;
 
-  MedicationList:any=[];
+  ReportList:any=[];
 
   ngOnInit(): void {
-    //this.loadReportList();
+    this.loadReportList();
   }
 
-  /*loadMedicationList(){
+  loadReportList(){
     this.service.getReportList().subscribe((data:any)=>{
       this.ReportList=data;
     });
-  }*/
+  }
 
   addReport(){
     var val = {MedicationName:this.MedicationName,

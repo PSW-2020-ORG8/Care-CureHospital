@@ -51,6 +51,8 @@ namespace IntegrationAdapters
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors();
         }
     }
 }
