@@ -294,6 +294,7 @@ namespace Backend.Migrations
                         });
                 });
 
+
             modelBuilder.Entity("Model.AllActors.Doctor", b =>
                 {
                     b.Property<int>("Id")

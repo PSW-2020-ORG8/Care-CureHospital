@@ -10,7 +10,7 @@ namespace Backend.Model.DoctorMenager
     {
         public int Id { get; set; }
 
-        public int MedicamentId { get; set; }
+        public int MedicamentId { set; get; }
 
         public String MedicamentName { get; set; }
 

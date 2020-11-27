@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WinSCP;
+using Renci.SshNet;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -12,51 +13,34 @@ namespace IntegrationAdapters.Controllers
     [ApiController]
     public class SftpController : ControllerBase
     {
-
-        public int sendFiles()
+        [HttpGet]
+        public IActionResult SendFile()
         {
             try
             {
-                // Setup session options
-                SessionOptions sessionOptions = new SessionOptions
+                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "user", "password")))
                 {
-                    Protocol = Protocol.Sftp,
-                    HostName = "192.168.0.13",
-                    UserName = "user",
-                    Password = "password",
-                    PortNumber = 22,
-                    SshHostKeyFingerprint = "ssh-rsa 2048 UsRx+jRnMtSyVQohCHBr6cEruCMLTTFJPIcPaEyxWcQ"
-                };
+                    client.Connect();
 
-                using (Session session = new Session())
-                {
-                    // Connect
-                    session.Open(sessionOptions);
-
-                    // Upload files
-                    TransferOptions transferOptions = new TransferOptions();
-                    transferOptions.TransferMode = TransferMode.Binary;
-
-                    TransferOperationResult transferResult;
-                    transferResult =
-                                    session.PutFiles(@"d:\toupload\*", "/home/user/", false, transferOptions);
-
-                    // Throw on any error
-                    transferResult.Check();
-
-                    // Print results
-                    foreach (TransferEventArgs transfer in transferResult.Transfers)
+                    string sourceFile = @"D:\testFiles\report.txt";
+                    using (Stream stream = System.IO.File.OpenRead(sourceFile))
                     {
-                        Console.WriteLine("Upload of {0} succeeded", transfer.FileName);
+                        client.UploadFile(stream, @"\public\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                     }
-                }
 
-                return 0;
+                    string serverFile = @"\public\report.txt";
+                    string localFile = @"D:\localFiles\Report.txt";
+                    using (Stream stream = System.IO.File.OpenWrite(localFile))
+                    {
+                        client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
+                    }
+                        client.Disconnect();
+                }
+                return Ok();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine("Error: {0}", e);
-                return 1;
+                return BadRequest(exception.Message + "Failed");
             }
         }
     }

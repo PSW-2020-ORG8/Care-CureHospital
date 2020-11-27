@@ -15,6 +15,7 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    MedicamentId = table.Column<int>(nullable: false),
                     MedicamentName = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     FromDate = table.Column<DateTime>(nullable: false),
@@ -24,6 +25,12 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Report", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Report_Medicaments_MedicamentId",
+                        column: x => x.MedicamentId,
+                        principalTable: "Medicaments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -524,10 +531,10 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "MedicamentName", "Quantity", "FromDate", "ToDate" },
                 values: new object[,]
                 {
-                    { 1, "Brufen", 10, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 2, "Panadol", 15, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 3, "Vitamin B", 120, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                    { 4, "Paracetamol", 24, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
+                    { 1, 1, "Brufen", 10, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)},
+                    { 2, 2, "Panadol", 15, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)},
+                    { 3, 4, "Vitamin B", 120, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
+                    { 4, 3, "Paracetamol", 24, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
                 });
 
             migrationBuilder.InsertData(
@@ -740,11 +747,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Report_MedicamentId",
-                table: "Report",
-                column: "MedicamentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Allergies_MedicalRecordId",
                 table: "Allergies",
                 column: "MedicalRecordId");
@@ -758,6 +760,12 @@ namespace Backend.Migrations
                 name: "IX_Diagnosies_AnamnesisId",
                 table: "Diagnosies",
                 column: "AnamnesisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Report_MedicamentId",
+                table: "Report",
+                column: "MedicamentId"
+                );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctor_CityId",
