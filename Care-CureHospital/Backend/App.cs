@@ -3,8 +3,11 @@ using Backend.Model.PatientDoctor;
 using Backend.Repository.BlogNotificationRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
+using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.ExaminationSurgeryServices;
+using Backend.Service.UsersServices;
+using Model.AllActors;
 using Model.Patient;
 using Model.PatientDoctor;
 using Model.Term;
@@ -33,6 +36,7 @@ namespace Backend
         public PrescriptionService PrescriptionService;
         public MedicalRecordService MedicalRecordService;
         public AllergiesService AllergiesService;
+        public DoctorService DoctorService;
 
         private App()
         {
@@ -54,6 +58,8 @@ namespace Backend
                new AllergiesRepository(new MySQLStream<Allergies>(), new IntSequencer()));
             SurveyService = new SurveyService(
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()), MedicalExaminationService, AnswerService);
+            DoctorService = new DoctorService(
+                new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
         }
 
         public static App Instance()

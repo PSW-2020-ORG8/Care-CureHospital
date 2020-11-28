@@ -4,6 +4,7 @@ const postFeedback = { template: '<postFeedback></postFeedback>' }
 const patientRegistration = { template: '<patientRegistration></patientRegistration>' }
 const surveyAfterExamination = { template: '<surveyAfterExamination></surveyAfterExamination>' }
 const surveyResults = { template: '<surveyResults></surveyResults>' }
+const doctorSurveyResults = { template: '<doctorSurveyResults></doctorSurveyResults>'}
 const medicalRecordReview = { template: '<medicalRecordReview></medicalRecordReview>' }
 
 const router = new VueRouter({
@@ -15,6 +16,7 @@ const router = new VueRouter({
 		{ path: '/patientRegistration', name: 'patientRegistration', component: patientRegistration },
 		{ path: '/surveyAfterExamination', name: 'surveyAfterExamination', component: surveyAfterExamination },
 		{ path: '/surveyResults', name: 'surveyResults', component: surveyResults },
+		{ path: '/doctorSurveyResults', name: 'doctorSurveyResults', component: doctorSurveyResults },
 		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview }
 	]
 });

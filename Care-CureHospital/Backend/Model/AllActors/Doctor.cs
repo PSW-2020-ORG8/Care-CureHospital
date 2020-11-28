@@ -26,6 +26,12 @@ namespace Model.AllActors
             Specialitation = specialitation;
         }
 
+        public Doctor(string name, string surname, string username, Specialitation specialitation)
+            : base(name, surname, username)
+        {
+            Specialitation = specialitation;
+        }
+
 
         public Doctor(int id) : base(id)
         {

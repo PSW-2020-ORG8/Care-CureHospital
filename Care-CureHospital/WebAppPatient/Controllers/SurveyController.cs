@@ -35,7 +35,7 @@ namespace WebAppPatient.Controllers
         [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResults
         public IActionResult getSurveyResultsForDoctors()
         {
-            return Ok(App.Instance().SurveyService.GetSurveyResultsForAllDoctors());
+            return Ok(QuestionResultMapper.CreateDoctorResultsDto(App.Instance().SurveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
         }
 
         [HttpPost]      // POST /api/survey

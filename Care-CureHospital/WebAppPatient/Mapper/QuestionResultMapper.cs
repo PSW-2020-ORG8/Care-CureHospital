@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.AllActors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,20 +14,23 @@ namespace WebAppPatient.Mapper
             List<QuestionResultDto> questionResults = new List<QuestionResultDto>();
             foreach (int key in results.Keys)
             {
-                QuestionResultDto dto = new QuestionResultDto();
-
-                dto.QuestionId = key;
-                dto.Grades = new List<int>(results[key]);
-                for (int i = 0; i < dto.Grades.Count; i++)
-                {
-                    dto.AverageGrade += dto.Grades[i] * (i + 1);
-                }
-                dto.AverageGrade = Math.Round(dto.AverageGrade / dto.Grades.Sum(), 2);
-
-                questionResults.Add(dto);
+                questionResults.Add(new QuestionResultDto(key, results[key]));
             }
 
             return questionResults;
         }
+
+        public static List<DoctorResultDto> CreateDoctorResultsDto(Dictionary<int, Dictionary<int, List<int>>> results, IEnumerable<Doctor> doctors)
+        {
+            List<DoctorResultDto> doctorResults = new List<DoctorResultDto>();
+            foreach (int key in results.Keys)
+            {
+                Doctor doctor = doctors.FirstOrDefault(doctor => doctor.Id == key);
+                doctorResults.Add(new DoctorResultDto(new Doctor(doctor.Name, doctor.Surname, doctor.Username, doctor.Specialitation), CreateQuestionResultsDto(results[key])));
+            }
+
+            return doctorResults;
+        }
+
     }
 }

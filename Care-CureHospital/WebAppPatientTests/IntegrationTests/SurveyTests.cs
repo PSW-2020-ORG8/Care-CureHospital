@@ -10,12 +10,12 @@ using Xunit;
 
 namespace WebAppPatientTests.IntegrationTests
 {
-    public class AnswersTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class SurveyTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         
         private readonly WebApplicationFactory<Startup> factory;
 
-        public AnswersTest(WebApplicationFactory<Startup> factory)
+        public SurveyTests(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
         }
@@ -30,6 +30,19 @@ namespace WebAppPatientTests.IntegrationTests
 
             response.StatusCode.ShouldBeEquivalentTo(expectedAnswer);
         }
+
+        [Theory]
+        [MemberData(nameof(Data))]
+        public async void Get_survey_results_for_doctors(HttpStatusCode expectedAnswer)
+        {
+            HttpClient client = factory.CreateClient();
+
+            HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResultsForDoctors");
+
+            response.StatusCode.ShouldBeEquivalentTo(expectedAnswer);
+        }
+
+
 
         public static IEnumerable<object[]> Data =>
         new List<object[]>

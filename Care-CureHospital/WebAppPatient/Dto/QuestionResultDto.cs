@@ -15,5 +15,16 @@ namespace WebAppPatient.Dto
         public double AverageGrade { get; set; }
 
         public QuestionResultDto() { }
+
+        public QuestionResultDto(int questionId, List<int> grades)
+        {
+            QuestionId = questionId;
+            Grades = new List<int>(grades);
+            for (int i = 0; i < Grades.Count; i++)
+            {
+                AverageGrade += Grades[i] * (i + 1);
+            }
+            AverageGrade = Math.Round(AverageGrade / Grades.Sum(), 2);
+        }
     }
 }

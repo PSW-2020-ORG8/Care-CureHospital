@@ -64,6 +64,13 @@ namespace Model.AllActors
             Password = password;
         }
 
+        public User(string name, string surname, string username)
+        {
+            Name = name;
+            Surname = surname;
+            Username = username;
+        }
+
         public int GetId()
         {
             return Id;
