@@ -1,7 +1,8 @@
 Vue.component("patientDocumentsAdvancedSearch", {
 	data: function () {
 		return {
-			patientDocuments: [],
+			reportsForPatient: [],
+			prescriptionsForPatient : [],
 			firstSearchParams: 'Doktoru',
 			secondSearchParams: 'Doktoru',
 			thirdSearchParams: 'Doktoru',
@@ -15,14 +16,16 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			secondInput: '',
 			thirdInput: '',
 			fourthInput: '',
-			firstResult: [],
-			secondResult: [],
-			thirdResult: [],
-			fourthResult: [],
+			firstPublishingDate: '',
+			secondPublishingDate: '',
+			thirdPublishingDate: '',
+			fourthPublishingDate: '',
 			reportsButtonSelected : true,
 			prescriptionsButtonSelected : false,
 			reportsResult: [],
-			prescriptionsResult : []
+			prescriptionsResult: [],
+			paramInputDict: {},
+			logicOperatorsList: []
 		}
 	},
 	template: `
@@ -40,7 +43,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/patientDocumentsAdvancedSearch">Pretraga dokumenata</a></li>
+	            <li  class="active"><a href="#/patientDocumentsSimpleSearch">Pretraga dokumenata</a></li>
 	         </ul>
 	     </div>
  
@@ -57,7 +60,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	 </div>	
 
 	<div class="filterReports">
-            <div class="form-title">
+            <div class="form-title-search">
 				<h1>Pretraži po:</h1>
 
 				<div class="reports-btn" v-if="this.reportsButtonSelected === true">
@@ -73,17 +76,20 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					<button type="button" @click="prescriptionsSearchButton">Recepti</button>
 				</div>
 
-                <select v-model="firstSearchParams" name="firstRow">
+                <select v-if="this.reportsButtonSelected === true" v-model="firstSearchParams" name="firstRow">
 					<option value="Doktoru" selected>Doktoru</option>
 					<option value="Datumu">Datumu</option>
-					<option value="Sobi">Sobi</option>
 					<option value="Sadržaju">Sadržaju</option>
+					<option value="Sobi">Sobi</option>
+				</select>
+				<select v-if="this.prescriptionsButtonSelected === true" v-model="firstSearchParams" name="firstRow">
+					<option value="Doktoru" selected>Doktoru</option>
+					<option value="Datumu">Datumu</option>
+					<option value="Sadržaju">Sadržaju</option>
+					<option value="Lekovima">Lekovima</option>
 				</select>
 
-				<div v-if="firstSearchParams === 'Datumu'">
-					<input type="date" style="width:150px">
-				</div>
-
+				<input v-if="firstSearchParams === 'Datumu'" v-model="firstPublishingDate" type="date" style="width:150px;height:42px">
 				<input v-else v-model="firstInput" type="text" style="width:150px" placeholder="">
 
 				<select v-model="firstLogicOperators" style="width:90px" name="firstRow">
@@ -99,14 +105,21 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				</div>
 									
 				<div v-if="this.count >= 1" class="second-row" name="secondRow">
-					<select v-model="secondSearchParams">
+					<select v-if="this.reportsButtonSelected === true" v-model="secondSearchParams" name="firstRow">
 						<option value="Doktoru" selected>Doktoru</option>
 						<option value="Datumu">Datumu</option>
-						<option value="Sobi">Sobi</option>
 						<option value="Sadržaju">Sadržaju</option>
+						<option value="Sobi">Sobi</option>
+					</select>
+					<select v-if="this.prescriptionsButtonSelected === true" v-model="secondSearchParams" name="firstRow">
+						<option value="Doktoru" selected>Doktoru</option>
+						<option value="Datumu">Datumu</option>
+						<option value="Sadržaju">Sadržaju</option>
+						<option value="Lekovima">Lekovima</option>
 					</select>
 
-					<input v-model="secondInput" type="text" style="width:150px" placeholder="">
+					<input v-if="secondSearchParams === 'Datumu'" v-model="secondPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="secondInput" type="text" style="width:150px" placeholder="">
 
 					<select v-model="secondLogicOperators" style="width:90px" name="secondRow">
 						<option value="I" selected>I</option>
@@ -122,14 +135,21 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				</div>
 
 				<div v-if="this.count >= 2" class="third-row">
-					<select v-model="thirdSearchParams">
+					<select v-if="this.reportsButtonSelected === true" v-model="thirdSearchParams" name="firstRow">
 						<option value="Doktoru" selected>Doktoru</option>
 						<option value="Datumu">Datumu</option>
-						<option value="Sobi">Sobi</option>
 						<option value="Sadržaju">Sadržaju</option>
+						<option value="Sobi">Sobi</option>
+					</select>
+					<select v-if="this.prescriptionsButtonSelected === true" v-model="thirdSearchParams" name="firstRow">
+						<option value="Doktoru" selected>Doktoru</option>
+						<option value="Datumu">Datumu</option>
+						<option value="Sadržaju">Sadržaju</option>
+						<option value="Lekovima">Lekovima</option>
 					</select>
 
-					<input v-model="thirdInput" type="text" style="width:150px" placeholder="">
+					<input v-if="thirdSearchParams === 'Datumu'" v-model="thirdPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="thirdInput" type="text" style="width:150px" placeholder="">
 
 					<select v-model="thirdLogicOperators" style="width:90px">
 						<option value="I" selected>I</option>
@@ -145,14 +165,21 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				</div>
 
 				<div v-if="this.count >= 3" class="fourth-row">
-					<select v-model="fourthSearchParams">
+					<select v-if="this.reportsButtonSelected === true" v-model="fourthSearchParams" name="firstRow">
 						<option value="Doktoru" selected>Doktoru</option>
 						<option value="Datumu">Datumu</option>
-						<option value="Sobi">Sobi</option>
 						<option value="Sadržaju">Sadržaju</option>
+						<option value="Sobi">Sobi</option>
+					</select>
+					<select v-if="this.prescriptionsButtonSelected === true" v-model="fourthSearchParams" name="firstRow">
+						<option value="Doktoru" selected>Doktoru</option>
+						<option value="Datumu">Datumu</option>
+						<option value="Sadržaju">Sadržaju</option>
+						<option value="Lekovima">Lekovima</option>
 					</select>
 
-					<input v-model="fourthInput" type="text" style="width:150px" placeholder="">
+					<input v-if="fourthSearchParams === 'Datumu'" v-model="fourthPublishingDate" type="date" style="width:150px;height:42px">
+					<input v-else v-model="fourthInput" type="text" style="width:150px" placeholder="">
 				
 					<div v-if="this.count == 3" class="add-param-btn">
 						<button type="button" @click="dec">-</button>
@@ -160,7 +187,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				</div>
 
 				<div class="search-btn">
-					<button type="button" @click="advancedSeacrh()">Potvrdi</button>
+					<button type="button" @click="advancedSearch()">Potvrdi</button>
 				</div>
 
 		    </div>
@@ -170,7 +197,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Obična</a></li></div><br/>
+			<div><li><a href="#/patientDocumentsSimpleSearch">Obična</a></li></div><br/>
 		    <div><li class="active"><a href="#/patientDocumentsAdvancedSearch">Napredna</a></li></div><br/>
 	     </ul>
 	 </div>
@@ -209,7 +236,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					</div>
 					<div class="report-info">
 						<div class="report-text">
-							<h1>Izveštaj od doktora: {{prescription.doctor}}</h1></br>		
+							<h1>Recept od doktora: {{prescription.doctor}}</h1></br>		
 							<p>{{prescription.publishingDate}}</p>
 							<div  style="overflow-y:scroll;height:90px;width:400px;border:1px solid;padding: 5px 5px 10px 5px">
 								{{prescription.comment}}
@@ -238,25 +265,183 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	,
 	methods: {
 		advancedSearch: function () {
+			this.paramInputDict = {}
+			this.logicOperatorsList = []
+
+			if(this.count === 0) {
+				if(this.firstSearchParams === 'Datumu') {
+					this.paramInputDict[this.firstSearchParams] = this.firstPublishingDate
+				} else if(this.firstSearchParams === 'Doktoru') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+				} else if(this.firstSearchParams === 'Sadržaju') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+				} else if(this.firstSearchParams === 'Sobi') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+				} else if(this.firstSearchParams === 'Lekovima') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+				}	
+			} else {
+				if(this.firstSearchParams === 'Datumu') {
+					this.paramInputDict[this.firstSearchParams] = this.firstPublishingDate
+					this.logicOperatorsList.push(this.firstLogicOperators)
+				} else if(this.firstSearchParams === 'Doktoru') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+					this.logicOperatorsList.push(this.firstLogicOperators)
+				} else if(this.firstSearchParams === 'Sadržaju') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+					this.logicOperatorsList.push(this.firstLogicOperators)
+				} else if(this.firstSearchParams === 'Sobi') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+					this.logicOperatorsList.push(this.firstLogicOperators)
+				} else if(this.firstSearchParams === 'Lekovima') {
+					this.paramInputDict[this.firstSearchParams] = this.firstInput 
+					this.logicOperatorsList.push(this.firstLogicOperators)
+				}	
+			}			
+
+			if(this.count >=1) {
+				if(this.secondSearchParams === 'Datumu') {
+					this.paramInputDict[this.secondSearchParams] = this.secondPublishingDate
+					this.logicOperatorsList.push(this.secondLogicOperators)
+				} else if(this.secondSearchParams === 'Doktoru') {
+					this.paramInputDict[this.secondSearchParams] = this.secondInput
+					this.logicOperatorsList.push(this.secondLogicOperators) 
+				} else if(this.secondSearchParams === 'Sadržaju') {
+					this.paramInputDict[this.secondSearchParams] = this.secondInput
+					this.logicOperatorsList.push(this.secondLogicOperators) 
+				} else if(this.secondSearchParams === 'Sobi') {
+					this.paramInputDict[this.secondSearchParams] = this.secondInput
+					this.logicOperatorsList.push(this.secondLogicOperators) 
+				} else if(this.secondSearchParams === 'Lekovima') {
+					this.paramInputDict[this.secondSearchParams] = this.secondInput
+					this.logicOperatorsList.push(this.secondLogicOperators) 
+				} 				
+			}
+			
+			if(this.count >=2) {
+				if(this.thirdSearchParams === 'Datumu') {
+					this.paramInputDict[this.thirdSearchParams] = this.thirdPublishingDate
+					this.logicOperatorsList.push(this.thirdLogicOperators)
+				} else if(this.thirdSearchParams === 'Doktoru') {
+					this.paramInputDict[this.thirdSearchParams] = this.thirdInput 
+					this.logicOperatorsList.push(this.thirdLogicOperators)
+				} else if(this.thirdSearchParams === 'Sadržaju') {
+					this.paramInputDict[this.thirdSearchParams] = this.thirdInput 
+					this.logicOperatorsList.push(this.thirdLogicOperators)
+				} else if(this.thirdSearchParams === 'Sobi') {
+					this.paramInputDict[this.thirdSearchParams] = this.thirdInput 
+					this.logicOperatorsList.push(this.thirdLogicOperators)
+				} else if(this.thirdSearchParams === 'Lekovima') {
+					this.paramInputDict[this.thirdSearchParams] = this.thirdInput 
+					this.logicOperatorsList.push(this.thirdLogicOperators)
+				} 
+			}
+			
+			if(this.count >=3) {
+				if(this.fourthSearchParams === 'Datumu') {
+					this.paramInputDict[this.fourthSearchParams] = this.fourthPublishingDate
+				} else if(this.fourthSearchParams === 'Doktoru') {
+					this.paramInputDict[this.fourthSearchParams] = this.fourthInput 
+				} else if(this.fourthSearchParams === 'Sadržaju') {
+					this.paramInputDict[this.fourthSearchParams] = this.fourthInput
+				} else if(this.fourthSearchParams === 'Sobi') {
+					this.paramInputDict[this.fourthSearchParams] = this.fourthInput
+				} else if(this.fourthSearchParams === 'Lekovima') {
+					this.paramInputDict[this.fourthSearchParams] = this.fourthInput
+				} 
+			}
+				
+			if(this.reportsButtonSelected === true) {			
+				axios.post('api/medicalExaminationReport/advancedSearchReportsForPatient', {
+					patientId : 1,
+					searchParams : this.paramInputDict,
+					logicOperators : this.logicOperatorsList
+				}).then(response => {
+					this.reportsResult = response.data;		
+				});
+			} else if(this.prescriptionsButtonSelected === true) {
+				axios.post('api/prescription/advancedSearchPrescriptionsForPatient', {
+					patientId : 1,
+					searchParams : this.paramInputDict,
+					logicOperators : this.logicOperatorsList
+				}).then(response => {
+					this.prescriptionsResult = response.data;		
+				});
+			}
 			
 		},
 
 		add: function () {
-			this.count += 1
+			this.count += 1		
 		},
 
 		dec: function () {
 			this.count -= 1
+			if(this.count === 2){
+				this.fourthSearchParams = 'Doktoru'
+				this.fourthInput = ''
+				this.fourthPublishingDate = ''
+			} else if(this.count === 1) {
+				this.thirdSearchParams = 'Doktoru'
+				this.thirdLogicOperators = 'I'
+				this.thirdInput = ''
+				this.thirdPublishingDate = ''
+			} else if(this.count === 0) {
+				this.secondSearchParams = 'Doktoru'
+				this.secondLogicOperators = 'I'
+				this.secondInput = ''
+				this.secondPublishingDate = ''
+			}
 		},
 
 		reportsSearchButton: function () {
 			this.prescriptionsButtonSelected = false;
-			this.reportsButtonSelected = true;			
+			this.reportsButtonSelected = true;	
+			this.count = 0,
+			this.firstSearchParams = 'Doktoru',
+			this.secondSearchParams = 'Doktoru',
+			this.thirdSearchParams = 'Doktoru',
+			this.fourthSearchParams = 'Doktoru',
+			this.firstLogicOperators = 'I',
+			this.secondLogicOperators = 'I',
+			this.thirdLogicOperators = 'I',
+			this.fourthLogicOperators = 'I',
+			this.firstInput = '',
+			this.secondInput = '',
+			this.thirdInput = '',
+			this.fourthInput = '',
+			this.firstPublishingDate = '',
+			this.secondPublishingDate = '',
+			this.thirdPublishingDate = '',
+			this.fourthPublishingDate = '',
+			this.paramInputDict = {},
+			this.logicOperatorsList = [],
+			this.reportsResult = this.reportsForPatient
 		},
 
 		prescriptionsSearchButton: function () {
 			this.reportsButtonSelected = false;	
-			this.prescriptionsButtonSelected = true;					
+			this.prescriptionsButtonSelected = true;
+			this.count = 0,
+			this.firstSearchParams = 'Doktoru',
+			this.secondSearchParams = 'Doktoru',
+			this.thirdSearchParams = 'Doktoru',
+			this.fourthSearchParams = 'Doktoru',
+			this.firstLogicOperators = 'I',
+			this.secondLogicOperators = 'I',
+			this.thirdLogicOperators = 'I',
+			this.fourthLogicOperators = 'I',
+			this.firstInput = '',
+			this.secondInput = '',
+			this.thirdInput = '',
+			this.fourthInput = '',
+			this.firstPublishingDate = '',
+			this.secondPublishingDate = '',
+			this.thirdPublishingDate = '',
+			this.fourthPublishingDate = '',
+			this.paramInputDict = {},
+			this.logicOperatorsList = [],
+			this.prescriptionsResult = this.prescriptionsForPatient					
 		}
 	},
 	computed: {
@@ -264,10 +449,13 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	},
 	mounted() {
 		axios.get('api/medicalExaminationReport/getForPatient/' + 1).then(response => {
-			this.reportsResult = response.data;
+			this.reportsForPatient = response.data;
+			this.reportsResult = this.reportsForPatient;
+			
 		});
 		axios.get('api/prescription/getForPatient/' + 1).then(response => {
-			this.prescriptionsResult = response.data;
+			this.prescriptionsForPatient = response.data;
+			this.prescriptionsResult = this.prescriptionsForPatient;			
 		});
 	}
 });

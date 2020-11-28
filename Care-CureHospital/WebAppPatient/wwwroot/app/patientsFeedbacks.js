@@ -35,7 +35,6 @@ Vue.component("patientsFeedbacks", {
 		    </div>
 	    </div>
 	 </div>
-
 	 
 	<div class="filterFeedbacks">
             <div class="form-title">
@@ -46,7 +45,6 @@ Vue.component("patientsFeedbacks", {
                 </select>
 		    </div>
      </div>
-	 
 
 	 <div class="verticalLine"></div>
 	
@@ -56,8 +54,7 @@ Vue.component("patientsFeedbacks", {
 		    <div><li class="active"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
 			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
-	 </div>
-	 		 
+	 </div> 		 
 
 	<!--
 	 <div class="titleForPublishedFeedbackPreview">
@@ -65,7 +62,6 @@ Vue.component("patientsFeedbacks", {
 	 </div> 
 	-->	 
 		 
-
 	 <div class="listOfFeedbacks">
 		 
 	 <div v-for="pf in filterPatientFeedbacks" >	

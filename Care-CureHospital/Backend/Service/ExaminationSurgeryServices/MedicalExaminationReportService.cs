@@ -83,6 +83,52 @@ namespace Backend.Service.ExaminationSurgeryServices
             return searchResult;
         }
 
+        public List<MedicalExaminationReport> FindReportsUsingAdvancedSearch(int patientId, Dictionary<string, string> searchParameters, List<string> logicOperators)
+        {
+            List<MedicalExaminationReport> currentResult = FindReportsBySearchParameter(patientId, searchParameters.Keys.ToList()[0], searchParameters.Values.ToList()[0]);
+            for(int i = 1; i < searchParameters.Keys.Count; i++)
+            {
+                List<MedicalExaminationReport> nextResult = FindReportsBySearchParameter(patientId, searchParameters.Keys.ToList()[i], searchParameters.Values.ToList()[i]);
+                currentResult = CalculateLogicalOperationResult(logicOperators[i - 1], currentResult, nextResult);
+            }
+            return currentResult;          
+        }
+
+        public List<MedicalExaminationReport> FindReportsBySearchParameter(int patientId, string parameter, string parameterValue)
+        {
+            if (parameter.Equals("Doktoru"))
+            {
+                return FindReportsForDoctorParameter(patientId, parameterValue);
+            }
+            else if (parameter.Equals("Datumu"))
+            {
+                return FindReportsForDateParameter(patientId, parameterValue);
+            }
+            else if (parameter.Equals("Sadržaju"))
+            {
+                return FindReportsForCommentParameter(patientId, parameterValue);
+            }
+            else if (parameter.Equals("Sobi"))
+            {
+                return FindReportsForRoomParameter(patientId, parameterValue);
+            }
+            return null;
+        }
+
+        public List<MedicalExaminationReport> CalculateLogicalOperationResult(string logicOperator, List<MedicalExaminationReport> firstResult, List<MedicalExaminationReport> secondResult)
+        {
+            List<MedicalExaminationReport> result = new List<MedicalExaminationReport>();
+            if (logicOperator.Equals("I"))
+            {
+                result = firstResult.Intersect(secondResult).ToList();
+            } 
+            else if (logicOperator.Equals("ILI"))
+            {
+                result = firstResult.Union(secondResult).ToList();
+            }
+            return result;
+        }
+
         public MedicalExaminationReport GetEntity(int id)
         {
             return medicalExaminationReportRepository.GetEntity(id);

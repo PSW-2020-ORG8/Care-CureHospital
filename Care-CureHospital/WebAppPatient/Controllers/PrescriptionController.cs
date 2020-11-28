@@ -63,5 +63,13 @@ namespace WebAppPatient.Controllers
             App.Instance().PrescriptionService.FindPrescriptionsForMedicamentsParameter(patientId, medicaments).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
             return Ok(result);
         }
+
+        [HttpPost("advancedSearchPrescriptionsForPatient")]        // POST /api/prescription/advancedSearchPrescriptionsForPatient
+        public IActionResult FindPrescriptionsForPatient(PrescriptionDto dto)
+        {
+            List<PrescriptionDto> result = new List<PrescriptionDto>();
+            App.Instance().PrescriptionService.FindPrescriptionsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            return Ok(result);
+        }
     }
 }

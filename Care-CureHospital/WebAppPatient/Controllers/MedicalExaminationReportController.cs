@@ -64,5 +64,13 @@ namespace WebAppPatient.Controllers
             App.Instance().MedicalExaminationReportService.FindReportsForRoomParameter(patientId, room).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
             return Ok(result);
         }
+
+        [HttpPost("advancedSearchReportsForPatient")]       // POST /api/medicalExaminationReport/advancedSearchReportsForPatient  
+        public IActionResult FindMedicalExaminationReportsForPatient(MedicalExaminationReportDto dto)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
     }
 }
