@@ -35,7 +35,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.Comment.ToString().Contains(comment)))
+                if ((report.Comment.ToString().ToLower().Contains(comment.ToLower())))
                 {
                     searchResult.Add(report);
                 }
@@ -74,8 +74,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.MedicalExamination.Doctor.Name.ToString() + " " + report.MedicalExamination.Doctor.Surname.ToString()).Equals(doctorFullName) ||
-                    doctorFullName.Contains(report.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(report.MedicalExamination.Doctor.Surname.ToString()))
+                if (doctorFullName.Contains(report.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(report.MedicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(report);
                 }
@@ -94,21 +93,21 @@ namespace Backend.Service.ExaminationSurgeryServices
             return currentResult;          
         }
 
-        public List<MedicalExaminationReport> FindReportsBySearchParameter(int patientId, string parameter, string parameterValue)
+        public List<MedicalExaminationReport> FindReportsBySearchParameter(int patientId, string searchParameter, string parameterValue)
         {
-            if (parameter.Equals("Doktoru"))
+            if (searchParameter.Equals("Doktoru"))
             {
                 return FindReportsForDoctorParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Datumu"))
+            else if (searchParameter.Equals("Datumu"))
             {
                 return FindReportsForDateParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sadržaju"))
+            else if (searchParameter.Equals("Sadržaju"))
             {
                 return FindReportsForCommentParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sobi"))
+            else if (searchParameter.Equals("Sobi"))
             {
                 return FindReportsForRoomParameter(patientId, parameterValue);
             }

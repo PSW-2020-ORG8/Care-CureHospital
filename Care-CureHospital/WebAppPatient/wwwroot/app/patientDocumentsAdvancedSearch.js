@@ -92,7 +92,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				<input v-if="firstSearchParams === 'Datumu'" v-model="firstPublishingDate" type="date" style="width:150px;height:42px">
 				<input v-else v-model="firstInput" type="text" style="width:150px" placeholder="">
 
-				<select v-model="firstLogicOperators" style="width:90px" name="firstRow">
+				<select v-model="firstLogicOperators" v-if="this.count !== 0" style="width:90px" name="firstRow">
 					<option value="I" selected>I</option>
 					<option value="ILI">ILI</option>
 				</select>
@@ -121,7 +121,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					<input v-if="secondSearchParams === 'Datumu'" v-model="secondPublishingDate" type="date" style="width:150px;height:42px">
 					<input v-else v-model="secondInput" type="text" style="width:150px" placeholder="">
 
-					<select v-model="secondLogicOperators" style="width:90px" name="secondRow">
+					<select v-model="secondLogicOperators" v-if="this.count !== 1" style="width:90px" name="secondRow">
 						<option value="I" selected>I</option>
 						<option value="ILI">ILI</option>
 					</select>
@@ -151,7 +151,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					<input v-if="thirdSearchParams === 'Datumu'" v-model="thirdPublishingDate" type="date" style="width:150px;height:42px">
 					<input v-else v-model="thirdInput" type="text" style="width:150px" placeholder="">
 
-					<select v-model="thirdLogicOperators" style="width:90px">
+					<select v-model="thirdLogicOperators" v-if="this.count !== 2" style="width:90px">
 						<option value="I" selected>I</option>
 						<option value="ILI">ILI</option>
 					</select>
@@ -357,7 +357,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					searchParams : this.paramInputDict,
 					logicOperators : this.logicOperatorsList
 				}).then(response => {
-					this.reportsResult = response.data;		
+					this.reportsResult = response.data;	
 				});
 			} else if(this.prescriptionsButtonSelected === true) {
 				axios.post('api/prescription/advancedSearchPrescriptionsForPatient', {
@@ -365,10 +365,9 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					searchParams : this.paramInputDict,
 					logicOperators : this.logicOperatorsList
 				}).then(response => {
-					this.prescriptionsResult = response.data;		
+					this.prescriptionsResult = response.data;	
 				});
-			}
-			
+			}			
 		},
 
 		add: function () {

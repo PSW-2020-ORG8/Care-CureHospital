@@ -36,7 +36,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if ((prescription.Comment.ToString().Contains(comment)))
+                if ((prescription.Comment.ToString().ToLower().Contains(comment.ToLower())))
                 {
                     searchResult.Add(prescription);
                 }
@@ -62,8 +62,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if ((prescription.MedicalExamination.Doctor.Name.ToString() + " " + prescription.MedicalExamination.Doctor.Surname.ToString()).Equals(doctorFullName) ||
-                    doctorFullName.Contains(prescription.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(prescription.MedicalExamination.Doctor.Surname.ToString()))
+                if (doctorFullName.Contains(prescription.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(prescription.MedicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(prescription);
                 }
@@ -78,7 +77,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             {
                 foreach (Medicament medicament in prescription.Medicaments)
                 {
-                    if (medicaments.ToString().Contains(medicament.Name.ToString()))
+                    if (medicaments.ToString().ToLower().Contains(medicament.Name.ToString().ToLower()))
                     {
                         searchResult.Add(prescription);
                     }
@@ -98,21 +97,21 @@ namespace Backend.Service.ExaminationSurgeryServices
             return currentResult;
         }
 
-        public List<Prescription> FindPrescriptionsBySearchParameter(int patientId, string parameter, string parameterValue)
+        public List<Prescription> FindPrescriptionsBySearchParameter(int patientId, string searchParameter, string parameterValue)
         {
-            if (parameter.Equals("Doktoru"))
+            if (searchParameter.Equals("Doktoru"))
             {
                 return FindPrescriptionsForDoctorParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Datumu"))
+            else if (searchParameter.Equals("Datumu"))
             {
                 return FindPrescriptionsForDateParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sadržaju"))
+            else if (searchParameter.Equals("Sadržaju"))
             {
                 return FindPrescriptionsForCommentParameter(patientId, parameterValue);
             }
-            else if (parameter.Equals("Lekovima"))
+            else if (searchParameter.Equals("Lekovima"))
             {
                 return FindPrescriptionsForMedicamentsParameter(patientId, parameterValue);
             }

@@ -23,7 +23,7 @@ namespace Service.MedicalRecordService
 
         public MedicalRecord GetMedicalRecordForPatient(int patientID)
         {
-            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID); ;
+            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID);
         }
 
         public MedicalRecord GetEntity(int id)
