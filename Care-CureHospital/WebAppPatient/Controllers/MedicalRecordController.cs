@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -27,10 +28,9 @@ namespace WebAppPatient.Controllers
             {
                 return BadRequest("The data which were entered are incorrect!");
             }
-
             MedicalRecord medicalRecord = MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto);
-            //App.Instance().EmailVerificationService.SendVerificationEmailLink(new MailAddress(dto.Patient.EMail), dto.Patient.Username);
             App.Instance().MedicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), medicalRecord);
+            App.Instance().MedicalRecordService.WritePatientProfilePictureInFile(dto.Patient.Username, dto.ProfilePicture);
             return Ok(200);
         }
 
@@ -58,7 +58,6 @@ namespace WebAppPatient.Controllers
             }
             App.Instance().MedicalRecordService.ActivatePatientMedicalRecord(medicalRecord);
             return Redirect("http://localhost:51182/index.html#/");
-
         }
     }
 }

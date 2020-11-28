@@ -20,6 +20,7 @@ namespace WebAppPatient.Dto
         public string DateOfBirthday { get; set; }
         public bool ActiveMedicalRecord { get; set; }
         public string ConfirmedPassword { get; set; }
+        public string ProfilePicture { get; set; }
 
         public MedicalRecordDto() { }
     }

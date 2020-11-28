@@ -9,6 +9,7 @@ using Model.PatientDoctor;
 using Repository.MedicalRecordRepository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 
@@ -81,5 +82,29 @@ namespace Service.MedicalRecordService
         {
             return medicalRecordRepository.GetMedicalRecordByPatient(patient);
         }
+
+        public void WritePatientProfilePictureInFile(string patientUsername, string profilePicture)
+        {
+            try
+            {
+                byte[] bytes = Convert.FromBase64String(profilePicture.Split(",")[1]);
+                using (var fs = new FileStream(FindPictureFolderPath(patientUsername), FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private string FindPictureFolderPath(string patientUsername)
+        {
+            string pictureFolderPath = Path.Combine("wwwroot", "pictures\\patientsProfile\\");
+            string pathForSaving = Path.Combine(Directory.GetCurrentDirectory(), pictureFolderPath);
+            return Path.Combine(pathForSaving, patientUsername + ".jpg");
+        }
+
     }
 }

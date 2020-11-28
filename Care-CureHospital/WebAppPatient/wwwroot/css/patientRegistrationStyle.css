@@ -165,10 +165,10 @@
 .wrapper-form-patient-registration {
     position: fixed;
     z-index: 1;
-    height: 630px;
+    height: 500px;
     width: 854px;
     margin: 50px auto;
-    margin-left: 21%;
+    margin-left: 14%;
     margin-top: 0%;
     border-radius: 7px 7px 7px 7px;
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
@@ -180,7 +180,7 @@
 }
 
 .data-for-patient-registration {
-    height: 630px;
+    height: 500px;
     width: 854px;
     border-radius: 0 7px 10px 7px;
     background-color: #afd0c7;
@@ -434,9 +434,9 @@
 
 .scroll-in-patient-registration {
     overflow-y: scroll;
-    height: 400px;
+    height: 270px;
     width: 600px;
-    /* border: 1px solid #054f5294; */
+
     padding: 20px 20px 35px 20px;
     margin-left: -16%;
 }

@@ -55,7 +55,7 @@ Vue.component("patientRegistration", {
             addressInput : '',
             errorAddress : false,
             imagesShow : [],
-		    sendImages : [],
+		    sendImage : '',
 		    countImage : 0,
             disable : false,
             allergies : [],
@@ -240,9 +240,9 @@ Vue.component("patientRegistration", {
                               <option value="OMinus">O-</option>
                             </select><br><br>
 
-                            <br><br><label>Profilna slika:</label><br><br>
+                            <label>Profilna slika:</label><br><br>
                             <input v-if="this.countImage <= 1" type="file"   @change="addImage" >
-                            <input v-else type="file" disabled  @change="addImage" name="imagesForApartmentName"><br><br><br>
+                            <input v-else type="file" disabled  @change="addImage"><br><br><br>
                         </div>
 
                 </div>
@@ -462,39 +462,13 @@ Vue.component("patientRegistration", {
                         "Country" : {"Name" : this.country}}},
                         "allergies" : this.finalAllergiesLists,
                         "ConfirmedPassword" : this.confirmPasswordInputField,
-                        "ActiveMedicalRecord" : false
+                        "ActiveMedicalRecord" : false,
+                        "ProfilePicture" : this.sendImage
                     })
                     .then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
-                            this.usernameInputField = '';
-                            this.passwordInputField = '';
-                            this.confirmPasswordInputField =  '';
-                            this.nameInputField =  '';
-                            this.parentNameInputField =  '';
-                            this.surnameInputField =  '';
-                            this.genderSelectField =  'gender';
-                            this.jmbgInputField =  '';
-                            this.personalCardInputField =  '';
-                            this.healthBookletNumberInputField =  '';
-                            this.dateOfBirthDatePicker =  '';
-                            this.contactNumberField = '';
-                            this.emailField = '';
-                            this.places = null;
-                            this.city = '';
-                            this.zipCode = 0;
-                            this.longitude = '';
-                            this.latitude = '';
-                            this.street = '';
-                            this.number = '';
-                            this.address = '';
-                            this.country = '';
-                            this.addressInput = '';
-                            this.checkedAllergies =  [];
-                            this.finalCheckedAllergies =  [];
-                            this.modalDialog = false;
-                            this.allergyInputField = 'Bez alergija';
-                            this.bloodGroupInputField = 'unknown';          
+                            this.resetData()          
                         }           
                     }).catch(error => {
 
@@ -522,39 +496,10 @@ Vue.component("patientRegistration", {
         previousButtonClicked : function(){	
 
             if(confirm('Da li ste sigurni da želite da odustanete od registracije?') === true){ 
-                this.usernameInputField = '';
-                this.passwordInputField = '';
-                this.confirmPasswordInputField =  '';
-                this.nameInputField =  '';
-                this.parentNameInputField =  '';
-                this.surnameInputField =  '';
-                this.genderSelectField =  'gender';
-                this.jmbgInputField =  '';
-                this.personalCardInputField =  '';
-                this.healthBookletNumberInputField =  '';
-                this.dateOfBirthDatePicker =  '';
-                this.contactNumberField = '';
-                this.emailField = '';
-                this.places = null;
-                this.city = '';
-                this.zipCode = 0;
-                this.longitude = '';
-                this.latitude = '';
-                this.street = '';
-                this.number = '';
-                this.address = '';
-                this.country = '';
-                this.addressInput = '';
-                this.checkedAllergies =  [];
-                this.finalCheckedAllergies =  [];
-                this.modalDialog = false;
-                this.allergyInputField = 'Bez alergija';
-                this.bloodGroupInputField = 'unknown';
+                this.resetData()
             }
-        },
-        
+        },       
         addImage : function(e){
-
 			const file = e.target.files[0];
 			this.createBase64Image(file);
 			this.countImage++;
@@ -562,34 +507,51 @@ Vue.component("patientRegistration", {
 				this.disabled = true;
 			}
 			this.imagesShow.push(URL.createObjectURL(file));
-		},
-		
-		createBase64Image : function(file){
-			
+		},		
+		createBase64Image : function(file){		
 			const reader = new FileReader();
 			reader.onload = (e) => {
-				let image = e.target.result;
-				this.sendImages.push(image);				
-				
+				this.sendImage = e.target.result;						
 			}		
 			reader.readAsDataURL(file);
-		}
-
-
+        },
+        resetData : function(){
+            this.usernameInputField = '';
+            this.passwordInputField = '';
+            this.confirmPasswordInputField =  '';
+            this.nameInputField =  '';
+            this.parentNameInputField =  '';
+            this.surnameInputField =  '';
+            this.genderSelectField =  'gender';
+            this.jmbgInputField =  '';
+            this.personalCardInputField =  '';
+            this.healthBookletNumberInputField =  '';
+            this.dateOfBirthDatePicker =  '';
+            this.contactNumberField = '';
+            this.emailField = '';
+            this.places = null;
+            this.city = '';
+            this.zipCode = 0;
+            this.longitude = '';
+            this.latitude = '';
+            this.street = '';
+            this.number = '';
+            this.address = '';
+            this.country = '';
+            this.addressInput = '';
+            this.checkedAllergies =  [];
+            this.finalCheckedAllergies =  [];
+            this.modalDialog = false;
+            this.allergyInputField = 'Bez alergija';
+            this.bloodGroupInputField = 'unknown';
+            this.sendImage = '';
+		    this.countImage = 0;
+            this.disable = false;
+        }
 	},
 	mounted() {
-
-        // axios.get('api/allergies').then(response => {
-        //     this.allergies = response.data;
-        //     for(a in this.allergies){
-        //         console.log(a.name)
-        //     }
-        // });
         axios.get('api/allergies').then(response => {
             this.allergies = response.data;
-            for(a in this.allergies){
-                console.log(a)
-            }
 		});
 
         this.places = places({
@@ -612,7 +574,6 @@ Vue.component("patientRegistration", {
 			document.querySelector('#latitude').value = e.suggestion.latlng.lat || '';
 			document.querySelector('#zipCode').value = e.suggestion.postcode || '';
 			document.querySelector('#country').value = e.suggestion.country || '';
-			//document.querySelector('#number').value = e.suggestion.number || '';
 		});
 	}
 
