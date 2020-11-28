@@ -461,7 +461,8 @@ Vue.component("patientRegistration", {
                         "City" : {"Name" : this.city, "PostCode" : this.zipCode, "Address" : this.street + ' ' + this.number, 
                         "Country" : {"Name" : this.country}}},
                         "allergies" : this.finalAllergiesLists,
-                        "ConfirmedPassword" : this.confirmPasswordInputField
+                        "ConfirmedPassword" : this.confirmPasswordInputField,
+                        "ActiveMedicalRecord" : false
                     })
                     .then(response => {
                         if(response.status === 200){

@@ -37,6 +37,11 @@ namespace Backend.Service.UsersServices
             return PatientRepository.GetEntity(id);
         }
 
+        public Patient GetUserByUsername(string username)
+        {
+            return PatientRepository.GetPatientByUsername(username);
+        }
+
         public void UpdateEntity(Patient entity)
         {
             PatientRepository.UpdateEntity(entity);

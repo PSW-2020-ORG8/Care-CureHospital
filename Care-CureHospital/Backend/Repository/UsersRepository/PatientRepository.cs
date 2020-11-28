@@ -17,5 +17,15 @@ namespace Backend.Repository.UsersRepository
         {
         }
 
+        public Patient GetPatientByUsername(string username)
+        {
+            foreach (Patient patient in GetAllEntities())
+            {
+                if (patient.Username.Equals(username))
+                    return patient;
+            }
+            return null;
+        }
+
     }
 }

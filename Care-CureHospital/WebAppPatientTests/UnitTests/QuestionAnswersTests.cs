@@ -9,7 +9,7 @@ using Xunit;
 
 namespace WebAppPatientTests
 {
-    public class QuestionAnswersTest
+    public class QuestionAnswersTests
     {
         [Fact]
         public void Get_survey_results()

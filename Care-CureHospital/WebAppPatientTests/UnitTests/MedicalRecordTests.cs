@@ -10,7 +10,7 @@ using Xunit;
 
 namespace WebAppPatientTests
 {
-    public class MedicalRecordTest
+    public class MedicalRecordTests
     {
         [Fact]
         public void Find_medical_record_for_patient()
@@ -33,7 +33,7 @@ namespace WebAppPatientTests
         }
 
         [Fact]
-        public void Register_patient()
+        public void Register_patient_successfully()
         {
             MedicalRecordService medicalRecordService = new MedicalRecordService(CreateStubRepository());
 

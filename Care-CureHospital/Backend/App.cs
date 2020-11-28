@@ -41,10 +41,11 @@ namespace Backend
         public AllergiesService AllergiesService;
         public PatientService PatientService;
         public ReportService ReportService;
-
+        public EmailVerificationService EmailVerificationService;
 
         private App()
         {
+            EmailVerificationService = new EmailVerificationService();
             PatientFeedbackService = new PatientFeedbackService(
                 new PatientFeedbackRepository(new MySQLStream<PatientFeedback>(), new IntSequencer()));
             MedicalExaminationReportService = new MedicalExaminationReportService(
@@ -52,7 +53,7 @@ namespace Backend
             PrescriptionService = new PrescriptionService(
                new PrescriptionRepository(new MySQLStream<Prescription>(), new IntSequencer()));
             MedicalRecordService = new MedicalRecordService(
-               new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()));
+               new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()), EmailVerificationService);
             SurveyService = new SurveyService(
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
             QuestionService = new QuestionService(
@@ -62,8 +63,7 @@ namespace Backend
             PatientService = new PatientService(
                new PatientRepository(new MySQLStream<Patient>(), new IntSequencer()));
             ReportService = new ReportService(
-               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
-
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));           
         }
 
         public static App Instance()

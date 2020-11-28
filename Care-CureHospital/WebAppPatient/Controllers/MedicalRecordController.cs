@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,8 @@ namespace WebAppPatient.Controllers
             }
 
             MedicalRecord medicalRecord = MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto);
-            App.Instance().MedicalRecordService.AddEntity(medicalRecord);
+            //App.Instance().EmailVerificationService.SendVerificationEmailLink(new MailAddress(dto.Patient.EMail), dto.Patient.Username);
+            App.Instance().MedicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), medicalRecord);
             return Ok(200);
         }
 
@@ -44,6 +46,19 @@ namespace WebAppPatient.Controllers
             {
                 return Ok(MedicalRecordMapper.MedicalRecordToMedicalRecordDto(medicalRecord));
             }
+        }
+
+        [HttpGet("activatePatientMedicalRecord/{username}")]       // GET /api/medicalRecord/activatePatientMedicalRecord/{username}
+        public IActionResult ActivatePatientMedicalRecord(string username)
+        {
+            MedicalRecord medicalRecord = App.Instance().MedicalRecordService.GetMedicalRecordForPatientByUsername(username);
+            if (medicalRecord == null)
+            {
+                return BadRequest();
+            }
+            App.Instance().MedicalRecordService.ActivatePatientMedicalRecord(medicalRecord);
+            return Redirect("http://localhost:51182/index.html#/");
+
         }
     }
 }
