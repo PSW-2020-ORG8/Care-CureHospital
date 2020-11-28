@@ -1,13 +1,17 @@
 ﻿using Backend.Model.BlogAndNotification;
+using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
 using Backend.Repository.BlogNotificationRepository;
+using Backend.Repository.DirectorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
 using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
+using Backend.Service.DirectorService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.UsersServices;
 using Model.AllActors;
+using Model.DoctorMenager;
 using Model.Patient;
 using Model.PatientDoctor;
 using Model.Term;
@@ -15,7 +19,9 @@ using Repository.ExaminationSurgeryRepository;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
 using Service.ExaminationSurgeryServices;
+using Repository.MedicamentRepository;
 using Service.MedicalRecordService;
+using Service.MedicamentService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +43,8 @@ namespace Backend
         public MedicalRecordService MedicalRecordService;
         public AllergiesService AllergiesService;
         public DoctorService DoctorService;
+        public ReportService ReportService;
+
 
         private App()
         {
@@ -60,6 +68,8 @@ namespace Backend
                new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()), MedicalExaminationService, AnswerService);
             DoctorService = new DoctorService(
                 new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
+            ReportService = new ReportService(
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
         }
 
         public static App Instance()
@@ -69,7 +79,6 @@ namespace Backend
                 _instance = new App();
             }
             return _instance;
-
         }
         
     }

@@ -10,11 +10,10 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace WebAppPatientTests.UnitTests
+namespace WebAppPatientTests
 {
     public class SurveyTests
     {
-        
         [Fact]
         public void Post_survey()
         {
@@ -59,7 +58,7 @@ namespace WebAppPatientTests.UnitTests
             var stubRepository = new Mock<IMedicalExaminationRepository>();
 
             var medicalExaminations = new List<MedicalExamination>();
-            medicalExaminations.Add(new MedicalExamination() { Id = 1, DoctorId = 1});
+            medicalExaminations.Add(new MedicalExamination() { Id = 1, DoctorId = 1 });
             medicalExaminations.Add(new MedicalExamination() { Id = 2, DoctorId = 1 });
             medicalExaminations.Add(new MedicalExamination() { Id = 3, DoctorId = 3 });
 
@@ -68,6 +67,7 @@ namespace WebAppPatientTests.UnitTests
 
             return stubRepository.Object;
         }
+
 
     }
 }

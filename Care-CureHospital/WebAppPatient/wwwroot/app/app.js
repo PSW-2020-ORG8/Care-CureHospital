@@ -6,6 +6,8 @@ const surveyAfterExamination = { template: '<surveyAfterExamination></surveyAfte
 const surveyResults = { template: '<surveyResults></surveyResults>' }
 const doctorSurveyResults = { template: '<doctorSurveyResults></doctorSurveyResults>'}
 const medicalRecordReview = { template: '<medicalRecordReview></medicalRecordReview>' }
+const patientDocumentsAdvancedSearch = { template: '<patientDocumentsAdvancedSearch></patientDocumentsAdvancedSearch>' }
+const patientDocumentsSimpleSearch = { template: '<patientDocumentsSimpleSearch></patientDocumentsSimpleSearch>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -17,7 +19,10 @@ const router = new VueRouter({
 		{ path: '/surveyAfterExamination', name: 'surveyAfterExamination', component: surveyAfterExamination },
 		{ path: '/surveyResults', name: 'surveyResults', component: surveyResults },
 		{ path: '/doctorSurveyResults', name: 'doctorSurveyResults', component: doctorSurveyResults },
-		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview }
+		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview },
+		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview },
+		{ path: '/patientDocumentsAdvancedSearch', name: 'patientDocumentsAdvancedSearch', component: patientDocumentsAdvancedSearch },
+		{ path: '/patientDocumentsSimpleSearch', name: 'patientDocumentsSimpleSearch', component: patientDocumentsSimpleSearch }
 	]
 });
 

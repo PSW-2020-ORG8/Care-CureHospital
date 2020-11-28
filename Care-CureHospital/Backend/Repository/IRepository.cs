@@ -17,6 +17,8 @@ namespace Repository
 
         IEnumerable<E> GetAllEntities();
 
+        IEnumerable<E> GetAllNames();
+
         E AddEntity(E entity);
 
         void UpdateEntity(E entity);

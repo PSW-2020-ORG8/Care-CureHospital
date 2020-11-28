@@ -56,8 +56,6 @@ Vue.component("postFeedback", {
                              <button type="button" @click="postFeedback">Pošalji</button>
                          </div>
 
-
-
                      </form>
                  </div>
              </div>
@@ -72,16 +70,9 @@ Vue.component("postFeedback", {
 	     </ul>
 	 </div>
 	 
-		 
-
-
 	 <div class="titleForPublishedFeedbackPreview">
 		 <h1>Utisci pacijenata</h1>
 	 </div> 
-		 
-	
-
-	      
 		  
 	</div>
         

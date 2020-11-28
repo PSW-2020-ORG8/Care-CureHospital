@@ -46,6 +46,16 @@ namespace Backend.Repository.MySQL
             return stream.ReadAll();
         }
 
+        public IEnumerable<E> GetAllNames(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<E> GetAllNames()
+        {
+            throw new NotImplementedException();
+        }
+
         public E GetEntity(ID id)
         {
             return stream.ReadAll().SingleOrDefault(entity => entity.GetId().CompareTo(id) == 0);

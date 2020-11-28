@@ -81,26 +81,26 @@ namespace Backend.Repository.MySQL
             modelBuilder.Entity<MedicalExamination>().HasData(
                 new MedicalExamination { Id = 1, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
                 new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
-                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 3 },
-                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 2, DoctorId = 3, PatientId = 1 },
+                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
                 new MedicalExamination { Id = 5, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
                 new MedicalExamination { Id = 6, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
-                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema vecih problema", PublishingDate = new DateTime(2020, 10, 10, 10, 30, 0), MedicalExaminationId = 1 },
-                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema vecih problema", PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0), MedicalExaminationId = 2 },
-                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0), MedicalExaminationId = 3 },
-                new MedicalExaminationReport { Id = 4, Comment = "Pacijent je lose", PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0), MedicalExaminationId = 3 },
-                new MedicalExaminationReport { Id = 5, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0), MedicalExaminationId = 3 }
+                new MedicalExaminationReport { Id = 1, Comment = "Pacijent je dobro i nema vecih problema", PublishingDate = new DateTime(2020, 09, 20, 10, 30, 0), MedicalExaminationId = 3 },
+                new MedicalExaminationReport { Id = 2, Comment = "Pacijent je veoma dobro i nema vecih problema", PublishingDate = new DateTime(2020, 11, 23, 10, 30, 0), MedicalExaminationId = 4 },
+                new MedicalExaminationReport { Id = 3, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 4, Comment = "Pacijent je lose", PublishingDate = new DateTime(2020, 10, 14, 10, 30, 0), MedicalExaminationId = 2 },
+                new MedicalExaminationReport { Id = 5, Comment = "Pacijent ima virus", PublishingDate = new DateTime(2020, 11, 18, 10, 30, 0), MedicalExaminationId = 2 }
             );
 
             modelBuilder.Entity<Prescription>().HasData(
-                new Prescription { Id = 1, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 2, Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 3, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 4, Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 10, 30, 10, 30, 0), MedicalExaminationId = 1, Medicaments = new List<Medicament>() }
+                new Prescription { Id = 1, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 2, Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 3, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 4, Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 12, 03, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
+                new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() }
             );
 
             modelBuilder.Entity<Medicament>().HasData(

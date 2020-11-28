@@ -12,7 +12,7 @@ namespace WebAppPatientTests.IntegrationTests
 {
     public class SurveyTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        
+        /*
         private readonly WebApplicationFactory<Startup> factory;
 
         public SurveyTests(WebApplicationFactory<Startup> factory)
@@ -49,6 +49,6 @@ namespace WebAppPatientTests.IntegrationTests
         {
             new object[] {  HttpStatusCode.OK }
         };
-        
+        */
     }
 }
