@@ -41,6 +41,7 @@ namespace Service.MedicalRecordService
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.Patient.Username.Equals(username));
         }
 
+        /// <summary> This method activates patient medical record after click on email verification link. </summary>
         public void ActivatePatientMedicalRecord(int medicalRecordId)
         {
             MedicalRecord medicalRecord = GetEntity(medicalRecordId);

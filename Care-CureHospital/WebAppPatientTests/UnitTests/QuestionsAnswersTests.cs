@@ -55,7 +55,6 @@ namespace WebAppPatientTests.UnitTests
             Assert.Equal(expected, results);
         }
 
-
         [Fact]
         public void Get_answer_for_doctors_by_survey_ids()
         {

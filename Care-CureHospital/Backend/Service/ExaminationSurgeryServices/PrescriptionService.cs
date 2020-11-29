@@ -86,6 +86,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return searchResult;
         }
 
+        /// <summary> This method finds prescriptions with maximum four search parameters and logical operator (and, or) between them. </summary>
         public List<Prescription> FindPrescriptionsUsingAdvancedSearch(int patientId, Dictionary<string, string> searchParameters, List<string> logicOperators)
         {
             List<Prescription> currentResult = FindPrescriptionsBySearchParameter(patientId, searchParameters.Keys.ToList()[0], searchParameters.Values.ToList()[0]);
@@ -132,6 +133,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return result;
         }
 
+        /// <summary> This method finds prescriptions with maximum four search parameters. </summary>
         public List<Prescription> FindPrescriptionsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string medicaments)
         {
             return IntersectionOfSimpleSearchPrescriptionsResults(FindPrescriptionsByDoctorUsingSimpleSearch(patientId, doctor), FindPrescriptionsByDateUsingSimpleSearch(patientId, date),

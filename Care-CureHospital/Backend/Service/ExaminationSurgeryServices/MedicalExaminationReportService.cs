@@ -82,6 +82,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return searchResult;
         }
 
+        /// <summary> This method finds reports with maximum four search parameters and logical operator (and, or) between them. </summary>
         public List<MedicalExaminationReport> FindReportsUsingAdvancedSearch(int patientId, Dictionary<string, string> searchParameters, List<string> logicOperators)
         {
             List<MedicalExaminationReport> currentResult = FindReportsBySearchParameter(patientId, searchParameters.Keys.ToList()[0], searchParameters.Values.ToList()[0]);
@@ -128,6 +129,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return result;
         }
 
+        /// <summary> This method finds reports with maximum four search parameters. </summary>
         public List<MedicalExaminationReport> FindReportsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string room)
         {
             return IntersectionOfSimpleSearchReportsResults(FindReportsByDoctorUsingSimpleSearch(patientId, doctor),FindReportsByDateUsingSimpleSearch(patientId, date),
