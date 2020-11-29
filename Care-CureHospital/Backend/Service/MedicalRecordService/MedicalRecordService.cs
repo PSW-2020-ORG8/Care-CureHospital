@@ -33,16 +33,17 @@ namespace Service.MedicalRecordService
 
         public MedicalRecord GetMedicalRecordForPatient(int patientID)
         {
-            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID); ;
+            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID);
         }
 
-        public MedicalRecord GetMedicalRecordForPatientByUsername(string username)
+        public MedicalRecord FindPatientMedicalRecordByUsername(string username)
         {
-            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.Patient.Username.Equals(username)); ;
+            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.Patient.Username.Equals(username));
         }
 
-        public void ActivatePatientMedicalRecord(MedicalRecord medicalRecord)
+        public void ActivatePatientMedicalRecord(int medicalRecordId)
         {
+            MedicalRecord medicalRecord = GetEntity(medicalRecordId);
             medicalRecord.ActiveMedicalRecord = true;
             UpdateEntity(medicalRecord);
         }

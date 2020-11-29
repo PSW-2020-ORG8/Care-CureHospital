@@ -21,15 +21,14 @@ namespace WebAppPatient.Controllers
         public MedicalRecordController() { }
 
         [HttpPost]      // POST /api/medicalRecord
-        public IActionResult Add(MedicalRecordDto dto)
+        public IActionResult RegisterPatient(MedicalRecordDto dto)
         {
             MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation();
             if (!medicalRecordValidation.ValidateMedicalRecord(dto))
             {
                 return BadRequest("The data which were entered are incorrect!");
             }
-            MedicalRecord medicalRecord = MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto);
-            App.Instance().MedicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), medicalRecord);
+            App.Instance().MedicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto));
             App.Instance().MedicalRecordService.WritePatientProfilePictureInFile(dto.Patient.Username, dto.ProfilePicture);
             return Ok(200);
         }
@@ -51,12 +50,12 @@ namespace WebAppPatient.Controllers
         [HttpGet("activatePatientMedicalRecord/{username}")]       // GET /api/medicalRecord/activatePatientMedicalRecord/{username}
         public IActionResult ActivatePatientMedicalRecord(string username)
         {
-            MedicalRecord medicalRecord = App.Instance().MedicalRecordService.GetMedicalRecordForPatientByUsername(username);
+            MedicalRecord medicalRecord = App.Instance().MedicalRecordService.FindPatientMedicalRecordByUsername(username);
             if (medicalRecord == null)
             {
                 return BadRequest();
             }
-            App.Instance().MedicalRecordService.ActivatePatientMedicalRecord(medicalRecord);
+            App.Instance().MedicalRecordService.ActivatePatientMedicalRecord(medicalRecord.Id);
             return Redirect("http://localhost:51182/index.html#/");
         }
     }
