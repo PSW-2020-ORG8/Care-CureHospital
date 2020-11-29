@@ -95,6 +95,26 @@ namespace WebAppPatientTests
             Assert.Empty(searchResult);
         }
 
+        [Fact]
+        public void Find_Reports_Using_Simple_Search()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsUsingSimpleSearch(1, "Milan", "2020-10-12", "uredu", "101");
+
+            Assert.NotEmpty(searchResult);
+        }
+
+        [Fact]
+        public void Not_Found_Reports_Using_Simple_Search()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsUsingSimpleSearch(1, "Milan", "2020-11-23", "bolnica", "101");
+
+            Assert.Empty(searchResult);
+        }
+
         private static IMedicalExaminationReportRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IMedicalExaminationReportRepository>();
