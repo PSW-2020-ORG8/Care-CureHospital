@@ -85,6 +85,7 @@ namespace WebAppPatientTests
             Assert.NotEmpty(searchResult);
         }
 
+        [Fact]
         public void Not_Found_Reports_With_Room_Searh_Parameter()
         {
             MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());

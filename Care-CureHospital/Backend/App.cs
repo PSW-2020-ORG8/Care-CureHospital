@@ -11,20 +11,14 @@ using Backend.Service.DirectorService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.UsersServices;
 using Model.AllActors;
-using Model.DoctorMenager;
 using Model.Patient;
 using Model.PatientDoctor;
+using Model.Term;
+using Repository.ExaminationSurgeryRepository;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
-using Repository.UsersRepository;
+using Service.ExaminationSurgeryServices;
 using Service.MedicalRecordService;
-using Service.UsersServices;
-using Repository.MedicamentRepository;
-using Service.MedicamentService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend
 {
@@ -34,18 +28,24 @@ namespace Backend
 
         public SurveyService SurveyService;
         public QuestionService QuestionService;
+        public AnswerService AnswerService;
         public PatientFeedbackService PatientFeedbackService;
+        public MedicalExaminationService MedicalExaminationService; 
         public MedicalExaminationReportService MedicalExaminationReportService;
         public PrescriptionService PrescriptionService;
         public MedicalRecordService MedicalRecordService;
         public AllergiesService AllergiesService;
         public PatientService PatientService;
+        public DoctorService DoctorService;
         public ReportService ReportService;
         public EmailVerificationService EmailVerificationService;
+
 
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
+            MedicalExaminationService = new MedicalExaminationService(
+                new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(
                 new PatientFeedbackRepository(new MySQLStream<PatientFeedback>(), new IntSequencer()));
             MedicalExaminationReportService = new MedicalExaminationReportService(
@@ -54,14 +54,18 @@ namespace Backend
                new PrescriptionRepository(new MySQLStream<Prescription>(), new IntSequencer()));
             MedicalRecordService = new MedicalRecordService(
                new MedicalRecordRepository(new MySQLStream<MedicalRecord>(), new IntSequencer()), EmailVerificationService);
-            SurveyService = new SurveyService(
-               new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()));
             QuestionService = new QuestionService(
                 new QuestionRepository(new MySQLStream<Question>(), new IntSequencer()));
+            AnswerService = new AnswerService(
+                new AnswerRepository(new MySQLStream<Answer>(), new IntSequencer()), QuestionService);
             AllergiesService = new AllergiesService(
                new AllergiesRepository(new MySQLStream<Allergies>(), new IntSequencer()));
             PatientService = new PatientService(
                new PatientRepository(new MySQLStream<Patient>(), new IntSequencer()));
+            SurveyService = new SurveyService(
+               new SurveyRepository(new MySQLStream<Survey>(), new IntSequencer()), MedicalExaminationService, AnswerService);
+            DoctorService = new DoctorService(
+                new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
             ReportService = new ReportService(
                new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));           
         }
