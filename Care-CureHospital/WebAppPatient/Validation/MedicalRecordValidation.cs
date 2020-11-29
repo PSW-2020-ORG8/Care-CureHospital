@@ -30,197 +30,93 @@ namespace WebAppPatient.Validation
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         private bool ValidateUsername(string username)
         {
-            try
-            {
-                Match match = usernameRegex.Match(username);
-
-                if (string.IsNullOrEmpty(username))
-                {
-                    return false;
-                }
-                else if (App.Instance().PatientService.DoesUsernameExist(username))
-                {
-                    return false;
-                }
-                else if (!match.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
+            if(!ValidateString(username, usernameRegex))
             {
                 return false;
             }
+            else if (App.Instance().PatientService.DoesUsernameExist(username))
+            {
+                return false;
+            }
+            return true;           
         }
 
         private bool ValidatePassword(string password, string confirmedPassword)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmedPassword))
-                {
-                    return false;
-                }
-                else if (!password.Equals(confirmedPassword))
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
+            if (!CheckIfStringIsEmptyOrNull(password) || !CheckIfStringIsEmptyOrNull(confirmedPassword))
             {
                 return false;
             }
+            else if (!password.Equals(confirmedPassword))
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool ValidateLettersOnly(MedicalRecordDto dto)
         {
-            try
-            {
-                Match matchName = lettersOnlyRegex.Match(dto.Patient.Name);
-                Match matchParentName = lettersOnlyRegex.Match(dto.Patient.ParentName);
-                Match matchSurame = lettersOnlyRegex.Match(dto.Patient.Surname);
-
-                if (string.IsNullOrEmpty(dto.Patient.Name) || string.IsNullOrEmpty(dto.Patient.ParentName) || string.IsNullOrEmpty(dto.Patient.Surname))
-                {
-                    return false;
-                }
-                else if (!matchName.Success || !matchParentName.Success || !matchSurame.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
+            if(!ValidateString(dto.Patient.Name, lettersOnlyRegex) 
+                || !ValidateString(dto.Patient.ParentName, lettersOnlyRegex)
+                    || !ValidateString(dto.Patient.Surname, lettersOnlyRegex))
             {
                 return false;
             }
+            return true;
         }
 
         private bool ValidateJmbg(string jmbg)
         {
-            try
-            {
-                Match match = jmbgRegex.Match(jmbg);
-
-                if (string.IsNullOrEmpty(jmbg))
-                {
-                    return false;
-                }
-                else if (!match.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return ValidateString(jmbg, jmbgRegex);
         }
 
         private bool ValidateIdentityCard(string identityCard)
         {
-            try
-            {
-                Match match = personalCardRegex.Match(identityCard);
-
-                if (string.IsNullOrEmpty(identityCard))
-                {
-                    return false;
-                }
-                else if (!match.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return ValidateString(identityCard, personalCardRegex);
         }
 
         private bool ValidateHealthInsuranceCard(string healthInsuranceCard)
         {
-            try
-            {
-                Match match = healthInsuranceCardRegex.Match(healthInsuranceCard);
-
-                if (string.IsNullOrEmpty(healthInsuranceCard))
-                {
-                    return false;
-                }
-                else if (!match.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool ValidateDateOfBirth(DateTime dateOfBirth)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(dateOfBirth.ToString()))
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return ValidateString(healthInsuranceCard, healthInsuranceCardRegex);
         }
 
         private bool ValidateContactNumber(string contactNumber)
         {
-            try
-            {
-                Match match = contactNumberRegex.Match(contactNumber);
-
-                if (string.IsNullOrEmpty(contactNumber))
-                {
-                    return false;
-                }
-                else if (!match.Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return ValidateString(contactNumber, contactNumberRegex);
         }
 
         private bool ValidateEMail(string eMail)
         {
+            return ValidateString(eMail, eMailRegex);
+        }
+
+        private bool EmptyAddress(MedicalRecordDto medicalRecordDto)
+        {
+            if(!CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Name) 
+                || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.PostCode.ToString())
+                    || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Address)
+                        || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Country.Name))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateDateOfBirth(DateTime dateOfBirth)
+        {
+            return CheckIfStringIsEmptyOrNull(dateOfBirth.ToString());
+        }
+
+        private bool CheckIfStringIsEmptyOrNull(string input)
+        {
             try
             {
-                Match match = eMailRegex.Match(eMail);
-
-                if (string.IsNullOrEmpty(eMail))
-                {
-                    return false;
-                }
-                else if (!match.Success)
+                if (string.IsNullOrEmpty(input))
                 {
                     return false;
                 }
@@ -232,12 +128,15 @@ namespace WebAppPatient.Validation
             }
         }
 
-        private bool EmptyAddress(MedicalRecordDto medicalRecordDto)
+        private bool ValidateString(string input, Regex reg)
         {
             try
             {
-                if (string.IsNullOrEmpty(medicalRecordDto.Patient.City.Name) || string.IsNullOrEmpty(medicalRecordDto.Patient.City.PostCode.ToString()) ||
-                    string.IsNullOrEmpty(medicalRecordDto.Patient.City.Address) || string.IsNullOrEmpty(medicalRecordDto.Patient.City.Country.Name))
+                if (string.IsNullOrEmpty(input))
+                {
+                    return false;
+                }
+                else if (!reg.Match(input).Success)
                 {
                     return false;
                 }
