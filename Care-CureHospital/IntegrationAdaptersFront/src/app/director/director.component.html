@@ -34,39 +34,27 @@
   <caption>Table of report</caption>
     <thead>
         <tr>
+            <th id="Id">Id </th>
+            <th id="MedicationId">MedicationId</th>
             <th id="MedicationName">MedicationName</th>
-            <th id="ConsumedMedication">ConsumedMedication</th>
+            <th id="ConsumedMedication">Quantity</th>
             <th id="FromDate">FromDate</th>
             <th id="ToDate">ToDate</th>
         </tr>
     </thead>
     <tbody>
-      <!--  <tr *ngFor="let dataItem of EmployeeList">
-            <td>{{dataItem.EmployeeId}}</td>
-            <td>{{dataItem.EmployeeName}}</td>
-            <td>{{dataItem.Department}}</td>
-            <td>{{dataItem.DateOfJoining}}</td>
+       <tr *ngFor="let dataItem of ReportList">
+            <td>{{dataItem.Id}}</td>
+            <td>{{dataItem.MedicationId}}</td>
+            <td>{{dataItem.MedicationName}}</td>
+            <td>{{dataItem.Quantity}}</td>
+            <td>{{dataItem.FromDate}}</td>
+            <td>{{dataItem.ToDate}}</td>
             <td> 
               
             </td>
-        </tr>-->
-
-        <!--<tr *ngFor =" let dataItem of MedicationList">
-          <td>{{dataItem.MedicationName}}</td>
-          <td>{{dataItem.ConsumedMedication}}</td>
-          <td></td>
-        </tr>-->
-
-        <tr >
-          <td>Brufen</td>
-          <td>15</td>
-          <td>15:2:2020</td>
-          <td>20:11:2020</td>
-          
         </tr>
     </tbody>
 </table>
 
-<!--
-<button mat-raised-button (click)="exporter.exportTable('json', {fileName:'report'})" class="btn btn-primary float-right">Save</button>
--->
+<button (click)="generate()" class="btn btn-primary">Save</button>

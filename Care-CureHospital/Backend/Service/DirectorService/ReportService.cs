@@ -23,9 +23,11 @@ namespace Backend.Service.DirectorService
             return reportRepository.GetEntity(id);
         }
 
-        public IEnumerable<Report> GetAllNames()
+        public IEnumerable<Report> GetReportForCertainPeriod(DateTime fromDate, DateTime toDate)
         {
-            return reportRepository.GetAllNames();
+             return reportRepository.GetAllEntities().ToList().FindAll(r => DateTime.Compare(r.FromDate, fromDate) >= 0 &&
+                 DateTime.Compare(r.ToDate, toDate) <= 0);
+
         }
 
         public IEnumerable<Report> GetAllEntities()

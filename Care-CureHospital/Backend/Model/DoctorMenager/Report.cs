@@ -9,27 +9,37 @@ namespace Backend.Model.DoctorMenager
     public class Report : IIdentifiable<int>
     {
         public int Id { get; set; }
-        
-        public String MedicationName { get; set; }
+
+        public int MedicamentId { set; get; }
+
+        public String MedicamentName { get; set; }
 
         public int Quantity { get; set; }
 
-        public DateTime Date { get; set;  }
+        public DateTime FromDate { get; set; }
 
-        public Report(int id, string name, int quantity)
+        public DateTime ToDate { get; set; }
+
+        public Report(int id, int medicamentId, string name, int quantity, DateTime fromDate, DateTime toDate)
         {
             Id = id;
 
-            MedicationName = name;
+            MedicamentId = medicamentId;
+
+            MedicamentName = name;
 
             Quantity = quantity;
+
+            FromDate = fromDate;
+
+            ToDate = toDate;
 
         }
 
         public Report(string name, int quantity)
         {
 
-            MedicationName = name;
+            MedicamentName = name;
 
             Quantity = quantity;
             
@@ -38,7 +48,7 @@ namespace Backend.Model.DoctorMenager
 
         public Report(String name)
         {
-            MedicationName = name;
+            MedicamentName = name;
         }
 
         public Report()

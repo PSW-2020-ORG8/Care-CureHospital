@@ -10,25 +10,22 @@ export class DirectorComponent implements OnInit {
 
   constructor(private service:DirectorServiceService) { }
 
-  MedicationList:any=[];
+  ReportList:any=[];
 
   ModalTitle:string;
   ActivateAddEditRepComp:boolean=false;
   rep:any;
 
   ngOnInit(): void {
-   // this.refreshMedList();
+    //this.refreshReportList();
   }
-
 
   addclick(){
     this.rep={
-      MedicationId:0,
       MedicationName:"",
       MedicationLeft:"",
-      Date:""
-
-
+      FromDate:"",
+      ToDate:""
     }
     this.ModalTitle="Add Report";
     this.ActivateAddEditRepComp=true;
@@ -37,17 +34,10 @@ export class DirectorComponent implements OnInit {
 
   closeClick(){
     this.ActivateAddEditRepComp=false;
-    
+ 
   }
 
-  /*refreshMedList(){
-    this.service.getMedList().subscribe(data=>{this.MedicationList=data;});
-
-  }*/
-
-
-  saveTxt(){
-    
+  generate(){
+    alert("Report saved.");
   }
-
 }

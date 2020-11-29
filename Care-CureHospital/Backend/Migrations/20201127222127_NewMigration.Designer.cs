@@ -3,14 +3,16 @@ using System;
 using Backend.Repository.MySQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    partial class HealthClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201127222127_NewMigration")]
+    partial class NewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -790,171 +792,24 @@ namespace Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Model.Patient.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("SurveyId");
-
-                    b.ToTable("Answer");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Grade = 1,
-                            QuestionId = 1,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Grade = 4,
-                            QuestionId = 2,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Grade = 2,
-                            QuestionId = 3,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Grade = 3,
-                            QuestionId = 4,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Grade = 0,
-                            QuestionId = 5,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Grade = 4,
-                            QuestionId = 6,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Grade = 1,
-                            QuestionId = 7,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Grade = 1,
-                            QuestionId = 8,
-                            SurveyId = 1
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Grade = 3,
-                            QuestionId = 9,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Grade = 2,
-                            QuestionId = 1,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Grade = 4,
-                            QuestionId = 2,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Grade = 4,
-                            QuestionId = 3,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Grade = 3,
-                            QuestionId = 4,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Grade = 1,
-                            QuestionId = 5,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Grade = 2,
-                            QuestionId = 6,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Grade = 2,
-                            QuestionId = 7,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Grade = 4,
-                            QuestionId = 8,
-                            SurveyId = 2
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Grade = 3,
-                            QuestionId = 9,
-                            SurveyId = 2
-                        });
-                });
-
             modelBuilder.Entity("Model.Patient.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("Answer")
+                        .HasColumnType("int");
+
                     b.Property<string>("QuestionText")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("QuestionType")
+                    b.Property<int>("SurveyId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
 
                     b.ToTable("Question");
 
@@ -962,56 +817,128 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            Answer = 1,
                             QuestionText = "Ljubaznost doktora prema pacijentu",
-                            QuestionType = 0
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 2,
+                            Answer = 0,
                             QuestionText = "Posvećenost doktora pacijentu",
-                            QuestionType = 0
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 3,
+                            Answer = 1,
                             QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
-                            QuestionType = 0
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 4,
+                            Answer = 0,
                             QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
-                            QuestionType = 1
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 5,
+                            Answer = 1,
                             QuestionText = "Posvećenost medicinskog osoblja pacijentu",
-                            QuestionType = 1
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 6,
+                            Answer = 0,
                             QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
-                            QuestionType = 1
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 7,
+                            Answer = 3,
                             QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
-                            QuestionType = 2
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 8,
+                            Answer = 4,
                             QuestionText = "Higijena unutar bolnice",
-                            QuestionType = 2
+                            SurveyId = 1
                         },
                         new
                         {
                             Id = 9,
+                            Answer = 1,
                             QuestionText = "Opremljenost bolnice",
-                            QuestionType = 2
+                            SurveyId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Answer = 1,
+                            QuestionText = "Ljubaznost doktora prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Answer = 1,
+                            QuestionText = "Posvećenost doktora pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Answer = 0,
+                            QuestionText = "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Answer = 3,
+                            QuestionText = "Ljubaznost medicinskog osoblja prema pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Answer = 4,
+                            QuestionText = "Posvećenost medicinskog osoblja pacijentu",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Answer = 4,
+                            QuestionText = "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Answer = 2,
+                            QuestionText = "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Answer = 1,
+                            QuestionText = "Higijena unutar bolnice",
+                            SurveyId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Answer = 2,
+                            QuestionText = "Opremljenost bolnice",
+                            SurveyId = 2
                         });
                 });
 
@@ -1571,16 +1498,10 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model.Patient.Answer", b =>
+            modelBuilder.Entity("Model.Patient.Question", b =>
                 {
-                    b.HasOne("Model.Patient.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Model.Patient.Survey", "Survey")
-                        .WithMany("Answers")
+                        .WithMany("Questions")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

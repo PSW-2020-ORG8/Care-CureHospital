@@ -6,9 +6,6 @@
         <div class="col-sm-10">
            <select class="form-control" [(ngModel)]="MedicationName">
                <option>--Select--</option>
-               <!--<option *ngfor="let medName of MedicationList">
-                   {{repName.MedicationName}}
-               </option>-->
            </select>
         </div>
 
@@ -18,7 +15,12 @@
             placeholder="Enter consumption of medication ">
         </div>
     
-        <label class="col-sm-2 col-form-label">Date</label>
+        <label class="col-sm-2 col-form-label">From date</label>
+        <div class="col-sm-10">
+            <input type="date" >
+        </div>
+
+        <label class="col-sm-2 col-form-label">To date</label>
         <div class="col-sm-10">
             <input type="date" >
         </div>
@@ -28,6 +30,6 @@
 </div>
     
     
-<button  class="btn btn-primary">Add</button>
+<button class="btn btn-primary" (click)="addReport()">Add</button>
     
  
