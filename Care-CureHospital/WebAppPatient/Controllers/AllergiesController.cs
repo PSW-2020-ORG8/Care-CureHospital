@@ -20,8 +20,8 @@ namespace WebAppPatient.Controllers
         [HttpGet]       // GET /api/allergies
         public IActionResult GetAllAllergies()
         {
-            List<Allergies> result = new List<Allergies>();
-            App.Instance().AllergiesService.GetAllEntities().ToList().ForEach(allergy => result.Add(allergy));
+            List<AllergiesDto> result = new List<AllergiesDto>();
+            App.Instance().AllergiesService.GetAllEntities().ToList().ForEach(allergy => result.Add(AllergiesMapper.AllergiesToAllergiesDto(allergy)));
             return Ok(result);
         }
     }
