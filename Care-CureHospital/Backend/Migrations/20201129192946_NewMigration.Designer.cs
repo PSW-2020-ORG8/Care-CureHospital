@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201129111456_NewMigration")]
+    [Migration("20201129192946_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,49 @@ namespace Backend.Migrations
                             Comment = "Redovno koristite prepisane lekove",
                             MedicalExaminationId = 4,
                             PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.Pharmacy.Pharmacies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pharmacies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "gjyj",
+                            Link = "nesto.com",
+                            Name = "Apoteka1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "jgdfkgd",
+                            Link = "nesto1.com",
+                            Name = "Apoteka2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Key = "jrgettre",
+                            Link = "nesto2.com",
+                            Name = "Apoteka3"
                         });
                 });
 

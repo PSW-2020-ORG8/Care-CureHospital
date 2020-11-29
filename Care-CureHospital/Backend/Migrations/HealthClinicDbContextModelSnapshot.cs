@@ -228,6 +228,49 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Backend.Model.Pharmacy.Pharmacies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pharmacies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "gjyj",
+                            Link = "nesto.com",
+                            Name = "Apoteka1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "jgdfkgd",
+                            Link = "nesto1.com",
+                            Name = "Apoteka2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Key = "jrgettre",
+                            Link = "nesto2.com",
+                            Name = "Apoteka3"
+                        });
+                });
+
             modelBuilder.Entity("Model.AllActors.City", b =>
                 {
                     b.Property<int>("Id")

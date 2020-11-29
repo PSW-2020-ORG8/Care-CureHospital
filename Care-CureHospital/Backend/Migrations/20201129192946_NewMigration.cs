@@ -35,6 +35,21 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pharmacies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Key = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pharmacies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Question",
                 columns: table => new
                 {
@@ -535,6 +550,16 @@ namespace Backend.Migrations
                 values: new object[] { 1, "Srbija" });
 
             migrationBuilder.InsertData(
+                table: "Pharmacies",
+                columns: new[] { "Id", "Key", "Link", "Name" },
+                values: new object[,]
+                {
+                    { 1, "gjyj", "nesto.com", "Apoteka1" },
+                    { 2, "jgdfkgd", "nesto1.com", "Apoteka2" },
+                    { 3, "jrgettre", "nesto2.com", "Apoteka3" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Question",
                 columns: new[] { "Id", "QuestionText", "QuestionType" },
                 values: new object[,]
@@ -905,6 +930,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "PatientFeedbacks");
+
+            migrationBuilder.DropTable(
+                name: "Pharmacies");
 
             migrationBuilder.DropTable(
                 name: "Survey");

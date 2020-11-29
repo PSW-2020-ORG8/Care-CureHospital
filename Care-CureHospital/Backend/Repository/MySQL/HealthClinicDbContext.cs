@@ -1,6 +1,7 @@
 ﻿using Backend.Model.AllActors;
 using Backend.Model.BlogAndNotification;
 using Backend.Model.PatientDoctor;
+using Backend.Model.Pharmacy;
 using Microsoft.EntityFrameworkCore;
 using Model.AllActors;
 using Model.Doctor;
@@ -37,6 +38,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Symptoms> Symptomes { get; set; }
         public DbSet<Surgery> Survey { get; set; }
         public DbSet<Question> Question { get; set; }
+        public DbSet<Pharmacies> Pharmacies { get; set; }
 
         public HealthClinicDbContext() : base() { }
         public HealthClinicDbContext(DbContextOptions<HealthClinicDbContext> options) : base(options) { }
@@ -208,6 +210,12 @@ namespace Backend.Repository.MySQL
                new Answer { Id = 17, Grade = GradeOfQuestion.Excellent, QuestionId = 8, SurveyId = 2 },
                new Answer { Id = 18, Grade = GradeOfQuestion.VeryGood, QuestionId = 9, SurveyId = 2 }
            );
+
+            modelBuilder.Entity<Pharmacies>().HasData(
+                new Pharmacies { Id = 1, Name = "Apoteka1", Key = "gjyj", Link = "nesto.com" },
+                new Pharmacies { Id = 2, Name = "Apoteka2", Key = "jgdfkgd", Link = "nesto1.com" },
+                new Pharmacies { Id = 3, Name = "Apoteka3", Key = "jrgettre", Link = "nesto2.com" }
+            );
         }
     }
 }
