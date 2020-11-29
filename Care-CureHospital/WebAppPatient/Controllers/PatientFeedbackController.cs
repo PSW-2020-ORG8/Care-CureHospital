@@ -41,7 +41,6 @@ namespace WebAppPatient.Controllers
             {
                 return BadRequest();
             }
-
             PatientFeedback patientFeedback = PatientFeedbackMapper.PatientFeedbackDtoToPatientFeedback(dto, null);
             App.Instance().PatientFeedbackService.AddEntity(patientFeedback);
             return Ok();
@@ -55,11 +54,8 @@ namespace WebAppPatient.Controllers
             if (result == null)
             {
                 return NotFound();
-            }
-            
+            }          
             return Ok(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(result));
-        }
-        
-        
+        }      
     }
 }

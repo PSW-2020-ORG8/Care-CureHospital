@@ -44,6 +44,8 @@ namespace Backend.Service.ExaminationSurgeryServices
             answerRepository.UpdateEntity(entity);
         }
 
+        /// <summary> This method calculates survey statistics. </summary>
+        /// <returns> Dictionary which keys represent question id and values represent lists of grade summaries. </returns>
         public Dictionary<int, List<int>> GetAnswersByQuestion()
         {
             Dictionary<int, List<int>> results = new Dictionary<int, List<int>>();
@@ -53,12 +55,13 @@ namespace Backend.Service.ExaminationSurgeryServices
                 {
                     results.Add(answer.QuestionId, new List<int>() { 0, 0, 0, 0, 0 });
                 }
-
                 results[answer.QuestionId][(int)answer.Grade]++;
             }
             return results;
         }
 
+        /// <summary> This method calculates survey statistics for doctor's questions. </summary>
+        /// <returns> Dictionary which keys represent doctor's question id and values represent lists of grade summaries. </returns>
         public Dictionary<int, List<int>> GetAnswersForDoctorBySurveyIds(List<int> surveyIds)
         {
             Dictionary<int, List<int>> results = new Dictionary<int, List<int>>();
@@ -71,13 +74,10 @@ namespace Backend.Service.ExaminationSurgeryServices
                     {
                         results.Add(answer.QuestionId, new List<int>() { 0, 0, 0, 0, 0 });
                     }
-
                     results[answer.QuestionId][(int)answer.Grade]++;
                 }
             }
             return results;
         }
-
-
     }
 }

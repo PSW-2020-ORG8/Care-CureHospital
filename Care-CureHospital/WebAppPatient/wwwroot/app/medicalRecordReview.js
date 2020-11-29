@@ -14,7 +14,8 @@ function toLatinConvert(string) {
 Vue.component("medicalRecordReview", {
 	data: function () {
 		return {
-            medicalRecord : null,          
+            medicalRecord: null,
+            profilePicture: ''
 		}
 	},
 	template: `
@@ -55,6 +56,10 @@ Vue.component("medicalRecordReview", {
                 <div class="text-for-medical-record">
                     <h1>Moj medicinski karton</h1>
                         <div class="scroll-in-medical-record">
+
+                        <label class="scroll-in-medical-record-label-bold">Profilna slika:</label></br></br>
+                        <img v-bind:src="'/pictures/patientsProfile/' + this.profilePicture" class="room-active" alt="" width="260px" height="200px"></img><br><br>
+
                         <label class="scroll-in-medical-record-label-bold">Korisničko ime:</label></br>
                         <label>{{medicalRecord.patient.username}}</label><br><br><br> 
 
@@ -158,7 +163,9 @@ Vue.component("medicalRecordReview", {
 	},
 	mounted() {
         axios.get('api/medicalRecord/getForPatient/' + 1) // Umesto jedan preuzeti id ulogovanog pacijenta
-				.then(response => { this.medicalRecord = response.data;
+            .then(response => {
+                this.medicalRecord = response.data;
+                this.profilePicture = this.medicalRecord.profilePicture;
         });
 	}
 

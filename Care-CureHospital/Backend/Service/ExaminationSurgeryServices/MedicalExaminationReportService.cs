@@ -35,7 +35,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.Comment.ToString().Contains(comment)))
+                if ((report.Comment.ToString().ToLower().Contains(comment.ToLower())))
                 {
                     searchResult.Add(report);
                 }
@@ -74,8 +74,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.MedicalExamination.Doctor.Name.ToString() + " " + report.MedicalExamination.Doctor.Surname.ToString()).Equals(doctorFullName) ||
-                    doctorFullName.Contains(report.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(report.MedicalExamination.Doctor.Surname.ToString()))
+                if (doctorFullName.Contains(report.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(report.MedicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(report);
                 }
@@ -83,6 +82,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return searchResult;
         }
 
+        /// <summary> This method finds reports with maximum four search parameters and logical operator (and, or) between them. </summary>
         public List<MedicalExaminationReport> FindReportsUsingAdvancedSearch(int patientId, Dictionary<string, string> searchParameters, List<string> logicOperators)
         {
             List<MedicalExaminationReport> currentResult = FindReportsBySearchParameter(patientId, searchParameters.Keys.ToList()[0], searchParameters.Values.ToList()[0]);
@@ -94,23 +94,23 @@ namespace Backend.Service.ExaminationSurgeryServices
             return currentResult;          
         }
 
-        public List<MedicalExaminationReport> FindReportsBySearchParameter(int patientId, string parameter, string parameterValue)
+        public List<MedicalExaminationReport> FindReportsBySearchParameter(int patientId, string searchParameter, string parameterValue)
         {
-            if (parameter.Equals("Doktoru"))
+            if (searchParameter.Equals("Doktoru"))
             {
-                return FindReportsForDoctorParameter(patientId, parameterValue);
+                return FindReportsByDoctorUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Datumu"))
+            else if (searchParameter.Equals("Datumu"))
             {
-                return FindReportsForDateParameter(patientId, parameterValue);
+                return FindReportsByDateUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sadržaju"))
+            else if (searchParameter.Equals("Sadržaju"))
             {
-                return FindReportsForCommentParameter(patientId, parameterValue);
+                return FindReportsByCommentUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sobi"))
+            else if (searchParameter.Equals("Sobi"))
             {
-                return FindReportsForRoomParameter(patientId, parameterValue);
+                return FindReportsByRoomUsingSimpleSearch(patientId, parameterValue);
             }
             return null;
         }
@@ -129,14 +129,11 @@ namespace Backend.Service.ExaminationSurgeryServices
             return result;
         }
 
+        /// <summary> This method finds reports with maximum four search parameters. </summary>
         public List<MedicalExaminationReport> FindReportsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string room)
         {
-            List<MedicalExaminationReport> reportsByDoctor = FindReportsByDoctorUsingSimpleSearch(patientId, doctor);
-            List<MedicalExaminationReport> reportsByDate = FindReportsByDateUsingSimpleSearch(patientId, date);
-            List<MedicalExaminationReport> reportsByComment = FindReportsByCommentUsingSimpleSearch(patientId, comment);
-            List<MedicalExaminationReport> reportsByRoom = FindReportsByRoomUsingSimpleSearch(patientId, room); 
-
-            return IntersectionOfSimpleSearchReportsResults(reportsByDoctor, reportsByDate, reportsByComment, reportsByRoom);
+            return IntersectionOfSimpleSearchReportsResults(FindReportsByDoctorUsingSimpleSearch(patientId, doctor),FindReportsByDateUsingSimpleSearch(patientId, date),
+                FindReportsByCommentUsingSimpleSearch(patientId, comment), FindReportsByRoomUsingSimpleSearch(patientId, room));
         }
 
         public List<MedicalExaminationReport> IntersectionOfSimpleSearchReportsResults(List<MedicalExaminationReport> reportsByDoctor, List<MedicalExaminationReport> reportsByDate, List<MedicalExaminationReport> reportsByComment, List<MedicalExaminationReport> reportsByRoom)
@@ -150,66 +147,50 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public List<MedicalExaminationReport> FindReportsByDoctorUsingSimpleSearch(int patientId, string doctor)
         {
-            List<MedicalExaminationReport> reportsByDoctor = new List<MedicalExaminationReport>();
-
-            if (doctor == null)
+            if (doctor == null || doctor.Equals(""))
             {
-                reportsByDoctor = GetAllEntities().ToList();
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByDoctor = FindReportsForDoctorParameter(patientId, doctor);
+                return FindReportsForDoctorParameter(patientId, doctor);
             }
-
-            return reportsByDoctor;
         }
 
         public List<MedicalExaminationReport> FindReportsByDateUsingSimpleSearch(int patientId, string date)
         {
-            List<MedicalExaminationReport> reportsByDate = new List<MedicalExaminationReport>();
-
-            if (date == null)
+            if (date == null || date.Equals(""))
             {
-                reportsByDate = GetAllEntities().ToList(); ;
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByDate = FindReportsForDateParameter(patientId, date);
+                return FindReportsForDateParameter(patientId, date);
             }
-
-            return reportsByDate;
         }
 
         public List<MedicalExaminationReport> FindReportsByCommentUsingSimpleSearch(int patientId, string comment)
         {
-            List<MedicalExaminationReport> reportsByComment = new List<MedicalExaminationReport>();
-
-            if (comment == null)
+            if (comment == null || comment.Equals(""))
             {
-                reportsByComment = GetAllEntities().ToList(); ;
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByComment = FindReportsForCommentParameter(patientId, comment);
+                return FindReportsForCommentParameter(patientId, comment);
             }
-
-            return reportsByComment;
         }
 
         public List<MedicalExaminationReport> FindReportsByRoomUsingSimpleSearch(int patientId, string room)
         {
-            List<MedicalExaminationReport> reportsByRoom = new List<MedicalExaminationReport>();
-
-            if (room == null)
+            if (room == null || room.Equals(""))
             {
-                reportsByRoom = GetAllEntities().ToList();
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByRoom = FindReportsForRoomParameter(patientId, room);
+                return FindReportsForRoomParameter(patientId, room);
             }
-
-            return reportsByRoom;
         }
 
         public MedicalExaminationReport GetEntity(int id)
