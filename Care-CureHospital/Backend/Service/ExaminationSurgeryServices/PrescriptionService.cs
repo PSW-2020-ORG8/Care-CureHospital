@@ -133,6 +133,89 @@ namespace Backend.Service.ExaminationSurgeryServices
             return result;
         }
 
+        public List<Prescription> FindPrescriptionsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string medicaments)
+        {
+            List<Prescription> prescriptionsByDoctor = FindPrescriptionsByDoctorUsingSimpleSearch(patientId, doctor);
+            List<Prescription> prescriptionsByDate = FindPrescriptionsByDateUsingSimpleSearch(patientId, date);
+            List<Prescription> prescriptionsByComment = FindPrescriptionsByCommentUsingSimpleSearch(patientId, comment);
+            List<Prescription> prescriptionsByMedicaments = FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, medicaments);
+
+            return IntersectionOfSimpleSearchPrescriptionsResults(prescriptionsByDoctor, prescriptionsByDate, prescriptionsByComment, prescriptionsByMedicaments);
+        }
+
+        public List<Prescription> IntersectionOfSimpleSearchPrescriptionsResults(List<Prescription> prescriptionsByDoctor, List<Prescription> prescriptionsByDate, List<Prescription> prescriptionsByComment, List<Prescription> prescriptionsByMedicaments)
+        {
+            List<Prescription> result = prescriptionsByDoctor.Intersect(prescriptionsByDate).ToList();
+            result = result.Intersect(prescriptionsByComment).ToList();
+            result = result.Intersect(prescriptionsByMedicaments).ToList();
+
+            return result;
+        }
+
+        public List<Prescription> FindPrescriptionsByDoctorUsingSimpleSearch(int patientId, string doctor)
+        {
+            List<Prescription> prescriptionsByDoctor = new List<Prescription>();
+
+            if (doctor == null)
+            {
+                prescriptionsByDoctor = GetAllEntities().ToList();
+            }
+            else
+            {
+                prescriptionsByDoctor = FindPrescriptionsForDoctorParameter(patientId, doctor);
+            }
+
+            return prescriptionsByDoctor;
+        }
+
+        public List<Prescription> FindPrescriptionsByDateUsingSimpleSearch(int patientId, string date)
+        {
+            List<Prescription> prescriptionsByDate = new List<Prescription>();
+
+            if (date == null)
+            {
+                prescriptionsByDate = GetAllEntities().ToList(); ;
+            }
+            else
+            {
+                prescriptionsByDate = FindPrescriptionsForDateParameter(patientId, date);
+            }
+
+            return prescriptionsByDate;
+        }
+
+        public List<Prescription> FindPrescriptionsByCommentUsingSimpleSearch(int patientId, string comment)
+        {
+            List<Prescription> prescriptionsByComment = new List<Prescription>();
+
+            if (comment == null)
+            {
+                prescriptionsByComment = GetAllEntities().ToList(); ;
+            }
+            else
+            {
+                prescriptionsByComment = FindPrescriptionsForCommentParameter(patientId, comment);
+            }
+
+            return prescriptionsByComment;
+        }
+
+        public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments)
+        {
+            List<Prescription> prescriptionsByMedicaments = new List<Prescription>();
+
+            if (medicaments == null)
+            {
+                prescriptionsByMedicaments = GetAllEntities().ToList();
+            }
+            else
+            {
+                prescriptionsByMedicaments = FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
+            }
+
+            return prescriptionsByMedicaments;
+        }
+
         public Prescription GetEntity(int id)
         {
             return prescriptionRepository.GetEntity(id);
