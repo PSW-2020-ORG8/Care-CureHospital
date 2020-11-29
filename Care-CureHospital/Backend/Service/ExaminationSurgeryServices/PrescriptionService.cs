@@ -101,19 +101,19 @@ namespace Backend.Service.ExaminationSurgeryServices
         {
             if (searchParameter.Equals("Doktoru"))
             {
-                return FindPrescriptionsForDoctorParameter(patientId, parameterValue);
+                return FindPrescriptionsByDoctorUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Datumu"))
             {
-                return FindPrescriptionsForDateParameter(patientId, parameterValue);
+                return FindPrescriptionsByDateUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Sadržaju"))
             {
-                return FindPrescriptionsForCommentParameter(patientId, parameterValue);
+                return FindPrescriptionsByCommentUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Lekovima"))
             {
-                return FindPrescriptionsForMedicamentsParameter(patientId, parameterValue);
+                return FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, parameterValue);
             }
             return null;
         }
@@ -134,12 +134,8 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public List<Prescription> FindPrescriptionsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string medicaments)
         {
-            List<Prescription> prescriptionsByDoctor = FindPrescriptionsByDoctorUsingSimpleSearch(patientId, doctor);
-            List<Prescription> prescriptionsByDate = FindPrescriptionsByDateUsingSimpleSearch(patientId, date);
-            List<Prescription> prescriptionsByComment = FindPrescriptionsByCommentUsingSimpleSearch(patientId, comment);
-            List<Prescription> prescriptionsByMedicaments = FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, medicaments);
-
-            return IntersectionOfSimpleSearchPrescriptionsResults(prescriptionsByDoctor, prescriptionsByDate, prescriptionsByComment, prescriptionsByMedicaments);
+            return IntersectionOfSimpleSearchPrescriptionsResults(FindPrescriptionsByDoctorUsingSimpleSearch(patientId, doctor), FindPrescriptionsByDateUsingSimpleSearch(patientId, date),
+                FindPrescriptionsByCommentUsingSimpleSearch(patientId, comment), FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, medicaments));
         }
 
         public List<Prescription> IntersectionOfSimpleSearchPrescriptionsResults(List<Prescription> prescriptionsByDoctor, List<Prescription> prescriptionsByDate, List<Prescription> prescriptionsByComment, List<Prescription> prescriptionsByMedicaments)
@@ -153,66 +149,50 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public List<Prescription> FindPrescriptionsByDoctorUsingSimpleSearch(int patientId, string doctor)
         {
-            List<Prescription> prescriptionsByDoctor = new List<Prescription>();
-
-            if (doctor == null)
+            if (doctor == null || doctor == "")
             {
-                prescriptionsByDoctor = GetAllEntities().ToList();
+                return GetPrescriptionsForPatient(patientId).ToList();
             }
             else
             {
-                prescriptionsByDoctor = FindPrescriptionsForDoctorParameter(patientId, doctor);
+                return FindPrescriptionsForDoctorParameter(patientId, doctor);
             }
-
-            return prescriptionsByDoctor;
         }
 
         public List<Prescription> FindPrescriptionsByDateUsingSimpleSearch(int patientId, string date)
         {
-            List<Prescription> prescriptionsByDate = new List<Prescription>();
-
-            if (date == null)
+            if (date == null || date == "")
             {
-                prescriptionsByDate = GetAllEntities().ToList(); ;
+                return GetPrescriptionsForPatient(patientId).ToList();
             }
             else
             {
-                prescriptionsByDate = FindPrescriptionsForDateParameter(patientId, date);
+                return FindPrescriptionsForDateParameter(patientId, date);
             }
-
-            return prescriptionsByDate;
         }
 
         public List<Prescription> FindPrescriptionsByCommentUsingSimpleSearch(int patientId, string comment)
         {
-            List<Prescription> prescriptionsByComment = new List<Prescription>();
-
-            if (comment == null)
+            if (comment == null || comment == "")
             {
-                prescriptionsByComment = GetAllEntities().ToList(); ;
+                return GetPrescriptionsForPatient(patientId).ToList();
             }
             else
             {
-                prescriptionsByComment = FindPrescriptionsForCommentParameter(patientId, comment);
+                return FindPrescriptionsForCommentParameter(patientId, comment);
             }
-
-            return prescriptionsByComment;
         }
 
         public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments)
         {
-            List<Prescription> prescriptionsByMedicaments = new List<Prescription>();
-
-            if (medicaments == null)
+            if (medicaments == null || medicaments == "")
             {
-                prescriptionsByMedicaments = GetAllEntities().ToList();
+                return GetPrescriptionsForPatient(patientId).ToList();
             }
             else
             {
-                prescriptionsByMedicaments = FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
+                return FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
             }
-
-            return prescriptionsByMedicaments;
         }
 
         public Prescription GetEntity(int id)

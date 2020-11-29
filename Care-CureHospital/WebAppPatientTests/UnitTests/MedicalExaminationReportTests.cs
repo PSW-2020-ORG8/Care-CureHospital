@@ -126,6 +126,42 @@ namespace WebAppPatientTests
             searchResult.ShouldNotBeEmpty();
         }
 
+        [Fact]
+        public void Find_Reports_With_Three_Searh_Parameters()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+            Dictionary<string, string> parametersForSearch = new Dictionary<string, string>();
+            List<string> logicOperators = new List<string>();
+            parametersForSearch.Add("Doktoru", "Milan");
+            parametersForSearch.Add("Sadržaju", "Pacijent je dobro");
+            parametersForSearch.Add("Sobi", "301");
+            logicOperators.Add("ILI");
+            logicOperators.Add("ILI");
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsUsingAdvancedSearch(1, parametersForSearch, logicOperators);
+
+            searchResult.ShouldNotBeEmpty();
+        }
+
+        [Fact]
+        public void Find_Reports_With_Four_Searh_Parameters()
+        {
+            MedicalExaminationReportService service = new MedicalExaminationReportService(CreateStubRepository());
+            Dictionary<string, string> parametersForSearch = new Dictionary<string, string>();
+            List<string> logicOperators = new List<string>();
+            parametersForSearch.Add("Doktoru", "Milan");
+            parametersForSearch.Add("Datumu", "2020-10-12");
+            parametersForSearch.Add("Sadržaju", "Pregled");
+            parametersForSearch.Add("Sobi", "101");
+            logicOperators.Add("I");
+            logicOperators.Add("I");
+            logicOperators.Add("I");
+
+            List<MedicalExaminationReport> searchResult = service.FindReportsUsingAdvancedSearch(1, parametersForSearch, logicOperators);
+
+            searchResult.ShouldNotBeEmpty();
+        }
+
         private static IMedicalExaminationReportRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IMedicalExaminationReportRepository>();

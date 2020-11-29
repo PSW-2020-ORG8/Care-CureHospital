@@ -97,19 +97,19 @@ namespace Backend.Service.ExaminationSurgeryServices
         {
             if (searchParameter.Equals("Doktoru"))
             {
-                return FindReportsForDoctorParameter(patientId, parameterValue);
+                return FindReportsByDoctorUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Datumu"))
             {
-                return FindReportsForDateParameter(patientId, parameterValue);
+                return FindReportsByDateUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Sadržaju"))
             {
-                return FindReportsForCommentParameter(patientId, parameterValue);
+                return FindReportsByCommentUsingSimpleSearch(patientId, parameterValue);
             }
             else if (searchParameter.Equals("Sobi"))
             {
-                return FindReportsForRoomParameter(patientId, parameterValue);
+                return FindReportsByRoomUsingSimpleSearch(patientId, parameterValue);
             }
             return null;
         }
@@ -130,12 +130,8 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public List<MedicalExaminationReport> FindReportsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string room)
         {
-            List<MedicalExaminationReport> reportsByDoctor = FindReportsByDoctorUsingSimpleSearch(patientId, doctor);
-            List<MedicalExaminationReport> reportsByDate = FindReportsByDateUsingSimpleSearch(patientId, date);
-            List<MedicalExaminationReport> reportsByComment = FindReportsByCommentUsingSimpleSearch(patientId, comment);
-            List<MedicalExaminationReport> reportsByRoom = FindReportsByRoomUsingSimpleSearch(patientId, room); 
-
-            return IntersectionOfSimpleSearchReportsResults(reportsByDoctor, reportsByDate, reportsByComment, reportsByRoom);
+            return IntersectionOfSimpleSearchReportsResults(FindReportsByDoctorUsingSimpleSearch(patientId, doctor),FindReportsByDateUsingSimpleSearch(patientId, date),
+                FindReportsByCommentUsingSimpleSearch(patientId, comment), FindReportsByRoomUsingSimpleSearch(patientId, room));
         }
 
         public List<MedicalExaminationReport> IntersectionOfSimpleSearchReportsResults(List<MedicalExaminationReport> reportsByDoctor, List<MedicalExaminationReport> reportsByDate, List<MedicalExaminationReport> reportsByComment, List<MedicalExaminationReport> reportsByRoom)
@@ -149,66 +145,50 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public List<MedicalExaminationReport> FindReportsByDoctorUsingSimpleSearch(int patientId, string doctor)
         {
-            List<MedicalExaminationReport> reportsByDoctor = new List<MedicalExaminationReport>();
-
-            if (doctor == null)
+            if (doctor == null || doctor == "")
             {
-                reportsByDoctor = GetAllEntities().ToList();
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByDoctor = FindReportsForDoctorParameter(patientId, doctor);
+                return FindReportsForDoctorParameter(patientId, doctor);
             }
-
-            return reportsByDoctor;
         }
 
         public List<MedicalExaminationReport> FindReportsByDateUsingSimpleSearch(int patientId, string date)
         {
-            List<MedicalExaminationReport> reportsByDate = new List<MedicalExaminationReport>();
-
-            if (date == null)
+            if (date == null || date == "")
             {
-                reportsByDate = GetAllEntities().ToList(); ;
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByDate = FindReportsForDateParameter(patientId, date);
+                return FindReportsForDateParameter(patientId, date);
             }
-
-            return reportsByDate;
         }
 
         public List<MedicalExaminationReport> FindReportsByCommentUsingSimpleSearch(int patientId, string comment)
         {
-            List<MedicalExaminationReport> reportsByComment = new List<MedicalExaminationReport>();
-
-            if (comment == null)
+            if (comment == null || comment == "")
             {
-                reportsByComment = GetAllEntities().ToList(); ;
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByComment = FindReportsForCommentParameter(patientId, comment);
+                return FindReportsForCommentParameter(patientId, comment);
             }
-
-            return reportsByComment;
         }
 
         public List<MedicalExaminationReport> FindReportsByRoomUsingSimpleSearch(int patientId, string room)
         {
-            List<MedicalExaminationReport> reportsByRoom = new List<MedicalExaminationReport>();
-
-            if (room == null)
+            if (room == null || room == "")
             {
-                reportsByRoom = GetAllEntities().ToList();
+                return GetMedicalExaminationReportsForPatient(patientId).ToList();
             }
             else
             {
-                reportsByRoom = FindReportsForRoomParameter(patientId, room);
+                return FindReportsForRoomParameter(patientId, room);
             }
-
-            return reportsByRoom;
         }
 
         public MedicalExaminationReport GetEntity(int id)

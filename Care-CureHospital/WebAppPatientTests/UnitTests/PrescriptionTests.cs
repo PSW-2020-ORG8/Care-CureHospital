@@ -127,6 +127,44 @@ namespace WebAppPatientTests
             searchResult.ShouldNotBeEmpty();
         }
 
+        [Fact]
+        public void Find_Prescriptions_With_Three_Searh_Parameters()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+            Dictionary<string, string> parametersForSearch = new Dictionary<string, string>();
+            List<string> logicOperators = new List<string>();
+            parametersForSearch.Add("Doktoru", "Jovan");
+            parametersForSearch.Add("Sadržaju", "Brufen");
+            parametersForSearch.Add("Lekovima", "Brufen");
+            logicOperators.Add("ILI");
+            logicOperators.Add("ILI");
+
+            List<Prescription> searchResult = service.FindPrescriptionsUsingAdvancedSearch(1, parametersForSearch, logicOperators);
+
+            searchResult.ShouldNotBeEmpty();
+        }
+
+        [Fact]
+        public void Find_Prescriptions_With_Four_Searh_Parameters()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+            Dictionary<string, string> parametersForSearch = new Dictionary<string, string>();
+            List<string> logicOperators = new List<string>();
+            parametersForSearch.Add("Doktoru", "Milan");
+            parametersForSearch.Add("Datumu", "2020-10-05");
+            parametersForSearch.Add("Sadržaju", "Koristite");
+            parametersForSearch.Add("Lekovima", "Brufen");
+            logicOperators.Add("I");
+            logicOperators.Add("I");
+            logicOperators.Add("I");
+
+            List<Prescription> searchResult = service.FindPrescriptionsUsingAdvancedSearch(1, parametersForSearch, logicOperators);
+
+            searchResult.ShouldNotBeEmpty();
+
+            searchResult.ShouldNotBeEmpty();
+        }
+
         private static IPrescriptionRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IPrescriptionRepository>();
