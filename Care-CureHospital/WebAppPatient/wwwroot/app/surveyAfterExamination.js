@@ -380,8 +380,12 @@ Vue.component("surveyAfterExamination", {
 				title: 'Naslov ankete',
 				commentSurvey: this.commentSurvey,
 				answers: this.listOfAnswers
+			}).then(response => {
+				if (response.status === 200) {
+					toast('Anketa je uspešno poslata')
+				}
 			});
-				
+			
 		}
 
 	},
