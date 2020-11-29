@@ -1,79 +1,44 @@
 Vue.component("surveyAfterExamination", {
 	data: function () {
 		return {
-			listOfQuestions: [],
+			listOfAnswers: [],
 			commentSurvey: '',
+
 			textOfQuestion1: '',
 			gradeOfQuestion1: null,
-			poor1: false,
-			fair1: false,
-			good1: false,
-			veryGood1: false,
-			excellent1: false,
+			answer1 : 'good',
 
 			textOfQuestion2: '',
 			gradeOfQuestion2: null,
-			poor2: false,
-			fair2: false,
-			good2: false,
-			veryGood2: false,
-			excellent2: false,
+			answer2: 'good',
 
 			textOfQuestion3: '',
 			gradeOfQuestion3: null,
-			poor3: false,
-			fair3: false,
-			good3: false,
-			veryGood3: false,
-			excellent3: false,
+			answer3: 'good',
 
 			textOfQuestion4: '',
 			gradeOfQuestion4: null,
-			poor4: false,
-			fair4: false,
-			good4: false,
-			veryGood4: false,
-			excellent4: false,
+			answer4: 'good',
 
 			textOfQuestion5: '',
 			gradeOfQuestion5: null,
-			poor5: false,
-			fair5: false,
-			good5: false,
-			veryGood5: false,
-			excellent5: false,
+			answer5: 'good',
 
 			textOfQuestion6: '',
 			gradeOfQuestion6: null,
-			poor6: false,
-			fair6: false,
-			good6: false,
-			veryGood6: false,
-			excellent6: false,
+			answer6: 'good',
 
 			textOfQuestion7: '',
 			gradeOfQuestion7: null,
-			poor7: false,
-			fair7: false,
-			good7: false,
-			veryGood7: false,
-			excellent7: false,
+			answer7: 'good',
 
 			textOfQuestion8: '',
 			gradeOfQuestion8: null,
-			poor8: false,
-			fair8: false,
-			good8: false,
-			veryGood8: false,
-			excellent8: false,
+			answer8: 'good',
 
 			textOfQuestion9: '',
 			gradeOfQuestion9: null,
-			poor9: false,
-			fair9: false,
-			good9: false,
-			veryGood9: false,
-			excellent9: false
+			answer9: 'good'
 
 		}
 	},
@@ -112,9 +77,7 @@ Vue.component("surveyAfterExamination", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li class="active" ><a href="#/">Objavljeni utisci</a></li></div><br/>
-		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+			
 	     </ul>
 	 </div>
 
@@ -123,106 +86,106 @@ Vue.component("surveyAfterExamination", {
 		<h3 class = "doctor-qestions-title">Pitanja o doktoru kod kog je izvršen pregled:</h3> 
 		<table class="questions-about-doctor">
 			<tr>
-			<th style="min-width:530px;">Pitanja</th>
-			<th style="min-width:90px;">Vrlo loše</th>
-			<th style="min-width:90px;">Loše</th>
-			<th style="min-width:90px;">Dobro</th>
-			<th style="min-width:90px;">Vrlo dobro</th>
-			<th style="min-width:90px;">Odlično</th>
+				<th style="min-width:530px;">Pitanja</th>
+				<th style="min-width:90px;">Vrlo loše</th>
+				<th style="min-width:90px;">Loše</th>
+				<th style="min-width:90px;">Dobro</th>
+				<th style="min-width:90px;">Vrlo dobro</th>
+				<th style="min-width:90px;">Odlično</th>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion1">Ljubaznost doktora prema pacijentu</td>
-			<td><input type="radio" id="poor" name="gradeOfQuestion1" value="poor" v-model="poor1"></td>
-			<td><input v-model="fair1" type="radio" id="fair" name="gradeOfQuestion1" value="fair"></td>
-			<td><input v-model="good1" type="radio" id="good" name="gradeOfQuestion1" value="good"></td>
-			<td><input v-model="veryGood1" type="radio" id="veryGood" name="gradeOfQuestion1" value="veryGood"></td>
-			<td><input v-model="excellent1" type="radio" id="excellent" name="gradeOfQuestion1" value="excellent"></td>
+				<td v-model="textOfQuestion1">Ljubaznost doktora prema pacijentu</td>
+				<td><input v-model="answer1" type="radio" id="poor" name="gradeOfQuestion1" value="poor"></td>
+				<td><input v-model="answer1" type="radio" id="fair" name="gradeOfQuestion1" value="fair"></td>
+				<td><input v-model="answer1" type="radio" id="good" name="gradeOfQuestion1" value="good"></td>
+				<td><input v-model="answer1" type="radio" id="veryGood" name="gradeOfQuestion1" value="veryGood"></td>
+				<td><input v-model="answer1" type="radio" id="excellent" name="gradeOfQuestion1" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion2">Posvećenost doktora pacijentu</td>
-			<td><input v-model="poor2" type="radio" id="poor" name="gradeOfQuestion2" value="poor"></td>
-			<td><input v-model="fair2" type="radio" id="fair" name="gradeOfQuestion2" value="fair"></td>
-			<td><input v-model="good2" type="radio" id="good" name="gradeOfQuestion2" value="good"></td>
-			<td><input v-model="veryGood2" type="radio" id="veryGood" name="gradeOfQuestion2" value="veryGood"></td>
-			<td><input v-model="excellent2" type="radio" id="excellent" name="gradeOfQuestion2" value="excellent"></td>
+				<td v-model="textOfQuestion2">Posvećenost doktora pacijentu</td>
+				<td><input v-model="answer2" type="radio" id="poor" name="gradeOfQuestion2" value="poor"></td>
+				<td><input v-model="answer2" type="radio" id="fair" name="gradeOfQuestion2" value="fair"></td>
+				<td><input v-model="answer2" type="radio" id="good" name="gradeOfQuestion2" value="good"></td>
+				<td><input v-model="answer2" type="radio" id="veryGood" name="gradeOfQuestion2" value="veryGood"></td>
+				<td><input v-model="answer2" type="radio" id="excellent" name="gradeOfQuestion2" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion3">Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja</td>
-			<td><input v-model="poor3" type="radio" id="poor" name="gradeOfQuestion3" value="poor"></td>
-			<td><input v-model="fair3" type="radio" id="fair" name="gradeOfQuestion3" value="fair"></td>
-			<td><input v-model="good3" type="radio" id="good" name="gradeOfQuestion3" value="good"></td>
-			<td><input v-model="veryGood3" type="radio" id="veryGood" name="gradeOfQuestion3" value="veryGood"></td>
-			<td><input v-model="excellent3" type="radio" id="excellent" name="gradeOfQuestion3" value="excellent"></td>
+				<td v-model="textOfQuestion3">Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja</td>
+				<td><input v-model="answer3" type="radio" id="poor" name="gradeOfQuestion3" value="poor"></td>
+				<td><input v-model="answer3" type="radio" id="fair" name="gradeOfQuestion3" value="fair"></td>
+				<td><input v-model="answer3" type="radio" id="good" name="gradeOfQuestion3" value="good"></td>
+				<td><input v-model="answer3" type="radio" id="veryGood" name="gradeOfQuestion3" value="veryGood"></td>
+				<td><input v-model="answer3" type="radio" id="excellent" name="gradeOfQuestion3" value="excellent"></td>
 			</tr>
 		</table> 
 		<h3 class = "medicalstaff-qestions-title">Pitanja o medicinskom osoblju bolnice:</h3> 
 		<table class="questions-about-medicalstaff">
 			<tr>
-			<th style="min-width:530px;">Pitanja</th>
-			<th style="min-width:90px;">Vrlo loše</th>
-			<th style="min-width:90px;">Loše</th>
-			<th style="min-width:90px;">Dobro</th>
-			<th style="min-width:90px;">Vrlo dobro</th>
-			<th style="min-width:90px;">Odlično</th>
+				<th style="min-width:530px;">Pitanja</th>
+				<th style="min-width:90px;">Vrlo loše</th>
+				<th style="min-width:90px;">Loše</th>
+				<th style="min-width:90px;">Dobro</th>
+				<th style="min-width:90px;">Vrlo dobro</th>
+				<th style="min-width:90px;">Odlično</th>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion4">Ljubaznost medicinskog osoblja prema pacijentu</td>
-			<td><input v-model="poor4" type="radio" id="poor" name="gradeOfQuestion4" value="poor"></td>
-			<td><input v-model="fair4" type="radio" id="fair" name="gradeOfQuestion4" value="fair"></td>
-			<td><input v-model="good4" type="radio" id="good" name="gradeOfQuestion4" value="good"></td>
-			<td><input v-model="veryGood4" type="radio" id="veryGood" name="gradeOfQuestion4" value="veryGood"></td>
-			<td><input v-model="excellent4" type="radio" id="excellent" name="gradeOfQuestion4" value="excellent"></td>
+				<td v-model="textOfQuestion4">Ljubaznost medicinskog osoblja prema pacijentu</td>
+				<td><input v-model="answer4" type="radio" id="poor" name="gradeOfQuestion4" value="poor"></td>
+				<td><input v-model="answer4" type="radio" id="fair" name="gradeOfQuestion4" value="fair"></td>
+				<td><input v-model="answer4" type="radio" id="good" name="gradeOfQuestion4" value="good"></td>
+				<td><input v-model="answer4" type="radio" id="veryGood" name="gradeOfQuestion4" value="veryGood"></td>
+				<td><input v-model="answer4" type="radio" id="excellent" name="gradeOfQuestion4" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion5">Posvećenost medicinskog osoblja pacijentu</td>
-			<td><input v-model="poor5" type="radio" id="poor" name="gradeOfQuestion5" value="poor"></td>
-			<td><input v-model="fair5" type="radio" id="fair" name="gradeOfQuestion5" value="fair"></td>
-			<td><input v-model="good5" type="radio" id="good" name="gradeOfQuestion5" value="good"></td>
-			<td><input v-model="veryGood5" type="radio" id="veryGood" name="gradeOfQuestion5" value="veryGood"></td>
-			<td><input v-model="excellent5" type="radio" id="excellent" name="gradeOfQuestion5" value="excellent"></td>
+				<td v-model="textOfQuestion5">Posvećenost medicinskog osoblja pacijentu</td>
+				<td><input v-model="answer5" type="radio" id="poor" name="gradeOfQuestion5" value="poor"></td>
+				<td><input v-model="answer5" type="radio" id="fair" name="gradeOfQuestion5" value="fair"></td>
+				<td><input v-model="answer5" type="radio" id="good" name="gradeOfQuestion5" value="good"></td>
+				<td><input v-model="answer5" type="radio" id="veryGood" name="gradeOfQuestion5" value="veryGood"></td>
+				<td><input v-model="answer5" type="radio" id="excellent" name="gradeOfQuestion5" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion6">Profesionalizam u obavljanju svoji duznosti medicinskog osoblja</td>
-			<td><input v-model="poor6" type="radio" id="poor" name="gradeOfQuestion6" value="poor"></td>
-			<td><input v-model="fair6" type="radio" id="fair" name="gradeOfQuestion6" value="fair"></td>
-			<td><input v-model="good6" type="radio" id="good" name="gradeOfQuestion6" value="good"></td>
-			<td><input v-model="veryGood6" type="radio" id="veryGood" name="gradeOfQuestion6" value="veryGood"></td>
-			<td><input v-model="excellent6" type="radio" id="excellent" name="gradeOfQuestion6" value="excellent"></td>
+				<td v-model="textOfQuestion6">Profesionalizam u obavljanju svoji duznosti medicinskog osoblja</td>
+				<td><input v-model="answer6" type="radio" id="poor" name="gradeOfQuestion6" value="poor"></td>
+				<td><input v-model="answer6" type="radio" id="fair" name="gradeOfQuestion6" value="fair"></td>
+				<td><input v-model="answer6" type="radio" id="good" name="gradeOfQuestion6" value="good"></td>
+				<td><input v-model="answer6" type="radio" id="veryGood" name="gradeOfQuestion6" value="veryGood"></td>
+				<td><input v-model="answer6" type="radio" id="excellent" name="gradeOfQuestion6" value="excellent"></td>
 			</tr>
 		</table> 
 		<h3 class = "hospital-qestions-title">Pitanja o radu bolnice:</h3> 
 		<table class="questions-about-hospital">
 			<tr>
-			<th style="min-width:530px;">Pitanja</th>
-			<th style="min-width:90px;">Vrlo loše</th>
-			<th style="min-width:90px;">Loše</th>
-			<th style="min-width:90px;">Dobro</th>
-			<th style="min-width:90px;">Vrlo dobro</th>
-			<th style="min-width:90px;">Odlično</th>
+				<th style="min-width:530px;">Pitanja</th>
+				<th style="min-width:90px;">Vrlo loše</th>
+				<th style="min-width:90px;">Loše</th>
+				<th style="min-width:90px;">Dobro</th>
+				<th style="min-width:90px;">Vrlo dobro</th>
+				<th style="min-width:90px;">Odlično</th>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion7">Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici</td>
-			<td><input v-model="poor7" type="radio" id="poor" name="gradeOfQuestion7" value="poor"></td>
-			<td><input v-model="fair7" type="radio" id="fair" name="gradeOfQuestion7" value="fair"></td>
-			<td><input v-model="good7" type="radio" id="good" name="gradeOfQuestion7" value="good"></td>
-			<td><input v-model="veryGood7" type="radio" id="veryGood" name="gradeOfQuestion7" value="veryGood"></td>
-			<td><input v-model="excellent7" type="radio" id="excellent" name="gradeOfQuestion7" value="excellent"></td>
+				<td v-model="textOfQuestion7">Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici</td>
+				<td><input v-model="answer7" type="radio" id="poor" name="gradeOfQuestion7" value="poor"></td>
+				<td><input v-model="answer7" type="radio" id="fair" name="gradeOfQuestion7" value="fair"></td>
+				<td><input v-model="answer7" type="radio" id="good" name="gradeOfQuestion7" value="good"></td>
+				<td><input v-model="answer7" type="radio" id="veryGood" name="gradeOfQuestion7" value="veryGood"></td>
+				<td><input v-model="answer7" type="radio" id="excellent" name="gradeOfQuestion7" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion8">Higijena unutar bolnice</td>
-			<td><input v-model="poor8" type="radio" id="poor" name="gradeOfQuestion8" value="poor"></td>
-			<td><input v-model="fair8" type="radio" id="fair" name="gradeOfQuestion8" value="fair"></td>
-			<td><input v-model="good8" type="radio" id="good" name="gradeOfQuestion8" value="good"></td>
-			<td><input v-model="veryGood8" type="radio" id="veryGood" name="gradeOfQuestion8" value="veryGood"></td>
-			<td><input v-model="excellent8" type="radio" id="excellent" name="gradeOfQuestion8" value="excellent"></td>
+				<td v-model="textOfQuestion8">Higijena unutar bolnice</td>
+				<td><input v-model="answer8" type="radio" id="poor" name="gradeOfQuestion8" value="poor"></td>
+				<td><input v-model="answer8" type="radio" id="fair" name="gradeOfQuestion8" value="fair"></td>
+				<td><input v-model="answer8" type="radio" id="good" name="gradeOfQuestion8" value="good"></td>
+				<td><input v-model="answer8" type="radio" id="veryGood" name="gradeOfQuestion8" value="veryGood"></td>
+				<td><input v-model="answer8" type="radio" id="excellent" name="gradeOfQuestion8" value="excellent"></td>
 			</tr>
 			<tr>
-			<td v-model="textOfQuestion9">Opremljenost bolnice</td>
-			<td><input v-model="poor9" type="radio" id="poor" name="gradeOfQuestion9" value="poor"></td>
-			<td><input v-model="fair9" type="radio" id="fair" name="gradeOfQuestion9" value="fair"></td>
-			<td><input v-model="good9" type="radio" id="good" name="gradeOfQuestion9" value="good"></td>
-			<td><input v-model="veryGood9" type="radio" id="veryGood" name="gradeOfQuestion9" value="veryGood"></td>
-			<td><input v-model="excellent9" type="radio" id="excellent" name="gradeOfQuestion9" value="excellent"></td>
+				<td v-model="textOfQuestion9">Opremljenost bolnice</td>
+				<td><input v-model="answer9" type="radio" id="poor" name="gradeOfQuestion9" value="poor"></td>
+				<td><input v-model="answer9" type="radio" id="fair" name="gradeOfQuestion9" value="fair"></td>
+				<td><input v-model="answer9" type="radio" id="good" name="gradeOfQuestion9" value="good"></td>
+				<td><input v-model="answer9" type="radio" id="veryGood" name="gradeOfQuestion9" value="veryGood"></td>
+				<td><input v-model="answer9" type="radio" id="excellent" name="gradeOfQuestion9" value="excellent"></td>
 			</tr>
 		</table> 
 		<h3 class = "survey-comment-title">Komentar:</h3> 
@@ -246,177 +209,177 @@ Vue.component("surveyAfterExamination", {
 	methods: {
 		postSurvey: function () {
 
-			if (this.poor1 == "poor") {
+			this.listOfAnswers = []
+
+			if (this.answer1 == "poor") {
 				this.gradeOfQuestion1 = 0;
-			} else if(this.fair1 == "fair"){
+			} else if (this.answer1 == "fair"){
 				this.gradeOfQuestion1 = 1;
-			} else if (this.good1 == "good") {
+			} else if (this.answer1 == "good") {
 				this.gradeOfQuestion1 = 2;
-			} else if (this.veryGood1 == "veryGood") {
+			} else if (this.answer1 == "veryGood") {
 				this.gradeOfQuestion1 = 3;
-			} else if (this.excellent1 == "excellent") {
+			} else if (this.answer1 == "excellent") {
 				this.gradeOfQuestion1 = 4;
 			}
 
-			var question1={
-				questionText: 'Ljubaznost doktora prema pacijentu',
-				answer: this.gradeOfQuestion1
+			var answerOfQuestion1={
+				grade: this.gradeOfQuestion1,
+				questionId: 1
 			}
 
-			if (this.poor2 == "poor") {
+			if (this.answer2 == "poor") {
 				this.gradeOfQuestion2 = 0;
-			} else if (this.fair2 == "fair") {
+			} else if (this.answer2 == "fair") {
 				this.gradeOfQuestion2 = 1;
-			} else if (this.good2 == "good") {
+			} else if (this.answer2 == "good") {
 				this.gradeOfQuestion2 = 2;
-			} else if (this.veryGood2 == "veryGood") {
+			} else if (this.answer2 == "veryGood") {
 				this.gradeOfQuestion2 = 3;
-			} else if (this.excellent2 == "excellent") {
+			} else if (this.answer2 == "excellent") {
 				this.gradeOfQuestion2 = 4;
 			}
 
-			var question2 = {
-				questionText: 'Posvećenost doktora pacijentu',
-				answer: this.gradeOfQuestion2
+			var answerOfQuestion2 = {
+				grade: this.gradeOfQuestion2,
+				questionId: 2
 			}
 
-			if (this.poor3 == "poor") {
+			if (this.answer3 == "poor") {
 				this.gradeOfQuestion3 = 0;
-			} else if (this.fair3 == "fair") {
+			} else if (this.answer3 == "fair") {
 				this.gradeOfQuestion3 = 1;
-			} else if (this.good3 == "good") {
+			} else if (this.answer3 == "good") {
 				this.gradeOfQuestion3 = 2;
-			} else if (this.veryGood3 == "veryGood") {
+			} else if (this.answer3 == "veryGood") {
 				this.gradeOfQuestion3 = 3;
-			} else if (this.excellent3 == "excellent") {
+			} else if (this.answer3 == "excellent") {
 				this.gradeOfQuestion3 = 4;
 			}
 
-			var question3 = {
-				questionText: 'Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja',
-				answer: this.gradeOfQuestion3
+			var answerOfQuestion3 = {
+				grade: this.gradeOfQuestion3,
+				questionId: 3
 			}
 
-			if (this.poor4 == "poor") {
+			if (this.answer4 == "poor") {
 				this.gradeOfQuestion4 = 0;
-			} else if (this.fair4 == "fair") {
+			} else if (this.answer4 == "fair") {
 				this.gradeOfQuestion4 = 1;
-			} else if (this.good4 == "good") {
+			} else if (this.answer4 == "good") {
 				this.gradeOfQuestion4 = 2;
-			} else if (this.veryGood4 == "veryGood") {
+			} else if (this.answer4 == "veryGood") {
 				this.gradeOfQuestion4 = 3;
-			} else if (this.excellent4 == "excellent") {
+			} else if (this.answer4 == "excellent") {
 				this.gradeOfQuestion4 = 4;
 			}
 
-			var question4 = {
-				questionText: 'Ljubaznost medicinskog osoblja prema pacijentu',
-				answer: this.gradeOfQuestion4
+			var answerOfQuestion4 = {
+				grade: this.gradeOfQuestion4,
+				questionId: 4
 			}
 
-			if (this.poor5 == "poor") {
+			if (this.answer5 == "poor") {
 				this.gradeOfQuestion5 = 0;
-			} else if (this.fair5 == "fair") {
+			} else if (this.answer5 == "fair") {
 				this.gradeOfQuestion5 = 1;
-			} else if (this.good5 == "good") {
+			} else if (this.answer5 == "good") {
 				this.gradeOfQuestion5 = 2;
-			} else if (this.veryGood5 == "veryGood") {
+			} else if (this.answer5 == "veryGood") {
 				this.gradeOfQuestion5 = 3;
-			} else if (this.excellent5 == "excellent") {
+			} else if (this.answer5 == "excellent") {
 				this.gradeOfQuestion5 = 4;
 			}
 
-			var question5 = {
-				questionText: 'Posvećenost medicinskog osoblja pacijentu',
-				answer: this.gradeOfQuestion5
+			var answerOfQuestion5 = {
+				grade: this.gradeOfQuestion5,
+				questionId: 5
 			}
 
-			if (this.poor6 == "poor") {
+			if (this.answer6 == "poor") {
 				this.gradeOfQuestion6 = 0;
-			} else if (this.fair6 == "fair") {
+			} else if (this.answer6 == "fair") {
 				this.gradeOfQuestion6 = 1;
-			} else if (this.good6 == "good") {
+			} else if (this.answer6 == "good") {
 				this.gradeOfQuestion6 = 2;
-			} else if (this.veryGood6 == "veryGood") {
+			} else if (this.answer6 == "veryGood") {
 				this.gradeOfQuestion6 = 3;
-			} else if (this.excellent6 == "excellent") {
+			} else if (this.answer6 == "excellent") {
 				this.gradeOfQuestion6 = 4;
 			}
 
-			var question6 = {
-				questionText: 'Profesionalizam u obavljanju svoji duznosti medicinskog osoblja',
-				answer: this.gradeOfQuestion6
+			var answerOfQuestion6 = {
+				grade: this.gradeOfQuestion6,
+				questionId: 6
 			}
 
-			if (this.poor7 == "poor") {
+			if (this.answer7 == "poor") {
 				this.gradeOfQuestion7 = 0;
-			} else if (this.fair7 == "fair") {
+			} else if (this.answer7 == "fair") {
 				this.gradeOfQuestion7 = 1;
-			} else if (this.good7 == "good") {
+			} else if (this.answer7 == "good") {
 				this.gradeOfQuestion7 = 2;
-			} else if (this.veryGood7 == "veryGood") {
+			} else if (this.answer7 == "veryGood") {
 				this.gradeOfQuestion7 = 3;
-			} else if (this.excellent7 == "excellent") {
+			} else if (this.answer7 == "excellent") {
 				this.gradeOfQuestion7 = 4;
 			}
 
-			var question7 = {
-				questionText: 'Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici',
-				answer: this.gradeOfQuestion7
+			var answerOfQuestion7 = {
+				grade: this.gradeOfQuestion7,
+				questionId: 7
 			}
 
-			if (this.poor8 == "poor") {
+			if (this.answer8 == "poor") {
 				this.gradeOfQuestion8 = 0;
-			} else if (this.fair8 == "fair") {
+			} else if (this.answer8 == "fair") {
 				this.gradeOfQuestion8 = 1;
-			} else if (this.good8 == "good") {
+			} else if (this.answer8 == "good") {
 				this.gradeOfQuestion8 = 2;
-			} else if (this.veryGood8 == "veryGood") {
+			} else if (this.answer8 == "veryGood") {
 				this.gradeOfQuestion8 = 3;
-			} else if (this.excellent8 == "excellent") {
+			} else if (this.answer8 == "excellent") {
 				this.gradeOfQuestion8 = 4;
 			}
 
-			var question8 = {
-				questionText: 'Higijena unutar bolnice',
-				answer: this.gradeOfQuestion8
+			var answerOfQuestion8 = {
+				grade: this.gradeOfQuestion8,
+				questionId: 8
 			}
 
-			if (this.poor9 == "poor") {
+			if (this.answer9 == "poor") {
 				this.gradeOfQuestion9 = 0;
-			} else if (this.fair9 == "fair") {
+			} else if (this.answer9 == "fair") {
 				this.gradeOfQuestion9 = 1;
-			} else if (this.good9 == "good") {
+			} else if (this.answer9 == "good") {
 				this.gradeOfQuestion9 = 2;
-			} else if (this.veryGood9 == "veryGood") {
+			} else if (this.answer9 == "veryGood") {
 				this.gradeOfQuestion9 = 3;
-			} else if (this.excellent9 == "excellent") {
+			} else if (this.answer9 == "excellent") {
 				this.gradeOfQuestion9 = 4;
 			}
 
-			var question9 = {
-				questionText: 'Opremljenost bolnice',
-				answer: this.gradeOfQuestion9
+			var answerOfQuestion9 = {
+				grade: this.gradeOfQuestion9,
+				questionId: 9
 			}
 
-			this.listOfQuestions.push(question1)
-			this.listOfQuestions.push(question2)
-			this.listOfQuestions.push(question3)
-			this.listOfQuestions.push(question4)
-			this.listOfQuestions.push(question5)
-			this.listOfQuestions.push(question6)
-			this.listOfQuestions.push(question7)
-			this.listOfQuestions.push(question8)
-			this.listOfQuestions.push(question9)
+			this.listOfAnswers.push(answerOfQuestion1)
+			this.listOfAnswers.push(answerOfQuestion2)
+			this.listOfAnswers.push(answerOfQuestion3)
+			this.listOfAnswers.push(answerOfQuestion4)
+			this.listOfAnswers.push(answerOfQuestion5)
+			this.listOfAnswers.push(answerOfQuestion6)
+			this.listOfAnswers.push(answerOfQuestion7)
+			this.listOfAnswers.push(answerOfQuestion8)
+			this.listOfAnswers.push(answerOfQuestion9)
 
-
-			var formatted_date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-			//"2020-11-06T08:30:00"
+			
 
 			axios.post('/api/survey', {
 				title: 'Naslov ankete',
 				commentSurvey: this.commentSurvey,
-				questions: this.listOfQuestions
+				answers: this.listOfAnswers
 			});
 				
 		}

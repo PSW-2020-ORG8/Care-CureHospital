@@ -23,7 +23,7 @@ namespace WebAppPatient.Mapper
             medicalRecord.Allergies = dto.Allergies;
             medicalRecord.Medicaments = new List<Medicament>();
             medicalRecord.ActiveMedicalRecord = false;
-
+            
             return medicalRecord;
         }
 
@@ -33,6 +33,7 @@ namespace WebAppPatient.Mapper
             dto.Id = medicalRecord.Id;
             dto.Patient = medicalRecord.Patient;
             dto.PatientId = medicalRecord.PatientId;
+            dto.ActiveMedicalRecord = medicalRecord.ActiveMedicalRecord;
             dto.Anamnesis = medicalRecord.Anamnesis;
             dto.Allergies = medicalRecord.Allergies;
             dto.Medicaments = medicalRecord.Medicaments;

@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace WebAppPatientTests
+namespace WebAppPatientTests.UnitTests
 {
     public class MedicalRecordTest
     {

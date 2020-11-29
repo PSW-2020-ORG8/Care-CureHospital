@@ -31,7 +31,7 @@ namespace Service.UsersServices
 
         public String FindPasswordByUsername(String username)
         {
-            foreach(User user in this.GetAllEntities())
+            foreach(User user in GetAllEntities())
                 if (user.Username.Equals(username))
                     return user.Password;
             return "";
@@ -42,22 +42,20 @@ namespace Service.UsersServices
             throw new NotImplementedException();
         }
 
-        public bool IsUsernameExist(String username)
+        public bool DoesUsernameExist(String username)
         {
-            foreach (User user in this.GetAllEntities())
+            foreach (User user in GetAllEntities())
                 if (user.Username.Equals(username))
                     return true;
+
             return false;
         }
-
 
         public bool DoesJmbgExsist(String jmbg)
         {
             foreach (User user in GetAllEntities())
-            {
                 if (user.Jmbg.Equals(jmbg))
                     return true;
-            }
             return false;
         }
 

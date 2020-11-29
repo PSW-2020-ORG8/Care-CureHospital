@@ -56,6 +56,16 @@ namespace Model.PatientDoctor
             Medicaments = medicament;
         }
 
+        public MedicalRecord(int id, int patientId, AllActors.Patient patient, int anamnesisId, List<Allergies> allergies, List<Medicament> medicament, bool activeMedicalRecord) : this(id)
+        {
+            PatientId = patientId;
+            Patient = patient;
+            AnamnesisId = anamnesisId;
+            Allergies = allergies;
+            Medicaments = medicament;
+            ActiveMedicalRecord = activeMedicalRecord;
+        }
+
         public MedicalRecord(int id, AllActors.Patient patient, Anamnesis anamnesis, List<Allergies> allergies, List<Medicament> medicament, bool activeMedicalRecord) : this(id)
         {
             Patient = patient;

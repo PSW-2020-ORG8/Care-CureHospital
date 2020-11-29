@@ -26,11 +26,16 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
-
         [HttpGet("getSurveyResults")] // GET /api/survey/getSurveyResults
         public IActionResult getSurveyResults()
         {
-            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().QuestionService.GetAnswersByQuestion()));
+            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().AnswerService.GetAnswersByQuestion()));
+        }
+
+        [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResults
+        public IActionResult getSurveyResultsForDoctors()
+        {
+            return Ok(QuestionResultMapper.CreateDoctorResultsDto(App.Instance().SurveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
         }
 
         [HttpPost]      // POST /api/survey
