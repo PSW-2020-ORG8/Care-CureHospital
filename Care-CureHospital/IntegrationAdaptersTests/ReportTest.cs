@@ -55,12 +55,11 @@ namespace IntegrationAdaptersTests
         private static IReportRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IReportRepository>();
-
             var reports = new List<Report>();
+
             reports.Add(new Report(1, 1, "Brufen", 12, new DateTime(2019, 11, 6, 8, 30, 0), new DateTime(2019, 12, 6, 8, 30, 0)));
             reports.Add(new Report(2, 5, "Vitamin C", 102, new DateTime(2020, 5, 6, 8, 30, 0), new DateTime(2020, 11, 6, 8, 30, 0)));
             reports.Add(new Report(3, 4, "Paracetamol", 10, new DateTime(2020, 1, 6, 8, 30, 0), new DateTime(2020, 12, 6, 8, 30, 0)));
-
 
             stubRepository.Setup(reportRepository => reportRepository.GetAllEntities()).Returns(reports);
             stubRepository.Setup(report => report.AddEntity(It.IsAny<Report>())).Returns(new Report(1, 1, "Brufen", 12, new DateTime(2019, 11, 6, 8, 30, 0), new DateTime(2019, 12, 6, 8, 30, 0)));

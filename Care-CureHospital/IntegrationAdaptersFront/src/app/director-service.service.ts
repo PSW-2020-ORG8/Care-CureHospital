@@ -12,10 +12,6 @@ export class DirectorServiceService {
 
   constructor(private http:HttpClient) { }
 
-  getReportList():Observable<any[]>{
-    return this.http.get<any>(this.APIUrl+'/report');
-  }
-
   addReport(val:any){
     return this.http.post(this.APIUrl+'/report', val);
   }
@@ -24,16 +20,7 @@ export class DirectorServiceService {
     return this.http.put(this.APIUrl+'/report', val);
   }
 
- /* getAllMedicamentNames():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl+'/Report/GetAll');
-  }*/
-  
-  saveReport(val:any){
-   // return this.http.post(this.APIUrl+'/saveInfos', val);
-  }
-
   generate(val:any){
       return this.http.get<any[]>(this.APIUrl+'/sftp');
   }
-  
 }

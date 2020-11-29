@@ -17,7 +17,7 @@ export class DirectorComponent implements OnInit {
   rep:any;
 
   ngOnInit(): void {
-    this.refreshReportList();
+    //this.refreshReportList();
   }
 
   addclick(){
@@ -34,19 +34,10 @@ export class DirectorComponent implements OnInit {
 
   closeClick(){
     this.ActivateAddEditRepComp=false;
-    this.refreshReportList();
-  }
-
-  refreshReportList(){
-    this.service.getReportList().subscribe(data=>{this.ReportList=data;});
-
-  }
-
-  saveReport(){
-    alert("Report saved.");
+ 
   }
 
   generate(){
-    alert("Generated.");
+    alert("Report saved.");
   }
 }

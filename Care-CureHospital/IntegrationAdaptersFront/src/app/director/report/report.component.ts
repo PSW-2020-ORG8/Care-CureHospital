@@ -20,13 +20,6 @@ export class ReportComponent implements OnInit {
   ReportList:any=[];
 
   ngOnInit(): void {
-    this.loadReportList();
-  }
-
-  loadReportList(){
-    this.service.getReportList().subscribe((data:any)=>{
-      this.ReportList=data;
-    });
   }
 
   addReport(){
