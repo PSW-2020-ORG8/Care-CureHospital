@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'HealthClinicDB'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+  Backend:
+    build: 
+      context: .
+      dockerfile: Backend/Dockerfile
+    image: astevanovic/backend:latest
+    depends_on:
+      - db
+    expose: 
+      - "80"
+    ports:
+      - "6000:80"
+  IntegrationAdapters:
+    build: 
+      context: .
+      dockerfile: IntegrationAdapters/Dockerfile
+    image: astevanovic/integrationadapters:latest
+    expose: 
+      - "80"
+    ports:
+      - "6001:80"
+  WebAppPatient:
+    build: 
+      context: .
+      dockerfile: WebAppPatient/Dockerfile
+    image: astevanovic/webapppatient:latest
+    expose: 
+      - "80"
+    ports:
+      - "6002:80"
+  IntegrationAdaptersFront:
+    build: 
+      context: .
+      dockerfile: IntegrationAdaptersFront/Dockerfile
+    image: astevanovic/integrationadaptersfront:latest
+    expose: 
+      - "80"
+    ports:
+      - "6003:80"
+volumes:
+  mysql-db: {}
