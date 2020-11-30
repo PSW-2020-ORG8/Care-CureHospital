@@ -1,12 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
 
+export interface DataOfReport {
+  id: string;
+  medicationId: string;
+  medicationName: string;
+  quantity: string;
+  fromDate: string;
+  toDate: string;
+}
+
 @Component({
   selector: 'app-director',
   templateUrl: './director.component.html',
   styleUrls: ['./director.component.css']
 })
-export class DirectorComponent implements OnInit {
+export class DirectorComponent implements OnInit{
 
   constructor(private service:DirectorServiceService) { }
 
@@ -39,14 +48,9 @@ export class DirectorComponent implements OnInit {
 
   refreshReportList(){
     this.service.getReportList().subscribe(data=>{this.ReportList=data;});
-
-  }
-
-  saveReport(){
-    alert("Report saved.");
   }
 
   generate(){
-    alert("Generated.");
+    alert("Report saved.");
   }
 }

@@ -18,7 +18,7 @@ namespace IntegrationAdapters.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ReportController:ControllerBase
+    public class ReportController : ControllerBase
     {
 
         public ReportController() { }
@@ -32,6 +32,14 @@ namespace IntegrationAdapters.Controllers
             App.Instance().ReportService.GetAllEntities().ToList().ForEach(report => result.Add(ReportMapper.ReportToReportDto(report)));
             return Ok(result);
            
+        }
+
+        [HttpGet("getMedicationNames")] // GET /api/report/getMedicationNames
+        public IActionResult GetMedicationNames()
+        {
+            List<ReportDto> result = new List<ReportDto>();
+            App.Instance().ReportService.GetAllMedicationNames().ToList().ForEach(names => result.Add(ReportMapper.ReportToReportDto(names)));
+            return Ok(result);
         }
 
     }

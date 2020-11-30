@@ -30,6 +30,13 @@ namespace Backend.Service.DirectorService
 
         }
 
+        public IEnumerable<Report> GetAllMedicationNames()
+        {
+            List<Report> result = new List<Report>();
+
+            return result;
+        }
+
         public IEnumerable<Report> GetAllEntities()
         {
             return reportRepository.GetAllEntities();

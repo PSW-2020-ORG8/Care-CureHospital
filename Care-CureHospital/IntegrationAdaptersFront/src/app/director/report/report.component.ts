@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
 
-
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -20,14 +19,12 @@ export class ReportComponent implements OnInit {
   ReportList:any=[];
 
   ngOnInit(): void {
-    this.loadReportList();
+    this.MedicationName = this.rep.MedicationName;
+    this.ConsumedMedication = this.rep.ConsumedMedication;
+    this.FromDate = this.rep.FromDate;
+    this.ToDate = this.rep.ToDate;
   }
 
-  loadReportList(){
-    this.service.getReportList().subscribe((data:any)=>{
-      this.ReportList=data;
-    });
-  }
 
   addReport(){
     var val = {MedicationName:this.MedicationName,

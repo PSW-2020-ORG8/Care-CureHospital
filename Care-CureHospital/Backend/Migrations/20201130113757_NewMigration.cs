@@ -8,7 +8,6 @@ namespace Backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
             migrationBuilder.CreateTable(
                 name: "Anamnesies",
                 columns: table => new
@@ -518,17 +517,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Report",
-                columns: new[] { "Id", "MedicamentName", "Quantity", "FromDate", "ToDate" },
-                values: new object[,]
-                {
-                    { 1, "Brufen", 10, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 2, "Panadol", 15, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified)},
-                    { 3, "Vitamin B", 120, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                    { 4, "Paracetamol", 24, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)},
-                });
-
-            migrationBuilder.InsertData(
                 table: "Anamnesies",
                 columns: new[] { "Id", "Description" },
                 values: new object[,]
@@ -762,11 +750,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Report_MedicamentId",
-                table: "Report",
-                column: "MedicamentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Allergies_MedicalRecordId",
                 table: "Allergies",
                 column: "MedicalRecordId");
@@ -889,9 +872,6 @@ namespace Backend.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Report");
-
             migrationBuilder.DropTable(
                 name: "Allergies");
 

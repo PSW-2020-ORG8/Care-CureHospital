@@ -11,9 +11,6 @@ import { DirectorServiceService } from './director-service.service';
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddReportComponent } from './director/add-report/add-report.component';
-import { MatTableExporterModule } from 'mat-table-exporter';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,11 +25,9 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule,
-    MatTableExporterModule,
-    MatButtonModule
+    ReactiveFormsModule
   ],
-  providers: [ DirectorServiceService],
+  providers: [DirectorServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 using Backend.Model.DoctorMenager;
 using Backend.Repository.DirectorRepository;
 using Backend.Service.DirectorService;
+using IntegrationAdapters.Controllers;
 using Moq;
 using System;
 using System.Collections.Generic;
