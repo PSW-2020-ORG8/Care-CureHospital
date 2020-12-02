@@ -8,6 +8,7 @@ const doctorSurveyResults = { template: '<doctorSurveyResults></doctorSurveyResu
 const medicalRecordReview = { template: '<medicalRecordReview></medicalRecordReview>' }
 const patientDocumentsAdvancedSearch = { template: '<patientDocumentsAdvancedSearch></patientDocumentsAdvancedSearch>' }
 const patientDocumentsSimpleSearch = { template: '<patientDocumentsSimpleSearch></patientDocumentsSimpleSearch>' }
+const appointmentSchedulingByRecommendation = { template: '<appointmentSchedulingByRecommendation></appointmentSchedulingByRecommendation>' }
 const patientAppointments = { template: '<patientAppointments></patientAppointments>' }
 
 const router = new VueRouter({
@@ -24,6 +25,7 @@ const router = new VueRouter({
 		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview },
 		{ path: '/patientDocumentsAdvancedSearch', name: 'patientDocumentsAdvancedSearch', component: patientDocumentsAdvancedSearch },
 		{ path: '/patientDocumentsSimpleSearch', name: 'patientDocumentsSimpleSearch', component: patientDocumentsSimpleSearch },
+		{ path: '/appointmentSchedulingByRecommendation', name: 'appointmentSchedulingByRecommendation', component: appointmentSchedulingByRecommendation },
 		{ path: '/patientAppointments', name: 'patientAppointments', component: patientAppointments }
 	]
 });
