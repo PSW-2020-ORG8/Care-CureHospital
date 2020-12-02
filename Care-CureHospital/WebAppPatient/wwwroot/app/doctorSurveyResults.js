@@ -11,7 +11,7 @@ Vue.component("doctorSurveyResults", {
 	<div class="boundaryForScrollSurvey">
 	     <div class="logoAndName">
 	         <div class="logo">        
-	             <img src="pictures/clinic.png"/>
+	             <img src="images/hospital.png"/>
 	         </div>
 	         <div class="webName">
 	             <h3></h3>
@@ -27,8 +27,8 @@ Vue.component("doctorSurveyResults", {
  
 	     <div class="dropdown">
 	        <button class="dropbtn">
-	        	<img id="menuIcon" src="pictures/menuIcon.png" />
-	        	<img id="userIcon" src="pictures/user.png" />
+	        	<img id="menuIcon" src="images/menuIcon.png" />
+	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
 		        <a >Registruj se</a>

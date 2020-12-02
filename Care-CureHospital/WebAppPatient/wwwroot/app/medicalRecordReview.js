@@ -24,7 +24,7 @@ Vue.component("medicalRecordReview", {
     <div class="boundaryForScroll">
 	     <div class="logoAndName">
 	         <div class="logo">        
-	             <img src="pictures/clinic.png"/>
+	             <img src="images/hospital.png"/>
 	         </div>
 	         <div class="webName">
 	             <h3></h3>
@@ -39,8 +39,8 @@ Vue.component("medicalRecordReview", {
  
 	     <div class="dropdown">
 	        <button class="dropbtn">
-	        	<img id="menuIcon" src="pictures/menuIcon.png" />
-	        	<img id="userIcon" src="pictures/user.png" />
+	        	<img id="menuIcon" src="images/menuIcon.png" />
+	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
 		        <a href="#/patientRegistration">Registruj se</a>
@@ -58,7 +58,7 @@ Vue.component("medicalRecordReview", {
                         <div class="scroll-in-medical-record">
 
                         <label class="scroll-in-medical-record-label-bold">Profilna slika:</label></br></br>
-                        <img v-bind:src="'/pictures/patientsProfile/' + this.profilePicture" class="room-active" alt="" width="260px" height="200px"></img><br><br>
+                        <img v-bind:src="'/images/patientsProfileImages/' + this.profilePicture" class="room-active" alt="" width="260px" height="200px"></img><br><br>
 
                         <label class="scroll-in-medical-record-label-bold">Korisničko ime:</label></br>
                         <label>{{medicalRecord.patient.username}}</label><br><br><br> 

@@ -38,7 +38,7 @@ namespace WebAppPatient.Mapper
             dto.Allergies = medicalRecord.Allergies;
             dto.Medicaments = medicalRecord.Medicaments;
             dto.DateOfBirthday = medicalRecord.Patient.DateOfBirth.ToString("dd.MM.yyyy.");
-            dto.ProfilePicture = medicalRecord.Patient.Username + ".jpg";
+            dto.ProfilePicture = medicalRecord.Patient.Username + ".png";
 
             return dto;
         }

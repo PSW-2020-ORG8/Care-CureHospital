@@ -21,7 +21,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 		<div class="boundary-for-scroll-appointment-scheduling-by-recommendation">
 			<div class="logo-and-name-appointment-scheduling-by-recommendation">
 					<div class="logo-appointment-scheduling-by-recommendation">        
-						<img src="pictures/clinic.png"/>
+						<img src="images/clinic.png"/>
 					</div>
 					<div class="web-name-appointment-scheduling-by-recommendation">
 						<h3></h3>
@@ -36,8 +36,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
  
 				<div class="dropdown">
 					<button class="dropbtn">
-						<img id="menuIcon" src="pictures/menuIcon.png" />
-						<img id="userIcon" src="pictures/user.png" />
+						<img id="menuIcon" src="images/menuIcon.png" />
+						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
 					<a  href="#/patientRegistration">Registruj se</a>

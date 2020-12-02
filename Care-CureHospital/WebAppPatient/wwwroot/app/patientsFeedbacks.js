@@ -11,7 +11,7 @@ Vue.component("patientsFeedbacks", {
 	 <div class="boundaryForScroll">
 	     <div class="logoAndName">
 	         <div class="logo">        
-	             <img src="pictures/clinic.png"/>
+	             <img src="images/hospital.png"/>
 	         </div>
 	         <div class="webName">
 	             <h3></h3>
@@ -26,8 +26,8 @@ Vue.component("patientsFeedbacks", {
  
 	     <div class="dropdown">
 	        <button class="dropbtn">
-	        	<img id="menuIcon" src="pictures/menuIcon.png" />
-	        	<img id="userIcon" src="pictures/user.png" />
+	        	<img id="menuIcon" src="images/menuIcon.png" />
+	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
 		        <a href="#/patientRegistration">Registruj se</a>
@@ -68,7 +68,7 @@ Vue.component("patientsFeedbacks", {
  	 
 		<div class="wrapper">
 		    <div class="feedback-img">
-		        <img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
+		        <img src="./images/satisfaction.png" height="150" width="150" style="margin-left: 18%; margin-top: 21%;">
 		    </div>
 		    <div class="feedback-info">
 		        <div class="feedback-text">

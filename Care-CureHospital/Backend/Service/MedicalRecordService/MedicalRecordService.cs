@@ -103,9 +103,9 @@ namespace Service.MedicalRecordService
 
         private string FindPictureFolderPath(string patientUsername)
         {
-            string pictureFolderPath = Path.Combine("wwwroot", "pictures\\patientsProfile\\");
+            string pictureFolderPath = Path.Combine("wwwroot", "images\\patientsProfileImages\\");
             string pathForSaving = Path.Combine(Directory.GetCurrentDirectory(), pictureFolderPath);
-            return Path.Combine(pathForSaving, patientUsername + ".jpg");
+            return Path.Combine(pathForSaving, patientUsername + ".png");
         }
 
     }
