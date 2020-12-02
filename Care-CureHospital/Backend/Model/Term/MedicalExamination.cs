@@ -12,8 +12,8 @@ namespace Model.Term
     public class MedicalExamination : Term, IIdentifiable<int>
     {
         public int Id { get; set; }
-        public bool Urgency { get; set; }
         public string ShortDescription { get; set; }
+        public bool Urgency { get; set; }
         public int RoomId { get; set; }
         public int DoctorId { get; set; }
         public int PatientId { get; set; }
