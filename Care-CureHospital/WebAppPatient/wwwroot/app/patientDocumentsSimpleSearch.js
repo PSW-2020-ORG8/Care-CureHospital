@@ -26,7 +26,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 	 <div class="boundaryForScroll">
 	     <div class="logoAndName">
 	         <div class="logo">        
-	             <img src="pictures/clinic.png"/>
+	             <img src="images/hospital.png"/>
 	         </div>
 	         <div class="webName">
 	             <h3></h3>
@@ -41,8 +41,8 @@ Vue.component("patientDocumentsSimpleSearch", {
  
 	     <div class="dropdown">
 	        <button class="dropbtn">
-	        	<img id="menuIcon" src="pictures/menuIcon.png" />
-	        	<img id="userIcon" src="pictures/user.png" />
+	        	<img id="menuIcon" src="images/menuIcon.png" />
+	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
 		        <a href="#/patientRegistration">Registruj se</a>
@@ -128,7 +128,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 			<div v-for="report in reportsResult" >		 
 					<div class="wrapper-reports">
 						<div class="report-img">
-							<img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
+							<img src="./images/medical-report.png" height="150" width="150" style="margin-left: 13%; margin-top: 17%;">
 						</div>
 						<div class="report-info">
 							<div class="report-text">
@@ -153,7 +153,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 			<div v-for="prescription in prescriptionsResult" >		 
 				<div class="wrapper-reports">
 					<div class="report-img">
-						<img src="./pictures/comment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
+						<img src="./images/medical-prescription.png" height="150" width="150" style="margin-left: 11%; margin-top: 21%;">
 					</div>
 					<div class="report-info">
 						<div class="report-text">
