@@ -39,6 +39,7 @@ namespace Backend
         public DoctorService DoctorService;
         public ReportService ReportService;
         public EmailVerificationService EmailVerificationService;
+        public DoctorWorkDayService DoctorWorkDayService;
 
 
         private App()
@@ -67,7 +68,9 @@ namespace Backend
             DoctorService = new DoctorService(
                 new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
             ReportService = new ReportService(
-               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));           
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
+            DoctorWorkDayService = new DoctorWorkDayService(
+                new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()));
         }
 
         public static App Instance()
