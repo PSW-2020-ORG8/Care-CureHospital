@@ -11,14 +11,17 @@ using Backend.Service.DirectorService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.UsersServices;
 using Model.AllActors;
+using Model.Doctor;
 using Model.Patient;
 using Model.PatientDoctor;
 using Model.Term;
 using Repository.ExaminationSurgeryRepository;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
+using Repository.UsersRepository;
 using Service.ExaminationSurgeryServices;
 using Service.MedicalRecordService;
+using Service.UsersServices;
 
 namespace Backend
 {
@@ -39,7 +42,8 @@ namespace Backend
         public DoctorService DoctorService;
         public ReportService ReportService;
         public EmailVerificationService EmailVerificationService;
-
+        public DoctorWorkDayService DoctorWorkDayService;
+        public SpetialitationService SpetialitationService;
 
         private App()
         {
@@ -67,7 +71,11 @@ namespace Backend
             DoctorService = new DoctorService(
                 new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
             ReportService = new ReportService(
-               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));           
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
+            DoctorWorkDayService = new DoctorWorkDayService(
+                new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()));
+            SpetialitationService = new SpetialitationService(
+                new SpecialitationRepository(new MySQLStream<Specialitation>(), new IntSequencer()));
         }
 
         public static App Instance()

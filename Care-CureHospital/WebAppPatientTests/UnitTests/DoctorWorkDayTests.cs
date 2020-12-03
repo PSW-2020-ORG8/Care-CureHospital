@@ -10,7 +10,7 @@ using Xunit;
 
 namespace WebAppPatientTests.UnitTests
 {
-    public class AppointmentTests
+    public class DoctorWorkDayTests
     {
         [Fact]
         public void Get_doctor_work_day_by_date_and_doctor_id()
@@ -73,8 +73,6 @@ namespace WebAppPatientTests.UnitTests
 
             stubRepository.Setup(doctorWorkDayRepository => doctorWorkDayRepository.GetAllEntities()).Returns(doctorWorkDays);
             return stubRepository.Object;
-        }
-
-       
+        }   
     }
 }
