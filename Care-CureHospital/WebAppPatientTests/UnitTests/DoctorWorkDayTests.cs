@@ -1,5 +1,4 @@
-﻿using Backend.Repository.ExaminationSurgeryRepository;
-using Backend.Repository.UsersRepository;
+﻿using Backend.Repository.UsersRepository;
 using Backend.Service.UsersServices;
 using Model.Term;
 using Moq;
@@ -73,7 +72,6 @@ namespace WebAppPatientTests.UnitTests
             stubRepository.Setup(doctorWorkDayRepository => doctorWorkDayRepository.GetAllEntities()).Returns(doctorWorkDays);
             return stubRepository.Object;
         }
-
-       
+     
     }
 }

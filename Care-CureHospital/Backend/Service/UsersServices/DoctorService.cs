@@ -41,5 +41,18 @@ namespace Backend.Service.UsersServices
         {
             doctorRepository.UpdateEntity(entity);
         }
+
+        public List<Doctor> GetAllDoctorsBySpecialization(int specializationId)
+        {
+            List<Doctor> doctorsBySpecialization = new List<Doctor>();
+            foreach (Doctor doctor in GetAllEntities())
+            {
+                if (doctor.SpecialitationId == specializationId)
+                {
+                    doctorsBySpecialization.Add(doctor);
+                }
+            }
+            return doctorsBySpecialization;
+        }
     }
 }

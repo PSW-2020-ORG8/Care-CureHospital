@@ -12,7 +12,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
             specialization : '0',
             doctors : '0',
             priority : '0',
-            selectedAppointment : null
+            selectedAppointment: null,
+            specializations: [],
+            doctorsBySpecialization : []
 		}
 	},
 	template: `
@@ -21,7 +23,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 		<div class="boundary-for-scroll-appointment-scheduling-by-recommendation">
 			<div class="logo-and-name-appointment-scheduling-by-recommendation">
 					<div class="logo-appointment-scheduling-by-recommendation">        
-						<img src="images/clinic.png"/>
+						<img src="images/hospital.png"/>
 					</div>
 					<div class="web-name-appointment-scheduling-by-recommendation">
 						<h3></h3>
@@ -61,10 +63,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
             <div v-if="this.recommendationStep === 2">
                 <h1 style="padding-bottom: 70px;">Specijalizacija</h1>
                 <h3>Izaberite specijalističku granu:</h3>
-                <select v-model="specialization">
+                <select v-model="specialization" >
                     <option value="0">Izaberite specijalističku granu...</option>
-                    <option value="1">Kardiologija</option>
-                    <option value="2">Enestiologija</option>
+                    <option v-for="s in this.specializations" :key="s.id" :value="s.id">{{ s.specialitationForDoctor }}</option>
                 </select><br>
                 <div class="next-btn-appointment-scheduling-by-recommendation">
                     <button type="button" @click="nextRecommendationStep()" style="margin-top: 80%;">Dalje</button>
@@ -78,8 +79,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 <h3>Izaberite doktora:</h3>
                 <select v-model="doctors">
                     <option value="0">Izaberite doktora...</option>
-                    <option value="1">Dr. Milan Milanovic</option>
-                    <option value="2">Dr. Petar Petrovic</option>
+                    <option v-for="d in this.doctorsBySpecialization" :key="d.id" :value="d.id">Dr {{ d.name }} {{d.surname}}</option>
                 </select><br>
                 <div class="next-btn-appointment-scheduling-by-recommendation">
                     <button type="button" @click="nextRecommendationStep()" style="margin-top: 80%;">Dalje</button>
@@ -185,7 +185,10 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 } 
             }else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-            }else if(this.recommendationStep === 3 && this.doctors !== '0'){
+                axios.get('api/appointment/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
+                    this.doctorsBySpecialization = response.data;
+                });
+            } else if (this.recommendationStep === 3 && this.doctors !== '0') {
                 this.recommendationStep += 1;
             }else if(this.recommendationStep === 4 && this.priority !== '0'){
                 this.recommendationStep += 1;
@@ -215,7 +218,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
         }
 	},
 	mounted() {
-
+        axios.get('api/appointment/getAllSpecialization').then(response => {
+            this.specializations = response.data;
+        });
 	}
 
 });
