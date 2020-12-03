@@ -13,7 +13,7 @@ namespace WebAppPatient.Dto
         public string Title { get; set; }
         public String CommentSurvey { get; set; }
         public DateTime PublishingDate { get; set; }
-        public int medicalExaminationID { get; set; }
+        public int MedicalExaminationID { get; set; }
         public List<Answer> Answers { get; set; }
 
         public SurveyDto() { }

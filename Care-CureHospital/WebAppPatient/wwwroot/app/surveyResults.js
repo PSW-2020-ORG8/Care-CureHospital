@@ -22,8 +22,7 @@ Vue.component("surveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/">Pretraga dokumenata</a></li>
-				<li class="active"><a href="#/">Anketa</a></li>
+				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
 	         </ul>
 	     </div>
  
@@ -174,15 +173,9 @@ Vue.component("surveyResults", {
 				<td></td>
 				<td>{{this.hospitalQuestionsAverageGrade.toFixed(2)}}</td>
 			</tr>
-		</table> 
-		
+		</table> 	
 
-	</div>
-	
-	 
-	 
-
-	     
+	</div>	     
 	</div>	  
 	</div>
         

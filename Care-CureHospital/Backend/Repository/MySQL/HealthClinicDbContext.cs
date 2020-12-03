@@ -26,7 +26,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
-        public DbSet<MedicalExaminationReport> MedicalExaminationReport { get; set; }
+        public DbSet<MedicalExaminationReport> MedicalExaminationReports { get; set; }
         public DbSet<MedicalExaminationReport> Prescriptions { get; set; }
         public DbSet<Medicament> Medicaments { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -38,7 +38,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Allergies> Allergies { get; set; }
         public DbSet<Diagnosis> Diagnosies { get; set; }
         public DbSet<Symptoms> Symptomes { get; set; }
-        public DbSet<Surgery> Surveys { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<DoctorWorkDay> DoctorWorkDays { get; set; }
@@ -231,12 +231,12 @@ namespace Backend.Repository.MySQL
             ) ;
 
             modelBuilder.Entity<Appointment>().HasData(
-                new Appointment { Id = 1, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 0, 0), EndTime = new DateTime(2020, 12, 5, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
-                new Appointment { Id = 2, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 30, 0), EndTime = new DateTime(2020, 12, 5, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
-                new Appointment { Id = 3, Canceled = false, StartTime = new DateTime(2020, 12, 6, 8, 30, 0), EndTime = new DateTime(2020, 12, 6, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
-                new Appointment { Id = 4, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 30, 0), EndTime = new DateTime(2020, 12, 5, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
+                new Appointment { Id = 1, Canceled = false, StartTime = new DateTime(2020, 12, 20, 8, 0, 0), EndTime = new DateTime(2020, 12, 20, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
+                new Appointment { Id = 2, Canceled = false, StartTime = new DateTime(2020, 11, 18, 8, 30, 0), EndTime = new DateTime(2020, 11, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
+                new Appointment { Id = 3, Canceled = false, StartTime = new DateTime(2020, 12, 25, 8, 30, 0), EndTime = new DateTime(2020, 12, 25, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
+                new Appointment { Id = 4, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 30, 0), EndTime = new DateTime(2020, 12, 3, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
                 new Appointment { Id = 5, Canceled = false, StartTime = new DateTime(2020, 12, 5, 15, 30, 0), EndTime = new DateTime(2020, 12, 5, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
-                new Appointment { Id = 6, Canceled = false, StartTime = new DateTime(2020, 12, 6, 8, 30, 0), EndTime = new DateTime(2020, 12, 6, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
+                new Appointment { Id = 6, Canceled = false, StartTime = new DateTime(2020, 12, 6, 8, 30, 0), EndTime = new DateTime(2020, 12, 16, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
             );
 
         }

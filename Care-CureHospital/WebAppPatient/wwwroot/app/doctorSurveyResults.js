@@ -20,8 +20,7 @@ Vue.component("doctorSurveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/">Pretraga dokumenata</a></li>
-				<li class="active"><a href="#/">Anketa</a></li>
+				<li class="active"><a href="#/doctorSurveyResults">Rezultati anketa</a></li>
 	         </ul>
 	     </div>
  
@@ -114,15 +113,14 @@ Vue.component("doctorSurveyResults", {
 	mounted() {
 
 		axios.get('api/survey/getSurveyResultsForDoctors').then(response => {
-                    this.doctorSurveyResults = response.data;
-                    for (var doctorResult of this.doctorSurveyResults) {
-                        var averageGradePerDoctor = (doctorResult.questionResults[0].averageGrade 
-                            + doctorResult.questionResults[1].averageGrade + doctorResult.questionResults[2].averageGrade) / 3;
-                        this.doctorQuestionsAverageGrades.push(averageGradePerDoctor);
-                    }
-				});
-
-       
+            this.doctorSurveyResults = response.data;
+            for (var doctorResult of this.doctorSurveyResults) {
+                var averageGradePerDoctor = (doctorResult.questionResults[0].averageGrade 
+                    + doctorResult.questionResults[1].averageGrade + doctorResult.questionResults[2].averageGrade) / 3;
+                this.doctorQuestionsAverageGrades.push(averageGradePerDoctor);
+            }
+		});
+ 
 	}
 
 });

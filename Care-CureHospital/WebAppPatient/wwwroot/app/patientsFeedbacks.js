@@ -111,10 +111,10 @@ Vue.component("patientsFeedbacks", {
 			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
 				.then(response => {
 					axios.get('api/patientFeedback').then(response => {
-						toast('Utisak je uspešno objavljen!')
+						toast('Utisak je uspešno objavljen')
 						this.patientFeedbacks = response.data;
 					});
-					$this.router.go();
+					this.$router.go();
 				});
 		}
 	},

@@ -52,7 +52,7 @@ namespace Backend.Service.UsersServices
             foreach(Appointment scheduledAppointment in GetDoctorWorkDayByDateAndDoctorId(date, doctorId).ScheduledAppointments)
             {
                 var appointment = result.Find(o => DateTime.Compare(o.StartTime, scheduledAppointment.StartTime) == 0);
-                if (appointment != null)
+                if (appointment != null || scheduledAppointment.Canceled == false)
                 {
                     result.Remove(appointment);
                 }

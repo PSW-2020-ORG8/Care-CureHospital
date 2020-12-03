@@ -41,7 +41,7 @@ namespace WebAppPatient.Controllers
         [HttpPost]      // POST /api/survey
         public IActionResult AddSurvey(SurveyDto dto)
         {
-            Survey survey = SurveyMapper.SurveyDtoToSurvey(dto, null);
+            Survey survey = SurveyMapper.SurveyDtoToSurvey(dto);
             App.Instance().SurveyService.AddEntity(survey);
             return Ok();
         }

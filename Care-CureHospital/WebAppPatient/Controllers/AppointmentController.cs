@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.AllActors;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
 
@@ -43,5 +42,24 @@ namespace WebAppPatient.Controllers
             App.Instance().DoctorService.GetAllDoctorsBySpecialization(specializationId).ToList().ForEach(doctor => result.Add(DoctorMapper.DoctorToDoctorDto(doctor)));
             return Ok(result);
         }
+
+
+        [HttpGet("getPreviousAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getPreviousAppointmetsByPatient/{patientId}
+        public IActionResult GetPreviousAppointmetsByPatient(int patientId)
+        {
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            App.Instance().AppointmentService.GetPreviousAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            return Ok(result);
+        }
+
+        [HttpGet("getScheduledAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getScheduledAppointmetsByPatient/{patientId}
+        public IActionResult GetScheduledAppointmetsByPatient(int patientId)
+        {
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            App.Instance().AppointmentService.GetScheduledAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            return Ok(result);
+        }
+
+        
     }
 }
