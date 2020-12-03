@@ -41,5 +41,20 @@ namespace Backend.Service.ExaminationSurgeryServices
         {
             appointmentRepository.UpdateEntity(entity);
         }
+
+        public List<Appointment> GetPreviousAppointmetsByPatient(int patientId, DateTime currentDate)
+        {
+            return GetAllAppointmentsByPatient(patientId).Where(appointment => appointment.EndTime < currentDate).ToList();
+        }
+
+        public List<Appointment> GetScheduledAppointmetsByPatient(int patientId, DateTime currentDate)
+        {
+            return GetAllAppointmentsByPatient(patientId).Where(appointment => appointment.StartTime > currentDate).ToList();
+        }
+
+        public List<Appointment> GetAllAppointmentsByPatient(int patientId)
+        {
+            return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId).ToList();
+        }
     }
 }
