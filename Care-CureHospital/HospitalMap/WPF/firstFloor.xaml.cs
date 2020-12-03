@@ -1,4 +1,8 @@
-﻿using System;
+﻿using HospitalMap.Code.Model.Canvas;
+using HospitalMap.Code.Repository.RectangleRepository;
+using HospitalMap.Repository;
+using HospitalMap.WPF.ModelWPF;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,67 +15,45 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HospitalMap.Code.Model.Canvas;
-using HospitalMap.Code.Repository.RectangleRepository;
-using HospitalMap.Code.Repository;
-using HospitalMap.WPF;
-using HospitalMap.Repository;
-using HospitalMap.WPF.ModelWPF;
 
-namespace HospitalMap
+namespace HospitalMap.WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for prviSprat.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FirstFloor : Window
     {
         public Rectangle Dinamicly = new Rectangle();
         public ObservableCollection<Rectangles> Rectangle { get; set; }
 
-        public ObservableCollection<RoomInformationWiev>  RoomsInfo{ get; set; }
-        public object LayoutRoot { get; private set; }
-        public string Id { get; private set; }
+        public ObservableCollection<RoomInformationWiev> RoomsInfo { get; set; }
 
-        public String Key="";
+        public String Key = "";
 
-        public MainWindow()
+        public FirstFloor()
         {
             InitializeComponent();
             CreateDynamicCanvas();
-            DinamiclyDrawingRepository.GetInstance();
-            
-            Login login = new Login();
-            login.Show();
-            this.Close();
-            
-            
-        }
-        
-        public MainWindow(int broj)
-        {
-            InitializeComponent();
-            CreateDynamicCanvas();
-            DinamiclyDrawingRepository.GetInstance();
+            FirstFloorRepository.GetInstance();
             InformationEditRepository.GetInstance();
-            
+
         }
 
         private void CreateDynamicCanvas()
         {
             Rectangle = new ObservableCollection<Rectangles>();
-            Rectangle = DinamiclyDrawingRepository.GetInstance().GetAllRectangles();
-            RoomsInfo= InformationEditRepository.GetInstance().GetAll();
+            Rectangle = FirstFloorRepository.GetInstance().GetAllRectangles();
+            RoomsInfo = InformationEditRepository.GetInstance().GetAll();
 
             foreach (Rectangles r in Rectangle)
             {
                 Rectangle rect = new Rectangle()
-                {   
+                {
                     Fill = r.Paint,
                     Height = r.Height,
                     Width = r.Width
-                   
+
                 };
 
                 TextBlock txtb = new TextBlock()
@@ -96,7 +78,7 @@ namespace HospitalMap
                 Canvas.SetLeft(rect, r.Left);
                 Canvas.SetTop(rect, r.Top);
                 canvas.Children.Add(rect);
-                
+
             }
 
         }
@@ -115,11 +97,10 @@ namespace HospitalMap
 
         }
 
-        private void FirstFloor(object sender, RoutedEventArgs e)
-
+        private void FirstFloor1(object sender, RoutedEventArgs e)
         {
-            FirstFloor firstf = new FirstFloor();
-            firstf.Show();
+            FirstFloor psprat = new FirstFloor();
+            psprat.Show();
             this.Close();
         }
 
@@ -135,31 +116,22 @@ namespace HospitalMap
             GroundFloor2 p = new GroundFloor2();
             p.Show();
             this.Close();
+
         }
 
         private void SecondFloor(object sender, RoutedEventArgs e)
         {
-            FirstFloor psprat = new FirstFloor();
-            psprat.Show();
+            FirstFloor firstf = new FirstFloor();
+            firstf.Show();
             this.Close();
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private void Room1(object sender, MouseButtonEventArgs e)
         {
-
-            if (search.Text.ToString().Equals("Room2")){
-            InfoDoctor1 inf = new InfoDoctor1();
-            inf.Show();
-            }
-            else
-            {
-
-                InfoDoctor2 inf2 = new InfoDoctor2();
-                inf2.Show();
-
-            }
+            RoomInformation room = new RoomInformation();
+            room.Show();
         }
-
+        
         private void ButtonClick1(object sender, RoutedEventArgs e)
         {
             HospitalMap.WPF.Login.role = 0;
@@ -167,5 +139,7 @@ namespace HospitalMap
             login.Show();
             this.Close();
         }
+
     }
+
 }
