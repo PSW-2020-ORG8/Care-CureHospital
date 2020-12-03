@@ -20,58 +20,43 @@ using HospitalMap.WPF;
 using HospitalMap.Repository;
 using HospitalMap.WPF.ModelWPF;
 
-namespace HospitalMap
+namespace HospitalMap.WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for prizemlje.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GroundFloor2 : Window
     {
+
         public Rectangle Dinamicly = new Rectangle();
         public ObservableCollection<Rectangles> Rectangle { get; set; }
 
-        public ObservableCollection<RoomInformationWiev>  RoomsInfo{ get; set; }
-        public object LayoutRoot { get; private set; }
-        public string Id { get; private set; }
-
-        public String Key="";
-
-        public MainWindow()
+        public ObservableCollection<RoomInformationWiev> RoomsInfo { get; set; }
+   
+        public String Key = "";
+        public GroundFloor2()
         {
             InitializeComponent();
             CreateDynamicCanvas();
-            DinamiclyDrawingRepository.GetInstance();
-            
-            Login login = new Login();
-            login.Show();
-            this.Close();
-            
-            
-        }
-        
-        public MainWindow(int broj)
-        {
-            InitializeComponent();
-            CreateDynamicCanvas();
-            DinamiclyDrawingRepository.GetInstance();
+            GroundFloor2Repository.GetInstance();
             InformationEditRepository.GetInstance();
-            
+
         }
 
         private void CreateDynamicCanvas()
         {
             Rectangle = new ObservableCollection<Rectangles>();
-            Rectangle = DinamiclyDrawingRepository.GetInstance().GetAllRectangles();
-            RoomsInfo= InformationEditRepository.GetInstance().GetAll();
+            Rectangle = GroundFloor2Repository.GetInstance().GetAllRectangles();
+            RoomsInfo = InformationEditRepository.GetInstance().GetAll();
 
             foreach (Rectangles r in Rectangle)
             {
                 Rectangle rect = new Rectangle()
-                {   
+                {
                     Fill = r.Paint,
                     Height = r.Height,
                     Width = r.Width
-                   
+
                 };
 
                 TextBlock txtb = new TextBlock()
@@ -96,8 +81,16 @@ namespace HospitalMap
                 Canvas.SetLeft(rect, r.Left);
                 Canvas.SetTop(rect, r.Top);
                 canvas.Children.Add(rect);
-                
+
             }
+
+        }
+        private void GroundFloorClick(object sender, RoutedEventArgs e)
+        {
+            GroundFloor p = new GroundFloor();
+            p.Show();
+            this.Close();
+            
 
         }
 
@@ -106,17 +99,7 @@ namespace HospitalMap
             RoomInformation worktime1 = new RoomInformation(Key);
             worktime1.Show();
         }
-
-        private void GroundFloorClick(object sender, RoutedEventArgs e)
-        {
-            GroundFloor p = new GroundFloor();
-            p.Show();
-            this.Close();
-
-        }
-
         private void FirstFloor(object sender, RoutedEventArgs e)
-
         {
             FirstFloor firstf = new FirstFloor();
             firstf.Show();
@@ -130,34 +113,19 @@ namespace HospitalMap
             this.Close();
         }
 
-        private void GroundFloor2(object sender, RoutedEventArgs e)
+        private void GroundFloor(object sender, RoutedEventArgs e)
         {
             GroundFloor2 p = new GroundFloor2();
             p.Show();
             this.Close();
+
         }
 
         private void SecondFloor(object sender, RoutedEventArgs e)
         {
-            FirstFloor psprat = new FirstFloor();
-            psprat.Show();
+            FirstFloor secondf = new FirstFloor();
+            secondf.Show();
             this.Close();
-        }
-
-        private void ButtonClick(object sender, RoutedEventArgs e)
-        {
-
-            if (search.Text.ToString().Equals("Room2")){
-            InfoDoctor1 inf = new InfoDoctor1();
-            inf.Show();
-            }
-            else
-            {
-
-                InfoDoctor2 inf2 = new InfoDoctor2();
-                inf2.Show();
-
-            }
         }
 
         private void ButtonClick1(object sender, RoutedEventArgs e)
@@ -168,4 +136,5 @@ namespace HospitalMap
             this.Close();
         }
     }
+
 }
