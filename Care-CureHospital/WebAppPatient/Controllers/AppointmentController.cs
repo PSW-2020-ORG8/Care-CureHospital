@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend;
@@ -18,10 +19,13 @@ namespace WebAppPatient.Controllers
 
         public AppointmentController() { }
 
-        [HttpGet]
-        public IActionResult GetAvailableAppointmentsByDateAndDoctorId()
+        [HttpGet("getAvailableAppointments")]
+        public IActionResult GetAvailableAppointmentsByDateAndDoctorId([FromQuery(Name = "date")] string date, [FromQuery(Name = "doctorId")] int doctorId)
         {
-            return Ok();
+            return Ok(DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
+                App.Instance().DoctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-dd-MM", CultureInfo.InvariantCulture), doctorId),
+                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-dd-MM", CultureInfo.InvariantCulture), doctorId)
+                ));
         }
 
         [HttpGet("getAllSpecialization")]       // GET /api/appointment/getAllSpecialization
