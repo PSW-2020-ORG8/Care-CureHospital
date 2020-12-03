@@ -12,26 +12,26 @@ namespace IntegrationAdaptersTests.IntegrationTests
 {
     public class ReportTest : IClassFixture<WebApplicationFactory<IntegrationAdapters.Startup>>
     {
-        private readonly WebApplicationFactory<IntegrationAdapters.Startup> _factory;
+       /* private readonly WebApplicationFactory<IntegrationAdapters.Startup> _factory;
 
         public ReportTest(WebApplicationFactory<IntegrationAdapters.Startup> factory)
         {
             _factory = factory;
         }
-
-        [Fact]
-        public async Task Get_Report()
+       */
+      /*  [Fact]
+        public async Task Get_report()
         {
             // Arrange
             var client = _factory.CreateClient();
 
             // Act
-            var response = await client.GetAsync("");
+            var response = await client.GetAsync("/api/report");
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             Assert.Equal("text/html; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
-        }
+        }*/
     }
 }

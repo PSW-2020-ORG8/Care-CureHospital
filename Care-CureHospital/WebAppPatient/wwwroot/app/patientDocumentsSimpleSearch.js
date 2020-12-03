@@ -4,6 +4,14 @@ Vue.component("patientDocumentsSimpleSearch", {
 			patientDocuments: [],
 			firstSearchParams: 'Doktoru',
 			firstInput: '',
+			prescriptionDoctorInput: '',
+			prescriptionDateInput: '',
+			prescriptionCommentInput: '',
+			prescriptionMedicamentsInput: '',
+			reportDoctorInput: '',
+			reportDateInput: '',
+			reportCommentInput: '',
+			reportRoomInput: '',
 			publishingDate: '',
 			firstResult: [],
 			reportsButtonSelected : true,
@@ -43,7 +51,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 	    </div>
 	 </div>	
 
-	<div class="patients-docs-simple-search">
+	<div class="patients-docs-simple-search" style="height: 380px;">
             <div class="form-title-search">
 				<h1>Pretraži po:</h1>
 
@@ -60,7 +68,25 @@ Vue.component("patientDocumentsSimpleSearch", {
 					<button type="button" @click="prescriptionsSearchButton">Recepti</button>
 				</div>
 
+				<template v-if="this.reportsButtonSelected === true">
+
+					Doktoru: <input v-model="reportDoctorInput" type="text" style="width:250px;margin-left:42px;" placeholder=""><br>
+					Datumu:	<input v-model="reportDateInput" type="date" style="width:248px; height:42px; margin-left:43px;" placeholder=""><br>
+					Sadržaju: <input v-model="reportCommentInput" type="text" style="width:250px; margin-left:40px;" placeholder=""><br>
+					Sobi: <input v-model="reportRoomInput" type="text" style="width:250px; margin-left:70px; margin-top:0px" placeholder="">
+
+				</template>
+
+				<template v-if="this.prescriptionsButtonSelected === true">
+
+					Doktoru: <input v-model="prescriptionDoctorInput" type="text" style="width:250px;margin-left:42px;" placeholder=""><br>
+					Datumu:	<input v-model="prescriptionDateInput" type="date" style="width:248px; height:42px; margin-left:43px;" placeholder=""><br>
+					Sadržaju: <input v-model="prescriptionCommentInput" type="text" style="width:250px; margin-left:40px;" placeholder=""><br>
+					Lekovima: <input v-model="prescriptionMedicamentsInput" type="text" style="width:250px; margin-left:35px; margin-top:0px" placeholder="">
+
+				</template>
 				
+				<!--
 				<select v-if="this.reportsButtonSelected === true" v-model="firstSearchParams" name="firstRow" style="width:160px">
 					<option value="Doktoru" selected>Doktoru</option>
 					<option value="Datumu">Datumu</option>
@@ -68,7 +94,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 					<option value="Sobi">Sobi</option>
 				</select>
 				
-				<select v-if="this.prescriptionsButtonSelected === true" v-model="firstSearchParams" name="firstRow" style="width:160px">
+				<!--<select v-if="this.prescriptionsButtonSelected === true" v-model="firstSearchParams" name="firstRow" style="width:160px">
 					<option value="Doktoru" selected>Doktoru</option>
 					<option value="Datumu">Datumu</option>
 					<option value="Sadržaju">Sadržaju</option>
@@ -78,11 +104,12 @@ Vue.component("patientDocumentsSimpleSearch", {
 				<input v-model="publishingDate" v-if="firstSearchParams === 'Datumu'" type="date" format="dd.MM.yyyy." style="width:250px; height:42px">
 				<!--<vuejs-datepicker v-if="firstSearchParams === 'Datumu'"></vuejs-datepicker>-->
 				
-				<input v-else v-model="firstInput" type="text" style="width:250px" placeholder="">
+				<!--<input v-else v-model="firstInput" type="text" style="width:250px" placeholder="">-->
 
 				<div class="search-btn">
 					<button type="button" @click="simpleSearch()" style="margin-top:3%">Potvrdi</button>
-				</div>
+				</div> 
+				
 
 		    </div>
      </div>
@@ -159,115 +186,34 @@ Vue.component("patientDocumentsSimpleSearch", {
 	,
 	methods: {
 		simpleSearch: function () {
+		
 			if (this.reportsButtonSelected === true) {
-				if (this.firstSearchParams === 'Doktoru') {
-					if (this.firstInput === '') {
-						this.reportsResult = this.reportsForPatient
-						return
+				axios.get('api/medicalExaminationReport/simpleSearchReportsForPatient', {
+					params: {
+						patientId: 1,
+						doctor: this.reportDoctorInput,
+						date: this.reportDateInput,
+						comment: this.reportCommentInput,
+						room: this.reportRoomInput
 					}
-					axios.get('api/medicalExaminationReport/findReportsByDoctor', {
-						params: {
-							patientId: 1,
-							doctor: this.firstInput
-						}
-					}).then(response => {
+				}).then(response => {
 						this.reportsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Datumu') {
-					if (this.publishingDate === '') {
-						this.reportsResult = this.reportsForPatient
-						return
+				});
+			} else if (this.prescriptionsButtonSelected == true) {
+				axios.get('api/prescription/simpleSearchPrescriptionForPatient', {
+					params: {
+						patientId: 1,
+						doctor: this.prescriptionDoctorInput,
+						date: this.prescriptionDateInput,
+						comment: this.prescriptionCommentInput,
+						medicaments: this.prescriptionMedicamentsInput
 					}
-					axios.get('api/medicalExaminationReport/findReportsByDate', {
-						params: {
-							patientId: 1,
-							date: this.publishingDate
-						}
-					}).then(response => {
-						this.reportsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Sadržaju') {
-					if (this.firstInput === '') {
-						this.reportsResult = this.reportsForPatient
-						return
-					}
-					axios.get('api/medicalExaminationReport/findReportsByComment', {
-						params: {
-							patientId: 1,
-							comment: this.firstInput
-						}
-					}).then(response => {
-						this.reportsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Sobi') {
-					if (this.firstInput === '') {
-						this.reportsResult = this.reportsForPatient
-						return
-					}
-					axios.get('api/medicalExaminationReport/findReportsByRoom', {
-						params: {
-							patientId: 1,
-							room: this.firstInput
-						}
-					}).then(response => {
-						this.reportsResult = response.data;
-					});
-				}
-			} else if (this.prescriptionsButtonSelected === true) {
-				if (this.firstSearchParams === 'Doktoru') {
-					if (this.firstInput === '') {
-						this.prescriptionsResult = this.prescriptionsForPatient
-						return
-					}
-					axios.get('api/prescription/findPrescriptionsByDoctor', {
-						params: {
-							patientId: 1,
-							doctor: this.firstInput
-						}
-					}).then(response => {
-						this.prescriptionsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Datumu') {
-					if (this.publishingDate === '') {
-						this.prescriptionsResult = this.prescriptionsForPatient
-						return
-					}
-					axios.get('api/prescription/findPrescriptionsByDate', {
-						params: {
-							patientId: 1,
-							date: this.publishingDate
-						}
-					}).then(response => {
-						this.prescriptionsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Sadržaju') {
-					if (this.firstInput === '') {
-						this.prescriptionsResult = this.prescriptionsForPatient
-						return
-					}
-					axios.get('api/prescription/findPrescriptionsByComment', {
-						params: {
-							patientId: 1,
-							comment: this.firstInput
-						}
-					}).then(response => {
-						this.prescriptionsResult = response.data;
-					});
-				} else if (this.firstSearchParams === 'Lekovima') {
-					if (this.firstInput === '') {
-						this.prescriptionsResult = this.prescriptionsForPatient
-						return
-					}
-					axios.get('api/prescription/findPrescriptionsByMedicaments', {
-						params: {
-							patientId: 1,
-							medicaments: this.firstInput
-						}
-					}).then(response => {
-						this.prescriptionsResult = response.data;
-					});
-				}
+				}).then(response => {
+					this.prescriptionsResult = response.data;
+				});
             }
+
+
 		},
 
 		reportsSearchButton: function () {

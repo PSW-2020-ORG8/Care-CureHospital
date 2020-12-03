@@ -31,15 +31,18 @@ namespace IntegrationAdapters.Controllers
                    // client.Connect();
                     StringBuilder builder = new StringBuilder();
                     builder.Append("Report:");
-                  /*  foreach(Report report in reportRepository.GetAllEntities())
+                   /* foreach(Report report in reportRepository.GetAllEntities())
                     {
-                        foreach(Medicament medicament in medicamentService.GetAllEntities())
-                        {
-                            builder.Append("Medication name: " + medicament.Name + "\n");
-                            builder.Append("Quantity: " + medicament.Quantity + "\n");
-                        }
-                    }
-                  */
+                        
+                        builder.Append("Id:" + report.Id + "\n");
+                        builder.Append("Medication id: " + report.MedicamentId + "\n");
+                        builder.Append("Medication name: " + report.MedicamentName + "\n");
+                        builder.Append("Quantity: " + report.Quantity + "\n");
+                        builder.Append("From date: " + report.FromDate + "\n");
+                        builder.Append("To date: " + report.ToDate + "\n");
+                        
+                    }*/
+                  
                     String medRep = builder.ToString();
                     var test = @"D:\testFiles\report.txt";
                     System.IO.File.WriteAllText(test, medRep);
@@ -51,6 +54,7 @@ namespace IntegrationAdapters.Controllers
                     //  {
                     //  client.UploadFile(stream, @"\public\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                     // }
+
                     client.UploadFile(System.IO.File.OpenRead(test), @"\public\" + Path.GetFileName(test), x => { Console.WriteLine(x); });
 
                     string serverFile = @"\public\report.txt";
@@ -59,7 +63,7 @@ namespace IntegrationAdapters.Controllers
                     {
                         client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
                     }
-                        client.Disconnect();
+                    client.Disconnect();
                 }
                 return Ok();
             }

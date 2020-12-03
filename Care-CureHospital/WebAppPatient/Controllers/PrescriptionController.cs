@@ -71,5 +71,13 @@ namespace WebAppPatient.Controllers
             App.Instance().PrescriptionService.FindPrescriptionsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
             return Ok(result);
         }
+
+        [HttpGet("simpleSearchPrescriptionForPatient")]       // GET /api/prescription/simpleSearchPrescriptionForPatient  
+        public IActionResult FindPrescriptionsForPatientUsingSimpleSearch([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "doctor")] string doctor, [FromQuery(Name = "date")] string date, [FromQuery(Name = "comment")] string comment, [FromQuery(Name = "medicaments")] string medicaments)
+        {
+            List<PrescriptionDto> result = new List<PrescriptionDto>();
+            App.Instance().PrescriptionService.FindPrescriptionsUsingSimpleSearch(patientId, doctor, date, comment, medicaments).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            return Ok(result);
+        }
     }
 }

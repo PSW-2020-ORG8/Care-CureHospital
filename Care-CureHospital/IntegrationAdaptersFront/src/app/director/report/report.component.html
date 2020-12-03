@@ -4,34 +4,34 @@
     
         <label class="col-sm-2 col-form-label">Medication name</label>
         <div class="col-sm-10">
-           <select class="form-control" [(ngModel)]="MedicationName">
-               <option>--Select--</option>
-             <!-- <option *ngfor="let medName of MedicationList">
-                   {{repName.MedicationName}}
-               </option>--> 
-           </select>
+         <!--<select class="form-control" [(ngModel)]="medicamentName>
+             <option>--Select--</option>
+              <option *ngfor="let medName of MedicationList">
+                {{repName.MedicationName}}
+            </option> 
+           </select>-->  
+           <input type="text" id="medicamentName" placeholder="Name of medication" name="medicamentName" #medicamentName="ngModel" [(ngModel)]="service.medicamentName"/>
         </div>
 
-        <label class="col-sm-2 col-form-label">Consumed medication</label>
+        <label class="col-sm-2 col-form-label">Quantity</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" 
-            placeholder="Enter consumption of medication ">
+            <input type="text" class="form-control" id="quantity"
+            placeholder="Enter consumption of medication" name="quantity" #quantity="ngModel" [(ngModel)]="service.quantity"/>
         </div>
     
         <label class="col-sm-2 col-form-label">From date</label>
         <div class="col-sm-10">
-            <input type="date" >
+            <input type="date" id="fromDate" name="fromDate" #fromDate="ngModel" [(ngModel)]="service.fromDate"/>
         </div>
 
         <label class="col-sm-2 col-form-label">To date</label>
         <div class="col-sm-10">
-            <input type="date" >
+            <input type="date" id="toDate" name="toDate" #toDate="ngModel" [(ngModel)]="service.toDate"/>
         </div>
     
     </div>
   
 </div>
-    
     
 <button class="btn btn-primary" (click)="addReport()">Add</button>
     

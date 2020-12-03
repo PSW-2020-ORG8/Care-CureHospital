@@ -41,12 +41,15 @@
     </thead>
     <tbody>
        <tr *ngFor="let dataItem of ReportList">
-            <td>{{dataItem.Id}}</td>
-            <td>{{dataItem.MedicationId}}</td>
-            <td>{{dataItem.MedicationName}}</td>
-            <td>{{dataItem.Quantity}}</td>
-            <td>{{dataItem.FromDate}}</td>
-            <td>{{dataItem.ToDate}}</td>
+            <td>{{dataItem.id}}</td>
+            <td>{{dataItem.medicamentId}}</td>
+            <td>{{dataItem.medicamentName}}</td>
+            <td>{{dataItem.quantity}}</td>
+            <td>{{dataItem.fromDate}}</td>
+            <td>{{dataItem.toDate}}</td>
+            <td>
+              <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteReport(dataItem.id)"></i>
+            </td>
         </tr>
     </tbody>
 </table>

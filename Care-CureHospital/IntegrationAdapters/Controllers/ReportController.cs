@@ -12,15 +12,16 @@ using Backend.Model.DoctorMenager;
 using IntegrationAdapters.Dto;
 using Backend.Service.DirectorService;
 using IntegrationAdapters.Mapper;
+using System.Web.Http.Cors;
+
 
 namespace IntegrationAdapters.Controllers
 {
-
+ 
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase
     {
-
         public ReportController() { }
         
         [HttpGet]   //GET /api/report
@@ -34,13 +35,27 @@ namespace IntegrationAdapters.Controllers
            
         }
 
-        [HttpGet("getMedicationNames")] // GET /api/report/getMedicationNames
-        public IActionResult GetMedicationNames()
+        [HttpPost]   //POST /api/report
+        public IActionResult AddReport(ReportDto dto)
         {
-            List<ReportDto> result = new List<ReportDto>();
-            App.Instance().ReportService.GetAllMedicationNames().ToList().ForEach(names => result.Add(ReportMapper.ReportToReportDto(names)));
-            return Ok(result);
+            Report report = ReportMapper.ReportDtoToReport(dto, null);
+            App.Instance().ReportService.AddEntity(report);
+            return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteReport(int id)
+        {
+            Report report = App.Instance().ReportService.FindReportById(id);
+            if(report == null)
+            {
+                return BadRequest();
+            }
+           
+            App.Instance().ReportService.DeleteEntity(report);
+            
+            
+            return Ok(report);
+        }
     }
 }

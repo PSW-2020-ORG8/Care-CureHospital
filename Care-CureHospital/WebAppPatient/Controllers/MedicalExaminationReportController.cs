@@ -72,5 +72,13 @@ namespace WebAppPatient.Controllers
             App.Instance().MedicalExaminationReportService.FindReportsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
             return Ok(result);
         }
+
+        [HttpGet("simpleSearchReportsForPatient")]       // GET /api/medicalExaminationReport/simpleSearchReportsForPatient  
+        public IActionResult FindMedicalExaminationReportsForPatientUsingSimpleSearch([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "doctor")] string doctor, [FromQuery(Name = "date")] string date, [FromQuery(Name = "comment")] string comment, [FromQuery(Name = "room")] string room)
+        {
+            List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
+            App.Instance().MedicalExaminationReportService.FindReportsUsingSimpleSearch(patientId, doctor, date, comment, room).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
+            return Ok(result);
+        }
     }
 }

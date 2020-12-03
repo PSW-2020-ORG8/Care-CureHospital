@@ -56,6 +56,11 @@ namespace Backend.Service.DirectorService
         {
             reportRepository.DeleteEntity(entity);
         }
+
+        public Report FindReportById(int reportID)
+        {
+            return reportRepository.GetAllEntities().ToList().Find(report => report.Id == reportID);
+        }
     }
 
 

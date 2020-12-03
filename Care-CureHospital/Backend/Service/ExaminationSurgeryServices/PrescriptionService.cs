@@ -36,7 +36,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if ((prescription.Comment.ToString().Contains(comment)))
+                if ((prescription.Comment.ToString().ToLower().Contains(comment.ToLower())))
                 {
                     searchResult.Add(prescription);
                 }
@@ -62,8 +62,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if ((prescription.MedicalExamination.Doctor.Name.ToString() + " " + prescription.MedicalExamination.Doctor.Surname.ToString()).Equals(doctorFullName) ||
-                    doctorFullName.Contains(prescription.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(prescription.MedicalExamination.Doctor.Surname.ToString()))
+                if (doctorFullName.Contains(prescription.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(prescription.MedicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(prescription);
                 }
@@ -78,7 +77,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             {
                 foreach (Medicament medicament in prescription.Medicaments)
                 {
-                    if (medicaments.ToString().Contains(medicament.Name.ToString()))
+                    if (medicaments.ToString().ToLower().Contains(medicament.Name.ToString().ToLower()))
                     {
                         searchResult.Add(prescription);
                     }
@@ -87,6 +86,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             return searchResult;
         }
 
+        /// <summary> This method finds prescriptions with maximum four search parameters and logical operator (and, or) between them. </summary>
         public List<Prescription> FindPrescriptionsUsingAdvancedSearch(int patientId, Dictionary<string, string> searchParameters, List<string> logicOperators)
         {
             List<Prescription> currentResult = FindPrescriptionsBySearchParameter(patientId, searchParameters.Keys.ToList()[0], searchParameters.Values.ToList()[0]);
@@ -98,23 +98,23 @@ namespace Backend.Service.ExaminationSurgeryServices
             return currentResult;
         }
 
-        public List<Prescription> FindPrescriptionsBySearchParameter(int patientId, string parameter, string parameterValue)
+        public List<Prescription> FindPrescriptionsBySearchParameter(int patientId, string searchParameter, string parameterValue)
         {
-            if (parameter.Equals("Doktoru"))
+            if (searchParameter.Equals("Doktoru"))
             {
-                return FindPrescriptionsForDoctorParameter(patientId, parameterValue);
+                return FindPrescriptionsByDoctorUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Datumu"))
+            else if (searchParameter.Equals("Datumu"))
             {
-                return FindPrescriptionsForDateParameter(patientId, parameterValue);
+                return FindPrescriptionsByDateUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Sadržaju"))
+            else if (searchParameter.Equals("Sadržaju"))
             {
-                return FindPrescriptionsForCommentParameter(patientId, parameterValue);
+                return FindPrescriptionsByCommentUsingSimpleSearch(patientId, parameterValue);
             }
-            else if (parameter.Equals("Lekovima"))
+            else if (searchParameter.Equals("Lekovima"))
             {
-                return FindPrescriptionsForMedicamentsParameter(patientId, parameterValue);
+                return FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, parameterValue);
             }
             return null;
         }
@@ -131,6 +131,70 @@ namespace Backend.Service.ExaminationSurgeryServices
                 result = firstResult.Union(secondResult).ToList();
             }
             return result;
+        }
+
+        /// <summary> This method finds prescriptions with maximum four search parameters. </summary>
+        public List<Prescription> FindPrescriptionsUsingSimpleSearch(int patientId, string doctor, string date, string comment, string medicaments)
+        {
+            return IntersectionOfSimpleSearchPrescriptionsResults(FindPrescriptionsByDoctorUsingSimpleSearch(patientId, doctor), FindPrescriptionsByDateUsingSimpleSearch(patientId, date),
+                FindPrescriptionsByCommentUsingSimpleSearch(patientId, comment), FindPrescriptionsByMedicamentsUsingSimpleSearch(patientId, medicaments));
+        }
+
+        public List<Prescription> IntersectionOfSimpleSearchPrescriptionsResults(List<Prescription> prescriptionsByDoctor, List<Prescription> prescriptionsByDate, List<Prescription> prescriptionsByComment, List<Prescription> prescriptionsByMedicaments)
+        {
+            List<Prescription> result = prescriptionsByDoctor.Intersect(prescriptionsByDate).ToList();
+            result = result.Intersect(prescriptionsByComment).ToList();
+            result = result.Intersect(prescriptionsByMedicaments).ToList();
+
+            return result;
+        }
+
+        public List<Prescription> FindPrescriptionsByDoctorUsingSimpleSearch(int patientId, string doctor)
+        {
+            if (doctor == null || doctor.Equals(""))
+            {
+                return GetPrescriptionsForPatient(patientId).ToList();
+            }
+            else
+            {
+                return FindPrescriptionsForDoctorParameter(patientId, doctor);
+            }
+        }
+
+        public List<Prescription> FindPrescriptionsByDateUsingSimpleSearch(int patientId, string date)
+        {
+            if (date == null || date.Equals(""))
+            {
+                return GetPrescriptionsForPatient(patientId).ToList();
+            }
+            else
+            {
+                return FindPrescriptionsForDateParameter(patientId, date);
+            }
+        }
+
+        public List<Prescription> FindPrescriptionsByCommentUsingSimpleSearch(int patientId, string comment)
+        {
+            if (comment == null || comment.Equals(""))
+            {
+                return GetPrescriptionsForPatient(patientId).ToList();
+            }
+            else
+            {
+                return FindPrescriptionsForCommentParameter(patientId, comment);
+            }
+        }
+
+        public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments)
+        {
+            if (medicaments == null || medicaments.Equals(""))
+            {
+                return GetPrescriptionsForPatient(patientId).ToList();
+            }
+            else
+            {
+                return FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
+            }
         }
 
         public Prescription GetEntity(int id)

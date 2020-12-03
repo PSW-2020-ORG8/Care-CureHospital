@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend;
 using Backend.Repository.MySQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Web.Http.Cors;
 
 namespace IntegrationAdapters
 {
@@ -62,7 +64,6 @@ namespace IntegrationAdapters
                 endpoints.MapControllers();
             });
 
-     
         }
     }
 }

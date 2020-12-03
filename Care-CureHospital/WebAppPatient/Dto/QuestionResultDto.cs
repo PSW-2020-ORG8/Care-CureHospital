@@ -7,12 +7,24 @@ namespace WebAppPatient.Dto
 {
     public class QuestionResultDto
     {
-        public String QuestionText { get; set; }
+
+        public int QuestionId { get; set; }
 
         public List<int> Grades { get; set; }
 
         public double AverageGrade { get; set; }
 
         public QuestionResultDto() { }
+
+        public QuestionResultDto(int questionId, List<int> grades)
+        {
+            QuestionId = questionId;
+            Grades = new List<int>(grades);
+            for (int i = 0; i < Grades.Count; i++)
+            {
+                AverageGrade += Grades[i] * (i + 1);
+            }
+            AverageGrade = Math.Round(AverageGrade / Grades.Sum(), 2);
+        }
     }
 }

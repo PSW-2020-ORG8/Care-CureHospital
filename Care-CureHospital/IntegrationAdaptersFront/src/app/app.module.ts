@@ -11,6 +11,8 @@ import { DirectorServiceService } from './director-service.service';
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddReportComponent } from './director/add-report/add-report.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AddReportComponent } from './director/add-report/add-report.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [DirectorServiceService],
   bootstrap: [AppComponent]

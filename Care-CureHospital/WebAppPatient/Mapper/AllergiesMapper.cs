@@ -14,8 +14,6 @@ namespace WebAppPatient.Mapper
             Allergies allergy = new Allergies();
             allergy.Id = dto.Id;
             allergy.Name = dto.Name;
-            allergy.MedicalRecordId = dto.MedicalRecordId;
-            allergy.MedicalRecord = null;
             return allergy;
         }
 
@@ -25,7 +23,6 @@ namespace WebAppPatient.Mapper
             dto.Id = allergy.Id;
             dto.Name = allergy.Name;
             dto.MedicalRecordId = allergy.MedicalRecordId;
-            dto.MedicalRecord = null;
             return dto;
         }
     }

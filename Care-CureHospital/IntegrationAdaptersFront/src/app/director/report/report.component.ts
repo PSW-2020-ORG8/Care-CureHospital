@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
+import { Report } from 'src/app/models/report';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-report',
@@ -8,33 +10,37 @@ import { DirectorServiceService } from 'src/app/director-service.service';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService) { }
+  constructor(public service:DirectorServiceService, private toastr : ToastrService) { }
 
-  @Input() rep:any;
-  MedicationName:string;
-  ConsumedMedication:string;
-  FromDate:string;
-  ToDate:string;
+  @Input() rep:Report;
+  id:number;
+  medicamentId:number;
+  medicamentName:string;
+  quantity:number;
+  fromDate:Date;
+  toDate:Date;
 
-  ReportList:any=[];
+  //ReportList : Report[];
 
   ngOnInit(): void {
-    this.MedicationName = this.rep.MedicationName;
-    this.ConsumedMedication = this.rep.ConsumedMedication;
-    this.FromDate = this.rep.FromDate;
-    this.ToDate = this.rep.ToDate;
+    this.id = this.rep.id;
+    this.medicamentId = this.rep.medicamentId;
+    this.medicamentName = this.rep.medicamentName;
+    this.quantity = this.rep.quantity;
+    this.fromDate = this.rep.fromDate;
+    this.toDate = this.rep.toDate;
   }
 
-
   addReport(){
-    var val = {MedicationName:this.MedicationName,
-              ConsumedMedication:this.ConsumedMedication,
-              FromDate:this.FromDate,
-              ToDate:this.ToDate};
+    var val = {id:this.rep.id,
+      medicamentId:this.rep.medicamentId,
+      medicamentName:this.rep.medicamentName,
+      quantity:this.rep.quantity,
+      fromDate:this.rep.fromDate,
+      toDate:this.rep.toDate};
 
     this.service.addReport(val).subscribe(res=>{
       alert(res.toString())});
-    alert("Successfully added report");
+      this.toastr.success('Successfully added report!');
   }
-
 }

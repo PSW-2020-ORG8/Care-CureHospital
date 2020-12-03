@@ -53,7 +53,7 @@ namespace Controller.UsersControlers
 
         public bool IsUsernameExist(String username)
         {
-            return userService.IsUsernameExist(username);
+            return userService.DoesUsernameExist(username);
         }
 
         public User GetUserByJMBG(String jmbg)

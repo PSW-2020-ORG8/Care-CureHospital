@@ -19,22 +19,27 @@ namespace WebAppPatient.Controllers
         public SurveyController() { }
 
         [HttpGet] // GET /api/survey
-        public IActionResult getAllSurveys()
+        public IActionResult GetAllSurveys()
         {
             List<SurveyDto> result = new List<SurveyDto>();
             App.Instance().SurveyService.GetAllEntities().ToList().ForEach(survey => result.Add(SurveyMapper.SurveyToSurveyDto(survey)));
             return Ok(result);
         }
 
-
         [HttpGet("getSurveyResults")] // GET /api/survey/getSurveyResults
-        public IActionResult getSurveyResults()
+        public IActionResult GetSurveyResults()
         {
-            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().QuestionService.GetAnswersByQuestion()));
+            return Ok(QuestionResultMapper.CreateQuestionResultsDto(App.Instance().AnswerService.GetAnswersByQuestion()));
+        }
+
+        [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResults
+        public IActionResult GetSurveyResultsForDoctors()
+        {
+            return Ok(QuestionResultMapper.CreateDoctorResultsDto(App.Instance().SurveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
         }
 
         [HttpPost]      // POST /api/survey
-        public IActionResult Add(SurveyDto dto)
+        public IActionResult AddSurvey(SurveyDto dto)
         {
             Survey survey = SurveyMapper.SurveyDtoToSurvey(dto, null);
             App.Instance().SurveyService.AddEntity(survey);

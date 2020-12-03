@@ -21,5 +21,18 @@ namespace IntegrationAdapters.Mapper
 
             return dto;
         }
+
+        public static Report ReportDtoToReport(ReportDto dto, Report report)
+        {
+            Report newReport = new Report();
+
+            newReport.Id = dto.Id;
+            newReport.MedicamentId = dto.MedicamentId;
+            newReport.MedicamentName = dto.MedicamentName;
+            newReport.Quantity = dto.Quantity;
+            newReport.FromDate = DateTime.Now;
+            newReport.ToDate = DateTime.Now;
+            return newReport;
+        }
     }
 }
