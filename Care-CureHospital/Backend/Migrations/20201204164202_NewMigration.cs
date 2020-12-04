@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -392,6 +392,7 @@ namespace Backend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Canceled = table.Column<bool>(nullable: false),
+                    CancellationDate = table.Column<DateTime>(nullable: false),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     MedicalExaminationId = table.Column<int>(nullable: false),
@@ -710,9 +711,9 @@ namespace Backend.Migrations
                     { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -720,9 +721,9 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "ActiveMedicalRecord", "AnamnesisId", "PatientId" },
                 values: new object[,]
                 {
+                    { 3, true, 1, 3 },
                     { 1, false, 1, 1 },
                     { 2, true, 1, 2 },
-                    { 3, true, 1, 3 },
                     { 4, true, 1, 4 }
                 });
 
@@ -752,15 +753,15 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Appointments",
-                columns: new[] { "Id", "Canceled", "DoctorWorkDayId", "EndTime", "MedicalExaminationId", "StartTime" },
+                columns: new[] { "Id", "Canceled", "CancellationDate", "DoctorWorkDayId", "EndTime", "MedicalExaminationId", "StartTime" },
                 values: new object[,]
                 {
-                    { 3, false, 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, false, 4, new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, false, 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 5, 15, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, false, 5, new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, false, 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, false, 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 3, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, true, new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 5, 15, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(

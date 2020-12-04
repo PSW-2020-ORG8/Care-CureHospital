@@ -1331,6 +1331,9 @@ namespace Backend.Migrations
                     b.Property<bool>("Canceled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("CancellationDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DoctorWorkDayId")
                         .HasColumnType("int");
 
@@ -1356,6 +1359,7 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 1,
                             EndTime = new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 1,
@@ -1365,6 +1369,7 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
                             EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
@@ -1374,6 +1379,7 @@ namespace Backend.Migrations
                         {
                             Id = 3,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 3,
                             EndTime = new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 4,
@@ -1383,6 +1389,7 @@ namespace Backend.Migrations
                         {
                             Id = 4,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 4,
                             EndTime = new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 6,
@@ -1391,7 +1398,8 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
-                            Canceled = false,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
                             EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
@@ -1401,6 +1409,7 @@ namespace Backend.Migrations
                         {
                             Id = 6,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
                             EndTime = new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 3,
@@ -1567,7 +1576,7 @@ namespace Backend.Migrations
                             Id = 6,
                             DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 3,
+                            PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
                             SurveyFilled = false,

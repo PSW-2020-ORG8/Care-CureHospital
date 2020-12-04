@@ -44,11 +44,15 @@ namespace Backend.Service.ExaminationSurgeryServices
         public Appointment CancelPatientAppointment(int appointmentId)
         {
             Appointment appointmentForCancel = GetEntity(appointmentId);
-            appointmentForCancel.Canceled = true;
-            appointmentForCancel.CancellationDate = DateTime.Today;
-            UpdateEntity(appointmentForCancel);
-            SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId);
-            return appointmentForCancel;
+            if(DateTime.Now < appointmentForCancel.StartTime.AddHours(-48))
+            {
+                appointmentForCancel.Canceled = true;
+                appointmentForCancel.CancellationDate = DateTime.Today;
+                UpdateEntity(appointmentForCancel);
+                SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId);
+                return appointmentForCancel;
+            }
+            return null; 
         }
 
         public void SetIfPatientMalicious(int patientId)

@@ -87,6 +87,17 @@ namespace WebAppPatientTests.UnitTests
         }
 
         [Fact]
+        public void Cancel_patient_appointment_invalid_data()
+        {
+            AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);
+
+            appointmentService.CancelPatientAppointment(2);
+            Appointment canceledAppointment = appointmentService.GetEntity(2);
+
+            Assert.False(canceledAppointment.Canceled);
+        }
+
+        [Fact]
         public void Get_all_cencelled_appointments_by_patient()
         {
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);

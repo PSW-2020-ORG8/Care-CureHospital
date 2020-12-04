@@ -39,10 +39,10 @@ Vue.component("patientAppointments", {
 	<div class="filterAppointments">
             <div class="form-title-appointments">
                 <h1>Filtriraj preglede:</h1>
-                <select v-model="filterAppointments">
-                <option value="Svi pregledi" selected>Svi pregledi</option>
-				<option value="Zakazani pregledi">Zakazani pregledi</option>
-				<option value="Pregledi na kojima sam bio">Pregledi na kojima sam bio</option>
+                <select v-model="filterAppointments" @change="onChange()">>
+					<option value="Svi pregledi" selected>Svi pregledi</option>
+					<option value="Zakazani pregledi">Zakazani pregledi</option>
+					<option value="Pregledi na kojima sam bio">Pregledi na kojima sam bio</option>
                 </select>
 		    </div>
      </div>
@@ -111,10 +111,14 @@ Vue.component("patientAppointments", {
 		cancelAppointment: function (appointmentId) {
 			axios.put('api/appointment/cancelAppointment/' + appointmentId)
 				.then(response => {
-					axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
-						toast('Uspešno ste otkazali pregled')
-						this.scheduledAppointments = response.data;
-					});
+					if (response.status !== 204) {
+						axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+							toast('Uspešno ste otkazali pregled')
+							this.scheduledAppointments = response.data;
+						});
+					} else {
+						toast('Rok za otkazivanje pregleda je prošao')
+                    }					
 				});
 		},
 
@@ -127,8 +131,29 @@ Vue.component("patientAppointments", {
 					});
 				});
 			});	
-			//this.$router.push({ name: 'surveyAfterExamination', params: { medicalExaminationId: medicalExaminationForSurvey } })
-		}
+			this.$router.push({ name: 'surveyAfterExamination', params: { medicalExaminationId: medicalExaminationForSurvey } })
+		},
+
+		onChange: function () {
+			if (this.filterAppointments === "Svi pregledi") {
+				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+					this.scheduledAppointments = response.data;
+					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+						this.previousAppointments = response.data;
+					});
+				});
+			} else if (this.filterAppointments === "Zakazani pregledi") {
+				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+					this.scheduledAppointments = response.data;
+					this.previousAppointments = []
+				});
+			} else if (this.filterAppointments === "Pregledi na kojima sam bio") {
+				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+					this.previousAppointments = response.data;
+					this.scheduledAppointments = []
+				});		
+            }
+        }
 	},
 	computed: {
 		
