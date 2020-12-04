@@ -17,6 +17,16 @@ namespace Backend.Service.ExaminationSurgeryServices
             this.appointmentRepository = appointmentRepository;
         }
 
+        public List<Appointment> getAllCancelledAppointmentsByPatient(int patientId)
+        {
+            return GetAllAppointmentsByPatient(patientId).ToList().Where(appointment => appointment.Canceled == true).ToList();
+        }
+
+        public List<Appointment> GetAllAppointmentsByPatient(int patientId)
+        {
+            return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId).ToList();
+        }
+
         public Appointment AddEntity(Appointment entity)
         {
             return appointmentRepository.AddEntity(entity);
