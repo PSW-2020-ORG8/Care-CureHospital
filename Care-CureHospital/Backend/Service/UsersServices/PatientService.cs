@@ -28,30 +28,6 @@ namespace Backend.Service.UsersServices
             return maliciousPatient;
         }
 
-        //public void SetIfPatientMalicious(int patientId)
-        //{
-        //    if (IsPatientMalicious(patientId, DateTime.Today))
-        //    {
-        //        Patient maliciousPatient = GetEntity(patientId);
-        //        maliciousPatient.Malicious = true;
-        //        UpdateEntity(maliciousPatient);
-        //    }
-        //}
-
-        //public bool IsPatientMalicious(int patientId, DateTime currentCancellationDate)
-        //{
-        //    List<Appointment> cancelledAppointments = appointmentService.getAllCancelledAppointmentsByPatient(patientId);
-        //    List<Appointment> result = new List<Appointment>();
-        //    foreach (Appointment cancelledAppointment in cancelledAppointments)
-        //    {
-        //        if (currentCancellationDate > cancelledAppointment.CancellationDate && currentCancellationDate.AddDays(-30) < cancelledAppointment.CancellationDate)
-        //        {
-        //            result.Add(cancelledAppointment);
-        //        }
-        //    }
-        //    return result.Count >= 3;
-        //}
-
         public List<Patient> GetMaliciousPatients()
         {
             return GetAllEntities().ToList().Where(patient => patient.Malicious == true).ToList();
