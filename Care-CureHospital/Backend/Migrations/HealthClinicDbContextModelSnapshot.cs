@@ -488,6 +488,9 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
@@ -518,6 +521,9 @@ namespace Backend.Migrations
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("Malicious")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -543,6 +549,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 1,
                             ContactNumber = "063554533",
@@ -553,6 +560,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "32312312312",
                             IdentityCard = "123123123",
                             Jmbg = "13312312312312",
+                            Malicious = false,
                             Name = "Petar",
                             ParentName = "Zika",
                             Password = "123",
@@ -562,6 +570,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 2,
                             ContactNumber = "0635235333",
@@ -572,6 +581,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "712312312312",
                             IdentityCard = "124123123",
                             Jmbg = "12342312312312",
+                            Malicious = false,
                             Name = "Zika",
                             ParentName = "Pera",
                             Password = "123",
@@ -581,6 +591,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 3,
+                            Blocked = false,
                             BloodGroup = 0,
                             CityId = 1,
                             ContactNumber = "0635557673",
@@ -591,6 +602,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "62312312312",
                             IdentityCard = "163123123",
                             Jmbg = "12312512312312",
+                            Malicious = false,
                             Name = "Mica",
                             ParentName = "Jelena",
                             Password = "123",
@@ -600,6 +612,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 4,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 2,
                             ContactNumber = "063555356",
@@ -610,11 +623,54 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "52312312312",
                             IdentityCard = "127123123",
                             Jmbg = "12312316712312",
+                            Malicious = false,
                             Name = "Luna",
                             ParentName = "Jovan",
                             Password = "123",
                             Surname = "Lunic",
                             Username = "luna"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Blocked = false,
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063775356",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "ivan@gmail.com",
+                            Gender = 0,
+                            GuestAccount = false,
+                            HealthInsuranceCard = "52318812312",
+                            IdentityCard = "127199123",
+                            Jmbg = "12344316712312",
+                            Malicious = true,
+                            Name = "Ivan",
+                            ParentName = "Luka",
+                            Password = "123",
+                            Surname = "Ivanovic",
+                            Username = "ivan"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Blocked = false,
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063555312",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "marko@gmail.com",
+                            Gender = 0,
+                            GuestAccount = false,
+                            HealthInsuranceCard = "52312312311",
+                            IdentityCard = "127123333",
+                            Jmbg = "12312316712344",
+                            Malicious = true,
+                            Name = "Marko",
+                            ParentName = "Jovan",
+                            Password = "123",
+                            Surname = "Markovic",
+                            Username = "marko"
                         });
                 });
 

@@ -78,7 +78,7 @@ namespace Backend
             SpetialitationService = new SpetialitationService(
                 new SpecialitationRepository(new MySQLStream<Specialitation>(), new IntSequencer()));
             AppointmentService = new AppointmentService(
-                new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()));
+                new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()), PatientService);
         }
 
         public static App Instance()

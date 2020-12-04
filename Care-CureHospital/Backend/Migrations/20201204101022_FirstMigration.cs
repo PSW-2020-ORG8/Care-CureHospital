@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class DatabaseMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,7 +234,9 @@ namespace Backend.Migrations
                     CityId = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    GuestAccount = table.Column<bool>(nullable: false)
+                    GuestAccount = table.Column<bool>(nullable: false),
+                    Blocked = table.Column<bool>(nullable: false),
+                    Malicious = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -677,13 +679,15 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Patient",
-                columns: new[] { "Id", "BloodGroup", "CityId", "ContactNumber", "DateOfBirth", "EMail", "Gender", "GuestAccount", "HealthInsuranceCard", "IdentityCard", "Jmbg", "Name", "ParentName", "Password", "Surname", "Username" },
+                columns: new[] { "Id", "Blocked", "BloodGroup", "CityId", "ContactNumber", "DateOfBirth", "EMail", "Gender", "GuestAccount", "HealthInsuranceCard", "IdentityCard", "Jmbg", "Malicious", "Name", "ParentName", "Password", "Surname", "Username" },
                 values: new object[,]
                 {
-                    { 1, 2, 1, "063554533", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "pera@gmail.com", 0, false, "32312312312", "123123123", "13312312312312", "Petar", "Zika", "123", "Petrovic", "pera" },
-                    { 3, 0, 1, "0635557673", new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "mica@gmail.com", 0, false, "62312312312", "163123123", "12312512312312", "Mica", "Jelena", "123", "Micic", "mica" },
-                    { 2, 2, 2, "0635235333", new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "zika@gmail.com", 0, false, "712312312312", "124123123", "12342312312312", "Zika", "Pera", "123", "Zikic", "zika" },
-                    { 4, 2, 2, "063555356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "luna@gmail.com", 1, false, "52312312312", "127123123", "12312316712312", "Luna", "Jovan", "123", "Lunic", "luna" }
+                    { 1, false, 2, 1, "063554533", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "pera@gmail.com", 0, false, "32312312312", "123123123", "13312312312312", false, "Petar", "Zika", "123", "Petrovic", "pera" },
+                    { 3, false, 0, 1, "0635557673", new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "mica@gmail.com", 0, false, "62312312312", "163123123", "12312512312312", false, "Mica", "Jelena", "123", "Micic", "mica" },
+                    { 2, false, 2, 2, "0635235333", new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "zika@gmail.com", 0, false, "712312312312", "124123123", "12342312312312", false, "Zika", "Pera", "123", "Zikic", "zika" },
+                    { 4, false, 2, 2, "063555356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "luna@gmail.com", 1, false, "52312312312", "127123123", "12312316712312", false, "Luna", "Jovan", "123", "Lunic", "luna" },
+                    { 5, false, 2, 2, "063775356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "ivan@gmail.com", 0, false, "52318812312", "127199123", "12344316712312", true, "Ivan", "Luka", "123", "Ivanovic", "ivan" },
+                    { 6, false, 2, 2, "063555312", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "marko@gmail.com", 0, false, "52312312311", "127123333", "12312316712344", true, "Marko", "Jovan", "123", "Markovic", "marko" }
                 });
 
             migrationBuilder.InsertData(

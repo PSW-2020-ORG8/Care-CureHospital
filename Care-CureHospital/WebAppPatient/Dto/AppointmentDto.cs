@@ -9,6 +9,7 @@ namespace WebAppPatient.Dto
     {
         public int Id { get; set; }
         public bool Canceled { get; set; }
+        public String CancellationDate { get; set; }
         public bool SurveyFilled { get; set; }
         public String Date { get; set; }
         public String Period { get; set; }

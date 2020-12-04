@@ -9,6 +9,16 @@ namespace WebAppPatient.Mapper
 {
     public class AppointmentMapper
     {
+        public static Appointment AppointmentDtoToAppointment(AppointmentDto dto)
+        {
+            Appointment appointment = new Appointment();
+            appointment.Id = dto.Id;
+            appointment.Canceled = dto.Canceled;
+            appointment.CancellationDate = DateTime.Parse(dto.CancellationDate);
+            appointment.MedicalExamination.SurveyFilled = dto.SurveyFilled;
+            appointment.StartTime = DateTime.Parse(dto.Date);
+            return appointment;
+        }
         public static AppointmentDto AppointmentToAppointmentDto(Appointment appointment)
         {
             AppointmentDto dto = new AppointmentDto();
