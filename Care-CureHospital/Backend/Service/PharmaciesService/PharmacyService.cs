@@ -47,5 +47,21 @@ namespace Backend.Service.PharmaciesService
         {
             pharmacyRepository.DeleteEntity(entity);
         }
+
+        public bool DoesNameExist(string name)
+        {
+            foreach (Pharmacies pharmacy in GetAllEntities())
+                if (pharmacy.Name.Equals(name))
+                    return true;
+            return false;
+        }
+
+        public bool DoesKeyExist(string key)
+        {
+            foreach (Pharmacies pharmacy in GetAllEntities())
+                if (pharmacy.Key.Equals(key))
+                    return true;
+            return false;
+        }
     }
 }

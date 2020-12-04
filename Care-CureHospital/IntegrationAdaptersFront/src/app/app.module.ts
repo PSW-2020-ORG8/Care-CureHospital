@@ -7,13 +7,20 @@ import { DirectorComponent } from './director/director.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { ReportComponent } from './director/report/report.component';
 import { DirectorServiceService } from './director-service.service';
+import { ListofPharmaciesComponent } from './listofpharmacies/listofpharmacies.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddReportComponent } from './director/add-report/add-report.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +28,8 @@ import { MatTableModule } from '@angular/material/table';
     DirectorComponent,
     DoctorComponent,
     ReportComponent,
-    AddReportComponent
+    AddReportComponent,
+    ListofPharmaciesComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +38,13 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule, 
     ReactiveFormsModule,
     MatTableExporterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [ DirectorServiceService],
   bootstrap: [AppComponent]

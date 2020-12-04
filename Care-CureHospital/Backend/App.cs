@@ -1,14 +1,17 @@
 ﻿using Backend.Model.BlogAndNotification;
 using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
+using Backend.Model.Pharmacy;
 using Backend.Repository.BlogNotificationRepository;
 using Backend.Repository.DirectorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
+using Backend.Repository.PharmacyRepository;
 using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
 using Backend.Service.ExaminationSurgeryServices;
+using Backend.Service.PharmaciesService;
 using Backend.Service.UsersServices;
 using Model.AllActors;
 using Model.Patient;
@@ -38,6 +41,7 @@ namespace Backend
         public PatientService PatientService;
         public DoctorService DoctorService;
         public ReportService ReportService;
+        public PharmacyService PharmacyService;
         public EmailVerificationService EmailVerificationService;
 
 
@@ -67,7 +71,9 @@ namespace Backend
             DoctorService = new DoctorService(
                 new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
             ReportService = new ReportService(
-               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));           
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
+            PharmacyService = new PharmacyService(
+               new PharmacyRepository(new MySQLStream<Pharmacies>(), new IntSequencer()));
         }
 
         public static App Instance()
