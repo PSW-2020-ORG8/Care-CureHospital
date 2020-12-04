@@ -1,0 +1,18 @@
+[
+  {
+    "NameOfRoom": "Room2",
+    "NameOfClinic": "A",
+    "NumberOfFloor": "1",
+    "BedCapacity": "10",
+    "AvailableBeds": "5",
+    "OccupiedBeds": "5"
+  },
+  {
+    "NameOfRoom": "Hospital1",
+    "NameOfClinic": "B",
+    "NumberOfFloor": "3",
+    "BedCapacity": "22",
+    "AvailableBeds": "70",
+    "OccupiedBeds": "1"
+  }
+]

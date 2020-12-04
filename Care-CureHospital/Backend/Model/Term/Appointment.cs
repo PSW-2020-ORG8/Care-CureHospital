@@ -13,6 +13,7 @@ namespace Model.Term
     {
         public int Id { get; set; }
         public bool Canceled { get; set; }
+        public DateTime CancellationDate { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int MedicalExaminationId { get; set; }
@@ -28,6 +29,19 @@ namespace Model.Term
         {
             Id = id;
             Canceled = canceled;
+            StartTime = startTime;
+            EndTime = StartTime.AddMinutes(30);
+            MedicalExaminationId = medicalExaminationId;
+            MedicalExamination = medicalExamination;
+            DoctorWorkDayId = doctorWorkDayId;
+            DoctorWorkDay = doctorWorkDay;
+        }
+
+        public Appointment(int id, bool canceled, DateTime cancellationDate, DateTime startTime, int medicalExaminationId, MedicalExamination medicalExamination, int doctorWorkDayId, DoctorWorkDay doctorWorkDay)
+        {
+            Id = id;
+            Canceled = canceled;
+            CancellationDate = cancellationDate;
             StartTime = startTime;
             EndTime = StartTime.AddMinutes(30);
             MedicalExaminationId = medicalExaminationId;

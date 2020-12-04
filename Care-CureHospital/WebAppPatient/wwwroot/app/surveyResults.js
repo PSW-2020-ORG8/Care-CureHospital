@@ -22,8 +22,7 @@ Vue.component("surveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/">Pretraga dokumenata</a></li>
-				<li class="active"><a href="#/">Anketa</a></li>
+				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
 	         </ul>
 	     </div>
  
@@ -174,15 +173,9 @@ Vue.component("surveyResults", {
 				<td></td>
 				<td>{{this.hospitalQuestionsAverageGrade.toFixed(2)}}</td>
 			</tr>
-		</table> 
-		
+		</table> 	
 
-	</div>
-	
-	 
-	 
-
-	     
+	</div>	     
 	</div>	  
 	</div>
         
@@ -197,11 +190,11 @@ Vue.component("surveyResults", {
 	mounted() {
 
 		axios.get('api/survey/getSurveyResults').then(response => {
-					this.surveyResults = response.data;
-					this.doctorQuestionsAverageGrade = (this.surveyResults[0].averageGrade + this.surveyResults[1].averageGrade + this.surveyResults[2].averageGrade) / 3;
-					this.staffQuestionsAverageGrade = (this.surveyResults[3].averageGrade + this.surveyResults[4].averageGrade + this.surveyResults[5].averageGrade) / 3;
-					this.hospitalQuestionsAverageGrade = (this.surveyResults[6].averageGrade + this.surveyResults[7].averageGrade + this.surveyResults[8].averageGrade) / 3;
-				});
+			this.surveyResults = response.data;
+			this.doctorQuestionsAverageGrade = (this.surveyResults[0].averageGrade + this.surveyResults[1].averageGrade + this.surveyResults[2].averageGrade) / 3;
+			this.staffQuestionsAverageGrade = (this.surveyResults[3].averageGrade + this.surveyResults[4].averageGrade + this.surveyResults[5].averageGrade) / 3;
+			this.hospitalQuestionsAverageGrade = (this.surveyResults[6].averageGrade + this.surveyResults[7].averageGrade + this.surveyResults[8].averageGrade) / 3;
+		});
 
 	}
 

@@ -1,7 +1,7 @@
 Vue.component("blockMaliciousPatients", {
 	data: function () {
 		return {
-		
+			maliciousPatients: []
 		}
 	},
 	template: `
@@ -19,8 +19,7 @@ Vue.component("blockMaliciousPatients", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/">Pretraga dokumenata</a></li>
-				<li class="active"><a href="#/">Anketa</a></li>
+				<li class="active"><a>Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -49,39 +48,20 @@ Vue.component("blockMaliciousPatients", {
 		<table class="table-block-malicious-patients">
 			<tr>
 				<th>Korisničko ime</th>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th style="max-width:90px;">Broj otkazivanja na mesečnom nivou</th>
-                <th></th>
+				<th>Ime</th>
+				<th>Prezime</th>
+				<th style="max-width:90px;">Broj otkazivanja na mesečnom nivou</th>
+				<th></th>
 			</tr>
-			<tr>
-                <td>mare</td>
-                <td>Marko</td>
-                <td>Markovic</td>
-                <td>7</td>
-                <td>
-                <button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser()">Blokiraj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>mare</td>
-                <td>Marko</td>
-                <td>Markovic</td>
-                <td>7</td>
-                <td>
-                <button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser()">Blokiraj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>mare</td>
-                <td>Marko</td>
-                <td>Markovic</td>
-                <td>7</td>
-                <td>
-                <button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser()">Blokiraj</button>
-                </td>
-			</tr>
-			
+			<tr v-for = "maliciousPatient in maliciousPatients">
+				<td>{{maliciousPatient.username}}</td>
+				<td>{{maliciousPatient.name}}</td>
+				<td>{{maliciousPatient.surname}}</td>
+				<td>7</td>
+				<td>
+				<button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser(maliciousPatient.id)">Blokiraj</button>
+				</td>
+			</tr>			
 		</table> 
 	</div>
 	     
@@ -91,13 +71,12 @@ Vue.component("blockMaliciousPatients", {
 	`
 	,
 	methods: {
-		blockUser : function() {
-            if (confirm('Da li ste sigurni da želite da izvršite izmenu naloga?') == true) {
-                toast('Izmena je uspešno izvršena!')
-            }else{
-                toast('Izmena nije izvršena!')
+		blockUser : function(patientId) {
+			if (confirm('Da li ste sigurni da želite da blokirate pacijenta?') == true) {
+				axios.put('api/patient/blockMaliciousPatient/' + patientId)
+					.then(response => {});
+                toast('Uspešno ste blokirali pacijenta!')
             }
-
         }
 
 	},
@@ -105,7 +84,9 @@ Vue.component("blockMaliciousPatients", {
 
 	},
 	mounted() {
-
+		axios.get('api/patient/getMaliciousPatients').then(response => {
+			this.maliciousPatients = response.data;
+		});
 	}
 
 });
