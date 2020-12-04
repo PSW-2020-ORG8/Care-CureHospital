@@ -15,7 +15,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Web.Http.Cors;
 using Grpc.Core;
-using IntegrationAdapters.Protos;
 using Microsoft.AspNetCore.Http;
 
 namespace IntegrationAdapters
@@ -67,30 +66,7 @@ namespace IntegrationAdapters
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapGrpcService<NetGrpcServiceImpl>();
-
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("");
-                });
             });
-
-        /*    server = new Server()
-            {
-                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
-                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
-            };
-            server.Start();
-
-            applicationLifetime.ApplicationStopping.Register(OnShutDown);*/
         }
-
-     /*   private void OnShutDown()
-        {
-            if(server != null)
-            {
-                server.ShutdownAsync().Wait();
-            }
-        }*/
     }
 }

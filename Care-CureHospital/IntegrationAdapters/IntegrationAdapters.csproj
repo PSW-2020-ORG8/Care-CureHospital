@@ -30,8 +30,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Backend\Backend.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Protobuf Include="Protos\netGrpcService.proto" GrpcServices="Server" />
-  </ItemGroup>
 
 </Project>
