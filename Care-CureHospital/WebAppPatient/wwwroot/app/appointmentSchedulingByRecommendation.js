@@ -203,8 +203,19 @@ Vue.component("appointmentSchedulingByRecommendation", {
             if(this.selectedAppointment === null){
                 toast('Morate selektovati neki od ponuđenih termina')
             } else {
-                this.resetData()
-                toast('Termin je uspešno rezervisan!')
+                axios.post('/api/appointment', {
+                    // pribavi podatke
+
+                }).then(response => {
+                    if (response.status === 200) {
+                        toast('Termin je uspešno rezervisan!')
+                        this.resetData()
+                    }
+                }).catch(error => {
+                    if (error.response.status === 400) {
+                        
+                    }
+                });          
             }
         },
         resetData : function(){

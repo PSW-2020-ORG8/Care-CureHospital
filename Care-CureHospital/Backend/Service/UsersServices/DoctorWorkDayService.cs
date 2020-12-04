@@ -11,10 +11,12 @@ namespace Backend.Service.UsersServices
     public class DoctorWorkDayService : IService<DoctorWorkDay, int>
     {
         IDoctorWorkDayRepository doctorWorkDayRepository;
+        DoctorService doctorService;
 
-        public DoctorWorkDayService(IDoctorWorkDayRepository doctorWorkDayRepository)
+        public DoctorWorkDayService(IDoctorWorkDayRepository doctorWorkDayRepository, DoctorService doctorService)
         {
             this.doctorWorkDayRepository = doctorWorkDayRepository;
+            this.doctorService = doctorService;
         }
         public DoctorWorkDay AddEntity(DoctorWorkDay entity)
         {
@@ -46,15 +48,37 @@ namespace Backend.Service.UsersServices
             return doctorWorkDayRepository.GetAllEntities().FirstOrDefault(doctorWorkDay => DateTime.Compare(doctorWorkDay.Date, date) == 0 && doctorWorkDay.DoctorId == doctorId);
         }
 
+        public List<DoctorWorkDay> GetDoctorWorkDayByDateAndDoctorSpecialization(DateTime date, string doctorSpecialization)
+        {
+            return doctorWorkDayRepository.GetAllEntities().Where(doctorWorkDay => DateTime.Compare(doctorWorkDay.Date, date) == 0 && doctorWorkDay.Doctor.Specialitation.SpecialitationForDoctor.Equals(doctorSpecialization)).ToList();
+        }
+
         public List<Appointment> GetAvailableAppointmentsByDateAndDoctorId(DateTime date, int doctorId)
         {
-            List<Appointment> result = InitializeAvailableApoointmentsList(date);
-            foreach(Appointment scheduledAppointment in GetDoctorWorkDayByDateAndDoctorId(date, doctorId).ScheduledAppointments)
+            List<Appointment> result = new List<Appointment>();
+            if(GetDoctorWorkDayByDateAndDoctorId(date, doctorId) != null) 
             {
-                var appointment = result.Find(o => DateTime.Compare(o.StartTime, scheduledAppointment.StartTime) == 0);
-                if (appointment != null)
+                result = InitializeAvailableApoointmentsList(date);
+                foreach (Appointment scheduledAppointment in GetDoctorWorkDayByDateAndDoctorId(date, doctorId).ScheduledAppointments)
                 {
-                    result.Remove(appointment);
+                    var appointment = result.Find(o => DateTime.Compare(o.StartTime, scheduledAppointment.StartTime) == 0);
+                    if (appointment != null && scheduledAppointment.Canceled == false)
+                    {
+                        result.Remove(appointment);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public List<Appointment> GetAvailableAppointmentsByDateAndSpecialization(DateTime date, string doctorSpecialization)
+        {
+            List<Appointment> result = new List<Appointment>();
+            if (GetDoctorWorkDayByDateAndDoctorSpecialization(date, doctorSpecialization).Count != 0)
+            {
+                foreach(DoctorWorkDay doctorWorkDay in GetDoctorWorkDayByDateAndDoctorSpecialization(date, doctorSpecialization))
+                {
+                    result.AddRange(GetAvailableAppointmentsByDateAndDoctorId(date, doctorWorkDay.DoctorId));
                 }
             }
             return result;
@@ -70,6 +94,71 @@ namespace Backend.Service.UsersServices
                 result.Add(appointmentTimePeriod);
             }
             return result;
+        }
+
+        public List<Appointment> GetAvailableAppointmentsByDateRangeAndDoctorId(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            List<Appointment> result = new List<Appointment>();
+            for (DateTime date = startDate; DateTime.Compare(date, endDate) <= 0; date = date.AddDays(1))
+            {
+                result.AddRange(GetAvailableAppointmentsByDateAndDoctorId(date, doctorId));
+            }
+            return result;
+        }
+
+        public List<Appointment> GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime startDate, DateTime endDate, int doctorId, string priority)
+        {
+            List<Appointment> result = GetAvailableAppointmentsByDateRangeAndDoctorId(startDate, endDate, doctorId);           
+            if (priority.Equals("Vremenski period"))
+            {      
+                if (result.Count == 0)
+                {
+                    string doctorSpecialization = doctorService.GetEntity(doctorId).Specialitation.SpecialitationForDoctor;
+                    result = GetAvailableAppointmentsForOtherDoctors(startDate, endDate, doctorSpecialization);
+                }
+            } else if (priority.Equals("Doktor"))
+            {
+                if (result.Count == 0)
+                {
+                    result = GetAvailableAppointmentsByExpandDateRange(startDate, endDate, doctorId);
+                }
+            }
+            return result;
+        }
+
+        private List<Appointment> GetAvailableAppointmentsForOtherDoctors(DateTime startDate, DateTime endDate, string doctorSpecialization)
+        {
+            List<Appointment> result = new List<Appointment>();
+            for (DateTime date = startDate; DateTime.Compare(date, endDate) <= 0; date = date.AddDays(1))
+            {
+                result.AddRange(GetAvailableAppointmentsByDateAndSpecialization(date, doctorSpecialization));
+            }
+            return result;
+        }
+
+        private List<Appointment> GetAvailableAppointmentsByExpandDateRange(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            List<Appointment> result = ExpandeDateRange(startDate, endDate, doctorId);
+            int numberOfExpandingIteration = 0;
+            while (result.Count == 0)
+            {
+                if (++numberOfExpandingIteration > 6)
+                {
+                    break;
+                }
+                result = ExpandeDateRange(startDate, endDate, doctorId);
+            }
+            return result;
+        }
+
+        private List<Appointment> ExpandeDateRange(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            DateTime newStartDate = startDate.AddDays(-1);
+            if (DateTime.Compare(newStartDate, DateTime.Today) < 0)
+            {
+                newStartDate = DateTime.Today;
+            }
+            return GetAvailableAppointmentsByDateRangeAndDoctorId(newStartDate, endDate.AddDays(1), doctorId);
         }
     }
 }
