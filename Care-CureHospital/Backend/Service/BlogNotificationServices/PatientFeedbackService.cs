@@ -53,12 +53,6 @@ namespace Backend.Service.BlogNotificationServices
         public PatientFeedback PublishPatientFeedback(int id)
         {
             PatientFeedback patientFeedback = patientFeedbackRepository.GetEntity(id);
-            
-            if (patientFeedback == null)
-            {
-                return null;
-            }       
-            
             patientFeedback.IsPublished = true;
             patientFeedbackRepository.UpdateEntity(patientFeedback);
             return patientFeedback;

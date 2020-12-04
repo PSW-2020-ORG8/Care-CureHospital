@@ -16,8 +16,7 @@ Vue.component("publishedFeedbacks", {
 	             <h3></h3>
 	         </div>  
 	     </div>
-	 
-		
+	 	
 	     <div class="main">     
 	         <ul class="menu-contents">
 	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
@@ -81,9 +80,7 @@ Vue.component("publishedFeedbacks", {
 		</div>
 	</template >
 	-->
-
-	 </div>		     
-		  
+	</div>		     	  
 	</div>
         
 	`

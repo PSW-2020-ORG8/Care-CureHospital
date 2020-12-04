@@ -1,0 +1,22 @@
+[
+  {
+    "username": "nemanja",
+    "password": "direktor",
+    "role": "L"
+  },
+  {
+   "username": "lulu",
+   "password": "franc",
+   "role": "P"
+  },
+  {
+   "username": "zaki",
+   "password": "prevara",
+   "role": "U"
+  },
+  {
+   "username": "losmi",
+   "password": "influenser",
+   "role": "S"
+  }
+]

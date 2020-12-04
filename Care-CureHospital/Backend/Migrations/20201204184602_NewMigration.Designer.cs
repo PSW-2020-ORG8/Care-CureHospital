@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201202215857_NewMigration")]
+    [Migration("20201204184602_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -490,6 +490,9 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
@@ -520,6 +523,9 @@ namespace Backend.Migrations
                     b.Property<string>("Jmbg")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("Malicious")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -545,6 +551,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 1,
                             ContactNumber = "063554533",
@@ -555,6 +562,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "32312312312",
                             IdentityCard = "123123123",
                             Jmbg = "13312312312312",
+                            Malicious = false,
                             Name = "Petar",
                             ParentName = "Zika",
                             Password = "123",
@@ -564,6 +572,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 2,
                             ContactNumber = "0635235333",
@@ -574,6 +583,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "712312312312",
                             IdentityCard = "124123123",
                             Jmbg = "12342312312312",
+                            Malicious = false,
                             Name = "Zika",
                             ParentName = "Pera",
                             Password = "123",
@@ -583,6 +593,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 3,
+                            Blocked = false,
                             BloodGroup = 0,
                             CityId = 1,
                             ContactNumber = "0635557673",
@@ -593,6 +604,7 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "62312312312",
                             IdentityCard = "163123123",
                             Jmbg = "12312512312312",
+                            Malicious = false,
                             Name = "Mica",
                             ParentName = "Jelena",
                             Password = "123",
@@ -602,6 +614,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 4,
+                            Blocked = false,
                             BloodGroup = 2,
                             CityId = 2,
                             ContactNumber = "063555356",
@@ -612,11 +625,54 @@ namespace Backend.Migrations
                             HealthInsuranceCard = "52312312312",
                             IdentityCard = "127123123",
                             Jmbg = "12312316712312",
+                            Malicious = false,
                             Name = "Luna",
                             ParentName = "Jovan",
                             Password = "123",
                             Surname = "Lunic",
                             Username = "luna"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Blocked = false,
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063775356",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "ivan@gmail.com",
+                            Gender = 0,
+                            GuestAccount = false,
+                            HealthInsuranceCard = "52318812312",
+                            IdentityCard = "127199123",
+                            Jmbg = "12344316712312",
+                            Malicious = true,
+                            Name = "Ivan",
+                            ParentName = "Luka",
+                            Password = "123",
+                            Surname = "Ivanovic",
+                            Username = "ivan"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Blocked = false,
+                            BloodGroup = 2,
+                            CityId = 2,
+                            ContactNumber = "063555312",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "marko@gmail.com",
+                            Gender = 0,
+                            GuestAccount = false,
+                            HealthInsuranceCard = "52312312311",
+                            IdentityCard = "127123333",
+                            Jmbg = "12312316712344",
+                            Malicious = true,
+                            Name = "Marko",
+                            ParentName = "Jovan",
+                            Password = "123",
+                            Surname = "Markovic",
+                            Username = "marko"
                         });
                 });
 
@@ -1039,7 +1095,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("MedicalExaminationId");
 
-                    b.ToTable("Survey");
+                    b.ToTable("Surveys");
 
                     b.HasData(
                         new
@@ -1277,6 +1333,9 @@ namespace Backend.Migrations
                     b.Property<bool>("Canceled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("CancellationDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DoctorWorkDayId")
                         .HasColumnType("int");
 
@@ -1302,42 +1361,47 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 1,
-                            EndTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 1,
-                            StartTime = new DateTime(2020, 12, 5, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
-                            StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 3,
-                            EndTime = new DateTime(2020, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 4,
-                            StartTime = new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 6,
                             StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            Canceled = false,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
                             EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
@@ -1347,8 +1411,9 @@ namespace Backend.Migrations
                         {
                             Id = 6,
                             Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
-                            EndTime = new DateTime(2020, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 3,
                             StartTime = new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1436,11 +1501,11 @@ namespace Backend.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("SurveyFilled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("ToDateTime")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Urgency")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -1461,8 +1526,8 @@ namespace Backend.Migrations
                             PatientId = 2,
                             RoomId = 1,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1472,8 +1537,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijent je imao glavobolju",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1483,8 +1548,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1494,8 +1559,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1505,8 +1570,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1516,8 +1581,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1570,44 +1635,6 @@ namespace Backend.Migrations
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeOfRoomId = 1
                         });
-                });
-
-            modelBuilder.Entity("Model.Term.Surgery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorSpecialistId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FromDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShortDescription")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("ToDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Urgency")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorSpecialistId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("Model.Term.TypeOfRoom", b =>
@@ -1842,27 +1869,6 @@ namespace Backend.Migrations
                     b.HasOne("Model.Term.TypeOfRoom", "TypeOfRoom")
                         .WithMany()
                         .HasForeignKey("TypeOfRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Term.Surgery", b =>
-                {
-                    b.HasOne("Model.AllActors.Doctor", "DoctorSpecialist")
-                        .WithMany()
-                        .HasForeignKey("DoctorSpecialistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.AllActors.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.Term.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

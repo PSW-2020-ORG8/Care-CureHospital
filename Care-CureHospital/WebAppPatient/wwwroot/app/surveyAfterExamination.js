@@ -38,8 +38,9 @@ Vue.component("surveyAfterExamination", {
 
 			textOfQuestion9: '',
 			gradeOfQuestion9: null,
-			answer9: 'good'
+			answer9: 'good',
 
+			medicalExaminationId: null
 		}
 	},
 	template: `
@@ -57,8 +58,7 @@ Vue.component("surveyAfterExamination", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/">Pretraga dokumenata</a></li>
-				<li class="active"><a href="#/">Anketa</a></li>
+				<li><a href="#/patientAppointments">Nazad na moje preglede</a></li>
 	         </ul>
 	     </div>
  
@@ -72,15 +72,6 @@ Vue.component("surveyAfterExamination", {
 	            <a >Prijavi se</a>
 		    </div>
 		</div>
-		
-	<div class="survey-vertical-line"></div>
-	
-	 <div class="sideComponents">      
-	     <ul class="ulForSideComponents">
-			
-	     </ul>
-	 </div>
-
 	
 	<div class="survey-questions">	
 		<h3 class = "doctor-qestions-title">Pitanja o doktoru kod kog je izvršen pregled:</h3> 
@@ -195,12 +186,7 @@ Vue.component("surveyAfterExamination", {
 			<button type="button" @click="postSurvey">Pošalji</button>
 		</div>
 
-	</div>
-	
-	 
-	 
-
-	     
+	</div>     
 	</div>	  
 	</div>
         
@@ -374,12 +360,11 @@ Vue.component("surveyAfterExamination", {
 			this.listOfAnswers.push(answerOfQuestion8)
 			this.listOfAnswers.push(answerOfQuestion9)
 
-			
-
 			axios.post('/api/survey', {
 				title: 'Naslov ankete',
 				commentSurvey: this.commentSurvey,
-				answers: this.listOfAnswers
+				answers: this.listOfAnswers,
+				medicalExaminationId: this.medicalExaminationId
 			}).then(response => {
 				if (response.status === 200) {
 					toast('Anketa je uspešno poslata')
@@ -387,15 +372,19 @@ Vue.component("surveyAfterExamination", {
 			});
 			
 		}
-
 	},
 	computed: {
 
 	},
 	mounted() {
 
-
-
+		if (this.$route.params.medicalExaminationId !== null) {
+			this.medicalExaminationId = this.$route.params.medicalExaminationId;
+			console.log(this.medicalExaminationId)
+		} else {
+			this.medicalExaminationId = 0;
+		}
+		
 	}
 
 });
