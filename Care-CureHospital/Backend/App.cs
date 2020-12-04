@@ -44,6 +44,7 @@ namespace Backend
         public EmailVerificationService EmailVerificationService;
         public DoctorWorkDayService DoctorWorkDayService;
         public SpetialitationService SpetialitationService;
+        public AppointmentService AppointmentService;
 
         private App()
         {
@@ -76,6 +77,8 @@ namespace Backend
                 new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()));
             SpetialitationService = new SpetialitationService(
                 new SpecialitationRepository(new MySQLStream<Specialitation>(), new IntSequencer()));
+            AppointmentService = new AppointmentService(
+                new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()));
         }
 
         public static App Instance()

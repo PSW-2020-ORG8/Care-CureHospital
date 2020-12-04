@@ -9,7 +9,7 @@ namespace WebAppPatient.Mapper
 {
     public class SurveyMapper
     {
-        public static Survey SurveyDtoToSurvey(SurveyDto dto, Survey patient)
+        public static Survey SurveyDtoToSurvey(SurveyDto dto)
         {
             Survey survey = new Survey();
 
@@ -17,7 +17,7 @@ namespace WebAppPatient.Mapper
             survey.CommentSurvey = dto.CommentSurvey;
             survey.PublishingDate = DateTime.Now;
             survey.Answers = dto.Answers;
-            survey.MedicalExaminationId = 1;
+            survey.MedicalExaminationId = dto.MedicalExaminationID;
             return survey;
         }
 

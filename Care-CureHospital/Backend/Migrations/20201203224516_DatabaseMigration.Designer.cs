@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201202215857_NewMigration")]
-    partial class NewMigration
+    [Migration("20201203224516_DatabaseMigration")]
+    partial class DatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1039,7 +1039,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("MedicalExaminationId");
 
-                    b.ToTable("Survey");
+                    b.ToTable("Surveys");
 
                     b.HasData(
                         new
@@ -1303,34 +1303,34 @@ namespace Backend.Migrations
                             Id = 1,
                             Canceled = false,
                             DoctorWorkDayId = 1,
-                            EndTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 1,
-                            StartTime = new DateTime(2020, 12, 5, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             Canceled = false,
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
-                            StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Canceled = false,
                             DoctorWorkDayId = 3,
-                            EndTime = new DateTime(2020, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 4,
-                            StartTime = new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             Canceled = false,
                             DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 6,
                             StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1348,7 +1348,7 @@ namespace Backend.Migrations
                             Id = 6,
                             Canceled = false,
                             DoctorWorkDayId = 5,
-                            EndTime = new DateTime(2020, 12, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 3,
                             StartTime = new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1436,11 +1436,11 @@ namespace Backend.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("SurveyFilled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("ToDateTime")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Urgency")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -1461,8 +1461,8 @@ namespace Backend.Migrations
                             PatientId = 2,
                             RoomId = 1,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1472,8 +1472,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijent je imao glavobolju",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1483,8 +1483,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1494,8 +1494,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1505,8 +1505,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1516,8 +1516,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1570,44 +1570,6 @@ namespace Backend.Migrations
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeOfRoomId = 1
                         });
-                });
-
-            modelBuilder.Entity("Model.Term.Surgery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorSpecialistId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FromDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShortDescription")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("ToDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Urgency")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorSpecialistId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("Model.Term.TypeOfRoom", b =>
@@ -1842,27 +1804,6 @@ namespace Backend.Migrations
                     b.HasOne("Model.Term.TypeOfRoom", "TypeOfRoom")
                         .WithMany()
                         .HasForeignKey("TypeOfRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Model.Term.Surgery", b =>
-                {
-                    b.HasOne("Model.AllActors.Doctor", "DoctorSpecialist")
-                        .WithMany()
-                        .HasForeignKey("DoctorSpecialistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.AllActors.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.Term.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

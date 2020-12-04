@@ -34,6 +34,14 @@ namespace Service.ExaminationSurgeryServices
             return medicalExaminations;
         }
 
+        public MedicalExamination FilledSurveyForMedicalExamination(int medicalExaminationId)
+        {
+            MedicalExamination medicalExamination = GetEntity(medicalExaminationId);
+            medicalExamination.SurveyFilled = true;
+            UpdateEntity(medicalExamination);
+            return medicalExamination;
+        }
+
         public List<MedicalExamination> GetAllMedicalExaminationsByDoctor(Model.AllActors.Doctor doctor)
         {
             return medicalExaminationRepository.GetAllMedicalExaminationsByDoctor(doctor);
