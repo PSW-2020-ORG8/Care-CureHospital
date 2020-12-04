@@ -14,6 +14,7 @@ namespace WebAppPatient.Mapper
             AppointmentDto dto = new AppointmentDto();
             dto.Id = appointment.Id;
             dto.Canceled = appointment.Canceled;
+            dto.SurveyFilled = appointment.MedicalExamination.SurveyFilled;
             dto.Date = appointment.StartTime.ToString("dd.MM.yyyy.");
             dto.Period = appointment.StartTime.ToString("HH:mm") + " - " + appointment.EndTime.ToString("HH:mm");
             dto.DoctorFullName = appointment.MedicalExamination.Doctor.Name + " " + appointment.MedicalExamination.Doctor.Surname;

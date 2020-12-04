@@ -1434,11 +1434,11 @@ namespace Backend.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("SurveyFilled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("ToDateTime")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Urgency")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -1459,8 +1459,8 @@ namespace Backend.Migrations
                             PatientId = 2,
                             RoomId = 1,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1470,8 +1470,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijent je imao glavobolju",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1481,8 +1481,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1492,8 +1492,8 @@ namespace Backend.Migrations
                             PatientId = 1,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1503,8 +1503,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 2,
                             ShortDescription = "Pacijenta je boleo stomak",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1514,8 +1514,8 @@ namespace Backend.Migrations
                             PatientId = 3,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
-                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Urgency = false
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

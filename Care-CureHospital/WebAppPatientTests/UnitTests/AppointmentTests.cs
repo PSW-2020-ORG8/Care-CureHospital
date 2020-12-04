@@ -72,6 +72,17 @@ namespace WebAppPatientTests.UnitTests
             Assert.NotEqual(2, result.Count);
         }
 
+        [Fact]
+        public void Cancel_patient_appointment()
+        {
+            AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository());
+
+            appointmentService.CancelPatientAppointment(3);
+            Appointment canceledAppointment = appointmentService.GetEntity(3);
+
+            Assert.True(canceledAppointment.Canceled);
+        }
+
         private static IAppointmentRepository CreateDoctorWorkDayStubRepository()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
@@ -79,13 +90,20 @@ namespace WebAppPatientTests.UnitTests
             var appointments = new List<Appointment>();
             appointments.Add(new Appointment(1, false, new DateTime(2020, 12, 5, 8, 0, 0), 1, new MedicalExamination(1, false, "", 1, 1, 1, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
             appointments.Add(new Appointment(2, false, new DateTime(2020, 12, 5, 8, 30, 0), 1, new MedicalExamination(1, false, "", 1, 1, 1, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
-            appointments.Add(new Appointment(3, false, new DateTime(2020, 12, 5, 10, 30, 0), 1, new MedicalExamination(1, false, "", 1, 1, 2, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
+            appointments.Add(new Appointment(3, true, new DateTime(2020, 12, 5, 10, 30, 0), 1, new MedicalExamination(1, false, "", 1, 1, 2, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
             appointments.Add(new Appointment(4, false, new DateTime(2020, 12, 7, 15, 0, 0), 1, new MedicalExamination(1, false, "", 1, 1, 2, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
             appointments.Add(new Appointment(5, false, new DateTime(2020, 12, 7, 16, 0, 0), 1, new MedicalExamination(1, false, "", 1, 1, 2, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
             appointments.Add(new Appointment(6, false, new DateTime(2020, 12, 7, 18, 0, 0), 1, new MedicalExamination(1, false, "", 1, 1, 1, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
             appointments.Add(new Appointment(7, false, new DateTime(2020, 12, 7, 12, 30, 0), 1, new MedicalExamination(1, false, "", 1, 1, 1, new Room(), new Doctor(), new Patient()), 1, new DoctorWorkDay()));
 
             stubRepository.Setup(appointmentsRepository => appointmentsRepository.GetAllEntities()).Returns(appointments);
+            stubRepository.Setup(appointmentsRepository => appointmentsRepository.GetEntity(It.IsAny<int>())).Returns((int id) => appointments.Find(m => m.Id == id));
+            stubRepository.Setup(appointment => appointment.UpdateEntity(It.IsAny<Appointment>()))
+                .Callback((Appointment appointment) =>
+                {
+                    Appointment existingAppointment = appointments.Find(m => m.Id == appointment.Id);
+                    existingAppointment.Canceled = true;
+                });
             return stubRepository.Object;
         }
     }

@@ -22,7 +22,7 @@ namespace Repository.Csv.Converter
 
         public string ConvertEntityToCSVFormat(MedicalExamination entity)
         {
-            return string.Join(delimiter, entity.GetId(), entity.Urgency, entity.ShortDescription, entity.Room.GetId(),
+            return string.Join(delimiter, entity.GetId(), entity.SurveyFilled, entity.ShortDescription, entity.Room.GetId(),
                 entity.Doctor.GetId(), entity.Patient.GetId(), entity.FromDateTime.ToString(DATETIME_FORMAT), entity.ToDateTime.ToString(DATETIME_FORMAT));
         }
 

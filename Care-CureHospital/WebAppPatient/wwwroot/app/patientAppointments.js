@@ -57,7 +57,7 @@ Vue.component("patientAppointments", {
 	 </div> 	
 
 	<div class="listOfAppointments">		 
-		<div v-for="appointment in this.previousAppointments">	
+		<div v-for="appointment in previousAppointments">	
 			<div class="wrapper-appointments">
 				<div class="appointments-img">
 					<img src="./images/previousAppointment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
@@ -69,17 +69,17 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
-						<div class="cancelAppointment-btn">
+						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn">
 							<button type="button" @click="fillSurvey(appointment.medicalExaminationId)">Popuni anketu</button>
 						</div>	
-						<!--<div class="appointmentsParagraph1">
+						<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">
 							<p>Popunili ste anketu</p>
-						</div>-->
+						</div>
 					</div>
 				</div>		
 			</div>
 		</div>	
-		<div v-for="appointment in this.scheduledAppointments">	
+		<div v-for="appointment in scheduledAppointments">	
 			<div class="wrapper-appointments">
 				<div class="appointments-img">
 					<img src="./images/scheduledAppointment.png" height="150" width="150" style="margin-left: 20%; margin-top: 14%;">
@@ -91,8 +91,12 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
-						
-
+						<div class="cancelAppointment-btn">
+							<button type="button" @click="cancelAppointment(appointment.id)">Otkaži pregled</button>
+						</div>
+						<!--<div v-if="appointment.canceled === true" class="appointmentsParagraph2">
+							<p>Otkazali ste ovaj pregled</p>
+						</div>-->
 					</div>
 				</div>		
 			</div>
@@ -104,10 +108,26 @@ Vue.component("patientAppointments", {
 	`
 	,
 	methods: {
-		
+		cancelAppointment: function (appointmentId) {
+			axios.put('api/appointment/cancelAppointment/' + appointmentId)
+				.then(response => {
+					axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+						toast('Uspešno ste otkazali pregled')
+						this.scheduledAppointments = response.data;
+					});
+				});
+		},
 
 		fillSurvey: function (medicalExaminationForSurvey) {
-			this.$router.push({ name: 'surveyAfterExamination', params: { medicalExaminationId: medicalExaminationForSurvey } })
+			axios.put('/api/survey/filledSurveyForMedicalExamination/' + medicalExaminationForSurvey).then(response => {
+				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+					this.scheduledAppointments = response.data;
+					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+						this.previousAppointments = response.data;
+					});
+				});
+			});	
+			//this.$router.push({ name: 'surveyAfterExamination', params: { medicalExaminationId: medicalExaminationForSurvey } })
 		}
 	},
 	computed: {

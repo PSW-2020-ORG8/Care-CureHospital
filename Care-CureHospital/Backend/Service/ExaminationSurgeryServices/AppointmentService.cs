@@ -57,6 +57,12 @@ namespace Backend.Service.ExaminationSurgeryServices
             return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId && appointment.Canceled == false).ToList();
         }
 
-        
+        public Appointment CancelPatientAppointment(int appointmentId)
+        {
+            Appointment appointmentForCancel = GetEntity(appointmentId);
+            appointmentForCancel.Canceled = true;
+            UpdateEntity(appointmentForCancel);
+            return appointmentForCancel;
+        }
     }
 }

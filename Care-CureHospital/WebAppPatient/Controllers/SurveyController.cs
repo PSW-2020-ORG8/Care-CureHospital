@@ -38,6 +38,12 @@ namespace WebAppPatient.Controllers
             return Ok(QuestionResultMapper.CreateDoctorResultsDto(App.Instance().SurveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
         }
 
+        [HttpPut("filledSurveyForMedicalExamination/{medicalExaminationId}")]       // GET /api/survey/filledSurveyForMedicalExamination/{medicalExaminationId}
+        public IActionResult FilledSurveyForMedicalExamination(int medicalExaminationId)
+        {
+            return Ok(App.Instance().MedicalExaminationService.FilledSurveyForMedicalExamination(medicalExaminationId));
+        }
+
         [HttpPost]      // POST /api/survey
         public IActionResult AddSurvey(SurveyDto dto)
         {
