@@ -26,7 +26,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
-        public DbSet<MedicalExaminationReport> MedicalExaminationReport { get; set; }
+        public DbSet<MedicalExaminationReport> MedicalExaminationReports { get; set; }
         public DbSet<MedicalExaminationReport> Prescriptions { get; set; }
         public DbSet<Medicament> Medicaments { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -38,7 +38,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Allergies> Allergies { get; set; }
         public DbSet<Diagnosis> Diagnosies { get; set; }
         public DbSet<Symptoms> Symptomes { get; set; }
-        public DbSet<Surgery> Surveys { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<DoctorWorkDay> DoctorWorkDays { get; set; }
@@ -59,10 +59,12 @@ namespace Backend.Repository.MySQL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             modelBuilder.Entity<Patient>().HasData(
-                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000,1,1,3,3,3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1 },
-                new Patient { Id = 2, Name = "Zika", Surname = "Zikic", ParentName = "Pera", Gender = Gender.Male, IdentityCard = "124123123", HealthInsuranceCard = "712312312312", Jmbg = "12342312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3), ContactNumber = "0635235333", EMail = "zika@gmail.com", Username = "zika", Password = "123", GuestAccount = false, CityId = 2 },
-                new Patient { Id = 3, Name = "Mica", Surname = "Micic", ParentName = "Jelena", Gender = Gender.Male, IdentityCard = "163123123", HealthInsuranceCard = "62312312312", Jmbg = "12312512312312", BloodGroup = BloodGroup.Unknown, DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3), ContactNumber = "0635557673", EMail = "mica@gmail.com", Username = "mica", Password = "123", GuestAccount = false, CityId = 1 },
-                new Patient { Id = 4, Name = "Luna", Surname = "Lunic", ParentName = "Jovan", Gender = Gender.Female, IdentityCard = "127123123", HealthInsuranceCard = "52312312312", Jmbg = "12312316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555356", EMail = "luna@gmail.com", Username = "luna", Password = "123", GuestAccount = false, CityId = 2 }
+                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000,1,1,3,3,3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
+                new Patient { Id = 2, Name = "Zika", Surname = "Zikic", ParentName = "Pera", Gender = Gender.Male, IdentityCard = "124123123", HealthInsuranceCard = "712312312312", Jmbg = "12342312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3), ContactNumber = "0635235333", EMail = "zika@gmail.com", Username = "zika", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
+                new Patient { Id = 3, Name = "Mica", Surname = "Micic", ParentName = "Jelena", Gender = Gender.Male, IdentityCard = "163123123", HealthInsuranceCard = "62312312312", Jmbg = "12312512312312", BloodGroup = BloodGroup.Unknown, DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3), ContactNumber = "0635557673", EMail = "mica@gmail.com", Username = "mica", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
+                new Patient { Id = 4, Name = "Luna", Surname = "Lunic", ParentName = "Jovan", Gender = Gender.Female, IdentityCard = "127123123", HealthInsuranceCard = "52312312312", Jmbg = "12312316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555356", EMail = "luna@gmail.com", Username = "luna", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
+                new Patient { Id = 5, Name = "Ivan", Surname = "Ivanovic", ParentName = "Luka", Gender = Gender.Male, IdentityCard = "127199123", HealthInsuranceCard = "52318812312", Jmbg = "12344316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "ivan@gmail.com", Username = "ivan", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true },
+                new Patient { Id = 6, Name = "Marko", Surname = "Markovic", ParentName = "Jovan", Gender = Gender.Male, IdentityCard = "127123333", HealthInsuranceCard = "52312312311", Jmbg = "12312316712344", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555312", EMail = "marko@gmail.com", Username = "marko", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true }
             );
 
             modelBuilder.Entity<Report>().HasData(
@@ -92,12 +94,12 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<MedicalExamination>().HasData(
-                new MedicalExamination { Id = 1, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
-                new MedicalExamination { Id = 2, Urgency = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
-                new MedicalExamination { Id = 3, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
-                new MedicalExamination { Id = 4, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
-                new MedicalExamination { Id = 5, Urgency = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
-                new MedicalExamination { Id = 6, Urgency = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
+                new MedicalExamination { Id = 1, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
+                new MedicalExamination { Id = 2, SurveyFilled = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 3, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 4, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
+                new MedicalExamination { Id = 5, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
+                new MedicalExamination { Id = 6, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
@@ -223,20 +225,20 @@ namespace Backend.Repository.MySQL
            );
 
             modelBuilder.Entity<DoctorWorkDay>().HasData(
-                new DoctorWorkDay { Id = 1, DoctorId = 1, Date = new DateTime(2020, 12, 5), RoomId = 1 },
-                new DoctorWorkDay { Id = 2, DoctorId = 2, Date = new DateTime(2020, 12, 5), RoomId = 2 },
-                new DoctorWorkDay { Id = 3, DoctorId = 3, Date = new DateTime(2020, 12, 6), RoomId = 2 },
-                new DoctorWorkDay { Id = 4, DoctorId = 4, Date = new DateTime(2020, 12, 5), RoomId = 3 },
-                new DoctorWorkDay { Id = 5, DoctorId = 2, Date = new DateTime(2020, 12, 6), RoomId = 3 }
+                new DoctorWorkDay { Id = 1, DoctorId = 1, Date = new DateTime(2020, 12, 20), RoomId = 1 },
+                new DoctorWorkDay { Id = 2, DoctorId = 2, Date = new DateTime(2020, 12, 18), RoomId = 2 },
+                new DoctorWorkDay { Id = 3, DoctorId = 3, Date = new DateTime(2020, 12, 25), RoomId = 2 },
+                new DoctorWorkDay { Id = 4, DoctorId = 4, Date = new DateTime(2020, 12, 20), RoomId = 3 },
+                new DoctorWorkDay { Id = 5, DoctorId = 2, Date = new DateTime(2020, 12, 21), RoomId = 3 }
             ) ;
 
             modelBuilder.Entity<Appointment>().HasData(
-                new Appointment { Id = 1, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 0, 0), EndTime = new DateTime(2020, 12, 5, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
-                new Appointment { Id = 2, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 30, 0), EndTime = new DateTime(2020, 12, 5, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
-                new Appointment { Id = 3, Canceled = false, StartTime = new DateTime(2020, 12, 6, 8, 30, 0), EndTime = new DateTime(2020, 12, 6, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
-                new Appointment { Id = 4, Canceled = false, StartTime = new DateTime(2020, 12, 5, 8, 30, 0), EndTime = new DateTime(2020, 12, 5, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
-                new Appointment { Id = 5, Canceled = false, StartTime = new DateTime(2020, 12, 5, 15, 30, 0), EndTime = new DateTime(2020, 12, 5, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
-                new Appointment { Id = 6, Canceled = false, StartTime = new DateTime(2020, 12, 6, 8, 30, 0), EndTime = new DateTime(2020, 12, 6, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
+                new Appointment { Id = 1, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 0, 0), EndTime = new DateTime(2020, 12, 20, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
+                new Appointment { Id = 2, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 8, 30, 0), EndTime = new DateTime(2020, 11, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
+                new Appointment { Id = 3, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 25, 8, 30, 0), EndTime = new DateTime(2020, 12, 25, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
+                new Appointment { Id = 4, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 30, 0), EndTime = new DateTime(2020, 12, 20, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
+                new Appointment { Id = 5, Canceled = true, CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 5, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
+                new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 21, 8, 30, 0), EndTime = new DateTime(2020, 12, 21, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
             );
 
         }

@@ -1,4 +1,3 @@
-﻿using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.UsersRepository;
 using Backend.Service.UsersServices;
 using Model.Term;
@@ -52,7 +51,6 @@ namespace WebAppPatientTests.UnitTests
             Assert.NotEqual(21, result.Count);
         }
 
-
         private static IDoctorWorkDayRepository CreateDoctorWorkDayStubRepository()
         {
             var stubRepository = new Mock<IDoctorWorkDayRepository>();
@@ -73,6 +71,6 @@ namespace WebAppPatientTests.UnitTests
 
             stubRepository.Setup(doctorWorkDayRepository => doctorWorkDayRepository.GetAllEntities()).Returns(doctorWorkDays);
             return stubRepository.Object;
-        }   
+        }
     }
 }

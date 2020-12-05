@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.AllActors;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
 
@@ -50,11 +49,34 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
+
         [HttpPost]       // POST /api/appointment/
-        public IActionResult ScheduleAppointment(AppointmentMDto dto)
+        public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)
         {
-            return Ok(App.Instance().DoctorWorkDayService.ScheduleAppointment(AppointmentMMapper.AppointmentDtoToAppointment(dto)));
-            //return Ok(App.Instance().AppointmentService.AddEntity(AppointmentMMapper.AppointmentDtoToAppointment(dto)));
+            return Ok(App.Instance().DoctorWorkDayService.ScheduleAppointment(SchedulingAppointmentMapper.AppointmentDtoToAppointment(dto)));
+
+        }
+
+        [HttpGet("getPreviousAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getPreviousAppointmetsByPatient/{patientId}
+        public IActionResult GetPreviousAppointmetsByPatient(int patientId)
+        {
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            App.Instance().AppointmentService.GetPreviousAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            return Ok(result);
+        }
+
+        [HttpGet("getScheduledAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getScheduledAppointmetsByPatient/{patientId}
+        public IActionResult GetScheduledAppointmetsByPatient(int patientId)
+        {
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            App.Instance().AppointmentService.GetScheduledAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            return Ok(result);
+        }
+
+        [HttpPut("cancelAppointment/{appointmentId}")]       // GET /api/appointment/cancelAppointment/{appointmentId}
+        public IActionResult CancelPatientAppointment(int appointmentId)
+        {
+            return Ok(App.Instance().AppointmentService.CancelPatientAppointment(appointmentId));
         }
     }
 }

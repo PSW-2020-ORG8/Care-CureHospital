@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAppPatient.Dto
 {
-    public class AppointmentMDto
+    public class SchedulingAppointmentDto
     {
         public int Id { get; set; }
         public bool Canceled { get; set; }
@@ -15,7 +15,7 @@ namespace WebAppPatient.Dto
         public MedicalExamination MedicalExamination { get; set; }
         public int DoctorWorkDayId { get; set; }
 
-        public AppointmentMDto()
+        public SchedulingAppointmentDto()
         {
         }
     }

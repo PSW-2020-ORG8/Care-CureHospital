@@ -13,7 +13,7 @@ namespace Model.Term
     {
         public int Id { get; set; }
         public string ShortDescription { get; set; }
-        public bool Urgency { get; set; }
+        public bool SurveyFilled { get; set; }
         public int RoomId { get; set; }
         public int DoctorId { get; set; }
         public int PatientId { get; set; }
@@ -33,7 +33,7 @@ namespace Model.Term
         public MedicalExamination(int id, bool urgency, string shortDescription, Room room, AllActors.Doctor doctor, AllActors.Patient patient, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            Urgency = urgency;
+            SurveyFilled = urgency;
             ShortDescription = shortDescription;
             Id = id;
             Room = room;
@@ -44,7 +44,7 @@ namespace Model.Term
         public MedicalExamination(bool urgency, string shortDescription, Room room, AllActors.Doctor doctor, AllActors.Patient patient, DateTime fromDateTime, DateTime toDateTime)
             : base(fromDateTime, toDateTime)
         {
-            Urgency = urgency;
+            SurveyFilled = urgency;
             ShortDescription = shortDescription;
             Room = room;
             Doctor = doctor;
@@ -53,7 +53,7 @@ namespace Model.Term
 
         public MedicalExamination(int id, bool urgency, string shortDescription, int roomId, int doctorId, int patientId, Room room, AllActors.Doctor doctor, AllActors.Patient patient) : this(id)
         {
-            Urgency = urgency;
+            SurveyFilled = urgency;
             ShortDescription = shortDescription;
             RoomId = roomId;
             DoctorId = doctorId;

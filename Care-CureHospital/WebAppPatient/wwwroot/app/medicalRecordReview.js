@@ -162,7 +162,7 @@ Vue.component("medicalRecordReview", {
 
 	},
 	mounted() {
-        axios.get('api/medicalRecord/getForPatient/' + 1) // Umesto jedan preuzeti id ulogovanog pacijenta
+        axios.get('api/medicalRecord/getForPatient/' + 1)
             .then(response => {
                 this.medicalRecord = response.data;
                 this.profilePicture = this.medicalRecord.profilePicture;

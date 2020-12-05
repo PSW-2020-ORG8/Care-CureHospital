@@ -7,9 +7,9 @@ using WebAppPatient.Dto;
 
 namespace WebAppPatient.Mapper
 {
-    public class AppointmentMMapper
+    public class SchedulingAppointmentMapper
     {
-        public static Appointment AppointmentDtoToAppointment(AppointmentMDto dto)
+        public static Appointment AppointmentDtoToAppointment(SchedulingAppointmentDto dto)
         {
             Appointment appointment = new Appointment();
 
