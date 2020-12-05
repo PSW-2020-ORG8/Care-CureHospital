@@ -10,11 +10,12 @@ Vue.component("appointmentSchedulingByRecommendation", {
             startDateModel : '',
             endDateModel : '',
             specialization : '0',
-            doctors : '0',
+            doctorId : '0',
             priority : '0',
             selectedAppointment: null,
             specializations: [],
-            doctorsBySpecialization : []
+            doctorsBySpecialization : [],
+            recommendedTerms : []
 		}
 	},
 	template: `
@@ -77,7 +78,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             <div v-if="this.recommendationStep === 3">
                 <h1 style="padding-bottom: 70px;">Doktor</h1>
                 <h3>Izaberite doktora:</h3>
-                <select v-model="doctors">
+                <select v-model="doctorId">
                     <option value="0">Izaberite doktora...</option>
                     <option v-for="d in this.doctorsBySpecialization" :key="d.id" :value="d.id">Dr {{ d.name }} {{d.surname}}</option>
                 </select><br>
@@ -188,10 +189,24 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 axios.get('api/appointment/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
                     this.doctorsBySpecialization = response.data;
                 });
-            } else if (this.recommendationStep === 3 && this.doctors !== '0') {
+            } else if (this.recommendationStep === 3 && this.doctorId !== '0') {
                 this.recommendationStep += 1;
             }else if(this.recommendationStep === 4 && this.priority !== '0'){
                 this.recommendationStep += 1;
+                console.log(this.startDateModel)
+                console.log(this.endDateModel)
+                console.log(this.doctorId + ' ' + this.priority)
+                axios.get('api/appointment/getAllRecommendedTerms', {
+                    params: {
+						startDate : this.startDateModel,
+                        endDate : this.endDateModel,
+                        doctorId : this.doctorId,
+                        priority : this.priority
+                        
+					}
+                }).then(response => {
+                    this.recommendedTerms = response.data;
+                });
             }         
         },
         backRecommendationStep : function() {
@@ -223,7 +238,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             this.startDateModel = '';
             this.endDateModel = '';
             this.specialization = '0';
-            this.doctors = '0';
+            this.doctorId = '0';
             this.priority = '0';
             this.selectedAppointment = null;
         }

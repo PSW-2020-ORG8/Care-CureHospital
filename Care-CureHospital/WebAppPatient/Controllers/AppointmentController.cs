@@ -65,5 +65,13 @@ namespace WebAppPatient.Controllers
         {
             return Ok(App.Instance().AppointmentService.CancelPatientAppointment(appointmentId));
         }
+
+        /*[HttpGet("getAllRecommendedTerms")]       // GET /api/appointment/getAllRecommendedTerms
+        public IActionResult GetAllRecommendedTerms([FromQuery(Name = "startDate")] string startDate, [FromQuery(Name = "endDate")] string endDate, [FromQuery(Name = "doctorId")] string doctorId, [FromQuery(Name = "priority")] string priority)
+        {
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) , DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto2(appointment)));
+            return Ok(result);
+        }*/
     }
 }
