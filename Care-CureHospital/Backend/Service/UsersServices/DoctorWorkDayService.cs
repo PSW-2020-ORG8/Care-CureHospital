@@ -48,13 +48,17 @@ namespace Backend.Service.UsersServices
 
         public List<Appointment> GetAvailableAppointmentsByDateAndDoctorId(DateTime date, int doctorId)
         {
-            List<Appointment> result = InitializeAvailableApoointmentsList(date);
-            foreach(Appointment scheduledAppointment in GetDoctorWorkDayByDateAndDoctorId(date, doctorId).ScheduledAppointments)
+            List<Appointment> result = new List<Appointment>();
+            if (GetDoctorWorkDayByDateAndDoctorId(date, doctorId) != null)
             {
-                var appointment = result.Find(o => DateTime.Compare(o.StartTime, scheduledAppointment.StartTime) == 0);
-                if (appointment != null)
+                result = InitializeAvailableApoointmentsList(date);
+                foreach (Appointment scheduledAppointment in GetDoctorWorkDayByDateAndDoctorId(date, doctorId).ScheduledAppointments)
                 {
-                    result.Remove(appointment);
+                    var appointment = result.Find(o => DateTime.Compare(o.StartTime, scheduledAppointment.StartTime) == 0);
+                    if (appointment != null && appointment.Canceled == false)
+                    {
+                        result.Remove(appointment);
+                    }
                 }
             }
             return result;
@@ -70,6 +74,26 @@ namespace Backend.Service.UsersServices
                 result.Add(appointmentTimePeriod);
             }
             return result;
+        }
+
+        public DoctorWorkDay ScheduleAppointment(Appointment appointment)
+        {
+            DoctorWorkDay doctorWorkDay = GetEntity(appointment.DoctorWorkDayId);
+            if (CheckIfAppointmentTimeIsAvailableForGivenWorkDay(doctorWorkDay, appointment))
+            {
+                doctorWorkDay.ScheduledAppointments.Add(appointment);
+                UpdateEntity(doctorWorkDay);
+            }
+            return doctorWorkDay;
+        }
+
+        public bool CheckIfAppointmentTimeIsAvailableForGivenWorkDay(DoctorWorkDay doctorWorkDay, Appointment appointment)
+        {
+            if (doctorWorkDay.ScheduledAppointments.Where(o => DateTime.Compare(o.StartTime, appointment.StartTime) == 0).ToList().Count == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
