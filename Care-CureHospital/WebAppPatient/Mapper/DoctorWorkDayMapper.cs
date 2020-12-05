@@ -12,11 +12,17 @@ namespace WebAppPatient.Mapper
 
         public static DoctorWorkDayDto DoctorWorkDayToDoctorWorkDayDto(DoctorWorkDay doctorWorkDay, List<Appointment> availableAppointments)
         {
-            DoctorWorkDayDto dto = new DoctorWorkDayDto();
-            dto.Id = doctorWorkDay.Id;
-            dto.DoctorId = doctorWorkDay.DoctorId;
-            dto.RoomId = doctorWorkDay.RoomId;
-            dto.AvailableAppointments = availableAppointments;
+            DoctorWorkDayDto dto = null;
+
+            if (doctorWorkDay != null)
+            {
+                dto = new DoctorWorkDayDto();
+
+                dto.Id = doctorWorkDay.Id;
+                dto.DoctorId = doctorWorkDay.DoctorId;
+                dto.RoomId = doctorWorkDay.RoomId;
+                dto.AvailableAppointments = availableAppointments;
+            }
 
             return dto;
         }

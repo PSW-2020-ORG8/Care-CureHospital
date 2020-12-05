@@ -21,10 +21,16 @@ namespace WebAppPatient.Controllers
         [HttpGet("getAvailableAppointments")]
         public IActionResult GetAvailableAppointmentsByDateAndDoctorId([FromQuery(Name = "date")] string date, [FromQuery(Name = "doctorId")] int doctorId)
         {
-            return Ok(DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
-                App.Instance().DoctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-dd-MM", CultureInfo.InvariantCulture), doctorId),
-                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-dd-MM", CultureInfo.InvariantCulture), doctorId)
-                ));
+            DoctorWorkDayDto dto = DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
+                App.Instance().DoctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId),
+                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId)
+                );
+            
+            if (dto == null)
+            {
+                return NoContent();
+            }
+            return Ok(dto);
         }
 
         [HttpGet("getAllSpecialization")]       // GET /api/appointment/getAllSpecialization
@@ -43,6 +49,13 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost]       // POST /api/appointment/
+        public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)
+        {
+            return Ok(App.Instance().DoctorWorkDayService.ScheduleAppointment(SchedulingAppointmentMapper.AppointmentDtoToAppointment(dto)));
+
+        }
 
         [HttpGet("getPreviousAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getPreviousAppointmetsByPatient/{patientId}
         public IActionResult GetPreviousAppointmetsByPatient(int patientId)
