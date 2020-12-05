@@ -22,6 +22,8 @@ namespace WebAppPatient.Mapper
                 dto.DoctorId = doctorWorkDay.DoctorId;
                 dto.RoomId = doctorWorkDay.RoomId;
                 dto.AvailableAppointments = availableAppointments;
+                dto.Specialization = doctorWorkDay.Doctor.Specialitation.SpecialitationForDoctor;
+                dto.DoctorFullName = "Dr " + doctorWorkDay.Doctor.Name + " " + doctorWorkDay.Doctor.Surname;
             }
 
             return dto;

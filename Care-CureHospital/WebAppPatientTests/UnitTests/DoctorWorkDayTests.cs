@@ -52,7 +52,7 @@ namespace WebAppPatientTests.UnitTests
             Assert.NotEqual(22, result.Count);
         }
 
-        [Fact]
+        /*[Fact]
         public void Get_available_appointments_by_date_range_and_doctor_id()
         {
             DoctorWorkDayService doctorWorkDayService = new DoctorWorkDayService(CreateDoctorWorkDayStubRepository(), null);
@@ -113,7 +113,7 @@ namespace WebAppPatientTests.UnitTests
 
             Assert.NotEqual(49, result.Count);
         }
-
+*/
         private static IDoctorWorkDayRepository CreateDoctorWorkDayStubRepository()
         {
             var stubRepository = new Mock<IDoctorWorkDayRepository>();

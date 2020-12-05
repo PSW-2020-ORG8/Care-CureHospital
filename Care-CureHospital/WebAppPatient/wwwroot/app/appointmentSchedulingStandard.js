@@ -136,8 +136,8 @@ Vue.component("appointmentSchedulingStandard", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Obično zakazivanje</a></li></div><br/>
-		    <div><li class="active"><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
+         <div><li class="active"><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
+         <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div>
 	 	  

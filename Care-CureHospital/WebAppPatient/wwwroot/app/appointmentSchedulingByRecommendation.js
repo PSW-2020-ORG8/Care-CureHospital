@@ -15,7 +15,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            workDaysRecommendedTerms : []
+            workDaysRecommendedTerms : [],
 		}
 	},
 	template: `
@@ -105,36 +105,33 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 </div>
             </div>
             <div v-if="this.recommendationStep === 5">
-                <h1 style="padding-bottom: 30px;" v-if="this.priority === '1'">Preporučeni termini po doktoru</h1>
-                <h1 style="padding-bottom: 30px;" v-if="this.priority === '2'">Preporučeni termini po vremenskom periodu</h1>
+                <h1 style="padding-bottom: 30px;" v-if="this.priority === 'Doctor'">Preporučeni termini po doktoru</h1>
+                <h1 style="padding-bottom: 30px;" v-if="this.priority === 'DateRange'">Preporučeni termini po vremenskom periodu</h1>
                 <h3>Izaberite jedan slobodan termin:</h3><br>
                 <div class="scroll-in-appointment-scheduling-by-recommendation">
                     <div class="table-wrapper-appointment-scheduling-by-recommendation">
                         <table class="fl-table-appointment-scheduling-by-recommendation">
                             <thead>
-                            <tr>
-                                <th>Doktor</th>
-                                <th>Specijalistička grana</th>
-                                <th>Datum</th>
-                                <th>Vreme</th>
-                                <th>Izaberite</th>
-                            </tr>
+                                <tr>
+                                    <th>Doktor</th>
+                                    <th>Specijalistička grana</th>
+                                    <th>Datum</th>
+                                    <th>Vreme</th>
+                                    <th>Izaberite</th>
+                                </tr>
                             </thead>
-                            <tbody>        
-                                <tr>
-                                    <td>Dr. Milan Milanovic</td>
-                                    <td>Kardiolog</td>
-                                    <td>12.12.2020.</td>
-                                    <td>11:00-11:30</td>
-                                    <td><input v-model="selectedAppointment" type="radio" name="radioButtonAppointment" value="1"></td>		                        	                 
-                                </tr>
-                                <tr>
-                                    <td>Dr. Milan Milanovic</td>
-                                    <td>Kardiolog</td>
-                                    <td>12.12.2020.</td>
-                                    <td>12:00-12:30</td>
-                                    <td><input v-model="selectedAppointment" type="radio" name="radioButtonAppointment" value="2"></td>		                        	                 
-                                </tr>
+                            <tbody>  
+                                <template v-for="(workDayRecommendedTerm, index) in this.workDaysRecommendedTerms">
+                                    <template v-for="(availableAppointment, index) in workDayRecommendedTerm.availableAppointments">
+                                        <tr>
+                                            <td>{{workDayRecommendedTerm.doctorFullName}}</td>
+                                            <td>{{workDayRecommendedTerm.specialization}}</td>
+                                            <td>{{availableAppointment.startTime.split('T')[0]}}</td>
+                                            <td>{{availableAppointment.startTime.split('T')[1]}} - {{availableAppointment.endTime.split('T')[1]}}</td>
+                                            <td><input v-model="selectedAppointment" type="radio" name="radioButtonAppointment" :value="index"></td>
+                                        </tr>
+                                    </template>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -153,7 +150,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Obično zakazivanje</a></li></div><br/>
+			<div><li><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
 		    <div><li class="active"><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div>
@@ -193,10 +190,6 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 this.recommendationStep += 1;
             }else if(this.recommendationStep === 4 && this.priority !== '0'){
                 this.recommendationStep += 1;
-                console.log(this.startDateModel)
-                console.log(this.endDateModel)
-                console.log(this.doctorId + ' ' + this.priority)
-                console.log(this.specialization)
                 axios.get('api/appointment/getAllRecommendedTerms', {
                     params: {
 						startDate : this.convertDate(this.startDateModel),
@@ -220,8 +213,16 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate selektovati neki od ponuđenih termina')
             } else {
                 axios.post('/api/appointment', {
-                    // pribavi podatke
-
+                    canceled: false,
+                    startTime: this.workDaysRecommendedTerms[this.selectedAppointment].availableAppointments[this.selectedAppointment].startTime,
+                    endTime: this.workDaysRecommendedTerms[this.selectedAppointment].availableAppointments[this.selectedAppointment].endTime,
+					doctorWorkDayId: this.workDaysRecommendedTerms[this.selectedAppointment].id,
+					medicalExamination: {
+                        shortDescription : '',
+                        urgency : false,
+                        roomId : this.workDaysRecommendedTerms[this.selectedAppointment].roomId,
+                        doctorId : this.workDaysRecommendedTerms[this.selectedAppointment].doctorId
+                    }
                 }).then(response => {
                     if (response.status === 200) {
                         toast('Termin je uspešno rezervisan!')
