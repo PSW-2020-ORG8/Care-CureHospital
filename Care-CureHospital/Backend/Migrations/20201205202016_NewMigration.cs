@@ -696,11 +696,11 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Date", "DoctorId", "RoomId" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
-                    { 5, new DateTime(2020, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 3 },
-                    { 4, new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 3 },
-                    { 3, new DateTime(2020, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
-                    { 1, new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 }
+                    { 2, new DateTime(2020, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
+                    { 5, new DateTime(2020, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 3 },
+                    { 4, new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 3 },
+                    { 3, new DateTime(2020, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
+                    { 1, new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -757,11 +757,11 @@ namespace Backend.Migrations
                 values: new object[,]
                 {
                     { 3, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, true, new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 5, 15, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 20, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, true, new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(

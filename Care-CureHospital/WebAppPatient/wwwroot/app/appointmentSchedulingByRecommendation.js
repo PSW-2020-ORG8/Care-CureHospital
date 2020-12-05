@@ -15,7 +15,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            recommendedTerms : []
+            workDaysRecommendedTerms : []
 		}
 	},
 	template: `
@@ -94,8 +94,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 <h3>Izaberite prioritet:</h3>
                 <select v-model="priority">
                     <option value="0">Izaberite prioritet...</option>
-                    <option value="1">Doktor</option>
-                    <option value="2">Vremenski period</option>
+                    <option value="Doctor">Doktor</option>
+                    <option value="DateRange">Vremenski period</option>
                 </select><br>
                 <div class="next-btn-appointment-scheduling-by-recommendation">
                     <button type="button" @click="nextRecommendationStep()" style="margin-top: 80%;">Dalje</button>
@@ -196,16 +196,17 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 console.log(this.startDateModel)
                 console.log(this.endDateModel)
                 console.log(this.doctorId + ' ' + this.priority)
+                console.log(this.specialization)
                 axios.get('api/appointment/getAllRecommendedTerms', {
                     params: {
-						startDate : this.startDateModel,
-                        endDate : this.endDateModel,
+						startDate : this.convertDate(this.startDateModel),
+                        endDate : this.convertDate(this.endDateModel),
                         doctorId : this.doctorId,
                         priority : this.priority
                         
 					}
                 }).then(response => {
-                    this.recommendedTerms = response.data;
+                    this.workDaysRecommendedTerms = response.data;
                 });
             }         
         },
@@ -241,6 +242,17 @@ Vue.component("appointmentSchedulingByRecommendation", {
             this.doctorId = '0';
             this.priority = '0';
             this.selectedAppointment = null;
+        },
+        extractTime : function(dateTime) {
+            let parts = dateTime.split('T');
+            return parts[1];
+        },
+        convertDate : function(date) {
+            let d = new Date(date);
+            let year = d.getFullYear();
+            let month = d.getMonth() + 1;
+            let day = d.getDate(); 
+            return d.getFullYear() + '-' + (month > 10 ? '' : '0') + month + '-' + (day > 10 ? '' : '0') + day;
         }
 	},
 	mounted() {
@@ -248,5 +260,4 @@ Vue.component("appointmentSchedulingByRecommendation", {
             this.specializations = response.data;
         });
 	}
-
 });
