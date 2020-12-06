@@ -380,9 +380,6 @@ Vue.component("surveyAfterExamination", {
 
 		if (this.$route.params.medicalExaminationId !== null) {
 			this.medicalExaminationId = this.$route.params.medicalExaminationId;
-			console.log(this.medicalExaminationId)
-		} else {
-			this.medicalExaminationId = 0;
 		}
 		
 	}

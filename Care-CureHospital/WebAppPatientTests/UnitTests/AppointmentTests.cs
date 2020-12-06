@@ -80,7 +80,7 @@ namespace WebAppPatientTests.UnitTests
         {
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);
 
-            appointmentService.CancelPatientAppointment(3);
+            appointmentService.CancelPatientAppointment(3, new DateTime(2020, 12, 4));
             Appointment canceledAppointment = appointmentService.GetEntity(3);
 
             Assert.True(canceledAppointment.Canceled);
@@ -91,7 +91,7 @@ namespace WebAppPatientTests.UnitTests
         {
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);
 
-            appointmentService.CancelPatientAppointment(2);
+            appointmentService.CancelPatientAppointment(2, new DateTime(2020, 12, 4));
             Appointment canceledAppointment = appointmentService.GetEntity(2);
 
             Assert.False(canceledAppointment.Canceled);
@@ -113,9 +113,9 @@ namespace WebAppPatientTests.UnitTests
             PatientService patientService = new PatientService(CreatePatientStubRepository());
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), patientService);
 
-            appointmentService.CancelPatientAppointment(8);
-            appointmentService.CancelPatientAppointment(9);
-            appointmentService.CancelPatientAppointment(10);
+            appointmentService.CancelPatientAppointment(8, new DateTime(2020, 12, 4));
+            appointmentService.CancelPatientAppointment(9, new DateTime(2020, 12, 4));
+            appointmentService.CancelPatientAppointment(10, new DateTime(2020, 12, 4));
 
             List<Patient> result = patientService.GetMaliciousPatients();
 

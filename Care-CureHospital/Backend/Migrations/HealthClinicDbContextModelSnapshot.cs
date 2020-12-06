@@ -1391,7 +1391,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 6,
                             StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },

@@ -758,7 +758,7 @@ namespace Backend.Migrations
                 {
                     { 3, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 5, true, new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 5, 15, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
