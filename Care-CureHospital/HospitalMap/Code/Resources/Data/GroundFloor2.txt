@@ -309,7 +309,7 @@
   },
   {
     "Paint": "#FFFFFF00",
-    "Id": "surgeryRoom1",
+    "Id": "Sr1B",
     "Top": 37,
     "Left": 218,
     "Width": 128,
@@ -323,7 +323,7 @@
   },
   {
     "Paint": "#FFFFFF00",
-    "Id": "surgeryRoom2",
+    "Id": "Sr2B",
     "Top": 148,
     "Left": 218,
     "Width": 128,
@@ -337,7 +337,7 @@
   },
   {
     "Paint": "#FFFFFF00",
-    "Id": "surgeryRoom3",
+    "Id": "Sr3B",
     "Top": 236,
     "Left": 218,
     "Width": 128,
@@ -351,7 +351,7 @@
   },
   {
     "Paint": "#FFF08080",
-    "Id": "radiology",
+    "Id": "RadB",
     "Top": 323,
     "Left": 218,
     "Width": 128,
@@ -365,7 +365,7 @@
   },
   {
     "Paint": "#FF00FF00",
-    "Id": "storage",
+    "Id": "s2B",
     "Top": 404,
     "Left": 218,
     "Width": 128,
@@ -379,7 +379,7 @@
   },
   {
     "Paint": "#FFFFFFFF",
-    "Id": "pharmacy",
+    "Id": "PhB",
     "Top": 37,
     "Left": 787,
     "Width": 125,
@@ -407,7 +407,7 @@
   },
   {
     "Paint": "#FFF08080",
-    "Id": "neurology",
+    "Id": "Neur",
     "Top": 267,
     "Left": 787,
     "Width": 125,
@@ -421,7 +421,7 @@
   },
   {
     "Paint": "#FFF08080",
-    "Id": "psychiatric",
+    "Id": "Psyc",
     "Top": 404,
     "Left": 787,
     "Width": 125,
@@ -477,7 +477,7 @@
   },
   {
     "Paint": "#FF5F9EA0",
-    "Id": "doctor1Office",
+    "Id": "Dr1B",
     "Top": 464,
     "Left": 363,
     "Width": 192,
@@ -491,7 +491,7 @@
   },
   {
     "Paint": "#FF5F9EA0",
-    "Id": "doctor2Office",
+    "Id": "Dr2B",
     "Top": 464,
     "Left": 572,
     "Width": 198,

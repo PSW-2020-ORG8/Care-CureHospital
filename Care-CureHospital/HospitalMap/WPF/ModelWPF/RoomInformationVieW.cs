@@ -6,10 +6,10 @@ using System.Text;
 
 namespace HospitalMap.WPF.ModelWPF
 {
-    public class RoomInformationWiev : INotifyPropertyChanged
+    public class RoomInformationVieW : INotifyPropertyChanged
     {
 
-        public RoomInformationWiev() { }
+        public RoomInformationVieW() { }
 
 
 
@@ -23,7 +23,33 @@ namespace HospitalMap.WPF.ModelWPF
         }
 
 
+
+        private string _idOfRoom;
         private string _nameOfRoom;
+        private string _nameOfClinic;
+        private string _numberOfFloor;
+        private string _bedCapacity;
+        private string _availableBeds;
+        private string _occupiedBeds;
+
+        public string IdOfRoom
+        { 
+            get
+            {
+                return _idOfRoom;
+            }
+            set
+            {
+                if (value != _idOfRoom)
+                {
+                    _idOfRoom = value;
+                    OnPropertyChanged("IdOfRoom");
+                }
+            }
+        }
+
+
+        
        
         public string NameOfRoom
         {
@@ -42,7 +68,7 @@ namespace HospitalMap.WPF.ModelWPF
         }
 
 
-        private string _nameOfClinic;
+        
         
         public string NameOfClinic
         {
@@ -63,7 +89,7 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        private string _numberOfFloor;
+        
        
 
         public string NumberOfFloor
@@ -84,7 +110,7 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        private string _bedCapacity;
+        
         
 
 
@@ -108,7 +134,7 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        private string _availableBeds;
+        
         
 
         public string AvailableBeds
@@ -130,7 +156,7 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        private string _occupiedBeds;
+        
         
         public string OccupiedBeds
         {

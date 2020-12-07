@@ -43,7 +43,7 @@
   },
   {
     "Paint": "#FF0000FF",
-    "Id": "Hospital1",
+    "Id": "HospitalA",
     "Top": 118,
     "Left": 393,
     "Width": 107,
@@ -57,7 +57,7 @@
   },
   {
     "Paint": "#FF0000FF",
-    "Id": "Hospital2",
+    "Id": "HospitalB",
     "Top": 194,
     "Left": 744,
     "Width": 148,
@@ -71,7 +71,7 @@
   },
   {
     "Paint": "#FF0000FF",
-    "Id": "Hospital2",
+    "Id": "HospitalB",
     "Top": 118,
     "Left": 669,
     "Width": 107,
@@ -715,7 +715,7 @@
   },
   {
     "Paint": "#FF0000FF",
-    "Id": "hospital1",
+    "Id": "HospitalA",
     "Top": 194,
     "Left": 274,
     "Width": 147,
