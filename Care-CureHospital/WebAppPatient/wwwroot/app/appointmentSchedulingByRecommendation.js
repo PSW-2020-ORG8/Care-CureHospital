@@ -107,8 +107,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
             <div v-if="this.recommendationStep === 5">
                 <h1 style="padding-bottom: 30px;" v-if="this.priority === 'Doctor'">Preporučeni termini po doktoru</h1>
                 <h1 style="padding-bottom: 30px;" v-if="this.priority === 'DateRange'">Preporučeni termini po vremenskom periodu</h1>
-                <h3>Izaberite jedan slobodan termin:</h3><br>
-                <div class="scroll-in-appointment-scheduling-by-recommendation">
+                <h3 v-if="this.workDaysRecommendedTerms.length !== 0">Izaberite jedan slobodan termin:</h3><br>
+                <h3 v-if="this.workDaysRecommendedTerms.length === 0"></h3><br>
+                <div class="scroll-in-appointment-scheduling-by-recommendation" v-if="this.workDaysRecommendedTerms.length !== 0">
                     <div class="table-wrapper-appointment-scheduling-by-recommendation">
                         <table class="fl-table-appointment-scheduling-by-recommendation">
                             <thead>
@@ -121,14 +122,14 @@ Vue.component("appointmentSchedulingByRecommendation", {
                                 </tr>
                             </thead>
                             <tbody>  
-                                <template v-for="(workDayRecommendedTerm, index) in this.workDaysRecommendedTerms">
-                                    <template v-for="(availableAppointment, index) in workDayRecommendedTerm.availableAppointments">
+                                <template v-for="(workDayRecommendedTerm, index1) in this.workDaysRecommendedTerms">
+                                    <template v-for="(availableAppointment, index2) in workDayRecommendedTerm.availableAppointments">
                                         <tr>
                                             <td>{{workDayRecommendedTerm.doctorFullName}}</td>
                                             <td>{{workDayRecommendedTerm.specialization}}</td>
                                             <td>{{availableAppointment.startTime.split('T')[0]}}</td>
                                             <td>{{availableAppointment.startTime.split('T')[1]}} - {{availableAppointment.endTime.split('T')[1]}}</td>
-                                            <td><input v-model="selectedAppointment" type="radio" name="radioButtonAppointment" :value="index"></td>
+                                            <td><input v-model="selectedAppointment" type="radio" name="radioButtonAppointment" :value="index1 + '-' + index2"></td>
                                         </tr>
                                     </template>
                                 </template>
@@ -136,10 +137,16 @@ Vue.component("appointmentSchedulingByRecommendation", {
                         </table>
                     </div>
                 </div>
-                <div class="next-btn-appointment-scheduling-by-recommendation">
-                    <button type="button" @click="scheduleTerm()" style="margin-top: 8%;">Zakaži</button>
+                <div class="scroll-in-appointment-scheduling-by-recommendation" style="overflow: hidden;" v-if="this.workDaysRecommendedTerms.length === 0">
+                    <br><br><br><h3>Nema slobodnih termina za izabrane parametre</h3>
                 </div>
-                <div class="back-btn-appointment-scheduling-by-recommendation" style="margin-top: -20.8%;">
+                <div class="next-btn-appointment-scheduling-by-recommendation">
+                    <button v-if="this.workDaysRecommendedTerms.length !== 0" type="button" @click="scheduleTerm()" style="margin-top: 8%;">Zakaži</button>
+                </div>
+                <div v-if="this.workDaysRecommendedTerms.length !== 0" class="back-btn-appointment-scheduling-by-recommendation" style="margin-top: -20.8%;">
+                    <button type="button" @click="backRecommendationStep()">Nazad</button>
+                </div>
+                <div v-if="this.workDaysRecommendedTerms.length === 0" class="back-btn-appointment-scheduling-by-recommendation" style="margin-top: -17%;">
                     <button type="button" @click="backRecommendationStep()">Nazad</button>
                 </div>
             </div>
@@ -181,14 +188,20 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 } else if(this.recommendationStep === 1) {
                     this.recommendationStep += 1;
                 } 
-            }else if(this.recommendationStep === 2 && this.specialization !== '0'){
+            } else if (this.recommendationStep === 1 && (this.startDateModel === '' || this.endDateModel === '')){
+                toast('Morate izabrati i početni i krajnji datum')
+            } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
                 axios.get('api/appointment/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
                     this.doctorsBySpecialization = response.data;
                 });
+            } else if (this.recommendationStep === 2 && this.specialization === '0'){
+                toast('Morate izabrati specijalističku granu')
             } else if (this.recommendationStep === 3 && this.doctorId !== '0') {
                 this.recommendationStep += 1;
-            }else if(this.recommendationStep === 4 && this.priority !== '0'){
+            } else if (this.recommendationStep === 3 && this.doctorId === '0'){
+                toast('Morate izabrati doktora')
+            } else if(this.recommendationStep === 4 && this.priority !== '0'){
                 this.recommendationStep += 1;
                 axios.get('api/appointment/getAllRecommendedTerms', {
                     params: {
@@ -201,6 +214,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 }).then(response => {
                     this.workDaysRecommendedTerms = response.data;
                 });
+            } else if (this.recommendationStep === 4 && this.priority === '0'){
+                toast('Morate izabrati prioritet pretrage')
             }         
         },
         backRecommendationStep : function() {
@@ -212,21 +227,23 @@ Vue.component("appointmentSchedulingByRecommendation", {
             if(this.selectedAppointment === null){
                 toast('Morate selektovati neki od ponuđenih termina')
             } else {
+                var splitedSelectedAppointment = this.selectedAppointment.split('-');
                 axios.post('/api/appointment', {
                     canceled: false,
-                    startTime: this.workDaysRecommendedTerms[this.selectedAppointment].availableAppointments[this.selectedAppointment].startTime,
-                    endTime: this.workDaysRecommendedTerms[this.selectedAppointment].availableAppointments[this.selectedAppointment].endTime,
-					doctorWorkDayId: this.workDaysRecommendedTerms[this.selectedAppointment].id,
+                    startTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].startTime,
+                    endTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].endTime,
+					doctorWorkDayId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].id,
 					medicalExamination: {
                         shortDescription : '',
                         urgency : false,
-                        roomId : this.workDaysRecommendedTerms[this.selectedAppointment].roomId,
-                        doctorId : this.workDaysRecommendedTerms[this.selectedAppointment].doctorId
+                        roomId : this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].roomId,
+                        doctorId : this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].doctorId
                     }
                 }).then(response => {
                     if (response.status === 200) {
                         toast('Termin je uspešno rezervisan!')
                         this.resetData()
+                        this.$router.push('patientAppointments')
                     }
                 }).catch(error => {
                     if (error.response.status === 400) {
@@ -253,7 +270,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             let year = d.getFullYear();
             let month = d.getMonth() + 1;
             let day = d.getDate(); 
-            return d.getFullYear() + '-' + (month > 10 ? '' : '0') + month + '-' + (day > 10 ? '' : '0') + day;
+            return d.getFullYear() + '-' + (month > 9 ? '' : '0') + month + '-' + (day > 9 ? '' : '0') + day;
         }
 	},
 	mounted() {
