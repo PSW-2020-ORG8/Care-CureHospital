@@ -136,8 +136,8 @@ Vue.component("appointmentSchedulingStandard", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Obično zakazivanje</a></li></div><br/>
-		    <div><li class="active"><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
+         <div><li class="active"><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
+         <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div>
 	 	  
@@ -223,7 +223,7 @@ Vue.component("appointmentSchedulingStandard", {
             let year = d.getFullYear();
             let month = d.getMonth() + 1;
             let day = d.getDate(); 
-            return d.getFullYear() + '-' + (month > 10 ? '' : '0') + month + '-' + (day > 10 ? '' : '0') + day;
+            return d.getFullYear() + '-' + (month > 9 ? '' : '0') + month + '-' + (day > 9 ? '' : '0') + day;
         },
         resetData : function(){
             this.recommendationStep = 1;

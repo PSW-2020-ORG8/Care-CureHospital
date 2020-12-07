@@ -74,7 +74,7 @@ namespace Backend
             ReportService = new ReportService(
                new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
             DoctorWorkDayService = new DoctorWorkDayService(
-                new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()));
+                new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()), DoctorService);
             SpetialitationService = new SpetialitationService(
                 new SpecialitationRepository(new MySQLStream<Specialitation>(), new IntSequencer()));
             AppointmentService = new AppointmentService(

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Term;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
 
@@ -77,6 +78,13 @@ namespace WebAppPatient.Controllers
         public IActionResult CancelPatientAppointment(int appointmentId)
         {
             return Ok(App.Instance().AppointmentService.CancelPatientAppointment(appointmentId));
+        }
+
+        [HttpGet("getAllRecommendedTerms")]       // GET /api/appointment/getAllRecommendedTerms
+        public IActionResult GetAllRecommendedTerms([FromQuery(Name = "startDate")] string startDate, [FromQuery(Name = "endDate")] string endDate, [FromQuery(Name = "doctorId")] string doctorId, [FromQuery(Name = "priority")] string priority)
+        {
+            Dictionary<int, List<Appointment>> availableAppointments =  App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority);
+            return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(App.Instance().DoctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
         }
     }
 }
