@@ -79,6 +79,14 @@ namespace Backend.Service.ExaminationSurgeryServices
             return result.Count >= 3;
         }
 
+        public Appointment FilledSurveyForAppointment(int appointmentId)
+        {
+            Appointment appointment = GetEntity(appointmentId);
+            appointment.MedicalExamination.SurveyFilled = true;
+            UpdateEntity(appointment);
+            return appointment;
+        }
+
         public Appointment AddEntity(Appointment entity)
         {
             return appointmentRepository.AddEntity(entity);

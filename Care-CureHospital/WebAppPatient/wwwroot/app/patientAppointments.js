@@ -70,7 +70,7 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
 						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn">
-							<button type="button" @click="fillSurvey(appointment.medicalExaminationId)">Popuni anketu</button>
+							<button type="button" @click="fillSurvey(appointment)">Popuni anketu</button>
 						</div>	
 						<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">
 							<p>Popunili ste anketu</p>
@@ -122,16 +122,8 @@ Vue.component("patientAppointments", {
 				});
 		},
 
-		fillSurvey: function (medicalExaminationForSurvey) {
-			axios.put('/api/survey/filledSurveyForMedicalExamination/' + medicalExaminationForSurvey).then(response => {
-				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
-					this.scheduledAppointments = response.data;
-					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
-						this.previousAppointments = response.data;
-					});
-				});
-			});	
-			this.$router.push({ name: 'surveyAfterExamination', params: { medicalExaminationId: medicalExaminationForSurvey } })
+		fillSurvey: function (selectedAppointment) {
+			this.$router.push({ name: 'surveyAfterExamination', params: { appointment: selectedAppointment } })
 		},
 
 		onChange: function () {

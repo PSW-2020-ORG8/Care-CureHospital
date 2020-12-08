@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201205205004_NewMigration")]
+    [Migration("20201206221005_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1375,7 +1375,7 @@ namespace Backend.Migrations
                             DoctorWorkDayId = 2,
                             EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
-                            StartTime = new DateTime(2020, 11, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1393,19 +1393,19 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 6,
-                            StartTime = new DateTime(2020, 12, 5, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             Canceled = true,
-                            CancellationDate = new DateTime(2020, 12, 1, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
                             EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
-                            StartTime = new DateTime(2020, 12, 5, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1413,9 +1413,9 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
-                            EndTime = new DateTime(2020, 12, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 3,
-                            StartTime = new DateTime(2020, 12, 6, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1446,35 +1446,35 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 1,
                             RoomId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 2,
                             RoomId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2020, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 3,
                             RoomId = 2
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2020, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 4,
                             RoomId = 3
                         },
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2020, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 2,
                             RoomId = 3
                         });
