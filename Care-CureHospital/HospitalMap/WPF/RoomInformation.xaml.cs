@@ -21,7 +21,7 @@ namespace HospitalMap.WPF
     public partial class RoomInformation : Window
     {
         private InformationEditController informationControler = new InformationEditController();
-        public RoomInformationWiev room
+        public RoomInformationVieW room
         {
             get;
             set;
@@ -32,7 +32,22 @@ namespace HospitalMap.WPF
             InitializeComponent();
             this.DataContext = this;
 
-            room = informationControler.GetRoomById("Room2");
+            if (Login.role != 3)
+            {
+
+                ButonSave.Visibility = Visibility.Hidden;
+
+                Roomtxt.IsEnabled = false;
+                FloorTxt.IsEnabled = false;
+                BedCapacityTxt.IsEnabled = false;
+                OcupiedBedsTxt.IsEnabled = false;
+                AvailableBedsTxt.IsEnabled = false;
+                ClinicTxt.IsEnabled = false;
+
+
+            }
+
+            room = informationControler.GetRoomById("2");
 
 
         }
@@ -42,6 +57,31 @@ namespace HospitalMap.WPF
         {
             InitializeComponent();
             this.DataContext = this;
+
+
+            if (Login.role != 3)
+            {
+
+                ButonSave.Visibility = Visibility.Hidden;
+
+                Roomtxt.IsEnabled = false;
+                FloorTxt.IsEnabled = false;
+                BedCapacityTxt.IsEnabled = false;
+                OcupiedBedsTxt.IsEnabled = false;
+                AvailableBedsTxt.IsEnabled = false;
+                ClinicTxt.IsEnabled = false;
+
+
+            }
+            if (Login.role == 2) {
+                BedCapacityTxt.Visibility = Visibility.Hidden;
+                OcupiedBedsTxt.Visibility = Visibility.Hidden;
+                AvailableBedsTxt.Visibility = Visibility.Hidden;
+                BedCapacity.Visibility = Visibility.Hidden;
+                OccupiedBeds.Visibility = Visibility.Hidden;
+                AvailableBeds.Visibility = Visibility.Hidden;
+
+            }
 
             room = informationControler.GetRoomById(id);
            

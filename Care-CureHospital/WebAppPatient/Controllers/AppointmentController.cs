@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Term;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
 
@@ -15,7 +16,6 @@ namespace WebAppPatient.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-
         public AppointmentController() { }
 
         [HttpGet("getAvailableAppointments")]
@@ -23,8 +23,7 @@ namespace WebAppPatient.Controllers
         {
             DoctorWorkDayDto dto = DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
                 App.Instance().DoctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId),
-                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId)
-                );
+                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId));
             
             if (dto == null)
             {
@@ -48,7 +47,6 @@ namespace WebAppPatient.Controllers
             App.Instance().DoctorService.GetAllDoctorsBySpecialization(specializationId).ToList().ForEach(doctor => result.Add(DoctorMapper.DoctorToDoctorDto(doctor)));
             return Ok(result);
         }
-
 
         [HttpPost]       // POST /api/appointment/
         public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)
@@ -77,6 +75,13 @@ namespace WebAppPatient.Controllers
         public IActionResult CancelPatientAppointment(int appointmentId)
         {
             return Ok(App.Instance().AppointmentService.CancelPatientAppointment(appointmentId, DateTime.Now));
+        }
+
+        [HttpGet("getAllRecommendedTerms")]       // GET /api/appointment/getAllRecommendedTerms
+        public IActionResult GetAllRecommendedTerms([FromQuery(Name = "startDate")] string startDate, [FromQuery(Name = "endDate")] string endDate, [FromQuery(Name = "doctorId")] string doctorId, [FromQuery(Name = "priority")] string priority)
+        {
+            Dictionary<int, List<Appointment>> availableAppointments =  App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority);
+            return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(App.Instance().DoctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
         }
     }
 }

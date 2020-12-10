@@ -48,7 +48,7 @@ Vue.component("medicalRecordReview", {
 		    </div>
 	    </div>
 	 </div>
-   
+
     <div class="fields-to-fill-medical-record">
 
         <div class="wrapper-form-medical-record">

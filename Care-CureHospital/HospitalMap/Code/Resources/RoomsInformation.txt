@@ -1,6 +1,7 @@
 [
   {
-    "NameOfRoom": "Room2",
+    "IdOfRoom": "R1",
+    "NameOfRoom": "Room 1",
     "NameOfClinic": "A",
     "NumberOfFloor": "1",
     "BedCapacity": "10",
@@ -8,9 +9,46 @@
     "OccupiedBeds": "5"
   },
   {
-    "NameOfRoom": "Hospital1",
+    "IdOfRoom": "R2",
+    "NameOfRoom": "Room2",
     "NameOfClinic": "B",
-    "NumberOfFloor": "3",
+    "NumberOfFloor": "2",
+    "BedCapacity": "22",
+    "AvailableBeds": "70",
+    "OccupiedBeds": "1"
+  },
+  {
+    "IdOfRoom": "R3",
+    "NameOfRoom": "Room3",
+    "NameOfClinic": "B",
+    "NumberOfFloor": "1",
+    "BedCapacity": "22",
+    "AvailableBeds": "70",
+    "OccupiedBeds": "1"
+  },
+  {
+    "IdOfRoom": "R4",
+    "NameOfRoom": "Room4",
+    "NameOfClinic": "A",
+    "NumberOfFloor": "1",
+    "BedCapacity": "10",
+    "AvailableBeds": "5",
+    "OccupiedBeds": "5"
+  },
+  {
+    "IdOfRoom": "R5",
+    "NameOfRoom": "Room5",
+    "NameOfClinic": "B",
+    "NumberOfFloor": "2",
+    "BedCapacity": "22",
+    "AvailableBeds": "70",
+    "OccupiedBeds": "1"
+  },
+  {
+    "IdOfRoom": "R6",
+    "NameOfRoom": "Room6",
+    "NameOfClinic": "B",
+    "NumberOfFloor": "2",
     "BedCapacity": "22",
     "AvailableBeds": "70",
     "OccupiedBeds": "1"

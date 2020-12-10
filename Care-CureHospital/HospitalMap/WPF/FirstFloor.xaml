@@ -47,7 +47,7 @@
         </TabControl>
         <Image  Source="/Images/hospital.png" Height="73" Canvas.Left="48.1" Canvas.Top="75.2" Width="111"/>
         <Button Content="Sign out" Canvas.Left="54" Canvas.Top="528" Height="38" Width="101" Background="#FFEE2A2A" Click="ButtonClick1"/>
-
+        <TextBox x:Name="RoomTxt" Canvas.Left="218" Canvas.Top="37" TextWrapping="Wrap" Width="128" Height="96" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF0FB949" BorderBrush="Transparent" />
 
 
 

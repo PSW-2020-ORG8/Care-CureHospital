@@ -31,6 +31,22 @@ namespace WebAppPatient.Mapper
             dto.DoctorSpecialization = appointment.MedicalExamination.Doctor.Specialitation.SpecialitationForDoctor;
             dto.Room = appointment.MedicalExamination.Room.RoomId;
             dto.MedicalExaminationId = appointment.MedicalExaminationId;
+            dto.DoctorId = appointment.MedicalExamination.DoctorId;
+
+            return dto;
+        }
+        public static AppointmentDto AppointmentToAppointmentDto2(Appointment appointment)
+        {
+            AppointmentDto dto = new AppointmentDto();
+            dto.Id = appointment.Id;
+            dto.Canceled = appointment.Canceled;
+            dto.SurveyFilled = appointment.MedicalExamination.SurveyFilled;
+            dto.Date = appointment.StartTime.ToString("yyyy-MM-dd");
+            dto.Period = appointment.StartTime.ToString("HH:mm") + " - " + appointment.EndTime.ToString("HH:mm");
+            dto.DoctorFullName = appointment.MedicalExamination.Doctor.Name + " " + appointment.MedicalExamination.Doctor.Surname;
+            dto.DoctorSpecialization = appointment.MedicalExamination.Doctor.Specialitation.SpecialitationForDoctor;
+            dto.MedicalExaminationId = appointment.MedicalExaminationId;
+            dto.DoctorId = appointment.MedicalExamination.DoctorId;
 
             return dto;
         }

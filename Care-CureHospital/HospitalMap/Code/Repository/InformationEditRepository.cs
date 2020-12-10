@@ -23,7 +23,7 @@ namespace HospitalMap.Repository
             return _instance;
         }
 
-        public ObservableCollection<RoomInformationWiev> rooms
+        public ObservableCollection<RoomInformationVieW> Rooms
         {
             get;
             set;
@@ -33,24 +33,24 @@ namespace HospitalMap.Repository
         public InformationEditRepository()
         {
             
-            rooms = GetAll();
+            Rooms = GetAll();
 
 
 
         }
 
-        public ObservableCollection<RoomInformationWiev> GetAll()
+        public ObservableCollection<RoomInformationVieW> GetAll()
         {
             String text = "";
 
             if (File.Exists(_path))
                 text = File.ReadAllText(_path);
 
-            return JsonConvert.DeserializeObject<ObservableCollection<RoomInformationWiev>>(text);
+            return JsonConvert.DeserializeObject<ObservableCollection<RoomInformationVieW>>(text);
 
         }
 
-        public void SaveAll(ObservableCollection<RoomInformationWiev> rooms)
+        public void SaveAll(ObservableCollection<RoomInformationVieW> rooms)
         {
             string json = JsonConvert.SerializeObject(rooms, Newtonsoft.Json.Formatting.Indented);
 
@@ -58,11 +58,13 @@ namespace HospitalMap.Repository
         }
 
 
-        public void Edit(RoomInformationWiev room)
+        public void Edit(RoomInformationVieW room)
         {
-            foreach(RoomInformationWiev currentRoom in rooms)
+            Rooms = GetAll();
+            foreach(RoomInformationVieW currentRoom in Rooms)
             {
-                if (currentRoom.NameOfRoom.Equals(room.NameOfRoom.ToString())){
+                if (currentRoom.IdOfRoom.Equals(room.IdOfRoom.ToString())){
+                    currentRoom.NameOfRoom = room.NameOfRoom;
                     currentRoom.NumberOfFloor = room.NumberOfFloor;
                     currentRoom.NameOfClinic = room.NameOfClinic;
                     currentRoom.BedCapacity = room.BedCapacity;
@@ -70,14 +72,15 @@ namespace HospitalMap.Repository
                     currentRoom.OccupiedBeds = room.OccupiedBeds;
                 }
             }
-            SaveAll(rooms);
+            SaveAll(Rooms);
         }
 
-        public RoomInformationWiev GetById(string room)
+
+        public RoomInformationVieW GetById(string roomId)
         {
-            foreach (RoomInformationWiev currentRoom in rooms)
+            foreach (RoomInformationVieW currentRoom in GetAll())
             {
-                if (currentRoom.NameOfRoom.Equals(room.ToString()))
+                if (currentRoom.IdOfRoom.Equals(roomId.ToString()))
                 {
                     return currentRoom;
                 }

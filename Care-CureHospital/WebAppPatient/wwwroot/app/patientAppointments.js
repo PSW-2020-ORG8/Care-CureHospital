@@ -20,7 +20,7 @@ Vue.component("patientAppointments", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/medicalRecordReview">Moj nalog</a></li>
+	            <li  class="active"><a href="#/patientAppointments">Pregledi</a></li>
 	         </ul>
 	     </div>
  
@@ -50,9 +50,10 @@ Vue.component("patientAppointments", {
 	 <div class="verticalLine"></div>
 	
 	 <div class="sideComponents">      
-	     <ul class="ulForSideComponents">
-			<div><li><a href="#/medicalRecordReview">Medicinski karton</a></li></div><br/>
-		    <div><li class="active"><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
+		 <ul class="ulForSideComponents">
+		 <div><li class="active"><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
+         <div><li><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
+         <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div> 	
 
@@ -64,7 +65,7 @@ Vue.component("patientAppointments", {
 				</div>
 				<div class="appointments-info">
 					<div class="appointments-text">
-						<h1>dr {{appointment.doctorFullName}}</h1> 
+						<h1>Dr {{appointment.doctorFullName}}</h1> 
 						<h3>- {{appointment.doctorSpecialization}}</h3>
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
@@ -86,7 +87,7 @@ Vue.component("patientAppointments", {
 				</div>
 				<div class="appointments-info">
 					<div class="appointments-text">
-						<h1>dr {{appointment.doctorFullName}}</h1> 
+						<h1>Dr {{appointment.doctorFullName}}</h1> 
 						<h3>- {{appointment.doctorSpecialization}}</h3>
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>

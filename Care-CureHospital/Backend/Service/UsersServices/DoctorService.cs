@@ -54,5 +54,10 @@ namespace Backend.Service.UsersServices
             }
             return doctorsBySpecialization;
         }
+
+        public int GetSpecializationIdByDoctorId(int doctorId)
+        {
+            return GetEntity(doctorId).SpecialitationId;
+        }
     }
 }

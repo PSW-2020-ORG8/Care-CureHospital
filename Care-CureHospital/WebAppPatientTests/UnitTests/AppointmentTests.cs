@@ -104,7 +104,7 @@ namespace WebAppPatientTests.UnitTests
 
             List<Appointment> result = appointmentService.getAllCancelledAppointmentsByPatient(2);
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace WebAppPatientTests.UnitTests
 
             List<Patient> result = patientService.GetMaliciousPatients();
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
 
         private static IAppointmentRepository CreateDoctorWorkDayStubRepository()
