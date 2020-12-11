@@ -150,7 +150,20 @@
     margin-top: -12%;
 }
 
-.form-title-search input[type=text], select {
+.form-title-search input[type=text]{
+    width: 30%;
+    padding: 12px 20px;
+    margin: 16px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Bentham', serif;
+}
+
+.form-title-search select {
     width: 30%;
     padding: 12px 20px;
     margin: 16px 0px;
