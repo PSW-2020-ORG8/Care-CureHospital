@@ -10,7 +10,7 @@ using Xunit;
 
 namespace WebAppPatientTests.IntegrationTests
 {
-    public class SurveyTestsIntegration : IClassFixture<WebApplicationFactory<Startup>>
+    public class SurveyTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         /*
         private readonly WebApplicationFactory<Startup> factory;

@@ -482,6 +482,78 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Model.AllActors.Manager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Managers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "063555156",
+                            DateOfBirth = new DateTime(1992, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            EMail = "darja@gmail.com",
+                            Gender = 0,
+                            Jmbg = "12317316712344",
+                            Name = "Darja",
+                            Password = "123",
+                            Surname = "Rusedski",
+                            Username = "manager1"
+                        });
+                });
+
             modelBuilder.Entity("Model.AllActors.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -671,6 +743,78 @@ namespace Backend.Migrations
                             Password = "123",
                             Surname = "Markovic",
                             Username = "marko"
+                        });
+                });
+
+            modelBuilder.Entity("Model.AllActors.Secretary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Secretaries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "063775356",
+                            DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "milica@gmail.com",
+                            Gender = 0,
+                            Jmbg = "12312316712345",
+                            Name = "Milica",
+                            Password = "123",
+                            Surname = "Carica",
+                            Username = "sekretar1"
                         });
                 });
 
@@ -1371,7 +1515,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
                             StartTime = new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1398,36 +1542,16 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
-                            Canceled = false,
-                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 10, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            MedicalExaminationId = 4,
-                            StartTime = new DateTime(2020, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Canceled = false,
-                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            MedicalExaminationId = 2,
-                            StartTime = new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
                             Canceled = true,
                             CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 18, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
                             StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 6,
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
@@ -1596,7 +1720,7 @@ namespace Backend.Migrations
                             Id = 6,
                             DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 1,
+                            PatientId = 3,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
                             SurveyFilled = false,
@@ -1732,7 +1856,25 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Model.AllActors.Manager", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model.AllActors.Patient", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.AllActors.Secretary", b =>
                 {
                     b.HasOne("Model.AllActors.City", "City")
                         .WithMany()

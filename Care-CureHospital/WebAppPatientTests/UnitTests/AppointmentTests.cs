@@ -80,21 +80,10 @@ namespace WebAppPatientTests.UnitTests
         {
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);
 
-            appointmentService.CancelPatientAppointment(3, new DateTime(2020, 12, 4));
+            appointmentService.CancelPatientAppointment(3);
             Appointment canceledAppointment = appointmentService.GetEntity(3);
 
             Assert.True(canceledAppointment.Canceled);
-        }
-
-        [Fact]
-        public void Cancel_patient_appointment_invalid_data()
-        {
-            AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), null);
-
-            appointmentService.CancelPatientAppointment(2, new DateTime(2020, 12, 4));
-            Appointment canceledAppointment = appointmentService.GetEntity(2);
-
-            Assert.False(canceledAppointment.Canceled);
         }
 
         [Fact]
@@ -104,7 +93,7 @@ namespace WebAppPatientTests.UnitTests
 
             List<Appointment> result = appointmentService.getAllCancelledAppointmentsByPatient(2);
 
-            Assert.Single(result);
+            Assert.Equal(1, result.Count);
         }
 
         [Fact]
@@ -113,13 +102,13 @@ namespace WebAppPatientTests.UnitTests
             PatientService patientService = new PatientService(CreatePatientStubRepository());
             AppointmentService appointmentService = new AppointmentService(CreateDoctorWorkDayStubRepository(), patientService);
 
-            appointmentService.CancelPatientAppointment(8, new DateTime(2020, 12, 4));
-            appointmentService.CancelPatientAppointment(9, new DateTime(2020, 12, 4));
-            appointmentService.CancelPatientAppointment(10, new DateTime(2020, 12, 4));
+            appointmentService.CancelPatientAppointment(8);
+            appointmentService.CancelPatientAppointment(9);
+            appointmentService.CancelPatientAppointment(10);
 
             List<Patient> result = patientService.GetMaliciousPatients();
 
-            Assert.Single(result);
+            Assert.Equal(1, result.Count);
         }
 
         private static IAppointmentRepository CreateDoctorWorkDayStubRepository()

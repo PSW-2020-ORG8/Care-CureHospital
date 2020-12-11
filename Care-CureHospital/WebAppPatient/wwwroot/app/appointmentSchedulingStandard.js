@@ -32,7 +32,7 @@ Vue.component("appointmentSchedulingStandard", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-					<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+					<li class="active"><a href="#/">Termini za pregled</a></li>
 					</ul>
 				</div>
  
@@ -135,8 +135,7 @@ Vue.component("appointmentSchedulingStandard", {
 	 <div class="verticalLinePublishFeedback"></div>
 	
 	 <div class="sideComponents">      
-         <ul class="ulForSideComponents">
-         <div><li><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
+	     <ul class="ulForSideComponents">
          <div><li class="active"><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
          <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>

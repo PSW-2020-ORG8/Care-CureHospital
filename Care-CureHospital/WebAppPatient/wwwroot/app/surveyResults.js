@@ -47,7 +47,7 @@ Vue.component("surveyResults", {
     </div>  
 
 	
-	<div class="survey-questions" style="margin-left:20%">	
+	<div class="survey-questions">	
 		<h3 class = "doctor-qestions-title">Pitanja o doktoru kod kog je izvršen pregled:</h3> 
 		<table class="questions-about-doctor">
 			<tr>

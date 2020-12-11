@@ -41,23 +41,19 @@ namespace Backend.Service.ExaminationSurgeryServices
             return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId).ToList();
         }
 
-        public Appointment CancelPatientAppointment(int appointmentId, DateTime today)
+        public Appointment CancelPatientAppointment(int appointmentId)
         {
             Appointment appointmentForCancel = GetEntity(appointmentId);
-            if(today < appointmentForCancel.StartTime.AddHours(-48))
-            {
-                appointmentForCancel.Canceled = true;
-                appointmentForCancel.CancellationDate = today;
-                UpdateEntity(appointmentForCancel);
-                SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId, today);
-                return appointmentForCancel;
-            }
-            return null; 
+            appointmentForCancel.Canceled = true;
+            appointmentForCancel.CancellationDate = DateTime.Today;
+            UpdateEntity(appointmentForCancel);
+            SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId);
+            return appointmentForCancel;
         }
 
-        public void SetIfPatientMalicious(int patientId, DateTime today)
+        public void SetIfPatientMalicious(int patientId)
         {
-            if (IsPatientMalicious(patientId, today))
+            if (IsPatientMalicious(patientId, DateTime.Today))
             {
                 Patient maliciousPatient = patientService.GetEntity(patientId);
                 maliciousPatient.Malicious = true;
@@ -77,14 +73,6 @@ namespace Backend.Service.ExaminationSurgeryServices
                 }
             }
             return result.Count >= 3;
-        }
-
-        public Appointment FilledSurveyForAppointment(int appointmentId)
-        {
-            Appointment appointment = GetEntity(appointmentId);
-            appointment.MedicalExamination.SurveyFilled = true;
-            UpdateEntity(appointment);
-            return appointment;
         }
 
         public Appointment AddEntity(Appointment entity)
