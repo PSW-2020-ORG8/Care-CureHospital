@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201205202016_NewMigration")]
-    partial class NewMigration
+    [Migration("20201210231610_DatabaseMigration")]
+    partial class DatabaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1373,7 +1373,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
                             StartTime = new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1400,16 +1400,36 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 10, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 4,
+                            StartTime = new DateTime(2020, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 2,
+                            StartTime = new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
                             Canceled = true,
                             CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 18, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
                             StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 8,
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
@@ -1578,7 +1598,7 @@ namespace Backend.Migrations
                             Id = 6,
                             DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 3,
+                            PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
                             SurveyFilled = false,
