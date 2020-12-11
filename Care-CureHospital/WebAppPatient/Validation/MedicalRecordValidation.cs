@@ -35,7 +35,7 @@ namespace WebAppPatient.Validation
 
         private bool ValidateUsername(string username)
         {
-            if(!ValidateString(username, usernameRegex))
+            if(!BasicValidation.ValidateString(username, usernameRegex))
             {
                 return false;
             }
@@ -48,7 +48,7 @@ namespace WebAppPatient.Validation
 
         private bool ValidatePassword(string password, string confirmedPassword)
         {
-            if (!CheckIfStringIsEmptyOrNull(password) || !CheckIfStringIsEmptyOrNull(confirmedPassword))
+            if (!BasicValidation.CheckIfStringIsEmptyOrNull(password) || !BasicValidation.CheckIfStringIsEmptyOrNull(confirmedPassword))
             {
                 return false;
             }
@@ -61,9 +61,9 @@ namespace WebAppPatient.Validation
 
         private bool ValidateLettersOnly(MedicalRecordDto dto)
         {
-            if(!ValidateString(dto.Patient.Name, lettersOnlyRegex) 
-                || !ValidateString(dto.Patient.ParentName, lettersOnlyRegex)
-                    || !ValidateString(dto.Patient.Surname, lettersOnlyRegex))
+            if(!BasicValidation.ValidateString(dto.Patient.Name, lettersOnlyRegex) 
+                || !BasicValidation.ValidateString(dto.Patient.ParentName, lettersOnlyRegex)
+                    || !BasicValidation.ValidateString(dto.Patient.Surname, lettersOnlyRegex))
             {
                 return false;
             }
@@ -72,35 +72,35 @@ namespace WebAppPatient.Validation
 
         private bool ValidateJmbg(string jmbg)
         {
-            return ValidateString(jmbg, jmbgRegex);
+            return BasicValidation.ValidateString(jmbg, jmbgRegex);
         }
 
         private bool ValidateIdentityCard(string identityCard)
         {
-            return ValidateString(identityCard, personalCardRegex);
+            return BasicValidation.ValidateString(identityCard, personalCardRegex);
         }
 
         private bool ValidateHealthInsuranceCard(string healthInsuranceCard)
         {
-            return ValidateString(healthInsuranceCard, healthInsuranceCardRegex);
+            return BasicValidation.ValidateString(healthInsuranceCard, healthInsuranceCardRegex);
         }
 
         private bool ValidateContactNumber(string contactNumber)
         {
-            return ValidateString(contactNumber, contactNumberRegex);
+            return BasicValidation.ValidateString(contactNumber, contactNumberRegex);
         }
 
         private bool ValidateEMail(string eMail)
         {
-            return ValidateString(eMail, eMailRegex);
+            return BasicValidation.ValidateString(eMail, eMailRegex);
         }
 
         private bool EmptyAddress(MedicalRecordDto medicalRecordDto)
         {
-            if(!CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Name) 
-                || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.PostCode.ToString())
-                    || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Address)
-                        || !CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Country.Name))
+            if(!BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Name) 
+                || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.PostCode.ToString())
+                    || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Address)
+                        || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Country.Name))
             {
                 return false;
             }
@@ -109,43 +109,7 @@ namespace WebAppPatient.Validation
 
         private bool ValidateDateOfBirth(DateTime dateOfBirth)
         {
-            return CheckIfStringIsEmptyOrNull(dateOfBirth.ToString());
-        }
-
-        private bool CheckIfStringIsEmptyOrNull(string input)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(input))
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool ValidateString(string input, Regex reg)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(input))
-                {
-                    return false;
-                }
-                else if (!reg.Match(input).Success)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return BasicValidation.CheckIfStringIsEmptyOrNull(dateOfBirth.ToString());
         }
     }
 }

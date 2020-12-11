@@ -209,8 +209,8 @@ Vue.component("appointmentSchedulingStandard", {
                         this.resetData()
                     }
                 }).catch(error => {
-                    if (error.response.status === 400) {
-                        
+                    if (error.response.status === 404) {
+                        toast('Greška prilikom zakazivanja termina!')
                     }
                 });          
             }
