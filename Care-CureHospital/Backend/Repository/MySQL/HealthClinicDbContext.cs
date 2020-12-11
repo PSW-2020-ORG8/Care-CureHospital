@@ -238,7 +238,7 @@ namespace Backend.Repository.MySQL
                 new Appointment { Id = 3, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 25, 8, 30, 0), EndTime = new DateTime(2020, 12, 25, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
                 new Appointment { Id = 4, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 30, 0), EndTime = new DateTime(2020, 12, 20, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
                 new Appointment { Id = 5, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 10, 12, 00, 0), EndTime = new DateTime(2020, 12, 10, 12, 30, 0), DoctorWorkDayId = 4, MedicalExaminationId = 4 },
-                new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 09, 15, 30, 0), EndTime = new DateTime(2020, 12, 09, 14, 00, 0), DoctorWorkDayId = 4, MedicalExaminationId = 2 },
+                new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 09, 15, 30, 0), EndTime = new DateTime(2020, 12, 09, 16, 00, 0), DoctorWorkDayId = 4, MedicalExaminationId = 2 },
                 new Appointment { Id = 7, Canceled = true, CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 18, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
                 new Appointment { Id = 8, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 21, 8, 30, 0), EndTime = new DateTime(2020, 12, 21, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
             );
