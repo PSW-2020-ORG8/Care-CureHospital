@@ -20,7 +20,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        [Theory]
+        /*[Theory]
         [MemberData(nameof(SurveyData))]
         public async void Get_survey_results(HttpStatusCode expectedResponseStatusCode)
         {
@@ -46,6 +46,6 @@ namespace WebAppPatientTests.IntegrationTests
         new List<object[]>
         {
             new object[] { HttpStatusCode.OK }
-        };
+        };*/
     }
 }

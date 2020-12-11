@@ -19,7 +19,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        [Theory]
+        /*[Theory]
         [MemberData(nameof(MedicalRecordData))]
         public async void Medical_Record_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
         {
@@ -36,6 +36,6 @@ namespace WebAppPatientTests.IntegrationTests
             retVal.Add(new object[] { 1, HttpStatusCode.OK });
             retVal.Add(new object[] { 20, HttpStatusCode.NotFound });
             return retVal;
-        }
+        }*/
     }
 }
