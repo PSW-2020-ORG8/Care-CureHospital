@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using WebAppPatient;
 using Xunit;
@@ -14,6 +17,25 @@ namespace WebAppPatientTests.IntegrationTests
         public AppointmentTestsIntegration(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
+        }
+
+        [Theory]
+        [MemberData(nameof(AppointmentData))]
+        public async void Cancel_Appointment_Status_Code_Test(int appointmentId, HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.PutAsync("/api/appointment/cancelAppointment/" + appointmentId, new StringContent("1", Encoding.UTF8, "application/json"));
+
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
+
+        public static IEnumerable<object[]> AppointmentData()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { 1, HttpStatusCode.OK });
+            retVal.Add(new object[] { 20, HttpStatusCode.NotFound });
+            return retVal;
         }
     }
 }

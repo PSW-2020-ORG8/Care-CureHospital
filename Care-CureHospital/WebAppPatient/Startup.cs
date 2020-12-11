@@ -47,8 +47,8 @@ namespace WebAppPatient
 
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
-                RequestPath = new PathString("/wwwroot")
+                //FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
+                //RequestPath = new PathString("/wwwroot")
             });
 
             app.UseAuthorization();

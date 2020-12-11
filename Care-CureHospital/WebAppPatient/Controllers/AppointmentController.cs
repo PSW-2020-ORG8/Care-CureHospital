@@ -73,7 +73,11 @@ namespace WebAppPatient.Controllers
 
         [HttpPut("cancelAppointment/{appointmentId}")]       // GET /api/appointment/cancelAppointment/{appointmentId}
         public IActionResult CancelPatientAppointment(int appointmentId)
-        {
+        {   
+            if(App.Instance().AllergiesService.GetEntity(appointmentId) == null)
+            {
+                return NotFound();
+            }
             return Ok(App.Instance().AppointmentService.CancelPatientAppointment(appointmentId, DateTime.Now));
         }
 
