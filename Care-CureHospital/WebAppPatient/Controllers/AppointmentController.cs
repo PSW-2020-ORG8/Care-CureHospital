@@ -52,22 +52,29 @@ namespace WebAppPatient.Controllers
         public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)
         {
             return Ok(App.Instance().DoctorWorkDayService.ScheduleAppointment(SchedulingAppointmentMapper.AppointmentDtoToAppointment(dto)));
-
         }
 
         [HttpGet("getPreviousAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getPreviousAppointmetsByPatient/{patientId}
-        public IActionResult GetPreviousAppointmetsByPatient(int patientId)
+        public IActionResult GetPreviousAppointmentsByPatient(int patientId)
         {
             List<AppointmentDto> result = new List<AppointmentDto>();
-            App.Instance().AppointmentService.GetPreviousAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            App.Instance().AppointmentService.GetPreviousAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));   
+            if(result.Count == 0)
+            {
+                return NotFound();
+            }
             return Ok(result);
         }
 
         [HttpGet("getScheduledAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getScheduledAppointmetsByPatient/{patientId}
-        public IActionResult GetScheduledAppointmetsByPatient(int patientId)
+        public IActionResult GetScheduledAppointmentsByPatient(int patientId)
         {
             List<AppointmentDto> result = new List<AppointmentDto>();
             App.Instance().AppointmentService.GetScheduledAppointmetsByPatient(patientId, DateTime.Now).ToList().ForEach(appointment => result.Add(AppointmentMapper.AppointmentToAppointmentDto(appointment)));
+            if (result.Count == 0)
+            {
+                return NotFound();
+            }
             return Ok(result);
         }
 
