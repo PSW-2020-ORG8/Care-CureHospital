@@ -47,6 +47,14 @@ services:
       dockerfile: IntegrationAdapters/Dockerfile
     image: astevanovic/integrationadapters:latest
     restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
     expose: 
       - "80"
     ports:
@@ -59,6 +67,14 @@ services:
       dockerfile: WebAppPatient/Dockerfile
     image: astevanovic/webapppatient:latest
     restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
     expose: 
       - "80"
     ports:
