@@ -57,7 +57,7 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public void SetIfPatientMalicious(int patientId, DateTime today)
         {
-            if (IsPatientMalicious(patientId, today))
+            if (CountCancelledAppointmentsForPatient(patientId, today)>=3)
             {
                 Patient maliciousPatient = patientService.GetEntity(patientId);
                 maliciousPatient.Malicious = true;
@@ -65,7 +65,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             }
         }
 
-        public bool IsPatientMalicious(int patientId, DateTime currentCancellationDate)
+        public int CountCancelledAppointmentsForPatient(int patientId, DateTime currentCancellationDate)
         {
             List<Appointment> cancelledAppointments = getAllCancelledAppointmentsByPatient(patientId);
             List<Appointment> result = new List<Appointment>();
@@ -76,7 +76,7 @@ namespace Backend.Service.ExaminationSurgeryServices
                     result.Add(cancelledAppointment);
                 }
             }
-            return result.Count >= 3;
+            return result.Count;
         }
 
         public Appointment FilledSurveyForAppointment(int appointmentId)
