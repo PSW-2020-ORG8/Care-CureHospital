@@ -32,7 +32,6 @@ namespace IntegrationAdapters.Controllers
 
             App.Instance().ReportService.GetAllEntities().ToList().ForEach(report => result.Add(ReportMapper.ReportToReportDto(report)));
             return Ok(result);
-           
         }
     }
 }

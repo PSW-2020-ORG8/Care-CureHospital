@@ -14,6 +14,7 @@ import { AddReportComponent } from './director/add-report/add-report.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { EprescriptionComponent } from './doctor/eprescription/eprescription.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatTableModule } from '@angular/material/table';
     DirectorComponent,
     DoctorComponent,
     ReportComponent,
-    AddReportComponent
+    AddReportComponent,
+    EprescriptionComponent
   ],
   imports: [
     BrowserModule,

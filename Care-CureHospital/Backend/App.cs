@@ -3,11 +3,13 @@ using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
 using Backend.Repository.BlogNotificationRepository;
 using Backend.Repository.DirectorRepository;
+using Backend.Repository.DoctorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
 using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
+using Backend.Service.DoctorService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.UsersServices;
 using Model.AllActors;
@@ -45,6 +47,7 @@ namespace Backend
         public DoctorWorkDayService DoctorWorkDayService;
         public SpetialitationService SpetialitationService;
         public AppointmentService AppointmentService;
+        public EPrescriptionService EPrescriptionService;
 
         private App()
         {
@@ -79,6 +82,8 @@ namespace Backend
                 new SpecialitationRepository(new MySQLStream<Specialitation>(), new IntSequencer()));
             AppointmentService = new AppointmentService(
                 new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()), PatientService);
+            EPrescriptionService = new EPrescriptionService(
+                new EPrescriptionRepository(new MySQLStream<EPrescription>(), new IntSequencer()));
         }
 
         public static App Instance()

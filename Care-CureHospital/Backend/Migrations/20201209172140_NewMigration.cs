@@ -215,41 +215,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patient",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    ParentName = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    Gender = table.Column<int>(nullable: false),
-                    Jmbg = table.Column<string>(nullable: true),
-                    IdentityCard = table.Column<string>(nullable: true),
-                    HealthInsuranceCard = table.Column<string>(nullable: true),
-                    BloodGroup = table.Column<int>(nullable: false),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
-                    ContactNumber = table.Column<string>(nullable: true),
-                    EMail = table.Column<string>(nullable: true),
-                    CityId = table.Column<int>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    GuestAccount = table.Column<bool>(nullable: false),
-                    Blocked = table.Column<bool>(nullable: false),
-                    Malicious = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patient", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Patient_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InventaryRoom",
                 columns: table => new
                 {
@@ -298,6 +263,83 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicalRecords",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PatientId = table.Column<int>(nullable: false),
+                    AnamnesisId = table.Column<int>(nullable: false),
+                    ActiveMedicalRecord = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalRecords", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MedicalRecords_Anamnesies_AnamnesisId",
+                        column: x => x.AnamnesisId,
+                        principalTable: "Anamnesies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Allergies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    MedicalRecordId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allergies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Allergies_MedicalRecords_MedicalRecordId",
+                        column: x => x.MedicalRecordId,
+                        principalTable: "MedicalRecords",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patient",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    ParentName = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    Jmbg = table.Column<string>(nullable: true),
+                    IdentityCard = table.Column<string>(nullable: true),
+                    HealthInsuranceCard = table.Column<string>(nullable: true),
+                    BloodGroup = table.Column<int>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    ContactNumber = table.Column<string>(nullable: true),
+                    EMail = table.Column<string>(nullable: true),
+                    CityId = table.Column<int>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    GuestAccount = table.Column<bool>(nullable: false),
+                    Blocked = table.Column<bool>(nullable: false),
+                    Malicious = table.Column<bool>(nullable: false),
+                    EPrescriptionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patient", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Patient_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicalExaminations",
                 columns: table => new
                 {
@@ -330,33 +372,6 @@ namespace Backend.Migrations
                         name: "FK_MedicalExaminations_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MedicalRecords",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PatientId = table.Column<int>(nullable: false),
-                    AnamnesisId = table.Column<int>(nullable: false),
-                    ActiveMedicalRecord = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalRecords", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_Anamnesies_AnamnesisId",
-                        column: x => x.AnamnesisId,
-                        principalTable: "Anamnesies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_Patient_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -409,6 +424,30 @@ namespace Backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_MedicalExaminations_MedicalExaminationId",
+                        column: x => x.MedicalExaminationId,
+                        principalTable: "MedicalExaminations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EPrescription",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Comment = table.Column<string>(nullable: true),
+                    PatientName = table.Column<string>(nullable: true),
+                    PatientId = table.Column<int>(nullable: false),
+                    MedicamentName = table.Column<string>(nullable: true),
+                    PublishingDate = table.Column<DateTime>(nullable: false),
+                    MedicalExaminationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EPrescription", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EPrescription_MedicalExaminations_MedicalExaminationId",
                         column: x => x.MedicalExaminationId,
                         principalTable: "MedicalExaminations",
                         principalColumn: "Id",
@@ -480,26 +519,6 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Allergies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    MedicalRecordId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Allergies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Allergies_MedicalRecords_MedicalRecordId",
-                        column: x => x.MedicalRecordId,
-                        principalTable: "MedicalRecords",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Medicaments",
                 columns: table => new
                 {
@@ -512,11 +531,18 @@ namespace Backend.Migrations
                     Quantity = table.Column<int>(nullable: false),
                     Ingredients = table.Column<string>(nullable: true),
                     MedicalRecordId = table.Column<int>(nullable: false),
-                    PrescriptionId = table.Column<int>(nullable: false)
+                    PrescriptionId = table.Column<int>(nullable: false),
+                    EPrescriptionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medicaments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Medicaments_EPrescription_EPrescriptionId",
+                        column: x => x.EPrescriptionId,
+                        principalTable: "EPrescription",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Medicaments_MedicalRecords_MedicalRecordId",
                         column: x => x.MedicalRecordId,
@@ -680,15 +706,15 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Patient",
-                columns: new[] { "Id", "Blocked", "BloodGroup", "CityId", "ContactNumber", "DateOfBirth", "EMail", "Gender", "GuestAccount", "HealthInsuranceCard", "IdentityCard", "Jmbg", "Malicious", "Name", "ParentName", "Password", "Surname", "Username" },
+                columns: new[] { "Id", "Blocked", "BloodGroup", "CityId", "ContactNumber", "DateOfBirth", "EMail", "EPrescriptionId", "Gender", "GuestAccount", "HealthInsuranceCard", "IdentityCard", "Jmbg", "Malicious", "Name", "ParentName", "Password", "Surname", "Username" },
                 values: new object[,]
                 {
-                    { 1, false, 2, 1, "063554533", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "pera@gmail.com", 0, false, "32312312312", "123123123", "13312312312312", false, "Petar", "Zika", "123", "Petrovic", "pera" },
-                    { 3, false, 0, 1, "0635557673", new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "mica@gmail.com", 0, false, "62312312312", "163123123", "12312512312312", false, "Mica", "Jelena", "123", "Micic", "mica" },
-                    { 2, false, 2, 2, "0635235333", new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "zika@gmail.com", 0, false, "712312312312", "124123123", "12342312312312", false, "Zika", "Pera", "123", "Zikic", "zika" },
-                    { 4, false, 2, 2, "063555356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "luna@gmail.com", 1, false, "52312312312", "127123123", "12312316712312", false, "Luna", "Jovan", "123", "Lunic", "luna" },
-                    { 5, false, 2, 2, "063775356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "ivan@gmail.com", 0, false, "52318812312", "127199123", "12344316712312", true, "Ivan", "Luka", "123", "Ivanovic", "ivan" },
-                    { 6, false, 2, 2, "063555312", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "marko@gmail.com", 0, false, "52312312311", "127123333", "12312316712344", true, "Marko", "Jovan", "123", "Markovic", "marko" }
+                    { 1, false, 2, 1, "063554533", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "pera@gmail.com", null, 0, false, "32312312312", "123123123", "13312312312312", false, "Petar", "Zika", "123", "Petrovic", "pera" },
+                    { 3, false, 0, 1, "0635557673", new DateTime(2002, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "mica@gmail.com", null, 0, false, "62312312312", "163123123", "12312512312312", false, "Mica", "Jelena", "123", "Micic", "mica" },
+                    { 2, false, 2, 2, "0635235333", new DateTime(2001, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "zika@gmail.com", null, 0, false, "712312312312", "124123123", "12342312312312", false, "Zika", "Pera", "123", "Zikic", "zika" },
+                    { 4, false, 2, 2, "063555356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "luna@gmail.com", null, 1, false, "52312312312", "127123123", "12312316712312", false, "Luna", "Jovan", "123", "Lunic", "luna" },
+                    { 5, false, 2, 2, "063775356", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "ivan@gmail.com", null, 0, false, "52318812312", "127199123", "12344316712312", true, "Ivan", "Luka", "123", "Ivanovic", "ivan" },
+                    { 6, false, 2, 2, "063555312", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "marko@gmail.com", null, 0, false, "52312312311", "127123333", "12312316712344", true, "Marko", "Jovan", "123", "Markovic", "marko" }
                 });
 
             migrationBuilder.InsertData(
@@ -760,8 +786,20 @@ namespace Backend.Migrations
                     { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 20, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 5, true, new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EPrescription",
+                columns: new[] { "Id", "Comment", "MedicalExaminationId", "MedicamentName", "PatientId", "PatientName", "PublishingDate" },
+                values: new object[,]
+                {
+                    { 1, "Redovno koristite prepisane lekove", 4, null, 1, "Petar", new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Svakodnevno koristite prepisani lek", 3, null, 2, "Mica", new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Redovno koristite prepisane lekove", 2, null, 3, "Zika", new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Ne preskacite konzumiranje leka", 2, null, 5, "Ivan", new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Redovno koristite prepisane lekove", 4, null, 6, "Marko", new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -771,9 +809,9 @@ namespace Backend.Migrations
                 {
                     { 1, "Pacijent je dobro i nema vecih problema", 3, new DateTime(2020, 9, 20, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 5, "Pacijent ima virus", 2, new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Pacijent je veoma dobro i nema vecih problema", 4, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 4, "Pacijent je lose", 2, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Pacijent ima virus", 2, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 3, "Pacijent ima virus", 2, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Pacijent je veoma dobro i nema vecih problema", 4, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -781,10 +819,10 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
+                    { 5, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 4, "Ne preskacite konzumiranje leka", 2, new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 3, "Redovno koristite prepisane lekove", 2, new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
@@ -793,8 +831,8 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "CommentSurvey", "MedicalExaminationId", "PublishingDate", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Sve je super u bolnici", 1, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" },
-                    { 2, "Sve je super u bolnici", 2, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" }
+                    { 2, "Sve je super u bolnici", 2, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" },
+                    { 1, "Sve je super u bolnici", 1, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Naslov" }
                 });
 
             migrationBuilder.InsertData(
@@ -824,14 +862,14 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Medicaments",
-                columns: new[] { "Id", "Code", "Ingredients", "MedicalRecordId", "Name", "PrescriptionId", "Producer", "Quantity", "StateOfValidation" },
+                columns: new[] { "Id", "Code", "EPrescriptionId", "Ingredients", "MedicalRecordId", "Name", "PrescriptionId", "Producer", "Quantity", "StateOfValidation" },
                 values: new object[,]
                 {
-                    { 4, "L423", "sastojak1, sastojak2, sastojak3", 4, "Vitamin B", 2, "Hemofarm", 10, 0 },
-                    { 1, "L123", "sastojak1, sastojak2, sastojak3", 1, "Brufen", 1, "Hemofarm", 10, 0 },
-                    { 5, "L233", "sastojak1, sastojak2, sastojak3", 1, "Panadol", 2, "Hemofarm", 14, 0 },
-                    { 2, "L233", "sastojak1, sastojak2, sastojak3", 2, "Panadol", 1, "Hemofarm", 10, 0 },
-                    { 3, "L523", "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", 3, "Hemofarm", 10, 0 }
+                    { 4, "L423", null, "sastojak1, sastojak2, sastojak3", 4, "Vitamin B", 2, "Hemofarm", 10, 0 },
+                    { 1, "L123", null, "sastojak1, sastojak2, sastojak3", 1, "Brufen", 1, "Hemofarm", 10, 0 },
+                    { 5, "L233", null, "sastojak1, sastojak2, sastojak3", 1, "Panadol", 2, "Hemofarm", 14, 0 },
+                    { 2, "L233", null, "sastojak1, sastojak2, sastojak3", 2, "Panadol", 1, "Hemofarm", 10, 0 },
+                    { 3, "L523", null, "sastojak1, sastojak2, sastojak3", 3, "Paracetamol", 3, "Hemofarm", 10, 0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -890,6 +928,11 @@ namespace Backend.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EPrescription_MedicalExaminationId",
+                table: "EPrescription",
+                column: "MedicalExaminationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventaryRoom_RoomId",
                 table: "InventaryRoom",
                 column: "RoomId");
@@ -925,6 +968,11 @@ namespace Backend.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medicaments_EPrescriptionId",
+                table: "Medicaments",
+                column: "EPrescriptionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Medicaments_MedicalRecordId",
                 table: "Medicaments",
                 column: "MedicalRecordId");
@@ -938,6 +986,11 @@ namespace Backend.Migrations
                 name: "IX_Patient_CityId",
                 table: "Patient",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patient_EPrescriptionId",
+                table: "Patient",
+                column: "EPrescriptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PatientFeedbacks_PatientId",
@@ -963,10 +1016,30 @@ namespace Backend.Migrations
                 name: "IX_Symptomes_AnamnesisId",
                 table: "Symptomes",
                 column: "AnamnesisId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_MedicalRecords_Patient_PatientId",
+                table: "MedicalRecords",
+                column: "PatientId",
+                principalTable: "Patient",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Patient_EPrescription_EPrescriptionId",
+                table: "Patient",
+                column: "EPrescriptionId",
+                principalTable: "EPrescription",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_EPrescription_MedicalExaminations_MedicalExaminationId",
+                table: "EPrescription");
+
             migrationBuilder.DropTable(
                 name: "Allergies");
 
@@ -1032,6 +1105,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "EPrescription");
 
             migrationBuilder.DropTable(
                 name: "TypesOfRoom");

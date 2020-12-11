@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201205202016_NewMigration")]
+    [Migration("20201209172140_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,6 +173,84 @@ namespace Backend.Migrations
                             MedicamentName = "Paracetamol",
                             Quantity = 24,
                             ToDate = new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.PatientDoctor.EPrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicalExaminationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicamentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("EPrescription");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 4,
+                            PatientId = 1,
+                            PatientName = "Petar",
+                            PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Svakodnevno koristite prepisani lek",
+                            MedicalExaminationId = 3,
+                            PatientId = 2,
+                            PatientName = "Mica",
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 2,
+                            PatientId = 3,
+                            PatientName = "Zika",
+                            PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Ne preskacite konzumiranje leka",
+                            MedicalExaminationId = 2,
+                            PatientId = 5,
+                            PatientName = "Ivan",
+                            PublishingDate = new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicalExaminationId = 4,
+                            PatientId = 6,
+                            PatientName = "Marko",
+                            PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -508,6 +586,9 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int?>("EPrescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -544,6 +625,8 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("EPrescriptionId");
 
                     b.ToTable("Patient");
 
@@ -711,6 +794,9 @@ namespace Backend.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int?>("EPrescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Ingredients")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -733,6 +819,8 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EPrescriptionId");
 
                     b.HasIndex("MedicalRecordId");
 
@@ -1672,6 +1760,15 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Model.PatientDoctor.EPrescription", b =>
+                {
+                    b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
+                        .WithMany()
+                        .HasForeignKey("MedicalExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
                 {
                     b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
@@ -1721,10 +1818,18 @@ namespace Backend.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Backend.Model.PatientDoctor.EPrescription", null)
+                        .WithMany("Patient")
+                        .HasForeignKey("EPrescriptionId");
                 });
 
             modelBuilder.Entity("Model.DoctorMenager.Medicament", b =>
                 {
+                    b.HasOne("Backend.Model.PatientDoctor.EPrescription", null)
+                        .WithMany("Medicaments")
+                        .HasForeignKey("EPrescriptionId");
+
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
                         .WithMany("Medicaments")
                         .HasForeignKey("MedicalRecordId")
