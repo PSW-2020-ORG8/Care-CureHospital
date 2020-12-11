@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Backend;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Model.Term;
 using WebAppPatient.Dto;
 using WebAppPatient.Mapper;
+using WebAppPatient.Validation;
 
 namespace WebAppPatient.Controllers
 {
@@ -51,8 +53,11 @@ namespace WebAppPatient.Controllers
         [HttpPost]       // POST /api/appointment/
         public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)
         {
-            return Ok(App.Instance().DoctorWorkDayService.ScheduleAppointment(SchedulingAppointmentMapper.AppointmentDtoToAppointment(dto)));
-
+            if (App.Instance().DoctorWorkDayService.ScheduleAppointment(SchedulingAppointmentMapper.AppointmentDtoToAppointment(dto)))
+            {
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpGet("getPreviousAppointmetsByPatient/{patientId}")]       // GET /api/appointment/getPreviousAppointmetsByPatient/{patientId}
@@ -80,8 +85,15 @@ namespace WebAppPatient.Controllers
         [HttpGet("getAllRecommendedTerms")]       // GET /api/appointment/getAllRecommendedTerms
         public IActionResult GetAllRecommendedTerms([FromQuery(Name = "startDate")] string startDate, [FromQuery(Name = "endDate")] string endDate, [FromQuery(Name = "doctorId")] string doctorId, [FromQuery(Name = "priority")] string priority)
         {
-            Dictionary<int, List<Appointment>> availableAppointments =  App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority);
-            return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(App.Instance().DoctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
+            try
+            {
+                Dictionary<int, List<Appointment>> availableAppointments = App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority);
+                return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(App.Instance().DoctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
+            }
+            catch
+            {
+                return BadRequest("The data which were entered are incorrect!");
+            }           
         }
     }
 }
