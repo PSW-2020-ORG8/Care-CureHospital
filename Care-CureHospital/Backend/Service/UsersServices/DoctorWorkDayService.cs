@@ -177,7 +177,7 @@ namespace Backend.Service.UsersServices
         public bool ScheduleAppointment(Appointment appointment)
         {
             DoctorWorkDay doctorWorkDay = GetEntity(appointment.DoctorWorkDayId);
-            if (CheckIfAppointmentTimeIsAvailableForGivenWorkDay(doctorWorkDay, appointment) && CheckIfPatientAlreadyHasAppointmentForGivenWorkDay(doctorWorkDay, appointment))
+            if (CheckIfAppointmentTimeIsAvailableForGivenWorkDay(doctorWorkDay, appointment))
             {
                 doctorWorkDay.ScheduledAppointments.Add(appointment);
                 UpdateEntity(doctorWorkDay);
@@ -197,7 +197,7 @@ namespace Backend.Service.UsersServices
 
         private bool CheckIfAppointmentTimeIsAvailableForGivenWorkDay(DoctorWorkDay doctorWorkDay, Appointment appointment)
         {
-            if (doctorWorkDay.ScheduledAppointments.Where(o => DateTime.Compare(o.StartTime, appointment.StartTime) == 0).ToList().Count == 0)
+            if (doctorWorkDay.ScheduledAppointments.Where(o => DateTime.Compare(o.StartTime, appointment.StartTime) == 0 && o.Canceled == false).ToList().Count == 0)
             {
                 return true;
             }
