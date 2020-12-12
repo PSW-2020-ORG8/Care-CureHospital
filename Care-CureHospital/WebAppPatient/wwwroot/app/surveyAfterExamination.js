@@ -40,7 +40,8 @@ Vue.component("surveyAfterExamination", {
 			gradeOfQuestion9: null,
 			answer9: 'good',
 
-			medicalExaminationId: null
+			medicalExaminationId: null,
+			appointmentId: null
 		}
 	},
 	template: `
@@ -368,6 +369,9 @@ Vue.component("surveyAfterExamination", {
 			}).then(response => {
 				if (response.status === 200) {
 					toast('Anketa je uspešno poslata')
+					axios.put('/api/survey/filledSurveyForAppointment/' + this.appointmentId).then(response => {
+						this.$router.push({ name: 'patientAppointments' })
+					});
 				}
 			});
 			
@@ -379,10 +383,9 @@ Vue.component("surveyAfterExamination", {
 	mounted() {
 
 		if (this.$route.params.medicalExaminationId !== null) {
-			this.medicalExaminationId = this.$route.params.medicalExaminationId;
-			console.log(this.medicalExaminationId)
-		} else {
-			this.medicalExaminationId = 0;
+			var appointment = this.$route.params.appointment;
+			this.medicalExaminationId = appointment.medicalExaminationId;
+			this.appointmentId = appointment.id;
 		}
 		
 	}

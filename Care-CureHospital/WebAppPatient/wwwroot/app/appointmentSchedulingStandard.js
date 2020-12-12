@@ -32,7 +32,7 @@ Vue.component("appointmentSchedulingStandard", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-					<li class="active"><a href="#/">Termini za pregled</a></li>
+					<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
 					</ul>
 				</div>
  
@@ -135,7 +135,8 @@ Vue.component("appointmentSchedulingStandard", {
 	 <div class="verticalLinePublishFeedback"></div>
 	
 	 <div class="sideComponents">      
-	     <ul class="ulForSideComponents">
+         <ul class="ulForSideComponents">
+         <div><li><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
          <div><li class="active"><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
          <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
@@ -208,8 +209,8 @@ Vue.component("appointmentSchedulingStandard", {
                         this.resetData()
                     }
                 }).catch(error => {
-                    if (error.response.status === 400) {
-                        
+                    if (error.response.status === 404) {
+                        toast('Greška prilikom zakazivanja termina!')
                     }
                 });          
             }

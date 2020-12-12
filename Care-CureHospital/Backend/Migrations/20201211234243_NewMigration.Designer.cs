@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201209172140_NewMigration")]
+    [Migration("20201211234243_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,9 +185,6 @@ namespace Backend.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("MedicalExaminationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MedicamentName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -202,8 +199,6 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedicalExaminationId");
-
                     b.ToTable("EPrescription");
 
                     b.HasData(
@@ -211,7 +206,7 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Comment = "Redovno koristite prepisane lekove",
-                            MedicalExaminationId = 4,
+                            MedicamentName = "Aspirin",
                             PatientId = 1,
                             PatientName = "Petar",
                             PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
@@ -220,7 +215,7 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             Comment = "Svakodnevno koristite prepisani lek",
-                            MedicalExaminationId = 3,
+                            MedicamentName = "Brufen",
                             PatientId = 2,
                             PatientName = "Mica",
                             PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
@@ -229,7 +224,7 @@ namespace Backend.Migrations
                         {
                             Id = 3,
                             Comment = "Redovno koristite prepisane lekove",
-                            MedicalExaminationId = 2,
+                            MedicamentName = "Vitamin B",
                             PatientId = 3,
                             PatientName = "Zika",
                             PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified)
@@ -238,7 +233,7 @@ namespace Backend.Migrations
                         {
                             Id = 4,
                             Comment = "Ne preskacite konzumiranje leka",
-                            MedicalExaminationId = 2,
+                            MedicamentName = "Panadol",
                             PatientId = 5,
                             PatientName = "Ivan",
                             PublishingDate = new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified)
@@ -247,7 +242,7 @@ namespace Backend.Migrations
                         {
                             Id = 5,
                             Comment = "Redovno koristite prepisane lekove",
-                            MedicalExaminationId = 4,
+                            MedicamentName = "Andol",
                             PatientId = 6,
                             PatientName = "Marko",
                             PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
@@ -586,9 +581,6 @@ namespace Backend.Migrations
                     b.Property<string>("EMail")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("EPrescriptionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -625,8 +617,6 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
-
-                    b.HasIndex("EPrescriptionId");
 
                     b.ToTable("Patient");
 
@@ -794,9 +784,6 @@ namespace Backend.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("EPrescriptionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Ingredients")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -819,8 +806,6 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EPrescriptionId");
 
                     b.HasIndex("MedicalRecordId");
 
@@ -1461,7 +1446,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
                             StartTime = new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1488,16 +1473,36 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 10, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 4,
+                            StartTime = new DateTime(2020, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 2,
+                            StartTime = new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
                             Canceled = true,
                             CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 18, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 5,
                             StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 8,
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
@@ -1666,7 +1671,7 @@ namespace Backend.Migrations
                             Id = 6,
                             DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 3,
+                            PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
                             SurveyFilled = false,
@@ -1760,15 +1765,6 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Model.PatientDoctor.EPrescription", b =>
-                {
-                    b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
-                        .WithMany()
-                        .HasForeignKey("MedicalExaminationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
                 {
                     b.HasOne("Model.Term.MedicalExamination", "MedicalExamination")
@@ -1818,18 +1814,10 @@ namespace Backend.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Backend.Model.PatientDoctor.EPrescription", null)
-                        .WithMany("Patient")
-                        .HasForeignKey("EPrescriptionId");
                 });
 
             modelBuilder.Entity("Model.DoctorMenager.Medicament", b =>
                 {
-                    b.HasOne("Backend.Model.PatientDoctor.EPrescription", null)
-                        .WithMany("Medicaments")
-                        .HasForeignKey("EPrescriptionId");
-
                     b.HasOne("Model.PatientDoctor.MedicalRecord", "MedicalRecord")
                         .WithMany("Medicaments")
                         .HasForeignKey("MedicalRecordId")

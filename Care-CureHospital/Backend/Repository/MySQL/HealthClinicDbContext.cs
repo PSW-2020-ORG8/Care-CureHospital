@@ -100,7 +100,7 @@ namespace Backend.Repository.MySQL
                 new MedicalExamination { Id = 3, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
                 new MedicalExamination { Id = 4, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
                 new MedicalExamination { Id = 5, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
-                new MedicalExamination { Id = 6, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
+                new MedicalExamination { Id = 6, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 1 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
@@ -120,13 +120,11 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<EPrescription>().HasData(
-              /*  new EPrescription { Id = 1, PatientId = 1, PatientName = "Petar", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() },
-                new EPrescription { Id = 2, PatientId = 2, PatientName = "Mica", Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0), MedicalExaminationId = 3, Medicaments = new List<Medicament>() },
-                new EPrescription { Id = 3, PatientId = 3, PatientName = "Zika", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new EPrescription { Id = 4, PatientId = 5, PatientName = "Ivan", Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 12, 03, 30, 0), MedicalExaminationId = 2, Medicaments = new List<Medicament>() },
-                new EPrescription { Id = 5, PatientId = 6, PatientName = "Marko", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() }
-            */
-              new EPrescription { Id = 2, PatientId = 2, PatientName = "Mica", Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0)}
+                new EPrescription { Id = 1, PatientId = 1, PatientName = "Petar", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0), MedicamentName = "Aspirin" },
+                new EPrescription { Id = 2, PatientId = 2, PatientName = "Mica", Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0), MedicamentName = "Brufen" },
+                new EPrescription { Id = 3, PatientId = 3, PatientName = "Zika", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0), MedicamentName = "Vitamin B" },
+                new EPrescription { Id = 4, PatientId = 5, PatientName = "Ivan", Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 12, 03, 30, 0), MedicamentName = "Panadol" },
+                new EPrescription { Id = 5, PatientId = 6, PatientName = "Marko", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicamentName = "Andol" }
               );
 
             modelBuilder.Entity<Medicament>().HasData(
@@ -245,15 +243,16 @@ namespace Backend.Repository.MySQL
 
             modelBuilder.Entity<Appointment>().HasData(
                 new Appointment { Id = 1, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 0, 0), EndTime = new DateTime(2020, 12, 20, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
-                new Appointment { Id = 2, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 8, 30, 0), EndTime = new DateTime(2020, 11, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
+                new Appointment { Id = 2, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 8, 30, 0), EndTime = new DateTime(2020, 12, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
                 new Appointment { Id = 3, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 25, 8, 30, 0), EndTime = new DateTime(2020, 12, 25, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
                 new Appointment { Id = 4, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 30, 0), EndTime = new DateTime(2020, 12, 20, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
-                new Appointment { Id = 5, Canceled = true, CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 5, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
-                new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 21, 8, 30, 0), EndTime = new DateTime(2020, 12, 21, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
+                new Appointment { Id = 5, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 10, 12, 00, 0), EndTime = new DateTime(2020, 12, 10, 12, 30, 0), DoctorWorkDayId = 4, MedicalExaminationId = 4 },
+                new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 09, 15, 30, 0), EndTime = new DateTime(2020, 12, 09, 14, 00, 0), DoctorWorkDayId = 4, MedicalExaminationId = 2 },
+                new Appointment { Id = 7, Canceled = true, CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 18, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
+                new Appointment { Id = 8, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 21, 8, 30, 0), EndTime = new DateTime(2020, 12, 21, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 }
             );
 
         }
-
        
     }
 }
