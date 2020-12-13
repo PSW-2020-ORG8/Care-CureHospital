@@ -41,19 +41,23 @@ namespace Backend.Service.ExaminationSurgeryServices
             return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId).ToList();
         }
 
-        public Appointment CancelPatientAppointment(int appointmentId)
+        public Appointment CancelPatientAppointment(int appointmentId, DateTime today)
         {
             Appointment appointmentForCancel = GetEntity(appointmentId);
-            appointmentForCancel.Canceled = true;
-            appointmentForCancel.CancellationDate = DateTime.Today;
-            UpdateEntity(appointmentForCancel);
-            SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId);
-            return appointmentForCancel;
+            if (today < appointmentForCancel.StartTime.AddHours(-48))
+            {
+                appointmentForCancel.Canceled = true;
+                appointmentForCancel.CancellationDate = today;
+                UpdateEntity(appointmentForCancel);
+                SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId, today);
+                return appointmentForCancel;
+            }
+            return null;
         }
 
-        public void SetIfPatientMalicious(int patientId)
+        public void SetIfPatientMalicious(int patientId, DateTime today)
         {
-            if (IsPatientMalicious(patientId, DateTime.Today))
+            if (IsPatientMalicious(patientId, today))
             {
                 Patient maliciousPatient = patientService.GetEntity(patientId);
                 maliciousPatient.Malicious = true;

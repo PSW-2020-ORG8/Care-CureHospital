@@ -174,20 +174,30 @@ namespace Backend.Service.UsersServices
             return GetAvailableAppointmentsByDateRangeAndDoctorId(newStartDate, endDate.AddDays(1), doctorId);
         }
 
-        public DoctorWorkDay ScheduleAppointment(Appointment appointment)
+        public bool ScheduleAppointment(Appointment appointment)
         {
             DoctorWorkDay doctorWorkDay = GetEntity(appointment.DoctorWorkDayId);
             if (CheckIfAppointmentTimeIsAvailableForGivenWorkDay(doctorWorkDay, appointment))
             {
                 doctorWorkDay.ScheduledAppointments.Add(appointment);
                 UpdateEntity(doctorWorkDay);
+                return true;
             }
-            return doctorWorkDay;
+            return false;
         }
 
-        public bool CheckIfAppointmentTimeIsAvailableForGivenWorkDay(DoctorWorkDay doctorWorkDay, Appointment appointment)
+        private bool CheckIfPatientAlreadyHasAppointmentForGivenWorkDay(DoctorWorkDay doctorWorkDay, Appointment appointment)
         {
-            if (doctorWorkDay.ScheduledAppointments.Where(o => DateTime.Compare(o.StartTime, appointment.StartTime) == 0).ToList().Count == 0)
+            if(doctorWorkDay.ScheduledAppointments.Where(o => o.MedicalExamination.PatientId == appointment.MedicalExamination.PatientId).ToList().Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckIfAppointmentTimeIsAvailableForGivenWorkDay(DoctorWorkDay doctorWorkDay, Appointment appointment)
+        {
+            if (doctorWorkDay.ScheduledAppointments.Where(o => DateTime.Compare(o.StartTime, appointment.StartTime) == 0 && o.Canceled == false).ToList().Count == 0)
             {
                 return true;
             }

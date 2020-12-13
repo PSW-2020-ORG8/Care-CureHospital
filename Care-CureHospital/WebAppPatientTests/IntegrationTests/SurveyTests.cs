@@ -10,45 +10,43 @@ using Xunit;
 
 namespace WebAppPatientTests.IntegrationTests
 {
-    public class SurveyTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class SurveyTestsIntegration : IClassFixture<WebApplicationFactory<Startup>>
     {
-        /*
+        
         private readonly WebApplicationFactory<Startup> factory;
 
-        public SurveyTests(WebApplicationFactory<Startup> factory)
+        public  SurveyTestsIntegration(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
+            
         }
 
-        [Theory]
-        [MemberData(nameof(Data))]
-        public async void Get_survey_results(HttpStatusCode expectedAnswer)
+        /*[Theory]
+        [MemberData(nameof(SurveyData))]
+        public async void Get_survey_results(HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = factory.CreateClient();
 
             HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResults");
 
-            response.StatusCode.ShouldBeEquivalentTo(expectedAnswer);
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
         [Theory]
-        [MemberData(nameof(Data))]
-        public async void Get_survey_results_for_doctors(HttpStatusCode expectedAnswer)
+        [MemberData(nameof(SurveyData))]
+        public async void Get_survey_results_for_doctors(HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = factory.CreateClient();
 
             HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResultsForDoctors");
 
-            response.StatusCode.ShouldBeEquivalentTo(expectedAnswer);
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
-
-
-        public static IEnumerable<object[]> Data =>
+        public static IEnumerable<object[]> SurveyData =>
         new List<object[]>
         {
-            new object[] {  HttpStatusCode.OK }
-        };
-        */
+            new object[] { HttpStatusCode.OK }
+        };*/
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Renci.SshNet;
 using System.Text;
+using System.Net.Mail;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -30,12 +31,8 @@ namespace IntegrationAdapters.Controllers
                     client.Connect();
                     client.UploadFile(System.IO.File.OpenRead(test), @"\public\" + Path.GetFileName(test), x => { Console.WriteLine(x); });
 
-                    string serverFile = @"\public\report.txt";
-                    string localFile = @"D:\localFiles\Report.txt";
-                    using (Stream stream = System.IO.File.OpenWrite(localFile))
-                    {
-                        client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
-                    }
+                    SendNotificationEPrescription();
+                    
                     client.Disconnect();
                 }
                 return Ok();
@@ -43,6 +40,30 @@ namespace IntegrationAdapters.Controllers
             catch (Exception exception)
             {
                 return BadRequest(exception.Message + "Failed");
+            }
+        }
+
+        public void SendNotificationEPrescription()
+        {
+            try
+            {
+                Console.WriteLine("E-mail Report se salje!");
+                MailMessage email = new MailMessage();
+                SmtpClient smpt = new SmtpClient("smtp.gmail.com");
+
+                email.From = new MailAddress("hospitalssystem@gmail.com");
+                email.To.Add("pharmacysistem@gmail.com");
+                email.Subject = ("Nofication about send report file");
+                email.Body = "We sent you new report!";
+
+                smpt.Port = 587;
+                smpt.Credentials = new System.Net.NetworkCredential("hospitalssystem@gmail.com", "bolnica123");
+                smpt.EnableSsl = true;
+                smpt.Send(email);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("E-mail Report se ne salje!");
             }
         }
     }
