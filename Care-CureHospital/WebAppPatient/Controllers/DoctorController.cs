@@ -27,7 +27,6 @@ namespace WebAppPatient.Controllers
             List<SpecializationDto> result = new List<SpecializationDto>();
             App.Instance().SpetialitationService.GetAllEntities().ToList().ForEach(specialization => result.Add(SpecializationMapper.SpecializationToSpecializationDto(specialization)));
             return Ok(result);
-        }
-        
+        }      
     }
 }

@@ -177,9 +177,10 @@ Vue.component("appointmentSchedulingStandard", {
                         date: this.convertDate(this.dateModel)
                     }
                 }).then(response => {
-                    if (response.status === 200)
-                    {
+                    if (response.status === 200) {
                         this.doctorWorkDay = response.data;
+                    } else {
+                        this.doctorWorkDay = null;
                     }
 				});
             } else if (this.recommendationStep === 3 && this.doctorId === '0') {
@@ -208,8 +209,9 @@ Vue.component("appointmentSchedulingStandard", {
                     }
                 }).then(response => {
                     if (response.status === 200) {
-                        toast('Termin je uspešno rezervisan!')
+                        toast('Termin je uspešno zakazan!')
                         this.resetData()
+                        this.$router.push('patientAppointments')
                     }
                 }).catch(error => {
                     if (error.response.status === 404) {
