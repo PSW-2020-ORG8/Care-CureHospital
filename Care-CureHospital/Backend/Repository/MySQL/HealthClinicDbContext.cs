@@ -18,7 +18,6 @@ namespace Backend.Repository.MySQL
 {
     public class HealthClinicDbContext : DbContext
     {
-
         public DbSet<Report> Report { get; set; }
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }

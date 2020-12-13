@@ -54,6 +54,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             }
             return null; 
         }
+
         /// <summary> This metod sets patient as malicious if patient canceled three or more appointments in last 30 days </summary>
         public void SetIfPatientMalicious(int patientId, DateTime today)
         {
