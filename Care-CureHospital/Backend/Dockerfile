@@ -20,4 +20,4 @@ WORKDIR /app
 COPY --from=publish /app .
 WORKDIR /app/publish
 VOLUME /app/sql
-ENTRYPOINT ["dotnet", "Backend.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Backend.dll

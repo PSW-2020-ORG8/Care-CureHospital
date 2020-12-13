@@ -19,4 +19,4 @@ RUN dotnet publish "IntegrationAdapters.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "IntegrationAdapters.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet IntegrationAdapters.dll
