@@ -7,13 +7,17 @@ WORKDIR /src
 COPY ["Backend/Backend.csproj", "Backend/"]
 RUN dotnet restore "Backend/Backend.csproj"
 COPY . .
-WORKDIR "/src/Backend"
-RUN dotnet build "Backend.csproj" -c Release -o /app/build
+RUN dotnet build "Backend/Backend.csproj" -c Release -o /app/build
 
 FROM build-env AS publish
-RUN dotnet publish "Backend.csproj" -c Release -o /app/publish
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef --version 3.1.0 && \
+	dotnet publish "Backend/Backend.csproj" -c Release -o /app/publish && \
+    dotnet-ef migrations script -p "Backend/Backend.csproj" -o /app/sql/init.sql
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Backend.dll"]
+COPY --from=publish /app .
+WORKDIR /app/publish
+VOLUME /app/sql
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Backend.dll

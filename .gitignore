@@ -347,7 +347,7 @@ MigrationBackup/
 ## Visual studio for Mac
 ##
 
-/Migrations/
+Migrations
 
 # globs
 Makefile.in
