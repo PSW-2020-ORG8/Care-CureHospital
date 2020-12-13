@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(HealthClinicDbContext))]
-    [Migration("20201211003137_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201212061934_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1413,7 +1413,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 4,
-                            EndTime = new DateTime(2020, 12, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 9, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
                             StartTime = new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified)
                         },

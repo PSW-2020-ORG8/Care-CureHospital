@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -763,7 +763,7 @@ namespace Backend.Migrations
                     { 8, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 9, 14, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 9, 16, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(

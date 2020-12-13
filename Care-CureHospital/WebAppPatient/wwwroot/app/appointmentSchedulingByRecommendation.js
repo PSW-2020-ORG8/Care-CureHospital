@@ -193,7 +193,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/appointment/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
                     this.doctorsBySpecialization = response.data;
                 });
             } else if (this.recommendationStep === 2 && this.specialization === '0'){
@@ -247,8 +247,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
                         this.$router.push('patientAppointments')
                     }
                 }).catch(error => {
-                    if (error.response.status === 400) {
-                        
+                    if (error.response.status === 404) {
+                        toast('Greška prilikom zakazivanja termina!')
                     }
                 });          
             }
@@ -275,7 +275,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
         }
 	},
 	mounted() {
-        axios.get('api/appointment/getAllSpecialization').then(response => {
+        axios.get('api/doctor/getAllSpecialization').then(response => {
             this.specializations = response.data;
         });
 	}

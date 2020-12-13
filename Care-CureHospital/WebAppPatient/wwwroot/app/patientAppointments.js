@@ -157,7 +157,15 @@ Vue.component("patientAppointments", {
 			this.scheduledAppointments = response.data;
 			axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 				this.previousAppointments = response.data;
+			}).catch(error => {
+				if (error.response.status === 404) {
+					
+				}
 			});		
+		}).catch(error => {
+			if (error.response.status === 404) {
+				
+			}
 		});
 	}
 
