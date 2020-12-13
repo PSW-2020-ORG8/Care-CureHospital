@@ -20,7 +20,8 @@ namespace WebAppPatient.Controllers
         public IActionResult GetAllPatients(int patientId)
         {
             List<PatientDto> result = new List<PatientDto>();
-            App.Instance().PatientService.GetAllEntities().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient)));
+            App.Instance().PatientService.GetAllEntities().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient,
+                App.Instance().AppointmentService.CountCancelledAppointmentsForPatient(patient.Id, DateTime.Now))));
             return Ok(result);
         }
 
@@ -28,7 +29,8 @@ namespace WebAppPatient.Controllers
         public IActionResult GetMaliciousPatients()
         {
             List<PatientDto> result = new List<PatientDto>();
-            App.Instance().PatientService.GetMaliciousPatients().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient)));
+            App.Instance().PatientService.GetMaliciousPatients().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient, 
+                App.Instance().AppointmentService.CountCancelledAppointmentsForPatient(patient.Id, DateTime.Now))));
             return Ok(result);
         }
 
