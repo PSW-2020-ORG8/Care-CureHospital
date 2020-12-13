@@ -48,9 +48,12 @@ Vue.component("blockMaliciousPatients", {
 				<td>{{maliciousPatient.username}}</td>
 				<td>{{maliciousPatient.name}}</td>
 				<td>{{maliciousPatient.surname}}</td>
-				<td>7</td>
-				<td>
+				<td>{{maliciousPatient.numberOfCancelledAppointents}}</td>
+				<td v-if="maliciousPatient.blocked === false">
 				<button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser(maliciousPatient.id)">Blokiraj</button>
+				</td>
+				<td v-if="maliciousPatient.blocked === true" style="color: red">
+					Pacijent je blokiran
 				</td>
 			</tr>			
 		</table> 
@@ -65,7 +68,11 @@ Vue.component("blockMaliciousPatients", {
 		blockUser : function(patientId) {
 			if (confirm('Da li ste sigurni da želite da blokirate pacijenta?') == true) {
 				axios.put('api/patient/blockMaliciousPatient/' + patientId)
-					.then(response => {});
+					.then(response => {
+						axios.get('api/patient/getMaliciousPatients').then(response => {
+							this.maliciousPatients = response.data;
+						});
+					});
                 toast('Uspešno ste blokirali pacijenta!')
             }
         }

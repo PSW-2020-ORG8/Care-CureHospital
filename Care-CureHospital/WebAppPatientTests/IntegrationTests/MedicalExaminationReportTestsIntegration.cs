@@ -19,7 +19,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        [Theory]
+        /*[Theory]
         [MemberData(nameof(MedicalExaminationReportData))]
         public async void Find_Reports_With_Doctor_Searh_Parameter(HttpStatusCode expectedResponseStatusCode)
         {
@@ -30,10 +30,11 @@ namespace WebAppPatientTests.IntegrationTests
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
-        public static IEnumerable<object[]> MedicalExaminationReportData =>
-        new List<object[]>
+        public static IEnumerable<object[]> MedicalExaminationReportData()
         {
-            new object[] { HttpStatusCode.OK }
-        };
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { HttpStatusCode.OK });
+            return retVal;
+        }*/
     }
 }
