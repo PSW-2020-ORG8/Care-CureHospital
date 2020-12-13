@@ -1,5 +1,7 @@
 ﻿using HospitalMap.Controller;
+using HospitalMap.WPF.Converter;
 using HospitalMap.WPF.ModelWPF;
+using Model.Term;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +23,7 @@ namespace HospitalMap.WPF
     {
 
 
-        public WorkTimeViewModel WorkTimeVie
+        public RoomWorkTime WorkTimeVie
         {
             get;
             set;
@@ -58,9 +60,14 @@ namespace HospitalMap.WPF
 
             }
 
-            WorkTimeVie = _informationControler.GetWorkTimeByRoom(id);
-           
             
+
+            Room r1 = _informationControler.GetRoomById(id);
+            if (r1 != null)
+            {
+                WorkTimeVie = WorkTimeRoomConverter.ConvertRoomToRoomWorkTime(_informationControler.GetRoomById(id));
+            }
+
 
 
         }
@@ -78,7 +85,21 @@ namespace HospitalMap.WPF
             }
 
 
-            _informationControler.EditWorkTimeByRoom(WorkTimeVie);
+            Room r1 = _informationControler.GetEntity(WorkTimeVie.IdOfRoomInMySQLDataBase);
+
+            r1.RoomId = WorkTimeVie.NameOfRoom;
+            r1.IdRoomClinic = WorkTimeVie.IdOfRoom;
+            r1.NameOfClinic = WorkTimeVie.NameOfClinic;
+            r1.NumberOfFloor = WorkTimeVie.NumberOfFloor;
+            r1.StartWorkTime = WorkTimeVie.FromDateTime;
+            r1.EndWorkTime = WorkTimeVie.ToDateTime;
+
+
+            _informationControler.UpdateEntity(r1);
+
+
+
+            
             this.Close();
         }
     }

@@ -24,6 +24,7 @@ using HospitalMap.Code.Model;
 using HospitalMap.Code.Repository.RoomInformatioRepository;
 using HospitalMap.Code.Controller;
 using HospitalMap.Code.Repository.DoctorsRepository;
+using HospitalMap.WPF.Converter;
 
 namespace HospitalMap
 {
@@ -35,21 +36,21 @@ namespace HospitalMap
         public Rectangle Dinamicly = new Rectangle();
         public ObservableCollection<Rectangles> Rectangle { get; set; }
 
-        public ObservableCollection<RoomInformationVieW>  RoomsInfo{ get; set; }
+        public ObservableCollection<PatientsRoomVieW> RoomsInfo { get; set; }
 
-        public ObservableCollection<StorageModel> storage { get; set; }
+        public ObservableCollection<StorageModel> Storage { get; set; }
 
-        public ObservableCollection<WorkTimeViewModel> workTime { get; set; }
+        public ObservableCollection<RoomWorkTime> WorkTime { get; set; }
 
-        public ObservableCollection<RoomInformationVieW> SearchedPatientsRooms { get; set; }
+        public ObservableCollection<PatientsRoomVieW> SearchedPatientsRooms { get; set; }
         public ObservableCollection<DoctorRoomView> SearchedDoctorsRooms { get; set; }
 
-        public ObservableCollection<WorkTimeViewModel> SearchedAnotherRooms { get; set; }
+        public ObservableCollection<RoomWorkTime> SearchedAnotherRooms { get; set; }
 
         public object LayoutRoot { get; private set; }
         public string Id { get; private set; }
 
-        
+
 
         public MainWindow()
         {
@@ -58,14 +59,14 @@ namespace HospitalMap
             DinamiclyDrawingRepository.GetInstance();
             StorageRepository.GetInstance();
             RoomWorkTimeRepository.GetInstance();
-            
+
             Login login = new Login();
             login.Show();
             this.Close();
-            
-            
+
+
         }
-        
+
         public MainWindow(int broj)
         {
             InitializeComponent();
@@ -76,9 +77,9 @@ namespace HospitalMap
             RoomWorkTimeRepository.GetInstance();
             DoctorsRoomRepository.GetInstance();
 
-            SearchedPatientsRooms = new ObservableCollection<RoomInformationVieW>();
+            SearchedPatientsRooms = new ObservableCollection<PatientsRoomVieW>();
             SearchedDoctorsRooms = new ObservableCollection<DoctorRoomView>();
-            SearchedAnotherRooms = new ObservableCollection<WorkTimeViewModel>();
+            SearchedAnotherRooms = new ObservableCollection<RoomWorkTime>();
 
             if (Login.role == 2)
             {
@@ -95,19 +96,21 @@ namespace HospitalMap
         private void CreateDynamicCanvas()
         {
             Rectangle = new ObservableCollection<Rectangles>();
-            Rectangle = DinamiclyDrawingRepository.GetInstance().GetAllRectangles();
-            RoomsInfo= InformationEditRepository.GetInstance().GetAll();
-            storage = StorageRepository.GetInstance().GetAllStorage();
-            workTime = RoomWorkTimeRepository.GetInstance().GetAll();
+            Rectangle = DinamiclyDrawingRepository.GetInstance().GetAllRectangles();            
+            Storage = StorageRepository.GetInstance().GetAllStorage();            
+            RoomsInfo = new ObservableCollection<PatientsRoomVieW>(PatientsRoomConverter.ConvertRoomToPatientsRoomView(
+            Backend.App.Instance().RoomService.GetAllEntitiesByType(3).ToList()));
+            WorkTime = new ObservableCollection<RoomWorkTime>(WorkTimeRoomConverter.ConvertRoomToRoomWorkTime(
+            Backend.App.Instance().RoomService.GetAllEntitiesByType(4).ToList()));
 
             foreach (Rectangles r in Rectangle)
             {
                 Rectangle rect = new Rectangle()
-                {   
+                {
                     Fill = r.Paint,
                     Height = r.Height,
                     Width = r.Width,
-                    Name=r.Id
+                    Name = r.Id
                 };
 
                 TextBlock txtb = new TextBlock()
@@ -118,15 +121,15 @@ namespace HospitalMap
                     Background = r.Background
                 };
                 canvas.Children.Add(txtb);
-                foreach (RoomInformationVieW room in RoomsInfo)
+                foreach (PatientsRoomVieW room in RoomsInfo)
                 {
-                    if (r.Id.Equals(room.NameOfRoom))
+                    if (r.Id.Equals(room.IdOfRoom))
                     {
                         rect.MouseDown += RoomInformation;
                     }
                 }
 
-                foreach ( StorageModel s in storage)
+                foreach (StorageModel s in Storage)
                 {
                     if (r.Id.Equals(s.IdS))
                     {
@@ -134,7 +137,7 @@ namespace HospitalMap
                     }
                 }
 
-                foreach (WorkTimeViewModel s in workTime)
+                foreach (RoomWorkTime s in WorkTime)
                 {
                     if (r.Id.Equals(s.IdOfRoom))
                     {
@@ -147,7 +150,7 @@ namespace HospitalMap
                 Canvas.SetLeft(rect, r.Left);
                 Canvas.SetTop(rect, r.Top);
                 canvas.Children.Add(rect);
-                
+
             }
 
         }
@@ -213,9 +216,10 @@ namespace HospitalMap
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
 
-           
 
-            if (EquipmnetRadioButon.IsChecked == true && !search.Text.ToString().Equals("")) {
+
+            if (EquipmnetRadioButon.IsChecked == true && !search.Text.ToString().Equals(""))
+            {
                 ObservableCollection<StorageModel> equipments = new ObservableCollection<StorageModel>();
                 equipments = StorageRepository.GetInstance().SearchedItemsByName(search.Text);
 
@@ -227,16 +231,19 @@ namespace HospitalMap
 
                 Storage storage = new Storage(equipments);
                 storage.Show();
-                       
+
             }
 
             if (RoomsRadioButon.IsChecked == true)
             {
                 SearchController _searchController = new SearchController();
 
-                SearchedPatientsRooms = _searchController.SearchPatientsRooms(search.Text.ToString());
-                SearchedDoctorsRooms = _searchController.SearchDoctorsRooms(search.Text.ToString());
-                SearchedAnotherRooms = _searchController.SearchAnotherRooms(search.Text.ToString());
+                SearchedPatientsRooms = new ObservableCollection<PatientsRoomVieW>(PatientsRoomConverter.ConvertRoomToPatientsRoomView(_searchController.SearchPatientsRooms(search.Text.ToString()).ToList()));
+
+
+                SearchedDoctorsRooms = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(_searchController.SearchDoctorsRooms(search.Text.ToString()).ToList()));
+
+                SearchedAnotherRooms = new ObservableCollection<RoomWorkTime>(WorkTimeRoomConverter.ConvertRoomToRoomWorkTime(_searchController.SearchAnotherRooms(search.Text.ToString()).ToList()));
 
                 if (SearchedPatientsRooms.Count == 0 && SearchedDoctorsRooms.Count == 0 && SearchedAnotherRooms.Count == 0)
                 {

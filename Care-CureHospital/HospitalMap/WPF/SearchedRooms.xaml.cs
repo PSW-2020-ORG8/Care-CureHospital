@@ -33,16 +33,16 @@ namespace HospitalMap.WPF
 
 
 
-        private ObservableCollection<RoomInformationVieW> _patientsRooms;
+        private ObservableCollection<PatientsRoomVieW> _patientsRooms;
 
-        public ObservableCollection<RoomInformationVieW> PatientsRooms
+        public ObservableCollection<PatientsRoomVieW> PatientsRooms
         {
             get { return _patientsRooms; }
             set { _patientsRooms = value; OnPropertyChanged("PatientsRooms"); }
 
         }
 
-        public RoomInformationVieW SelectedPatientRoom;
+        public PatientsRoomVieW SelectedPatientRoom;
 
         public DoctorRoomView SelectedDoctorRoom;
 
@@ -57,9 +57,9 @@ namespace HospitalMap.WPF
         }
 
 
-        private ObservableCollection<WorkTimeViewModel> _anothersRooms;
+        private ObservableCollection<RoomWorkTime> _anothersRooms;
 
-        public ObservableCollection<WorkTimeViewModel> AnothersRooms
+        public ObservableCollection<RoomWorkTime> AnothersRooms
         {
             get { return _anothersRooms; }
             set { _anothersRooms = value; OnPropertyChanged("AnothersRooms"); }
@@ -69,7 +69,7 @@ namespace HospitalMap.WPF
 
 
 
-        public SearchedRooms(ObservableCollection<RoomInformationVieW> patientsRooms, ObservableCollection<DoctorRoomView> doctorsRooms, ObservableCollection<WorkTimeViewModel> anothersRooms)
+        public SearchedRooms(ObservableCollection<PatientsRoomVieW> patientsRooms, ObservableCollection<DoctorRoomView> doctorsRooms, ObservableCollection<RoomWorkTime> anothersRooms)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -83,7 +83,7 @@ namespace HospitalMap.WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SelectedPatientRoom = (RoomInformationVieW)PatientsRoomDataGrid.SelectedItem;
+            SelectedPatientRoom = (PatientsRoomVieW)PatientsRoomDataGrid.SelectedItem;
 
             FirstFloor f = new FirstFloor(SelectedPatientRoom.IdOfRoom);
             f.Show();
