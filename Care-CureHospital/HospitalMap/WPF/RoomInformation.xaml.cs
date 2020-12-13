@@ -1,5 +1,7 @@
 ﻿using HospitalMap.Controller;
+using HospitalMap.WPF.Converter;
 using HospitalMap.WPF.ModelWPF;
+using Model.Term;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +23,7 @@ namespace HospitalMap.WPF
     public partial class RoomInformation : Window
     {
         private InformationEditController informationControler = new InformationEditController();
-        public RoomInformationVieW room
+        public PatientsRoomVieW room
         {
             get;
             set;
@@ -47,7 +49,7 @@ namespace HospitalMap.WPF
 
             }
 
-            room = informationControler.GetRoomById("2");
+           
 
 
         }
@@ -73,7 +75,8 @@ namespace HospitalMap.WPF
 
 
             }
-            if (Login.role == 2) {
+            if (Login.role == 2)
+            {
                 BedCapacityTxt.Visibility = Visibility.Hidden;
                 OcupiedBedsTxt.Visibility = Visibility.Hidden;
                 AvailableBedsTxt.Visibility = Visibility.Hidden;
@@ -83,15 +86,29 @@ namespace HospitalMap.WPF
 
             }
 
-            room = informationControler.GetRoomById(id);
-           
+            Room r1 = informationControler.GetRoomById(id);
+            if (r1 != null)
+            {
+                room = PatientsRoomConverter.ConvertRoomToPatientsRoomView(informationControler.GetRoomById(id));
+            }
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            informationControler.EditInformation(room);
+
+            Room r1 = informationControler.GetEntity(room.IdOfRoomInMySQLDataBase);
+
+            r1.RoomId = room.NameOfRoom;
+            r1.IdRoomClinic = room.IdOfRoom;
+            r1.NameOfClinic = room.NameOfClinic;
+            r1.NumberOfFloor = room.NumberOfFloor;
+            r1.BedCapacity = room.BedCapacity;
+            r1.AvailableBeds = room.AvailableBeds;
+            r1.OccupiedBeds = room.OccupiedBeds;
+
+
+            informationControler.UpdateEntity(r1);
             this.Close();
 
 

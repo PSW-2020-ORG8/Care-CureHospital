@@ -20,9 +20,11 @@ using Model.Term;
 using Repository.ExaminationSurgeryRepository;
 using Repository.IDSequencer;
 using Repository.MedicalRecordRepository;
+using Repository.RoomsRepository;
 using Repository.UsersRepository;
 using Service.ExaminationSurgeryServices;
 using Service.MedicalRecordService;
+using Service.RoomsServices;
 using Service.UsersServices;
 
 namespace Backend
@@ -50,6 +52,7 @@ namespace Backend
         public SpetialitationService SpetialitationService;
         public AppointmentService AppointmentService;
         public EPrescriptionService EPrescriptionService;
+        public RoomService RoomService;
 
         private App()
         {
@@ -90,6 +93,8 @@ namespace Backend
                 new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()), PatientService);
             EPrescriptionService = new EPrescriptionService(
                 new EPrescriptionRepository(new MySQLStream<EPrescription>(), new IntSequencer()));
+            RoomService = new RoomService(
+               new RoomRepository(new MySQLStream<Room>(), new IntSequencer()));
         }
 
         public static App Instance()
