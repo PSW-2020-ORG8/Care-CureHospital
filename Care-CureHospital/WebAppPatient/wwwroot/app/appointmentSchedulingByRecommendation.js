@@ -242,7 +242,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                     }
                 }).then(response => {
                     if (response.status === 200) {
-                        toast('Termin je uspešno rezervisan!')
+                        toast('Termin je uspešno zakazan!')
                         this.resetData()
                         this.$router.push('patientAppointments')
                     }
