@@ -61,14 +61,13 @@ namespace Backend.Repository.MySQL
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "us-cdbr-east-02.cleardb.com";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "HealthClinicDB";
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
-
-            return $"server={server};port={port};database={database};user={user};password={password};";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "heroku_04a57706b4c21c3";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "b1230c944d2123";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "c9966da2";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            return $"server={server};port={port};database={database};user={user};password={password};SSL Mode={sslMode};";
         }
 
 

@@ -15,8 +15,13 @@
       "launchUrl": "api",
       "applicationUrl": "http://localhost:51492",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_HOST": "localhost",
+        "DATABASE_PORT": "3306",
+        "DATABASE_SCHEMA": "HealthClinicDB",
+        "DATABASE_USERNAME": "root",
+        "DATABASE_PASSWORD": "root"
+    }
     },
     "IntegrationAdapters": {
       "commandName": "Project",
@@ -24,8 +29,13 @@
       "launchUrl": "api",
       "applicationUrl": "https://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_HOST": "localhost",
+        "DATABASE_PORT": "3306",
+        "DATABASE_SCHEMA": "HealthClinicDB",
+        "DATABASE_USERNAME": "root",
+        "DATABASE_PASSWORD": "root"
+    }
     }
   }
 }
