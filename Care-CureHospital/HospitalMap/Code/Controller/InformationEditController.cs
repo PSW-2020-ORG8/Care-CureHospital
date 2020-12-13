@@ -1,8 +1,8 @@
-﻿using HospitalMap.Service;
-using HospitalMap.WPF.ModelWPF;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+
+using Model.AllActors;
+using Model.Term;
+
 
 namespace HospitalMap.Controller
 {
@@ -10,23 +10,36 @@ namespace HospitalMap.Controller
     {
 
 
-        private InformationEditService _informationEditService;
+        
+        
 
-            public InformationEditController() {
+        public InformationEditController() {
 
-            _informationEditService = new InformationEditService();
+            
              }
 
-         public void  EditInformation(RoomInformationWiev room)
+         public void UpdateEntity(Room room)
         {
-             _informationEditService.EditInformation(room);
+            Backend.App.Instance().RoomService.UpdateEntity(room);
         }
 
-        public RoomInformationWiev GetRoomById(string room)
+        public Room GetEntity(int id)
         {
-            return _informationEditService.GetRoomById(room);
+           return Backend.App.Instance().RoomService.GetEntity(id);
         }
 
+        public Room GetRoomById(string roomId)
+        {
+            return Backend.App.Instance().RoomService.GetEntityByHospitalId(roomId);
+        }
+
+
+        public Doctor GetDoctorById(int id)
+        {
+            return Backend.App.Instance().DoctorService.GetEntity(id);
+        }
+
+          
 
     }
 }

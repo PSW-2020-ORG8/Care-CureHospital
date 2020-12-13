@@ -43,6 +43,15 @@ namespace Model.Term
             ScheduledAppointments = scheduledAppointments;
         }
 
+        public DoctorWorkDay(int id, DateTime date, int doctorId, Model.AllActors.Doctor doctor, List<Appointment> scheduledAppointments)
+        {
+            Id = id;
+            Date = date;
+            DoctorId = doctorId;
+            Doctor = doctor;
+            ScheduledAppointments = scheduledAppointments;
+        }
+
         public int GetId()
         {
             return Id;

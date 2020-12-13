@@ -1,10 +1,15 @@
-﻿using HospitalMap.Code.Model.Canvas;
+﻿using HospitalMap.Code.Model;
+using HospitalMap.Code.Model.Canvas;
+using HospitalMap.Code.Repository;
+using HospitalMap.Code.Repository.DoctorsRepository;
 using HospitalMap.Code.Repository.RectangleRepository;
 using HospitalMap.Repository;
+using HospitalMap.WPF.Converter;
 using HospitalMap.WPF.ModelWPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,29 +27,106 @@ namespace HospitalMap.WPF
     /// <summary>
     /// Interaction logic for prviSprat.xaml
     /// </summary>
-    public partial class FirstFloor : Window
+    public partial class FirstFloor : Window, INotifyPropertyChanged
     {
         public Rectangle Dinamicly = new Rectangle();
         public ObservableCollection<Rectangles> Rectangle { get; set; }
 
-        public ObservableCollection<RoomInformationWiev> RoomsInfo { get; set; }
+        public ObservableCollection<PatientsRoomVieW> RoomsInfo { get; set; }
 
-        public String Key = "";
+        public ObservableCollection<DoctorRoomView> DrOfficeInfo { get; set; }
 
+        public ObservableCollection<StorageModel> storage { get; set; }
+
+        public Rectangles SearchedRectangle = new Rectangles();
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+
+        private PatientsRoomVieW _room;
+
+        public PatientsRoomVieW Room
+        {
+            get
+            {
+                return _room;
+            }
+            set
+            {
+                if (value != _room)
+                {
+                    _room = value;
+                    OnPropertyChanged("Room");
+                }
+            }
+        }
         public FirstFloor()
         {
             InitializeComponent();
             CreateDynamicCanvas();
             FirstFloorRepository.GetInstance();
             InformationEditRepository.GetInstance();
+            DoctorsRoomRepository.GetInstance();
+            StorageRepository.GetInstance();
+            Room = InformationEditRepository.GetInstance().GetById("R1");
+            RoomTxt.Text = Room.NameOfRoom;
+        }
 
+        public FirstFloor(string Id)
+        {
+            InitializeComponent();
+            CreateDynamicCanvas();
+            FirstFloorRepository.GetInstance();
+            InformationEditRepository.GetInstance();
+            DrawSelectedRectangle(Id);
+            DoctorsRoomRepository.GetInstance();
+            StorageRepository.GetInstance();
+            Room = InformationEditRepository.GetInstance().GetById("R1");
+            RoomTxt.Text = Room.NameOfRoom;
+        }
+
+        private void DrawSelectedRectangle(string Id)
+        {
+            SearchedRectangle = FirstFloorRepository.GetInstance().GetById(Id);
+
+            Rectangle rect = new Rectangle()
+            {
+
+                Fill = Brushes.Transparent,
+                Height = SearchedRectangle.Height,
+                Width = SearchedRectangle.Width,
+                Name = SearchedRectangle.Id,
+                Stroke = Brushes.Red,
+                StrokeThickness = 5
+
+            };
+            Canvas.SetLeft(rect, SearchedRectangle.Left);
+            Canvas.SetTop(rect, SearchedRectangle.Top);
+            canvas.Children.Add(rect);
         }
 
         private void CreateDynamicCanvas()
         {
             Rectangle = new ObservableCollection<Rectangles>();
-            Rectangle = FirstFloorRepository.GetInstance().GetAllRectangles();
-            RoomsInfo = InformationEditRepository.GetInstance().GetAll();
+            Rectangle = FirstFloorRepository.GetInstance().GetAllRectangles();           
+           
+            RoomsInfo = new ObservableCollection<PatientsRoomVieW>(PatientsRoomConverter.ConvertRoomToPatientsRoomView(
+             Backend.App.Instance().RoomService.GetAllEntitiesByType(3).ToList()));
+           
+
+            DrOfficeInfo = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(
+             Backend.App.Instance().RoomService.GetAllEntitiesByType(1).ToList()));
+
+           
+            storage = StorageRepository.GetInstance().GetAllStorage();
 
             foreach (Rectangles r in Rectangle)
             {
@@ -52,8 +134,8 @@ namespace HospitalMap.WPF
                 {
                     Fill = r.Paint,
                     Height = r.Height,
-                    Width = r.Width
-
+                    Width = r.Width,
+                    Name = r.Id
                 };
 
                 TextBlock txtb = new TextBlock()
@@ -64,12 +146,28 @@ namespace HospitalMap.WPF
                     Background = r.Background
                 };
                 canvas.Children.Add(txtb);
-                foreach (RoomInformationWiev room in RoomsInfo)
+                foreach (PatientsRoomVieW room in RoomsInfo)
                 {
-                    if (r.Id.Equals(room.NameOfRoom))
+                    if (r.Id.Equals(room.IdOfRoom))
                     {
-                        Key = r.Id;
                         rect.MouseDown += RoomInformation;
+                    }
+                }
+
+                foreach (DoctorRoomView room in DrOfficeInfo)
+                {
+                    if (r.Id.Equals(room.IdOfRoom))
+                    {
+                        rect.MouseDown += DrOfficeInformation;
+                    }
+                }
+
+                foreach (StorageModel s in storage)
+                {
+                    if (r.Id.Equals(s.IdS))
+                    {
+                        rect.MouseDown += StorageInfo;
+                        break;
                     }
                 }
 
@@ -78,14 +176,32 @@ namespace HospitalMap.WPF
                 Canvas.SetLeft(rect, r.Left);
                 Canvas.SetTop(rect, r.Top);
                 canvas.Children.Add(rect);
-
+                
             }
 
         }
 
+        private void StorageInfo(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle rect = (Rectangle)sender;
+            RoomItems s = new RoomItems("", rect.Name);
+            s.Show();
+        }
+
         private void RoomInformation(object sender, MouseButtonEventArgs e)
         {
-            RoomInformation worktime1 = new RoomInformation(Key);
+            Rectangle rect = (Rectangle)sender;
+            RoomInformation worktime1 = new RoomInformation(rect.Name);
+            worktime1.Show(); 
+        }
+
+     
+
+
+        private void DrOfficeInformation(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle rect = (Rectangle)sender;
+            DoctorOfficeInformation worktime1 = new DoctorOfficeInformation(rect.Name);
             worktime1.Show();
         }
 

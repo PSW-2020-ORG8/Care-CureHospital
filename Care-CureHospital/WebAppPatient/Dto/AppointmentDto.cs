@@ -17,6 +17,7 @@ namespace WebAppPatient.Dto
         public String DoctorSpecialization { get; set; }
         public String Room { get; set; }
         public int MedicalExaminationId { get; set; }
+        public int DoctorId { get; set; }
         public AppointmentDto() { }
     }
 }

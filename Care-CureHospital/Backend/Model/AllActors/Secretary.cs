@@ -27,5 +27,9 @@ namespace Model.AllActors
         public Secretary()
         {
         }
+        public Secretary(string id,string username,string password) : base(id,username,password)
+        {
+            
+        }
     }
 }

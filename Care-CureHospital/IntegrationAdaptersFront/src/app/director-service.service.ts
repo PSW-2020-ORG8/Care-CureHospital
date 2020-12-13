@@ -23,4 +23,5 @@ export class DirectorServiceService {
   generate(val:any){
       return this.http.get<any[]>(this.APIUrl+'/sftp');
   }
+  
 }

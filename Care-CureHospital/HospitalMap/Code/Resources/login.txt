@@ -1,22 +1,22 @@
 [
   {
-    "username": "nemanja",
-    "password": "direktor",
+    "username": "a",
+    "password": "a",
     "role": "L"
   },
   {
-   "username": "lulu",
-   "password": "franc",
+   "username": "p",
+   "password": "p",
    "role": "P"
   },
   {
-   "username": "zaki",
-   "password": "prevara",
+   "username": "u",
+   "password": "u",
    "role": "U"
   },
   {
-   "username": "losmi",
-   "password": "influenser",
+   "username": "s",
+   "password": "s",
    "role": "S"
   }
 ]

@@ -41,19 +41,24 @@ namespace Backend.Service.ExaminationSurgeryServices
             return GetAllEntities().ToList().Where(appointment => appointment.MedicalExamination.PatientId == patientId).ToList();
         }
 
-        public Appointment CancelPatientAppointment(int appointmentId)
+        public Appointment CancelPatientAppointment(int appointmentId, DateTime today)
         {
-            Appointment appointmentForCancel = GetEntity(appointmentId);
-            appointmentForCancel.Canceled = true;
-            appointmentForCancel.CancellationDate = DateTime.Today;
-            UpdateEntity(appointmentForCancel);
-            SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId);
-            return appointmentForCancel;
+            Appointment appointmentForCancelation = GetEntity(appointmentId);
+            if(today < appointmentForCancelation.StartTime.AddHours(-48))
+            {
+                appointmentForCancelation.Canceled = true;
+                appointmentForCancelation.CancellationDate = today;
+                UpdateEntity(appointmentForCancelation);
+                SetIfPatientMalicious(appointmentForCancelation.MedicalExamination.PatientId, today);
+                return appointmentForCancelation;
+            }
+            return null;
         }
 
-        public void SetIfPatientMalicious(int patientId)
+        /// <summary> This metod sets patient as malicious if patient canceled three or more appointments in last 30 days </summary>
+        public void SetIfPatientMalicious(int patientId, DateTime today)
         {
-            if (IsPatientMalicious(patientId, DateTime.Today))
+            if (CountCancelledAppointmentsForPatient(patientId, today)>=3)
             {
                 Patient maliciousPatient = patientService.GetEntity(patientId);
                 maliciousPatient.Malicious = true;
@@ -61,7 +66,7 @@ namespace Backend.Service.ExaminationSurgeryServices
             }
         }
 
-        public bool IsPatientMalicious(int patientId, DateTime currentCancellationDate)
+        public int CountCancelledAppointmentsForPatient(int patientId, DateTime currentCancellationDate)
         {
             List<Appointment> cancelledAppointments = getAllCancelledAppointmentsByPatient(patientId);
             List<Appointment> result = new List<Appointment>();
@@ -72,7 +77,7 @@ namespace Backend.Service.ExaminationSurgeryServices
                     result.Add(cancelledAppointment);
                 }
             }
-            return result.Count >= 3;
+            return result.Count;
         }
 
         public Appointment AddEntity(Appointment entity)
