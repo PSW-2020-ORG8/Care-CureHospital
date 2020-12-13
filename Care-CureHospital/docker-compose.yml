@@ -1,24 +1,6 @@
 version: "3.8"
 
 services:
-  mysql:
-    image: mysql:latest
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_DATABASE: HealthClinicDB
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - mysql-db:/var/lib/mysql
-      - app-sql:/docker-entrypoint-initdb.d/
-    networks:
-      - public_net
   Backend:
     build: 
       context: .
@@ -26,13 +8,11 @@ services:
     image: astevanovic/backend:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: mysql
-      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
       SHOW_ENV: 'TRUE'
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -48,13 +28,11 @@ services:
     image: astevanovic/integrationadapters:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: mysql
-      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
       SHOW_ENV: 'TRUE'
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -68,13 +46,11 @@ services:
     image: astevanovic/webapppatient:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: mysql
-      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
       SHOW_ENV: 'TRUE'
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -97,5 +73,4 @@ networks:
   public_net:
     driver: bridge
 volumes:
-  mysql-db:
   app-sql:
