@@ -43,18 +43,19 @@ namespace Backend.Service.ExaminationSurgeryServices
 
         public Appointment CancelPatientAppointment(int appointmentId, DateTime today)
         {
-            Appointment appointmentForCancel = GetEntity(appointmentId);
-            if(today < appointmentForCancel.StartTime.AddHours(-48))
+            Appointment appointmentForCancelation = GetEntity(appointmentId);
+            if(today < appointmentForCancelation.StartTime.AddHours(-48))
             {
-                appointmentForCancel.Canceled = true;
-                appointmentForCancel.CancellationDate = today;
-                UpdateEntity(appointmentForCancel);
-                SetIfPatientMalicious(appointmentForCancel.MedicalExamination.PatientId, today);
-                return appointmentForCancel;
+                appointmentForCancelation.Canceled = true;
+                appointmentForCancelation.CancellationDate = today;
+                UpdateEntity(appointmentForCancelation);
+                SetIfPatientMalicious(appointmentForCancelation.MedicalExamination.PatientId, today);
+                return appointmentForCancelation;
             }
             return null; 
         }
 
+        /// <summary> This metod sets patient as malicious if patient canceled three or more appointments in last 30 days </summary>
         public void SetIfPatientMalicious(int patientId, DateTime today)
         {
             if (CountCancelledAppointmentsForPatient(patientId, today)>=3)

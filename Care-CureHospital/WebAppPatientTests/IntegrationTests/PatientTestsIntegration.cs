@@ -25,7 +25,7 @@ namespace WebAppPatientTests.IntegrationTests
         {
             HttpClient client = factory.CreateClient();
 
-            var response = await client.PutAsync("/api/patient/blockMaliciousPatient/" + patientId, new StringContent("1", Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync("/api/patient/blockMaliciousPatient/" + patientId, new StringContent("5", Encoding.UTF8, "application/json"));
 
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
@@ -33,7 +33,7 @@ namespace WebAppPatientTests.IntegrationTests
         public static IEnumerable<object[]> PatientData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { 1, HttpStatusCode.OK });
+            retVal.Add(new object[] { 5, HttpStatusCode.OK });
             return retVal;
         }*/
     }
