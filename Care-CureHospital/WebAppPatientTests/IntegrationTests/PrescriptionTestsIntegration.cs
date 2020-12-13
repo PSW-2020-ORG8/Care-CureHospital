@@ -10,27 +10,27 @@ using Xunit;
 
 namespace WebAppPatientTests.IntegrationTests
 {
-    public class MedicalExaminationReportTestsIntegration : IClassFixture<WebApplicationFactory<Startup>>
+    public class PrescriptionTestsIntegration : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> factory;
 
-        public MedicalExaminationReportTestsIntegration(WebApplicationFactory<Startup> factory)
+        public PrescriptionTestsIntegration(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
         }
 
         /*[Theory]
-        [MemberData(nameof(MedicalExaminationReportData))]
-        public async void Find_Reports_With_Doctor_Searh_Parameter(HttpStatusCode expectedResponseStatusCode)
+        [MemberData(nameof(PrescriptionData))]
+        public async void Find_Prescriptions_With_Doctor_Searh_Parameter(HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/api/medicalExaminationReport/findReportsByDoctor?patientId=1&doctor=Aleksandar");
+            HttpResponseMessage response = await client.GetAsync("/api/prescription/findPrescriptionsByDoctor?patientId=1&doctor=Aleksandar");
 
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
-        public static IEnumerable<object[]> MedicalExaminationReportData()
+        public static IEnumerable<object[]> PrescriptionData()
         {
             var retVal = new List<object[]>();
             retVal.Add(new object[] { HttpStatusCode.OK });

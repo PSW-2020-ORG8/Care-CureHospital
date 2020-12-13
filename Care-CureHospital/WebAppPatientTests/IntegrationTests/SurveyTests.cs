@@ -43,10 +43,11 @@ namespace WebAppPatientTests.IntegrationTests
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
-        public static IEnumerable<object[]> SurveyData =>
-        new List<object[]>
+        public static IEnumerable<object[]> SurveyData()
         {
-            new object[] { HttpStatusCode.OK }
-        };*/
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { HttpStatusCode.OK });
+            return retVal;
+        }*/
     }
 }
