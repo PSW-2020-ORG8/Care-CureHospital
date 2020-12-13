@@ -45,9 +45,9 @@ Vue.component("doctorSurveyResults", {
     </div>  
 
 	
-    <div class="survey-questions" style="margin-left:20%">
+    <div class="survey-questions">
     <template v-for = "(doctorResult, index) in doctorSurveyResults">
-        <h3 class = "doctor-name-and-specialitation">Dr {{doctorResult.doctor.name}} {{doctorResult.doctor.surname}}</h3>
+        <h3 class = "doctor-name-and-specialitation">dr {{doctorResult.doctor.name}} {{doctorResult.doctor.surname}}</h3>
         <h3 class = "doctor-name-and-specialitation">Specijalizacija: {{doctorResult.doctor.specialitation.specialitationForDoctor}}</h3>
 
 		<table class="questions-about-doctor" style="margin-bottom : 40px">

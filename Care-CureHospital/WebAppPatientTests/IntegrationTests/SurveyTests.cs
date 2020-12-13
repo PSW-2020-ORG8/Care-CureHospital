@@ -15,9 +15,10 @@ namespace WebAppPatientTests.IntegrationTests
         
         private readonly WebApplicationFactory<Startup> factory;
 
-        public SurveyTestsIntegration(WebApplicationFactory<Startup> factory)
+        public  SurveyTestsIntegration(WebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
+            
         }
 
         /*[Theory]

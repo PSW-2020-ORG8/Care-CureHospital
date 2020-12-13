@@ -32,6 +32,8 @@ namespace Backend
         private static App _instance = null;
 
         public SurveyService SurveyService;
+        public ManagerService ManagerService;
+        public SecretaryService SecretaryService;
         public QuestionService QuestionService;
         public AnswerService AnswerService;
         public PatientFeedbackService PatientFeedbackService;
@@ -52,6 +54,10 @@ namespace Backend
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
+            ManagerService = new ManagerService(
+                new ManagerRepository(new MySQLStream<Manager>(), new IntSequencer()));
+            SecretaryService = new SecretaryService(
+                new SecretaryRepository(new MySQLStream<Secretary>(), new IntSequencer()));
             MedicalExaminationService = new MedicalExaminationService(
                 new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(

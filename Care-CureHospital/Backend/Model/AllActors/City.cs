@@ -38,6 +38,16 @@ namespace Model.AllActors
             CountryId = country.Id;
             Country = country;
         }
+        public City(int id,string name,int postcode,string addres,int countryid
+            ) {
+            Id = id;
+            Name = name;
+            PostCode = postcode;
+            Address = addres;
+            CountryId = countryid;
+
+
+        }
 
     }
 }

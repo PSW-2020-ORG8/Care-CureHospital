@@ -14,6 +14,7 @@ namespace WebAppPatient.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
+
         public AppointmentController() { }
 
         [HttpGet("getAvailableAppointments")]
@@ -21,7 +22,8 @@ namespace WebAppPatient.Controllers
         {
             DoctorWorkDayDto dto = DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
                 App.Instance().DoctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId),
-                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId));
+                App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId)
+                );
             
             if (dto == null)
             {
@@ -29,6 +31,7 @@ namespace WebAppPatient.Controllers
             }
             return Ok(dto);
         }    
+
 
         [HttpPost]       // POST /api/appointment/
         public IActionResult ScheduleAppointment(SchedulingAppointmentDto dto)

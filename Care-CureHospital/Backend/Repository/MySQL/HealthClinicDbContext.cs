@@ -21,6 +21,8 @@ namespace Backend.Repository.MySQL
         public DbSet<Report> Report { get; set; }
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Secretary> Secretaries { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<Patient> Doctors { get; set; }
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
@@ -57,9 +59,9 @@ namespace Backend.Repository.MySQL
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
             modelBuilder.Entity<Patient>().HasData(
-                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000,1,1,3,3,3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
+                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
                 new Patient { Id = 2, Name = "Zika", Surname = "Zikic", ParentName = "Pera", Gender = Gender.Male, IdentityCard = "124123123", HealthInsuranceCard = "712312312312", Jmbg = "12342312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3), ContactNumber = "0635235333", EMail = "zika@gmail.com", Username = "zika", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
                 new Patient { Id = 3, Name = "Mica", Surname = "Micic", ParentName = "Jelena", Gender = Gender.Male, IdentityCard = "163123123", HealthInsuranceCard = "62312312312", Jmbg = "12312512312312", BloodGroup = BloodGroup.Unknown, DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3), ContactNumber = "0635557673", EMail = "mica@gmail.com", Username = "mica", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
                 new Patient { Id = 4, Name = "Luna", Surname = "Lunic", ParentName = "Jovan", Gender = Gender.Female, IdentityCard = "127123123", HealthInsuranceCard = "52312312312", Jmbg = "12312316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555356", EMail = "luna@gmail.com", Username = "luna", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
@@ -80,11 +82,19 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Report>().HasData(
-                new Report { Id = 1, MedicamentId = 1,  MedicamentName = "Brufen", Quantity = 10, FromDate = new DateTime(2019, 5, 1, 6, 30, 0), ToDate = new DateTime(2019, 10, 1, 6, 10, 0)},
-                new Report { Id = 2, MedicamentId = 2,  MedicamentName = "Panadol", Quantity = 15, FromDate = new DateTime(2020, 10, 30, 10, 30, 0), ToDate = new DateTime(2020, 2, 5, 6, 10, 0)},
-                new Report { Id = 3, MedicamentId = 4,  MedicamentName = "Vitamin B", Quantity = 120, FromDate = new DateTime(2019, 1, 10, 3, 30, 0), ToDate = new DateTime(2019, 5, 10, 6, 30, 0)},
-                new Report { Id = 4, MedicamentId = 3, MedicamentName = "Paracetamol", Quantity = 24, FromDate = new DateTime(2020, 1, 5, 8, 30, 0), ToDate = new DateTime(2020, 12, 10, 6, 30, 0)}
+                new Report { Id = 1, MedicamentId = 1, MedicamentName = "Brufen", Quantity = 10, FromDate = new DateTime(2019, 5, 1, 6, 30, 0), ToDate = new DateTime(2019, 10, 1, 6, 10, 0) },
+                new Report { Id = 2, MedicamentId = 2, MedicamentName = "Panadol", Quantity = 15, FromDate = new DateTime(2020, 10, 30, 10, 30, 0), ToDate = new DateTime(2020, 2, 5, 6, 10, 0) },
+                new Report { Id = 3, MedicamentId = 4, MedicamentName = "Vitamin B", Quantity = 120, FromDate = new DateTime(2019, 1, 10, 3, 30, 0), ToDate = new DateTime(2019, 5, 10, 6, 30, 0) },
+                new Report { Id = 4, MedicamentId = 3, MedicamentName = "Paracetamol", Quantity = 24, FromDate = new DateTime(2020, 1, 5, 8, 30, 0), ToDate = new DateTime(2020, 12, 10, 6, 30, 0) }
             );
+
+            modelBuilder.Entity<Secretary>().HasData(
+                new Secretary { Id = 1, Username = "sekretar1", Password = "123", Name = "Milica", Surname = "Carica", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "milica@gmail.com", CityId = 1 }
+            );
+            modelBuilder.Entity<Manager>().HasData(
+                new Manager {Id = 1, Username = "manager1", Password = "123", Name = "Darja", Surname = "Rusedski", Jmbg = "12317316712344", DateOfBirth = new DateTime(1992, 1, 10, 3, 30, 0),ContactNumber = "063555156",EMail = "darja@gmail.com",CityId=1 }
+                );
+
 
             modelBuilder.Entity<Specialitation>().HasData(
                 new Specialitation { Id = 1, SpecialitationForDoctor = "Lekar opste prakse" },
@@ -98,9 +108,19 @@ namespace Backend.Repository.MySQL
                 new MedicalRecord { Id = 1, PatientId = 1, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true },
                 new MedicalRecord { Id = 2, PatientId = 2, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true },
                 new MedicalRecord { Id = 3, PatientId = 3, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true },
+
                 new MedicalRecord { Id = 4, PatientId = 4, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true },
                 new MedicalRecord { Id = 5, PatientId = 5, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true },
                 new MedicalRecord { Id = 6, PatientId = 6, AnamnesisId = 1, Allergies = new List<Allergies>(), Medicaments = new List<Medicament>(), ActiveMedicalRecord = true }
+            );
+
+            modelBuilder.Entity<MedicalExamination>().HasData(
+                new MedicalExamination { Id = 1, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 1, DoctorId = 1, PatientId = 2 },
+                new MedicalExamination { Id = 2, SurveyFilled = false, ShortDescription = "Pacijent je imao glavobolju", RoomId = 2, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 3, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 2, PatientId = 1 },
+                new MedicalExamination { Id = 4, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 3, PatientId = 1 },
+                new MedicalExamination { Id = 5, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 2, PatientId = 3 },
+                new MedicalExamination { Id = 6, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 4, PatientId = 3 }
             );
 
             modelBuilder.Entity<MedicalExaminationReport>().HasData(
@@ -248,9 +268,10 @@ namespace Backend.Repository.MySQL
 
             modelBuilder.Entity<Appointment>().HasData(
                 new Appointment { Id = 1, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 0, 0), EndTime = new DateTime(2020, 12, 20, 8, 30, 0), DoctorWorkDayId = 1, MedicalExaminationId = 1},
-                new Appointment { Id = 2, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 8, 30, 0), EndTime = new DateTime(2020, 12, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
+                new Appointment { Id = 2, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 8, 30, 0), EndTime = new DateTime(2020, 11, 18, 9, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 2 },
                 new Appointment { Id = 3, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 25, 8, 30, 0), EndTime = new DateTime(2020, 12, 25, 9, 0, 0), DoctorWorkDayId = 3, MedicalExaminationId = 4 },
                 new Appointment { Id = 4, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 20, 8, 30, 0), EndTime = new DateTime(2020, 12, 20, 9, 0, 0), DoctorWorkDayId = 4, MedicalExaminationId = 6 },
+
                 new Appointment { Id = 5, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 10, 12, 00, 0), EndTime = new DateTime(2020, 12, 10, 12, 30, 0), DoctorWorkDayId = 4, MedicalExaminationId = 4 },
                 new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 09, 15, 30, 0), EndTime = new DateTime(2020, 12, 09, 16, 00, 0), DoctorWorkDayId = 4, MedicalExaminationId = 2 },
                 new Appointment { Id = 7, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 18, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
@@ -261,6 +282,7 @@ namespace Backend.Repository.MySQL
                 new Appointment { Id = 12, Canceled = true, CancellationDate = new DateTime(2020, 11, 26, 8, 0, 0), StartTime = new DateTime(2020, 11, 29, 8, 0, 0), EndTime = new DateTime(2020, 11, 29, 8, 30, 0), DoctorWorkDayId = 9, MedicalExaminationId = 10 },
                 new Appointment { Id = 13, Canceled = true, CancellationDate = new DateTime(2020, 11, 27, 8, 0, 0), StartTime = new DateTime(2020, 11, 30, 8, 0, 0), EndTime = new DateTime(2020, 11, 30, 8, 30, 0), DoctorWorkDayId = 10, MedicalExaminationId = 11 },
                 new Appointment { Id = 14, Canceled = true, CancellationDate = new DateTime(2020, 11, 18, 8, 0, 0), StartTime = new DateTime(2020, 11, 21, 9, 0, 0), EndTime = new DateTime(2020, 11, 21, 9, 30, 0), DoctorWorkDayId = 6, MedicalExaminationId = 12 }
+
             );
 
             modelBuilder.Entity<MedicalExamination>().HasData(
@@ -278,5 +300,6 @@ namespace Backend.Repository.MySQL
                 new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 6 }
             );
         }
+
     }
 }

@@ -52,7 +52,7 @@ namespace Backend.Service.ExaminationSurgeryServices
                 SetIfPatientMalicious(appointmentForCancelation.MedicalExamination.PatientId, today);
                 return appointmentForCancelation;
             }
-            return null; 
+            return null;
         }
 
         /// <summary> This metod sets patient as malicious if patient canceled three or more appointments in last 30 days </summary>
@@ -78,14 +78,6 @@ namespace Backend.Service.ExaminationSurgeryServices
                 }
             }
             return result.Count;
-        }
-
-        public Appointment FilledSurveyForAppointment(int appointmentId)
-        {
-            Appointment appointment = GetEntity(appointmentId);
-            appointment.MedicalExamination.SurveyFilled = true;
-            UpdateEntity(appointment);
-            return appointment;
         }
 
         public Appointment AddEntity(Appointment entity)
