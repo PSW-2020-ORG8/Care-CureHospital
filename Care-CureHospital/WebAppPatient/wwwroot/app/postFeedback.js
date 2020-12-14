@@ -45,7 +45,7 @@ Vue.component("postFeedback", {
                           <br><br>
 						<!--<input type="text" id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." >  -->
 						<textarea id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." rows="9" cols="92" style="resize: none;"></textarea>
-						<label v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 23%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
+						<label id="FeedbackErrorMessage" v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 23%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
 						
 						<input type="checkbox" id="isAnonymous" name="isAnonymous" value="isAnonymous" v-model = "isAnonymous">
 						<label> Anonimno</label><br>
@@ -53,7 +53,7 @@ Vue.component("postFeedback", {
 						<label>Dozvoli objavljivanje</label><br>	
 
                          <div class="post-feedback-btn">
-                             <button type="button" @click="postFeedback">Pošalji</button>
+                             <button type="button" @click="postFeedback" id="SendFeedbackButton">Pošalji</button>
                          </div>
 
                      </form>
@@ -87,6 +87,7 @@ Vue.component("postFeedback", {
 			if (this.text.length === 0) {
 				empty = true;
 				this.feedbackError = true;
+				alert('Morati popuniti polje kako biste ostavili utisak!')
 			}
 
 			if (empty === false) {
@@ -100,7 +101,7 @@ Vue.component("postFeedback", {
 					patient: null,
 					publishingDate: null
 				});
-				toast('Utisak je uspešno ostavljen')
+				alert('Utisak je uspešno ostavljen')
 				this.text = '';
 				this.isAnonymous = false;
 				this.isForPublishing = false;
