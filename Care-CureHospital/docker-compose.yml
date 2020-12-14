@@ -1,57 +1,76 @@
 version: "3.8"
 
 services:
-  db:
-    image: mysql:latest
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'HealthClinicDB'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'user'
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - mysql-db:/var/lib/mysql
   Backend:
     build: 
       context: .
       dockerfile: Backend/Dockerfile
     image: astevanovic/backend:latest
-    depends_on:
-      - db
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
+      SHOW_ENV: 'TRUE'
     expose: 
       - "80"
     ports:
       - "6000:80"
+    volumes:
+      - app-sql:/app/sql
+    networks:
+      - public_net
   IntegrationAdapters:
     build: 
       context: .
       dockerfile: IntegrationAdapters/Dockerfile
     image: astevanovic/integrationadapters:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
+      SHOW_ENV: 'TRUE'
     expose: 
       - "80"
     ports:
       - "6001:80"
+    networks:
+      - public_net
   WebAppPatient:
     build: 
       context: .
       dockerfile: WebAppPatient/Dockerfile
     image: astevanovic/webapppatient:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: b1230c944d2123
+      DATABASE_PASSWORD: c9966da2
+      DATABASE_HOST: us-cdbr-east-02.cleardb.com
+      DATABASE_SCHEMA: heroku_04a57706b4c21c3
+      SHOW_ENV: 'TRUE'
     expose: 
       - "80"
     ports:
       - "6002:80"
+    networks:
+      - public_net
   IntegrationAdaptersFront:
     build: 
       context: .
       dockerfile: IntegrationAdaptersFront/Dockerfile
     image: astevanovic/integrationadaptersfront:latest
+    restart: on-failure
     expose: 
-      - "80"
+      - "4200"
     ports:
-      - "6003:80"
+      - "6003:4200"
+    networks:
+      - public_net
+networks:
+  public_net:
+    driver: bridge
 volumes:
-  mysql-db: {}
+  app-sql:
