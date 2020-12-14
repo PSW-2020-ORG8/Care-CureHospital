@@ -55,7 +55,7 @@ namespace WebAppPatientTests.EndToEndTests
         [Fact]
         public void TestValidText()
         {
-            createFeedbackPage.InsertText("Svidja mi se usluga.");
+            createFeedbackPage.InsertText("Svidja mi se Vasa usluga.");
             createFeedbackPage.EnablePublishedCheckbox("true");
             createFeedbackPage.WaitForButton();
 
