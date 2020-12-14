@@ -9,7 +9,7 @@ namespace WebAppPatientTests.EndToEndTests.Pages
     class CreateFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:51182/index.html#/postFeedback";
+        public const string URI = "https://carecurehospitalwebapp.herokuapp.com/index.html#/postFeedback";
         private IWebElement textField => driver.FindElement(By.Id("feedbackID"));
         private IWebElement anonyimusCheckbox => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement publishedCheckbox => driver.FindElement(By.Id("isForPublishing"));
