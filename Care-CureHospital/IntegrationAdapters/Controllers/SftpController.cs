@@ -19,7 +19,7 @@ namespace IntegrationAdapters.Controllers
         {
             try
             {
-                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "user", "password")))
+                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.13", "user", "password")))
                 {
                     StringBuilder builder = new StringBuilder();
                     builder.Append("Report:");
@@ -30,13 +30,13 @@ namespace IntegrationAdapters.Controllers
                     client.Connect();
                     client.UploadFile(System.IO.File.OpenRead(test), @"\public\" + Path.GetFileName(test), x => { Console.WriteLine(x); });
 
-                    string serverFile = @"\public\report.txt";
+                  /*  string serverFile = @"\public\report.txt";
                     string localFile = @"D:\localFiles\Report.txt";
                     using (Stream stream = System.IO.File.OpenWrite(localFile))
                     {
                         client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
                     }
-                    client.Disconnect();
+                    client.Disconnect();*/
                 }
                 return Ok();
             }
