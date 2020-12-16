@@ -27,7 +27,8 @@ We are a group of young and enthusiastic people who are ready to improve their a
 | [Aleksandar Stevanović](https://github.com/stiven98/) <br> <img src="https://avatars3.githubusercontent.com/u/57716920?s=460&v=4" width="100" height="100">   | [Stefan Beljić](https://github.com/stefanb12/) <br> <img src="https://avatars2.githubusercontent.com/u/58919427?s=460&u=2679182da00d2f14f95e2f7bef536499f7ea4691&v=4" width="100" height="100">       | [Jovana Svitić](https://github.com/jovanasvitic/) <br> <img src="https://avatars0.githubusercontent.com/u/57136564?s=460&v=4" width="100" height="100">          | [Savo Tomić](https://github.com/savotomic/) <br> <img src="https://avatars2.githubusercontent.com/u/59099541?s=460&v=4" width="100" height="100">          |
 | [Đorđije Kundačina](https://github.com/qndaa/) <br> <img src="https://avatars2.githubusercontent.com/u/57578574?s=460&u=030cbb28f5093c08d266b0bbdfd38bd1af6ef1c9&v=4" width="100" height="100">       | [Stefan Savić](https://github.com/Stefans98/) <br> <img src="https://avatars0.githubusercontent.com/u/57643299?s=460&v=4" width="100" height="100">       | [Vanja Stanojević](https://github.com/vanjastan/) <br> <img src="https://avatars0.githubusercontent.com/u/57722996?s=460&v=4" width="100" height="100">       | [Nemanja Dragutinović](https://github.com/nemanjadragutinovic/) <br> <img src="https://avatars3.githubusercontent.com/u/57371939?s=460&u=07b29f9d70c0d11d1044efb5398be29ba2d97626&v=4" width="100" height="100">|
 
-<br>
+
+
 ## Technologies and platforms wich we use
 -   .NET Core Framework
 -  WPF UI framework
