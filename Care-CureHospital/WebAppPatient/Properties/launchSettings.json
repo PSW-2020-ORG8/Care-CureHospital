@@ -27,15 +27,6 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "index.html",
-      "environmentVariables": {
-        "DATABASE_SSL_MODE": "None",
-        "DATABASE_HOST": "localhost",
-        "DATABASE_PASSWORD": "root",
-        "DATABASE_USERNAME": "root",
-        "DATABASE_SCHEMA": "HealthClinicDB",
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DATABASE_PORT": "3306"
-      },
       "applicationUrl": "http://localhost:5000"
     }
   }
