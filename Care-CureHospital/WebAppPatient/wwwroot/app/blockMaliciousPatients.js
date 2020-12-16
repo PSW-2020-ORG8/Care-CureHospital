@@ -33,15 +33,6 @@ Vue.component("blockMaliciousPatients", {
 	            <a >Prijavi se</a>
 		    </div>
 		</div>
-		
-	<div class="malicious-patients-vertical-line"></div>
-	
-	 <div class="sideComponents">      
-	     <ul class="ulForSideComponents">
-			
-	     </ul>
-	 </div>
-
 	
 	<div class="block-malicious-patients">	
 		<h3 class = "block-malicious-patients-title">Spisak potencijalno zlonamernih korisnika:</h3> 

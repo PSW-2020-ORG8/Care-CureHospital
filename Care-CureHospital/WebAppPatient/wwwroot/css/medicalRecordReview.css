@@ -9,11 +9,11 @@
 .wrapper-form-medical-record {
     position: fixed;
     z-index: 6;
-    height: 550px;
+    height: 560px;
     width: 854px;
     margin: 50px auto;
-    margin-left: 21%;
-    margin-top: -5%;
+    margin-left: 25%;
+    margin-top: -1%;
     border-radius: 7px 7px 7px 7px;
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
@@ -23,8 +23,8 @@
 }
 
 .data-for-medical-record {
-    margin-top: -1%;
-    height: 560px;
+    margin-top: 0%;
+    height: 570px;
     width: 854px;
     border-radius: 0 7px 10px 7px;
     background-color: #afd0c7;

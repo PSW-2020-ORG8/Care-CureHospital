@@ -1,10 +1,6 @@
-<!-- Button trigger modal -->
 <button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
-(click)="addclick()" data-backdrop='static' data-keybord="false">
-    Add report
-  </button>
-  
-  <!-- Modal -->
+(click)="addclick()" data-backdrop='static' data-keybord="false">Add report</button>
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -17,26 +13,18 @@
         </div>
         <div class="modal-body">
             <app-report [rep]="rep" *ngIf="ActivateAddEditRepComp">
-
             </app-report>
         </div>
-
-        
       </div>
     </div>
   </div>
-
-
-
-
 <form enctype="multipart/form-data">
-<table class="table table-striped" matTableExporter #exporter="matTableExporter" >
-  <caption>Table of report</caption>
+<table class="table table-striped" matTableExporter #exporter="matTableExporter">
     <thead>
         <tr>
             <th id="Id">Id </th>
-            <th id="MedicationId">MedicationId</th>
-            <th id="MedicationName">MedicationName</th>
+            <th id="MedicationId">MedicamentId</th>
+            <th id="MedicationName">MedicamentName</th>
             <th id="ConsumedMedication">Quantity</th>
             <th id="FromDate">FromDate</th>
             <th id="ToDate">ToDate</th>
@@ -44,18 +32,14 @@
     </thead>
     <tbody>
        <tr *ngFor="let dataItem of ReportList">
-            <td>{{dataItem.Id}}</td>
-            <td>{{dataItem.MedicationId}}</td>
-            <td>{{dataItem.MedicationName}}</td>
-            <td>{{dataItem.Quantity}}</td>
-            <td>{{dataItem.FromDate}}</td>
-            <td>{{dataItem.ToDate}}</td>
-            <td> 
-              
-            </td>
+            <td>{{dataItem.id}}</td>
+            <td>{{dataItem.medicamentId}}</td>
+            <td>{{dataItem.medicamentName}}</td>
+            <td>{{dataItem.quantity}}</td>
+            <td>{{dataItem.fromDate}}</td>
+            <td>{{dataItem.toDate}}</td>
         </tr>
     </tbody>
 </table>
 </form> 
-
 <button (click)="generate()" class="btn btn-primary">Save</button>

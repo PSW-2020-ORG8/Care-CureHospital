@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Model.DoctorMenager;
-
-namespace IntegrationAdapters.Dto
+﻿namespace IntegrationAdapters.Dto
 {
     public class ReportDto
     {

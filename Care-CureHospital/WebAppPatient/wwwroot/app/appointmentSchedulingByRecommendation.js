@@ -33,7 +33,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-					<li class="active"><a href="#/">Termini za pregled</a></li>
+					<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
 					</ul>
 				</div>
  
@@ -156,7 +156,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	 <div class="verticalLinePublishFeedback"></div>
 	
 	 <div class="sideComponents">      
-	     <ul class="ulForSideComponents">
+         <ul class="ulForSideComponents">
+            <div><li><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
 			<div><li><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
 		    <div><li class="active"><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
@@ -192,7 +193,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/appointment/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
                     this.doctorsBySpecialization = response.data;
                 });
             } else if (this.recommendationStep === 2 && this.specialization === '0'){
@@ -241,13 +242,13 @@ Vue.component("appointmentSchedulingByRecommendation", {
                     }
                 }).then(response => {
                     if (response.status === 200) {
-                        toast('Termin je uspešno rezervisan!')
+                        toast('Termin je uspešno zakazan!')
                         this.resetData()
                         this.$router.push('patientAppointments')
                     }
                 }).catch(error => {
-                    if (error.response.status === 400) {
-                        
+                    if (error.response.status === 404) {
+                        toast('Greška prilikom zakazivanja termina!')
                     }
                 });          
             }
@@ -274,7 +275,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
         }
 	},
 	mounted() {
-        axios.get('api/appointment/getAllSpecialization').then(response => {
+        axios.get('api/doctor/getAllSpecialization').then(response => {
             this.specializations = response.data;
         });
 	}

@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using IntegrationAdapters.Controllers;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace IntegrationAdapters
 {
@@ -14,7 +10,7 @@ namespace IntegrationAdapters
     {
         public static async Task Main(string[] args)
         {
-            Console.WriteLine("Enter medication:");
+            Console.WriteLine(":");
             PrintMenu();
             string input = Console.ReadLine();
             if (ValidInput(input))
@@ -30,7 +26,7 @@ namespace IntegrationAdapters
 
         private static void PrintMenu()
         {
-            Console.WriteLine("1 - Send GET request to get all medicaments");
+            Console.WriteLine("1 - Send request to get medicaments");
         }
 
         private static bool ValidInput(string input)

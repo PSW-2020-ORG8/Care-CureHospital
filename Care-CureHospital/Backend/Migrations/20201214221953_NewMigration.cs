@@ -35,6 +35,23 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EPrescription",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Comment = table.Column<string>(nullable: true),
+                    PatientName = table.Column<string>(nullable: true),
+                    PatientId = table.Column<int>(nullable: false),
+                    MedicamentName = table.Column<string>(nullable: true),
+                    PublishingDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EPrescription", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
@@ -574,19 +591,31 @@ namespace Backend.Migrations
                 values: new object[] { 1, "Srbija" });
 
             migrationBuilder.InsertData(
+                table: "EPrescription",
+                columns: new[] { "Id", "Comment", "MedicamentName", "PatientId", "PatientName", "PublishingDate" },
+                values: new object[,]
+                {
+                    { 1, "Redovno koristite prepisane lekove", "Aspirin", 1, "Petar", new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Svakodnevno koristite prepisani lek", "Brufen", 2, "Mica", new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Redovno koristite prepisane lekove", "Vitamin B", 3, "Zika", new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Ne preskacite konzumiranje leka", "Panadol", 5, "Ivan", new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Redovno koristite prepisane lekove", "Andol", 6, "Marko", new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Questions",
                 columns: new[] { "Id", "QuestionText", "QuestionType" },
                 values: new object[,]
                 {
-                    { 4, "Ljubaznost medicinskog osoblja prema pacijentu", 1 },
-                    { 9, "Opremljenost bolnice", 2 },
-                    { 8, "Higijena unutar bolnice", 2 },
-                    { 1, "Ljubaznost doktora prema pacijentu", 0 },
-                    { 2, "Posvećenost doktora pacijentu", 0 },
-                    { 3, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 0 },
-                    { 7, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2 },
                     { 5, "Posvećenost medicinskog osoblja pacijentu", 1 },
-                    { 6, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1 }
+                    { 4, "Ljubaznost medicinskog osoblja prema pacijentu", 1 },
+                    { 3, "Pružanje informacija od strane doktora o mom zdravstvenom stanju i mogućnostima lečenja", 0 },
+                    { 2, "Posvećenost doktora pacijentu", 0 },
+                    { 1, "Ljubaznost doktora prema pacijentu", 0 },
+                    { 7, "Ispunjenost vremena zakazanog termina i vreme provedeno u cekonici", 2 },
+                    { 9, "Opremljenost bolnice", 2 },
+                    { 6, "Profesionalizam u obavljanju svoji duznosti medicinskog osoblja", 1 },
+                    { 8, "Higijena unutar bolnice", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -594,10 +623,10 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "FromDate", "MedicamentId", "MedicamentName", "Quantity", "ToDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), 1, "Brufen", 10, new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified) },
                     { 4, new DateTime(2020, 1, 5, 8, 30, 0, 0, DateTimeKind.Unspecified), 3, "Paracetamol", 24, new DateTime(2020, 12, 10, 6, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 3, new DateTime(2019, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified), 4, "Vitamin B", 120, new DateTime(2019, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), 2, "Panadol", 15, new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), 2, "Panadol", 15, new DateTime(2020, 2, 5, 6, 10, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, new DateTime(2019, 5, 1, 6, 30, 0, 0, DateTimeKind.Unspecified), 1, "Brufen", 10, new DateTime(2019, 10, 1, 6, 10, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -605,7 +634,10 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "SpecialitationForDoctor" },
                 values: new object[,]
                 {
-                    { 2, "Hirurg" },
+                    { 5, "Endokrinolog" },
+                    { 4, "Dermatolog" },
+                    { 3, "Kardiolog" },
+                    { 2, "Ortoped" },
                     { 1, "Lekar opste prakse" }
                 });
 
@@ -663,9 +695,14 @@ namespace Backend.Migrations
                 values: new object[,]
                 {
                     { 2, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "aca@gmail.com", 0, null, null, "13212312312312", "Aleksandar", null, "123", 1, "Aleksic", "aca" },
-                    { 4, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "nikola@gmail.com", 0, null, null, "13316712312312", "Nikola", null, "123", 1, "Nikic", "nikola" },
+                    { 7, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "helena@gmail.com", 0, null, null, "13312367312312", "Helena", null, "123", 4, "Kostic", "helena" },
+                    { 5, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "mihajlo@gmail.com", 0, null, null, "13312367312312", "Mihajlo", null, "123", 3, "Mihajlovic", "mihajlo" },
                     { 1, 0, 2, "06345111144", new DateTime(2000, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "milan@gmail.com", 0, null, null, "13312312312312", "Milan", null, "123", 1, "Petrovic", "milan" },
-                    { 3, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "jovan@gmail.com", 0, null, null, "13312367312312", "Jovan", null, "123", 2, "Jovic", "jovan" }
+                    { 3, 0, 2, "06345111144", new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "jovan@gmail.com", 0, null, null, "13312367312312", "Jovan", null, "123", 2, "Jovic", "jovan" },
+                    { 8, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "marija@gmail.com", 0, null, null, "13316712312312", "Marija", null, "123", 4, "Marijic", "marija" },
+                    { 6, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "vuk@gmail.com", 0, null, null, "13316712312312", "Vuk", null, "123", 3, "Vukic", "vuk" },
+                    { 4, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "nikola@gmail.com", 0, null, null, "13316712312312", "Nikola", null, "123", 1, "Nikic", "nikola" },
+                    { 9, 0, 1, "06345111144", new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified), "tanja@gmail.com", 0, null, null, "13316712312312", "Tanja", null, "123", 5, "Tankosic", "tanja" }
                 });
 
             migrationBuilder.InsertData(
@@ -673,8 +710,8 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Name", "Quantity", "RoomId" },
                 values: new object[,]
                 {
-                    { 1, "Stolovi", 1, 1 },
                     { 2, "Stolice", 1, 1 },
+                    { 1, "Stolovi", 1, 1 },
                     { 3, "Kreveti", 1, 2 }
                 });
 
@@ -699,8 +736,13 @@ namespace Backend.Migrations
                     { 2, new DateTime(2020, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
                     { 5, new DateTime(2020, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 3 },
                     { 4, new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 3 },
-                    { 3, new DateTime(2020, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
-                    { 1, new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 }
+                    { 9, new DateTime(2020, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 3 },
+                    { 7, new DateTime(2020, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 2 },
+                    { 6, new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 9, 1 },
+                    { 8, new DateTime(2020, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 2 },
+                    { 10, new DateTime(2020, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 3 },
+                    { 1, new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 3, new DateTime(2020, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -708,12 +750,18 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "DoctorId", "FromDateTime", "PatientId", "RoomId", "ShortDescription", "SurveyFilled", "ToDateTime" },
                 values: new object[,]
                 {
+                    { 10, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 1, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 1, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Pacijent je imao glavobolju", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 6, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, "Sve je bilo u redu na pregledu", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, "Pacijenta je boleo stomak", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -721,10 +769,12 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "ActiveMedicalRecord", "AnamnesisId", "PatientId" },
                 values: new object[,]
                 {
-                    { 1, false, 1, 1 },
+                    { 6, true, 1, 6 },
+                    { 1, true, 1, 1 },
+                    { 5, true, 1, 5 },
+                    { 4, true, 1, 4 },
                     { 2, true, 1, 2 },
-                    { 3, true, 1, 3 },
-                    { 4, true, 1, 4 }
+                    { 3, true, 1, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -732,12 +782,12 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "IsAnonymous", "IsForPublishing", "IsPublished", "PatientId", "PublishingDate", "Text" },
                 values: new object[,]
                 {
-                    { 3, true, true, false, 3, new DateTime(2020, 9, 3, 11, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
-                    { 6, true, true, false, 4, new DateTime(2020, 10, 15, 6, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
-                    { 2, true, true, true, 2, new DateTime(2020, 8, 15, 9, 17, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 4, false, false, false, 4, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
                     { 5, false, false, false, 2, new DateTime(2020, 10, 18, 7, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 2, true, true, true, 2, new DateTime(2020, 8, 15, 9, 17, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
+                    { 3, true, true, false, 3, new DateTime(2020, 9, 3, 11, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
                     { 1, false, true, true, 1, new DateTime(2020, 10, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." },
-                    { 4, false, false, false, 4, new DateTime(2020, 11, 6, 8, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." }
+                    { 6, true, true, false, 4, new DateTime(2020, 10, 15, 6, 30, 0, 0, DateTimeKind.Unspecified), "Iako rečenica nema značenje, ona ima dugu istoriju. Nju su nekoliko vekova koristili tipografi da bi prikazali najistaknutije osobine svojih fontova. Koristi se zbog toga što slova koja su uključena u nju, kao i razmak između slova u tim kombinacijama na najbolji mogući način otkrivaju težinu, dizajn i druge važne funkcije slovnog oblika." }
                 });
 
             migrationBuilder.InsertData(
@@ -746,9 +796,9 @@ namespace Backend.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "Penicilin" },
-                    { 4, 1, "Ambrozija" },
                     { 3, 2, "Panadol" },
-                    { 2, 3, "Brufen" }
+                    { 2, 3, "Brufen" },
+                    { 4, 1, "Ambrozija" }
                 });
 
             migrationBuilder.InsertData(
@@ -756,12 +806,20 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Canceled", "CancellationDate", "DoctorWorkDayId", "EndTime", "MedicalExaminationId", "StartTime" },
                 values: new object[,]
                 {
-                    { 3, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 20, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, true, new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, true, new DateTime(2020, 11, 18, 8, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 11, 21, 9, 30, 0, 0, DateTimeKind.Unspecified), 12, new DateTime(2020, 11, 21, 9, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, true, new DateTime(2020, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified), 9, new DateTime(2020, 11, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), 10, new DateTime(2020, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, true, new DateTime(2020, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified), 8, new DateTime(2020, 11, 28, 8, 30, 0, 0, DateTimeKind.Unspecified), 9, new DateTime(2020, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, true, new DateTime(2020, 11, 20, 8, 0, 0, 0, DateTimeKind.Unspecified), 7, new DateTime(2020, 11, 23, 8, 30, 0, 0, DateTimeKind.Unspecified), 8, new DateTime(2020, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, true, new DateTime(2020, 11, 18, 8, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 11, 21, 8, 30, 0, 0, DateTimeKind.Unspecified), 7, new DateTime(2020, 11, 21, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 9, 16, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2020, 12, 20, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 8, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 20, 9, 0, 0, 0, DateTimeKind.Unspecified), 6, new DateTime(2020, 12, 20, 8, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, true, new DateTime(2020, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified), 10, new DateTime(2020, 11, 30, 8, 30, 0, 0, DateTimeKind.Unspecified), 11, new DateTime(2020, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2020, 12, 18, 16, 0, 0, 0, DateTimeKind.Unspecified), 5, new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 10, 12, 30, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateTime(2020, 12, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), 4, new DateTime(2020, 12, 25, 8, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -769,11 +827,11 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
+                    { 2, "Pacijent je veoma dobro i nema vecih problema", 4, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Pacijent ima virus", 2, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 1, "Pacijent je dobro i nema vecih problema", 3, new DateTime(2020, 9, 20, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 5, "Pacijent ima virus", 2, new DateTime(2020, 11, 18, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Pacijent je veoma dobro i nema vecih problema", 4, new DateTime(2020, 11, 23, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "Pacijent je lose", 2, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Pacijent ima virus", 2, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 4, "Pacijent je lose", 2, new DateTime(2020, 10, 14, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -781,11 +839,11 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Comment", "MedicalExaminationId", "PublishingDate" },
                 values: new object[,]
                 {
+                    { 1, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 4, "Ne preskacite konzumiranje leka", 2, new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified) },
                     { 3, "Redovno koristite prepisane lekove", 2, new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Svakodnevno koristite prepisani lek", 3, new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 5, "Redovno koristite prepisane lekove", 4, new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -978,6 +1036,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Diagnosies");
+
+            migrationBuilder.DropTable(
+                name: "EPrescription");
 
             migrationBuilder.DropTable(
                 name: "InventaryRoom");

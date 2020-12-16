@@ -1,1 +1,44 @@
-<p>doctor works!</p>
+<button type="button" class="btn btn-primary float-right m-2" (click)="addEP()"  data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Add EPrescription</button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-eprescription [ep]="ep" *ngIf="ActivateAddEditEPComp">
+            </app-eprescription>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped" matTableExporter #exporter="matTableExporter">
+      <thead>
+          <tr>
+              <th id="Id">Id</th>
+              <th id="PatientId">PatientId</th>
+              <th id="PatientName">PatientName</th>
+              <th id="Comment">Comment</th>
+              <th id="MedicamentName">MedicamentName</th>
+              <th id="PublishingDate">PublishingDate</th>
+          </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let dataItem of EPrescriptionList">
+              <td>{{dataItem.id}}</td>
+              <td>{{dataItem.patientId}}</td>
+              <td>{{dataItem.patientName}}</td>
+              <td>{{dataItem.comment}}</td>
+              <td>{{dataItem.medicamentName}}</td>
+              <td>{{dataItem.publishingDate}}</td>
+          </tr>
+      </tbody>
+  </table>
+ 
+
+ 

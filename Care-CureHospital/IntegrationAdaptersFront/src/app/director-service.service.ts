@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
-
+import { Report } from './models/Report';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,14 @@ import { Observable } from 'rxjs';
 export class DirectorServiceService {
   readonly APIUrl = "http://localhost:51492/api";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { this.getReportList() }
 
-  addReport(val:any){
-    return this.http.post(this.APIUrl+'/report', val);
+  getReportList():Observable<Report[]>{
+    return this.http.get<Report[]>(this.APIUrl+'/report');
+  }
+
+  addReport(val:Report):Observable<Report>{
+    return this.http.post<Report>(this.APIUrl+'/report', val);
   }
 
   updateReport(val:any){
@@ -21,6 +25,6 @@ export class DirectorServiceService {
   }
 
   generate(val:any){
-      return this.http.get<any[]>(this.APIUrl+'/sftp');
+    return this.http.get<any[]>(this.APIUrl+'/sftp');
   }
 }

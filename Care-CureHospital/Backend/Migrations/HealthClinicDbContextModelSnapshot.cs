@@ -174,6 +174,79 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Backend.Model.PatientDoctor.EPrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("MedicamentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EPrescription");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicamentName = "Aspirin",
+                            PatientId = 1,
+                            PatientName = "Petar",
+                            PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Svakodnevno koristite prepisani lek",
+                            MedicamentName = "Brufen",
+                            PatientId = 2,
+                            PatientName = "Mica",
+                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicamentName = "Vitamin B",
+                            PatientId = 3,
+                            PatientName = "Zika",
+                            PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Ne preskacite konzumiranje leka",
+                            MedicamentName = "Panadol",
+                            PatientId = 5,
+                            PatientName = "Ivan",
+                            PublishingDate = new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Comment = "Redovno koristite prepisane lekove",
+                            MedicamentName = "Andol",
+                            PatientId = 6,
+                            PatientName = "Marko",
+                            PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
                 {
                     b.Property<int>("Id")
@@ -479,6 +552,86 @@ namespace Backend.Migrations
                             SpecialitationId = 1,
                             Surname = "Nikic",
                             Username = "nikola"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BloodGroup = 0,
+                            CityId = 2,
+                            ContactNumber = "06345111144",
+                            DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "mihajlo@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312367312312",
+                            Name = "Mihajlo",
+                            Password = "123",
+                            SpecialitationId = 3,
+                            Surname = "Mihajlovic",
+                            Username = "mihajlo"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "06345111144",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "vuk@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13316712312312",
+                            Name = "Vuk",
+                            Password = "123",
+                            SpecialitationId = 3,
+                            Surname = "Vukic",
+                            Username = "vuk"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BloodGroup = 0,
+                            CityId = 2,
+                            ContactNumber = "06345111144",
+                            DateOfBirth = new DateTime(2005, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "helena@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13312367312312",
+                            Name = "Helena",
+                            Password = "123",
+                            SpecialitationId = 4,
+                            Surname = "Kostic",
+                            Username = "helena"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "06345111144",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "marija@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13316712312312",
+                            Name = "Marija",
+                            Password = "123",
+                            SpecialitationId = 4,
+                            Surname = "Marijic",
+                            Username = "marija"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "06345111144",
+                            DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "tanja@gmail.com",
+                            Gender = 0,
+                            Jmbg = "13316712312312",
+                            Name = "Tanja",
+                            Password = "123",
+                            SpecialitationId = 5,
+                            Surname = "Tankosic",
+                            Username = "tanja"
                         });
                 });
 
@@ -696,7 +849,22 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
-                            SpecialitationForDoctor = "Hirurg"
+                            SpecialitationForDoctor = "Ortoped"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SpecialitationForDoctor = "Kardiolog"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SpecialitationForDoctor = "Dermatolog"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            SpecialitationForDoctor = "Endokrinolog"
                         });
                 });
 
@@ -1256,7 +1424,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            ActiveMedicalRecord = false,
+                            ActiveMedicalRecord = true,
                             AnamnesisId = 1,
                             PatientId = 1
                         },
@@ -1280,6 +1448,20 @@ namespace Backend.Migrations
                             ActiveMedicalRecord = true,
                             AnamnesisId = 1,
                             PatientId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ActiveMedicalRecord = true,
+                            AnamnesisId = 1,
+                            PatientId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ActiveMedicalRecord = true,
+                            AnamnesisId = 1,
+                            PatientId = 6
                         });
                 });
 
@@ -1371,7 +1553,7 @@ namespace Backend.Migrations
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 11, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(2020, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 2,
                             StartTime = new DateTime(2020, 12, 18, 8, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1398,22 +1580,102 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
-                            Canceled = true,
-                            CancellationDate = new DateTime(2020, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
-                            DoctorWorkDayId = 2,
-                            EndTime = new DateTime(2020, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            MedicalExaminationId = 5,
-                            StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 10, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 4,
+                            StartTime = new DateTime(2020, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
                             Canceled = false,
                             CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 4,
+                            EndTime = new DateTime(2020, 12, 9, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 2,
+                            StartTime = new DateTime(2020, 12, 9, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 2,
+                            EndTime = new DateTime(2020, 12, 18, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 5,
+                            StartTime = new DateTime(2020, 12, 18, 15, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Canceled = false,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorWorkDayId = 5,
                             EndTime = new DateTime(2020, 12, 21, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 3,
                             StartTime = new DateTime(2020, 12, 21, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 18, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 6,
+                            EndTime = new DateTime(2020, 11, 21, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 7,
+                            StartTime = new DateTime(2020, 11, 21, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 20, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 7,
+                            EndTime = new DateTime(2020, 11, 23, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 8,
+                            StartTime = new DateTime(2020, 11, 23, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 25, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 8,
+                            EndTime = new DateTime(2020, 11, 28, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 9,
+                            StartTime = new DateTime(2020, 11, 28, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 26, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 9,
+                            EndTime = new DateTime(2020, 11, 29, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 10,
+                            StartTime = new DateTime(2020, 11, 29, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 27, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 10,
+                            EndTime = new DateTime(2020, 11, 30, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 11,
+                            StartTime = new DateTime(2020, 11, 30, 8, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Canceled = true,
+                            CancellationDate = new DateTime(2020, 11, 18, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 6,
+                            EndTime = new DateTime(2020, 11, 21, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 12,
+                            StartTime = new DateTime(2020, 11, 21, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1474,6 +1736,41 @@ namespace Backend.Migrations
                             Id = 5,
                             Date = new DateTime(2020, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 2,
+                            RoomId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Date = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 9,
+                            RoomId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Date = new DateTime(2020, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 8,
+                            RoomId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Date = new DateTime(2020, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 7,
+                            RoomId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Date = new DateTime(2020, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 6,
+                            RoomId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Date = new DateTime(2020, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 5,
                             RoomId = 3
                         });
                 });
@@ -1576,9 +1873,75 @@ namespace Backend.Migrations
                             Id = 6,
                             DoctorId = 4,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = 3,
+                            PatientId = 1,
                             RoomId = 3,
                             ShortDescription = "Sve je bilo u redu na pregledu",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DoctorId = 9,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 5,
+                            RoomId = 1,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DoctorId = 8,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 5,
+                            RoomId = 2,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DoctorId = 7,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 5,
+                            RoomId = 2,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DoctorId = 6,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 6,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DoctorId = 5,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 6,
+                            RoomId = 3,
+                            ShortDescription = "Sve je bilo u redu na pregledu",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DoctorId = 9,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 6,
+                            RoomId = 1,
+                            ShortDescription = "Pacijenta je boleo stomak",
                             SurveyFilled = false,
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

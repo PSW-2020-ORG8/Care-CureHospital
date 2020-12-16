@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Shouldly;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using WebAppPatient;
-using Xunit;
+
 
 namespace WebAppPatientTests.IntegrationTests
 {
-    public class MedicalExaminationReportTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class MedicalExaminationReportTests ///: IClassFixture<WebApplicationFactory<Startup>>
     {
         //private readonly WebApplicationFactory<Startup> factory;
 
