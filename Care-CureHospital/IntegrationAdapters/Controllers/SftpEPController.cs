@@ -1,14 +1,10 @@
-﻿using Backend.Model.PatientDoctor;
-using Backend.Repository.DoctorRepository;
+﻿using Backend.Repository.DoctorRepository;
 using Microsoft.AspNetCore.Mvc;
 using Renci.SshNet;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -45,7 +41,7 @@ namespace IntegrationAdapters.Controllers
         {
             try
             {
-                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "user", "password")))
+                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.13", "user", "password")))
                 {
                     StringBuilder builder = new StringBuilder();
                     builder.Append("EPrescription:");
