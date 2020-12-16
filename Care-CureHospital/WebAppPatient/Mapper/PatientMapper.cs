@@ -21,13 +21,14 @@ namespace WebAppPatient.Mapper
             return patient;
         }
 
-        public static PatientDto PatientToPatientDto(Patient patient)
+        public static PatientDto PatientToPatientDto(Patient patient, int numberOfCancelledAppointments)
         {
             PatientDto dto = new PatientDto();
             dto.Id = patient.Id;
             dto.Username = patient.Username;
             dto.Name = patient.Name;
             dto.Surname = patient.Surname;
+            dto.NumberOfCancelledAppointents = numberOfCancelledAppointments;
             dto.Malicious = patient.Malicious;
             dto.Blocked = patient.Blocked;
             return dto;

@@ -18,7 +18,6 @@ namespace Backend.Repository.MySQL
 {
     public class HealthClinicDbContext : DbContext
     {
-
         public DbSet<Report> Report { get; set; }
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -53,8 +52,20 @@ namespace Backend.Repository.MySQL
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseLazyLoadingProxies();
-                optionsBuilder.UseMySql("server=localhost;port=3306;database=HealthClinicDB;user=root;password=root");
+                optionsBuilder.UseMySql(CreateConnectionStringFromEnvironment());
             }
+        }
+
+
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "us-cdbr-east-02.cleardb.com";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "heroku_04a57706b4c21c3";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "b1230c944d2123";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "c9966da2";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            return $"server={server};port={port};database={database};user={user};password={password};SSL Mode={sslMode};";
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -120,13 +131,13 @@ namespace Backend.Repository.MySQL
                 new Prescription { Id = 5, Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicalExaminationId = 4, Medicaments = new List<Medicament>() }
             );
 
-            modelBuilder.Entity<EPrescription>().HasData(
+            /*modelBuilder.Entity<EPrescription>().HasData(
                 new EPrescription { Id = 1, PatientId = 1, PatientName = "Petar", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0), MedicamentName = "Aspirin" },
                 new EPrescription { Id = 2, PatientId = 2, PatientName = "Mica", Comment = "Svakodnevno koristite prepisani lek", PublishingDate = new DateTime(2020, 09, 12, 10, 30, 0), MedicamentName = "Brufen" },
                 new EPrescription { Id = 3, PatientId = 3, PatientName = "Zika", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0), MedicamentName = "Vitamin B" },
                 new EPrescription { Id = 4, PatientId = 5, PatientName = "Ivan", Comment = "Ne preskacite konzumiranje leka", PublishingDate = new DateTime(2020, 10, 12, 03, 30, 0), MedicamentName = "Panadol" },
                 new EPrescription { Id = 5, PatientId = 6, PatientName = "Marko", Comment = "Redovno koristite prepisane lekove", PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0), MedicamentName = "Andol" }
-              );
+              );*/
 
             modelBuilder.Entity<Medicament>().HasData(
                 new Medicament { Id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", StateOfValidation = State.Confirmed, Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1, PrescriptionId = 1 },

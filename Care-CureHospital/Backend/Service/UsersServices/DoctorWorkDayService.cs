@@ -87,6 +87,7 @@ namespace Backend.Service.UsersServices
             return result;
         }
 
+        /// <summary> This method generate all appointment terms in work day (from 8AM to 8PM) </summary>
         public List<Appointment> InitializeAvailableApoointmentsList(DateTime date)
         {
             DateTime startTime = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
@@ -217,6 +218,24 @@ namespace Backend.Service.UsersServices
                 numberOfAvailableAppointments += appointments[key].Count;
             }
             return numberOfAvailableAppointments;
+        }
+
+        public void CancelPatientAppointment(int doctorWorkDayId, int appointmentId, DateTime today)
+        {
+            DoctorWorkDay doctorWorkDay = GetEntity(doctorWorkDayId);
+            foreach(Appointment appointmentForCancelation in doctorWorkDay.ScheduledAppointments)
+            {
+                if(appointmentForCancelation.Id == appointmentId)
+                {
+                    if (today < appointmentForCancelation.StartTime.AddHours(-48))
+                    {
+                        appointmentForCancelation.Canceled = true;
+                        appointmentForCancelation.CancellationDate = today;
+                        UpdateEntity(doctorWorkDay);
+                        return;
+                    }
+                }
+            }        
         }
     }
 }
