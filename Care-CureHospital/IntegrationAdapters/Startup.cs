@@ -20,10 +20,12 @@ namespace IntegrationAdapters
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
+                options.AddPolicy(
+                        name: "CorsPolicy",
+                        builder => builder.SetIsOriginAllowed(origin => true)
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader());
             });
             services.AddControllers();
             services.AddControllersWithViews()

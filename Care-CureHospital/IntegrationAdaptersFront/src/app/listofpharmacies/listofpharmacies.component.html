@@ -1,0 +1,19 @@
+<div class="bolnica">
+    <div>
+    <h2 class="ui header" style="text-align:center">Partner pharmacies</h2>
+
+        <table class="content-table">
+            <thead>
+                <th>Name</th>
+                <th>Link</th>
+            </thead>
+            <tbody>
+                <tr ng-container *ngFor="let category of categories">
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.link}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        </div>
+</div>

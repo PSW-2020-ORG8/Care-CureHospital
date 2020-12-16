@@ -2,6 +2,7 @@
 using Backend.Model.BlogAndNotification;
 using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
+using Backend.Model.Pharmacy;
 using Microsoft.EntityFrameworkCore;
 using Model.AllActors;
 using Model.Doctor;
@@ -43,6 +44,7 @@ namespace Backend.Repository.MySQL
         public DbSet<Answer> Answers { get; set; }
         public DbSet<DoctorWorkDay> DoctorWorkDays { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Pharmacies> Pharmacies { get; set; }
 
         public HealthClinicDbContext() : base() { }
         public HealthClinicDbContext(DbContextOptions<HealthClinicDbContext> options) : base(options) { }
@@ -288,6 +290,12 @@ namespace Backend.Repository.MySQL
                 new MedicalExamination { Id = 10, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 6, PatientId = 6 },
                 new MedicalExamination { Id = 11, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 5, PatientId = 6 },
                 new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 6 }
+            );
+
+            modelBuilder.Entity<Pharmacies>().HasData(
+                new Pharmacies { Id = 1, Name = "Apoteka1", Key = "1234", Link = "apoteka1.com" },
+                new Pharmacies { Id = 2, Name = "Apoteka2", Key = "5678", Link = "apoteka2.com" },
+                new Pharmacies { Id = 3, Name = "Apoteka3", Key = "9101112", Link = "apoteka3.com" }
             );
         }
     }
