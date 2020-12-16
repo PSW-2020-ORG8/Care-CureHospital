@@ -1,16 +1,19 @@
 ﻿using Backend.Model.BlogAndNotification;
 using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
+using Backend.Model.Pharmacy;
 using Backend.Repository.BlogNotificationRepository;
 using Backend.Repository.DirectorRepository;
 using Backend.Repository.DoctorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
+using Backend.Repository.PharmacyRepository;
 using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
 using Backend.Service.DoctorService;
 using Backend.Service.ExaminationSurgeryServices;
+using Backend.Service.PharmaciesService;
 using Backend.Service.UsersServices;
 using Model.AllActors;
 using Model.Doctor;
@@ -48,6 +51,7 @@ namespace Backend
         public SpetialitationService SpetialitationService;
         public AppointmentService AppointmentService;
         public EPrescriptionService EPrescriptionService;
+        public PharmacyService PharmacyService;
 
         private App()
         {
@@ -84,6 +88,8 @@ namespace Backend
                 new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()), PatientService);
             EPrescriptionService = new EPrescriptionService(
                 new EPrescriptionRepository(new MySQLStream<EPrescription>(), new IntSequencer()));
+            PharmacyService = new PharmacyService(
+               new PharmacyRepository(new MySQLStream<Pharmacies>(), new IntSequencer()));
         }
 
         public static App Instance()

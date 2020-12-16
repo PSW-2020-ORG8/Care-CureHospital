@@ -1,0 +1,27 @@
+<div class="apoteka">
+    <h1  style="text-align:center">Register pharmacy</h1>
+    <form (ngSubmit)="onSubmitPharmacy()">
+    <div>
+    
+        <p style="text-align:center" >
+            <label for="username">Pharmacy name</label>
+            <input type="text" placeholder="Pharmacy name" name = "Name" class="form-control" [(ngModel)]="pharmacy.name"/>    
+        </p>
+
+        <p style="text-align:center" >
+              <label for="apikey">Api Key</label>
+              <input type="text" placeholder="Api Key" name = "Api" class="form-control" [(ngModel)]="pharmacy.key"/>    
+        </p>
+
+        <p style="text-align:center" >
+            <label for="link">Endpoint</label>
+            <input type="text" placeholder="Endpoint"  name = "Link" class="form-control" [(ngModel)]="pharmacy.link"/>    
+      </p>
+
+    </div>
+    <div  style="text-align:center" >
+      <button mat-raised-button type="submit">Register</button>
+      
+    </div>
+    </form>
+    </div>

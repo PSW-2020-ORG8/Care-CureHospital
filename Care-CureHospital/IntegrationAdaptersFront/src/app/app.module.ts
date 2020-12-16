@@ -7,6 +7,8 @@ import { DirectorComponent } from './director/director.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { ReportComponent } from './director/report/report.component';
 import { DirectorServiceService } from './director-service.service';
+import { ListofPharmaciesComponent } from './listofpharmacies/listofpharmacies.component';
+import { PharmacyComponent } from './pharmacies/pharmacies.component';
 
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +25,9 @@ import { EprescriptionComponent } from './doctor/eprescription/eprescription.com
     DoctorComponent,
     ReportComponent,
     AddReportComponent,
-    EprescriptionComponent
+    EprescriptionComponent,
+    ListofPharmaciesComponent,
+    PharmacyComponent
   ],
   imports: [
     BrowserModule,
