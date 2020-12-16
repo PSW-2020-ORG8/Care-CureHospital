@@ -43,9 +43,48 @@ namespace Backend.Service.DoctorService
             throw new NotImplementedException();
         }
 
-        public EPrescription GetEPrescriptionForPatient(int patientID)
+         public EPrescription GetEPrescriptionForPatient(int patientID)
+         {
+             return eprescriptionRepository.GetAllEntities().ToList().Find(ePrescription => ePrescription.PatientId == patientID);
+         }
+
+        public List<EPrescription> GetEPrescriptionsForPatient(int patientID)
         {
-            return eprescriptionRepository.GetAllEntities().ToList().Find(ePrescription => ePrescription.PatientId == patientID);
+            List<EPrescription> eprescriptionsForPatient = new List<EPrescription>();
+            foreach (EPrescription eprescription in eprescriptionRepository.GetAllEntities().ToList())
+            {
+                if (eprescription.PatientId == patientID)
+                {
+                    eprescriptionsForPatient.Add(eprescription);
+                }
+            }
+            return eprescriptionsForPatient;
+        }
+
+        public List<EPrescription> FindEPrescriptionsForCommentParameter(int patientID, string comment)
+        {
+            List<EPrescription> searchResult = new List<EPrescription>();
+            foreach (EPrescription eprescription in GetEPrescriptionsForPatient(patientID))
+            {
+                if ((eprescription.Comment.ToString().ToLower().Contains(comment.ToLower())))
+                {
+                    searchResult.Add(eprescription);
+                }
+            }
+            return searchResult;
+        }
+
+        public List<EPrescription> FindEPrescriptionsForDateParameter(int patientID, string publishingDate)
+        {
+            List<EPrescription> searchResult = new List<EPrescription>();
+            foreach (EPrescription eprescription in GetEPrescriptionsForPatient(patientID))
+            {
+                if ((eprescription.PublishingDate.ToString("yyyy-MM-dd").Equals(publishingDate)))
+                {
+                    searchResult.Add(eprescription);
+                }
+            }
+            return searchResult;
         }
     }
 }

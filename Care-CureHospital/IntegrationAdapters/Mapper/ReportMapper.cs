@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Model.DoctorMenager;
-using IntegrationAdapters.Dto;
+﻿using IntegrationAdapters.Dto;
 using Backend.Model.DoctorMenager;
 
 namespace IntegrationAdapters.Mapper
@@ -18,7 +13,6 @@ namespace IntegrationAdapters.Mapper
             dto.Quantity = report.Quantity;
             dto.FromDate = report.FromDate.ToString("dd.MM.yyyy. HH:mm");
             dto.ToDate = report.ToDate.ToString("dd.MM.yyyy. HH:mm");
-
             return dto;
         }
     }

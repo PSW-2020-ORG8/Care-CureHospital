@@ -1,6 +1,4 @@
 <button type="button" class="btn btn-primary float-right m-2" (click)="addEP()"  data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Add EPrescription</button>
-  
-  <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -13,22 +11,18 @@
         </div>
         <div class="modal-body">
             <app-eprescription [ep]="ep" *ngIf="ActivateAddEditEPComp">
-
             </app-eprescription>
         </div>
-
-        
       </div>
     </div>
   </div>
 
-  <table class="table table-striped" matTableExporter #exporter="matTableExporter" >
-    <caption>Table of EPrescription</caption>
+  <table class="table table-striped" matTableExporter #exporter="matTableExporter">
       <thead>
           <tr>
               <th id="Id">Id</th>
               <th id="PatientId">PatientId</th>
-              <th id="PatientName">PatiendName</th>
+              <th id="PatientName">PatientName</th>
               <th id="Comment">Comment</th>
               <th id="MedicamentName">MedicamentName</th>
               <th id="PublishingDate">PublishingDate</th>
@@ -45,7 +39,6 @@
           </tr>
       </tbody>
   </table>
-  
-  <button (click)="generateEP()" class="btn btn-primary">Save</button>
+ 
 
  
