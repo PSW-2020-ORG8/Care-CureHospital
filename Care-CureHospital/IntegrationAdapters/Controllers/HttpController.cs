@@ -16,7 +16,7 @@ namespace IntegrationAdapters.Controllers
              StringBuilder builder = new StringBuilder();
              builder.Append("About medication consumption:");
              String medRep = builder.ToString();
-             var test = @"C:\Users\Korisnik\Desktop\Care-CureHospital\Care-CureHospital\IntegrationAdapters\fileHttp.txt";
+             var test = @".\..\fileHttp.txt";
              System.IO.File.WriteAllText(test, medRep);
              try
              {
