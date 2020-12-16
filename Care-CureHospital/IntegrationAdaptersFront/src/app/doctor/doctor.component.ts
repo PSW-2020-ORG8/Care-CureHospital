@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from 'src/app/doctor.service';
-import { EPrescription } from './models/ePrescription';
+import { EPrescription } from '../models/EPrescription';
 
 @Component({
   selector: 'app-doctor',
@@ -43,9 +43,5 @@ export class DoctorComponent implements OnInit {
 
   closeClick(){
     this.ActivateAddEditEPComp=false;
-  }
-
-  generateEP(){
-    alert("EPrescription Saved!");
   }
 }

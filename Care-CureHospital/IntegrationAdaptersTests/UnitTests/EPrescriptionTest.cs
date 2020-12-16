@@ -2,14 +2,10 @@
 using Model.DoctorMenager;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Backend.Model;
 using Backend.Repository.DoctorRepository;
 using Xunit;
 using Backend.Model.PatientDoctor;
 using Moq;
-using Model.Doctor;
-using Model.Term;
 using Backend.Service.DoctorService;
 
 namespace IntegrationAdaptersTests
@@ -17,25 +13,27 @@ namespace IntegrationAdaptersTests
     public class EPrescriptionTest
     {
         [Fact]
-        public void Find_EPrescription_For_Patient()
+        public void Find_ePrescription_for_patient()
         {
             EPrescriptionService ePrescriptionService = new EPrescriptionService(CreateStubRepository());
 
             EPrescription ePrescription = ePrescriptionService.GetEPrescriptionForPatient(5);
+
             Assert.NotNull(ePrescription);
         }
 
         [Fact]
-        public void Not_Find_EPrescription_For_Patient()
+        public void Not_found_ePrescription_for_patient()
         {
             EPrescriptionService ePrescriptionService = new EPrescriptionService(CreateStubRepository());
 
             EPrescription ePrescription = ePrescriptionService.GetEPrescriptionForPatient(7);
+
             Assert.Null(ePrescription);
         }
 
         [Fact]
-        public void Get_EPrescription()
+        public void Get_ePrescription()
         {
             EPrescriptionService EPrescriptionService = new EPrescriptionService(CreateStubRepository());
 
@@ -44,7 +42,25 @@ namespace IntegrationAdaptersTests
             Assert.NotNull(results);
         }
 
+        [Fact]
+        public void Found_prescriptions_with_date_parameter()
+        {
+            EPrescriptionService service = new EPrescriptionService(CreateStubRepository());
 
+            List<EPrescription> searchResult = service.FindEPrescriptionsForDateParameter(1, "2020-08-12");
+
+            Assert.NotEmpty(searchResult);
+        }
+
+        [Fact]
+        public void Not_found_prescriptions_with_date_parameter()
+        {
+            EPrescriptionService service = new EPrescriptionService(CreateStubRepository());
+
+            List<EPrescription> searchResult = service.FindEPrescriptionsForDateParameter(1, "2020-12-23");
+
+            Assert.Empty(searchResult);
+        }
 
         private static IEPrescriptionRepository CreateStubRepository()
         {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
+import { Report } from '../models/Report';
 
 @Component({
   selector: 'app-director',
@@ -10,34 +11,42 @@ export class DirectorComponent implements OnInit {
 
   constructor(private service:DirectorServiceService) { }
 
-  ReportList:any=[];
+  ReportList: Report[];
 
   ModalTitle:string;
   ActivateAddEditRepComp:boolean=false;
-  rep:any;
+  rep:Report;
 
   ngOnInit(): void {
-    //this.refreshReportList();
+    this.refreshReportList();
   }
 
   addclick(){
     this.rep={
-      MedicationName:"",
-      MedicationLeft:"",
-      FromDate:"",
-      ToDate:""
+      id: 0,
+      medicamentId: 0,
+      medicamentName:"",
+      quantity: 0,
+      fromDate: null,
+      toDate: null
     }
     this.ModalTitle="Add Report";
     this.ActivateAddEditRepComp=true;
-
   }
 
   closeClick(){
     this.ActivateAddEditRepComp=false;
- 
+    this.refreshReportList();
+  }
+
+  refreshReportList(){
+    this.service.getReportList().subscribe((data: Report[]) => {
+      console.log(data);
+      this.ReportList = data;
+    })
   }
 
   generate(){
-    alert("Report saved.");
+    alert("Report saved!");
   }
 }
