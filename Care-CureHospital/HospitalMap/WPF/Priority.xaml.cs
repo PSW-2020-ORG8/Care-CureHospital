@@ -68,7 +68,7 @@ namespace HospitalMap.WPF
             }
             else if (Prioritet.SelectedIndex == 1) {
 
-                priority = "Vremenski period";
+                priority = "DateRange";
             }
 
            // SearchController _searchController = new SearchController();
