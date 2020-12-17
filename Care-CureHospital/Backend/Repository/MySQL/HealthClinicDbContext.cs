@@ -19,6 +19,8 @@ namespace Backend.Repository.MySQL
 {
     public class HealthClinicDbContext : DbContext
     {
+        public DbSet<Secretary> Secretaries { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<Report> Report { get; set; }
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -51,6 +53,7 @@ namespace Backend.Repository.MySQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+                
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseLazyLoadingProxies();
@@ -61,15 +64,17 @@ namespace Backend.Repository.MySQL
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "us-cdbr-east-02.cleardb.com";
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "heroku_04a57706b4c21c3";
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "b1230c944d2123";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "c9966da2";
-            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "HealthClinicDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";           
             return $"server={server};port={port};database={database};user={user};password={password};SSL Mode={sslMode};";
+            
         }
-
+       
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             modelBuilder.Entity<Patient>().HasData(
@@ -92,6 +97,15 @@ namespace Backend.Repository.MySQL
                 new Doctor { Id = 8, Username = "marija", Password = "123", Name = "Marija", Surname = "Marijic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "marija@gmail.com", CityId = 1, SpecialitationId = 4 },
                 new Doctor { Id = 9, Username = "tanja", Password = "123", Name = "Tanja", Surname = "Tankosic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "tanja@gmail.com", CityId = 1, SpecialitationId = 5 }
             );
+
+            modelBuilder.Entity<Secretary>().HasData(
+                new Secretary { Id = 1, Username = "sekretar1", Password = "123", Name = "Milica", Surname = "Carica", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "milica@gmail.com", CityId = 1 }
+            );
+
+            modelBuilder.Entity<Manager>().HasData(
+                new Manager { Id = 1, Username = "manager1", Password = "123", Name = "Darja", Surname = "Rusedski", Jmbg = "12317316712344", DateOfBirth = new DateTime(1992, 1, 10, 3, 30, 0), ContactNumber = "063555156", EMail = "darja@gmail.com", CityId = 1 }
+                );
+
 
             modelBuilder.Entity<Report>().HasData(
                 new Report { Id = 1, MedicamentId = 1,  MedicamentName = "Brufen", Quantity = 10, FromDate = new DateTime(2019, 5, 1, 6, 30, 0), ToDate = new DateTime(2019, 10, 1, 6, 10, 0)},
@@ -150,10 +164,40 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Room>().HasData(
-                new Room { Id = 1, RoomId = "101", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() },
-                new Room { Id = 2, RoomId = "201", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() },
-                new Room { Id = 3, RoomId = "301", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>() }
-            );
+                  new Room { Id = 1, RoomId = "101", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "101", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 2, RoomId = "201", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "201", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 3, RoomId = "301", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "301", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 4, RoomId = "Room 1", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R1", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 5, RoomId = "Room 2", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R2", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 6, RoomId = "Room 3", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R3", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 7, RoomId = "Room 4", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R4", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 8, RoomId = "Room 5", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R5", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 9, RoomId = "Room 6", TypeOfRoomId = 3, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "R6", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 10, RoomId = "Doctor office 3", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "Dr3", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 11, RoomId = "Doctor office 4", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Dr4", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 12, RoomId = "Doctor office 1", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Dr1A", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 13, RoomId = "Doctor office 2", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Dr2A", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 14, RoomId = "Doctor office 1", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Dr1B", NameOfClinic = "B", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 15, RoomId = "Doctor office 2", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Dr2B", NameOfClinic = "B", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "08", EndWorkTime = "16" },
+                 new Room { Id = 16, RoomId = "Surgery room 1", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr1A", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 17, RoomId = "Surgery room 2", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr2A", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 18, RoomId = "Surgery room 3", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr3A", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 19, RoomId = "Surgery room 1", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr1B", NameOfClinic = "B", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 20, RoomId = "Surgery room 2", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr2B", NameOfClinic = "B", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 21, RoomId = "Surgery room 3", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Sr3B", NameOfClinic = "B", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 22, RoomId = "Radiology", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "RadA", NameOfClinic = "A", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 23, RoomId = "Radiology", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "RadB", NameOfClinic = "B", NumberOfFloor = "1", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 24, RoomId = "Cardiology", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Card", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 25, RoomId = "Patology", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Pat", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 26, RoomId = "Neurology", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Neur", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 27, RoomId = "Pyshiatric", TypeOfRoomId = 1, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "Psyc", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "10", AvailableBeds = "5", OccupiedBeds = "5", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 28, RoomId = "Hospital A", TypeOfRoomId = 4, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "HospitalA", NameOfClinic = "A", NumberOfFloor = "", BedCapacity = "", AvailableBeds = "", OccupiedBeds = "", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 29, RoomId = "Hospital B", TypeOfRoomId = 4, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "HospitalB", NameOfClinic = "A", NumberOfFloor = "", BedCapacity = "", AvailableBeds = "", OccupiedBeds = "", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 30, RoomId = "Pharmacy", TypeOfRoomId = 4, Equipment = new List<InventaryRoom>(), DoctordId = 1, IdRoomClinic = "PhA", NameOfClinic = "A", NumberOfFloor = "0", BedCapacity = "", AvailableBeds = "", OccupiedBeds = "", StartWorkTime = "00", EndWorkTime = "24" },
+                 new Room { Id = 31, RoomId = "Pharmacy", TypeOfRoomId = 4, Equipment = new List<InventaryRoom>(), DoctordId = 2, IdRoomClinic = "PhB", NameOfClinic = "B", NumberOfFloor = "", BedCapacity = "", AvailableBeds = "", OccupiedBeds = "", StartWorkTime = "00", EndWorkTime = "24" }
+
+
+             );
 
             modelBuilder.Entity<InventaryRoom>().HasData(
                new InventaryRoom { Id = 1, Name = "Stolovi", Quantity = 1, RoomId = 1 },
@@ -163,7 +207,9 @@ namespace Backend.Repository.MySQL
 
             modelBuilder.Entity<TypeOfRoom>().HasData(
                 new TypeOfRoom { Id = 1, NameOfType = "Soba za preglede" },
-                new TypeOfRoom { Id = 2, NameOfType = "Soba za operacije" }
+                new TypeOfRoom { Id = 2, NameOfType = "Soba za operacije" },
+                new TypeOfRoom { Id = 3, NameOfType = "Soba za lezanje" },
+                new TypeOfRoom { Id = 4, NameOfType = "Ostale prostorije" }
             );
 
             modelBuilder.Entity<Allergies>().HasData(
@@ -248,7 +294,7 @@ namespace Backend.Repository.MySQL
            );
 
             modelBuilder.Entity<DoctorWorkDay>().HasData(
-                new DoctorWorkDay { Id = 1, DoctorId = 1, Date = new DateTime(2020, 12, 20), RoomId = 1 },
+                new DoctorWorkDay { Id = 1, DoctorId = 1, Date = new DateTime(2020, 12, 20), RoomId = 10 },
                 new DoctorWorkDay { Id = 2, DoctorId = 2, Date = new DateTime(2020, 12, 18), RoomId = 2 },
                 new DoctorWorkDay { Id = 3, DoctorId = 3, Date = new DateTime(2020, 12, 25), RoomId = 2 },
                 new DoctorWorkDay { Id = 4, DoctorId = 4, Date = new DateTime(2020, 12, 20), RoomId = 3 },

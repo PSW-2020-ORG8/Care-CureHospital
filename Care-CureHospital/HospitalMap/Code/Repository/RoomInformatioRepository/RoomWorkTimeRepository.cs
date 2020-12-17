@@ -23,7 +23,7 @@ namespace HospitalMap.Code.Repository.RoomInformatioRepository
             return _instance;
         }
 
-        public ObservableCollection<WorkTimeViewModel> AllWorkTime
+        public ObservableCollection<RoomWorkTime> AllWorkTime
         {
             get;
             set;
@@ -55,18 +55,18 @@ namespace HospitalMap.Code.Repository.RoomInformatioRepository
 
         }
 
-        public ObservableCollection<WorkTimeViewModel> GetAll()
+        public ObservableCollection<RoomWorkTime> GetAll()
         {
             String text = "";
 
             if (File.Exists(_path))
                 text = File.ReadAllText(_path);
 
-            return JsonConvert.DeserializeObject<ObservableCollection<WorkTimeViewModel>>(text);
+            return JsonConvert.DeserializeObject<ObservableCollection<RoomWorkTime>>(text);
 
         }
 
-        public void SaveAll(ObservableCollection<WorkTimeViewModel> roomsWorkTime)
+        public void SaveAll(ObservableCollection<RoomWorkTime> roomsWorkTime)
         {
             string json = JsonConvert.SerializeObject(roomsWorkTime, Newtonsoft.Json.Formatting.Indented);
 
@@ -74,10 +74,10 @@ namespace HospitalMap.Code.Repository.RoomInformatioRepository
         }
 
 
-        public void Edit(WorkTimeViewModel workTime)
+        public void Edit(RoomWorkTime workTime)
         {
             AllWorkTime = GetAll();
-            foreach (WorkTimeViewModel currnetWorkTime in AllWorkTime)
+            foreach (RoomWorkTime currnetWorkTime in AllWorkTime)
             {
                 if (currnetWorkTime.IdOfRoom.Equals(workTime.IdOfRoom.ToString()) )
                 {
@@ -95,9 +95,9 @@ namespace HospitalMap.Code.Repository.RoomInformatioRepository
 
 
 
-        public WorkTimeViewModel GetById(string roomId)
+        public RoomWorkTime GetById(string roomId)
         {
-            foreach (WorkTimeViewModel currentRoom in GetAll())
+            foreach (RoomWorkTime currentRoom in GetAll())
             {
                 if (currentRoom.IdOfRoom.Equals(roomId.ToString()))
                 {

@@ -63,17 +63,17 @@ namespace Service.RoomsServices
                 {
                     room.TypeOfRoom = typeOfRoom;
                     break;
-                }                   
+                }
         }
 
         public void AddEquipmentInRoom(InventaryRoom equipment, String roomID)
         {
             foreach (Room room in roomRepository.GetAllEntities())
                 if (room.RoomId == roomID)
-                    room.Equipment.Add(equipment);        
+                    room.Equipment.Add(equipment);
         }
 
-        public List<InventaryRoom> GetEquipmentForRoom(Room room) 
+        public List<InventaryRoom> GetEquipmentForRoom(Room room)
         {
             foreach (Room oneRoom in roomRepository.GetAllEntities())
                 if (oneRoom.RoomId == room.RoomId)
@@ -81,7 +81,7 @@ namespace Service.RoomsServices
             return null;
         }
 
-        public Room GetRoomByRoomID(String roomID)
+        public Room GetRoomByRoomId(String roomID)
         {
             foreach (Room oneRoom in roomRepository.GetAllEntities())
                 if (oneRoom.RoomId == roomID)
@@ -99,11 +99,90 @@ namespace Service.RoomsServices
             return roomRepository.GetEntity(id);
         }
 
+        public Room GetEntityByHospitalId(string id)
+        {
+            foreach (Room currentRoom in roomRepository.GetAllEntities())
+            {
+                if (currentRoom.IdRoomClinic.Equals(id.ToString()))
+                {
+                    return currentRoom;
+                }
+            }
+            return null;
+        }
+
         public IEnumerable<Room> GetAllEntities()
         {
             return roomRepository.GetAllEntities();
         }
-       
+
+
+
+        public List<Room> GetAllEntitiesByType(int type)
+        {
+            List<Room> room = new List<Room>();
+            foreach (Room currentRoom in roomRepository.GetAllEntities())
+            {
+                if (currentRoom.TypeOfRoomId==type)
+                {
+                    room.Add(currentRoom);
+                }
+            }
+            return room;
+
+        }
+
+        public List<Room> SearchPatientsRooms(string nameOfRoom)
+        {
+            List<Room> searchedRooms = new List<Room>();
+
+            foreach (Room currentRoom in roomRepository.GetAllEntities())
+            {
+                if (currentRoom.RoomId.Contains(nameOfRoom) && currentRoom.TypeOfRoomId==3)
+                {
+                    searchedRooms.Add(currentRoom);
+                }
+
+
+            }
+
+            return searchedRooms;
+        }
+
+        public List<Room> SearchDoctorsRooms(string nameOfRoom)
+        {
+            List<Room> searchedRooms = new List<Room>();
+
+            foreach (Room currentRoom in roomRepository.GetAllEntities())
+            {
+                if (currentRoom.RoomId.Contains(nameOfRoom) && currentRoom.TypeOfRoomId == 1)
+                {
+                    searchedRooms.Add(currentRoom);
+                }
+
+
+            }
+
+            return searchedRooms;
+        }
+
+        public List<Room> SearchAnotherRooms(string nameOfRoom)
+        {
+            List<Room> searchedRooms = new List<Room>();
+
+            foreach (Room currentRoom in roomRepository.GetAllEntities())
+            {
+                if (currentRoom.RoomId.Contains(nameOfRoom) && currentRoom.TypeOfRoomId == 4)
+                {
+                    searchedRooms.Add(currentRoom);
+                }
+
+
+            }
+
+            return searchedRooms;
+        }
+
         public Room AddEntity(Room entity)
         {
             return roomRepository.AddEntity(entity);
@@ -116,14 +195,16 @@ namespace Service.RoomsServices
 
         public void DeleteEntity(Room entity)
         {
-            roomRepository.UpdateEntity(entity);
+            roomRepository.DeleteEntity(entity);
         }
 
-        public Room GetFirstRoom(List<Room> rooms) 
+        public Room GetFirstRoom(List<Room> rooms)
         {
             foreach (Room room in rooms)
                 return room;
             return null;
         }
+
+
     }
 }

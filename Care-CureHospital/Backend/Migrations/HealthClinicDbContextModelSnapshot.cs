@@ -198,53 +198,6 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EPrescription");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Comment = "Redovno koristite prepisane lekove",
-                            MedicamentName = "Aspirin",
-                            PatientId = 1,
-                            PatientName = "Petar",
-                            PublishingDate = new DateTime(2020, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Comment = "Svakodnevno koristite prepisani lek",
-                            MedicamentName = "Brufen",
-                            PatientId = 2,
-                            PatientName = "Mica",
-                            PublishingDate = new DateTime(2020, 9, 12, 10, 30, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Comment = "Redovno koristite prepisane lekove",
-                            MedicamentName = "Vitamin B",
-                            PatientId = 3,
-                            PatientName = "Zika",
-                            PublishingDate = new DateTime(2020, 12, 25, 10, 30, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Comment = "Ne preskacite konzumiranje leka",
-                            MedicamentName = "Panadol",
-                            PatientId = 5,
-                            PatientName = "Ivan",
-                            PublishingDate = new DateTime(2020, 10, 12, 3, 30, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Comment = "Redovno koristite prepisane lekove",
-                            MedicamentName = "Andol",
-                            PatientId = 6,
-                            PatientName = "Marko",
-                            PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Backend.Model.PatientDoctor.MedicalExaminationReport", b =>
@@ -362,6 +315,49 @@ namespace Backend.Migrations
                             Comment = "Redovno koristite prepisane lekove",
                             MedicalExaminationId = 4,
                             PublishingDate = new DateTime(2020, 11, 26, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Model.Pharmacy.Pharmacies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pharmacies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "1234",
+                            Link = "apoteka1.com",
+                            Name = "Apoteka1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "5678",
+                            Link = "apoteka2.com",
+                            Name = "Apoteka2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Key = "9101112",
+                            Link = "apoteka3.com",
+                            Name = "Apoteka3"
                         });
                 });
 
@@ -635,6 +631,78 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Model.AllActors.Manager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Managers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "063555156",
+                            DateOfBirth = new DateTime(1992, 1, 10, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            EMail = "darja@gmail.com",
+                            Gender = 0,
+                            Jmbg = "12317316712344",
+                            Name = "Darja",
+                            Password = "123",
+                            Surname = "Rusedski",
+                            Username = "manager1"
+                        });
+                });
+
             modelBuilder.Entity("Model.AllActors.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -824,6 +892,78 @@ namespace Backend.Migrations
                             Password = "123",
                             Surname = "Markovic",
                             Username = "marko"
+                        });
+                });
+
+            modelBuilder.Entity("Model.AllActors.Secretary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EMail")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInsuranceCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("IdentityCard")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Secretaries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BloodGroup = 0,
+                            CityId = 1,
+                            ContactNumber = "063775356",
+                            DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3, 0, DateTimeKind.Unspecified),
+                            EMail = "milica@gmail.com",
+                            Gender = 0,
+                            Jmbg = "12312316712345",
+                            Name = "Milica",
+                            Password = "123",
+                            Surname = "Carica",
+                            Username = "sekretar1"
                         });
                 });
 
@@ -1708,7 +1848,7 @@ namespace Backend.Migrations
                             Id = 1,
                             Date = new DateTime(2020, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 1,
-                            RoomId = 1
+                            RoomId = 10
                         },
                         new
                         {
@@ -1953,10 +2093,40 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AvailableBeds")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("BedCapacity")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EndWorkTime")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<DateTime>("FromDateTime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("IdRoomClinic")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("NameOfClinic")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("NumberOfFloor")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("OccupiedBeds")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("RoomId")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("StartWorkTime")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("ToDateTime")
@@ -1967,6 +2137,8 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorId");
+
                     b.HasIndex("TypeOfRoomId");
 
                     b.ToTable("Rooms");
@@ -1975,26 +2147,529 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "16",
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "101",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
                             RoomId = "101",
+                            StartWorkTime = "08",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeOfRoomId = 1
                         },
                         new
                         {
                             Id = 2,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "16",
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "201",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
                             RoomId = "201",
+                            StartWorkTime = "08",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeOfRoomId = 1
                         },
                         new
                         {
                             Id = 3,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "16",
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "301",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
                             RoomId = "301",
+                            StartWorkTime = "08",
                             ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R1",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 1",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R2",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 2",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R3",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 3",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R4",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 4",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R5",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 5",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "R6",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Room 6",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 1,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr3",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 3",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr4",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 4",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr1A",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 1",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr2A",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 2",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr1B",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 1",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "16",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Dr2B",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Doctor office 2",
+                            StartWorkTime = "08",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr1A",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 1",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr2A",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 2",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr3A",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 3",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr1B",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 1",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr2B",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 2",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Sr3B",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Surgery room 3",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "RadA",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Radiology",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "RadB",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "1",
+                            OccupiedBeds = "5",
+                            RoomId = "Radiology",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Card",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Cardiology",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Pat",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Patology",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Neur",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Neurology",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            AvailableBeds = "5",
+                            BedCapacity = "10",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "Psyc",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "5",
+                            RoomId = "Pyshiatric",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            AvailableBeds = "",
+                            BedCapacity = "",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "HospitalA",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "",
+                            OccupiedBeds = "",
+                            RoomId = "Hospital A",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 4
+                        },
+                        new
+                        {
+                            Id = 29,
+                            AvailableBeds = "",
+                            BedCapacity = "",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "HospitalB",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "",
+                            OccupiedBeds = "",
+                            RoomId = "Hospital B",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 4
+                        },
+                        new
+                        {
+                            Id = 30,
+                            AvailableBeds = "",
+                            BedCapacity = "",
+                            DoctordId = 1,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "PhA",
+                            NameOfClinic = "A",
+                            NumberOfFloor = "0",
+                            OccupiedBeds = "",
+                            RoomId = "Pharmacy",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 4
+                        },
+                        new
+                        {
+                            Id = 31,
+                            AvailableBeds = "",
+                            BedCapacity = "",
+                            DoctordId = 2,
+                            EndWorkTime = "24",
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdRoomClinic = "PhB",
+                            NameOfClinic = "B",
+                            NumberOfFloor = "",
+                            OccupiedBeds = "",
+                            RoomId = "Pharmacy",
+                            StartWorkTime = "00",
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TypeOfRoomId = 4
                         });
                 });
 
@@ -2021,6 +2696,16 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             NameOfType = "Soba za operacije"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NameOfType = "Soba za lezanje"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NameOfType = "Ostale prostorije"
                         });
                 });
 
@@ -2075,7 +2760,25 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Model.AllActors.Manager", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model.AllActors.Patient", b =>
+                {
+                    b.HasOne("Model.AllActors.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.AllActors.Secretary", b =>
                 {
                     b.HasOne("Model.AllActors.City", "City")
                         .WithMany()
@@ -2227,6 +2930,10 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Model.Term.Room", b =>
                 {
+                    b.HasOne("Model.AllActors.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
                     b.HasOne("Model.Term.TypeOfRoom", "TypeOfRoom")
                         .WithMany()
                         .HasForeignKey("TypeOfRoomId")

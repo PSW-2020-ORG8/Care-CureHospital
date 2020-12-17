@@ -1,9 +1,8 @@
-﻿using HospitalMap.Service;
-using HospitalMap.WPF;
-using HospitalMap.WPF.ModelWPF;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+
+using Model.AllActors;
+using Model.Term;
+
 
 namespace HospitalMap.Controller
 {
@@ -11,52 +10,36 @@ namespace HospitalMap.Controller
     {
 
 
-        private InformationEditService _informationEditService;
+        
         
 
         public InformationEditController() {
 
-            _informationEditService = new InformationEditService();
+            
              }
 
-         public void  EditInformation(RoomInformationVieW room)
+         public void UpdateEntity(Room room)
         {
-             _informationEditService.EditInformation(room);
+            Backend.App.Instance().RoomService.UpdateEntity(room);
         }
 
-        public RoomInformationVieW GetRoomById(string roomId)
+        public Room GetEntity(int id)
         {
-            return _informationEditService.GetRoomById(roomId);
+           return Backend.App.Instance().RoomService.GetEntity(id);
         }
 
-
-        public DoctorRoomView GetDoctorsRoomById(string roomId)
+        public Room GetRoomById(string roomId)
         {
-            return _informationEditService.GetDoctorsRoomById(roomId);
-        }
-
-
-        public void AddNewDoctorOnInformation(DoctorRoomView currentDoctorsRoom,string newDoctorsJmbg)
-        {
-            _informationEditService.AddNewDoctorOnInformation(currentDoctorsRoom,newDoctorsJmbg);
-        }
-
-        public void EditCurrentDoctorOnInformation(DoctorRoomView doctorsRoom)
-        {
-            _informationEditService.EditCurrentDoctorOnInformation(doctorsRoom);
+            return Backend.App.Instance().RoomService.GetEntityByHospitalId(roomId);
         }
 
 
-        public WorkTimeViewModel GetWorkTimeByRoom(string roomId)
+        public Doctor GetDoctorById(int id)
         {
-            return _informationEditService.GetWorkTimeByRoom(roomId);
+            return Backend.App.Instance().DoctorService.GetEntity(id);
         }
 
-
-        public void EditWorkTimeByRoom(WorkTimeViewModel workTime)
-        {
-            _informationEditService.EditWorkTimeByRoom(workTime);
-        }
+          
 
     }
 }
