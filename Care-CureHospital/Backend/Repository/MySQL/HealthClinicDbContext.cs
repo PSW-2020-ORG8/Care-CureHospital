@@ -304,7 +304,7 @@ namespace Backend.Repository.MySQL
                 new DoctorWorkDay { Id = 8, DoctorId = 7, Date = new DateTime(2020, 11, 28), RoomId = 2 },
                 new DoctorWorkDay { Id = 9, DoctorId = 6, Date = new DateTime(2020, 11, 29), RoomId = 3 },
                 new DoctorWorkDay { Id = 10, DoctorId = 5, Date = new DateTime(2020, 11, 30), RoomId = 3 },
-                new DoctorWorkDay { Id = 11, DoctorId = 9, Date = new DateTime(2023, 11, 21), RoomId = 1 }
+                new DoctorWorkDay { Id = 11, DoctorId = 9, Date = new DateTime(2023, 11, 21), RoomId = 1 },
                 new DoctorWorkDay { Id = 12, DoctorId = 2, Date = new DateTime(2020, 12, 22), RoomId = 11 }
 
             );

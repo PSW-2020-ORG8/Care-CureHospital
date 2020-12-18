@@ -1929,9 +1929,6 @@ namespace Backend.Migrations
                             Date = new DateTime(2023, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 9,
                             RoomId = 1
-                            Date = new DateTime(2020, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            RoomId = 10
                         },
                         new
                         {
