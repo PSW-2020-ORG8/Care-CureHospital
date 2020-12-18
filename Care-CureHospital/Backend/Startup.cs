@@ -30,7 +30,7 @@ namespace Backend
             services.AddControllers();
             //services.AddScoped<IMySQLStream<>>();
             services.AddDbContext<HealthClinicDbContext>(options =>
-                    options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+                    options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

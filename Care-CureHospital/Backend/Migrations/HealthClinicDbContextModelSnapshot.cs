@@ -1719,6 +1719,16 @@ namespace Backend.Migrations
                             EndTime = new DateTime(2020, 11, 21, 9, 30, 0, 0, DateTimeKind.Unspecified),
                             MedicalExaminationId = 12,
                             StartTime = new DateTime(2020, 11, 21, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Canceled = true,
+                            CancellationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorWorkDayId = 11,
+                            EndTime = new DateTime(2023, 11, 21, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            MedicalExaminationId = 13,
+                            StartTime = new DateTime(2023, 11, 21, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1815,6 +1825,13 @@ namespace Backend.Migrations
                             Date = new DateTime(2020, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 5,
                             RoomId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Date = new DateTime(2023, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 9,
+                            RoomId = 1
                         });
                 });
 
@@ -1983,6 +2000,17 @@ namespace Backend.Migrations
                             DoctorId = 9,
                             FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 6,
+                            RoomId = 1,
+                            ShortDescription = "Pacijenta je boleo stomak",
+                            SurveyFilled = false,
+                            ToDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DoctorId = 9,
+                            FromDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
                             RoomId = 1,
                             ShortDescription = "Pacijenta je boleo stomak",
                             SurveyFilled = false,

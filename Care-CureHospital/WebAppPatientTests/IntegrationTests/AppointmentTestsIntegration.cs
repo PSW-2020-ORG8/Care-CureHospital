@@ -21,7 +21,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        /*[Theory]
+        [Theory]
         [MemberData(nameof(AppointmentData))]
         public async void Get_Previous_Appointments_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
         {
@@ -44,7 +44,7 @@ namespace WebAppPatientTests.IntegrationTests
         }
 
         [Theory]
-        [MemberData(nameof(AppointmentData))]
+        [MemberData(nameof(CancelAppointmentData))]
         public async void Cancel_Appointment_Status_Code_Test(int appointmentId, HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = factory.CreateClient();
@@ -110,14 +110,22 @@ namespace WebAppPatientTests.IntegrationTests
             var retVal = new List<object[]>();
             retVal.Add(new object[] { 1, HttpStatusCode.OK });
             retVal.Add(new object[] { 50, HttpStatusCode.NotFound });
-            return retVal;  
+            return retVal;
+        }
+
+        public static IEnumerable<object[]> CancelAppointmentData()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { 15, HttpStatusCode.OK });
+            retVal.Add(new object[] { 50, HttpStatusCode.NotFound });
+            return retVal;
         }
 
         public static IEnumerable<object[]> ScheduleAppointmentData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2020, 12, 21, 19, 30, 0), EndTime = new DateTime(2020, 12, 21, 20, 0, 0), DoctorWorkDayId = 5, MedicalExamination = new Model.Term.MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 2 }}, HttpStatusCode.NotFound });
+            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2020, 12, 21, 19, 30, 0), EndTime = new DateTime(2020, 12, 21, 20, 0, 0), DoctorWorkDayId = 5, MedicalExamination = new Model.Term.MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 2 } }, HttpStatusCode.NotFound });
             return retVal;
-        }*/
+        }
     }
 }

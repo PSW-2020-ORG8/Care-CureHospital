@@ -19,7 +19,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        /*[Theory]
+        [Theory]
         [MemberData(nameof(DoctorData))]
         public async void Get_All_Doctor_By_Doctor_Specialization_Id(int specializationId, HttpStatusCode expectedResponseStatusCode)
         {
@@ -53,6 +53,6 @@ namespace WebAppPatientTests.IntegrationTests
             var retVal = new List<object[]>();
             retVal.Add(new object[] { HttpStatusCode.OK });
             return retVal;
-        }*/
+        }
     }
 }
