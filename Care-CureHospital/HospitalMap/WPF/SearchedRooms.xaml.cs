@@ -45,6 +45,7 @@ namespace HospitalMap.WPF
         public PatientsRoomVieW SelectedPatientRoom;
 
         public DoctorRoomView SelectedDoctorRoom;
+        public RoomWorkTime SelectedAnotherRoom { get; set; }
 
 
         private ObservableCollection<DoctorRoomView> _doctorsRooms;
@@ -66,8 +67,7 @@ namespace HospitalMap.WPF
 
         }
 
-
-
+       
 
         public SearchedRooms(ObservableCollection<PatientsRoomVieW> patientsRooms, ObservableCollection<DoctorRoomView> doctorsRooms, ObservableCollection<RoomWorkTime> anothersRooms)
         {
@@ -109,6 +109,29 @@ namespace HospitalMap.WPF
                 f.Show();
 
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            SelectedAnotherRoom = (RoomWorkTime)AnotherRoomsDataGrid.SelectedItem;
+
+           if(SelectedAnotherRoom.IdOfRoom.Equals("HospitalA") || SelectedAnotherRoom.IdOfRoom.Equals("HospitalB"))
+            {
+                MessageBox.Show("Clinic A and Clinic B are located on the complex maps! ", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (SelectedAnotherRoom.IdOfRoom.Contains("A"))
+            {
+                GroundFloor f = new GroundFloor(SelectedAnotherRoom.IdOfRoom);
+                f.Show();
+            }
+            else if (SelectedAnotherRoom.IdOfRoom.Contains("B"))
+            {
+                GroundFloor2 f = new GroundFloor2(SelectedAnotherRoom.IdOfRoom);
+                f.Show();
+            }
+            
         }
     }
 }

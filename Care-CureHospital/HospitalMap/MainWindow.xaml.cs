@@ -257,12 +257,7 @@ namespace HospitalMap
             }
 
 
-            if (TermsRadioButon.IsChecked == true)
-            {
-                AllDoctors allDoc = new AllDoctors();
-                allDoc.Show();
-
-            }
+            
 
 
         }

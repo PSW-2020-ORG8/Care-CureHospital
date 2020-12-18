@@ -131,7 +131,7 @@
 
                     </DataGrid>
 
-                    <Button Background="CornflowerBlue" Content="Show" Grid.Column="1" HorizontalAlignment="Left" Margin="173,307,0,0" VerticalAlignment="Top" Width="114" Height="34"/>
+                    <Button Background="CornflowerBlue" Content="Show" Grid.Column="1" HorizontalAlignment="Left" Margin="173,307,0,0" VerticalAlignment="Top" Width="114" Height="34" Click="Button_Click_2"/>
 
 
                 </Grid>
