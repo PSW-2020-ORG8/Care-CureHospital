@@ -1,9 +1,5 @@
 ﻿using Backend;
 using IntegrationAdapters.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Validation
 {
@@ -20,7 +16,6 @@ namespace IntegrationAdapters.Validation
             {
                 return false;
             }
-
             return true;
         }
 
@@ -40,7 +35,6 @@ namespace IntegrationAdapters.Validation
             {
                 return false;
             }
-
             return true;
         }
     }

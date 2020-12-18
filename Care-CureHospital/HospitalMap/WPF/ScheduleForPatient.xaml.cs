@@ -44,6 +44,32 @@ namespace HospitalMap.WPF
             }
         }
 
+
+        public static DateTime Dstart
+        {
+            get;
+            set;
+        }
+
+        public static DateTime Dend
+        {
+            get;
+            set;
+        }
+
+        public static DoctorView DoctorS
+        {
+            get;
+            set;
+        }
+
+        public static string PriorityS
+        {
+            get;
+            set;
+        }
+
+
         public static PatientView SelektovaniPacijent
         {
             get;
@@ -56,12 +82,16 @@ namespace HospitalMap.WPF
         }
 
 
-        public ScheduleForPatient(WorkDayViewView selectedAppointment)
+        public ScheduleForPatient(WorkDayViewView selectedAppointment, DateTime DatumS, DateTime DatumE, DoctorView Dr, String priority1)
         {
             InitializeComponent();
             this.DataContext = this;
+            Dstart = DatumS;
+            Dend = DatumE;
+            DoctorS = Dr;
+            PriorityS = priority1;
 
-           AllPatients = new ObservableCollection<PatientView>(PatientConverter.ConvertPatientToPatientViewList(
+            AllPatients = new ObservableCollection<PatientView>(PatientConverter.ConvertPatientToPatientViewList(
            Backend.App.Instance().PatientService.GetAllEntities().ToList()));
            Pacijenti.SelectedIndex = 0;
            SelectedApp = selectedAppointment;
@@ -83,7 +113,10 @@ namespace HospitalMap.WPF
             if (Backend.App.Instance().DoctorWorkDayService.ScheduleAppointment(ScheduleAppoitmentConverter.AppointmentDtoToAppointment(appointment, SelektovaniPacijent)))
             {
                 MessageBox.Show("Uspesno zakazan termin");
+                ResultSchedule s = new ResultSchedule(Dstart,Dend,DoctorS,PriorityS);
+                s.Show();
                 this.Close();
+
             }
             else {
                 MessageBox.Show("Termin nije zakazan");

@@ -15,18 +15,15 @@ namespace IntegrationAdapters
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(
-                        name: "CorsPolicy",
-                        builder => builder.SetIsOriginAllowed(origin => true)
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader());
-            });
+             services.AddCors(options =>
+             {
+                 options.AddPolicy("CorsPolicy",
+                     builder => builder.WithOrigins("http://localhost:4401")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader());
+             });
             services.AddControllers();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
@@ -34,7 +31,6 @@ namespace IntegrationAdapters
             services.AddCors();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,8 +50,6 @@ namespace IntegrationAdapters
             {
                 endpoints.MapControllers();
             });
-
-            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true));
         }
     }
 }

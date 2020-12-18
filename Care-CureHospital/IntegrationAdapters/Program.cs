@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using IntegrationAdapters.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -10,17 +9,6 @@ namespace IntegrationAdapters
     {
         public static async Task Main(string[] args)
         {
-            Console.WriteLine(":");
-            PrintMenu();
-            string input = Console.ReadLine();
-            if (ValidInput(input))
-            {
-                await HttpInquiriesController.SendRequest(int.Parse(input));
-            }
-            else
-            {
-                Console.WriteLine("Input not valid!");
-            }
             CreateHostBuilder(args).Build().Run();
         }
 

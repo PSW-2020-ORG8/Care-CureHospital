@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Backend.Model.Pharmacy;
 
 namespace IntegrationAdapters.Dto
 {
     public class PharmaciesDTO
     {
-
         public int Id { get; set; }
 
         public String Name { get; set; }

@@ -32,6 +32,32 @@ namespace HospitalMap.WPF
             }
         }
 
+
+        public static DateTime Dstart
+        {
+            get;
+            set;
+        }
+
+        public static DateTime Dend
+        {
+            get;
+            set;
+        }
+
+        public static DoctorView DoctorS
+        {
+            get;
+            set;
+        }
+
+        public static string PriorityS
+        {
+            get;
+            set;
+        }
+
+
         public WorkDayViewView SelectedRoom;
 
         private ObservableCollection<WorkDayViewView> _specs;
@@ -55,6 +81,10 @@ namespace HospitalMap.WPF
             InitializeComponent();
             this.DataContext = this;
             String priority = priority1;
+            Dstart = DatumS;
+            Dend = DatumE;
+            DoctorS = Dr;
+            PriorityS = priority1;
             Dictionary<int, List<Appointment>> availableAppointments = Backend.App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DatumS, DatumE, Int32.Parse(Dr.IdOfDoctor), priority);
             ObservableCollection<WorkDayView> SlobodniTermini = new ObservableCollection<WorkDayView>();
             SlobodniTermini = new ObservableCollection<WorkDayView>(WorkDayConverter.CreateDoctorWorkDayDtos(Backend.App.Instance().DoctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
@@ -102,9 +132,9 @@ namespace HospitalMap.WPF
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             SelectedRoom = (WorkDayViewView)raspored.SelectedItem;
-            ScheduleForPatient s = new ScheduleForPatient(SelectedRoom);
+            ScheduleForPatient s = new ScheduleForPatient(SelectedRoom,Dstart,Dend,DoctorS,PriorityS);
             s.Show();
-            
+            this.Close();
         }
     }
 }
