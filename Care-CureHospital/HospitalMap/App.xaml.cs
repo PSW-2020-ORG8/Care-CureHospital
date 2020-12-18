@@ -13,5 +13,9 @@ namespace HospitalMap
     /// </summary>
     public partial class App : Application
     {
+        internal static object Instance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

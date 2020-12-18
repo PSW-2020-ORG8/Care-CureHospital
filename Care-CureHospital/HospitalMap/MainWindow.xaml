@@ -59,6 +59,7 @@
         <RadioButton x:Name="TermsRadioButon" Content="Terms" Canvas.Left="29" Canvas.Top="349" />
 
         <RadioButton x:Name="EquipmnetRadioButon" Content="Equipmnet" Canvas.Left="104" Canvas.Top="317" Width="86"/>
+        <Button x:Name="Appointment" Background="CornflowerBlue" Content="Schedule appoitment" Canvas.Left="31" Canvas.Top="451" RenderTransformOrigin="-0.454,-1.541" Width="148" Height="33" Click="Button_Click" />
 
 
 

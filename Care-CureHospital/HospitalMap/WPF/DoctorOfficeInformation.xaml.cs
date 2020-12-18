@@ -2,11 +2,15 @@
 using HospitalMap.Code.Repository;
 using HospitalMap.Code.Repository.DoctorsRepository;
 using HospitalMap.Controller;
+using HospitalMap.WPF.Converter;
 using HospitalMap.WPF.ModelWPF;
+using Model.AllActors;
+using Model.Term;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,8 +29,8 @@ namespace HospitalMap.WPF
     public partial class DoctorOfficeInformation : Window
     {
 
-       
-        
+
+
 
 
         private InformationEditController _informationControler = new InformationEditController();
@@ -37,7 +41,7 @@ namespace HospitalMap.WPF
         }
 
 
-        public  ObservableCollection<DoctorRoomView> AllDoctors
+        public  ObservableCollection<DoctorView> AllDoctors
         {
             get;
             set;
@@ -50,6 +54,7 @@ namespace HospitalMap.WPF
         }
 
         private static string _idRoom;
+        Doctor doctor;
         public DoctorOfficeInformation(string Id)
         {
             
@@ -77,8 +82,23 @@ namespace HospitalMap.WPF
 
             }
 
+            Room r1 = _informationControler.GetRoomById(Id);
+            if (r1 != null)
+            {
+                Room room = _informationControler.GetRoomById(Id);
 
-             DoctorsRoom = _informationControler.GetDoctorsRoomById(Id);
+                DoctorsRoom = DoctorRoomConverter.ConvertRoomToDoctorRoomView(_informationControler.GetRoomById(Id));
+                doctor = _informationControler.GetDoctorById(room.DoctordId);
+
+                DoctorsRoom.NameOfDoctor = doctor.Name;
+                DoctorsRoom.SurnameOfDoctor= doctor.Surname;
+                DoctorsRoom.JmbgOfDoctor = doctor.Jmbg;
+                
+
+
+
+            }
+            
 
             _idRoom = Id;
 
@@ -86,13 +106,17 @@ namespace HospitalMap.WPF
 
             AllNameAndSurnameAndJmbgFromDoctors = new ObservableCollection<string>();
 
-            AllDoctors = DoctorsRoomRepository.GetInstance().GetAll();
+            
+            AllDoctors = new ObservableCollection<DoctorView>(DoctorConverter.ConvertDoctorToDoctorViewList(
+              Backend.App.Instance().DoctorService.GetAllEntities().ToList()));
 
-            foreach (DoctorRoomView doctor in AllDoctors)
+
+
+            foreach (DoctorView curentDoctor in AllDoctors)
             {
-                if (!doctor.JmbgOfDoctor.Equals(DoctorsRoom.JmbgOfDoctor))
+                if (!curentDoctor.IdOfDoctor.Equals( doctor.Id.ToString()) )
                 {
-                    AllNameAndSurnameAndJmbgFromDoctors.Add(doctor.NameOfDoctor + " " + doctor.SurnameOfDoctor + " Jmbg:" + doctor.JmbgOfDoctor);
+                    AllNameAndSurnameAndJmbgFromDoctors.Add(curentDoctor.NameOfDoctor + " " + curentDoctor.SurnameOfDoctor + " Doctor ID:" + curentDoctor.IdOfDoctor);
                 }
             }
         }
@@ -107,7 +131,9 @@ namespace HospitalMap.WPF
 
                 string[] niz = _selectedDoctor.Split(':');
 
-                string _selectedDoctorJmbg = niz[1];
+                
+
+                int selectedDoctorId= Int32.Parse(niz[1]);
 
                 int from= Int32.Parse(DoctorsRoom.FromDateTime);
                 int to= Int32.Parse(DoctorsRoom.ToDateTime);
@@ -118,10 +144,23 @@ namespace HospitalMap.WPF
                     return;
                 }
 
-                _informationControler.AddNewDoctorOnInformation(DoctorsRoom, _selectedDoctorJmbg);
+               
+
+                Doctor selectedDoctor= _informationControler.GetDoctorById(selectedDoctorId);
+
+                Room currentRoom = _informationControler.GetRoomById(_idRoom);
+
+                currentRoom.DoctordId = selectedDoctor.Id;
+                currentRoom.NameOfClinic = DoctorsRoom.NameOfClinic;
+                currentRoom.NumberOfFloor = DoctorsRoom.NumberOfFloor;
+                currentRoom.StartWorkTime = DoctorsRoom.FromDateTime;
+                currentRoom.EndWorkTime = DoctorsRoom.ToDateTime;
+
+                _informationControler.UpdateEntity(currentRoom);
 
 
-                
+
+
                 this.Close();
 
             }
@@ -136,7 +175,18 @@ namespace HospitalMap.WPF
                     return;
                 }
 
-                _informationControler.EditCurrentDoctorOnInformation(DoctorsRoom);
+                Room currentRoom = _informationControler.GetRoomById(_idRoom);
+
+                
+                currentRoom.NameOfClinic = DoctorsRoom.NameOfClinic;
+                currentRoom.NumberOfFloor = DoctorsRoom.NumberOfFloor;
+                currentRoom.StartWorkTime = DoctorsRoom.FromDateTime;
+                currentRoom.EndWorkTime = DoctorsRoom.ToDateTime;
+
+                _informationControler.UpdateEntity(currentRoom);
+
+
+               
 
                 this.Close();
             }

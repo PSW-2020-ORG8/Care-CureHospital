@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace HospitalMap.WPF.ModelWPF
 {
-    public class DoctorRoomView : INotifyPropertyChanged
+    public class PatientsRoomVieW : INotifyPropertyChanged
     {
 
-        public DoctorRoomView() { }
+        public PatientsRoomVieW() { }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -22,29 +23,15 @@ namespace HospitalMap.WPF.ModelWPF
         }
 
 
-
-
-
-        private ObservableCollection<MedicalTerm> _medicalTerms;
-        public ObservableCollection<MedicalTerm> MedicalTerms
-        {
-            get { return _medicalTerms; }
-            set { _medicalTerms = value; OnPropertyChanged("MedicalTerms"); }
-
-        }
-
-
         private int _idOfRoomInMySQLDataBase;
         private string _idOfRoom;
         private int _typeOfRoomId;
         private string _nameOfRoom;
         private string _nameOfClinic;
         private string _numberOfFloor;
-        private string _nameOfDoctor;
-        private string _surnameOfDoctor;
-        private string _jmbgOfDoctor;
-        private string _fromDateTime;
-        private string _toDateTime;
+        private string _bedCapacity;
+        private string _availableBeds;
+        private string _occupiedBeds;
 
 
         public int IdOfRoomInMySQLDataBase
@@ -64,7 +51,6 @@ namespace HospitalMap.WPF.ModelWPF
         }
 
 
-
         public int TypeOfRoomId
         {
             get
@@ -82,6 +68,46 @@ namespace HospitalMap.WPF.ModelWPF
         }
 
 
+
+
+        public string IdOfRoom
+        {
+            get
+            {
+                return _idOfRoom;
+            }
+            set
+            {
+                if (value != _idOfRoom)
+                {
+                    _idOfRoom = value;
+                    OnPropertyChanged("IdOfRoom");
+                }
+            }
+        }
+
+
+
+
+        public string NameOfRoom
+        {
+            get
+            {
+                return _nameOfRoom;
+            }
+            set
+            {
+                if (value != _nameOfRoom)
+                {
+                    _nameOfRoom = value;
+                    OnPropertyChanged("NameOfRoom");
+                }
+            }
+        }
+
+
+
+
         public string NameOfClinic
         {
             get
@@ -97,6 +123,7 @@ namespace HospitalMap.WPF.ModelWPF
                 }
             }
         }
+
 
 
 
@@ -125,74 +152,18 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        public string IdOfRoom
+        public string BedCapacity
         {
             get
             {
-                return _idOfRoom;
+                return _bedCapacity;
             }
             set
             {
-                if (value != _idOfRoom)
+                if (value != _numberOfFloor)
                 {
-                    _idOfRoom = value;
-                    OnPropertyChanged("IdOfRoom");
-                }
-            }
-        }
-
-
-
-        public string NameOfRoom
-        {
-            get
-            {
-                return _nameOfRoom;
-            }
-            set
-            {
-                if (value != _nameOfRoom)
-                {
-                    _nameOfRoom = value;
-                    OnPropertyChanged("NameOfRoom");
-                }
-            }
-        }
-
-
-
-
-        public string NameOfDoctor
-        {
-            get
-            {
-                return _nameOfDoctor;
-            }
-            set
-            {
-                if (value != _nameOfDoctor)
-                {
-                    _nameOfDoctor = value;
-                    OnPropertyChanged("NameOfDoctor");
-                }
-            }
-        }
-
-
-
-
-        public string SurnameOfDoctor
-        {
-            get
-            {
-                return _surnameOfDoctor; ;
-            }
-            set
-            {
-                if (value != _surnameOfDoctor)
-                {
-                    _surnameOfDoctor = value;
-                    OnPropertyChanged("SurnameOfDoctor");
+                    _bedCapacity = value;
+                    OnPropertyChanged(" BedCapacity");
                 }
             }
         }
@@ -201,37 +172,21 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        public string JmbgOfDoctor
+
+
+
+        public string AvailableBeds
         {
             get
             {
-                return _jmbgOfDoctor; ;
+                return _availableBeds;
             }
             set
             {
-                if (value != _jmbgOfDoctor)
+                if (value != _availableBeds)
                 {
-                    _jmbgOfDoctor = value;
-                    OnPropertyChanged("JmbgOfDoctor");
-                }
-            }
-        }
-
-
-
-
-        public string FromDateTime
-        {
-            get
-            {
-                return _fromDateTime;
-            }
-            set
-            {
-                if (value != _fromDateTime)
-                {
-                    _fromDateTime = value;
-                    OnPropertyChanged("FromDateTime");
+                    _availableBeds = value;
+                    OnPropertyChanged("AvailableBeds");
                 }
             }
         }
@@ -240,24 +195,22 @@ namespace HospitalMap.WPF.ModelWPF
 
 
 
-        public string ToDateTime
+
+        public string OccupiedBeds
         {
             get
             {
-                return _toDateTime;
+                return _occupiedBeds;
             }
             set
             {
-                if (value != _toDateTime)
+                if (value != _occupiedBeds)
                 {
-                    _toDateTime = value;
-                    OnPropertyChanged("ToDateTime");
+                    _occupiedBeds = value;
+                    OnPropertyChanged("OccupiedBeds");
                 }
             }
         }
-
-
-
 
 
     }

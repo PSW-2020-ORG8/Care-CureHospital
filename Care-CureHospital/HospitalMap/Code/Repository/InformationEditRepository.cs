@@ -23,7 +23,7 @@ namespace HospitalMap.Repository
             return _instance;
         }
 
-        public ObservableCollection<RoomInformationVieW> Rooms
+        public ObservableCollection<PatientsRoomVieW> Rooms
         {
             get;
             set;
@@ -39,18 +39,18 @@ namespace HospitalMap.Repository
 
         }
 
-        public ObservableCollection<RoomInformationVieW> GetAll()
+        public ObservableCollection<PatientsRoomVieW> GetAll()
         {
             String text = "";
 
             if (File.Exists(_path))
                 text = File.ReadAllText(_path);
 
-            return JsonConvert.DeserializeObject<ObservableCollection<RoomInformationVieW>>(text);
+            return JsonConvert.DeserializeObject<ObservableCollection<PatientsRoomVieW>>(text);
 
         }
 
-        public void SaveAll(ObservableCollection<RoomInformationVieW> rooms)
+        public void SaveAll(ObservableCollection<PatientsRoomVieW> rooms)
         {
             string json = JsonConvert.SerializeObject(rooms, Newtonsoft.Json.Formatting.Indented);
 
@@ -58,10 +58,10 @@ namespace HospitalMap.Repository
         }
 
 
-        public void Edit(RoomInformationVieW room)
+        public void Edit(PatientsRoomVieW room)
         {
             Rooms = GetAll();
-            foreach(RoomInformationVieW currentRoom in Rooms)
+            foreach(PatientsRoomVieW currentRoom in Rooms)
             {
                 if (currentRoom.IdOfRoom.Equals(room.IdOfRoom.ToString())){
                     currentRoom.NameOfRoom = room.NameOfRoom;
@@ -76,9 +76,9 @@ namespace HospitalMap.Repository
         }
 
 
-        public RoomInformationVieW GetById(string roomId)
+        public PatientsRoomVieW GetById(string roomId)
         {
-            foreach (RoomInformationVieW currentRoom in GetAll())
+            foreach (PatientsRoomVieW currentRoom in GetAll())
             {
                 if (currentRoom.IdOfRoom.Equals(roomId.ToString()))
                 {

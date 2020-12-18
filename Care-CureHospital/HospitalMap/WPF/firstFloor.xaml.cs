@@ -4,6 +4,7 @@ using HospitalMap.Code.Repository;
 using HospitalMap.Code.Repository.DoctorsRepository;
 using HospitalMap.Code.Repository.RectangleRepository;
 using HospitalMap.Repository;
+using HospitalMap.WPF.Converter;
 using HospitalMap.WPF.ModelWPF;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace HospitalMap.WPF
         public Rectangle Dinamicly = new Rectangle();
         public ObservableCollection<Rectangles> Rectangle { get; set; }
 
-        public ObservableCollection<RoomInformationVieW> RoomsInfo { get; set; }
+        public ObservableCollection<PatientsRoomVieW> RoomsInfo { get; set; }
 
         public ObservableCollection<DoctorRoomView> DrOfficeInfo { get; set; }
 
@@ -50,9 +51,9 @@ namespace HospitalMap.WPF
         }
 
 
-        private RoomInformationVieW _room;
+        private PatientsRoomVieW _room;
 
-        public RoomInformationVieW Room
+        public PatientsRoomVieW Room
         {
             get
             {
@@ -115,9 +116,16 @@ namespace HospitalMap.WPF
         private void CreateDynamicCanvas()
         {
             Rectangle = new ObservableCollection<Rectangles>();
-            Rectangle = FirstFloorRepository.GetInstance().GetAllRectangles();
-            RoomsInfo = InformationEditRepository.GetInstance().GetAll();
-            DrOfficeInfo = DoctorsRoomRepository.GetInstance().GetAll();
+            Rectangle = FirstFloorRepository.GetInstance().GetAllRectangles();           
+           
+            RoomsInfo = new ObservableCollection<PatientsRoomVieW>(PatientsRoomConverter.ConvertRoomToPatientsRoomView(
+             Backend.App.Instance().RoomService.GetAllEntitiesByType(3).ToList()));
+           
+
+            DrOfficeInfo = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(
+             Backend.App.Instance().RoomService.GetAllEntitiesByType(1).ToList()));
+
+           
             storage = StorageRepository.GetInstance().GetAllStorage();
 
             foreach (Rectangles r in Rectangle)
@@ -138,7 +146,7 @@ namespace HospitalMap.WPF
                     Background = r.Background
                 };
                 canvas.Children.Add(txtb);
-                foreach (RoomInformationVieW room in RoomsInfo)
+                foreach (PatientsRoomVieW room in RoomsInfo)
                 {
                     if (r.Id.Equals(room.IdOfRoom))
                     {
