@@ -1912,6 +1912,20 @@ namespace Backend.Migrations
                             Date = new DateTime(2020, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DoctorId = 5,
                             RoomId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Date = new DateTime(2020, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            RoomId = 10
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Date = new DateTime(2020, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            RoomId = 11
                         });
                 });
 

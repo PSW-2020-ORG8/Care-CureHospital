@@ -54,7 +54,6 @@ namespace HospitalMap.WPF
         {
             InitializeComponent();
             this.DataContext = this;
-            //SlobodniTerminiBind = selectedRooms;
             String priority = priority1;
             Dictionary<int, List<Appointment>> availableAppointments = Backend.App.Instance().DoctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DatumS, DatumE, Int32.Parse(Dr.IdOfDoctor), priority);
             ObservableCollection<WorkDayView> SlobodniTermini = new ObservableCollection<WorkDayView>();
@@ -76,10 +75,12 @@ namespace HospitalMap.WPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SelectedRoom = (WorkDayViewView)raspored.SelectedItem;
-            
-            if (SelectedRoom == null)
-                return;
 
+            if (SelectedRoom.IdOfRoom == null)
+            {
+                MessageBox.Show("Soba ne postoji na mapi");
+                return;
+            }
             if (SelectedRoom.IdOfRoom.Contains("A"))
             {
                 GroundFloor f = new GroundFloor(SelectedRoom.IdOfRoom);
@@ -96,6 +97,14 @@ namespace HospitalMap.WPF
                 f.Show();
 
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SelectedRoom = (WorkDayViewView)raspored.SelectedItem;
+            ScheduleForPatient s = new ScheduleForPatient(SelectedRoom);
+            s.Show();
+            
         }
     }
 }

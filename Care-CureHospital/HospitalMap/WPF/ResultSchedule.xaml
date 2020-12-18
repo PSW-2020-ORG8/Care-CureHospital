@@ -42,7 +42,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Background="CornflowerBlue" Content="Schedule" HorizontalAlignment="Left" Margin="529,355,0,0" VerticalAlignment="Top" Height="32" Width="112" FontSize="18"/>
+        <Button Background="CornflowerBlue" Content="Schedule" HorizontalAlignment="Left" Margin="529,355,0,0" VerticalAlignment="Top" Height="32" Width="112" FontSize="18" Click="Button_Click_1"/>
         <Button Background="CornflowerBlue" Content="Show" HorizontalAlignment="Left" Margin="153,355,0,0" VerticalAlignment="Top" Height="32" Width="112"  FontSize="18" Click="Button_Click"/>
     </Grid>
 </Window>

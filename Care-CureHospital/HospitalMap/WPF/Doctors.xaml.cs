@@ -51,7 +51,7 @@ namespace HospitalMap.WPF
             get { return _specs; }
             set
             {
-                _specs = value; OnPropertyChanged("VrsteSpec");
+                _specs = value; OnPropertyChanged("AllDoctors");
 
             }
         }
