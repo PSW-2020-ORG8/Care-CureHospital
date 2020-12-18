@@ -21,7 +21,6 @@ import { EprescriptionComponent } from './doctor/eprescription/eprescription.com
     DirectorComponent,
     DoctorComponent,
     ReportComponent,
-    AddReportComponent,
     EprescriptionComponent,
     ListofPharmaciesComponent,
     PharmacyComponent

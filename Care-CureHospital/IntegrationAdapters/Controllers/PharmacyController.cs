@@ -1,13 +1,9 @@
 ﻿using Backend;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Backend.Model.Pharmacy;
 using IntegrationAdapters.Dto;
-using Backend.Service.PharmaciesService;
-using Backend.Repository.PharmacyRepository;
 using IntegrationAdapters.Mapper;
 using Microsoft.AspNetCore.Cors;
 using IntegrationAdapters.Validation;
@@ -47,6 +43,5 @@ namespace IntegrationAdapters.Controllers
             App.Instance().PharmacyService.GetAllEntities().ToList().ForEach(pharmacy => pdto.Add(PharmacyMapper.PharmacyToPharmacyDto(pharmacy)));
             return Ok(pdto);
         }
-
     }
 }
