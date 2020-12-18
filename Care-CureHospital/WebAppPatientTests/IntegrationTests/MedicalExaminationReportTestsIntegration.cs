@@ -19,7 +19,7 @@ namespace WebAppPatientTests.IntegrationTests
             this.factory = factory;
         }
 
-        /*[Theory]
+        [Theory]
         [MemberData(nameof(MedicalExaminationReportData))]
         public async void Find_Reports_With_Doctor_Searh_Parameter(HttpStatusCode expectedResponseStatusCode)
         {
@@ -35,6 +35,6 @@ namespace WebAppPatientTests.IntegrationTests
             var retVal = new List<object[]>();
             retVal.Add(new object[] { HttpStatusCode.OK });
             return retVal;
-        }*/
+        }
     }
 }
