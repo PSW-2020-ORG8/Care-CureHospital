@@ -22,6 +22,7 @@ using HospitalMap.WPF.ModelWPF;
 using HospitalMap.Code.Model;
 using HospitalMap.Code.Repository.RoomInformatioRepository;
 using HospitalMap.Code.Repository.DoctorsRepository;
+using HospitalMap.WPF.Converter;
 
 namespace HospitalMap.WPF
 {
@@ -37,7 +38,7 @@ namespace HospitalMap.WPF
 
         public ObservableCollection<StorageModel> storage { get; set; }
 
-        public ObservableCollection<WorkTimeViewModel> workTime { get; set; }
+        public ObservableCollection<RoomWorkTime> WorkTime { get; set; }
 
         public Rectangles SearchedRectangle = new Rectangles();
 
@@ -89,9 +90,15 @@ namespace HospitalMap.WPF
         {
             Rectangle = new ObservableCollection<Rectangles>();
             Rectangle = GroundFloor2Repository.GetInstance().GetAllRectangles();
-            DrOfficeInfo = DoctorsRoomRepository.GetInstance().GetAll();
+           // DrOfficeInfo = DoctorsRoomRepository.GetInstance().GetAll();
             storage = StorageRepository.GetInstance().GetAllStorage();
-            workTime = RoomWorkTimeRepository.GetInstance().GetAll();
+            // workTime = RoomWorkTimeRepository.GetInstance().GetAll();
+
+            DrOfficeInfo = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(
+            Backend.App.Instance().RoomService.GetAllEntitiesByType(1).ToList()));
+
+            WorkTime = new ObservableCollection<RoomWorkTime>(WorkTimeRoomConverter.ConvertRoomToRoomWorkTime(
+             Backend.App.Instance().RoomService.GetAllEntitiesByType(4).ToList()));
 
             foreach (Rectangles r in Rectangle)
             {
@@ -128,7 +135,7 @@ namespace HospitalMap.WPF
                     }
                 }
 
-                foreach (WorkTimeViewModel s in workTime)
+                foreach (RoomWorkTime s in WorkTime)
                 {
                     if (r.Id.Equals(s.IdOfRoom))
                     {

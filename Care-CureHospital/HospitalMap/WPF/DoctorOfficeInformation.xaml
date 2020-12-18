@@ -29,9 +29,9 @@
 
 
             <TextBlock HorizontalAlignment="Left" Margin="126,85,0,0" Text=""  VerticalAlignment="Top"/>
-            <TextBox x:Name="NameOfCurrentDoctor" HorizontalAlignment="Left" Margin="188,85,0,0" Text="{Binding Path=NameOfDoctor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="164" Height="18"/>
+            <TextBox x:Name="NameOfCurrentDoctor" IsEnabled="False" HorizontalAlignment="Left" Margin="188,85,0,0" Text="{Binding Path=NameOfDoctor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="164" Height="18"/>
             <TextBlock Margin="32,121,0,0" Text="Surname of current doctor:" TextWrapping="Wrap" RenderTransformOrigin="1.085,0.642" HorizontalAlignment="Left" Width="143" Height="16" VerticalAlignment="Top"/>
-            <TextBox x:Name="SurnameOfCurrentDoctor" Margin="188,120,98,247" Text="{Binding SurnameOfDoctor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="164" Height="17"/>
+            <TextBox x:Name="SurnameOfCurrentDoctor" IsEnabled="False"  Margin="188,120,98,247" Text="{Binding SurnameOfDoctor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="164" Height="17"/>
             <TextBlock Margin="242,0,0,178" Text="To:" HorizontalAlignment="Left" Width="28" Height="18" VerticalAlignment="Bottom" RenderTransformOrigin="0.479,-0.448" />
             <TextBlock Margin="116,0,0,178" Text="From:" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="38" RenderTransformOrigin="0.377,-0.719" />
             <Button x:Name="ButtonSave" Background="CornflowerBlue" Content="Save" HorizontalAlignment="Left" Margin="159,271,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click"/>

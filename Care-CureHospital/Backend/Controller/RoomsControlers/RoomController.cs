@@ -47,7 +47,7 @@ namespace Controller.RoomsControlers
         }
         public Room GetRoomByRoomID(String roomID)
         {
-            return roomService.GetRoomByRoomID(roomID);
+            return roomService.GetRoomByRoomId(roomID);
         }
 
         public List<Room> GetAllRoomForHospitalitation()

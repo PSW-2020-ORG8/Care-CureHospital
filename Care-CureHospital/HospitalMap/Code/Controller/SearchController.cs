@@ -1,5 +1,6 @@
 ﻿using HospitalMap.Code.Service;
 using HospitalMap.WPF.ModelWPF;
+using Model.Term;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,31 +10,27 @@ namespace HospitalMap.Code.Controller
 {
     public class SearchController
     {
-        private SearchService _searchService;
+        
 
 
-        public SearchController()
+        public SearchController() { }
+
+
+        public List<Room> SearchPatientsRooms(string nameOfRoom)
         {
-
-            _searchService = new SearchService();
+            return Backend.App.Instance().RoomService.SearchPatientsRooms(nameOfRoom);
         }
 
 
-        public ObservableCollection<RoomInformationVieW> SearchPatientsRooms(string nameOfRoom)
+        public List<Room> SearchDoctorsRooms(string nameOfRoom)
         {
-            return _searchService.SearchPatientsRooms(nameOfRoom);
+            return Backend.App.Instance().RoomService.SearchDoctorsRooms(nameOfRoom);
         }
 
 
-        public ObservableCollection<DoctorRoomView> SearchDoctorsRooms(string nameOfRoom)
+        public List<Room> SearchAnotherRooms(string nameOfRoom)
         {
-            return _searchService.SearchDoctorsRooms(nameOfRoom);
-        }
-
-
-        public ObservableCollection<WorkTimeViewModel> SearchAnotherRooms(string nameOfRoom)
-        {
-            return _searchService.SearchAnotherRooms(nameOfRoom);
+            return Backend.App.Instance().RoomService.SearchAnotherRooms(nameOfRoom);
         }
 
     }
