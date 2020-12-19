@@ -20,33 +20,33 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
             this.factory = factory;
         }
 
-        [Theory]
-        [MemberData(nameof(SurveyData))]
-        public async void Get_survey_results(HttpStatusCode expectedResponseStatusCode)
-        {
-            HttpClient client = factory.CreateClient();
+        //[Theory]
+        //[MemberData(nameof(SurveyData))]
+        //public async void Get_survey_results(HttpStatusCode expectedResponseStatusCode)
+        //{
+        //    HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResults");
+        //    HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResults");
 
-            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        }
+        //    response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        //}
 
-        [Theory]
-        [MemberData(nameof(SurveyData))]
-        public async void Get_survey_results_for_doctors(HttpStatusCode expectedResponseStatusCode)
-        {
-            HttpClient client = factory.CreateClient();
+        //[Theory]
+        //[MemberData(nameof(SurveyData))]
+        //public async void Get_survey_results_for_doctors(HttpStatusCode expectedResponseStatusCode)
+        //{
+        //    HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResultsForDoctors");
+        //    HttpResponseMessage response = await client.GetAsync("/api/survey/getSurveyResultsForDoctors");
 
-            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        }
+        //    response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        //}
 
-        public static IEnumerable<object[]> SurveyData()
-        {
-            var retVal = new List<object[]>();
-            retVal.Add(new object[] { HttpStatusCode.OK });
-            return retVal;
-        }
+        //public static IEnumerable<object[]> SurveyData()
+        //{
+        //    var retVal = new List<object[]>();
+        //    retVal.Add(new object[] { HttpStatusCode.OK });
+        //    return retVal;
+        //}
     }
 }
