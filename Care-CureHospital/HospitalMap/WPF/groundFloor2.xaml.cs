@@ -23,6 +23,7 @@ using HospitalMap.Code.Model;
 using HospitalMap.Code.Repository.RoomInformatioRepository;
 using HospitalMap.Code.Repository.DoctorsRepository;
 using HospitalMap.WPF.Converter;
+using HospitalMap.Code.Controller;
 
 namespace HospitalMap.WPF
 {
@@ -41,6 +42,11 @@ namespace HospitalMap.WPF
         public ObservableCollection<RoomWorkTime> WorkTime { get; set; }
 
         public Rectangles SearchedRectangle = new Rectangles();
+
+        public ObservableCollection<PatientsRoomVieW> SearchedPatientsRooms { get; set; }
+        public ObservableCollection<DoctorRoomView> SearchedDoctorsRooms { get; set; }
+
+        public ObservableCollection<RoomWorkTime> SearchedAnotherRooms { get; set; }
 
         public GroundFloor2()
         {
@@ -64,6 +70,11 @@ namespace HospitalMap.WPF
             InformationEditRepository.GetInstance();
             StorageRepository.GetInstance();
             RoomWorkTimeRepository.GetInstance();
+
+
+            SearchedPatientsRooms = new ObservableCollection<PatientsRoomVieW>();
+            SearchedDoctorsRooms = new ObservableCollection<DoctorRoomView>();
+            SearchedAnotherRooms = new ObservableCollection<RoomWorkTime>();
         }
 
         private void DrawSelectedRectangle(string Id)
@@ -90,10 +101,9 @@ namespace HospitalMap.WPF
         {
             Rectangle = new ObservableCollection<Rectangles>();
             Rectangle = GroundFloor2Repository.GetInstance().GetAllRectangles();
-           // DrOfficeInfo = DoctorsRoomRepository.GetInstance().GetAll();
+           
             storage = StorageRepository.GetInstance().GetAllStorage();
-            // workTime = RoomWorkTimeRepository.GetInstance().GetAll();
-
+            
             DrOfficeInfo = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(
             Backend.App.Instance().RoomService.GetAllEntitiesByType(1).ToList()));
 
@@ -216,6 +226,62 @@ namespace HospitalMap.WPF
             Login login = new Login();
             login.Show();
             this.Close();
+        }
+
+        private void ButtonClick(object sender, RoutedEventArgs e)
+        {
+
+
+
+            if (EquipmnetRadioButon.IsChecked == true && !search.Text.ToString().Equals(""))
+            {
+                ObservableCollection<StorageModel> equipments = new ObservableCollection<StorageModel>();
+                equipments = StorageRepository.GetInstance().SearchedItemsByName(search.Text);
+
+                if (equipments.Count == 0)
+                {
+                    MessageBox.Show("There are no items like '" + search.Text + "' in storage!", "Storage");
+                    return;
+                }
+
+                Storage storage = new Storage(equipments);
+                storage.Show();
+
+            }
+
+            if (RoomsRadioButon.IsChecked == true)
+            {
+                SearchController _searchController = new SearchController();
+
+                SearchedPatientsRooms = new ObservableCollection<PatientsRoomVieW>(PatientsRoomConverter.ConvertRoomToPatientsRoomView(_searchController.SearchPatientsRooms(search.Text.ToString()).ToList()));
+
+
+                SearchedDoctorsRooms = new ObservableCollection<DoctorRoomView>(DoctorRoomConverter.ConvertRoomToDoctorRoomView(_searchController.SearchDoctorsRooms(search.Text.ToString()).ToList()));
+
+                SearchedAnotherRooms = new ObservableCollection<RoomWorkTime>(WorkTimeRoomConverter.ConvertRoomToRoomWorkTime(_searchController.SearchAnotherRooms(search.Text.ToString()).ToList()));
+
+                if (SearchedPatientsRooms.Count == 0 && SearchedDoctorsRooms.Count == 0 && SearchedAnotherRooms.Count == 0)
+                {
+                    MessageBox.Show("There are no search results! ", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                SearchedRooms searchedRoom = new SearchedRooms(SearchedPatientsRooms, SearchedDoctorsRooms, SearchedAnotherRooms);
+                searchedRoom.Show();
+
+            }
+
+
+
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Schedule s = new Schedule();
+            s.Show();
+
         }
     }
 

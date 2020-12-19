@@ -88,16 +88,31 @@ namespace HospitalMap.WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+                      
+            String priority = "";
+            if (Prioritet.SelectedIndex == 0)
+            {
+                priority = "Doctor";
 
-            Priority s = new Priority(Dstart,Dend,SelektovaniDoktor,Specijalizacija);
+            }
+            else if (Prioritet.SelectedIndex == 1)
+            {
+
+                priority = "DateRange";
+            }
+
+            
+            ResultSchedule s = new ResultSchedule(Dstart, Dend, SelektovaniDoktor, priority);
             s.Show();
             this.Close();
+
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Specialization s = new Specialization(Dstart, Dend);
+            
+            Schedule s = new Schedule();
             s.Show();
             this.Close();
         }

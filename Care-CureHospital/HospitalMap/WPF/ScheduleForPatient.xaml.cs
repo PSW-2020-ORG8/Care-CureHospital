@@ -112,14 +112,14 @@ namespace HospitalMap.WPF
 
             if (Backend.App.Instance().DoctorWorkDayService.ScheduleAppointment(ScheduleAppoitmentConverter.AppointmentDtoToAppointment(appointment, SelektovaniPacijent)))
             {
-                MessageBox.Show("Uspesno zakazan termin");
+                MessageBox.Show("The appointment is successfully made ");
                 ResultSchedule s = new ResultSchedule(Dstart,Dend,DoctorS,PriorityS);
                 s.Show();
                 this.Close();
 
             }
             else {
-                MessageBox.Show("Termin nije zakazan");
+                MessageBox.Show("Error");
 
 
             }

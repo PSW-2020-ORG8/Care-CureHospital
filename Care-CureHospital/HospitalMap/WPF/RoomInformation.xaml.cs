@@ -34,6 +34,8 @@ namespace HospitalMap.WPF
             InitializeComponent();
             this.DataContext = this;
 
+            
+
             if (Login.role != 3)
             {
 
@@ -60,6 +62,8 @@ namespace HospitalMap.WPF
             InitializeComponent();
             this.DataContext = this;
 
+            RoomTextBlock.Visibility = Visibility.Hidden;
+            Roomtxt.Visibility = Visibility.Hidden;
 
             if (Login.role != 3)
             {

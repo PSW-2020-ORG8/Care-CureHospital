@@ -47,6 +47,11 @@
         </TabControl>
         <Image  Source="/Images/hospital.png" Height="73" Canvas.Left="48" Canvas.Top="75" Width="111"/>
         <Button Content="Sign out" Canvas.Left="54" Canvas.Top="528" Height="38" Width="101" Background="#FFEE2A2A" Click="ButtonClick1"/>
+        <Button Background="CornflowerBlue" Content="Search" Canvas.Left="29" Canvas.Top="352" RenderTransformOrigin="-0.454,-1.541" Width="148" Height="33" Click="ButtonClick"/>
+        <TextBox x:Name="search" Canvas.Left="29" Canvas.Top="260" Text="" TextWrapping="Wrap" Width="149" Height="33" FontSize="20"/>
+        <RadioButton x:Name="RoomsRadioButon" Content="Rooms" Canvas.Left="30" Canvas.Top="317"/>
+        <RadioButton x:Name="EquipmnetRadioButon" Content="Equipmnet" Canvas.Left="104" Canvas.Top="317" Width="86"/>
+        <Button x:Name="Appointment" Background="CornflowerBlue" Content="Schedule appointment" Canvas.Left="30" Canvas.Top="436" RenderTransformOrigin="-0.454,-1.541" Width="148" Height="33" Click="Button_Click" />
 
 
 
