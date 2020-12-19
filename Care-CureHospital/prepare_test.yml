@@ -41,26 +41,6 @@ services:
       - app-sql:/app/sql
     networks:
       - public_net
-  WebAppPatient:
-    build: 
-      context: .
-      dockerfile: WebAppPatient/Dockerfile
-    image: astevanovic/webapppatient:latest
-    restart: on-failure
-    environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: mysql
-      DATABASE_SCHEMA: HealthClinicDB
-      SHOW_ENV: 'TRUE'
-    depends_on:
-      - mysql
-    expose: 
-      - "80"
-    ports:
-      - "6002:80"
-    networks:
-      - public_net
   IntegrationTests:
     build: 
       context: .
@@ -75,7 +55,6 @@ services:
       SHOW_ENV: 'TRUE'
     depends_on:
       - mysql
-      - WebAppPatient
     expose: 
       - "80"
     ports:
