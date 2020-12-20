@@ -89,7 +89,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         {
             HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAvailableAppointments?date=2020-12-24&doctorId=1");
+            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAvailableAppointments?date=2027-12-24&doctorId=1");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
         }
@@ -116,7 +116,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public static IEnumerable<object[]> CancelAppointmentData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { 15, HttpStatusCode.OK });
+            retVal.Add(new object[] { 3, HttpStatusCode.OK });
             retVal.Add(new object[] { 50, HttpStatusCode.NotFound });
             return retVal;
         }

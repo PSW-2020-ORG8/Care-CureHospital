@@ -46,7 +46,6 @@ services:
       context: .
       dockerfile: IntegrationTests/Dockerfile
     image: astevanovic/integrationtests:latest
-    restart: on-failure
     environment:
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: user
