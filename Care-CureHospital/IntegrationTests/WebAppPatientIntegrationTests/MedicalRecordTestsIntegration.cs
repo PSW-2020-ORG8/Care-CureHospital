@@ -19,23 +19,23 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
             this.factory = factory;
         }
 
-        //[Theory]
-        //[MemberData(nameof(MedicalRecordData))]
-        //public async void Medical_Record_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
-        //{
-        //    HttpClient client = factory.CreateClient();
+        [Theory]
+        [MemberData(nameof(MedicalRecordData))]
+        public async void Medical_Record_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
 
-        //    var response = await client.GetAsync("/api/medicalRecord/getForPatient/" + patientId);
+            var response = await client.GetAsync("/api/medicalRecord/getForPatient/" + patientId);
 
-        //    response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        //}
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
 
-        //public static IEnumerable<object[]> MedicalRecordData()
-        //{
-        //    var retVal = new List<object[]>();
-        //    retVal.Add(new object[] { 1, HttpStatusCode.OK });
-        //    retVal.Add(new object[] { 20, HttpStatusCode.NotFound });
-        //    return retVal;
-        //}
+        public static IEnumerable<object[]> MedicalRecordData()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { 1, HttpStatusCode.OK });
+            retVal.Add(new object[] { 20, HttpStatusCode.NotFound });
+            return retVal;
+        }
     }
 }
