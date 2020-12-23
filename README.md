@@ -14,7 +14,10 @@ With the help of our application, we provide system users with the following pos
 
 * Patient -  they have their own account which they can manage. They schedule an examination and have an insight into free appointments with the desired doctor. Also have the ability to change or cancel exemination. They have the option to leave feedback for the doctor and the satisfaction of the overall impression of the service.
   
-Care&CureHospita is integrated with several pharmacies from which it regularly procures medicines, which is quite simple with the help of our application.
+Care&CureHospital is integrated with several pharmacies from which it regularly procures medicines, which is quite simple with the help of our application.
+
+
+Demo video: https://www.youtube.com/watch?v=VOHFMiSiGco&t=4s
   
 
 ## Care&CureHospital teams
