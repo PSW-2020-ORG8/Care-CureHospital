@@ -1,3 +1,6 @@
+using Grpc.Core;
+using IntegrationAdapters.Grpc;
+using IntegrationAdapters.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,9 +32,12 @@ namespace IntegrationAdapters
                 .AddNewtonsoftJson(options =>
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors();
-        }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+        }
+        private Server server;
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +56,25 @@ namespace IntegrationAdapters
             {
                 endpoints.MapControllers();
             });
+
+            server = new Server
+            {
+                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+                Ports = { new ServerPort("localhost", 5555, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+        }
+
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
         }
     }
 }
