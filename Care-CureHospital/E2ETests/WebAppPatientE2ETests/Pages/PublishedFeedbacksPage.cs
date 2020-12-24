@@ -11,8 +11,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     {
         private readonly IWebDriver driver;
         public const string URI = "http://localhost:5000/index.html#/";
-        //private ReadOnlyCollection<IWebElement> PublishedFeedbacks => driver.FindElements(By.ClassName("publishedFeedbacks"));
-        private ReadOnlyCollection<IWebElement> PublishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));       
+        private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));       
 
         public PublishedFeedbacksPage(IWebDriver driver)
         {
@@ -26,7 +25,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             {
                 try
                 {
-                    return PublishedFeedbacks.Count > 0;
+                    return publishedFeedbacks.Count > 0;
                 }
                 catch (StaleElementReferenceException)
                 {
@@ -41,7 +40,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public int PublishedFeedbackCount()
         {
-            return PublishedFeedbacks.Count;
+            return publishedFeedbacks.Count;
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);
