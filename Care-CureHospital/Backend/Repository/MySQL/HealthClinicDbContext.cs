@@ -73,6 +73,8 @@ namespace Backend.Repository.MySQL
             Console.WriteLine(server);
             Console.WriteLine(port);
             Console.WriteLine(user);
+            Console.WriteLine(password);
+            Console.WriteLine(database);
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
 
