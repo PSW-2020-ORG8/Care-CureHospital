@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using E2ETests.WebAppPatientE2ETests.Pages;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace E2ETests.WebAppPatientE2ETests
     public class CreateFeedbackText : IDisposable
     {
         private readonly IWebDriver driver;
-        private Pages.CreateFeedbackPage createFeedbackPage;
+        private CreateFeedbackPage createFeedbackPage;
 
         public CreateFeedbackText()
         {
@@ -25,7 +26,7 @@ namespace E2ETests.WebAppPatientE2ETests
 
             driver = new ChromeDriver(options);
 
-            createFeedbackPage = new Pages.CreateFeedbackPage(driver);
+            createFeedbackPage = new CreateFeedbackPage(driver);
             createFeedbackPage.Navigate();
             Assert.Equal(driver.Url, Pages.CreateFeedbackPage.URI);
             Assert.True(createFeedbackPage.TextElementDisplayed());
@@ -49,7 +50,7 @@ namespace E2ETests.WebAppPatientE2ETests
             createFeedbackPage.WaitForButton();
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForAlertDialog();
-            Assert.Equal(createFeedbackPage.GetDialogMessage(), Pages.CreateFeedbackPage.InvalidMessage);
+            Assert.Equal(createFeedbackPage.GetDialogMessage(), CreateFeedbackPage.InvalidMessage);
         }
 
         [Fact]
@@ -61,7 +62,7 @@ namespace E2ETests.WebAppPatientE2ETests
 
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForAlertDialog();
-            Assert.Equal(createFeedbackPage.GetDialogMessage(), Pages.CreateFeedbackPage.ValidMessage);
+            Assert.Equal(createFeedbackPage.GetDialogMessage(), CreateFeedbackPage.ValidMessage);
 
         }
 
