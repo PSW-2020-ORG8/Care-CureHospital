@@ -47,7 +47,7 @@ services:
       context: .
       dockerfile: IntegrationTests/Dockerfile
     image: astevanovic/integrationtests:latest
-    container_name: inttest
+    container_name: integrationtests
     environment:
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: user
