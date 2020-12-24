@@ -9,16 +9,60 @@ using Model.Doctor;
 using System;
 using System.Collections.Generic;
 using Repository.UsersRepository;
+using Backend;
+using Microsoft.Extensions.Options;
+using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Backend.Service.UsersServices;
 
 namespace Service.UsersServices
 {
     public class UserService : IService<User, int>
     {
         public IUserRepository userRepository;
+        public PatientService patientService;
+        //private readonly AppSettings appSettings;
 
-        public UserService(IUserRepository userRepository)
+        /*public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
+        {
+            this.userRepository = userRepository;    
+            this.appSettings = appSettings.Value;
+        }*/
+
+        public UserService(IUserRepository userRepository, PatientService patientService)
         {
             this.userRepository = userRepository;
+            this.patientService = patientService;
+        }
+
+        public User Authenticate(string username, string password, byte[] secretKey)
+        {
+            var user = this.patientService.GetAllEntities().SingleOrDefault(user => user.Username == username && user.Password == password);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = secretKey;
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddHours(3),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
+
+            return user;
         }
 
         public User Login(String username, String password)
