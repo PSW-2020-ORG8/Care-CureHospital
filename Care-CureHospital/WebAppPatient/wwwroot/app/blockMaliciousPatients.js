@@ -49,8 +49,8 @@ Vue.component("blockMaliciousPatients", {
 				<td>{{maliciousPatient.name}}</td>
 				<td>{{maliciousPatient.surname}}</td>
 				<td>{{maliciousPatient.numberOfCancelledAppointents}}</td>
-				<td v-if="maliciousPatient.blocked === false">
-				<button style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser(maliciousPatient.id)">Blokiraj</button>
+				<td class="patient-for-blocking" v-if="maliciousPatient.blocked === false">
+				<button class="block-malicious-patient-btn" style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser(maliciousPatient.id)">Blokiraj</button>
 				</td>
 				<td v-if="maliciousPatient.blocked === true" style="color: red">
 					Pacijent je blokiran
