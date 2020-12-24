@@ -19,22 +19,22 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
             this.factory = factory;
         }
 
-        //[Theory]
-        //[MemberData(nameof(PatientData))]
-        //public async void Block_Patient_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
-        //{
-        //    HttpClient client = factory.CreateClient();
+        [Theory]
+        [MemberData(nameof(PatientData))]
+        public async void Block_Patient_Status_Code_Test(int patientId, HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
 
-        //    var response = await client.PutAsync("/api/patient/blockMaliciousPatient/" + patientId, new StringContent("5", Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync("/api/patient/blockMaliciousPatient/" + patientId, new StringContent("5", Encoding.UTF8, "application/json"));
 
-        //    response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        //}
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
 
-        //public static IEnumerable<object[]> PatientData()
-        //{
-        //    var retVal = new List<object[]>();
-        //    retVal.Add(new object[] { 5, HttpStatusCode.OK });
-        //    return retVal;
-        //}
+        public static IEnumerable<object[]> PatientData()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { 5, HttpStatusCode.OK });
+            return retVal;
+        }
     }
 }
