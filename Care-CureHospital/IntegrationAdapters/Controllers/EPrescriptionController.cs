@@ -52,5 +52,6 @@ namespace IntegrationAdapters.Controllers
             App.Instance().EPrescriptionService.FindEPrescriptionsForCommentParameter(patientId, comment).ToList().ForEach(eprescription => result.Add(EPrescriptionMapper.EPrescriptionToEPresctriptionDto(eprescription)));
             return Ok(result);
         }
+
     }
 }

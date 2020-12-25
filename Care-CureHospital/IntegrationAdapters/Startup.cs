@@ -75,6 +75,7 @@ namespace IntegrationAdapters
                 server.ShutdownAsync().Wait();
             }
 
+
         }
     }
 }
