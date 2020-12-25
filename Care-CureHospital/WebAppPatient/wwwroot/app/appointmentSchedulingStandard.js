@@ -42,7 +42,7 @@ Vue.component("appointmentSchedulingStandard", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
+					<a href="#/patientRegistration">Registruj se</a>
 					<a>Prijavi se</a>
 				</div>
 			</div>
