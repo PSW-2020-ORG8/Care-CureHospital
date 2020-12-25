@@ -93,7 +93,7 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
 						<div class="cancelAppointment-btn">
-							<button type="button" @click="cancelAppointment(appointment.id)">Otkaži pregled</button>
+							<button type="button" @click="cancelAppointment(appointment.id)" id="cancelAppointmentButton">Otkaži pregled</button>
 						</div>
 						<!--<div v-if="appointment.canceled === true" class="appointmentsParagraph2">
 							<p>Otkazali ste ovaj pregled</p>
@@ -134,15 +134,23 @@ Vue.component("patientAppointments", {
 					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 						this.previousAppointments = response.data;
 					});
+				}).catch(error => {
+					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+						this.previousAppointments = response.data;
+					});
 				});
 			} else if (this.filterAppointments === "Zakazani pregledi") {
 				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
 					this.scheduledAppointments = response.data;
 					this.previousAppointments = []
+				}).catch(error => {
+					this.previousAppointments = []
 				});
 			} else if (this.filterAppointments === "Pregledi na kojima sam bio") {
 				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 					this.previousAppointments = response.data;
+					this.scheduledAppointments = []
+				}).catch(error => {
 					this.scheduledAppointments = []
 				});		
             }
@@ -157,14 +165,12 @@ Vue.component("patientAppointments", {
 			this.scheduledAppointments = response.data;
 			axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 				this.previousAppointments = response.data;
-			}).catch(error => {
-				if (error.response.status === 404) {
-					
-				}
 			});		
 		}).catch(error => {
 			if (error.response.status === 404) {
-				
+				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+					this.previousAppointments = response.data;
+				});		
 			}
 		});
 	}

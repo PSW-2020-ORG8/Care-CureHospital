@@ -64,7 +64,7 @@ Vue.component("patientsFeedbacks", {
 		 
 	 <div class="listOfFeedbacks">
 		 
-	 <div v-for="pf in filterPatientFeedbacks" >	
+	 <div v-for="pf in filterPatientFeedbacks">	
  	 
 		<div class="wrapper">
 		    <div class="feedback-img">
@@ -80,10 +80,10 @@ Vue.component("patientsFeedbacks", {
 						{{pf.text}}
 					</div>
 					<div v-if="pf.isForPublishing === true && pf.isPublished === false" class="publishFeedback-btn">
-                            <button type="button" @click="publishFeedback(pf)">Podeli javno</button>
+                            <button type="button" @click="publishFeedback(pf)" id="publishFeedbackButton">Podeli javno</button>
 					</div>
 					<div v-else-if="pf.isForPublishing === true && pf.isPublished === true" class="publishFeedbackParagraph1">
-                            <p>Utisak je objavljen</p>
+                            <p id="feedbackIsPublished">Utisak je objavljen</p>
 					</div>
 					<div v-else-if="pf.isForPublishing === false && pf.isPublished === false" class="publishFeedbackParagraph2">
                             <p>Utisak nije moguće objaviti</p>
