@@ -24,6 +24,7 @@ namespace Service.UsersServices
     {
         public IUserRepository userRepository;
         public PatientService patientService;
+        public SystemAdministratorService systemAdministratorService;
         //private readonly AppSettings appSettings;
 
         /*public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
@@ -32,15 +33,17 @@ namespace Service.UsersServices
             this.appSettings = appSettings.Value;
         }*/
 
-        public UserService(IUserRepository userRepository, PatientService patientService)
+        public UserService(IUserRepository userRepository, PatientService patientService, SystemAdministratorService systemAdministratorService)
         {
             this.userRepository = userRepository;
             this.patientService = patientService;
+            this.systemAdministratorService = systemAdministratorService;
         }
 
         public User Authenticate(string username, string password, byte[] secretKey)
         {
-            var user = this.patientService.GetAllEntities().SingleOrDefault(user => user.Username == username && user.Password == password);
+            //var user = this.patientService.GetAllEntities().SingleOrDefault(user => user.Username == username && user.Password == password);
+            var user = GetAllPatientsAndSystemAdministrators().SingleOrDefault(user => user.Username == username && user.Password == password);
 
             if (user == null)
             {
@@ -63,6 +66,15 @@ namespace Service.UsersServices
             user.Token = tokenHandler.WriteToken(token);
 
             return user;
+        }
+
+
+        public IEnumerable<User> GetAllPatientsAndSystemAdministrators()
+        {
+            List<User> users = new List<User>();
+            users.AddRange(patientService.GetAllEntities());
+            users.AddRange(systemAdministratorService.GetAllEntities());
+            return users;
         }
 
         public User Login(String username, String password)

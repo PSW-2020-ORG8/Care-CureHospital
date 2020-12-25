@@ -25,6 +25,7 @@ namespace Backend.Repository.MySQL
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Patient> Doctors { get; set; }
+        public DbSet<SystemAdministrator> SystemAdministrators { get; set; }
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
@@ -94,6 +95,11 @@ namespace Backend.Repository.MySQL
                 new Doctor { Id = 8, Username = "marija", Password = "123", Name = "Marija", Surname = "Marijic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "marija@gmail.com", CityId = 1, SpecialitationId = 4 },
                 new Doctor { Id = 9, Username = "tanja", Password = "123", Name = "Tanja", Surname = "Tankosic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "tanja@gmail.com", CityId = 1, SpecialitationId = 5 }
             );
+
+            modelBuilder.Entity<SystemAdministrator>().HasData(
+               new SystemAdministrator { Id = 1, Username = "admin1", Password = "admin1", Name = "Vladislav", Surname = "Petkovic", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "vladislav@gmail.com", CityId = 1, Role = Role.Admin },
+               new SystemAdministrator { Id = 2, Username = "admin2", Password = "admin2", Name = "Dusan", Surname = "Vasiljev", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "dusan@gmail.com", CityId = 1, Role = Role.Admin }
+           );
 
             modelBuilder.Entity<Secretary>().HasData(
                 new Secretary { Id = 1, Username = "sekretar1", Password = "123", Name = "Milica", Surname = "Carica", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "milica@gmail.com", CityId = 1 }

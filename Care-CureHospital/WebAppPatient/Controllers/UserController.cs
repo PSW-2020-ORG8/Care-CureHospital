@@ -27,7 +27,7 @@ namespace WebAppPatient.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public IActionResult Authenticate([FromBody] AuthenticateDto model)
         {          
             var user = App.Instance().UserService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(_appSettings.Secret));
