@@ -30,6 +30,7 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {
@@ -38,6 +39,7 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = Role.Patient)]
         [HttpPost]      // POST /api/patientFeedback
         public IActionResult Add(PatientFeedbackDto dto)
         {
@@ -50,6 +52,7 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {     

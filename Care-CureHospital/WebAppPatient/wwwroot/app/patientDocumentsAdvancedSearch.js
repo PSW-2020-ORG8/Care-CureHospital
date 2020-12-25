@@ -25,7 +25,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			reportsResult: [],
 			prescriptionsResult: [],
 			paramInputDict: {},
-			logicOperatorsList: []
+			logicOperatorsList: [],
+			userToken: null
 		}
 	},
 	template: `
@@ -53,8 +54,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="#/patientRegistration">Registruj se</a>
-	            <a>Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 	    </div>
 	 </div>	
@@ -363,23 +363,41 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				}
 			}
 				
-			if(this.reportsButtonSelected === true) {			
+			if (this.reportsButtonSelected === true) {
 				axios.post('api/medicalExaminationReport/advancedSearchReportsForPatient', {
-					patientId : 1,
-					searchParams : this.paramInputDict,
-					logicOperators : this.logicOperatorsList
+					patientId: 1,
+					searchParams: this.paramInputDict,
+					logicOperators: this.logicOperatorsList
+				}, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
 				}).then(response => {
-					this.reportsResult = response.data;	
+					this.reportsResult = response.data;
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});
-			} else if(this.prescriptionsButtonSelected === true) {
+			} else if (this.prescriptionsButtonSelected === true) {
 				axios.post('api/prescription/advancedSearchPrescriptionsForPatient', {
-					patientId : 1,
-					searchParams : this.paramInputDict,
-					logicOperators : this.logicOperatorsList
+					patientId: 1,
+					searchParams: this.paramInputDict,
+					logicOperators: this.logicOperatorsList
+				}, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
 				}).then(response => {
-					this.prescriptionsResult = response.data;	
+					this.prescriptionsResult = response.data;
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});
-			}			
+			}		
 		},
 
 		add: function () {
@@ -453,20 +471,43 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			this.paramInputDict = {},
 			this.logicOperatorsList = [],
 			this.prescriptionsResult = this.prescriptionsForPatient					
+		},
+
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	computed: {
 
 	},
 	mounted() {
-		axios.get('api/medicalExaminationReport/getForPatient/' + 1).then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/medicalExaminationReport/getForPatient/' + 1, {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.reportsForPatient = response.data;
-			this.reportsResult = this.reportsForPatient;
-			
-		});
-		axios.get('api/prescription/getForPatient/' + 1).then(response => {
+			this.reportsResult = this.reportsForPatient;		
+		}).catch(error => {
+            if (error.response.status === 401 || error.response.status === 403) {
+                toast('Nemate pravo pristupa stranici!')
+                this.$router.push({ name: 'userLogin' })
+            }
+        });
+
+		axios.get('api/prescription/getForPatient/' + 1, {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.prescriptionsForPatient = response.data;
 			this.prescriptionsResult = this.prescriptionsForPatient;			
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 	}
 });
