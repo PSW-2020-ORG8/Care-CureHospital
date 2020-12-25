@@ -30,7 +30,7 @@ Vue.component("publishedFeedbacks", {
 	        </button>
 		    <div class="dropdown-content">
 		        <a href="#/patientRegistration">Registruj se</a>
-	            <a >Prijavi se</a>
+	            <a href="#/userLogin">Prijavi se</a>
 		    </div>
 	    </div>
 	 </div>

@@ -79,7 +79,7 @@ Vue.component("patientRegistration", {
             emptyEmail : false,
             emptyAddress : false,
             finalAllergiesLists : [],
-            foundAllergy : null
+            foundAllergy: null
 		}
 	},
 	template: `
@@ -96,7 +96,7 @@ Vue.component("patientRegistration", {
 
         <div class="main-patient-registration">     
             <ul class="menu-contents">
-            <li><a href="#/">Utisci pacijenata</a></li>
+            <li><a href="#/">Početna</a></li>
             </ul>
         </div>
 
@@ -107,7 +107,7 @@ Vue.component("patientRegistration", {
             </button>
         <div class="dropdown-content">
             <a>Registruj se</a>
-            <a>Prijavi se</a>
+            <a href="#/userLogin">Prijavi se</a>
         </div>
     </div>
 	 
@@ -464,18 +464,17 @@ Vue.component("patientRegistration", {
                         "ConfirmedPassword" : this.confirmPasswordInputField,
                         "ActiveMedicalRecord" : false,
                         "ProfilePicture" : this.sendImage
-                    })
-                    .then(response => {
+                    }).then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
                             this.resetData()          
                         }           
                     }).catch(error => {
-
 			            if(error.response.status === 400){
                             toast('Korisničko ime već postoji!')
                             this.emptyUsername = true;
-			            }});
+                        }
+                    });
                     
                 }		 	
 			} else {
@@ -549,10 +548,10 @@ Vue.component("patientRegistration", {
             this.disable = false;
         }
 	},
-	mounted() {
+    mounted() {
         axios.get('api/allergies').then(response => {
             this.allergies = response.data;
-		});
+        });
 
         this.places = places({
 			appId: 'plQ4P1ZY8JUZ',

@@ -2,7 +2,8 @@ Vue.component("patientsFeedbacks", {
 	data: function () {
 		return {
 			patientFeedbacks: [],
-			typeOfFeedback: 'Svi utisci'
+			typeOfFeedback: 'Svi utisci',
+			userToken: null
 		}
 	},
 	template: `
@@ -30,8 +31,7 @@ Vue.component("patientsFeedbacks", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="#/patientRegistration">Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 	    </div>
 	 </div>
@@ -116,6 +116,10 @@ Vue.component("patientsFeedbacks", {
 					});
 					//this.$router.go();
 				});
+		},
+
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	computed: {
@@ -132,9 +136,18 @@ Vue.component("patientsFeedbacks", {
 		}
 	},
 	mounted() {
-
-		axios.get('api/patientFeedback').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/patientFeedback', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.patientFeedbacks = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 
 	}

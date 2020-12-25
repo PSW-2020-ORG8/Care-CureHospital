@@ -2,7 +2,8 @@ Vue.component("doctorSurveyResults", {
 	data: function () {
 		return {
             doctorSurveyResults: [],
-            doctorQuestionsAverageGrades: []
+			doctorQuestionsAverageGrades: [],
+			userToken: null
 		}
 	},
 	template: `
@@ -112,13 +113,21 @@ Vue.component("doctorSurveyResults", {
 	},
 	mounted() {
 
-		axios.get('api/survey/getSurveyResultsForDoctors').then(response => {
+		axios.get('api/survey/getSurveyResultsForDoctors', {
+			headers: {
+			'Authorization': 'Bearer ' + this.userToken }
+		}).then(response => {
             this.doctorSurveyResults = response.data;
             for (var doctorResult of this.doctorSurveyResults) {
                 var averageGradePerDoctor = (doctorResult.questionResults[0].averageGrade 
                     + doctorResult.questionResults[1].averageGrade + doctorResult.questionResults[2].averageGrade) / 3;
                 this.doctorQuestionsAverageGrades.push(averageGradePerDoctor);
             }
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
  
 	}
