@@ -5,7 +5,8 @@ Vue.component("postFeedback", {
 			text: '',
 			isAnonymous: false,
 			isForPublishing: false,
-			feedbackError: false
+			feedbackError: false,
+			userToken: null
 		}
 	},
 	template: `
@@ -97,6 +98,15 @@ Vue.component("postFeedback", {
 					patientID: 1,
 					patient: null,
 					publishingDate: null
+				}, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});	
 				alert('Utisak je uspešno ostavljen')
 				this.text = '';
@@ -106,8 +116,19 @@ Vue.component("postFeedback", {
 		}
 	},
 	mounted() {
-		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+
+		axios.get('api/patientFeedback/getPublishedFeedbacks', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.patientFeedbacks = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 	}
 });
