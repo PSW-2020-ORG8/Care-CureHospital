@@ -53,7 +53,7 @@ Vue.component("publishedFeedbacks", {
 
 	 <div class="listOfFeedbacks">
 		 
-	 <div v-for="pf in patientFeedbacks" >	
+	 <div v-for="pf in patientFeedbacks">	
 	 	 
 		<div class="wrapper">
 		    <div class="feedback-img">

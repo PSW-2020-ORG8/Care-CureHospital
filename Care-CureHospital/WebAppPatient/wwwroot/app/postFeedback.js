@@ -10,7 +10,6 @@ Vue.component("postFeedback", {
 	},
 	template: `
 	<div>
-	
 		<div class="boundaryForScrollPublish">
 			<div class="logoAndName">
 					<div class="logo">        
@@ -45,7 +44,7 @@ Vue.component("postFeedback", {
                           <br><br>
 						<!--<input type="text" id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." >  -->
 						<textarea id="feedbackID" v-model="text" placeholder="Ostavite Vaš utisak..." rows="9" cols="92" style="resize: none;"></textarea>
-						<label id="FeedbackErrorMessage" v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 23%">Morati popuniti polje kako biste ostavili utisak!</label><br><br>
+						<label id="FeedbackErrorMessage" v-if="feedbackError" style="color:red; font-size: 18px; margin-left: 23%">Morate popuniti polje kako biste ostavili utisak!</label><br><br>
 						
 						<input type="checkbox" id="isAnonymous" name="isAnonymous" value="isAnonymous" v-model = "isAnonymous">
 						<label> Anonimno</label><br>
@@ -83,15 +82,13 @@ Vue.component("postFeedback", {
 			this.feedbackError = false;
 			var empty = false;
 
-
 			if (this.text.length === 0) {
 				empty = true;
 				this.feedbackError = true;
-				alert('Morati popuniti polje kako biste ostavili utisak!')
+				alert('Morate popuniti polje kako biste ostavili utisak!')
 			}
 
 			if (empty === false) {
-
 				axios.post('/api/patientFeedback', {
 					text: this.text,
 					isForPublishing: this.isForPublishing,
@@ -100,23 +97,17 @@ Vue.component("postFeedback", {
 					patientID: 1,
 					patient: null,
 					publishingDate: null
-				});
+				});	
 				alert('Utisak je uspešno ostavljen')
 				this.text = '';
 				this.isAnonymous = false;
 				this.isForPublishing = false;
 			}
-
-
 		}
-
 	},
 	mounted() {
-
 		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
 			this.patientFeedbacks = response.data;
 		});
-
 	}
-
 });
