@@ -6,22 +6,20 @@ using System.Text;
 
 namespace E2ETests.WebAppPatientE2ETests.Pages
 {
-    class CreateFeedbackPage
+    class PostFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "https://carecurehospitalwebapp.herokuapp.com/index.html#/postFeedback";
+        public const string URI = "http://localhost:5000/index.html#/postFeedback";
         private IWebElement textField => driver.FindElement(By.Id("feedbackID"));
         private IWebElement anonyimusCheckbox => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement publishedCheckbox => driver.FindElement(By.Id("isForPublishing"));
         private IWebElement submitButton => driver.FindElement(By.Id("SendFeedbackButton"));
-
         private IWebElement errorMessage => driver.FindElement(By.Id("FeedbackErrorMessage"));
         public string Title => driver.Title;
-
         public const string ValidMessage = "Utisak je uspešno ostavljen";
-        public const string InvalidMessage = "Morati popuniti polje kako biste ostavili utisak!";
+        public const string InvalidMessage = "Morate popuniti polje kako biste ostavili utisak!";
 
-        public CreateFeedbackPage(IWebDriver driver)
+        public PostFeedbackPage(IWebDriver driver)
         {
             this.driver = driver;
         }
@@ -51,12 +49,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             submitButton.Click();
         }
 
-        public void InsertText(String text)
+        public void InsertText(string text)
         {
             textField.SendKeys(text);
         }
 
-        public void EnablePublishedCheckbox(String status)
+        public void EnablePublishedCheckbox(string status)
         {
             publishedCheckbox.SendKeys(status);
         }
@@ -74,7 +72,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             {
                 try
                 {
-                    return (this.SubmitButtonDisplayed() == true);
+                    return (SubmitButtonDisplayed() == true);
                 }
                 catch (StaleElementReferenceException)
                 {
@@ -85,11 +83,6 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
                     return false;
                 }
             });
-        }
-
-        internal void WaitForFormSubmit()
-        {
-            throw new NotImplementedException();
         }
 
         public string GetDialogMessage()
@@ -103,6 +96,5 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);
-
     }
 }
