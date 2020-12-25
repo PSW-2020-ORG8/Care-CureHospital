@@ -398,13 +398,25 @@ Vue.component("surveyAfterExamination", {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
+
+		axios.get('/api/doctor/getAllSpecialization', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
+
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
+		});
 
 		if (this.$route.params.medicalExaminationId !== null) {
 			var appointment = this.$route.params.appointment;
 			this.medicalExaminationId = appointment.medicalExaminationId;
 			this.appointmentId = appointment.id;
-		}
-		
+		}	
 	}
-
 });

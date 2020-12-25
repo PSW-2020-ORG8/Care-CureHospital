@@ -33,8 +33,7 @@ Vue.component("postFeedback", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
-					<a>Prijavi se</a>
+					<a href="#/userLogin" @click="logOut()">Odjavi se</a>
 				</div>
 			</div>
 		</div>
@@ -113,12 +112,15 @@ Vue.component("postFeedback", {
 				this.isAnonymous = false;
 				this.isForPublishing = false;
 			}
+		},
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
 
-		axios.get('api/patientFeedback/getPublishedFeedbacks', {
+		axios.get('/api/doctor/getAllSpecialization', {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

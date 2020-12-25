@@ -44,8 +44,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
-					<a>Prijavi se</a>
+					<a href="#/userLogin" @click="logOut()">Odjavi se</a>
 				</div>
 			</div>
 		</div>
@@ -294,6 +293,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
             let month = d.getMonth() + 1;
             let day = d.getDate(); 
             return d.getFullYear() + '-' + (month > 9 ? '' : '0') + month + '-' + (day > 9 ? '' : '0') + day;
+        },
+        logOut: function () {
+            localStorage.removeItem("validToken");
         }
 	},
     mounted() {

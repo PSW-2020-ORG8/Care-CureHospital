@@ -79,8 +79,7 @@ Vue.component("patientRegistration", {
             emptyEmail : false,
             emptyAddress : false,
             finalAllergiesLists : [],
-            foundAllergy: null,
-            userToken: null
+            foundAllergy: null
 		}
 	},
 	template: `
@@ -97,7 +96,7 @@ Vue.component("patientRegistration", {
 
         <div class="main-patient-registration">     
             <ul class="menu-contents">
-            <li><a href="#/">Utisci pacijenata</a></li>
+            <li><a href="#/">Početna</a></li>
             </ul>
         </div>
 
@@ -108,7 +107,7 @@ Vue.component("patientRegistration", {
             </button>
         <div class="dropdown-content">
             <a>Registruj se</a>
-            <a>Prijavi se</a>
+            <a href="#/userLogin">Prijavi se</a>
         </div>
     </div>
 	 
@@ -465,10 +464,6 @@ Vue.component("patientRegistration", {
                         "ConfirmedPassword" : this.confirmPasswordInputField,
                         "ActiveMedicalRecord" : false,
                         "ProfilePicture" : this.sendImage
-                    }, {
-                        headers: {
-                            'Authorization': 'Bearer ' + this.userToken
-                        }
                     }).then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
@@ -478,9 +473,6 @@ Vue.component("patientRegistration", {
 			            if(error.response.status === 400){
                             toast('Korisničko ime već postoji!')
                             this.emptyUsername = true;
-                        } else if (error.response.status === 401 || error.response.status === 403) {
-                            toast('Nemate pravo pristupa stranici!')
-                            this.$router.push({ name: 'userLogin' })
                         }
                     });
                     
@@ -557,19 +549,8 @@ Vue.component("patientRegistration", {
         }
 	},
     mounted() {
-        this.userToken = localStorage.getItem('validToken');
-
-        axios.get('api/allergies', {
-            headers: {
-                'Authorization': 'Bearer ' + this.userToken
-            }
-        }).then(response => {
+        axios.get('api/allergies').then(response => {
             this.allergies = response.data;
-        }).catch(error => {
-            if (error.response.status === 401 || error.response.status === 403) {
-                toast('Nemate pravo pristupa stranici!')
-                this.$router.push({ name: 'userLogin' })
-            }
         });
 
         this.places = places({
