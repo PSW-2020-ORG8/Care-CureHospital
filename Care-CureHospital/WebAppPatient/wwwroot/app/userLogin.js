@@ -60,37 +60,38 @@ Vue.component("userLogin", {
 		onSubmit : function() {
 			this.usernameInput = false;
 			this.passwordInput = false;	
-			this.notification = false;
+            this.notification = false;
 			
 			document.getElementById("form").setAttribute("onsubmit","return false;");
-            if (this.username.length === 0)
-            {
+            if (this.username.length === 0){
 				this.usernameInput = true;			
 			} else {
 				this.usernameInput = false;
             } 
-            if (this.password.length === 0){
+            if (this.password.length === 0) {
 				this.passwordInput = true;	
 			} else {
 				this.passwordInput = false;			
 			}
-			
-			axios.get('api/users/getUserByUsername', { params:{
-				username : this.username,
-				password : this.password
-			}}).then(response =>{
-                if (response.data === 200){
-                    this.resetData()
-                    this.$router.push({ name: 'homePage' })
-                } else if(response.data === 204){
-                    this.resetData()
-                } else if(response.data.toString() === ("Vaš nalog je blokiran!")){
-                    toast('Vaš nalog je blokiran, ne možete izvršiti prijavu!');
-                } else{
-                    this.notification = true;
-                    this.returnData = response.data;
-                }
-			});	
+
+            if (this.usernameInput === false && this.passwordInput === false) {
+                axios.post('api/user/login', {
+                    username: this.username,
+                    password: this.password
+                }).then(response => {
+                    var user = response.data
+                    localStorage.setItem("validToken", user.token)
+                    if (user.role === 'Admin') {
+                        this.$router.push({ name: 'patientsFeedbacks' })
+                    } else if (user.role === 'Patient') {
+                        this.$router.push({ name: 'patientsFeedbacks' })
+                    }
+                }).catch(error => {
+                    if (error.response.status === 403) {
+                        toast('Neuspešno korisničko ime ili lozinka')
+                    }
+                });
+            }          
 		},	
 		singUp : function() {
 			this.$router.push({ name: 'patientRegistration' })	

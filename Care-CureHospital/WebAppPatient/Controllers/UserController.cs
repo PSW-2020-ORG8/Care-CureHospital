@@ -1,4 +1,5 @@
 ﻿using Backend;
+using Backend.Model.AllActors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -28,7 +29,7 @@ namespace WebAppPatient.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Authenticate([FromBody] AuthenticateDto model)
+        public IActionResult Login([FromBody] AuthenticateDto model)
         {          
             var user = App.Instance().UserService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(_appSettings.Secret));
             if (user == null)
@@ -36,6 +37,13 @@ namespace WebAppPatient.Controllers
                 return Forbid();
             }
             return Ok(user);
+        }
+
+        [Authorize(Roles = Role.Admin + "," + Role.Patient)]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            return Ok(new { Token = "", Message = "Logged Out" });
         }
     }
 }

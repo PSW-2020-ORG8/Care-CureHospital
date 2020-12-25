@@ -2,7 +2,8 @@ Vue.component("patientsFeedbacks", {
 	data: function () {
 		return {
 			patientFeedbacks: [],
-			typeOfFeedback: 'Svi utisci'
+			typeOfFeedback: 'Svi utisci',
+			userToken: null
 		}
 	},
 	template: `
@@ -132,9 +133,18 @@ Vue.component("patientsFeedbacks", {
 		}
 	},
 	mounted() {
-
-		axios.get('api/patientFeedback').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/patientFeedback', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.patientFeedbacks = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 
 	}

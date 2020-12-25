@@ -25,13 +25,6 @@ namespace Service.UsersServices
         public IUserRepository userRepository;
         public PatientService patientService;
         public SystemAdministratorService systemAdministratorService;
-        //private readonly AppSettings appSettings;
-
-        /*public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
-        {
-            this.userRepository = userRepository;    
-            this.appSettings = appSettings.Value;
-        }*/
 
         public UserService(IUserRepository userRepository, PatientService patientService, SystemAdministratorService systemAdministratorService)
         {
@@ -42,7 +35,6 @@ namespace Service.UsersServices
 
         public User Authenticate(string username, string password, byte[] secretKey)
         {
-            //var user = this.patientService.GetAllEntities().SingleOrDefault(user => user.Username == username && user.Password == password);
             var user = GetAllPatientsAndSystemAdministrators().SingleOrDefault(user => user.Username == username && user.Password == password);
 
             if (user == null)
@@ -56,7 +48,7 @@ namespace Service.UsersServices
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Username.ToString()),
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),
@@ -67,7 +59,6 @@ namespace Service.UsersServices
 
             return user;
         }
-
 
         public IEnumerable<User> GetAllPatientsAndSystemAdministrators()
         {

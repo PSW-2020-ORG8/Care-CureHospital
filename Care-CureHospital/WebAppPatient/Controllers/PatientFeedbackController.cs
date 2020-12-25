@@ -5,18 +5,23 @@ using System.Threading.Tasks;
 using Backend;
 using Backend.Adapters;
 using Backend.Dto;
+using Backend.Model.AllActors;
 using Backend.Model.BlogAndNotification;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAppPatient.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientFeedbackController : ControllerBase
     {
         public PatientFeedbackController() {}
 
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
@@ -25,7 +30,6 @@ namespace WebAppPatient.Controllers
             return Ok(result);
         }
 
-        /// <summary> This method calls <c>PatientFeedbackService</c> to get list of <c>PatientFeedback</c> where paramter <c>IsPublished</c> is true. </summary>
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {
@@ -46,7 +50,6 @@ namespace WebAppPatient.Controllers
             return Ok();
         }
 
-        /// <summary> This method calls <c>PatientFeedbackService</c> to change status of <c>PatientFeedback</c> into published Feedback <c>isPublished<c>> </summary>
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {     
