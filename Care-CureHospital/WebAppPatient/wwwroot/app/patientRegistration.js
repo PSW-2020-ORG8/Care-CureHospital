@@ -79,7 +79,8 @@ Vue.component("patientRegistration", {
             emptyEmail : false,
             emptyAddress : false,
             finalAllergiesLists : [],
-            foundAllergy : null
+            foundAllergy: null,
+            userToken: null
 		}
 	},
 	template: `
@@ -464,18 +465,24 @@ Vue.component("patientRegistration", {
                         "ConfirmedPassword" : this.confirmPasswordInputField,
                         "ActiveMedicalRecord" : false,
                         "ProfilePicture" : this.sendImage
-                    })
-                    .then(response => {
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + this.userToken
+                        }
+                    }).then(response => {
                         if(response.status === 200){
                             toast('Uspešno ste se registrovali, potvrdite Vaš identitet putem mejla')
                             this.resetData()          
                         }           
                     }).catch(error => {
-
 			            if(error.response.status === 400){
                             toast('Korisničko ime već postoji!')
                             this.emptyUsername = true;
-			            }});
+                        } else if (error.response.status === 401 || error.response.status === 403) {
+                            toast('Nemate pravo pristupa stranici!')
+                            this.$router.push({ name: 'userLogin' })
+                        }
+                    });
                     
                 }		 	
 			} else {
@@ -549,10 +556,21 @@ Vue.component("patientRegistration", {
             this.disable = false;
         }
 	},
-	mounted() {
-        axios.get('api/allergies').then(response => {
+    mounted() {
+        this.userToken = localStorage.getItem('validToken');
+
+        axios.get('api/allergies', {
+            headers: {
+                'Authorization': 'Bearer ' + this.userToken
+            }
+        }).then(response => {
             this.allergies = response.data;
-		});
+        }).catch(error => {
+            if (error.response.status === 401 || error.response.status === 403) {
+                toast('Nemate pravo pristupa stranici!')
+                this.$router.push({ name: 'userLogin' })
+            }
+        });
 
         this.places = places({
 			appId: 'plQ4P1ZY8JUZ',
