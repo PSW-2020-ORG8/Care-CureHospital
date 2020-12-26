@@ -70,8 +70,7 @@ Vue.component("surveyAfterExamination", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 	
@@ -392,6 +391,9 @@ Vue.component("surveyAfterExamination", {
 				}
 			});
 			
+		},
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	computed: {
