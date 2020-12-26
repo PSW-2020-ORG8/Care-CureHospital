@@ -23,7 +23,11 @@ Vue.component("postFeedback", {
 	 
 				<div class="main">     
 					<ul class="menu-contents">
-					<li  class="active"><a href="#/">Utisci pacijenata</a></li>
+						<li><a href="#/patientAppointments">Pregledi</a></li>
+						<li class="active"><a href="#/">Utisci</a></li>
+						<li><a href="#/patientMainPage">Početna</a></li>
+						<li><a href="#/medicalRecordReview">Moj karton</a></li>
+						<li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 					</ul>
 				</div>
  
@@ -64,8 +68,7 @@ Vue.component("postFeedback", {
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
 			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
-		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li class="active" ><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li class="active"><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 

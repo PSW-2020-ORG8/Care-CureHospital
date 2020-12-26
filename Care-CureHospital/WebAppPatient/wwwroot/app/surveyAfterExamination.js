@@ -60,7 +60,7 @@ Vue.component("surveyAfterExamination", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/patientAppointments">Nazad na moje preglede</a></li>
+				<li><a href="#/patientAppointments">Nazad na preglede</a></li>
 	         </ul>
 	     </div>
  

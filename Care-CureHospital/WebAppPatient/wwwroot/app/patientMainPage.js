@@ -43,23 +43,6 @@ Vue.component("patientMainPage", {
         <div class="slideshow-container">
 
         <div class="mySlides fade">
-            <!--<div class="numbertext">2 / 3</div>-->
-            <img src="./images/second.jpg" style="width:100%; height:480px; margin-bottom:-0.4%">
-            <div class="text_pharmacy_name">
-            <h1 style="color:black;float:left; font-size: 24px;">Apoteka: Zegin </h1><br>
-            </div>
-            <div class="text_discount">
-                <h1 style="color:black;float:left; font-size: 24px; ">Popust: 30%  </h1><br>
-            </div>
-            <div class="text_period">
-                <h1 style="color:black;float:left; font-size: 24px; ">Period: 15.12.2020. - 01.02.2021.  </h1><br>
-            </div>
-            <div class="text_product">
-                <h1 style="color:black;float:left; font-size: 24px; ">Proizvod: Galenika lekovi </h1><br>
-            </div>
-        </div>
-
-        <div class="mySlides fade">
             <!-- <div class="numbertext">1 / 3</div> -->
             <img src="./images/first.jpg" style="width:100%; height:480px; margin-bottom:-0.4%">
             <div class="text_pharmacy_name">
@@ -73,6 +56,23 @@ Vue.component("patientMainPage", {
             </div>
             <div class="text_product">
                 <h1 style="color:black;float:left; font-size: 24px; ">Proizvod: Sandoz lekovi  </h1><br>
+            </div>
+        </div>
+
+        <div class="mySlides fade">
+            <!--<div class="numbertext">2 / 3</div>-->
+            <img src="./images/second.jpg" style="width:100%; height:480px; margin-bottom:-0.4%">
+            <div class="text_pharmacy_name">
+            <h1 style="color:black;float:left; font-size: 24px;">Apoteka: Zegin </h1><br>
+            </div>
+            <div class="text_discount">
+                <h1 style="color:black;float:left; font-size: 24px; ">Popust: 30%  </h1><br>
+            </div>
+            <div class="text_period">
+                <h1 style="color:black;float:left; font-size: 24px; ">Period: 15.12.2020. - 01.02.2021.  </h1><br>
+            </div>
+            <div class="text_product">
+                <h1 style="color:black;float:left; font-size: 24px; ">Proizvod: Galenika lekovi </h1><br>
             </div>
         </div>
 
