@@ -14,7 +14,8 @@ Vue.component("appointmentSchedulingStandard", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            doctorWorkDay : null
+            doctorWorkDay : null,
+            userToken: null
 		}
 	},
 	template: `
@@ -42,7 +43,7 @@ Vue.component("appointmentSchedulingStandard", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
+					<a href="#/patientRegistration">Registruj se</a>
 					<a>Prijavi se</a>
 				</div>
 			</div>
@@ -164,8 +165,15 @@ Vue.component("appointmentSchedulingStandard", {
                 toast('Morate izabrati datum')
             } else if (this.recommendationStep === 2 && this.specialization !== '0') {
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, { 
+                    headers: { 'Authorization': 'Bearer ' + this.userToken }
+                }).then(response => {
                     this.doctorsBySpecialization = response.data;
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
                 });
             } else if (this.recommendationStep === 2 && this.specialization === '0') {
                 toast('Morate izabrati specijalističku granu')
@@ -175,14 +183,19 @@ Vue.component("appointmentSchedulingStandard", {
                     params: {
                         doctorId: this.doctorId,
                         date: this.convertDate(this.dateModel)
-                    }
+                    } }, {
+                    headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
-                    if (response.status === 200) {
-                        this.doctorWorkDay = response.data;
-                    } else {
+                    this.doctorWorkDay = response.data;
+				}).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                    else {
                         this.doctorWorkDay = null;
                     }
-				});
+                });
             } else if (this.recommendationStep === 3 && this.doctorId === '0') {
                 toast('Morate izabrati doktora')
             }   
@@ -207,6 +220,8 @@ Vue.component("appointmentSchedulingStandard", {
                         roomId : this.doctorWorkDay.roomId,
                         doctorId : this.doctorWorkDay.doctorId
                     }
+                }, { 
+                    headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
                     if (response.status === 200) {
                         toast('Termin je uspešno zakazan!')
@@ -214,7 +229,11 @@ Vue.component("appointmentSchedulingStandard", {
                         this.$router.push('patientAppointments')
                     }
                 }).catch(error => {
-                    if (error.response.status === 404) {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                    else if (error.response.status === 404) {
                         toast('Greška prilikom zakazivanja termina!')
                     }
                 });          
@@ -242,9 +261,16 @@ Vue.component("appointmentSchedulingStandard", {
         }
 	},
 	mounted() {
-        axios.get('api/doctor/getAllSpecialization').then(response => {
+        axios.get('api/doctor/getAllSpecialization', { 
+            headers: { 'Authorization': 'Bearer ' + this.userToken }
+        }).then(response => {
             this.specializations = response.data;
-        });
+        }).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
+		});
 	}
 
 });

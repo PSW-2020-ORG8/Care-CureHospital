@@ -13,6 +13,7 @@ const appointmentSchedulingStandard = { template: '<appointmentSchedulingStandar
 const patientAppointments = { template: '<patientAppointments></patientAppointments>' }
 const blockMaliciousPatients = { template: '<blockMaliciousPatients></blockMaliciousPatients>' }
 const patientMainPage = { template: '<patientMainPage></patientMainPage>' }
+const userLogin = { template: '<userLogin></userLogin>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -25,15 +26,14 @@ const router = new VueRouter({
 		{ path: '/surveyResults', name: 'surveyResults', component: surveyResults },
 		{ path: '/doctorSurveyResults', name: 'doctorSurveyResults', component: doctorSurveyResults },
 		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview },
-		{ path: '/medicalRecordReview', name: 'medicalRecordReview', component: medicalRecordReview },
 		{ path: '/patientDocumentsAdvancedSearch', name: 'patientDocumentsAdvancedSearch', component: patientDocumentsAdvancedSearch },
 		{ path: '/patientDocumentsSimpleSearch', name: 'patientDocumentsSimpleSearch', component: patientDocumentsSimpleSearch },
 		{ path: '/appointmentSchedulingByRecommendation', name: 'appointmentSchedulingByRecommendation', component: appointmentSchedulingByRecommendation },
 		{ path: '/appointmentSchedulingStandard', name: 'appointmentSchedulingStandard', component: appointmentSchedulingStandard },
 		{ path: '/patientAppointments', name: 'patientAppointments', component: patientAppointments },
-		{ path: '/patientAppointments', name: 'patientAppointments', component: patientAppointments },
 		{ path: '/blockMaliciousPatients', name: 'blockMaliciousPatients', component: blockMaliciousPatients },
-		{ path: '/patientMainPage', name: 'patientMainPage', component: patientMainPage }
+		{ path: '/patientMainPage', name: 'patientMainPage', component: patientMainPage },
+		{ path: '/userLogin', name: 'userLogin', component: userLogin }
 	]
 });
 
