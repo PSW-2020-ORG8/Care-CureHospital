@@ -192,6 +192,7 @@ Vue.component("surveyResults", {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
 
 		axios.get('api/survey/getSurveyResults', {
 			headers: {

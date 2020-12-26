@@ -193,7 +193,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, , {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, {
                     headers: {
                         'Authorization': 'Bearer ' + this.userToken
                     }

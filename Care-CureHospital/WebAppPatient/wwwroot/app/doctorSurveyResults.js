@@ -115,6 +115,7 @@ Vue.component("doctorSurveyResults", {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
 
 		axios.get('api/survey/getSurveyResultsForDoctors', {
 			headers: {

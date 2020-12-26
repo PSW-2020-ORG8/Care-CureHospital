@@ -109,13 +109,30 @@ Vue.component("patientsFeedbacks", {
 	,
 	methods: {
 		publishFeedback: function (patientFeedback) {
-			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
-				.then(response => {
+			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id, null, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
 					toast('Utisak je uspešno objavljen')
-					axios.get('api/patientFeedback').then(response => {			
+					axios.get('api/patientFeedback', {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {			
 						this.patientFeedbacks = response.data;
+					}).catch(error => {
+						if (error.response.status === 401 || error.response.status === 403) {
+							toast('Nemate pravo pristupa stranici!')
+							this.$router.push({ name: 'userLogin' })
+						}
 					});
 					//this.$router.go();
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});
 		},
 
