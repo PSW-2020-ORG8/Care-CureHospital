@@ -1,9 +1,13 @@
 /* Slideshow container */
 .slideshow-container {
-    top:100px;
+    border: solid 1px;
+    top:240px;
+    height: 80%;
+    width: 90%;
     max-width: 1000px;
     position: relative;
     margin: auto;
+    margin-left: 20%;
 }
 
 /* Hide the images by default */
@@ -39,14 +43,40 @@
     }
 
 /* Caption text */
-.text {
-    color: #f2f2f2;
+.text_pharmacy_name {
+    color: black;
     font-size: 15px;
-    padding: 8px 12px;
+    padding: 93px 12px;
     position: absolute;
     bottom: 8px;
     width: 100%;
-    text-align: center;
+}
+
+.text_discount {
+    color: black;
+    font-size: 15px;
+    padding: 63px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+}
+
+.text_period {
+    color: black;
+    font-size: 15px;
+    padding: 33px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+}
+
+.text_product {
+    color: black;
+    font-size: 15px;
+    padding: 3px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
 }
 
 /* Number text (1/3 etc) */
@@ -61,7 +91,7 @@
 /* The dots/bullets/indicators */
 .dot {
     position:relative;
-    top:100px;
+    top:240px;
     cursor: pointer;
     height: 15px;
     width: 15px;
@@ -102,4 +132,16 @@
     to {
         opacity: 1
     }
+}
+
+.title-patient-main-page {
+    position: absolute;
+    top: 19%;
+    left: 48%;
+    transform: translate(-50%, 0%); 
+}
+
+.title-patient-main-page h1 {
+    color: white;
+    font-size: 24px; 
 }
