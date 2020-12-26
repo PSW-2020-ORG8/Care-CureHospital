@@ -43,8 +43,7 @@ Vue.component("appointmentSchedulingStandard", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a href="#/patientRegistration">Registruj se</a>
-					<a>Prijavi se</a>
+					<a href="#/userLogin" @click="logOut()">Odjavi se</a>
 				</div>
 			</div>
 		</div>
@@ -258,6 +257,9 @@ Vue.component("appointmentSchedulingStandard", {
             this.doctors = '0';
             this.priority = '0';
             this.selectedAppointment = null;
+        },
+        logOut: function () {
+            localStorage.removeItem("validToken");
         }
 	},
 	mounted() {
