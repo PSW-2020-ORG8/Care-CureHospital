@@ -267,6 +267,8 @@ Vue.component("appointmentSchedulingStandard", {
         }
 	},
 	mounted() {
+        this.userToken = localStorage.getItem('validToken');
+
         axios.get('api/doctor/getAllSpecialization', { 
             headers: { 'Authorization': 'Bearer ' + this.userToken }
         }).then(response => {
