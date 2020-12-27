@@ -44,7 +44,11 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/patientDocumentsSimpleSearch">Pretraga dokumenata</a></li>
+				<li><a href="#/patientAppointments">Pregledi</a></li>
+				<li><a href="#/">Utisci</a></li>
+				<li><a href="#/patientMainPage">Početna</a></li>
+				<li><a href="#/medicalRecordReview">Moj karton</a></li>
+				<li class="active"><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 	         </ul>
 	     </div>
  

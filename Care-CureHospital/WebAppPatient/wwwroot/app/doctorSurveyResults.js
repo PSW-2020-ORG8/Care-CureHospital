@@ -21,7 +21,9 @@ Vue.component("doctorSurveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li class="active"><a href="#/doctorSurveyResults">Rezultati anketa</a></li>
+				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
+				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
+				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -31,8 +33,7 @@ Vue.component("doctorSurveyResults", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 		
@@ -106,7 +107,9 @@ Vue.component("doctorSurveyResults", {
 	`
 	,
 	methods: {
-
+		logOut: function () {
+			localStorage.removeItem("validToken");
+		}
 	},
 	computed: {
 

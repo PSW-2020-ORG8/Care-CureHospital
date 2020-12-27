@@ -34,7 +34,11 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-					<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+                        <li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+                        <li><a href="#/">Utisci</a></li>
+                        <li><a href="#/patientMainPage">Početna</a></li>
+                        <li><a href="#/medicalRecordReview">Moj karton</a></li>
+                        <li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 					</ul>
 				</div>
  
@@ -193,7 +197,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, , {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, {
                     headers: {
                         'Authorization': 'Bearer ' + this.userToken
                     }
