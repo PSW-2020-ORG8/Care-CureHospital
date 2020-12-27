@@ -28,7 +28,7 @@
 				<li v-if="this.userRole === 'Admin'"><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 				<li v-if="this.userRole === 'Patient'"><a href="#/patientAppointments">Pregledi</a></li>
                 <li v-if="this.userRole === 'Patient'" class="active"><a href="#/">Utisci</a></li>
-                <li v-if="this.userRole === 'Patient'"><a href="">Početna</a></li>
+                <li v-if="this.userRole === 'Patient'"><a href="#/patientMainPage">Početna</a></li>
                 <li v-if="this.userRole === 'Patient'"><a href="#/medicalRecordReview">Moj karton</a></li>
                 <li v-if="this.userRole === 'Patient'"><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 	         </ul>
@@ -51,10 +51,10 @@
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li v-if="this.userRole === 'Admin'"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li v-if="this.userRole === 'Admin'" class="active"><a href="#/">Objavljeni utisci</a></li></div><br/>
-			<div><li v-if="this.userRole === 'Patient'"><a href="#/">Objavljeni utisci</a></li></div><br/>
-			<div><li v-if="this.userRole === 'Patient'"><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+		    <div><li v-if="this.userRole === 'Admin'"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br v-if="this.userRole === 'Admin'"/>
+			<div><li v-if="this.userRole === 'Admin'" class="active"><a href="#/">Objavljeni utisci</a></li></div><br v-if="this.userRole === 'Admin'"/>
+			<div><li v-if="this.userRole === 'Patient'" class="active"><a href="#/">Objavljeni utisci</a></li></div><br v-if="this.userRole === 'Patient'"/>
+			<div><li v-if="this.userRole === 'Patient'"><a href="#/postFeedback">Ostavite utisak</a></li></div><br v-if="this.userRole === 'Patient'"/>
 	     </ul>
 	 </div>	 
 

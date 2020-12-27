@@ -12,6 +12,7 @@ const appointmentSchedulingByRecommendation = { template: '<appointmentSchedulin
 const appointmentSchedulingStandard = { template: '<appointmentSchedulingStandard></appointmentSchedulingStandard>' }
 const patientAppointments = { template: '<patientAppointments></patientAppointments>' }
 const blockMaliciousPatients = { template: '<blockMaliciousPatients></blockMaliciousPatients>' }
+const patientMainPage = { template: '<patientMainPage></patientMainPage>' }
 const userLogin = { template: '<userLogin></userLogin>' }
 
 const router = new VueRouter({
@@ -31,6 +32,7 @@ const router = new VueRouter({
 		{ path: '/appointmentSchedulingStandard', name: 'appointmentSchedulingStandard', component: appointmentSchedulingStandard },
 		{ path: '/patientAppointments', name: 'patientAppointments', component: patientAppointments },
 		{ path: '/blockMaliciousPatients', name: 'blockMaliciousPatients', component: blockMaliciousPatients },
+		{ path: '/patientMainPage', name: 'patientMainPage', component: patientMainPage },
 		{ path: '/userLogin', name: 'userLogin', component: userLogin }
 	]
 });

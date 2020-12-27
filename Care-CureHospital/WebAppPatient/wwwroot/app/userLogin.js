@@ -84,7 +84,7 @@ Vue.component("userLogin", {
                     if (user.role === 'Admin') {
                         this.$router.push({ name: 'patientsFeedbacks' })
                     } else if (user.role === 'Patient') {
-                        this.$router.push({ name: 'patientsFeedbacks' })
+                        this.$router.push({ name: 'patientMainPage' })
                     }
                 }).catch(error => {
                     if (error.response.status === 403) {
