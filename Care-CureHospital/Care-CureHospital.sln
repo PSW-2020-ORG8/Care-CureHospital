@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAdapters", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMap", "HospitalMap\HospitalMap.csproj", "{EC4CD704-B4A5-42BE-AF63-727C0DFB04D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{ED5DDF6D-2465-480F-B784-3DC7FBB6FA3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{ED5DDF6D-2465-480F-B784-3DC7FBB6FA3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{9D0D0D12-1BF6-41B9-8957-2128AEC48CF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{9D0D0D12-1BF6-41B9-8957-2128AEC48CF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E2ETests", "E2ETests\E2ETests.csproj", "{60E1446E-107D-423D-BE1D-DF89E3EEFFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E2ETests", "E2ETests\E2ETests.csproj", "{60E1446E-107D-423D-BE1D-DF89E3EEFFB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayWebApi", "GatewayWebApi\GatewayWebApi.csproj", "{725A79D9-EF10-4410-920B-E1A67B0446C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{60E1446E-107D-423D-BE1D-DF89E3EEFFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E1446E-107D-423D-BE1D-DF89E3EEFFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E1446E-107D-423D-BE1D-DF89E3EEFFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{725A79D9-EF10-4410-920B-E1A67B0446C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725A79D9-EF10-4410-920B-E1A67B0446C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725A79D9-EF10-4410-920B-E1A67B0446C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725A79D9-EF10-4410-920B-E1A67B0446C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
