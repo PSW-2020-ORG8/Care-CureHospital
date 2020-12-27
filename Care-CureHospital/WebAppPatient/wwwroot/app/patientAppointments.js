@@ -3,7 +3,8 @@ Vue.component("patientAppointments", {
 		return {
 			filterAppointments: 'Svi pregledi',
 			scheduledAppointments: [],
-			previousAppointments: []
+			previousAppointments: [],
+			userToken: null
 		}
 	},
 	template: `
@@ -20,7 +21,11 @@ Vue.component("patientAppointments", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/patientAppointments">Pregledi</a></li>
+				<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+				<li><a href="#/">Utisci</a></li>
+				<li><a href="#/patientMainPage">Početna</a></li>
+				<li><a href="#/medicalRecordReview">Moj karton</a></li>
+				<li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 	         </ul>
 	     </div>
  
@@ -30,8 +35,7 @@ Vue.component("patientAppointments", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="#/patientRegistration">Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 	    </div>
 	 </div>
@@ -93,7 +97,7 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
 						<div class="cancelAppointment-btn">
-							<button type="button" @click="cancelAppointment(appointment.id)">Otkaži pregled</button>
+							<button type="button" @click="cancelAppointment(appointment.id)" id="cancelAppointmentButton">Otkaži pregled</button>
 						</div>
 						<!--<div v-if="appointment.canceled === true" class="appointmentsParagraph2">
 							<p>Otkazali ste ovaj pregled</p>
@@ -110,17 +114,25 @@ Vue.component("patientAppointments", {
 	,
 	methods: {
 		cancelAppointment: function (appointmentId) {
-			axios.put('api/appointment/cancelAppointment/' + appointmentId)
-				.then(response => {
-					if (response.status !== 204) {
-						axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
-							toast('Uspešno ste otkazali pregled')
-							this.scheduledAppointments = response.data;
-						});
-					} else {
-						toast('Rok za otkazivanje pregleda je prošao')
-                    }					
-				});
+			axios.put('api/appointment/cancelAppointment/' + appointmentId, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				if (response.status !== 204) {
+					axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+						toast('Uspešno ste otkazali pregled')
+						this.scheduledAppointments = response.data;
+					});
+				} else {
+					toast('Rok za otkazivanje pregleda je prošao')
+                }					
+			}).catch(error => {
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
 		},
 
 		fillSurvey: function (selectedAppointment) {
@@ -134,37 +146,69 @@ Vue.component("patientAppointments", {
 					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 						this.previousAppointments = response.data;
 					});
+				}).catch(error => {
+					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+						this.previousAppointments = response.data;
+					});
 				});
 			} else if (this.filterAppointments === "Zakazani pregledi") {
 				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
 					this.scheduledAppointments = response.data;
+					this.previousAppointments = []
+				}).catch(error => {
 					this.previousAppointments = []
 				});
 			} else if (this.filterAppointments === "Pregledi na kojima sam bio") {
 				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
 					this.previousAppointments = response.data;
 					this.scheduledAppointments = []
+				}).catch(error => {
+					this.scheduledAppointments = []
 				});		
             }
-        }
+		},
+
+		logOut: function () {
+			localStorage.removeItem("validToken");
+		}
 	},
 	computed: {
 		
 	},
 	mounted() {
-
-		axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1, {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.scheduledAppointments = response.data;
-			axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+			axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
 				this.previousAppointments = response.data;
 			}).catch(error => {
-				if (error.response.status === 404) {
-					
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
 				}
 			});		
 		}).catch(error => {
 			if (error.response.status === 404) {
-				
+				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
+					this.previousAppointments = response.data;
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
+				});		
 			}
 		});
 	}

@@ -4,7 +4,8 @@ Vue.component("surveyResults", {
 			surveyResults: [],
 			doctorQuestionsAverageGrade: 0,
 			staffQuestionsAverageGrade: 0,
-			hospitalQuestionsAverageGrade: 0
+			hospitalQuestionsAverageGrade: 0,
+			userToken: null
 		}
 	},
 	template: `
@@ -22,7 +23,9 @@ Vue.component("surveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
+				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
 				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
+				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -32,8 +35,7 @@ Vue.component("surveyResults", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 		
@@ -182,18 +184,29 @@ Vue.component("surveyResults", {
 	`
 	,
 	methods: {
-
+		logOut: function () {
+			localStorage.removeItem("validToken");
+		}
 	},
 	computed: {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
 
-		axios.get('api/survey/getSurveyResults').then(response => {
+		axios.get('api/survey/getSurveyResults', {
+			headers: {
+			'Authorization': 'Bearer ' + this.userToken }
+		}).then(response => {
 			this.surveyResults = response.data;
 			this.doctorQuestionsAverageGrade = (this.surveyResults[0].averageGrade + this.surveyResults[1].averageGrade + this.surveyResults[2].averageGrade) / 3;
 			this.staffQuestionsAverageGrade = (this.surveyResults[3].averageGrade + this.surveyResults[4].averageGrade + this.surveyResults[5].averageGrade) / 3;
 			this.hospitalQuestionsAverageGrade = (this.surveyResults[6].averageGrade + this.surveyResults[7].averageGrade + this.surveyResults[8].averageGrade) / 3;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 
 	}

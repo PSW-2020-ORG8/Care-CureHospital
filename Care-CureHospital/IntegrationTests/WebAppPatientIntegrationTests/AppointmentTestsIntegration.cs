@@ -89,7 +89,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         {
             HttpClient client = factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAvailableAppointments?date=2020-12-24&doctorId=1");
+            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAvailableAppointments?date=2027-12-24&doctorId=1");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
         }
@@ -116,7 +116,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public static IEnumerable<object[]> CancelAppointmentData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { 15, HttpStatusCode.OK });
+            retVal.Add(new object[] { 3, HttpStatusCode.OK });
             retVal.Add(new object[] { 50, HttpStatusCode.NotFound });
             return retVal;
         }
@@ -124,7 +124,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public static IEnumerable<object[]> ScheduleAppointmentData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2020, 12, 21, 19, 30, 0), EndTime = new DateTime(2020, 12, 21, 20, 0, 0), DoctorWorkDayId = 5, MedicalExamination = new Model.Term.MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 2 } }, HttpStatusCode.NotFound });
+            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2015, 12, 15, 19, 30, 0), EndTime = new DateTime(2015, 12, 15, 20, 0, 0), DoctorWorkDayId = 1, MedicalExamination = new Model.Term.MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 1 } }, HttpStatusCode.NotFound });
             return retVal;
         }
     }
