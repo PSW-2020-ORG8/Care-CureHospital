@@ -162,7 +162,7 @@ ul li.active a {
 
 .dropdown {
     position: fixed;
-    top: 2.5%;
+    top: 4.5%;
     left: 90%;
     display: inline-block;
     z-index: 5;

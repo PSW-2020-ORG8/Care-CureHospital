@@ -1,4 +1,5 @@
-<button type="button" class="btn btn-primary float-right m-2" (click)="addEP()"  data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Add EPrescription</button>
+<div class="doctor">
+  <button type="button" mat-raised-button (click)="addEP()"  data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false" class="prescButton">Add EPrescription</button>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -16,12 +17,12 @@
       </div>
     </div>
   </div>
-
+  <br/>
+  <br/>
+  <form enctype="multipart/form-data">
   <table class="table table-striped" matTableExporter #exporter="matTableExporter">
       <thead>
           <tr>
-              <th id="Id">Id</th>
-              <th id="PatientId">PatientId</th>
               <th id="PatientName">PatientName</th>
               <th id="Comment">Comment</th>
               <th id="MedicamentName">MedicamentName</th>
@@ -30,8 +31,6 @@
       </thead>
       <tbody>
          <tr *ngFor="let dataItem of EPrescriptionList">
-              <td>{{dataItem.id}}</td>
-              <td>{{dataItem.patientId}}</td>
               <td>{{dataItem.patientName}}</td>
               <td>{{dataItem.comment}}</td>
               <td>{{dataItem.medicamentName}}</td>
@@ -39,6 +38,8 @@
           </tr>
       </tbody>
   </table>
+</form>
+</div>
  
 
  

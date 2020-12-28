@@ -5,7 +5,8 @@ Vue.component("postFeedback", {
 			text: '',
 			isAnonymous: false,
 			isForPublishing: false,
-			feedbackError: false
+			feedbackError: false,
+			userToken: null
 		}
 	},
 	template: `
@@ -22,7 +23,11 @@ Vue.component("postFeedback", {
 	 
 				<div class="main">     
 					<ul class="menu-contents">
-					<li  class="active"><a href="#/">Utisci pacijenata</a></li>
+						<li><a href="#/patientAppointments">Pregledi</a></li>
+						<li class="active"><a href="#/">Utisci</a></li>
+						<li><a href="#/patientMainPage">Početna</a></li>
+						<li><a href="#/medicalRecordReview">Moj karton</a></li>
+						<li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 					</ul>
 				</div>
  
@@ -32,8 +37,7 @@ Vue.component("postFeedback", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
-					<a>Prijavi se</a>
+					<a href="#/userLogin" @click="logOut()">Odjavi se</a>
 				</div>
 			</div>
 		</div>
@@ -64,8 +68,7 @@ Vue.component("postFeedback", {
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
 			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
-		    <div><li><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li class="active" ><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li class="active"><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
 	     </ul>
 	 </div>
 	 
@@ -97,17 +100,40 @@ Vue.component("postFeedback", {
 					patientID: 1,
 					patient: null,
 					publishingDate: null
+				}, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});	
 				alert('Utisak je uspešno ostavljen')
 				this.text = '';
 				this.isAnonymous = false;
 				this.isForPublishing = false;
 			}
+		},
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	mounted() {
-		axios.get('api/patientFeedback/getPublishedFeedbacks').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+
+		axios.get('/api/doctor/getAllSpecialization', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.patientFeedbacks = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 	}
 });

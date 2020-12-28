@@ -4,13 +4,13 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend.Service.DoctorService
 {
     public class EPrescriptionService : IService<EPrescription, int>
     {
         public IEPrescriptionRepository eprescriptionRepository;
+        public ISftpService sftpService;
 
         public static object Assert { get; set; }
 
@@ -19,9 +19,15 @@ namespace Backend.Service.DoctorService
             this.eprescriptionRepository = eprescriptionRepository;
         }
 
+        public EPrescriptionService(IEPrescriptionRepository eprescriptionRepository, ISftpService sftpService)
+        {
+            this.eprescriptionRepository = eprescriptionRepository;
+            this.sftpService = sftpService;
+        }
+
         public EPrescription AddEntity(EPrescription entity)
         {
-            throw new NotImplementedException();
+            return eprescriptionRepository.AddEntity(entity);
         }
 
         public void DeleteEntity(EPrescription entity)
@@ -43,10 +49,10 @@ namespace Backend.Service.DoctorService
             throw new NotImplementedException();
         }
 
-         public EPrescription GetEPrescriptionForPatient(int patientID)
-         {
-             return eprescriptionRepository.GetAllEntities().ToList().Find(ePrescription => ePrescription.PatientId == patientID);
-         }
+        public EPrescription GetEPrescriptionForPatient(int patientID)
+        {
+            return eprescriptionRepository.GetAllEntities().ToList().Find(ePrescription => ePrescription.PatientId == patientID);
+        }
 
         public List<EPrescription> GetEPrescriptionsForPatient(int patientID)
         {
@@ -85,6 +91,20 @@ namespace Backend.Service.DoctorService
                 }
             }
             return searchResult;
+        }
+
+        public void SendPrescriptionSftp()
+        {
+            String prescriptionFile = "Files\\Prescription_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
+            System.IO.File.WriteAllText(prescriptionFile, "Prescription:");
+            try
+            {
+                sftpService.UploadFile(prescriptionFile);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

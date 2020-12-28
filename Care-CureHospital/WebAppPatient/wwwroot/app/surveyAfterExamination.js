@@ -41,7 +41,8 @@ Vue.component("surveyAfterExamination", {
 			answer9: 'good',
 
 			medicalExaminationId: null,
-			appointmentId: null
+			appointmentId: null,
+			userToken: null
 		}
 	},
 	template: `
@@ -59,7 +60,7 @@ Vue.component("surveyAfterExamination", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/patientAppointments">Nazad na moje preglede</a></li>
+				<li><a href="#/patientAppointments">Nazad na preglede</a></li>
 	         </ul>
 	     </div>
  
@@ -69,8 +70,7 @@ Vue.component("surveyAfterExamination", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 	
@@ -366,28 +366,59 @@ Vue.component("surveyAfterExamination", {
 				commentSurvey: this.commentSurvey,
 				answers: this.listOfAnswers,
 				medicalExaminationId: this.medicalExaminationId
+			}, {
+				headers: {
+				'Authorization': 'Bearer ' + this.userToken }
 			}).then(response => {
 				if (response.status === 200) {
 					toast('Anketa je uspešno poslata')
-					axios.put('/api/survey/filledSurveyForAppointment/' + this.appointmentId).then(response => {
+					axios.put('/api/survey/filledSurveyForAppointment/' + this.appointmentId, {
+						headers: {
+						'Authorization': 'Bearer ' + this.userToken }
+					}).then(response => {
 						this.$router.push({ name: 'patientAppointments' })
+					}).catch(error => {
+						if (error.response.status === 401 || error.response.status === 403) {
+							toast('Nemate pravo pristupa stranici!')
+							this.$router.push({ name: 'userLogin' })
+						}
 					});
+				}
+			}).catch(error => {
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
 				}
 			});
 			
+		},
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	computed: {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
+
+		axios.get('/api/doctor/getAllSpecialization', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
+
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
+		});
 
 		if (this.$route.params.medicalExaminationId !== null) {
 			var appointment = this.$route.params.appointment;
 			this.medicalExaminationId = appointment.medicalExaminationId;
 			this.appointmentId = appointment.id;
-		}
-		
+		}	
 	}
-
 });

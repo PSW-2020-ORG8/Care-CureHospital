@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Google.Protobuf" Version="3.13.0" />
+=======
+    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.34.0" />
+>>>>>>> cd07df4c1d767db08848c29a38fe7db4e4ae46d9
     <PackageReference Include="Grpc.Core" Version="2.34.0" />
     <PackageReference Include="Grpc.Tools" Version="2.34.0">
       <PrivateAssets>all</PrivateAssets>
@@ -34,6 +40,12 @@
 		<Protobuf Include="Protos\netGrpcService.proto" GrpcServices="Server" />
 		<Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
 	</ItemGroup>	
+
+	<ItemGroup>
+		<Protobuf Include="Protos\model.proto" GrpcServices="None" />
+		<Protobuf Include="Protos\netGrpcService.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
+	</ItemGroup>
 
 
 </Project>

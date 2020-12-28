@@ -2,7 +2,8 @@ Vue.component("patientsFeedbacks", {
 	data: function () {
 		return {
 			patientFeedbacks: [],
-			typeOfFeedback: 'Svi utisci'
+			typeOfFeedback: 'Svi utisci',
+			userToken: null
 		}
 	},
 	template: `
@@ -20,7 +21,9 @@ Vue.component("patientsFeedbacks", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li  class="active"><a href="#/">Utisci pacijenata</a></li>
+	            <li class="active"><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
+				<li><a href="#/surveyResults">Rezultati anketa</a></li>
+				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -30,8 +33,7 @@ Vue.component("patientsFeedbacks", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a href="#/patientRegistration">Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 	    </div>
 	 </div>
@@ -50,9 +52,8 @@ Vue.component("patientsFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
 		    <div><li class="active"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li><a href="#/postFeedback">Ostavite utisak</a></li></div><br/>
+			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
 	     </ul>
 	 </div> 		 
 
@@ -108,14 +109,35 @@ Vue.component("patientsFeedbacks", {
 	,
 	methods: {
 		publishFeedback: function (patientFeedback) {
-			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id)
-				.then(response => {
+			axios.put('api/patientFeedback/publishFeedback/' + patientFeedback.id, null, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
 					toast('Utisak je uspešno objavljen')
-					axios.get('api/patientFeedback').then(response => {			
+					axios.get('api/patientFeedback', {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {			
 						this.patientFeedbacks = response.data;
+					}).catch(error => {
+						if (error.response.status === 401 || error.response.status === 403) {
+							toast('Nemate pravo pristupa stranici!')
+							this.$router.push({ name: 'userLogin' })
+						}
 					});
 					//this.$router.go();
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
 				});
+		},
+
+		logOut: function () {
+			localStorage.removeItem("validToken");
 		}
 	},
 	computed: {
@@ -132,9 +154,18 @@ Vue.component("patientsFeedbacks", {
 		}
 	},
 	mounted() {
-
-		axios.get('api/patientFeedback').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/patientFeedback', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.patientFeedbacks = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 
 	}

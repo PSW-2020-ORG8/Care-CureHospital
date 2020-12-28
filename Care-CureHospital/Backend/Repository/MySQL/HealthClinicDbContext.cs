@@ -25,6 +25,7 @@ namespace Backend.Repository.MySQL
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Patient> Doctors { get; set; }
+        public DbSet<SystemAdministrator> SystemAdministrators { get; set; }
         public DbSet<Specialitation> Specialitations { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
@@ -61,7 +62,6 @@ namespace Backend.Repository.MySQL
             }
         }
 
-
         private string CreateConnectionStringFromEnvironment()
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
@@ -73,16 +73,15 @@ namespace Backend.Repository.MySQL
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {         
             modelBuilder.Entity<Patient>().HasData(
-                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
-                new Patient { Id = 2, Name = "Zika", Surname = "Zikic", ParentName = "Pera", Gender = Gender.Male, IdentityCard = "124123123", HealthInsuranceCard = "712312312312", Jmbg = "12342312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3), ContactNumber = "0635235333", EMail = "zika@gmail.com", Username = "zika", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
-                new Patient { Id = 3, Name = "Mica", Surname = "Micic", ParentName = "Jelena", Gender = Gender.Male, IdentityCard = "163123123", HealthInsuranceCard = "62312312312", Jmbg = "12312512312312", BloodGroup = BloodGroup.Unknown, DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3), ContactNumber = "0635557673", EMail = "mica@gmail.com", Username = "mica", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false },
-                new Patient { Id = 4, Name = "Luna", Surname = "Lunic", ParentName = "Jovan", Gender = Gender.Female, IdentityCard = "127123123", HealthInsuranceCard = "52312312312", Jmbg = "12312316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555356", EMail = "luna@gmail.com", Username = "luna", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false },
-                new Patient { Id = 5, Name = "Ivan", Surname = "Ivanovic", ParentName = "Luka", Gender = Gender.Male, IdentityCard = "127199123", HealthInsuranceCard = "52318812312", Jmbg = "12344316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "ivan@gmail.com", Username = "ivan", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true },
-                new Patient { Id = 6, Name = "Marko", Surname = "Markovic", ParentName = "Jovan", Gender = Gender.Male, IdentityCard = "127123333", HealthInsuranceCard = "52312312311", Jmbg = "12312316712344", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555312", EMail = "marko@gmail.com", Username = "marko", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true }
+                new Patient { Id = 1, Name = "Petar", Surname = "Petrovic", ParentName = "Zika", Gender = Gender.Male, IdentityCard = "123123123", HealthInsuranceCard = "32312312312", Jmbg = "13312312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2000, 1, 1, 3, 3, 3), ContactNumber = "063554533", EMail = "pera@gmail.com", Username = "pera", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false, Role = Role.Patient },
+                new Patient { Id = 2, Name = "Zika", Surname = "Zikic", ParentName = "Pera", Gender = Gender.Male, IdentityCard = "124123123", HealthInsuranceCard = "712312312312", Jmbg = "12342312312312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2001, 1, 1, 3, 3, 3), ContactNumber = "0635235333", EMail = "zika@gmail.com", Username = "zika", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false, Role = Role.Patient },
+                new Patient { Id = 3, Name = "Mica", Surname = "Micic", ParentName = "Jelena", Gender = Gender.Male, IdentityCard = "163123123", HealthInsuranceCard = "62312312312", Jmbg = "12312512312312", BloodGroup = BloodGroup.Unknown, DateOfBirth = new DateTime(2002, 1, 1, 3, 3, 3), ContactNumber = "0635557673", EMail = "mica@gmail.com", Username = "mica", Password = "123", GuestAccount = false, CityId = 1, Blocked = false, Malicious = false, Role = Role.Patient },
+                new Patient { Id = 4, Name = "Luna", Surname = "Lunic", ParentName = "Jovan", Gender = Gender.Female, IdentityCard = "127123123", HealthInsuranceCard = "52312312312", Jmbg = "12312316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555356", EMail = "luna@gmail.com", Username = "luna", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = false, Role = Role.Patient },
+                new Patient { Id = 5, Name = "Ivan", Surname = "Ivanovic", ParentName = "Luka", Gender = Gender.Male, IdentityCard = "127199123", HealthInsuranceCard = "52318812312", Jmbg = "12344316712312", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "ivan@gmail.com", Username = "ivan", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true, Role = Role.Patient },
+                new Patient { Id = 6, Name = "Marko", Surname = "Markovic", ParentName = "Jovan", Gender = Gender.Male, IdentityCard = "127123333", HealthInsuranceCard = "52312312311", Jmbg = "12312316712344", BloodGroup = BloodGroup.AbMinus, DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "063555312", EMail = "marko@gmail.com", Username = "marko", Password = "123", GuestAccount = false, CityId = 2, Blocked = false, Malicious = true, Role = Role.Patient }
             );
 
             modelBuilder.Entity<Doctor>().HasData(
@@ -96,6 +95,11 @@ namespace Backend.Repository.MySQL
                 new Doctor { Id = 8, Username = "marija", Password = "123", Name = "Marija", Surname = "Marijic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "marija@gmail.com", CityId = 1, SpecialitationId = 4 },
                 new Doctor { Id = 9, Username = "tanja", Password = "123", Name = "Tanja", Surname = "Tankosic", Jmbg = "13316712312312", DateOfBirth = new DateTime(2004, 1, 1, 3, 3, 3), ContactNumber = "06345111144", EMail = "tanja@gmail.com", CityId = 1, SpecialitationId = 5 }
             );
+
+            modelBuilder.Entity<SystemAdministrator>().HasData(
+               new SystemAdministrator { Id = 1, Username = "admin1", Password = "admin1", Name = "Vladislav", Surname = "Petkovic", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "vladislav@gmail.com", CityId = 1, Role = Role.Admin },
+               new SystemAdministrator { Id = 2, Username = "admin2", Password = "admin2", Name = "Dusan", Surname = "Vasiljev", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "dusan@gmail.com", CityId = 1, Role = Role.Admin }
+           );
 
             modelBuilder.Entity<Secretary>().HasData(
                 new Secretary { Id = 1, Username = "sekretar1", Password = "123", Name = "Milica", Surname = "Carica", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "milica@gmail.com", CityId = 1 }

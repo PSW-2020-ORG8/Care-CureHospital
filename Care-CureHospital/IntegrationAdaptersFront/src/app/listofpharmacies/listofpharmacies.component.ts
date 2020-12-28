@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PharmacyService } from 'src/app/pharmacy.service';
+import { Medicament } from '../models/Medicament';
 
 @Component({
     selector: 'app-listofpharmacies',
@@ -10,11 +11,17 @@ import { PharmacyService } from 'src/app/pharmacy.service';
   export class ListofPharmaciesComponent implements OnInit {
 
     categories = [];
+    medicamentName;
   
     constructor(private pharmacyService: PharmacyService) { }
   
+    ModalTitle:string;
+    ActivateAddEditRepComp:boolean=false;
+    med:Medicament;
+
     ngOnInit() {
         this.getAll();
+        this.addStock();
     }
   
     private getAll(): void {
@@ -25,5 +32,15 @@ import { PharmacyService } from 'src/app/pharmacy.service';
           console.log('Error');
         });
       }
- 
+
+    addStock(){
+      this.ModalTitle="Medicament stock";
+      this.ActivateAddEditRepComp=true;
+      this.pharmacyService.generateMedicamentStock().subscribe(data =>{
+        this.medicamentName = data;
+        console.log(this.medicamentName);
+      }, error => {
+        console.log('Error');
+      });
+    }
   }

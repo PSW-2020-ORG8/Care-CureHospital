@@ -15,7 +15,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            workDaysRecommendedTerms : [],
+            workDaysRecommendedTerms: [],
+            userToken: null
 		}
 	},
 	template: `
@@ -33,7 +34,11 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-					<li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+                        <li class="active"><a href="#/patientAppointments">Pregledi</a></li>
+                        <li><a href="#/">Utisci</a></li>
+                        <li><a href="#/patientMainPage">Početna</a></li>
+                        <li><a href="#/medicalRecordReview">Moj karton</a></li>
+                        <li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
 					</ul>
 				</div>
  
@@ -43,8 +48,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 						<img id="userIcon" src="images/user.png" />
 					</button>
 				<div class="dropdown-content">
-					<a  href="#/patientRegistration">Registruj se</a>
-					<a>Prijavi se</a>
+					<a href="#/userLogin" @click="logOut()">Odjavi se</a>
 				</div>
 			</div>
 		</div>
@@ -193,8 +197,17 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization).then(response => {
+                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
+                }).then(response => {
                     this.doctorsBySpecialization = response.data;
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
                 });
             } else if (this.recommendationStep === 2 && this.specialization === '0'){
                 toast('Morate izabrati specijalističku granu')
@@ -206,14 +219,22 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 this.recommendationStep += 1;
                 axios.get('api/appointment/getAllRecommendedTerms', {
                     params: {
-						startDate : this.convertDate(this.startDateModel),
-                        endDate : this.convertDate(this.endDateModel),
-                        doctorId : this.doctorId,
-                        priority : this.priority
-                        
-					}
+                        startDate: this.convertDate(this.startDateModel),
+                        endDate: this.convertDate(this.endDateModel),
+                        doctorId: this.doctorId,
+                        priority: this.priority
+
+                    }}, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
                 }).then(response => {
                     this.workDaysRecommendedTerms = response.data;
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
                 });
             } else if (this.recommendationStep === 4 && this.priority === '0'){
                 toast('Morate izabrati prioritet pretrage')
@@ -233,13 +254,14 @@ Vue.component("appointmentSchedulingByRecommendation", {
                     canceled: false,
                     startTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].startTime,
                     endTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].endTime,
-					doctorWorkDayId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].id,
-					medicalExamination: {
-                        shortDescription : '',
-                        urgency : false,
-                        roomId : this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].roomId,
-                        doctorId : this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].doctorId
-                    }
+                    doctorWorkDayId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].id,
+                    medicalExamination: {
+                        shortDescription: '',
+                        urgency: false,
+                        roomId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].roomId,
+                        doctorId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].doctorId
+                    }}, {
+                    headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
                     if (response.status === 200) {
                         toast('Termin je uspešno zakazan!')
@@ -249,6 +271,9 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 }).catch(error => {
                     if (error.response.status === 404) {
                         toast('Greška prilikom zakazivanja termina!')
+                    } else if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
                     }
                 });          
             }
@@ -272,11 +297,25 @@ Vue.component("appointmentSchedulingByRecommendation", {
             let month = d.getMonth() + 1;
             let day = d.getDate(); 
             return d.getFullYear() + '-' + (month > 9 ? '' : '0') + month + '-' + (day > 9 ? '' : '0') + day;
+        },
+        logOut: function () {
+            localStorage.removeItem("validToken");
         }
 	},
-	mounted() {
-        axios.get('api/doctor/getAllSpecialization').then(response => {
+    mounted() {
+        this.userToken = localStorage.getItem('validToken');
+
+        axios.get('api/doctor/getAllSpecialization', {
+            headers: {
+                'Authorization': 'Bearer ' + this.userToken
+            }
+        }).then(response => {
             this.specializations = response.data;
+        }).catch(error => {
+            if (error.response.status === 401 || error.response.status === 403) {
+                toast('Nemate pravo pristupa stranici!')
+                this.$router.push({ name: 'userLogin' })
+            }
         });
 	}
 });

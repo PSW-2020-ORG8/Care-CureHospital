@@ -11,6 +11,11 @@ export class DirectorComponent implements OnInit {
 
   constructor(private service:DirectorServiceService) { }
 
+  medicamentName:string;
+  quantity:number;
+  fromDate:Date;
+  toDate:Date;
+
   ReportList: Report[];
 
   ModalTitle:string;
@@ -23,8 +28,6 @@ export class DirectorComponent implements OnInit {
 
   addclick(){
     this.rep={
-      id: 0,
-      medicamentId: 0,
       medicamentName:"",
       quantity: 0,
       fromDate: null,
@@ -48,5 +51,6 @@ export class DirectorComponent implements OnInit {
 
   generate(){
     alert("Report saved!");
+    console.log(this.ReportList);
   }
 }

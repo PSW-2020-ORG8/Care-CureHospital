@@ -1,7 +1,8 @@
 Vue.component("blockMaliciousPatients", {
 	data: function () {
 		return {
-			maliciousPatients: []
+			maliciousPatients: [],
+			userToken: null
 		}
 	},
 	template: `
@@ -19,7 +20,9 @@ Vue.component("blockMaliciousPatients", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li class="active"><a>Zlonamerni korisnici</a></li>
+				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
+				<li><a href="#/surveyResults">Rezultati anketa</a></li>
+				<li class="active"><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -29,8 +32,7 @@ Vue.component("blockMaliciousPatients", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 	
@@ -67,23 +69,53 @@ Vue.component("blockMaliciousPatients", {
 	methods: {
 		blockUser : function(patientId) {
 			if (confirm('Da li ste sigurni da želite da blokirate pacijenta?') == true) {
-				axios.put('api/patient/blockMaliciousPatient/' + patientId)
-					.then(response => {
-						axios.get('api/patient/getMaliciousPatients').then(response => {
+				axios.put('api/patient/blockMaliciousPatient/' + patientId, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
+					axios.get('api/patient/getMaliciousPatients', {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
 							this.maliciousPatients = response.data;
-						});
+					}).catch(error => {
+						if (error.response.status === 401 || error.response.status === 403) {
+							toast('Nemate pravo pristupa stranici!')
+							this.$router.push({ name: 'userLogin' })
+						}
 					});
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
+				});
                 toast('Uspešno ste blokirali pacijenta!')
             }
-        }
+		},
+		logOut: function () {
+			localStorage.removeItem("validToken");
+		}
 
 	},
 	computed: {
 
 	},
 	mounted() {
-		axios.get('api/patient/getMaliciousPatients').then(response => {
+		this.userToken = localStorage.getItem('validToken');
+		axios.get('api/patient/getMaliciousPatients', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
 			this.maliciousPatients = response.data;
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
 	}
 

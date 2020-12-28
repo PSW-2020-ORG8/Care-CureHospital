@@ -2,7 +2,8 @@ Vue.component("doctorSurveyResults", {
 	data: function () {
 		return {
             doctorSurveyResults: [],
-            doctorQuestionsAverageGrades: []
+			doctorQuestionsAverageGrades: [],
+			userToken: null
 		}
 	},
 	template: `
@@ -20,7 +21,9 @@ Vue.component("doctorSurveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li class="active"><a href="#/doctorSurveyResults">Rezultati anketa</a></li>
+				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
+				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
+				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -30,8 +33,7 @@ Vue.component("doctorSurveyResults", {
 	        	<img id="userIcon" src="images/user.png" />
 	        </button>
 		    <div class="dropdown-content">
-		        <a >Registruj se</a>
-	            <a >Prijavi se</a>
+		        <a href="#/userLogin" @click="logOut()">Odjavi se</a>
 		    </div>
 		</div>
 		
@@ -105,20 +107,31 @@ Vue.component("doctorSurveyResults", {
 	`
 	,
 	methods: {
-
+		logOut: function () {
+			localStorage.removeItem("validToken");
+		}
 	},
 	computed: {
 
 	},
 	mounted() {
+		this.userToken = localStorage.getItem('validToken');
 
-		axios.get('api/survey/getSurveyResultsForDoctors').then(response => {
+		axios.get('api/survey/getSurveyResultsForDoctors', {
+			headers: {
+			'Authorization': 'Bearer ' + this.userToken }
+		}).then(response => {
             this.doctorSurveyResults = response.data;
             for (var doctorResult of this.doctorSurveyResults) {
                 var averageGradePerDoctor = (doctorResult.questionResults[0].averageGrade 
                     + doctorResult.questionResults[1].averageGrade + doctorResult.questionResults[2].averageGrade) / 3;
                 this.doctorQuestionsAverageGrades.push(averageGradePerDoctor);
             }
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
 		});
  
 	}

@@ -28,10 +28,29 @@ namespace IntegrationTests.IntegrationAdaptersIntegrationTests
             var response = await client.GetAsync("/api/eprescription/getForPatient/" + patientId);
 
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-            Console.WriteLine(expectedResponseStatusCode);
+            
         }
 
-       
+        [Fact]
+        public async void Get_All_Eprescription_By_Date()
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.GetAsync("/api/eprescription/findePrescriptionsByDate?date=2020-11-26T10:30:00");
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async void Get_All_Eprescription_By_Comment()
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.GetAsync("/api/eprescription/findePrescriptionsByDate?comment=Ne preskacite konzumiranje leka");
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+        }
+
         public static IEnumerable<object[]> EPrescriptionData()
         {
             var retVal = new List<object[]>();

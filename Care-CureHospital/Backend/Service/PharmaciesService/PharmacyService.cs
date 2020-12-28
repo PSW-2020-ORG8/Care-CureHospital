@@ -1,5 +1,4 @@
-﻿
-using Backend.Model.Pharmacy;
+﻿using Backend.Model.Pharmacy;
 using Backend.Repository.PharmacyRepository;
 using Service;
 using System;
@@ -63,5 +62,7 @@ namespace Backend.Service.PharmaciesService
                     return true;
             return false;
         }
+
+        
     }
 }
