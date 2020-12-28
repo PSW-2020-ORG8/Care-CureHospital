@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentsMicroservice", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMicroservice", "FeedbackMicroservice\FeedbackMicroservice.csproj", "{331DAA2A-4684-48D8-826E-6956E20446C5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMicroservice", "UserMicroservice\UserMicroservice.csproj", "{F2F9AE06-F745-4126-AD06-81A69A2E61E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{331DAA2A-4684-48D8-826E-6956E20446C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{331DAA2A-4684-48D8-826E-6956E20446C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{331DAA2A-4684-48D8-826E-6956E20446C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F9AE06-F745-4126-AD06-81A69A2E61E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F9AE06-F745-4126-AD06-81A69A2E61E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F9AE06-F745-4126-AD06-81A69A2E61E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F9AE06-F745-4126-AD06-81A69A2E61E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

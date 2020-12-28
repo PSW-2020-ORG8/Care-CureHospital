@@ -1,30 +1,19 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Stefan
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
+﻿using Microsoft.IdentityModel.Tokens;
 using Model.AllActors;
-using Model.Doctor;
 using System;
 using System.Collections.Generic;
-using Repository.UsersRepository;
-using Backend;
-using Microsoft.Extensions.Options;
-using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 using System.Security.Claims;
-using Backend.Service.UsersServices;
+using UserMicroservice.Repository;
 
-namespace Service.UsersServices
+namespace UserMicroservice.Service
 {
-    public class UserService : IService<User, int>
+    public class UserService : IUserService
     {
         public IUserRepository userRepository;
-        public PatientService patientService;
-        public SystemAdministratorService systemAdministratorService;
+        public IPatientService patientService;
+        public ISystemAdministratorService systemAdministratorService;
 
         public UserService(IUserRepository userRepository, PatientService patientService, SystemAdministratorService systemAdministratorService)
         {
@@ -78,7 +67,7 @@ namespace Service.UsersServices
 
         public String FindPasswordByUsername(String username)
         {
-            foreach(User user in GetAllEntities())
+            foreach (User user in GetAllEntities())
                 if (user.Username.Equals(username))
                     return user.Password;
             return "";
@@ -126,7 +115,7 @@ namespace Service.UsersServices
             return userRepository.GetAllManagers();
         }
 
-        public List<Doctor> GetDoctorBySpecialitation(Specialitation specialitation)
+        public List<Doctor> GetDoctorBySpecialitation(Model.Doctor.Specialitation specialitation)
         {
             return userRepository.GetDoctorBySpecialitation(specialitation);
         }

@@ -1,25 +1,25 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Backend;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Model.AllActors;
-using Service.UsersServices;
+using Model.Doctor;
+using Model.Term;
+using UserMicroservice.Repository;
+using UserMicroservice.Repository.MySQL.Stream;
+using UserMicroservice.Service;
 
-namespace WebAppPatient
+namespace UserMicroservice
 {
     public class Startup
     {
@@ -33,11 +33,22 @@ namespace WebAppPatient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors();
+            services.AddCors();
+            services.AddSingleton<IAppointmentService, AppointmentService>(service =>
+                    new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>()), new PatientService(new PatientRepository(new MySQLStream<Patient>()))));
+            services.AddSingleton<IDoctorService, DoctorService>(service =>
+                    new DoctorService(new DoctorRepository(new MySQLStream<Doctor>())));
+            services.AddSingleton<IPatientService, PatientService>(service =>
+                    new PatientService(new PatientRepository(new MySQLStream<Patient>())));
+            services.AddSingleton<ISpecializationService, SpecializationService>(service =>
+                    new SpecializationService(new SpecializationRepository(new MySQLStream<Specialitation>())));
+            services.AddSingleton<ISystemAdministratorService, SystemAdministratorService>(service =>
+                    new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>())));
+            services.AddSingleton<IUserService, UserService>(service =>
+                    new UserService(new UserRepository(new MySQLStream<User>()), 
+                        new PatientService(new PatientRepository(new MySQLStream<Patient>())),
+                            new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>()))));
             services.AddControllers();
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -64,9 +75,6 @@ namespace WebAppPatient
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
-            /*// configure DI for application services
-            services.AddScoped<IUserService, UserService>();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,15 +87,8 @@ namespace WebAppPatient
 
             app.UseRouting();
 
-            app.UseStaticFiles();
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                //FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
-                //RequestPath = new PathString("/wwwroot")
-            });
-
             app.UseAuthorization();
+
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
