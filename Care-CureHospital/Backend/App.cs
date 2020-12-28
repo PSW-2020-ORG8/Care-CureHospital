@@ -12,6 +12,7 @@ using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
 using Backend.Service.DoctorService;
+using Backend.Service.EmailService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.PharmaciesService;
 using Backend.Service.SftpService;
@@ -61,11 +62,13 @@ namespace Backend
         public SftpService SftpService;
         public SystemAdministratorService SystemAdministratorService;
         public UserService UserService;
+        public TenderService TenderService;
 
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
             SftpService = new SftpService();
+            TenderService = new TenderService();
             MedicalExaminationService = new MedicalExaminationService(
                 new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(

@@ -53,4 +53,14 @@ export class DirectorComponent implements OnInit {
     alert("Report saved!");
     console.log(this.ReportList);
   }
+
+  publishT(){
+    this.service.publishTender().subscribe(data=>{
+      console.log("Successfully sent!");
+      alert("Successfully sent!");
+    },
+    Error => {
+      console.log("Error");
+    });
+  }
 }
