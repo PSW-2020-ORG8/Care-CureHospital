@@ -21,7 +21,6 @@ import { Medicament } from '../models/Medicament';
 
     ngOnInit() {
         this.getAll();
-        this.addStock();
     }
   
     private getAll(): void {
@@ -36,11 +35,5 @@ import { Medicament } from '../models/Medicament';
     addStock(){
       this.ModalTitle="Medicament stock";
       this.ActivateAddEditRepComp=true;
-      this.pharmacyService.generateMedicamentStock().subscribe(data =>{
-        this.medicamentName = data;
-        console.log(this.medicamentName);
-      }, error => {
-        console.log('Error');
-      });
     }
   }

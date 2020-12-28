@@ -14,6 +14,7 @@ using Backend.Service.DirectorService;
 using Backend.Service.DoctorService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.PharmaciesService;
+using Backend.Service.RequestServices;
 using Backend.Service.SftpService;
 using Backend.Service.UsersServices;
 using Model.AllActors;
@@ -61,11 +62,13 @@ namespace Backend
         public SftpService SftpService;
         public SystemAdministratorService SystemAdministratorService;
         public UserService UserService;
+        public HttpService HttpService;
 
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
             SftpService = new SftpService();
+            HttpService = new HttpService();
             MedicalExaminationService = new MedicalExaminationService(
                 new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(

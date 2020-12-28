@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pharmacy } from './pharmacies/pharmacy';
+import { Medicament } from './models/Medicament';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ import { Pharmacy } from './pharmacies/pharmacy';
     readonly APIUrl = "http://localhost:51492/api";
 
     constructor(private http: HttpClient) { 
+      this.generateMedicamentStock();
     }
 
     addPh(pharmacy: Pharmacy): Observable<any> {
@@ -22,6 +24,6 @@ import { Pharmacy } from './pharmacies/pharmacy';
       }
 
     generateMedicamentStock():Observable<any>{
-      return this.http.get(this.APIUrl+'/stock');
+      return this.http.get<any>(this.APIUrl+'/stock');
     }
   }

@@ -14,15 +14,44 @@ export class MedicamentComponent implements OnInit {
 
   @Input() med:Medicament;
    name:string;
-   quantity:string;
+   quantity:number;
 
-  medList:any=[];
+    MedicamentList:Medicament[]=[
+      {
+        id:1,
+        name: "Aspirin",
+        quantity: 40
+      },
+      {
+        id:2,
+        name: "Bromazepan",
+        quantity: 20
+      },
+      {
+        id:2,
+        name: "Vitamin B",
+        quantity: 60
+      }
+    ];
 
   ngOnInit(): void {
+    this.med={
+      id: 0,
+      name:"",
+      quantity: 0
+    };
     this.sendRequest();
   }
 
   sendRequest(){
-    alert("Request sent!");
+    this.service.generateMedicamentStock().subscribe((data:Medicament[]) =>{
+      this.MedicamentList = data;
+      console.log(this.MedicamentList);
+      /*this.MedicamentList.forEach(
+        m => this.name+=m
+      )*/
+    }, error => {
+      console.log('Error');
+    });
   }
 }
