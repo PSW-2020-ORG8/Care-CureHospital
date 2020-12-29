@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
+import { HttpClient } from '@angular/common/http'; 
+import { Report } from 'src/app/models/Report';
 
 @Component({
   selector: 'app-report',
@@ -8,11 +10,9 @@ import { DirectorServiceService } from 'src/app/director-service.service';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService) { }
+  constructor(private service:DirectorServiceService, public http: HttpClient) { }
 
-  @Input() rep:any;
-  id:number;
-  medicamentId: number;
+  @Input() rep:Report;
   medicamentName:string;
   quantity:number;
   fromDate:Date;
@@ -21,17 +21,19 @@ export class ReportComponent implements OnInit {
   ReportList:any=[];
 
   ngOnInit(): void {
+    this.medicamentName = this.rep.medicamentName;
+    this.quantity = this.rep.quantity;
+    this.fromDate = this.rep.fromDate;
+    this.toDate = this.rep.toDate;
   }
 
   addReport(){
-    var val = {id:this.id,
-              medicamentId:this.medicamentId,
-              medicamentName:this.medicamentName,
-              quantity:this.quantity,
-              fromDate:this.fromDate,
-              toDate:this.toDate};
+    var val = {medicamentName:this.ReportList.medicamentName,
+              quantity:this.ReportList.quantity,
+              fromDate:this.ReportList.fromDate,
+              toDate:this.ReportList.toDate};
 
-    this.service.addReport(val).subscribe(res=>{
+    this.service.addReports(val).subscribe(res=>{
       alert(res.toString())});
     alert("Successfully added report");
   }

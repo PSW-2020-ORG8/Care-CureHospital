@@ -16,7 +16,7 @@ namespace IntegrationAdapters.Controllers
              StringBuilder builder = new StringBuilder();
              builder.Append("About medication consumption:");
              String medRep = builder.ToString();
-             var test = @".\..\fileHttp.txt";
+             var test = "Files\\Report.json";
              System.IO.File.WriteAllText(test, medRep);
              try
              {

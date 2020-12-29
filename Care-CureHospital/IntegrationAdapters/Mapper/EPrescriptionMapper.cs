@@ -17,13 +17,12 @@ namespace IntegrationAdapters.Mapper
             return dto;
         }
 
-        public static EPrescription EPrescriptionDtoToEPrescription(EPrescriptionDto dto, EPrescription eprescription)
+        public static EPrescription EPrescriptionDtoToEPrescription(EPrescriptionDto dto)
         {
             EPrescription newEPrescriptions = new EPrescription();
-            newEPrescriptions.Id = dto.Id;
-            newEPrescriptions.PatientId = dto.PatientId;
             newEPrescriptions.PatientName = dto.PatientName;
             newEPrescriptions.MedicamentName = dto.MedicamentName;
+            newEPrescriptions.Comment = dto.Comment;
             newEPrescriptions.PublishingDate = dto.PublishingDate;
             return newEPrescriptions;
         }

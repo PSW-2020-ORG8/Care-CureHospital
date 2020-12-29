@@ -41,16 +41,16 @@ namespace IntegrationAdapters.Controllers
         {
             try
             {
-                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.13", "user", "password")))
+                using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "tester", "password")))
                 {
                     StringBuilder builder = new StringBuilder();
                     builder.Append("EPrescription:");
                     String medRep = builder.ToString();
-                    var test = @"D:\testFiles\eprescription.txt";
+                    var test = "Files\\eprescription.txt";
                     System.IO.File.WriteAllText(test, medRep);
                     
                     client.Connect();
-                    client.UploadFile(System.IO.File.OpenRead(test), @"\public\" + Path.GetFileName(test), x => { Console.WriteLine(x); });
+                    client.UploadFile(System.IO.File.OpenRead(test), @"" + Path.GetFileName(test), x => { Console.WriteLine(x); });
 
                     SendNotificationEPrescription();
                     client.Disconnect();

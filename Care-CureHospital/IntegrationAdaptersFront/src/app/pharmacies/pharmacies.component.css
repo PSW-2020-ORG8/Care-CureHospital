@@ -1,11 +1,11 @@
-.mat-form-field-appearance-outline .mat-form-field-outline {
-    background-color:white !important;
-  }
-  
-  .apoteka {
-    height:60em;
+  .pharmacy {
+    height:50em;
     background-size:cover;
     width:auto;
-    background-position:100% 100%;
-    background-image:url('\src\assets\apoteka.jpg');
+    background-position:center;
+    background-image:url('\src\assets\hospital.jpg');
   }
+
+  h3{
+    margin-top: 3%;
+}
