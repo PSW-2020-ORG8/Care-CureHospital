@@ -12,6 +12,8 @@ namespace E2ETests.WebAppPatientE2ETests
     {
         private readonly IWebDriver driver;
         private BlockMaliciousPatientsPage blockMaliciousPatientsPage;
+        private UserLoginPage userLoginPage;
+        private PatientsFeedbacksPage patientsFeedbacksPage;
         private int patientsForBlockingCount = 0;
 
         public BlockMaliciousPatientsTest()
@@ -27,8 +29,25 @@ namespace E2ETests.WebAppPatientE2ETests
 
             driver = new ChromeDriver(options);
 
+            userLoginPage = new UserLoginPage(driver);
+            userLoginPage.Navigate();
+            Assert.Equal(driver.Url, UserLoginPage.URI);
+            Assert.True(userLoginPage.UsernameElementDisplayed());
+            Assert.True(userLoginPage.PasswordElementDisplayed());
+            Assert.True(userLoginPage.SubmitButtonElementDisplayed());
+
+            userLoginPage.InsertUsername("admin1");
+            userLoginPage.InsertPassword("admin1");
+            userLoginPage.SubmitForm();
+            userLoginPage.WaitForAdministratorHomePage();
+
+            patientsFeedbacksPage = new PatientsFeedbacksPage(driver);
+            Assert.Equal(driver.Url, PatientsFeedbacksPage.URI);
+            Assert.True(patientsFeedbacksPage.MaliciousPatientsLinkElementDisplayed());
+            patientsFeedbacksPage.ClickMaliciousPatientsLink();
+
             blockMaliciousPatientsPage = new BlockMaliciousPatientsPage(driver);
-            blockMaliciousPatientsPage.Navigate();
+            blockMaliciousPatientsPage.EnsurePageIsDisplayed();
             patientsForBlockingCount = blockMaliciousPatientsPage.PatientsForBlockingCount();
             Assert.Equal(driver.Url, BlockMaliciousPatientsPage.URI);
             Assert.True(blockMaliciousPatientsPage.BlockMaliciousPatientButtonDisplayed());
@@ -47,9 +66,7 @@ namespace E2ETests.WebAppPatientE2ETests
             blockMaliciousPatientsPage.WaitForAlertDialog();
             blockMaliciousPatientsPage.ResolveAlertDialog();
 
-            BlockMaliciousPatientsPage newBlockMaliciousPatientsPage = new BlockMaliciousPatientsPage(driver);
-            newBlockMaliciousPatientsPage.Navigate();
-
+            blockMaliciousPatientsPage.EnsureTableDataIsDisplayed();
             Assert.Equal(patientsForBlockingCount - 1, blockMaliciousPatientsPage.PatientsForBlockingCount());
         }
 
