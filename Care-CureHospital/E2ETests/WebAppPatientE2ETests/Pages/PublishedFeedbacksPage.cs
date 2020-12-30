@@ -12,7 +12,8 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     {
         private readonly IWebDriver driver;
         public const string URI = "http://localhost:5000/index.html#/";
-        private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));       
+        private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));
+        private IWebElement postFeedbackLinkElement => driver.FindElement(By.Id("post-feedback-link"));
 
         public PublishedFeedbacksPage(IWebDriver driver)
         {
@@ -37,6 +38,16 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
                     return false;
                 }
             });
+        }
+
+        public bool PostFeedbackLinkElementDisplayed()
+        {
+            return postFeedbackLinkElement.Displayed;
+        }
+
+        public void ClickPostFeedbackLink()
+        {
+            postFeedbackLinkElement.Click();
         }
 
         public int PublishedFeedbackCount()

@@ -21,9 +21,9 @@ Vue.component("patientsFeedbacks", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-	            <li class="active"><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
+	            <li class="active"><a href="#/patientsFeedbacks" id="patient-feedbacks-link">Utisci pacijenata</a></li>
 				<li><a href="#/surveyResults">Rezultati anketa</a></li>
-				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
+				<li><a href="#/blockMaliciousPatients" id="malicious-patients-link">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  

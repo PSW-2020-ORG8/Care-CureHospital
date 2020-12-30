@@ -8,7 +8,7 @@ using Xunit;
 
 namespace E2ETests.WebAppPatientE2ETests
 {
-    public class CancelAppointmentTest
+    public class CancelAppointmentTest : IDisposable
     {
         private readonly IWebDriver driver;
         private PatientAppointmentsPage patientAppointmentsPage;

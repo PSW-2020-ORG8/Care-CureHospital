@@ -11,7 +11,7 @@ namespace E2ETests.WebAppPatientE2ETests
     public class PublishFeedbackTests : IDisposable
     {
         private readonly IWebDriver driver;
-        private PublishFeedbackPage publishFeedbackPage;
+        private PatientsFeedbacksPage publishFeedbackPage;
         private PublishedFeedbacksPage publishedFeedbacksPage;
         private int publishedFeedbacksCount = 0;
 
@@ -34,9 +34,9 @@ namespace E2ETests.WebAppPatientE2ETests
             publishedFeedbacksCount = publishedFeedbacksPage.PublishedFeedbackCount();
             Assert.Equal(driver.Url, PublishedFeedbacksPage.URI);
 
-            publishFeedbackPage = new PublishFeedbackPage(driver);
+            publishFeedbackPage = new PatientsFeedbacksPage(driver);
             publishFeedbackPage.Navigate();
-            Assert.Equal(driver.Url, PublishFeedbackPage.URI);
+            Assert.Equal(driver.Url, PatientsFeedbacksPage.URI);
             Assert.True(publishFeedbackPage.PublishFeedbackButtonDisplayed());           
         }
 
