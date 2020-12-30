@@ -11,7 +11,8 @@ namespace E2ETests.WebAppPatientE2ETests
     public class PublishFeedbackTests : IDisposable
     {
         private readonly IWebDriver driver;
-        private PatientsFeedbacksPage publishFeedbackPage;
+        private UserLoginPage userLoginPage;
+        private PatientsFeedbacksPage patientsFeedbacksPage;
         private PublishedFeedbacksPage publishedFeedbacksPage;
         private int publishedFeedbacksCount = 0;
 
@@ -28,16 +29,32 @@ namespace E2ETests.WebAppPatientE2ETests
 
             driver = new ChromeDriver(options);
 
+            userLoginPage = new UserLoginPage(driver);
+            userLoginPage.Navigate();
+            Assert.True(userLoginPage.UsernameElementDisplayed());
+            Assert.True(userLoginPage.PasswordElementDisplayed());
+            Assert.True(userLoginPage.SubmitButtonElementDisplayed());
+            userLoginPage.InsertUsername("admin1");
+            userLoginPage.InsertPassword("admin1");
+            userLoginPage.SubmitForm();
+            userLoginPage.WaitForAdministratorHomePage();
+
+            patientsFeedbacksPage = new PatientsFeedbacksPage(driver);
+            Assert.True(patientsFeedbacksPage.PublishedFeedbacksLinkElementDisplayed());
+            Assert.Equal(driver.Url, PatientsFeedbacksPage.URI);
+            patientsFeedbacksPage.ClickPublishedFeedbacksLink();
+            patientsFeedbacksPage.WaitForPublishedFeedbacksPage();
+
             publishedFeedbacksPage = new PublishedFeedbacksPage(driver);
-            publishedFeedbacksPage.Navigate();
             publishedFeedbacksPage.EnsurePageIsDisplayed();
             publishedFeedbacksCount = publishedFeedbacksPage.PublishedFeedbackCount();
             Assert.Equal(driver.Url, PublishedFeedbacksPage.URI);
+            publishedFeedbacksPage.ClickAllFeedbacksLink();
+            publishedFeedbacksPage.WaitForAllFeedbacksPage();
 
-            publishFeedbackPage = new PatientsFeedbacksPage(driver);
-            publishFeedbackPage.Navigate();
+            patientsFeedbacksPage = new PatientsFeedbacksPage(driver);
+            Assert.True(patientsFeedbacksPage.PublishFeedbackButtonDisplayed());
             Assert.Equal(driver.Url, PatientsFeedbacksPage.URI);
-            Assert.True(publishFeedbackPage.PublishFeedbackButtonDisplayed());           
         }
 
         public void Dispose()
@@ -49,11 +66,11 @@ namespace E2ETests.WebAppPatientE2ETests
         [Fact]
         public void TestSuccessfulPublishFeedback()
         {
-            publishFeedbackPage.ClickPublishFeedbackButton();
-            //publishFeedbackPage.WaitForButtonClick();
+            patientsFeedbacksPage.ClickPublishFeedbackButton();
+            patientsFeedbacksPage.ClickPublishedFeedbacksLink();
+            patientsFeedbacksPage.WaitForPublishedFeedbacksPage();
 
             PublishedFeedbacksPage newPublishedFeedbacksPage = new PublishedFeedbacksPage(driver);
-            newPublishedFeedbacksPage.Navigate();
             newPublishedFeedbacksPage.EnsurePageIsDisplayed();
 
             Assert.Equal(publishedFeedbacksCount + 1, newPublishedFeedbacksPage.PublishedFeedbackCount());                                

@@ -14,6 +14,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         public const string URI = "http://localhost:5000/index.html#/";
         private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));
         private IWebElement postFeedbackLinkElement => driver.FindElement(By.Id("post-feedback-link"));
+        private IWebElement allFeedbacksLinkElement => driver.FindElement(By.Id("all-feedbacks-link"));
 
         public PublishedFeedbacksPage(IWebDriver driver)
         {
@@ -45,14 +46,30 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             return postFeedbackLinkElement.Displayed;
         }
 
+        public bool allFeedbacksLinkElementDisplayed()
+        {
+            return allFeedbacksLinkElement.Displayed;
+        }
+
         public void ClickPostFeedbackLink()
         {
             postFeedbackLinkElement.Click();
         }
 
+        public void ClickAllFeedbacksLink()
+        {
+            allFeedbacksLinkElement.Click();
+        }
+
         public int PublishedFeedbackCount()
         {
             return publishedFeedbacks.Count;
+        }
+
+        public void WaitForAllFeedbacksPage()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientsFeedbacksPage.URI));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);
