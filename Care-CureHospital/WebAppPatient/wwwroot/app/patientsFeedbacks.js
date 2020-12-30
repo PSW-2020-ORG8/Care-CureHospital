@@ -52,8 +52,8 @@ Vue.component("patientsFeedbacks", {
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li class="active"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br/>
-			<div><li><a href="#/">Objavljeni utisci</a></li></div><br/>
+		    <div><li class="active"><a href="#/patientsFeedbacks" id="all-feedbacks-link">Svi utisci</a></li></div><br/>
+			<div><li><a href="#/" id="published-feedbacks-link">Objavljeni utisci</a></li></div><br/>
 	     </ul>
 	 </div> 		 
 
