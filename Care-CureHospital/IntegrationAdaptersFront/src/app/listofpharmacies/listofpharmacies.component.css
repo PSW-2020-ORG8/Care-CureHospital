@@ -1,13 +1,9 @@
-.bolnica {
+.hospital {
     height:50em;
     background-size:cover;
     width:auto;
     background-position:center;
-    background-image:url('\src\assets\bolnica.jpg');
-  }
-
-  * {
-    font-family: sans-serif; /* Change your font family */
+    background-image:url('\src\assets\hospital.jpg');
   }
   
   .content-table {
@@ -36,5 +32,9 @@
   
   .content-table tbody tr {
     background-color: #e6f7ff;
+  }
+
+  .h3{
+    margin-top: 3%;
   }
   

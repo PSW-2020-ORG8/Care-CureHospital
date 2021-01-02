@@ -9,8 +9,6 @@ using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using WebAppPatient.Dto;
 using Xunit;
 
 namespace UnitTests.WebAppPatientUnitTests

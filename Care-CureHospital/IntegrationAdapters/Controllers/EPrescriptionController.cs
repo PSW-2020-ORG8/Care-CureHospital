@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using IntegrationAdapters.Mapper;
+
 namespace IntegrationAdapters.Controllers
 {
     [Route("api/[controller]")]
@@ -24,7 +25,7 @@ namespace IntegrationAdapters.Controllers
         [HttpPost] 
         public IActionResult AddEPrescription(EPrescriptionDto dto)
         {
-            EPrescription eprescription = EPrescriptionMapper.EPrescriptionDtoToEPrescription(dto, null);
+            EPrescription eprescription = EPrescriptionMapper.EPrescriptionDtoToEPrescription(dto);
             App.Instance().EPrescriptionService.AddEntity(eprescription);
             return Ok();
         }
@@ -51,6 +52,13 @@ namespace IntegrationAdapters.Controllers
             List<EPrescriptionDto> result = new List<EPrescriptionDto>();
             App.Instance().EPrescriptionService.FindEPrescriptionsForCommentParameter(patientId, comment).ToList().ForEach(eprescription => result.Add(EPrescriptionMapper.EPrescriptionToEPresctriptionDto(eprescription)));
             return Ok(result);
+        }
+
+        [HttpPost("send")]
+        public IActionResult SendPrescription()
+        {
+            App.Instance().EPrescriptionService.SendPrescriptionSftp();
+            return Ok();
         }
     }
 }

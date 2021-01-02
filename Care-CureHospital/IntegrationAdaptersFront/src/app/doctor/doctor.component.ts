@@ -18,23 +18,15 @@ export class DoctorComponent implements OnInit {
   ep:EPrescription;
 
   ngOnInit(): void {
-    this.refreshPrescList();
+    this.refreshEPrescList();
   }
 
   addEP(){
-    this.ep = {
-      id: 0,
-      patientId: 0,
-      patientName: "",
-      comment: "",
-      medicamentName:"",
-      publishingDate: null
-    }
     this.ModalTitle="Add EPrescription";
     this.ActivateAddEditEPComp=true;
   }
 
-  refreshPrescList(){
+  refreshEPrescList(){
     this.service.getEPrescriptionList().subscribe((data:EPrescription[])  => {
       console.log(data);
       this.EPrescriptionList = data;
@@ -43,5 +35,6 @@ export class DoctorComponent implements OnInit {
 
   closeClick(){
     this.ActivateAddEditEPComp=false;
+    this.refreshEPrescList();
   }
 }
