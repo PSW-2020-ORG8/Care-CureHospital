@@ -24,6 +24,7 @@ services:
       context: .
       dockerfile: Backend/Dockerfile
     image: astevanovic/backend:latest
+    container_name: backend
     restart: on-failure
     environment:
       DATABASE_USERNAME: user
@@ -46,6 +47,7 @@ services:
       context: .
       dockerfile: IntegrationTests/Dockerfile
     image: astevanovic/integrationtests:latest
+    container_name: integrationtests
     environment:
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: user
