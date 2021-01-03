@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Backend.Model.DoctorMenager;
-using Model.DoctorMenager;
 using Backend.Repository.DirectorRepository;
 using Service;
 
@@ -12,10 +10,17 @@ namespace Backend.Service.DirectorService
     public class ReportService : IService<Report, int>
     {
         public IReportRepository reportRepository;
+        public ISftpService sftpService;
 
         public ReportService(IReportRepository reportRepository)
         {
             this.reportRepository = reportRepository;
+        }
+
+        public ReportService(IReportRepository reportRepository, ISftpService sftpService)
+        {
+            this.reportRepository = reportRepository;
+            this.sftpService = sftpService;
         }
 
         public Report GetEntity(int id)
@@ -49,8 +54,19 @@ namespace Backend.Service.DirectorService
         {
             reportRepository.DeleteEntity(entity);
         }
+
+        public void SendReportSftp()
+        {
+            String reportFile = "Files\\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
+            System.IO.File.WriteAllText(reportFile, "Report about medicament consumption:");
+            try
+            {
+                sftpService.UploadFile(reportFile);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
     }
-
-
-
 }

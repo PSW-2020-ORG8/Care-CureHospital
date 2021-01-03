@@ -14,6 +14,9 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { EprescriptionComponent } from './doctor/eprescription/eprescription.component';
+import { MedicamentComponent } from './medicament/medicament.component';
+import { UrgentProcurementComponent } from './urgent-procurement/urgent-procurement.component';
+import { TenderComponent } from './doctor/tender/tender.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { EprescriptionComponent } from './doctor/eprescription/eprescription.com
     ReportComponent,
     EprescriptionComponent,
     ListofPharmaciesComponent,
-    PharmacyComponent
+    PharmacyComponent,
+    MedicamentComponent,
+    UrgentProcurementComponent,
+    TenderComponent
   ],
   imports: [
     BrowserModule,

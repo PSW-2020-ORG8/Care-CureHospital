@@ -1,6 +1,8 @@
-<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
-(click)="addclick()" data-backdrop='static' data-keybord="false">Add report</button>
-
+<div class="director">
+  <button type="button" mat-raised-button data-toggle="modal" data-target="#exampleModal"
+(click)="addclick()" data-backdrop='static' data-keybord="false" class="reportButton">Add report</button>
+<button type="button" mat-raised-button (click)="publishT()" class="tenderButton">Publish tender</button>
+  <br/>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -18,22 +20,19 @@
       </div>
     </div>
   </div>
+  <br/>
 <form enctype="multipart/form-data">
 <table class="table table-striped" matTableExporter #exporter="matTableExporter">
     <thead>
         <tr>
-            <th id="Id">Id </th>
-            <th id="MedicationId">MedicamentId</th>
-            <th id="MedicationName">MedicamentName</th>
-            <th id="ConsumedMedication">Quantity</th>
-            <th id="FromDate">FromDate</th>
-            <th id="ToDate">ToDate</th>
+          <th id="MedicationName">MedicamentName</th>
+          <th id="ConsumedMedication">Quantity</th>
+          <th id="FromDate">FromDate</th>
+          <th id="ToDate">ToDate</th>
         </tr>
     </thead>
     <tbody>
        <tr *ngFor="let dataItem of ReportList">
-            <td>{{dataItem.id}}</td>
-            <td>{{dataItem.medicamentId}}</td>
             <td>{{dataItem.medicamentName}}</td>
             <td>{{dataItem.quantity}}</td>
             <td>{{dataItem.fromDate}}</td>
@@ -42,4 +41,5 @@
     </tbody>
 </table>
 </form> 
-<button (click)="generate()" class="btn btn-primary">Save</button>
+<button (click)="generate()" mat-raised-button class="buttonSave">Save</button>
+</div>

@@ -12,8 +12,11 @@ using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
 using Backend.Service.DoctorService;
+using Backend.Service.EmailService;
 using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.PharmaciesService;
+using Backend.Service.RequestServices;
+using Backend.Service.SftpService;
 using Backend.Service.UsersServices;
 using Model.AllActors;
 using Model.Doctor;
@@ -57,10 +60,18 @@ namespace Backend
         public RoomService RoomService;
         public ManagerService ManagerService;
         public SecretaryService SecretaryService;
+        public SftpService SftpService;
+        public SystemAdministratorService SystemAdministratorService;
+        public UserService UserService;
+        public HttpService HttpService;
+        public TenderService TenderService;
 
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
+            SftpService = new SftpService();
+            HttpService = new HttpService();
+            TenderService = new TenderService();
             MedicalExaminationService = new MedicalExaminationService(
                 new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(
@@ -84,7 +95,7 @@ namespace Backend
             DoctorService = new DoctorService(
                 new DoctorRepository(new MySQLStream<Doctor>(), new IntSequencer()));
             ReportService = new ReportService(
-               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()));
+               new ReportRepository(new MySQLStream<Report>(), new IntSequencer()), SftpService);
             DoctorWorkDayService = new DoctorWorkDayService(
                 new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>(), new IntSequencer()), DoctorService);
             SpetialitationService = new SpetialitationService(
@@ -92,7 +103,7 @@ namespace Backend
             AppointmentService = new AppointmentService(
                 new AppointmentRepository(new MySQLStream<Appointment>(), new IntSequencer()), PatientService);
             EPrescriptionService = new EPrescriptionService(
-                new EPrescriptionRepository(new MySQLStream<EPrescription>(), new IntSequencer()));
+                new EPrescriptionRepository(new MySQLStream<EPrescription>(), new IntSequencer()), SftpService);
             PharmacyService = new PharmacyService(
                new PharmacyRepository(new MySQLStream<Pharmacies>(), new IntSequencer()));
             RoomService = new RoomService(
@@ -101,6 +112,10 @@ namespace Backend
                 new ManagerRepository(new MySQLStream<Manager>(), new IntSequencer()));
             SecretaryService = new SecretaryService(
                 new SecretaryRepository(new MySQLStream<Secretary>(), new IntSequencer()));
+            SystemAdministratorService = new SystemAdministratorService(
+                new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>(), new IntSequencer()));
+            UserService = new UserService(
+                new UserRepository(new MySQLStream<User>(), new IntSequencer()), PatientService, SystemAdministratorService);
         }
 
         public static App Instance()
@@ -111,6 +126,5 @@ namespace Backend
             }
             return _instance;
         }
-
     }
 }
