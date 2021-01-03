@@ -8,7 +8,6 @@ using UserMicroservice.Service;
 
 namespace UserMicroservice.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
@@ -22,7 +21,6 @@ namespace UserMicroservice.Controllers
             this.appSettings = appSettings.Value;
         }
 
-        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthenticateDto model)
         {
@@ -32,13 +30,6 @@ namespace UserMicroservice.Controllers
                 return Forbid();
             }
             return Ok(user);
-        }
-
-        [Authorize(Roles = Role.Admin + "," + Role.Patient)]
-        [HttpPost("logout")]
-        public IActionResult Logout()
-        {
-            return Ok(new { Token = "", Message = "Logged Out" });
         }
     }
 }
