@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Model.BlogAndNotification;
+using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Dto;
 using FeedbackMicroservice.Mapper;
 using FeedbackMicroservice.Service;
@@ -23,6 +23,7 @@ namespace FeedbackMicroservice.Controllers
         public IActionResult GetAllFeedbacks()
         {
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
+            
             this.patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
             return Ok(result);
         }
@@ -42,7 +43,7 @@ namespace FeedbackMicroservice.Controllers
             {
                 return BadRequest();
             }
-            PatientFeedback patientFeedback = PatientFeedbackMapper.PatientFeedbackDtoToPatientFeedback(dto, null);
+            PatientFeedback patientFeedback = PatientFeedbackMapper.PatientFeedbackDtoToPatientFeedback(dto);
             this.patientFeedbackService.AddEntity(patientFeedback);
             return Ok();
         }

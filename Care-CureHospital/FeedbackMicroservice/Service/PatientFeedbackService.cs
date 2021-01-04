@@ -1,9 +1,8 @@
-﻿using Backend.Model.BlogAndNotification;
+﻿using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FeedbackMicroservice.Service
 {

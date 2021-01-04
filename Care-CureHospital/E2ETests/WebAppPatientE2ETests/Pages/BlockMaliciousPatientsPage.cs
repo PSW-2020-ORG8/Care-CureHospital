@@ -13,6 +13,8 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         public const string URI = "http://localhost:5000/index.html#/blockMaliciousPatients";
         private IWebElement blockMaliciousPatientButton => driver.FindElement(By.ClassName("block-malicious-patient-btn"));
         private ReadOnlyCollection<IWebElement> patientsForBlocking => driver.FindElements(By.ClassName("patient-for-blocking"));
+        private IWebElement blockedPatientTd => driver.FindElement(By.ClassName("blocked-patient-td"));
+
 
 
         public BlockMaliciousPatientsPage(IWebDriver driver)
@@ -20,9 +22,54 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             this.driver = driver;
         }
 
+        public void EnsurePageIsDisplayed()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            wait.Until(condition =>
+            {
+                try
+                {
+                    return BlockMaliciousPatientButtonDisplayed();
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return false;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+            });
+        }
+
+        public void EnsureTableDataIsDisplayed()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            wait.Until(condition =>
+            {
+                try
+                {
+                    return BlockMaliciousPatientTdDisplayed();
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return false;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+            });
+        }
+
         public bool BlockMaliciousPatientButtonDisplayed()
         {
             return blockMaliciousPatientButton.Displayed;
+        }
+
+        public bool BlockMaliciousPatientTdDisplayed()
+        {
+            return blockedPatientTd.Displayed;
         }
 
         public void ClickBlockMaliciousPatientButton()

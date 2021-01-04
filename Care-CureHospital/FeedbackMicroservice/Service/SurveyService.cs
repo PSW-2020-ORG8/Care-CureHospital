@@ -1,22 +1,17 @@
-﻿using FeedbackMicroservice.Repository;
-using Model.Patient;
-using System;
+﻿using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FeedbackMicroservice.Service
 {
     public class SurveyService : ISurveyService
     {
         public ISurveyRepository SurveyRepository;
-        public MedicalExaminationService MedicalExaminationService;
         public AnswerService AnswerService;
 
-        public SurveyService(ISurveyRepository surveyRepository, MedicalExaminationService medicalExaminationService, AnswerService answerService)
+        public SurveyService(ISurveyRepository surveyRepository, AnswerService answerService)
         {
             SurveyRepository = surveyRepository;
-            MedicalExaminationService = medicalExaminationService;
             AnswerService = answerService;
         }
 
@@ -47,7 +42,7 @@ namespace FeedbackMicroservice.Service
 
         /// <summary> This method find which doctors are graded by surveys. </summary>
         /// <returns> Dictionary which keys represent doctor id and values represent lists of survey ids. </returns>
-        public Dictionary<int, List<int>> GetSurveyIdsForDoctorIds()
+     /*   public Dictionary<int, List<int>> GetSurveyIdsForDoctorIds()
         {
             Dictionary<int, List<int>> results = new Dictionary<int, List<int>>();
             foreach (Survey survey in GetAllEntities())
@@ -73,7 +68,7 @@ namespace FeedbackMicroservice.Service
                 result.Add(doctorId, AnswerService.GetAnswersForDoctorBySurveyIds(surveyIdsForDoctorIds[doctorId]));
             }
             return result;
-        }
+        }*/
 
     }
 }

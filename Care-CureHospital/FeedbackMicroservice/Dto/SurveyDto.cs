@@ -1,9 +1,7 @@
-﻿using Model.Patient;
-using Model.Term;
+﻿using FeedbackMicroservice.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace FeedbackMicroservice.Dto
 {
