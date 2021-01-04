@@ -1,5 +1,5 @@
-﻿using FeedbackMicroservice.Repository;
-using Model.Patient;
+﻿using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
