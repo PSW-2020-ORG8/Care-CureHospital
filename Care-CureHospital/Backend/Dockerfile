@@ -13,7 +13,7 @@ FROM build-env AS publish
 ENV PATH $PATH:/root/.dotnet/tools
 RUN dotnet tool install -g dotnet-ef --version 3.1.0 && \
 	dotnet publish "Backend/Backend.csproj" -c Release -o /app/publish && \
-    dotnet-ef migrations script -p "Backend/Backend.csproj" -o /app/sql/init.sql
+    dotnet-ef dbcontext script -p "Backend/Backend.csproj" -o /app/sql/init.sql
 
 FROM base AS final
 WORKDIR /app

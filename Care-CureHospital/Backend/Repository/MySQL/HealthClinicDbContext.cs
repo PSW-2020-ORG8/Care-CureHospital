@@ -56,7 +56,7 @@ namespace Backend.Repository.MySQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            Console.WriteLine("* * * * * * * * * * * * *");
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseLazyLoadingProxies();
@@ -72,6 +72,11 @@ namespace Backend.Repository.MySQL
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            Console.WriteLine(server);
+            Console.WriteLine(port);
+            Console.WriteLine(user);
+            Console.WriteLine(password);
+            Console.WriteLine(database);
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
 
