@@ -59,6 +59,7 @@ namespace Backend
         public SecretaryService SecretaryService;
         public SystemAdministratorService SystemAdministratorService;
         public UserService UserService;
+        public AdvertisementService AdvertisementService;
 
         private App()
         {
@@ -107,6 +108,8 @@ namespace Backend
                 new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>(), new IntSequencer()));
             UserService = new UserService(
                 new UserRepository(new MySQLStream<User>(), new IntSequencer()), PatientService, SystemAdministratorService);
+            AdvertisementService = new AdvertisementService(
+               new AdvertisementRepository(new MySQLStream<Advertisement>(), new IntSequencer()));
         }
 
         public static App Instance()
