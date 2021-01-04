@@ -31,9 +31,9 @@ Vue.component("patientMainPage", {
 
         <div class="main-appointment-scheduling-by-recommendation">     
             <ul class="menu-contents">
-                <li><a href="#/patientAppointments">Pregledi</a></li>
-                <li><a href="#/">Utisci</a></li>
-                <li class="active"><a href="">Početna</a></li>
+                <li><a href="#/patientAppointments" id="appointments-link">Pregledi</a></li>
+                <li><a href="#/" id="feedbacks-link">Utisci</a></li>
+                <li class="active"><a href="#/patientMainPage">Početna</a></li>
                 <li><a href="#/medicalRecordReview">Moj karton</a></li>
                 <li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
             </ul>
