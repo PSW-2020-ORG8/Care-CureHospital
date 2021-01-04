@@ -41,13 +41,13 @@ namespace FeedbackMicroservice.Controllers
             return Ok(QuestionResultMapper.CreateQuestionResultsDto(this.answerService.GetAnswersByQuestion()));
         }
 
-        [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResults
+        [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResultsForDoctors
         public IActionResult GetSurveyResultsForDoctors()
         {
             return Ok(QuestionResultMapper.CreateDoctorResultsDto(this.surveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
         }
 
-        [HttpPut("filledSurveyForAppointment/{appointmentId}")]       // GET /api/survey/FilledSurveyForAppointment/{appointmentId}
+        [HttpPut("filledSurveyForAppointment/{appointmentId}")]       // GET /api/survey/filledSurveyForAppointment/{appointmentId}
         public IActionResult FilledSurveyForAppointment(int appointmentId)
         {
             return Ok(this.appointmentService.FilledSurveyForAppointment(appointmentId));

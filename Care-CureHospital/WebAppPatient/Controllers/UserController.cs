@@ -38,12 +38,5 @@ namespace WebAppPatient.Controllers
             }
             return Ok(user);
         }
-
-        [Authorize(Roles = Role.Admin + "," + Role.Patient)]
-        [HttpPost("logout")]
-        public IActionResult Logout()
-        {
-            return Ok(new { Token = "", Message = "Logged Out" });
-        }
     }
 }

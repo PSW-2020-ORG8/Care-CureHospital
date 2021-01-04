@@ -40,7 +40,7 @@ namespace UserMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpPut("blockMaliciousPatient/{patientId}")]       // GET /api/patient/blockMaliciousPatient/{patientId}
+        [HttpPut("blockMaliciousPatient/{patientId}")]       // PUT /api/patient/blockMaliciousPatient/{patientId}
         public IActionResult BlockMaliciousPatient(int patientId)
         {
             return Ok(patientService.BlockMaliciousPatient(patientId));
