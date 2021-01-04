@@ -39,7 +39,15 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void ClickCancelAppointmentButton()
         {
-            cancelAppointmentButton.Click();
+            try
+            {
+                cancelAppointmentButton.Click();
+            }
+            catch (StaleElementReferenceException ex)
+            {
+                cancelAppointmentButton = driver.FindElement(By.Id("cancelAppointmentButton"));
+                cancelAppointmentButton.Click();
+            }
         }
 
         public bool IsCancelAppointmentButtonNull()

@@ -13,6 +13,8 @@ namespace E2ETests.WebAppPatientE2ETests
         private readonly IWebDriver driver;
         private PatientAppointmentsPage patientAppointmentsPage;
         private int patientAppointmentsCount = 0;
+        private UserLoginPage userLoginPage;
+        private PatientHomePage patientHomePage;
 
         public CancelAppointmentTest()
         {
@@ -26,6 +28,23 @@ namespace E2ETests.WebAppPatientE2ETests
             options.AddArguments("--disable-notifications");
 
             driver = new ChromeDriver(options);
+
+            userLoginPage = new UserLoginPage(driver);
+            userLoginPage.Navigate();
+            Assert.True(userLoginPage.UsernameElementDisplayed());
+            Assert.True(userLoginPage.PasswordElementDisplayed());
+            Assert.True(userLoginPage.SubmitButtonElementDisplayed());
+            userLoginPage.InsertUsername("pera");
+            userLoginPage.InsertPassword("123");
+            userLoginPage.SubmitForm();
+            userLoginPage.WaitForPatientHomePage();
+
+            patientHomePage = new PatientHomePage(driver);
+            patientHomePage.Navigate();
+            Assert.True(patientHomePage.AppointmetsLinkElementDisplayed());
+            Assert.Equal(driver.Url, PatientHomePage.URI);
+            patientHomePage.ClickAppointmentsLink();
+            patientHomePage.WaitForAppointmentsPage();
 
             patientAppointmentsPage = new PatientAppointmentsPage(driver);
             patientAppointmentsPage.Navigate();
@@ -50,8 +69,10 @@ namespace E2ETests.WebAppPatientE2ETests
             }
             patientAppointmentsPage.ClickCancelAppointmentButton();
 
+            patientHomePage.ClickAppointmentsLink();
+            patientHomePage.WaitForAppointmentsPage();
+
             PatientAppointmentsPage newPatientAppointmentsPage = new PatientAppointmentsPage(driver);
-            newPatientAppointmentsPage.Navigate();
             newPatientAppointmentsPage.EnsurePageIsDisplayed();
 
             Assert.Equal(patientAppointmentsCount - 1, newPatientAppointmentsPage.PatientAppointmentsCount());

@@ -32,6 +32,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));
         }
 
+        public void WaitForAppointmentsPage()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientAppointmentsPage.URI));
+        }
+
         public void ClickAppointmentsLink()
         {
             appointmetsLinkElement.Click();
