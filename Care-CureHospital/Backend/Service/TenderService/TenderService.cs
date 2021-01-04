@@ -12,6 +12,16 @@ namespace Backend.Service.TenderService
     {
         public ITenderRepository tenderRepository;
 
+        public IEnumerable<Tender> GetActiveTenders()
+        {
+            return tenderRepository.GetAllEntities().Where(activeTender => activeTender.Active.Equals(true));
+        }
+
+        public IEnumerable<Tender> GetInactiveTenders()
+        {
+            return tenderRepository.GetAllEntities().Where(inactiveTender => inactiveTender.Active.Equals(false));
+        }
+
         public TenderService(ITenderRepository tenderRepository)
         {
             this.tenderRepository = tenderRepository;

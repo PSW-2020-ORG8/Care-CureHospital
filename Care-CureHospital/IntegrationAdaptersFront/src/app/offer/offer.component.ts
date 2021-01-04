@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DirectorServiceService } from '../director-service.service';
+import { DoctorService } from '../doctor.service';
 import { Offer } from '../models/Offer';
 
 @Component({
@@ -8,12 +10,30 @@ import { Offer } from '../models/Offer';
 })
 export class OfferComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:DirectorServiceService) { }
+
+  @Input() off:Offer;
+  price:number;
+  quantity:number;
+  commnet:string;
+
+  OfferList:any=[];
 
   ngOnInit(): void {
+    this.price = this.off.price;
+    this.quantity = this.off.quantity;
+    this.commnet = this.off.comment;
   }
   
-  add(){
+  addOffer(){
+    var val = {
+      price:this.OfferList.price,
+      quantity:this.OfferList.quantity,
+      comment:this.OfferList.commnet
+    };
+
+    this.service.addOffers(val).subscribe(res => {
+      alert(res.toString())});
     alert("You have successfully added your offer!");
   }
 }

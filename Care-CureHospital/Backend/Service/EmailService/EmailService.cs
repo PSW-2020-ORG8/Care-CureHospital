@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Backend.Model.Tender;
+using Backend.Repository.TenderRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -6,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Service.EmailService
 {
-    public class TenderService
+    public class EmailService
     {
-
+        public ITenderRepository tenderRepository;
         public void SendNotification()
         {
             try
@@ -32,5 +34,15 @@ namespace Backend.Service.EmailService
                 Console.WriteLine("ERROR!");
             }
         }
+
+       /* public IEnumerable<Tender> GetActiveTenders()
+        {
+            return tenderRepository.GetAllEntities().Where(activeTender => activeTender.Active.Equals(true));
+        }
+
+        public IEnumerable<Tender> GetInactiveTenders()
+        {
+            return tenderRepository.GetAllEntities().Where(inactiveTender => inactiveTender.Active.Equals(false));
+        }*/
     }
 }
