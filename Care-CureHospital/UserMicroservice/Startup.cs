@@ -1,20 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using Model.AllActors;
-using Model.Doctor;
-using Model.Term;
+using UserMicroservice.DataBase;
+using UserMicroservice.Domain;
 using UserMicroservice.Repository;
 using UserMicroservice.Repository.MySQL.Stream;
 using UserMicroservice.Service;
@@ -34,8 +25,6 @@ namespace UserMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddSingleton<IAppointmentService, AppointmentService>(service =>
-                    new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>()), new PatientService(new PatientRepository(new MySQLStream<Patient>()))));
             services.AddSingleton<IDoctorService, DoctorService>(service =>
                     new DoctorService(new DoctorRepository(new MySQLStream<Doctor>())));
             services.AddSingleton<IPatientService, PatientService>(service =>
@@ -45,9 +34,12 @@ namespace UserMicroservice
             services.AddSingleton<ISystemAdministratorService, SystemAdministratorService>(service =>
                     new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>())));
             services.AddSingleton<IUserService, UserService>(service =>
-                    new UserService(new UserRepository(new MySQLStream<User>()), 
+                    new UserService(new UserRepository(new MySQLStream<User>()),
                         new PatientService(new PatientRepository(new MySQLStream<Patient>())),
                             new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>()))));
+            services.AddDbContext<UserDataBaseContext>(options =>
+                   options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+
             services.AddControllers();
 
             // configure strongly typed settings objects
