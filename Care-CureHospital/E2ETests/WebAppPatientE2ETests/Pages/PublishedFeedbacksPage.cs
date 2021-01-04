@@ -46,7 +46,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             return postFeedbackLinkElement.Displayed;
         }
 
-        public bool allFeedbacksLinkElementDisplayed()
+        public bool AllFeedbacksLinkElementDisplayed()
         {
             return allFeedbacksLinkElement.Displayed;
         }
@@ -70,6 +70,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientsFeedbacksPage.URI));
+        }
+
+        public void WaitForPostFeedbacksPage()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PostFeedbackPage.URI));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);

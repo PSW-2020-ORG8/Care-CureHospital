@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace E2ETests.WebAppPatientE2ETests.Pages
 {
@@ -22,6 +24,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         public bool FeedbacksLinkElementDisplayed()
         {
             return feedbacksLinkElement.Displayed;
+        }
+
+        public void WaitForPublishedFeedbacksPage()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));
         }
 
         public void ClickAppointmentsLink()
