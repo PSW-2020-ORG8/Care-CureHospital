@@ -1,16 +1,12 @@
-﻿using Backend.Model.BlogAndNotification;
+﻿using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Dto;
-using Model.AllActors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace FeedbackMicroservice.Mapper
 {
     public class PatientFeedbackMapper
     {
-        public static PatientFeedback PatientFeedbackDtoToPatientFeedback(PatientFeedbackDto dto, Patient patient)
+        public static PatientFeedback PatientFeedbackDtoToPatientFeedback(PatientFeedbackDto dto)
         {
             PatientFeedback patientFeedback = new PatientFeedback();
 
@@ -18,7 +14,6 @@ namespace FeedbackMicroservice.Mapper
             patientFeedback.IsPublished = dto.IsPublished;
             patientFeedback.IsAnonymous = dto.IsAnonymous;
             patientFeedback.PatientId = dto.PatientId;
-            patientFeedback.Patient = null;
             patientFeedback.Text = dto.Text;
 
             return patientFeedback;
@@ -32,7 +27,7 @@ namespace FeedbackMicroservice.Mapper
             dto.IsPublished = patientFeedback.IsPublished;
             dto.IsAnonymous = patientFeedback.IsAnonymous;
             dto.PatientId = patientFeedback.PatientId;
-            dto.Patient = patientFeedback.Patient.Name + " " + patientFeedback.Patient.Surname;
+           // dto.Patient = patientFeedback.Patient.Name + " " + patientFeedback.Patient.Surname;
             dto.PublishingDate = patientFeedback.PublishingDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Text = patientFeedback.Text;
 

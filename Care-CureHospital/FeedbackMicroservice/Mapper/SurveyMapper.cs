@@ -1,9 +1,7 @@
-﻿using FeedbackMicroservice.Dto;
-using Model.Patient;
+﻿using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Dto;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FeedbackMicroservice.Mapper
 {
