@@ -1,0 +1,12 @@
+.tender{
+    height:50em;
+    background-size:cover;
+    width:auto;
+    background-position:center;
+    background-image:url('\src\assets\hospital.jpg');
+    margin-top: 3%;
+}
+
+.offerBtn{
+    margin-top: 2%;
+}

@@ -13,8 +13,9 @@ namespace Backend.Service.RequestServices
             var request = new RestRequest("/medicament/Aspirin");
             var response = client.Get<List<MedicamentDto>>(request);
             Console.WriteLine("Status: " + response.StatusCode.ToString());
-            List<MedicamentDto> result = response.Data;
-            result.ForEach(medicament => Console.WriteLine(medicament.ToString()));
+            response.Data.ForEach(medicament =>
+            Console.WriteLine(medicament.ToString()));
+            Console.WriteLine(response);
             return response;
         }
     }

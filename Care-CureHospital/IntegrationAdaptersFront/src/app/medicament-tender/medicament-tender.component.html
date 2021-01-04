@@ -1,0 +1,50 @@
+<div class="tender">
+    <table class="table table-striped" matTableExporter #exporter="matTableExporter">
+        <thead>
+            <tr>
+                <th id="Medicament">Medicament</th>
+                <th id="StartDate">Start date</th>
+                <th id="EndDate">End date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+                <th>Defrinol</th>
+                <th>20-3-2021</th>
+                <th>20-4-2021</th>
+                <button type="button" mat-raised-button (click)="addOffer()" class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                          (click)="closeClick()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                           <!--<app-offer [offer]="offer" *ngIf="ActivateAddEditEPComp">
+                            </app-offer>--> 
+                            <app-offer *ngIf="ActivateAddEditOffer"></app-offer>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </tr>
+            <tr>
+                <th>Analgin</th>
+                <th>20-3-2021</th>
+                <th>20-4-2021</th>
+                <button type="button" (click)="addOffer()" mat-raised-button class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
+            </tr>
+            <tr>
+                <th>Brufen</th>
+                <th>20-3-2021</th>
+                <th>20-4-2021</th>
+                <button type="button" (click)="addOffer()" mat-raised-button class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
+            </tr>
+        </tbody>
+    </table>
+</div>
