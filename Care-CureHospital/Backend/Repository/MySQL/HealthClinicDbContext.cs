@@ -48,6 +48,7 @@ namespace Backend.Repository.MySQL
         public DbSet<DoctorWorkDay> DoctorWorkDays { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Pharmacies> Pharmacies { get; set; }
+        public DbSet<Advertisement> Advertisement { get; set; }
 
         public HealthClinicDbContext() : base() { }
         public HealthClinicDbContext(DbContextOptions<HealthClinicDbContext> options) : base(options) { }
@@ -348,7 +349,7 @@ namespace Backend.Repository.MySQL
                 new MedicalExamination { Id = 9, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 7, PatientId = 5 },
                 new MedicalExamination { Id = 10, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 6, PatientId = 6 },
                 new MedicalExamination { Id = 11, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 5, PatientId = 6 },
-                new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 6 },
+                new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 1 },
                 new MedicalExamination { Id = 13, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 1, PatientId = 1 }
             );
 
@@ -356,6 +357,12 @@ namespace Backend.Repository.MySQL
                 new Pharmacies { Id = 1, Name = "Apoteka1", Key = "1234", Link = "apoteka1.com" },
                 new Pharmacies { Id = 2, Name = "Apoteka2", Key = "5678", Link = "apoteka2.com" },
                 new Pharmacies { Id = 3, Name = "Apoteka3", Key = "9101112", Link = "apoteka3.com" }
+            );
+
+            modelBuilder.Entity<Advertisement>().HasData(
+                new Advertisement { Id = 1, PharmacyName = "Janković", Percent = 10, Period="01.01.2021. - 02.02.2021.", Manufacturer = "Sandoz lekovi" },
+                new Advertisement { Id = 2, PharmacyName = "Sarić", Percent = 15, Period="05.01.2021. - 12.03.2021.", Manufacturer = "Galenika lekovi" },
+                new Advertisement { Id = 3, PharmacyName = "Zegin", Percent = 25, Period="08.01.2021. - 22.04.2021.", Manufacturer = "Pfizer lekovi" }
             );
         }
     }
