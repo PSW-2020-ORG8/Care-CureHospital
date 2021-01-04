@@ -11,6 +11,9 @@ namespace E2ETests.WebAppPatientE2ETests
     public class PostFeedbackTest : IDisposable
     {
         private readonly IWebDriver driver;
+        private UserLoginPage userLoginPage;
+        private PatientHomePage patientHomePage;
+        private PublishedFeedbacksPage publishedFeedbacksPage;
         private PostFeedbackPage postFeedbackPage;
 
         public PostFeedbackTest()
@@ -25,6 +28,31 @@ namespace E2ETests.WebAppPatientE2ETests
             options.AddArguments("--disable-notifications");    
 
             driver = new ChromeDriver(options);
+
+            userLoginPage = new UserLoginPage(driver);
+            userLoginPage.Navigate();
+            Assert.True(userLoginPage.UsernameElementDisplayed());
+            Assert.True(userLoginPage.PasswordElementDisplayed());
+            Assert.True(userLoginPage.SubmitButtonElementDisplayed());
+            userLoginPage.InsertUsername("pera");
+            userLoginPage.InsertPassword("123");
+            userLoginPage.SubmitForm();
+            userLoginPage.WaitForPatientHomePage();
+
+            patientHomePage = new PatientHomePage(driver);
+            patientHomePage.Navigate();
+            Assert.True(patientHomePage.FeedbacksLinkElementDisplayed());
+            Assert.Equal(driver.Url, PatientHomePage.URI);
+            patientHomePage.ClickFeedbacksLink();
+            patientHomePage.WaitForPublishedFeedbacksPage();
+
+            publishedFeedbacksPage = new PublishedFeedbacksPage(driver);
+            publishedFeedbacksPage.EnsurePageIsDisplayed();
+            Assert.True(publishedFeedbacksPage.PostFeedbackLinkElementDisplayed());
+            Assert.Equal(driver.Url, PublishedFeedbacksPage.URI);
+            publishedFeedbacksPage.ClickPostFeedbackLink();
+            publishedFeedbacksPage.WaitForPostFeedbacksPage();
+
 
             postFeedbackPage = new PostFeedbackPage(driver);
             postFeedbackPage.Navigate();

@@ -6,13 +6,15 @@ using System.Text;
 
 namespace E2ETests.WebAppPatientE2ETests.Pages
 {
-    public class PublishFeedbackPage
+    public class PatientsFeedbacksPage
     {
         private readonly IWebDriver driver;
         public const string URI = "http://localhost:5000/index.html#/patientsFeedbacks";
         private IWebElement publishFeedbackButton => driver.FindElement(By.Id("publishFeedbackButton"));
+        private IWebElement publishedFeedbacksLinkElement => driver.FindElement(By.Id("published-feedbacks-link"));
+        private IWebElement maliciousPatientsLinkElement => driver.FindElement(By.Id("malicious-patients-link")); 
 
-        public PublishFeedbackPage(IWebDriver driver)
+        public PatientsFeedbacksPage(IWebDriver driver)
         {
             this.driver = driver;
         }
@@ -22,12 +24,32 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             return publishFeedbackButton.Displayed;
         }
 
+        public bool MaliciousPatientsLinkElementDisplayed()
+        {
+            return maliciousPatientsLinkElement.Displayed;
+        }
+
+        public bool PublishedFeedbacksLinkElementDisplayed()
+        {
+            return publishedFeedbacksLinkElement.Displayed;
+        }
+
         public void ClickPublishFeedbackButton()
         {
             publishFeedbackButton.Click();
         }
 
-        public void WaitForButtonClick()
+        public void ClickMaliciousPatientsLink()
+        {
+            maliciousPatientsLinkElement.Click();
+        }
+
+        public void ClickPublishedFeedbacksLink()
+        {
+            publishedFeedbacksLinkElement.Click();
+        }
+
+        public void WaitForPublishedFeedbacksPage()
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));

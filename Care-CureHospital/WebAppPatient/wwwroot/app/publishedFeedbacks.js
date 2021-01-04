@@ -51,10 +51,10 @@
 	
 	 <div class="sideComponents">      
 	     <ul class="ulForSideComponents">
-		    <div><li v-if="this.userRole === 'Admin'"><a href="#/patientsFeedbacks">Svi utisci</a></li></div><br v-if="this.userRole === 'Admin'"/>
+		    <div><li v-if="this.userRole === 'Admin'"><a href="#/patientsFeedbacks" id="all-feedbacks-link">Svi utisci</a></li></div><br v-if="this.userRole === 'Admin'"/>
 			<div><li v-if="this.userRole === 'Admin'" class="active"><a href="#/">Objavljeni utisci</a></li></div><br v-if="this.userRole === 'Admin'"/>
 			<div><li v-if="this.userRole === 'Patient'" class="active"><a href="#/">Objavljeni utisci</a></li></div><br v-if="this.userRole === 'Patient'"/>
-			<div><li v-if="this.userRole === 'Patient'"><a href="#/postFeedback">Ostavite utisak</a></li></div><br v-if="this.userRole === 'Patient'"/>
+			<div><li v-if="this.userRole === 'Patient'"><a href="#/postFeedback" id="post-feedback-link">Ostavite utisak</a></li></div><br v-if="this.userRole === 'Patient'"/>
 	     </ul>
 	 </div>	 
 
