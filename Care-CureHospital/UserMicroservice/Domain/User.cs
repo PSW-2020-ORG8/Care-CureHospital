@@ -16,26 +16,66 @@ namespace UserMicroservice.Domain
         [NotMapped]
         public string Token { get; set; }
 
+        public User(int id)
+        {
+            Id = id;
+        }
+
         public User()
         {
         }
 
-        public User(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress,  string role)
-            : base(name, surname, jmbg, dateOfBirth, contactNumber, emailAddress)
+        public User(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city, string role)
+            : base(name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
         {
             Username = username;
             Password = password;
             Role = role;
             Id = id;
         }
-        public User(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress)
-          : base(name, surname, jmbg, dateOfBirth, contactNumber, emailAddress)
+
+        public User(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
+            : base(name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
         {
             Username = username;
             Password = password;
             Id = id;
         }
 
+        public User(string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
+           : base(name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        public User(int id, string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
+            : base(name, parentName, surname, gender, jmbg, identityCard, healthInsuranceCard, bloodGroup, dateOfBirth, contactNumber, emailAddress, city)
+        {
+            Username = username;
+            Password = password;
+            Id = id;
+        }
+
+        public User(string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
+           : base(name, parentName, surname, gender, jmbg, identityCard, healthInsuranceCard, bloodGroup, dateOfBirth, contactNumber, emailAddress, city)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        public User(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        public User(string name, string surname, string username)
+        {
+            Name = name;
+            Surname = surname;
+            Username = username;
+        }
 
         public int GetId()
         {

@@ -1,4 +1,5 @@
 ﻿using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Gateway;
 using FeedbackMicroservice.Repository;
 using System.Collections.Generic;
 
@@ -8,10 +9,19 @@ namespace FeedbackMicroservice.Service
     {
         public ISurveyRepository SurveyRepository;
         public AnswerService AnswerService;
+        public MedicalExaminationGateway MedicalExaminationGateway;
 
-        public SurveyService(ISurveyRepository surveyRepository, AnswerService answerService)
+        public SurveyService(ISurveyRepository surveyRepository, AnswerService answerService, MedicalExaminationGateway medicalExaminationGateway)
         {
             SurveyRepository = surveyRepository;
+            AnswerService = answerService;
+            MedicalExaminationGateway = medicalExaminationGateway;
+        }
+
+        public SurveyService(SurveyRepository surveyRepository, MedicalExaminationGateway medicalExaminationGateway, AnswerService answerService)
+        {
+            SurveyRepository = surveyRepository;
+            MedicalExaminationGateway = medicalExaminationGateway;
             AnswerService = answerService;
         }
 
@@ -42,12 +52,12 @@ namespace FeedbackMicroservice.Service
 
         /// <summary> This method find which doctors are graded by surveys. </summary>
         /// <returns> Dictionary which keys represent doctor id and values represent lists of survey ids. </returns>
-     /*   public Dictionary<int, List<int>> GetSurveyIdsForDoctorIds()
+        public Dictionary<int, List<int>> GetSurveyIdsForDoctorIds()
         {
             Dictionary<int, List<int>> results = new Dictionary<int, List<int>>();
             foreach (Survey survey in GetAllEntities())
             {
-                int doctorId = MedicalExaminationService.GetEntity(survey.MedicalExaminationId).DoctorId;
+                int doctorId = MedicalExaminationGateway.GetMedicalExaminationById(survey.MedicalExaminationId).DoctorId;
                 if (!results.ContainsKey(doctorId))
                 {
                     results.Add(doctorId, new List<int>());
@@ -68,7 +78,7 @@ namespace FeedbackMicroservice.Service
                 result.Add(doctorId, AnswerService.GetAnswersForDoctorBySurveyIds(surveyIdsForDoctorIds[doctorId]));
             }
             return result;
-        }*/
+        }
 
     }
 }
