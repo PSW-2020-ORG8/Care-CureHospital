@@ -197,7 +197,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati i početni i krajnji datum')
             } else if(this.recommendationStep === 2 && this.specialization !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, {
+                axios.get('gateway/doctor/getAllDoctorBySpecializationId/' + this.specialization, {
                     headers: {
                         'Authorization': 'Bearer ' + this.userToken
                     }
@@ -217,7 +217,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate izabrati doktora')
             } else if(this.recommendationStep === 4 && this.priority !== '0'){
                 this.recommendationStep += 1;
-                axios.get('api/appointment/getAllRecommendedTerms', {
+                axios.get('gateway/appointment/getAllRecommendedTerms', {
                     params: {
                         startDate: this.convertDate(this.startDateModel),
                         endDate: this.convertDate(this.endDateModel),
@@ -250,7 +250,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                 toast('Morate selektovati neki od ponuđenih termina')
             } else {
                 var splitedSelectedAppointment = this.selectedAppointment.split('-');
-                axios.post('/api/appointment', {
+                axios.post('gateway/appointment', {
                     canceled: false,
                     startTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].startTime,
                     endTime: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].availableAppointments[splitedSelectedAppointment[1]].endTime,
@@ -305,7 +305,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
     mounted() {
         this.userToken = localStorage.getItem('validToken');
 
-        axios.get('api/doctor/getAllSpecialization', {
+        axios.get('gateway/doctor/getAllSpecialization', {
             headers: {
                 'Authorization': 'Bearer ' + this.userToken
             }

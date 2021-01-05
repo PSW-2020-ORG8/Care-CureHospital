@@ -1,13 +1,13 @@
 /* Slideshow container */
 .slideshow-container {
     border: solid 1px;
-    top:240px;
+    top: 240px;
     height: 80%;
     width: 90%;
     max-width: 1000px;
     position: relative;
     margin: auto;
-    margin-left: 20%;
+    margin-left: 23%;
 }
 
 /* Hide the images by default */
@@ -90,8 +90,8 @@
 
 /* The dots/bullets/indicators */
 .dot {
-    position:relative;
-    top:240px;
+    position: relative;
+    top: 240px;
     cursor: pointer;
     height: 15px;
     width: 15px;
@@ -138,10 +138,10 @@
     position: absolute;
     top: 19%;
     left: 48%;
-    transform: translate(-50%, 0%); 
+    transform: translate(-50%, 0%);
 }
 
-.title-patient-main-page h1 {
-    color: white;
-    font-size: 24px; 
-}
+    .title-patient-main-page h1 {
+        color: white;
+        font-size: 24px;
+    }

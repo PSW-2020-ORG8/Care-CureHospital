@@ -75,7 +75,7 @@ Vue.component("userLogin", {
 			}
 
             if (this.usernameInput === false && this.passwordInput === false) {
-                axios.post('api/user/login', {
+                axios.post('gateway/user/login', {
                     username: this.username,
                     password: this.password
                 }).then(response => {
@@ -104,5 +104,4 @@ Vue.component("userLogin", {
 	mounted(){
 
 	}
-	
 });

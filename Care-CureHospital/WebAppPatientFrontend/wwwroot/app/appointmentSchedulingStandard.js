@@ -15,7 +15,8 @@ Vue.component("appointmentSchedulingStandard", {
             specializations: [],
             doctorsBySpecialization : [],
             doctorWorkDay : null,
-            userToken: null
+            userToken: null,
+            loggedUserId: 0
 		}
 	},
 	template: `
@@ -168,7 +169,7 @@ Vue.component("appointmentSchedulingStandard", {
                 toast('Morate izabrati datum')
             } else if (this.recommendationStep === 2 && this.specialization !== '0') {
                 this.recommendationStep += 1;
-                axios.get('api/doctor/getAllDoctorBySpecializationId/' + this.specialization, { 
+                axios.get('gateway/doctor/getAllDoctorBySpecializationId/' + this.specialization, { 
                     headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
                     this.doctorsBySpecialization = response.data;
@@ -182,7 +183,7 @@ Vue.component("appointmentSchedulingStandard", {
                 toast('Morate izabrati specijalističku granu')
             } else if (this.recommendationStep === 3 && this.doctorId !== '0') {
                 this.recommendationStep += 1;
-                axios.get('api/appointment/getAvailableAppointments', {
+                axios.get('gateway/appointment/getAvailableAppointments', {
                     params: {
                         doctorId: this.doctorId,
                         date: this.convertDate(this.dateModel)
@@ -212,7 +213,7 @@ Vue.component("appointmentSchedulingStandard", {
             if(this.selectedAppointment === null){
                 toast('Morate selektovati neki od ponuđenih termina')
             } else {
-                axios.post('/api/appointment', {
+                axios.post('gateway/appointment', {
                     canceled: false,
                     startTime: this.doctorWorkDay.availableAppointments[this.selectedAppointment].startTime,
                     endTime: this.doctorWorkDay.availableAppointments[this.selectedAppointment].endTime,
@@ -221,7 +222,8 @@ Vue.component("appointmentSchedulingStandard", {
                         shortDescription : '',
                         urgency : false,
                         roomId : this.doctorWorkDay.roomId,
-                        doctorId : this.doctorWorkDay.doctorId
+                        doctorId: this.doctorWorkDay.doctorId,
+                        patientId: this.loggedUserId
                     }
                 }, { 
                     headers: { 'Authorization': 'Bearer ' + this.userToken }
@@ -269,7 +271,18 @@ Vue.component("appointmentSchedulingStandard", {
 	mounted() {
         this.userToken = localStorage.getItem('validToken');
 
-        axios.get('api/doctor/getAllSpecialization', { 
+        if (this.userToken !== null) {
+            var base64Url = this.userToken.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            this.decodedToken = JSON.parse(jsonPayload);
+            this.loggedUserId = this.decodedToken.id;
+        }
+
+        axios.get('gateway/doctor/getAllSpecialization', { 
             headers: { 'Authorization': 'Bearer ' + this.userToken }
         }).then(response => {
             this.specializations = response.data;
