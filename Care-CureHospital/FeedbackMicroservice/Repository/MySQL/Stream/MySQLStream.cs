@@ -1,4 +1,4 @@
-﻿using Backend.Repository.MySQL;
+﻿using FeedbackMicroservice.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ namespace FeedbackMicroservice.Repository.MySQL.Stream
     public class MySQLStream<E> : IMySQLStream<E>
         where E : class
     {
-        private readonly HealthClinicDbContext dbContext;
+        private readonly FeedBackDataBaseContext dbContext;
 
         public MySQLStream()
         {
-            this.dbContext = new HealthClinicDbContext();
+            this.dbContext = new FeedBackDataBaseContext();
         }
 
         public void Add(E entity)

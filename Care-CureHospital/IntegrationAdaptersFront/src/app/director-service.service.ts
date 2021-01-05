@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Report } from './models/Report';
 import { map, catchError } from 'rxjs/operators';
+import { Offer } from './models/Offer';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,17 @@ export class DirectorServiceService {
 
   addReports(val:Report):Observable<Report>{
     return this.http.post<Report>(this.APIUrl+'/report', val).
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'Something went wrong!' );
+      })
+    )
+  }
+
+  addOffers(val:Offer):Observable<Offer>{
+    return this.http.post<Offer>(this.APIUrl+'/offer', val).
     pipe(
       map((data: any) => {
         return data;

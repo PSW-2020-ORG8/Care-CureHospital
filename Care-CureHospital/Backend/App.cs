@@ -2,12 +2,14 @@
 using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
 using Backend.Model.Pharmacy;
+using Backend.Model.Tender;
 using Backend.Repository.BlogNotificationRepository;
 using Backend.Repository.DirectorRepository;
 using Backend.Repository.DoctorRepository;
 using Backend.Repository.ExaminationSurgeryRepository;
 using Backend.Repository.MySQL.Stream;
 using Backend.Repository.PharmacyRepository;
+using Backend.Repository.TenderRepository;
 using Backend.Repository.UsersRepository;
 using Backend.Service.BlogNotificationServices;
 using Backend.Service.DirectorService;
@@ -17,6 +19,7 @@ using Backend.Service.ExaminationSurgeryServices;
 using Backend.Service.PharmaciesService;
 using Backend.Service.RequestServices;
 using Backend.Service.SftpService;
+using Backend.Service.TenderService;
 using Backend.Service.UsersServices;
 using Model.AllActors;
 using Model.Doctor;
@@ -63,15 +66,22 @@ namespace Backend
         public SftpService SftpService;
         public SystemAdministratorService SystemAdministratorService;
         public UserService UserService;
+        public AdvertisementService AdvertisementService;
         public HttpService HttpService;
+        public EmailService EmailService;
         public TenderService TenderService;
+        public OfferService OfferService;
 
         private App()
         {
             EmailVerificationService = new EmailVerificationService();
             SftpService = new SftpService();
             HttpService = new HttpService();
-            TenderService = new TenderService();
+            EmailService = new EmailService();
+            OfferService = new OfferService(
+                new OfferRepository(new MySQLStream<Offer>(), new IntSequencer()));
+            TenderService = new TenderService(
+                new TenderRepository(new MySQLStream<Tender>(), new IntSequencer()));
             MedicalExaminationService = new MedicalExaminationService(
                 new MedicalExaminationRepository(new MySQLStream<MedicalExamination>(), new IntSequencer()));
             PatientFeedbackService = new PatientFeedbackService(
@@ -116,6 +126,8 @@ namespace Backend
                 new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>(), new IntSequencer()));
             UserService = new UserService(
                 new UserRepository(new MySQLStream<User>(), new IntSequencer()), PatientService, SystemAdministratorService);
+            AdvertisementService = new AdvertisementService(
+               new AdvertisementRepository(new MySQLStream<Advertisement>(), new IntSequencer()));
         }
 
         public static App Instance()

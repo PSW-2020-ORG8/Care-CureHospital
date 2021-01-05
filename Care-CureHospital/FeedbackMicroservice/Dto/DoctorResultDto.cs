@@ -1,23 +1,20 @@
-﻿using Model.AllActors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace FeedbackMicroservice.Dto
 {
     public class DoctorResultDto
     {
-        public Doctor Doctor { get; set; }
+        public int DoctorId { get; set; }
 
         public List<QuestionResultDto> QuestionResults { get; set; }
 
 
         public DoctorResultDto() { }
 
-        public DoctorResultDto(Doctor doctor, List<QuestionResultDto> questionResults)
+        public DoctorResultDto(int doctorId, List<QuestionResultDto> questionResults)
         {
-            Doctor = doctor;
+            DoctorId = doctorId;
             QuestionResults = questionResults;
         }
     }

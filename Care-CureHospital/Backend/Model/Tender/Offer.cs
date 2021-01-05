@@ -7,6 +7,8 @@ namespace Backend.Model.Tender
     {
         public int Id { get; set; }
 
+        public int MedicamentId { get; set; }
+
         public double Price { get; set; }
 
         public int Quantity { get; set; }
@@ -18,9 +20,10 @@ namespace Backend.Model.Tender
 
         }
 
-        public Offer(int id, double price, int quantity, String comment)
+        public Offer(int id, int medicamentId, double price, int quantity, String comment)
         {
             Id = id;
+            MedicamentId = medicamentId;
             Price = price;
             Quantity = quantity;
             Comment = comment;

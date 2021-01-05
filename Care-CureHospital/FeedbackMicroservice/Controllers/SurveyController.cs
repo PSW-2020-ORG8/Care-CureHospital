@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Backend;
+using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Dto;
 using FeedbackMicroservice.Mapper;
 using FeedbackMicroservice.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.Patient;
 
 namespace FeedbackMicroservice.Controllers
 {
@@ -18,13 +14,12 @@ namespace FeedbackMicroservice.Controllers
     {
         private ISurveyService surveyService;
         private IAnswerService answerService;
-        private IAppointmentService appointmentService;
+       
 
-        public SurveyController(ISurveyService surveyService, IAnswerService answerService, IAppointmentService appointmentService) 
+        public SurveyController(ISurveyService surveyService, IAnswerService answerService) 
         {
             this.surveyService = surveyService;
             this.answerService = answerService;
-            this.appointmentService = appointmentService;
         }
 
         [HttpGet] // GET /api/survey
@@ -41,17 +36,17 @@ namespace FeedbackMicroservice.Controllers
             return Ok(QuestionResultMapper.CreateQuestionResultsDto(this.answerService.GetAnswersByQuestion()));
         }
 
-        [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResultsForDoctors
+      /* [HttpGet("getSurveyResultsForDoctors")] // GET /api/survey/getSurveyResultsForDoctors
         public IActionResult GetSurveyResultsForDoctors()
         {
             return Ok(QuestionResultMapper.CreateDoctorResultsDto(this.surveyService.GetSurveyResultsForAllDoctors(), App.Instance().DoctorService.GetAllEntities()));
-        }
+        }*/
 
-        [HttpPut("filledSurveyForAppointment/{appointmentId}")]       // GET /api/survey/filledSurveyForAppointment/{appointmentId}
+    /*    [HttpPut("filledSurveyForAppointment/{appointmentId}")]       // GET /api/survey/filledSurveyForAppointment/{appointmentId}
         public IActionResult FilledSurveyForAppointment(int appointmentId)
         {
             return Ok(this.appointmentService.FilledSurveyForAppointment(appointmentId));
-        }
+        }*/
 
         [HttpPost]      // POST /api/survey
         public IActionResult AddSurvey(SurveyDto dto)

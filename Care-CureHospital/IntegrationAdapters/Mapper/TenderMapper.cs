@@ -12,7 +12,10 @@ namespace IntegrationAdapters.Mapper
             dto.MedicamentName = tender.MedicamentName;
             dto.StartDate = tender.StartDate.ToString("dd.MM.yyyy. HH:mm");
             dto.EndDate = tender.EndDate.ToString("dd.MM.yyyy. HH:mm");
+            dto.Active = tender.Active;
             return dto;
         }
+
+       
     }
 }

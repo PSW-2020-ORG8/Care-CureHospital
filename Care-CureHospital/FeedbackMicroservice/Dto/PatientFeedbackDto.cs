@@ -1,10 +1,4 @@
-﻿using Model.AllActors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FeedbackMicroservice.Dto
+﻿namespace FeedbackMicroservice.Dto
 {
     public class PatientFeedbackDto
     {

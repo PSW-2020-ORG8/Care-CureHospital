@@ -17,7 +17,7 @@ namespace Backend.Service.TenderService
 
         public Offer AddEntity(Offer entity)
         {
-            throw new NotImplementedException();
+            return offerRepository.AddEntity(entity);
         }
 
         public void DeleteEntity(Offer entity)
@@ -27,7 +27,7 @@ namespace Backend.Service.TenderService
 
         public IEnumerable<Offer> GetAllEntities()
         {
-            throw new NotImplementedException();
+            return offerRepository.GetAllEntities();
         }
 
         public Offer GetEntity(int id)
