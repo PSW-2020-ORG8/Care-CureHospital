@@ -1,22 +1,19 @@
-﻿using AppointmentMicroservice.Repository;
-using Model.AllActors;
-using Model.Term;
+﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Service
 {
     public class AppointmentService : IAppointmentService
     {
         public IAppointmentRepository appointmentRepository;
-        public IPatientService patientService;
+       // public IPatientService patientService;
 
-        public AppointmentService(IAppointmentRepository appointmentRepository, PatientService patientService)
+        public AppointmentService(IAppointmentRepository appointmentRepository)
         {
             this.appointmentRepository = appointmentRepository;
-            this.patientService = patientService;
         }
 
         public List<Appointment> GetAllCancelledAppointmentsByPatient(int patientId)
@@ -47,22 +44,22 @@ namespace AppointmentMicroservice.Service
                 appointmentForCancelation.Canceled = true;
                 appointmentForCancelation.CancellationDate = today;
                 UpdateEntity(appointmentForCancelation);
-                SetIfPatientMalicious(appointmentForCancelation.MedicalExamination.PatientId, today);
+              //  SetIfPatientMalicious(appointmentForCancelation.MedicalExamination.PatientId, today);
                 return appointmentForCancelation;
             }
             return null;
         }
 
         /// <summary> This metod sets patient as malicious if patient canceled three or more appointments in last 30 days </summary>
-        public void SetIfPatientMalicious(int patientId, DateTime today)
+      /*  public void SetIfPatientMalicious(int patientId, DateTime today)
         {
             if (CountCancelledAppointmentsForPatient(patientId, today) >= 3)
             {
-                Patient maliciousPatient = patientService.GetEntity(patientId);
+                //Patient maliciousPatient = patientService.GetEntity(patientId);
                 maliciousPatient.Malicious = true;
                 patientService.UpdateEntity(maliciousPatient);
             }
-        }
+        }*/
 
         public int CountCancelledAppointmentsForPatient(int patientId, DateTime currentCancellationDate)
         {

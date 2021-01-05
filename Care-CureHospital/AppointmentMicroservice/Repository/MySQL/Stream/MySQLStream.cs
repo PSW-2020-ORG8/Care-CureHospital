@@ -1,19 +1,17 @@
-﻿using Backend.Repository.MySQL;
-using System;
+﻿using AppointmentMicroservice.DataBase;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace AppointmentMicroservice.Repository.MySQL.Stream
 {
     public class MySQLStream<E> : IMySQLStream<E>
         where E : class
     {
-        private readonly HealthClinicDbContext dbContext;
+        private readonly AppointmentDataBaseContext dbContext;
 
         public MySQLStream()
         {
-            this.dbContext = new HealthClinicDbContext();
+            this.dbContext = new AppointmentDataBaseContext();
         }
 
         public void Add(E entity)
