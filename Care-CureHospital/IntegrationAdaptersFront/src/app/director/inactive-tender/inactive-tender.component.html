@@ -1,16 +1,18 @@
 <table class="table table-striped" matTableExporter #exporter="matTableExporter">
     <thead>
         <tr>
+          <th id="MedicamentId">MedicamentId</th>
           <th id="Price">Price</th>
           <th id="Quantity">Quantity</th>
           <th id="Comment">Comment</th>
         </tr>
     </thead>
     <tbody>
-       <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let dataItem of OfferList">
+            <td>{{dataItem.medicamentId}}</td>
+            <td>{{dataItem.price}}</td>
+            <td>{{dataItem.quantity}}</td>
+            <td>{{dataItem.comment}}</td>
         </tr>
     </tbody>
 </table>

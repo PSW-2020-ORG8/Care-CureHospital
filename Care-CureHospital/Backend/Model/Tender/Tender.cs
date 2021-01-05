@@ -1,9 +1,5 @@
 ﻿using HealthClinic.Repository;
-using Model.DoctorMenager;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend.Model.Tender
 {
@@ -35,12 +31,12 @@ namespace Backend.Model.Tender
 
         public int GetId()
         {
-            throw new NotImplementedException();
+            return Id;
         }
 
         public void SetId(int id)
         {
-            throw new NotImplementedException();
+            Id = id;
         }
     }
 }

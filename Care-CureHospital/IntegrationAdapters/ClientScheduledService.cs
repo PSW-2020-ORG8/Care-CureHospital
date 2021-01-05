@@ -19,7 +19,6 @@ namespace IntegrationAdapters
             Console.WriteLine("Response");
             Console.WriteLine(response.Response + " is response; status: " + response.Status);
             return response.Response;
-           
         }
     }
 }

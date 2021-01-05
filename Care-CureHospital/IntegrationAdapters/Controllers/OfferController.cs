@@ -21,6 +21,22 @@ namespace IntegrationAdapters.Controllers
             App.Instance().OfferService.GetAllEntities().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
             return Ok(result);
         }
+       
+        [HttpGet("activeTender")] 
+        public IActionResult GetAllOffersActiveTender()
+        {
+            List<OfferDto> result = new List<OfferDto>();
+            App.Instance().OfferService.GetAllOffersForActiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
+            return Ok(result);
+        }
+
+        [HttpGet("inactiveTender")]
+        public IActionResult GetAllOffersInactiveTender()
+        {
+            List<OfferDto> result = new List<OfferDto>();
+            App.Instance().OfferService.GetAllOffersForInactiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
+            return Ok(result);
+        }
 
         [HttpPost]
         public IActionResult AddOffer(OfferDto dto)

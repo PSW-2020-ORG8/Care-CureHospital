@@ -1,5 +1,6 @@
 export class Offer{
-    price : number;
-    quantity :  number;
-    comment : string;
+    medicamentId:number;
+    price:number;
+    quantity:number;
+    comment:string;
 }

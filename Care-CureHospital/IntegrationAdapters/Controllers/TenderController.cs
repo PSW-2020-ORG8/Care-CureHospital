@@ -1,9 +1,5 @@
-﻿using Backend.Model.BlogAndNotification;
-using Model.AllActors;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Backend;
 using IntegrationAdapters.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -32,12 +28,26 @@ namespace IntegrationAdapters.Controllers
             return Ok(result);
         }
 
-       [HttpGet("allTender")] //allTender
+        [HttpGet("getInactiveTender")]
+        public IActionResult GetInactiveTender()
+        {
+            List<TenderDto> result = new List<TenderDto>();
+            App.Instance().TenderService.GetInactiveTenders().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
+            return Ok(result);
+        }
+
+        [HttpGet("allTender")] //allTender
         public IActionResult GetAllTenders()
         {
             List<TenderDto> result = new List<TenderDto>();
             App.Instance().TenderService.GetAllEntities().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
             return Ok(result);
+        }
+
+        [HttpPut("closeTender/{tenderId}")]
+        public IActionResult CloseTender(int tenderId)
+        {
+            return Ok(App.Instance().TenderService.CloseTender(tenderId));
         }
     }
 }

@@ -13,6 +13,7 @@ export class OfferComponent implements OnInit {
   constructor(private service:DirectorServiceService) { }
 
   @Input() off:Offer;
+  medicamentId:number;
   price:number;
   quantity:number;
   commnet:string;
@@ -20,17 +21,20 @@ export class OfferComponent implements OnInit {
   OfferList:any=[];
 
   ngOnInit(): void {
-    this.price = this.off.price;
+   /* this.price = this.off.price;
     this.quantity = this.off.quantity;
-    this.commnet = this.off.comment;
+    this.commnet = this.off.comment;*/
   }
   
   addOffer(){
     var val = {
+      medicamentId:this.OfferList.medicamentId,
       price:this.OfferList.price,
       quantity:this.OfferList.quantity,
       comment:this.OfferList.commnet
     };
+
+    console.log(this.OfferList);
 
     this.service.addOffers(val).subscribe(res => {
       alert(res.toString())});

@@ -15,18 +15,21 @@ namespace Backend.Model.Tender
 
         public String Comment { get; set; }
 
+        public bool ActiveTender { get; set; }
+
         public Offer()
         {
 
         }
 
-        public Offer(int id, int medicamentId, double price, int quantity, String comment)
+        public Offer(int id, int medicamentId, double price, int quantity, String comment, bool activeTender)
         {
             Id = id;
             MedicamentId = medicamentId;
             Price = price;
             Quantity = quantity;
             Comment = comment;
+            ActiveTender = activeTender;
         }
 
         public int GetId()

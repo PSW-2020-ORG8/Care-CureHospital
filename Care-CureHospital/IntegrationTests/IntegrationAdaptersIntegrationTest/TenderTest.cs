@@ -13,16 +13,5 @@ namespace IntegrationTests.IntegrationAdaptersIntegrationTest
         {
             this.factory = factory;
         }
-
-     /*   [Theory]
-        [MemberData(nameof(TenderData))]
-        public async void Get_All_Tenders(HttpStatusCode expectedResponseStatusCode)
-        {
-            HttpClient client = factory.CreateClient();
-
-            var response = await client.GetAsync("/api/");
-
-            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        }*/
     }
 }

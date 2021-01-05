@@ -68,8 +68,4 @@ export class DirectorComponent implements OnInit {
   showOffers(){
     this.router.navigate(['showOffers']);
   }
-
-  closeTender(){
-    alert("You have successfully closed tender!");
-  }
 }

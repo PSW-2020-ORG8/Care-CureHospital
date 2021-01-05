@@ -2,17 +2,17 @@
     <table class="table table-striped" matTableExporter #exporter="matTableExporter">
         <thead>
             <tr>
-                <th id="Medicament">Medicament</th>
+                <th id="Medicament">MedicamentName</th>
                 <th id="StartDate">Start date</th>
                 <th id="EndDate">End date</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-           <tr>
-                <th>Defrinol</th>
-                <th>20-3-2021</th>
-                <th>20-4-2021</th>
+           <tr *ngFor="let dataItem of TenderList">
+                <th>{{dataItem.medicamentName}}</th>
+                <th>{{dataItem.startDate}}</th>
+                <th>{{dataItem.endDate}}</th>
                 <button type="button" mat-raised-button (click)="addOffer()" class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -32,19 +32,7 @@
                       </div>
                     </div>
                   </div>
-            </tr>
-            <tr>
-                <th>Analgin</th>
-                <th>20-3-2021</th>
-                <th>20-4-2021</th>
-                <button type="button" (click)="addOffer()" mat-raised-button class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
-            </tr>
-            <tr>
-                <th>Brufen</th>
-                <th>20-3-2021</th>
-                <th>20-4-2021</th>
-                <button type="button" (click)="addOffer()" mat-raised-button class="offerBtn" data-toggle="modal" data-target="#exampleModal" data-backdrop='static' data-keybord="false">Make offer</button>
-            </tr>
+                </tr>
         </tbody>
     </table>
 </div>

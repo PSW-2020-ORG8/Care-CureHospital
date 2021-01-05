@@ -44,7 +44,7 @@ namespace Backend.Service.TenderService
 
         public Tender GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return tenderRepository.GetEntity(id);
         }
 
         public IEnumerable<Tender> GetTenderForCertainPeriod(DateTime startDate, DateTime endDate)
@@ -60,7 +60,18 @@ namespace Backend.Service.TenderService
 
         public void UpdateEntity(Tender entity)
         {
-            throw new NotImplementedException();
+            tenderRepository.UpdateEntity(entity);
+        }
+
+        public Tender CloseTender(int tenderId)
+        {
+            Tender finishedTender = GetEntity(tenderId);
+            if (finishedTender.Active == true)
+            {
+                finishedTender.Active = false;
+            }
+            UpdateEntity(finishedTender);
+            return finishedTender;
         }
     }
 }

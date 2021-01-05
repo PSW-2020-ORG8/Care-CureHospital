@@ -132,8 +132,8 @@ namespace Backend.Repository.MySQL
             );
 
             modelBuilder.Entity<Offer>().HasData(
-                new Offer { Id = 1, MedicamentId = 1, Price = 205.5, Quantity = 150, Comment = "Ova cena je za preko 100 komada!"},
-                new Offer { Id = 2, MedicamentId = 2, Price = 102.4, Quantity = 52, Comment = "Fiksna cena!" }
+                new Offer { Id = 1, MedicamentId = 1, Price = 205.5, Quantity = 150, Comment = "Ova cena je za preko 100 komada!", ActiveTender = true},
+                new Offer { Id = 2, MedicamentId = 2, Price = 102.4, Quantity = 52, Comment = "Fiksna cena!", ActiveTender = false }
                 );
 
             modelBuilder.Entity<Specialitation>().HasData(
