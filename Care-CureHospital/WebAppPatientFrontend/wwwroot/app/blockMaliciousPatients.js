@@ -2,7 +2,8 @@ Vue.component("blockMaliciousPatients", {
 	data: function () {
 		return {
 			maliciousPatients: [],
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -69,12 +70,12 @@ Vue.component("blockMaliciousPatients", {
 	methods: {
 		blockUser : function(patientId) {
 			if (confirm('Da li ste sigurni da želite da blokirate pacijenta?') == true) {
-				axios.put('api/patient/blockMaliciousPatient/' + patientId, {
+				axios.put('gateway/patient/blockMaliciousPatient/' + this.loggedUserId, null, {
 					headers: {
 						'Authorization': 'Bearer ' + this.userToken
 					}
 				}).then(response => {
-					axios.get('api/patient/getMaliciousPatients', {
+					axios.get('gateway/patient/getMaliciousPatients', {
 						headers: {
 							'Authorization': 'Bearer ' + this.userToken
 						}
@@ -105,7 +106,18 @@ Vue.component("blockMaliciousPatients", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		axios.get('api/patient/getMaliciousPatients', {
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/patient/getMaliciousPatients', {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

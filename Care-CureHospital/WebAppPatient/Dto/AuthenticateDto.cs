@@ -13,5 +13,13 @@ namespace WebAppPatient.Dto
 
         [Required]
         public string Password { get; set; }
+
+        public AuthenticateDto() { }
+
+        public AuthenticateDto(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
     }
 }

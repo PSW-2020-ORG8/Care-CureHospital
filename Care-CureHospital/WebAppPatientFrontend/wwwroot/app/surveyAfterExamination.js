@@ -42,7 +42,8 @@ Vue.component("surveyAfterExamination", {
 
 			medicalExaminationId: null,
 			appointmentId: null,
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -361,7 +362,7 @@ Vue.component("surveyAfterExamination", {
 			this.listOfAnswers.push(answerOfQuestion8)
 			this.listOfAnswers.push(answerOfQuestion9)
 
-			axios.post('/api/survey', {
+			axios.post('gateway/survey', {
 				title: 'Naslov ankete',
 				commentSurvey: this.commentSurvey,
 				answers: this.listOfAnswers,
@@ -372,7 +373,7 @@ Vue.component("surveyAfterExamination", {
 			}).then(response => {
 				if (response.status === 200) {
 					toast('Anketa je uspešno poslata')
-					axios.put('/api/survey/filledSurveyForAppointment/' + this.appointmentId, {
+					axios.put('gateway/survey/filledSurveyForAppointment/' + this.appointmentId, {
 						headers: {
 						'Authorization': 'Bearer ' + this.userToken }
 					}).then(response => {
@@ -401,8 +402,18 @@ Vue.component("surveyAfterExamination", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
 
-		axios.get('/api/doctor/getAllSpecialization', {
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/doctor/getAllSpecialization', {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

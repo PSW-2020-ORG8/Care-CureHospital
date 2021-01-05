@@ -4,7 +4,8 @@ Vue.component("patientAppointments", {
 			filterAppointments: 'Svi pregledi',
 			scheduledAppointments: [],
 			previousAppointments: [],
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -114,13 +115,13 @@ Vue.component("patientAppointments", {
 	,
 	methods: {
 		cancelAppointment: function (appointmentId) {
-			axios.put('api/appointment/cancelAppointment/' + appointmentId, {
+			axios.put('gateway/appointment/cancelAppointment/' + appointmentId, null, {
 				headers: {
 					'Authorization': 'Bearer ' + this.userToken
 				}
 			}).then(response => {
 				if (response.status !== 204) {
-					axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+					axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
 						toast('Uspešno ste otkazali pregled')
 						this.scheduledAppointments = response.data;
 					});
@@ -141,25 +142,25 @@ Vue.component("patientAppointments", {
 
 		onChange: function () {
 			if (this.filterAppointments === "Svi pregledi") {
-				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
 					this.scheduledAppointments = response.data;
-					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
 						this.previousAppointments = response.data;
 					});
 				}).catch(error => {
-					axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
 						this.previousAppointments = response.data;
 					});
 				});
 			} else if (this.filterAppointments === "Zakazani pregledi") {
-				axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1).then(response => {
+				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
 					this.scheduledAppointments = response.data;
 					this.previousAppointments = []
 				}).catch(error => {
 					this.previousAppointments = []
 				});
 			} else if (this.filterAppointments === "Pregledi na kojima sam bio") {
-				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1).then(response => {
+				axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
 					this.previousAppointments = response.data;
 					this.scheduledAppointments = []
 				}).catch(error => {
@@ -177,13 +178,25 @@ Vue.component("patientAppointments", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		axios.get('api/appointment/getScheduledAppointmetsByPatient/' + 1, {
+
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
 		}).then(response => {
 			this.scheduledAppointments = response.data;
-			axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1, {
+			axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId, {
 				headers: {
 					'Authorization': 'Bearer ' + this.userToken
 				}
@@ -197,7 +210,7 @@ Vue.component("patientAppointments", {
 			});		
 		}).catch(error => {
 			if (error.response.status === 404) {
-				axios.get('api/appointment/getPreviousAppointmetsByPatient/' + 1, {
+				axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId, {
 					headers: {
 						'Authorization': 'Bearer ' + this.userToken
 					}

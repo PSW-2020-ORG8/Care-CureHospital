@@ -453,7 +453,7 @@ Vue.component("patientRegistration", {
                         this.finalAllergiesLists.push(allergy)
                     }
 
-                    axios.post('/api/medicalRecord', {
+                    axios.post('gateway/medicalRecord', {
                         "Patient" : {"Username" : this.usernameInputField, "Password" : this.passwordInputField, "GuestAccount" : false,
                         "Name" : this.nameInputField , "ParentName" : this.parentNameInputField, "Surname" : this.surnameInputField,
                         "Jmbg" : this.jmbgInputField, "IdentityCard" : this.personalCardInputField, "HealthInsuranceCard" : this.healthBookletNumberInputField, 
@@ -549,7 +549,7 @@ Vue.component("patientRegistration", {
         }
 	},
     mounted() {
-        axios.get('api/allergies').then(response => {
+        axios.get('gateway/allergies').then(response => {
             this.allergies = response.data;
         });
 
@@ -575,5 +575,4 @@ Vue.component("patientRegistration", {
 			document.querySelector('#country').value = e.suggestion.country || '';
 		});
 	}
-
 });
