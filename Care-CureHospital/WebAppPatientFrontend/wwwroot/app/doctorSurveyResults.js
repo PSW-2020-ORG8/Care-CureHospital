@@ -3,7 +3,8 @@ Vue.component("doctorSurveyResults", {
 		return {
             doctorSurveyResults: [],
 			doctorQuestionsAverageGrades: [],
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -117,7 +118,19 @@ Vue.component("doctorSurveyResults", {
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
 
-		axios.get('api/survey/getSurveyResultsForDoctors', {
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+
+		axios.get('gateway/survey/getSurveyResultsForDoctors', {
 			headers: {
 			'Authorization': 'Bearer ' + this.userToken }
 		}).then(response => {
