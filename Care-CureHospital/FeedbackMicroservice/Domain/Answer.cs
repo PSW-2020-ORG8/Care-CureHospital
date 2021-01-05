@@ -8,7 +8,9 @@ namespace FeedbackMicroservice.Domain
         public int Id { get; set; }
         public GradeOfQuestion Grade { get; set; }
         public int QuestionId { get; set; }
+        public virtual Question Question { get; set; }
         public int SurveyId { get; set; }
+        public virtual Survey Survey { get; set; }
 
         public Answer(int id)
         {
@@ -19,11 +21,15 @@ namespace FeedbackMicroservice.Domain
         {
         }
 
-        public Answer(int id, GradeOfQuestion grade, int questionId, int surveyId) : this(id)
+
+        public Answer(int id, GradeOfQuestion grade, int questionId, Question question, int surveyId, Survey survey) : this(id)
         {
             Grade = grade;
             QuestionId = questionId;
+            Question = question;
             SurveyId = surveyId;
+            Survey = survey;
+
         }
 
         public Answer(int questionId, GradeOfQuestion grade)
@@ -43,4 +49,3 @@ namespace FeedbackMicroservice.Domain
         }
     }
 }
-
