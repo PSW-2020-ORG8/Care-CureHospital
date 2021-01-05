@@ -1,11 +1,5 @@
-﻿using Backend;
-using Backend.Service.RequestServices;
-using IntegrationAdapters.Dto;
+﻿using Backend.Service.RequestServices;
 using Microsoft.AspNetCore.Mvc;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -16,9 +10,7 @@ namespace IntegrationAdapters.Controllers
       [HttpGet]
       public IActionResult GetMedicament()
       {
-           // List<MedicamentDto> result = new List<MedicamentDto>();
-           // App.Instance().HttpService.SendGetRequestWithRestSharp();
-           return Ok(HttpService.SendGetRequestWithRestSharp());
+          return Ok(HttpService.SendGetRequestWithRestSharp());
       }
     }
 }

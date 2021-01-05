@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PharmacyService } from 'src/app/pharmacy.service';
 
 @Component({
   selector: 'app-urgent-procurement',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UrgentProcurementComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: PharmacyService) { }
+
+  httpResponse: String="";
 
   ngOnInit(): void {
   }
 
   sendHttpRequest(){
-    console.log("tu sm");
+    this.service.sendReqWithHttp().subscribe(res =>{
+      this.httpResponse = res;
+      alert(res);
+      console.log(res);
+    });
   }
 }

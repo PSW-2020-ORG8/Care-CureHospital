@@ -4,13 +4,13 @@ using Xunit;
 
 namespace UnitTests.IntegrationAdaptersUnitTests
 {
-    public class AvailableMedicamentTest
+    public class UrgentOrderTest
     {
         [Fact]
-        public void Send_request_with_rest_sharp()
+        public void Send_request_for_urgent_order()
         {
             RestClient restClient = new RestClient("http://localhost:8080");
-            RestRequest restRequest = new RestRequest("/medicament/Aspirin", DataFormat.Json);
+            RestRequest restRequest = new RestRequest("/urgentOrder/forMedicament");
 
             IRestResponse response = restClient.Execute(restRequest);
 
@@ -18,10 +18,10 @@ namespace UnitTests.IntegrationAdaptersUnitTests
         }
 
         [Fact]
-        public void Not_sent_request_with_rest_sharp()
+        public void Not_sent_request_for_urgent_order()
         {
             RestClient restClient = new RestClient("http://localhost:4001");
-            RestRequest restRequest = new RestRequest("/medicament/quantity", DataFormat.Json);
+            RestRequest restRequest = new RestRequest("/urgentOrder/");
 
             IRestResponse response = restClient.Execute(restRequest);
 

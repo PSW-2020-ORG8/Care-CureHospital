@@ -26,4 +26,8 @@ import { Medicament } from './models/Medicament';
     generateMedicamentStock():Observable<any>{
       return this.http.get<any>(this.APIUrl+'/stock');
     }
+
+    sendReqWithHttp():Observable<any>{
+      return this.http.get<any>(this.APIUrl+'/urgentorder');
+    }
   }

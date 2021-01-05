@@ -16,6 +16,8 @@ export class MedicamentComponent implements OnInit {
    name:string;
    quantity:number;
 
+   httpResponse: String="";
+
     MedicamentList:Medicament[]=[
       {
         id:1,
@@ -35,21 +37,18 @@ export class MedicamentComponent implements OnInit {
     ];
 
   ngOnInit(): void {
-    this.med={
+   /* this.med={
       id: 0,
       name:"",
       quantity: 0
-    };
-    this.sendRequest();
+    };*/
   }
 
   sendRequest(){
     this.service.generateMedicamentStock().subscribe((data:Medicament[]) =>{
       this.MedicamentList = data;
       console.log(this.MedicamentList);
-      /*this.MedicamentList.forEach(
-        m => this.name+=m
-      )*/
+      alert(data);
     }, error => {
       console.log('Error');
     });
