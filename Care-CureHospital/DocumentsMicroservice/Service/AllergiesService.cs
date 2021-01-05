@@ -1,10 +1,6 @@
-﻿using DocumentsMicroservice.Repository;
-using Model.PatientDoctor;
-using Service;
-using System;
+﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Service
 {

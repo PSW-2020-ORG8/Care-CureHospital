@@ -1,11 +1,6 @@
-﻿using DocumentsMicroservice.Repository.MySQL;
+﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Repository.MySQL;
 using DocumentsMicroservice.Repository.MySQL.Stream;
-using Model.AllActors;
-using Model.PatientDoctor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Repository
 {
@@ -16,7 +11,7 @@ namespace DocumentsMicroservice.Repository
         {
         }
 
-        public MedicalRecord GetMedicalRecordByPatient(Patient patient)
+        /*public MedicalRecord GetMedicalRecordByPatient(Patient patient)
         {
             foreach (MedicalRecord medicalRecord in GetAllEntities())
             {
@@ -24,6 +19,6 @@ namespace DocumentsMicroservice.Repository
                     return medicalRecord;
             }            
             return null;
-        }
+        }*/
     }
 }

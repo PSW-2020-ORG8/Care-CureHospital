@@ -1,5 +1,5 @@
-﻿using System;
-
+﻿using AppointmentMicroservice.Repository;
+using System;
 
 namespace AppointmentMicroservice.Domain
 {

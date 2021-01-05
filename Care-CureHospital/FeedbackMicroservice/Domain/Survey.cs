@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace FeedbackMicroservice.Domain
 {
-
     public class Survey : IIdentifiable<int>
     {
         public int Id { get; set; }

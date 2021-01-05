@@ -28,7 +28,7 @@ namespace DocumentsMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getForPatient/{patientID}")]       // GET /api/medicalExaminationReport/getForPatient/{id}
+        /*[HttpGet("getForPatient/{patientID}")]       // GET /api/medicalExaminationReport/getForPatient/{id}
         public IActionResult GetMedicalExaminationReportsForPatient(int patientID)
         {
             List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
@@ -83,6 +83,6 @@ namespace DocumentsMicroservice.Controllers
             List<MedicalExaminationReportDto> result = new List<MedicalExaminationReportDto>();
             this.medicalExaminationReportService.FindReportsUsingSimpleSearch(patientId, doctor, date, comment, room).ToList().ForEach(medicalExaminationReport => result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport)));
             return Ok(result);
-        }
+        }*/
     }
 }
