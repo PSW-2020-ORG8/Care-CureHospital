@@ -15,7 +15,6 @@ namespace AppointmentMicroservice.Mapper
             appointment.StartTime = dto.StartTime;
             appointment.EndTime = dto.EndTime;
             appointment.MedicalExamination = dto.MedicalExamination;
-            appointment.MedicalExamination.PatientId = 1;
 
             return appointment;
         }
