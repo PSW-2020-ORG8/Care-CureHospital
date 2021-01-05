@@ -1,22 +1,19 @@
-﻿using AppointmentMicroservice.Repository;
-using Model.AllActors;
-using Model.Term;
+﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Service
 {
     public class DoctorWorkDayService : IDoctorWorkDayService
     {
         private IDoctorWorkDayRepository doctorWorkDayRepository;
-        private IDoctorService doctorService;
 
-        public DoctorWorkDayService(IDoctorWorkDayRepository doctorWorkDayRepository, DoctorService doctorService)
+        public DoctorWorkDayService(IDoctorWorkDayRepository doctorWorkDayRepository)
         {
             this.doctorWorkDayRepository = doctorWorkDayRepository;
-            this.doctorService = doctorService;
+            
         }
         public DoctorWorkDay AddEntity(DoctorWorkDay entity)
         {
@@ -48,12 +45,12 @@ namespace AppointmentMicroservice.Service
             return doctorWorkDayRepository.GetAllEntities().FirstOrDefault(doctorWorkDay => DateTime.Compare(doctorWorkDay.Date, date) == 0 && doctorWorkDay.DoctorId == doctorId);
         }
 
-        public List<DoctorWorkDay> GetDoctorWorkDayByDateAndDoctorSpecialization(DateTime date, int doctorSpecializationId)
+   /*     public List<DoctorWorkDay> GetDoctorWorkDayByDateAndDoctorSpecialization(DateTime date, int doctorSpecializationId)
         {
             List<DoctorWorkDay> doctorWorkDaysByDate = doctorWorkDayRepository.GetAllEntities().Where(doctorWorkDay => DateTime.Compare(doctorWorkDay.Date, date) == 0).ToList();
-            List<Doctor> doctors = doctorService.GetAllEntities().Where(doctor => doctor.SpecialitationId == doctorSpecializationId).ToList();
-            return doctorWorkDaysByDate.Where(x => doctors.Any(y => y.Id == x.DoctorId)).ToList();
-        }
+          //  List<Doctor> doctors = doctorService.GetAllEntities().Where(doctor => doctor.SpecialitationId == doctorSpecializationId).ToList();
+           // return doctorWorkDaysByDate.Where(x => doctors.Any(y => y.Id == x.DoctorId)).ToList();
+        }*/
 
         public List<Appointment> GetAvailableAppointmentsByDateAndDoctorId(DateTime date, int doctorId)
         {
@@ -73,7 +70,7 @@ namespace AppointmentMicroservice.Service
             return result;
         }
 
-        public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateAndSpecialization(DateTime date, int doctorSpecializationId)
+      /*  public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateAndSpecialization(DateTime date, int doctorSpecializationId)
         {
             Dictionary<int, List<Appointment>> result = new Dictionary<int, List<Appointment>>();
             if (GetDoctorWorkDayByDateAndDoctorSpecialization(date, doctorSpecializationId).Count != 0)
@@ -84,7 +81,7 @@ namespace AppointmentMicroservice.Service
                 }
             }
             return result;
-        }
+        }*/
 
         /// <summary> This method generate all appointment terms in work day (from 8AM to 8PM) </summary>
         public List<Appointment> InitializeAvailableApoointmentsList(DateTime date)
@@ -112,7 +109,7 @@ namespace AppointmentMicroservice.Service
             return result;
         }
 
-        public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime startDate, DateTime endDate, int doctorId, string priority)
+       /* public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime startDate, DateTime endDate, int doctorId, string priority)
         {
             Dictionary<int, List<Appointment>> result = GetAvailableAppointmentsByDateRangeAndDoctorId(startDate, endDate, doctorId);
             if (priority.Equals("DateRange"))
@@ -131,9 +128,9 @@ namespace AppointmentMicroservice.Service
                 }
             }
             return result;
-        }
+        }*/
 
-        protected Dictionary<int, List<Appointment>> GetAvailableAppointmentsForOtherDoctors(DateTime startDate, DateTime endDate, int doctorSpecializationId)
+       /* protected Dictionary<int, List<Appointment>> GetAvailableAppointmentsForOtherDoctors(DateTime startDate, DateTime endDate, int doctorSpecializationId)
         {
             Dictionary<int, List<Appointment>> result = new Dictionary<int, List<Appointment>>();
             for (DateTime date = startDate; DateTime.Compare(date, endDate) <= 0; date = date.AddDays(1))
@@ -148,7 +145,7 @@ namespace AppointmentMicroservice.Service
                 }
             }
             return result;
-        }
+        }*/
 
         protected Dictionary<int, List<Appointment>> GetAvailableAppointmentsByExpandDateRange(DateTime startDate, DateTime endDate, int doctorId)
         {

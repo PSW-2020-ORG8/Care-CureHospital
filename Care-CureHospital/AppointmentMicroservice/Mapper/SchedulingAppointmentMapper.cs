@@ -1,9 +1,6 @@
-﻿using AppointmentMicroservice.Dto;
-using Model.Term;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Dto;
+
 
 namespace AppointmentMicroservice.Mapper
 {

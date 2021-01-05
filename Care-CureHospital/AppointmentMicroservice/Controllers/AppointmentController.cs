@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
+using AppointmentMicroservice.Domain;
 using AppointmentMicroservice.Dto;
 using AppointmentMicroservice.Mapper;
 using AppointmentMicroservice.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.Term;
 
 namespace AppointmentMicroservice.Controllers
 {
@@ -84,7 +82,7 @@ namespace AppointmentMicroservice.Controllers
             doctorWorkDayService.CancelPatientAppointment(appointmentForCancelation.DoctorWorkDayId, appointmentId, DateTime.Now);
             return Ok(appointmentService.CancelPatientAppointment(appointmentId, DateTime.Now));
         }
-
+        /*
         [HttpGet("getAllRecommendedTerms")]       // GET /api/appointment/getAllRecommendedTerms
         public IActionResult GetAllRecommendedTerms([FromQuery(Name = "startDate")] string startDate, [FromQuery(Name = "endDate")] string endDate, [FromQuery(Name = "doctorId")] string doctorId, [FromQuery(Name = "priority")] string priority)
         {
@@ -97,7 +95,7 @@ namespace AppointmentMicroservice.Controllers
             {
                 return BadRequest("The data which were entered are incorrect!");
             }
-        }
+        }*/
     }
 }
 
