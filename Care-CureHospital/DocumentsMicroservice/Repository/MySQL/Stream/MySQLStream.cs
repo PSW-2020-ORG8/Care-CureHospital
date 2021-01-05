@@ -1,19 +1,16 @@
-﻿using Backend.Repository.MySQL;
-using System;
+﻿using DocumentsMicroservice.DataBase;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Repository.MySQL.Stream
 {
     public class MySQLStream<E> : IMySQLStream<E>
         where E : class
     {
-        private readonly HealthClinicDbContext dbContext;
+        private readonly DocumentsDataBaseContext dbContext;
 
         public MySQLStream()
         {
-            this.dbContext = new HealthClinicDbContext();
+            this.dbContext = new DocumentsDataBaseContext();
         }
 
         public void Add(E entity)

@@ -1,14 +1,11 @@
-﻿using Backend.Model.PatientDoctor;
-using System;
+﻿using DocumentsMicroservice.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Service
 {
     public interface IPrescriptionService : IService<Prescription, int>
     {
-        public List<Prescription> GetPrescriptionsForPatient(int patientID);
+        /*public List<Prescription> GetPrescriptionsForPatient(int patientID);
         public List<Prescription> FindPrescriptionsForCommentParameter(int patientID, string comment);
         public List<Prescription> FindPrescriptionsForDateParameter(int patientID, string publishingDate);
         public List<Prescription> FindPrescriptionsForDoctorParameter(int patientID, string doctorFullName);
@@ -21,8 +18,7 @@ namespace DocumentsMicroservice.Service
         public List<Prescription> FindPrescriptionsByDoctorUsingSimpleSearch(int patientId, string doctor);
         public List<Prescription> FindPrescriptionsByDateUsingSimpleSearch(int patientId, string date);
         public List<Prescription> FindPrescriptionsByCommentUsingSimpleSearch(int patientId, string comment);
-        public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments);
-
+        public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments);*/
 
     }
 }

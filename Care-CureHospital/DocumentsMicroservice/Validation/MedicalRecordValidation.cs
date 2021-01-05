@@ -18,14 +18,14 @@ namespace DocumentsMicroservice.Validation
         private Regex contactNumberRegex = new Regex(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
         private Regex eMailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
 
-        private IPatientService patientService;
+        /*private IPatientService patientService;
 
         public MedicalRecordValidation(IPatientService patientService)
         {
             this.patientService = patientService;
-        }
+        }*/
 
-        public bool ValidateMedicalRecord(MedicalRecordDto medicalRecordDto)
+        /*public bool ValidateMedicalRecord(MedicalRecordDto medicalRecordDto)
         {
             if (!ValidateUsername(medicalRecordDto.Patient.Username) || !ValidatePassword(medicalRecordDto.Patient.Password, medicalRecordDto.ConfirmedPassword)
                 || !ValidateLettersOnly(medicalRecordDto) || !ValidateJmbg(medicalRecordDto.Patient.Jmbg) || !ValidateIdentityCard(medicalRecordDto.Patient.IdentityCard)
@@ -48,7 +48,7 @@ namespace DocumentsMicroservice.Validation
                 return false;
             }
             return true;
-        }
+        }*/
 
         private bool ValidatePassword(string password, string confirmedPassword)
         {

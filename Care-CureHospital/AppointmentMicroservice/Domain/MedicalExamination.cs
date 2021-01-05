@@ -1,4 +1,6 @@
-﻿namespace AppointmentMicroservice.Domain
+﻿using AppointmentMicroservice.Repository;
+
+namespace AppointmentMicroservice.Domain
 {
    public class MedicalExamination : Term, IIdentifiable<int>
     {

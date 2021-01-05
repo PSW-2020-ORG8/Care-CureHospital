@@ -1,4 +1,4 @@
-﻿
+﻿using AppointmentMicroservice.Repository;
 
 namespace AppointmentMicroservice.Domain
 {
