@@ -1,6 +1,5 @@
 ﻿using AppointmentMicroservice.Repository;
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppointmentMicroservice.Domain
 {
@@ -9,9 +8,19 @@ namespace AppointmentMicroservice.Domain
         public int Id { get; set; }
         public string RoomId { get; set; }
         public int DoctorId { get; set; }
+        [NotMapped]
+        public virtual Doctor Doctor { get; set; }
 
         public Room()
         {
+        }
+
+        public Room(int id, string roomId, int doctorId, Doctor doctor)
+        {
+            Id = id;
+            RoomId = roomId;
+            DoctorId = doctorId;
+            Doctor = doctor;
         }
 
         public int GetId()

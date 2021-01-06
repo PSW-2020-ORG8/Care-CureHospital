@@ -1,8 +1,6 @@
 ﻿using AppointmentMicroservice.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-
 
 namespace AppointmentMicroservice.DataBase
 {

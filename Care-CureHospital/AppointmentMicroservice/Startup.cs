@@ -1,17 +1,17 @@
-using System;
 using AppointmentMicroservice.DataBase;
 using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Gateway;
+using AppointmentMicroservice.Gateway.Interface;
 using AppointmentMicroservice.Repository;
 using AppointmentMicroservice.Repository.MySQL.Stream;
 using AppointmentMicroservice.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using System;
 
 namespace AppointmentMicroservice
 {
@@ -30,12 +30,13 @@ namespace AppointmentMicroservice
             services.AddCors();
 
             services.AddSingleton<IAppointmentService, AppointmentService>(service => 
-                    new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>())));
+                    new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>()), new PatientGateway()));
             services.AddSingleton<IDoctorWorkDayService, DoctorWorkDayService>(service => 
-                    new DoctorWorkDayService(new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>())));
+                    new DoctorWorkDayService(new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>()), new DoctorGateway()));
             services.AddSingleton<IMedicalExaminationService, MedicalExaminationService>(service =>
                     new MedicalExaminationService(new MedicalExaminationRepository(new MySQLStream<MedicalExamination>())));
-            
+            services.AddSingleton<IDoctorGateway, DoctorGateway>();
+
             services.AddControllers();
             services.AddDbContext<AppointmentDataBaseContext>(options =>
                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
