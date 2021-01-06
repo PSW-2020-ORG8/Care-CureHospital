@@ -106,6 +106,12 @@ namespace AppointmentMicroservice.Controllers
             Appointment appointment = appointmentService.FilledSurveyForAppointment(appointmentId);
             return Ok();
         }
+
+        [HttpGet("countCancelledAppointmentsForPatient/{patientId}")]       // GET /api/appointment/countCancelledAppointmentsForPatient/{patientId}
+        public IActionResult GetAllRecommendedTerms(int patientId)
+        {
+            return Ok(appointmentService.CountCancelledAppointmentsForPatient(patientId, DateTime.Now));
+        }
     }
 }
 
