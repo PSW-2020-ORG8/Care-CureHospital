@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroservice.Domain;
 using UserMicroservice.Dto;
 using UserMicroservice.Mapper;
 using UserMicroservice.Service;
@@ -49,7 +50,18 @@ namespace UserMicroservice.Controllers
         [HttpGet("getPatient/{patientId}")]    // GET /api/patient/getPatient/{patientId}
         public IActionResult GetPatientById(int patientId)
         {
-            return Ok(patientService.GetEntity(patientId));
+            Patient patient = patientService.GetEntity(patientId);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
+        }
+
+        [HttpPut("setMaliciousPatient/{patientId}")]       // PUT /api/patient/setMaliciousPatient/{patientId}
+        public IActionResult SetMaliciousPatient(int patientId)
+        {
+            return Ok(patientService.SetMaliciousPatient(patientId));
         }
 
         [HttpGet("doesUsernameExist/{username}")]    // GET /api/patient/doesUsernameExist/{username}

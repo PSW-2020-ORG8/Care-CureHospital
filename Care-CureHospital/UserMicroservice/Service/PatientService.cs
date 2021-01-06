@@ -22,6 +22,14 @@ namespace UserMicroservice.Service
             return maliciousPatient;
         }
 
+        public Patient SetMaliciousPatient(int patientId)
+        {
+            Patient patient = GetEntity(patientId);
+            patient.Malicious = true;
+            UpdateEntity(patient);
+            return patient;
+        }
+
         public List<Patient> GetMaliciousPatients()
         {
             return GetAllEntities().ToList().Where(patient => patient.Malicious == true).ToList();

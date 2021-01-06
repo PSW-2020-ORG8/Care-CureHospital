@@ -1,7 +1,6 @@
 ﻿using AppointmentMicroservice.DataBase;
 using System.Collections.Generic;
 
-
 namespace AppointmentMicroservice.Repository.MySQL.Stream
 {
     public class MySQLStream<E> : IMySQLStream<E>
