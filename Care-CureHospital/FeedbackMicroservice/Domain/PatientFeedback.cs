@@ -1,6 +1,6 @@
 ﻿using FeedbackMicroservice.Repository;
 using System;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FeedbackMicroservice.Domain
 {
@@ -11,6 +11,8 @@ namespace FeedbackMicroservice.Domain
         public bool IsPublished { get; set; }
         public bool IsAnonymous { get; set; }
         public int PatientId { get; set; }
+        [NotMapped]
+        public virtual Patient Patient { get; set; }
 
         public PatientFeedback()
         {

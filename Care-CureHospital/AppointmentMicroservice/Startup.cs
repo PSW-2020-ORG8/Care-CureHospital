@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AppointmentMicroservice.DataBase;
 using AppointmentMicroservice.Domain;
 using AppointmentMicroservice.Repository;
@@ -36,6 +33,9 @@ namespace AppointmentMicroservice
                     new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>())));
             services.AddSingleton<IDoctorWorkDayService, DoctorWorkDayService>(service => 
                     new DoctorWorkDayService(new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>())));
+            services.AddSingleton<IMedicalExaminationService, MedicalExaminationService>(service =>
+                    new MedicalExaminationService(new MedicalExaminationRepository(new MySQLStream<MedicalExamination>())));
+            
             services.AddControllers();
             services.AddDbContext<AppointmentDataBaseContext>(options =>
                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);

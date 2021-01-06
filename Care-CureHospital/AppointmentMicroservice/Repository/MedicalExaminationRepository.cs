@@ -10,12 +10,9 @@ namespace AppointmentMicroservice.Repository
 {
     public class MedicalExaminationRepository : MySQLRepository<MedicalExamination, int>, IMedicalExaminationRepository
     {
-
         public MedicalExaminationRepository(IMySQLStream<MedicalExamination> stream)
             : base(stream)
         {
         }
-
-
     }
 }

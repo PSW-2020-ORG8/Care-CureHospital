@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FeedbackMicroservice.Gateway.Interface
 {
-    public interface IMedicalExaminationGateway
+    public interface IPatientGateway
     {
-        public MedicalExamination GetMedicalExaminationById(int id);
+        public Patient GetPatientById(int patientId);
     }
 }

@@ -19,7 +19,7 @@ namespace FeedbackMicroservice.Mapper
             return patientFeedback;
         }
 
-        public static PatientFeedbackDto PatientFeedbackToPatientFeedbackDto(PatientFeedback patientFeedback)
+        public static PatientFeedbackDto PatientFeedbackToPatientFeedbackDto(PatientFeedback patientFeedback, Patient patient)
         {
             PatientFeedbackDto dto = new PatientFeedbackDto();
             dto.Id = patientFeedback.Id;
@@ -27,7 +27,7 @@ namespace FeedbackMicroservice.Mapper
             dto.IsPublished = patientFeedback.IsPublished;
             dto.IsAnonymous = patientFeedback.IsAnonymous;
             dto.PatientId = patientFeedback.PatientId;
-           // dto.Patient = patientFeedback.Patient.Name + " " + patientFeedback.Patient.Surname;
+            dto.Patient = patient.Name + " " + patient.Surname;
             dto.PublishingDate = patientFeedback.PublishingDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Text = patientFeedback.Text;
 

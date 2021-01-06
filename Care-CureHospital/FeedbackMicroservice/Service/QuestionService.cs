@@ -42,7 +42,6 @@ namespace FeedbackMicroservice.Service
             questionRepository.UpdateEntity(entity);
         }
 
-
         public List<int> GetDoctorTypeQuestionsIds()
         {
             return questionRepository.GetAllEntities().Where(q => q.QuestionType == QuestionType.Doctor).Select(q => q.Id).ToList();
