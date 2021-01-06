@@ -5,7 +5,7 @@ namespace DocumentsMicroservice.Service
 {
     public interface IMedicalExaminationReportService : IService<MedicalExaminationReport, int>
     {
-        /*public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID);
+        public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID);
         public List<MedicalExaminationReport> FindReportsForCommentParameter(int patientID, string comment);
         public List<MedicalExaminationReport> FindReportsForDateParameter(int patientID, string publishingDate);
         public List<MedicalExaminationReport> FindReportsForRoomParameter(int patientID, string numberOfRoom);
@@ -18,7 +18,7 @@ namespace DocumentsMicroservice.Service
         public List<MedicalExaminationReport> FindReportsByDoctorUsingSimpleSearch(int patientId, string doctor);
         public List<MedicalExaminationReport> FindReportsByDateUsingSimpleSearch(int patientId, string date);
         public List<MedicalExaminationReport> FindReportsByCommentUsingSimpleSearch(int patientId, string comment);
-        public List<MedicalExaminationReport> FindReportsByRoomUsingSimpleSearch(int patientId, string room);*/
+        public List<MedicalExaminationReport> FindReportsByRoomUsingSimpleSearch(int patientId, string room);
 
     }
 }

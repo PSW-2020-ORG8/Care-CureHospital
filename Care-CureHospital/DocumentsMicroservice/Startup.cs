@@ -33,6 +33,8 @@ namespace DocumentsMicroservice
             services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>())));
             services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>())));
             services.AddSingleton<IMedicalExaminationGateway, MedicalExaminationGateway>();
+            services.AddSingleton<IPatientGateway, PatientGateway>();
+
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
         }

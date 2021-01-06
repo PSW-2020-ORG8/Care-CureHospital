@@ -16,7 +16,7 @@ namespace DocumentsMicroservice.Mapper
             dto.Doctor = medicalExamination.Doctor.Name + " " + medicalExamination.Doctor.Surname;
             List<Medicament> medicaments = new List<Medicament>();
             prescription.Medicaments.ToList().ForEach(medicament => medicaments.Add(medicament));
-            //dto.Medicaments = medicaments;
+            dto.Medicaments = medicaments;
             return dto;
         }
     }

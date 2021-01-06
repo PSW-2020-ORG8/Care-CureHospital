@@ -7,6 +7,7 @@ namespace DocumentsMicroservice.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public int AnamnesisId { get; set; }
+        public virtual Anamnesis Anamnesis { get; set; }
 
         public Diagnosis()
         {
@@ -16,11 +17,6 @@ namespace DocumentsMicroservice.Domain
         {
             Name = name;
             Id = id;
-        }
-
-        public Diagnosis(string name)
-        {
-            Name = name;
         }
 
         public Diagnosis(int id, string name, int anamnesisID) : this(id, name)

@@ -51,5 +51,11 @@ namespace UserMicroservice.Controllers
         {
             return Ok(patientService.GetEntity(patientId));
         }
+
+        [HttpGet("doesUsernameExist/{username}")]    // GET /api/patient/doesUsernameExist/{username}
+        public IActionResult DoesUsernameExist(string username)
+        {
+            return Ok(patientService.DoesUsernameExist(username));
+        }
     }
 }
