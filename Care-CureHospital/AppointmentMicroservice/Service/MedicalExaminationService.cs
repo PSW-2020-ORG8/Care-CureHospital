@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Service
 {
-    public class MedicalExaminationService : IService<MedicalExamination, int>
+    public class MedicalExaminationService : IMedicalExaminationService
     {
         public IMedicalExaminationRepository medicalExaminationRepository;
 

@@ -11,17 +11,16 @@ namespace AppointmentMicroservice.Controllers
     [ApiController]
     public class MedicalExaminationController : ControllerBase
     {
-        private MedicalExaminationService medicalExaminationService;
+        private IMedicalExaminationService medicalExaminationService;
 
-        public MedicalExaminationController(MedicalExaminationService medicalExaminationService)
+        public MedicalExaminationController(IMedicalExaminationService medicalExaminationService)
         {
             this.medicalExaminationService = medicalExaminationService;
         }
 
         [HttpGet("getMedicalExamination/{id}")]
         public IActionResult GetMedicalExamination(int id)
-        {
-          
+        {   
             return Ok(medicalExaminationService.GetEntity(id));
         }
     }

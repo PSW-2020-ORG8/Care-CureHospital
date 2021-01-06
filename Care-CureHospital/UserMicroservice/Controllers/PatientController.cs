@@ -45,5 +45,11 @@ namespace UserMicroservice.Controllers
         {
             return Ok(patientService.BlockMaliciousPatient(patientId));
         }
+
+        [HttpGet("getPatient/{patientId}")]    // GET /api/patient/getPatient/{patientId}
+        public IActionResult GetPatientById(int patientId)
+        {
+            return Ok(patientService.GetEntity(patientId));
+        }
     }
 }

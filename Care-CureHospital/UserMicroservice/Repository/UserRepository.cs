@@ -35,28 +35,6 @@ namespace UserMicroservice.Repository
             return patients;
         }
 
-        public List<Secretary> GetAllSecretaries()
-        {
-            List<Secretary> secretaries = new List<Secretary>();
-            foreach (User user in this.GetAllEntities())
-            {
-                if (user.GetType() == typeof(Secretary))
-                    secretaries.Add((Secretary)user);
-            }
-            return secretaries;
-        }
-
-        public List<Manager> GetAllManagers()
-        {
-            List<Manager> managers = new List<Manager>();
-            foreach (User user in this.GetAllEntities())
-            {
-                if (user.GetType() == typeof(Manager))
-                    managers.Add((Manager)user);
-            }
-            return managers;
-        }
-
         public User GetUserByUsername(String username)
         {
             foreach (User user in this.GetAllEntities())

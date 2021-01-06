@@ -1,23 +1,25 @@
 ﻿using FeedbackMicroservice.Repository;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FeedbackMicroservice.Domain
 {
-    public class Doctor : IIdentifiable <int>
+    public class Patient : IIdentifiable<int>
     {
         public int Id { get; set; }
-        public string Username { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public Specialitation Specialitation  { get; set; }
 
-        public Doctor(string name, string surname, string username, Specialitation specialitation)        
+        public Patient()
+        {
+        }
+
+        public Patient(string name, string surname)
         {
             Name = name;
             Surname = surname;
-            Username = username;
-            Specialitation = specialitation;
         }
 
         public int GetId()

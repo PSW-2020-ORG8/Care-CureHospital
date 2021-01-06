@@ -96,6 +96,13 @@ namespace AppointmentMicroservice.Controllers
                 return BadRequest("The data which were entered are incorrect!");
             }
         }*/
+
+        [HttpGet("filledSurveyForAppointment/{appointmentId}")]       // GET /api/appointment/filledSurveyForAppointment/{appointmentId}
+        public IActionResult FilledSurveyForAppointment(int appointmentId)
+        {
+            Appointment appointment = appointmentService.FilledSurveyForAppointment(appointmentId);
+            return Ok();
+        }
     }
 }
 

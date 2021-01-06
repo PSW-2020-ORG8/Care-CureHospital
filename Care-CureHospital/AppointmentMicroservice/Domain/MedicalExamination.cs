@@ -21,7 +21,6 @@ namespace AppointmentMicroservice.Domain
         {
         }
 
-
         public MedicalExamination(int id, bool urgency, string shortDescription, int roomId, int doctorId, int patientId, Room room) : this(id)
         {
             SurveyFilled = urgency;

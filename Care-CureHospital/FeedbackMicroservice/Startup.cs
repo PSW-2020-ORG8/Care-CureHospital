@@ -1,6 +1,7 @@
 using FeedbackMicroservice.DataBase;
 using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Gateway;
+using FeedbackMicroservice.Gateway.Interface;
 using FeedbackMicroservice.Repository;
 using FeedbackMicroservice.Repository.MySQL.Stream;
 using FeedbackMicroservice.Service;
@@ -29,11 +30,15 @@ namespace FeedbackMicroservice
             services.AddCors();
 
             services.AddSingleton<IPatientFeedbackService, PatientFeedbackService>(patientFeedback => new PatientFeedbackService(new PatientFeedbackRepository(new MySQLStream<PatientFeedback>())));
-            services.AddSingleton<ISurveyService, SurveyService>(survey => new SurveyService(new SurveyRepository(new MySQLStream<Survey>()),new MedicalExaminationGateway(),
-                new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))))); services.AddSingleton<IAnswerService, AnswerService>(answer => new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>())))); 
+            services.AddSingleton<ISurveyService, SurveyService>(survey => new SurveyService(new SurveyRepository(new MySQLStream<Survey>()), new MedicalExaminationGateway(),
+                new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))))); 
+            services.AddSingleton<IAnswerService, AnswerService>(answer => new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))));
+            services.AddSingleton<IDoctorGateway, DoctorGateway>();
+            services.AddSingleton<IAppointmentGateway, AppointmentGateway>();
+            services.AddSingleton<IPatientGateway, PatientGateway>();
+
             services.AddDbContext<FeedBackDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
-
             services.AddControllers();
         }
         private string CreateConnectionStringFromEnvironment()

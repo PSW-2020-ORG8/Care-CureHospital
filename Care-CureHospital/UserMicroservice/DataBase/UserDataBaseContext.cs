@@ -10,8 +10,6 @@ namespace UserMicroservice.DataBase
 {
     public class UserDataBaseContext : DbContext
     {
-        public DbSet<Secretary> Secretaries { get; set; }
-        public DbSet<Manager> Managers { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<SystemAdministrator> SystemAdministrators { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -78,15 +76,6 @@ namespace UserMicroservice.DataBase
                new SystemAdministrator { Id = 2, Username = "admin2", Password = "admin2", Name = "Dusan", Surname = "Vasiljev", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "dusan@gmail.com", CityId = 1, Role = "Admin" }
            );
 
-            modelBuilder.Entity<Secretary>().HasData(
-                new Secretary { Id = 1, Username = "sekretar1", Password = "123", Name = "Milica", Surname = "Carica", Jmbg = "12312316712345", DateOfBirth = new DateTime(1998, 1, 1, 3, 3, 3), ContactNumber = "063775356", EMail = "milica@gmail.com", CityId = 1 }
-            );
-
-            modelBuilder.Entity<Manager>().HasData(
-                new Manager { Id = 1, Username = "manager1", Password = "123", Name = "Darja", Surname = "Rusedski", Jmbg = "12317316712344", DateOfBirth = new DateTime(1992, 1, 10, 3, 30, 0), ContactNumber = "063555156", EMail = "darja@gmail.com", CityId = 1 }
-                );
-
-
             modelBuilder.Entity<Specialitation>().HasData(
                 new Specialitation { Id = 1, SpecialitationForDoctor = "Lekar opste prakse" },
                 new Specialitation { Id = 2, SpecialitationForDoctor = "Ortoped" },
@@ -103,9 +92,7 @@ namespace UserMicroservice.DataBase
             modelBuilder.Entity<Country>().HasData(
                 new Country { Id = 1, Name = "Srbija" }
             );
-
-          
-
+        
             }
         }
     }

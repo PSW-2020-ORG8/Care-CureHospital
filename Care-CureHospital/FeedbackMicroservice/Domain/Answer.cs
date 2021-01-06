@@ -20,8 +20,6 @@ namespace FeedbackMicroservice.Domain
         public Answer()
         {
         }
-
-
         public Answer(int id, GradeOfQuestion grade, int questionId, Question question, int surveyId, Survey survey) : this(id)
         {
             Grade = grade;
