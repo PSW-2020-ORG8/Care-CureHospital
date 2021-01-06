@@ -1,6 +1,7 @@
 ﻿using DocumentsMicroservice.Domain;
 using DocumentsMicroservice.Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DocumentsMicroservice.Service
 {
@@ -13,7 +14,7 @@ namespace DocumentsMicroservice.Service
             this.prescriptionRepository = prescriptionRepository;
         }
 
-        /*public List<Prescription> GetPrescriptionsForPatient(int patientID)
+        public List<Prescription> GetPrescriptionsForPatient(int patientID)
         {
             List<Prescription> prescriptionsForPatient = new List<Prescription>();
             foreach (Prescription prescription in prescriptionRepository.GetAllEntities().ToList())
@@ -190,7 +191,7 @@ namespace DocumentsMicroservice.Service
             {
                 return FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
             }
-        }*/
+        }
 
         public Prescription GetEntity(int id)
         {

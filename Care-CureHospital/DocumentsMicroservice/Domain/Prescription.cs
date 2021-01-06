@@ -1,6 +1,7 @@
 ﻿using DocumentsMicroservice.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,9 @@ namespace DocumentsMicroservice.Domain
         public string Comment { get; set; }
         public DateTime PublishingDate { get; set; }
         public int MedicalExaminationId { get; set; }
-        //public virtual List<Medicament> Medicaments { get; set; }
+        [NotMapped]
+        public MedicalExamination MedicalExamination {get; set;}
+        public virtual List<Medicament> Medicaments { get; set; }
 
         public Prescription() { }
 
