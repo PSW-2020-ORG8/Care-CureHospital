@@ -19,7 +19,7 @@ namespace DocumentsMicroservice.Service
             List<MedicalExaminationReport> medicalExaminationReportsForPatient = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in medicalExaminationReportRepository.GetAllEntities().ToList())
             {
-                if (report.MedicalExamination.PatientId == patientID)
+                if (report.MedicalExamination.Patient.Id == patientID)
                 {
                     medicalExaminationReportsForPatient.Add(report);
                 }

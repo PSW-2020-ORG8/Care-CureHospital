@@ -29,13 +29,13 @@ namespace GatewayWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
+            /*services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder.WithOrigins(Environment.GetEnvironmentVariable("Frontend_host"))
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-            });
+            });*/
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -78,7 +78,9 @@ namespace GatewayWebApi
             app.UseAuthorization();
             app.UseAuthentication();
 
-            app.UseCors("CorsPolicy");
+            //app.UseCors("CorsPolicy");
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

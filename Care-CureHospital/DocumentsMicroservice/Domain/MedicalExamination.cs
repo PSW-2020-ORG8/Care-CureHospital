@@ -21,6 +21,17 @@ namespace DocumentsMicroservice.Domain
         {
         }
 
+        public MedicalExamination(int id, int doctorId, Doctor doctor, int patientId, Patient patient, int roomId, Room room)
+        {
+            Id = id;
+            DoctorId = doctorId;
+            Doctor = doctor;
+            PatientId = patientId;
+            Patient = patient;
+            RoomId = roomId;
+            Room = room;
+        }
+
         public int GetId()
         {
             return Id;
