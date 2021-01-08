@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Tender } from 'src/app/models/Tender';
 import { TenderServiceService } from 'src/app/tender-service.service';
+import { HttpClient } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-close-tender',
@@ -9,22 +10,25 @@ import { TenderServiceService } from 'src/app/tender-service.service';
 })
 export class CloseTenderComponent implements OnInit {
 
-  constructor(private tenderService:TenderServiceService) { }
+  constructor(private tenderService:TenderServiceService, public http: HttpClient) { }
   
+  tender:Tender;
   id:number;
   medicamentName : string;
   startDate : Date;
   endDate : Date;
+  active: boolean;
 
-  TenderList:Tender[];
+  TenderList: Tender[];
+  //TenderList:any=[];
 
   ngOnInit(): void {
     this.reresh();
   }
-
   
-  closeTender(){
-    this.tenderService.closeTender(this.id).subscribe(data =>{
+  closeTender(id:number){
+    console.log(id);
+    this.tenderService.closeTender(id).subscribe(data =>{
        console.log(data);
      })
      alert("Successfully closed!");

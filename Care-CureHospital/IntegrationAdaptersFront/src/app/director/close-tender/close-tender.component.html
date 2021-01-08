@@ -2,6 +2,7 @@
     <table class="table table-striped" matTableExporter #exporter="matTableExporter">
         <thead>
             <tr>
+                <th id="Id">TenderId</th>
                 <th id="Medicament">MedicamentName</th>
                 <th id="StartDate">Start date</th>
                 <th id="EndDate">End date</th>
@@ -10,10 +11,11 @@
         </thead>
         <tbody>
            <tr *ngFor="let dataItem of TenderList">
+               <th>{{dataItem.id}}</th>
                 <th>{{dataItem.medicamentName}}</th>
                 <th>{{dataItem.startDate}}</th>
                 <th>{{dataItem.endDate}}</th>
-                <button type="button" mat-raised-button (click)="closeTender()">Close tender</button>   
+                <button type="button" mat-raised-button (click)="closeTender(dataItem.id)">Close tender</button>   
             </tr>
         </tbody>
     </table>

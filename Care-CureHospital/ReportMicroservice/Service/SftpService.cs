@@ -9,7 +9,6 @@ namespace ReportMicroservice.Service
     {
         public SftpService()
         {
-
         }
 
         public void UploadFile(string file)

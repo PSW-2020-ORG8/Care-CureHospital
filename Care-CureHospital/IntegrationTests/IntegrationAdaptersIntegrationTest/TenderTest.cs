@@ -62,6 +62,39 @@ namespace IntegrationTests.IntegrationAdaptersIntegrationTest
             response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
         }
 
+        [Theory]
+        [MemberData(nameof(OfferData))]
+        public async void Get_All_Offers(HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.GetAsync("/api/offer");
+
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
+
+        [Theory]
+        [MemberData(nameof(OfferData))]
+        public async void Get_All_Offers_Active_Tender(HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.GetAsync("/api/offer/activeTender");
+
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
+
+        [Theory]
+        [MemberData(nameof(OfferData))]
+        public async void Get_All_Offers_Inactive_Tender(HttpStatusCode expectedResponseStatusCode)
+        {
+            HttpClient client = factory.CreateClient();
+
+            var response = await client.GetAsync("/api/offer/inactiveTender");
+
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
+
         public static IEnumerable<object[]> TenderData()
         {
             var retVal = new List<object[]>();
@@ -73,6 +106,13 @@ namespace IntegrationTests.IntegrationAdaptersIntegrationTest
         {
             var retVal = new List<object[]>();
             retVal.Add(new object[] { 2, HttpStatusCode.OK });
+            return retVal;
+        }
+
+        public static IEnumerable<object[]> OfferData()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { HttpStatusCode.OK });
             return retVal;
         }
     }

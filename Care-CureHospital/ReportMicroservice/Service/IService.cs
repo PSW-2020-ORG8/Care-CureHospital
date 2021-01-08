@@ -13,6 +13,5 @@ namespace ReportMicroservice.Service
         void UpdateEntity(E entity);
 
         void DeleteEntity(E entity);
-
     }
 }

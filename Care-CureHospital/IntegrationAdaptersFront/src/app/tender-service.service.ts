@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class TenderServiceService {
-  readonly APIUrl = "http://localhost:51999/api";
+  readonly APIUrl = "http://localhost:51492/api";
 
   constructor(private http:HttpClient) {
      this.getOfferListActive() ,
@@ -31,11 +31,7 @@ export class TenderServiceService {
     return this.http.get<any[]>(this.APIUrl+'/offer/winner');
   }
 
-  /*closeTender():Observable<any>{
-    return this.http.put<any>(this.APIUrl+'/tender/closeTender'); //'offer/notWinner
-  }*/
-
-  closeTender(val:any){
-    return this.http.put(this.APIUrl+'/tender/closeTender/{tenderId}', val);
+  closeTender(id:number):Observable<Tender>{
+    return this.http.put<Tender>(this.APIUrl+ '/tender/closeTender/{tenderId}', id); //'offer/notWinner
   }
 }

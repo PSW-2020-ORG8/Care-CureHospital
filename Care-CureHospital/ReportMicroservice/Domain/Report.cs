@@ -50,7 +50,6 @@ namespace ReportMicroservice.Domain
 
         public Report()
         {
-
         }
 
         public int GetId()
