@@ -20,9 +20,10 @@ namespace DocumentsMicroservice.Service
         public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID)
         {
             List<MedicalExaminationReport> medicalExaminationReportsForPatient = new List<MedicalExaminationReport>();
+            MedicalExamination medicalExamination = null;
             foreach (MedicalExaminationReport report in medicalExaminationReportRepository.GetAllEntities().ToList())
             {
-                MedicalExamination medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(report.MedicalExaminationId);
+                medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(report.MedicalExaminationId);
                 if (medicalExamination.Patient.Id == patientID)
                 {
                     medicalExaminationReportsForPatient.Add(report);

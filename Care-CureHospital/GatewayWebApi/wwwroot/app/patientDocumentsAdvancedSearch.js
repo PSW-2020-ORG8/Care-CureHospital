@@ -505,7 +505,20 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			}
 		}).then(response => {
 			this.reportsForPatient = response.data;
-			this.reportsResult = this.reportsForPatient;		
+			this.reportsResult = this.reportsForPatient;
+			axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				this.prescriptionsForPatient = response.data;
+				this.prescriptionsResult = this.prescriptionsForPatient;
+			}).catch(error => {
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
 		}).catch(error => {
             if (error.response.status === 401 || error.response.status === 403) {
                 toast('Nemate pravo pristupa stranici!')
@@ -513,7 +526,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
             }
         });
 
-		axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
+		/*axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
@@ -525,6 +538,6 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				toast('Nemate pravo pristupa stranici!')
 				this.$router.push({ name: 'userLogin' })
 			}
-		});
+		});*/
 	}
 });

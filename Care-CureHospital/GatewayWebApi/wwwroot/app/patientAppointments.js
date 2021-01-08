@@ -121,7 +121,11 @@ Vue.component("patientAppointments", {
 				}
 			}).then(response => {
 				if (response.status !== 204) {
-					axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
+					axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
 						toast('Uspešno ste otkazali pregled')
 						this.scheduledAppointments = response.data;
 					});
@@ -142,25 +146,45 @@ Vue.component("patientAppointments", {
 
 		onChange: function () {
 			if (this.filterAppointments === "Svi pregledi") {
-				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
+				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
 					this.scheduledAppointments = response.data;
-					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
+					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId, {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
 						this.previousAppointments = response.data;
 					});
 				}).catch(error => {
-					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
+					axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId, {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
 						this.previousAppointments = response.data;
 					});
 				});
 			} else if (this.filterAppointments === "Zakazani pregledi") {
-				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
+				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
 					this.scheduledAppointments = response.data;
 					this.previousAppointments = []
 				}).catch(error => {
 					this.previousAppointments = []
 				});
 			} else if (this.filterAppointments === "Pregledi na kojima sam bio") {
-				axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId).then(response => {
+				axios.get('gateway/appointment/getPreviousAppointmetsByPatient/' + this.loggedUserId, {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
 					this.previousAppointments = response.data;
 					this.scheduledAppointments = []
 				}).catch(error => {
