@@ -2,10 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iis": {
+    /*"iis": {
       "applicationUrl": "http://localhost/GatewayWebApi",
       "sslPort": 0
-    },
+    },*/
     "iisExpress": {
       "applicationUrl": "http://localhost:60370",
       "sslPort": 0
@@ -16,21 +16,21 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "Frontend_host": "http://localhost:5000"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+        //"Frontend_host": "http://localhost:5000"
       }
     },
     "GatewayWebApi": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "index.html",
+      "applicationUrl": "http://localhost:60370",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "Frontend_host": "http://localhost:5000"
-      },
-      "applicationUrl": "http://localhost:5000"
+        "ASPNETCORE_ENVIRONMENT": "Development"
+        //"Frontend_host": "http://localhost:5000"
+      }
     }
   }
 }

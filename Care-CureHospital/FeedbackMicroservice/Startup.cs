@@ -41,6 +41,9 @@ namespace FeedbackMicroservice
             services.AddDbContext<FeedBackDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddControllers();
+            services.AddControllersWithViews()
+               .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
         private string CreateConnectionStringFromEnvironment()
         {

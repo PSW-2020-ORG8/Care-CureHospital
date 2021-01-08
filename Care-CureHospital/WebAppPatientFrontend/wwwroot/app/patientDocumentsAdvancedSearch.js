@@ -496,7 +496,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			}).join(''));
 
 			this.decodedToken = JSON.parse(jsonPayload);
-			this.loggedUserId = this.decodedToken.id;
+			this.loggedUserId = this.decodedToken.unique_name;
 		}
 
 		axios.get('gateway/medicalExaminationReport/getForPatient/' + this.loggedUserId, {

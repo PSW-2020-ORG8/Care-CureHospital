@@ -55,7 +55,7 @@ namespace UserMicroservice.Service
             return patientRepository.GetEntity(id);
         }
 
-        public Patient GetUserByUsername(string username)
+        public Patient GetPatientByUsername(string username)
         {
             return patientRepository.GetPatientByUsername(username);
         }

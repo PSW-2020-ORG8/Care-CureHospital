@@ -27,6 +27,22 @@ namespace DocumentsMicroservice.Gateway
             return doesExist;
         }
 
+        public Patient GetPatientById(int patientId)
+        {
+            Patient patient = null;
+            using HttpClient client = new HttpClient();
+            var task = client.GetAsync(GetPatientService() + "/api/patient/getPatient/" + patientId)
+                .ContinueWith((taskWithResponse) =>
+                {
+                    var message = taskWithResponse.Result;
+                    var json = message.Content.ReadAsStringAsync();
+                    json.Wait();
+                    patient = JsonConvert.DeserializeObject<Patient>(json.Result);
+                });
+            task.Wait();
+            return patient;
+        }
+
         public string GetPatientService()
         {
             string origin = Environment.GetEnvironmentVariable("URL") ?? "localhost";

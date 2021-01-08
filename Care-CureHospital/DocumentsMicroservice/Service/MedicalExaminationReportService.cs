@@ -1,4 +1,5 @@
 ﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Repository;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,22 @@ namespace DocumentsMicroservice.Service
     public class MedicalExaminationReportService : IMedicalExaminationReportService
     {
         public IMedicalExaminationReportRepository medicalExaminationReportRepository;
+        public IMedicalExaminationGateway medicalExaminationGateway;
 
-        public MedicalExaminationReportService(IMedicalExaminationReportRepository medicalExaminationReportRepository)
+        public MedicalExaminationReportService(IMedicalExaminationReportRepository medicalExaminationReportRepository, IMedicalExaminationGateway medicalExaminationGateway)
         {
             this.medicalExaminationReportRepository = medicalExaminationReportRepository;
+            this.medicalExaminationGateway = medicalExaminationGateway;
         }
 
         public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID)
         {
             List<MedicalExaminationReport> medicalExaminationReportsForPatient = new List<MedicalExaminationReport>();
+            MedicalExamination medicalExamination = null;
             foreach (MedicalExaminationReport report in medicalExaminationReportRepository.GetAllEntities().ToList())
             {
-                if (report.MedicalExamination.PatientId == patientID)
+                medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(report.MedicalExaminationId);
+                if (medicalExamination.Patient.Id == patientID)
                 {
                     medicalExaminationReportsForPatient.Add(report);
                 }
@@ -58,7 +63,8 @@ namespace DocumentsMicroservice.Service
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if ((report.MedicalExamination.Room.RoomId.Equals(numberOfRoom)))
+                MedicalExamination medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(report.MedicalExaminationId);
+                if (medicalExamination.Room.RoomId.Equals(numberOfRoom))
                 {
                     searchResult.Add(report);
                 }
@@ -71,7 +77,8 @@ namespace DocumentsMicroservice.Service
             List<MedicalExaminationReport> searchResult = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in GetMedicalExaminationReportsForPatient(patientID))
             {
-                if (doctorFullName.Contains(report.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(report.MedicalExamination.Doctor.Surname.ToString()))
+                MedicalExamination medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(report.MedicalExaminationId);
+                if (doctorFullName.Contains(medicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(medicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(report);
                 }

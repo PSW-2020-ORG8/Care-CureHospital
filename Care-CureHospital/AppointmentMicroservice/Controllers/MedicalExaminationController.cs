@@ -1,4 +1,5 @@
 ﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Gateway.Interface;
 using AppointmentMicroservice.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,14 @@ namespace AppointmentMicroservice.Controllers
     public class MedicalExaminationController : ControllerBase
     {
         private IMedicalExaminationService medicalExaminationService;
+        private IDoctorGateway doctorGateway;
+        private IPatientGateway patientGateway;
 
-        public MedicalExaminationController(IMedicalExaminationService medicalExaminationService)
+        public MedicalExaminationController(IMedicalExaminationService medicalExaminationService, IDoctorGateway doctorGateway, IPatientGateway patientGateway)
         {
             this.medicalExaminationService = medicalExaminationService;
+            this.doctorGateway = doctorGateway;
+            this.patientGateway = patientGateway;
         }
 
         [HttpGet("getMedicalExamination/{id}")]
@@ -23,6 +28,8 @@ namespace AppointmentMicroservice.Controllers
             {
                 return NotFound();
             }
+            medicalExamination.Doctor = doctorGateway.GetDoctorById(medicalExamination.DoctorId);
+            medicalExamination.Patient = patientGateway.GetPatientById(medicalExamination.PatientId);
             return Ok(medicalExamination);
         }
     }

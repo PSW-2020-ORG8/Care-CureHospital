@@ -29,15 +29,19 @@ namespace AppointmentMicroservice
         {
             services.AddCors();
 
+            services.AddSingleton<IDoctorGateway, DoctorGateway>();
+            services.AddSingleton<IPatientGateway, PatientGateway>();
             services.AddSingleton<IAppointmentService, AppointmentService>(service => 
                     new AppointmentService(new AppointmentRepository(new MySQLStream<Appointment>()), new PatientGateway()));
             services.AddSingleton<IDoctorWorkDayService, DoctorWorkDayService>(service => 
                     new DoctorWorkDayService(new DoctorWorkDayRepository(new MySQLStream<DoctorWorkDay>()), new DoctorGateway()));
             services.AddSingleton<IMedicalExaminationService, MedicalExaminationService>(service =>
                     new MedicalExaminationService(new MedicalExaminationRepository(new MySQLStream<MedicalExamination>())));
-            services.AddSingleton<IDoctorGateway, DoctorGateway>();
 
             services.AddControllers();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<AppointmentDataBaseContext>(options =>
                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
         }

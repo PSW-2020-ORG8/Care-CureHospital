@@ -36,6 +36,26 @@ namespace DocumentsMicroservice.Domain
             Surname = surname;
         }
 
+        public Patient(int id, string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string eMail, int cityId, City city)
+        {
+            Id = id;
+            Username = username;
+            Password = password;
+            Name = name;
+            ParentName = parentName;
+            Surname = surname;
+            Gender = gender;
+            Jmbg = jmbg;
+            IdentityCard = identityCard;
+            HealthInsuranceCard = healthInsuranceCard;
+            BloodGroup = bloodGroup;
+            DateOfBirth = dateOfBirth;
+            ContactNumber = contactNumber;
+            EMail = eMail;
+            CityId = cityId;
+            City = city;
+        }
+
         public int GetId()
         {
             return Id;

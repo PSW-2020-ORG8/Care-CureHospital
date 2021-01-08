@@ -45,7 +45,7 @@ namespace DocumentsMicroservice.Controllers
             }
             else
             {
-                return Ok(MedicalRecordMapper.MedicalRecordToMedicalRecordDto(medicalRecord));
+                return Ok(MedicalRecordMapper.MedicalRecordToMedicalRecordDto(medicalRecord, patientGateway.GetPatientById(medicalRecord.PatientId)));
             }
         }
 

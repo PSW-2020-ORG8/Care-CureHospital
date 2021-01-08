@@ -13,7 +13,6 @@ namespace DocumentsMicroservice.Gateway
     {
         public MedicalExamination GetMedicalExaminationById(int id)
         {
-
             MedicalExamination medicalExamination = null;
             using HttpClient client = new HttpClient();
             var task = client.GetAsync(GetMedicalExaminationService() + "/api/medicalExamination/getMedicalExamination/" + id)

@@ -31,7 +31,8 @@ namespace AppointmentMicroservice.Controllers
         {
             DoctorWorkDayDto dto = DoctorWorkDayMapper.DoctorWorkDayToDoctorWorkDayDto(
                 doctorWorkDayService.GetDoctorWorkDayByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId),
-                doctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId));
+                doctorWorkDayService.GetAvailableAppointmentsByDateAndDoctorId(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture), doctorId),
+                doctorGateway.GetDoctorById(doctorId));
 
             if (dto == null)
             {
@@ -92,7 +93,7 @@ namespace AppointmentMicroservice.Controllers
             try
             {
                 Dictionary<int, List<Appointment>> availableAppointments = doctorWorkDayService.GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime.ParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture), Int32.Parse(doctorId), priority);
-                return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(doctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments));
+                return Ok(DoctorWorkDayMapper.CreateDoctorWorkDayDtos(doctorWorkDayService.GetDoctorWorkDaysByIds(availableAppointments.Keys.ToList()), availableAppointments, doctorGateway.GetDoctorById((Int32.Parse(doctorId)))));
             }
             catch
             {

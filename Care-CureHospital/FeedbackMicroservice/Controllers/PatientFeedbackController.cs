@@ -38,7 +38,7 @@ namespace FeedbackMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpPost]      // POST /api/patientFeedback
+        [HttpPost("postPatientFeedback")]      // POST /api/patientFeedback/postPatientFeedback
         public IActionResult Add(PatientFeedbackDto dto)
         {
             if (dto.Text.Length <= 0)
