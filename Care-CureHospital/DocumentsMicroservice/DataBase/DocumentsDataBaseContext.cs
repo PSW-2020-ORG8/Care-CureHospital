@@ -75,11 +75,11 @@ namespace DocumentsMicroservice.DataBase
             );
 
             modelBuilder.Entity<Medicament>().HasData(
-                new Medicament { Id = 1, Code = "L123", Name = "Brufen", Producer = "Hemofarm", Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1, PrescriptionId = 1 },
-                new Medicament { Id = 2, Code = "L233", Name = "Panadol", Producer = "Hemofarm", Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 2, PrescriptionId = 1 },
-                new Medicament { Id = 3, Code = "L523", Name = "Paracetamol", Producer = "Hemofarm", Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 3, PrescriptionId = 3 },
-                new Medicament { Id = 4, Code = "L423", Name = "Vitamin B", Producer = "Hemofarm", Quantity = 10, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 4, PrescriptionId = 2 },
-                new Medicament { Id = 5, Code = "L233", Name = "Panadol", Producer = "Hemofarm", Quantity = 14, Ingredients = "sastojak1, sastojak2, sastojak3", MedicalRecordId = 1, PrescriptionId = 2 }
+                new Medicament { Id = 1, Name = "Brufen", MedicalRecordId = 1, PrescriptionId = 1 },
+                new Medicament { Id = 2, Name = "Panadol", MedicalRecordId = 2, PrescriptionId = 1 },
+                new Medicament { Id = 3, Name = "Paracetamol", MedicalRecordId = 3, PrescriptionId = 3 },
+                new Medicament { Id = 4, Name = "Vitamin B", MedicalRecordId = 4, PrescriptionId = 2 },
+                new Medicament { Id = 5, Name = "Panadol", MedicalRecordId = 1, PrescriptionId = 2 }
             );
 
             modelBuilder.Entity<Allergies>().HasData(

@@ -530,23 +530,23 @@
             "UpstreamHttpMethod": [ "GET" ]
         },
         {
-            "DownstreamPathTemplate": "/api/patientFeedback",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 57733
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patientFeedback",
-            "UpstreamHttpMethod": [ "POST" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
+          "DownstreamPathTemplate": "/api/patientFeedback/postPatientFeedback",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            {
+              "Host": "localhost",
+              "Port": 57733
             }
+          ],
+          "UpstreamPathTemplate": "/gateway/patientFeedback/postPatientFeedback",
+          "UpstreamHttpMethod": [ "POST" ],
+          "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Key",
+            "AllowedScopes": []
+          },
+          "RouteClaimsRequirement": {
+            "UserRole": "Patient"
+          }
         },
         {
             "DownstreamPathTemplate": "/api/patientFeedback/publishFeedback/{id}",
@@ -665,6 +665,27 @@
             }
         },
 
+        // AdvertisementController
+        {
+            "DownstreamPathTemplate": "/api/advertisement",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                  "Host": "localhost",
+                  "Port": 57733
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/advertisement",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },      
+
         // DoctorController
         {
             "DownstreamPathTemplate": "/api/doctor/getAllDoctorBySpecializationId/{specializationId}",
@@ -760,7 +781,7 @@
                 "AllowedScopes": []
             },
             "RouteClaimsRequirement": {
-                "UserRole": "Patient"
+                "UserRole": "Admin"
             }
         },
 

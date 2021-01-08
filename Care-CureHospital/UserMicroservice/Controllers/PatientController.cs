@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using UserMicroservice.Domain;
+using UserMicroservice.Dto;
+using UserMicroservice.Interface.Gateway;
+using UserMicroservice.Mapper;
 using UserMicroservice.Service;
 
 namespace UserMicroservice.Controllers
@@ -8,19 +14,21 @@ namespace UserMicroservice.Controllers
     public class PatientController : ControllerBase
     {
         private IPatientService patientService;
+        private IAppointmentGateway appointmentGateway;
 
-        public PatientController(IPatientService patientService) {
+        public PatientController(IPatientService patientService, IAppointmentGateway appointmentGateway) {
      
             this.patientService = patientService;
+            this.appointmentGateway = appointmentGateway;
         }
 
-        /*
+        
         [HttpGet()]       // GET /api/patient
         public IActionResult GetAllPatients(int patientId)
         {
             List<PatientDto> result = new List<PatientDto>();
             patientService.GetAllEntities().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient,
-                appointmentService.CountCancelledAppointmentsForPatient(patient.Id, DateTime.Now))));
+                appointmentGateway.CountCancelledAppointmentsForPatient(patient.Id))));
             return Ok(result);
         }
 
@@ -29,10 +37,10 @@ namespace UserMicroservice.Controllers
         {
             List<PatientDto> result = new List<PatientDto>();
             patientService.GetMaliciousPatients().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient,
-                appointmentService.CountCancelledAppointmentsForPatient(patient.Id, DateTime.Now))));
+                appointmentGateway.CountCancelledAppointmentsForPatient(patient.Id))));
             return Ok(result);
         }
-        */
+        
         [HttpPut("blockMaliciousPatient/{patientId}")]       // PUT /api/patient/blockMaliciousPatient/{patientId}
         public IActionResult BlockMaliciousPatient(int patientId)
         {
@@ -42,7 +50,24 @@ namespace UserMicroservice.Controllers
         [HttpGet("getPatient/{patientId}")]    // GET /api/patient/getPatient/{patientId}
         public IActionResult GetPatientById(int patientId)
         {
-            return Ok(patientService.GetEntity(patientId));
+            Patient patient = patientService.GetEntity(patientId);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
+        }
+
+        [HttpPut("setMaliciousPatient/{patientId}")]       // PUT /api/patient/setMaliciousPatient/{patientId}
+        public IActionResult SetMaliciousPatient(int patientId)
+        {
+            return Ok(patientService.SetMaliciousPatient(patientId));
+        }
+
+        [HttpGet("doesUsernameExist/{username}")]    // GET /api/patient/doesUsernameExist/{username}
+        public IActionResult DoesUsernameExist(string username)
+        {
+            return Ok(patientService.DoesUsernameExist(username));
         }
     }
 }

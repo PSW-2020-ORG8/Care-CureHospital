@@ -1,4 +1,4 @@
-﻿using Model.DoctorMenager;
+﻿using DocumentsMicroservice.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

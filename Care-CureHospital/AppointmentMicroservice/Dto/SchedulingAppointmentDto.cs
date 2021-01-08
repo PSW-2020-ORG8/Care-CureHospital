@@ -1,7 +1,6 @@
 ﻿using AppointmentMicroservice.Domain;
 using System;
 
-
 namespace AppointmentMicroservice.Dto
 {
     public class SchedulingAppointmentDto

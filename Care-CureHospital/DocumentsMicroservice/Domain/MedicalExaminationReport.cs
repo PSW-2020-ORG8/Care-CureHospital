@@ -1,5 +1,6 @@
 ﻿using DocumentsMicroservice.Repository;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocumentsMicroservice.Domain
 {
@@ -9,6 +10,8 @@ namespace DocumentsMicroservice.Domain
         public string Comment { get; set; }
         public DateTime PublishingDate { get; set; }
         public int MedicalExaminationId { get; set; }
+        [NotMapped]
+        public MedicalExamination MedicalExamination { get; set; }
 
         public MedicalExaminationReport() { }
 
@@ -20,13 +23,13 @@ namespace DocumentsMicroservice.Domain
             MedicalExaminationId = medicalExaminationID;
         }
 
-        /*public MedicalExaminationReport(string comment, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination)
+        public MedicalExaminationReport(string comment, DateTime publishingDate, int medicalExaminationID, MedicalExamination medicalExamination)
         {
             Comment = comment;
             PublishingDate = publishingDate;
             MedicalExaminationId = medicalExaminationID;
             MedicalExamination = medicalExamination;
-        }*/
+        }
 
         public int GetId()
         {

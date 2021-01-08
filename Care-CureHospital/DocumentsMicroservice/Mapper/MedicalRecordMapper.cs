@@ -6,7 +6,7 @@ namespace DocumentsMicroservice.Mapper
 {
     public class MedicalRecordMapper
     {
-        /*public static MedicalRecord MedicalRecordDtoToMedicalRecord(MedicalRecordDto dto)
+        public static MedicalRecord MedicalRecordDtoToMedicalRecord(MedicalRecordDto dto)
         {
             MedicalRecord medicalRecord = new MedicalRecord(new Patient(), new Anamnesis(), new List<Allergies>(), new List<Medicament>());
 
@@ -22,20 +22,20 @@ namespace DocumentsMicroservice.Mapper
             return medicalRecord;
         }
 
-        public static MedicalRecordDto MedicalRecordToMedicalRecordDto(MedicalRecord medicalRecord)
+        public static MedicalRecordDto MedicalRecordToMedicalRecordDto(MedicalRecord medicalRecord, Patient patient)
         {
             MedicalRecordDto dto = new MedicalRecordDto();
             dto.Id = medicalRecord.Id;
-            dto.Patient = medicalRecord.Patient;
-            dto.PatientId = medicalRecord.PatientId;
+            dto.Patient = patient;
+            dto.PatientId = patient.Id;
             dto.ActiveMedicalRecord = medicalRecord.ActiveMedicalRecord;
             dto.Anamnesis = medicalRecord.Anamnesis;
             dto.Allergies = medicalRecord.Allergies;
             dto.Medicaments = medicalRecord.Medicaments;
-            dto.DateOfBirthday = medicalRecord.Patient.DateOfBirth.ToString("dd.MM.yyyy.");
-            dto.ProfilePicture = medicalRecord.Patient.Username + ".png";
+            dto.DateOfBirthday = patient.DateOfBirth.ToString("dd.MM.yyyy.");
+            dto.ProfilePicture = patient.Username + ".png";
 
             return dto;
-        }*/
+        }
     }
 }

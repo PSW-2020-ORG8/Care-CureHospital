@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace AppointmentMicroservice.Domain
 {
     public abstract class Term

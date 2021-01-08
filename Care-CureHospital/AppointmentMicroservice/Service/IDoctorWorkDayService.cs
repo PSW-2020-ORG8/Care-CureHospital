@@ -1,8 +1,6 @@
 ﻿using AppointmentMicroservice.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Service
 {
@@ -10,10 +8,10 @@ namespace AppointmentMicroservice.Service
     {
         public DoctorWorkDay GetDoctorWorkDayByDateAndDoctorId(DateTime date, int doctorId);
         public List<Appointment> GetAvailableAppointmentsByDateAndDoctorId(DateTime date, int doctorId);
-      //  public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateAndSpecialization(DateTime date, int doctorSpecializationId);
+        public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateAndSpecialization(DateTime date, int doctorSpecializationId);
         public List<Appointment> InitializeAvailableApoointmentsList(DateTime date);
         public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateRangeAndDoctorId(DateTime startDate, DateTime endDate, int doctorId);
-       // public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime startDate, DateTime endDate, int doctorId, string priority);
+        public Dictionary<int, List<Appointment>> GetAvailableAppointmentsByDateRangeAndDoctorIdIncludingPriority(DateTime startDate, DateTime endDate, int doctorId, string priority);
         public bool ScheduleAppointment(Appointment appointment);
         public List<DoctorWorkDay> GetDoctorWorkDaysByIds(List<int> ids);
         public int GetNumberOfAvailableAppointments(Dictionary<int, List<Appointment>> appointments);

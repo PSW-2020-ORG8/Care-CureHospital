@@ -11,6 +11,8 @@ using System;
 using System.Reflection;
 using UserMicroservice.DataBase;
 using UserMicroservice.Domain;
+using UserMicroservice.Gateway;
+using UserMicroservice.Interface.Gateway;
 using UserMicroservice.Repository;
 using UserMicroservice.Repository.MySQL.Stream;
 using UserMicroservice.Service;
@@ -45,9 +47,14 @@ namespace UserMicroservice
                     new UserService(new UserRepository(new MySQLStream<User>()),
                         new PatientService(new PatientRepository(new MySQLStream<Patient>())),
                             new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>()))));
-            services.AddDbContext<ESDataBaseContext>(option => 
+
+            services.AddDbContext<ESDataBaseContext>(option =>
             option.UseMySql(CreateConnectionStringFromEnvironmentEventStore()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddSingleton<IDomainEventService, DomainEventService>(services => new DomainEventService(new MySQLRepository(new ESDataBaseContext())));
+            services.AddSingleton<IAppointmentGateway, AppointmentGateway>();
+            services.AddControllersWithViews()
+               .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

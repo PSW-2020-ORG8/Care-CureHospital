@@ -6,7 +6,7 @@ namespace AppointmentMicroservice.Mapper
 {
     public class DoctorWorkDayMapper
     {
-        public static DoctorWorkDayDto DoctorWorkDayToDoctorWorkDayDto(DoctorWorkDay doctorWorkDay, List<Appointment> availableAppointments)
+        public static DoctorWorkDayDto DoctorWorkDayToDoctorWorkDayDto(DoctorWorkDay doctorWorkDay, List<Appointment> availableAppointments, Doctor doctor)
         {
             DoctorWorkDayDto dto = null;
 
@@ -18,19 +18,19 @@ namespace AppointmentMicroservice.Mapper
                 dto.DoctorId = doctorWorkDay.DoctorId;
                 dto.RoomId = doctorWorkDay.RoomId;
                 dto.AvailableAppointments = availableAppointments;
-             //   dto.Specialization = doctorWorkDay.Doctor.Specialitation.SpecialitationForDoctor;
-             //   dto.DoctorFullName = "Dr " + doctorWorkDay.Doctor.Name + " " + doctorWorkDay.Doctor.Surname;
+                dto.Specialization = doctor.Specialitation.SpecialitationForDoctor;
+                dto.DoctorFullName = "Dr " + doctor.Name + " " + doctor.Surname;
             }
 
             return dto;
         }
 
-        public static List<DoctorWorkDayDto> CreateDoctorWorkDayDtos(List<DoctorWorkDay> doctorWorkDays, Dictionary<int, List<Appointment>> availableAppointments)
+        public static List<DoctorWorkDayDto> CreateDoctorWorkDayDtos(List<DoctorWorkDay> doctorWorkDays, Dictionary<int, List<Appointment>> availableAppointments, Doctor doctor)
         {
             List<DoctorWorkDayDto> result = new List<DoctorWorkDayDto>();
             foreach (DoctorWorkDay doctorWorkDay in doctorWorkDays)
             {
-                result.Add(DoctorWorkDayToDoctorWorkDayDto(doctorWorkDay, availableAppointments[doctorWorkDay.Id]));
+                result.Add(DoctorWorkDayToDoctorWorkDayDto(doctorWorkDay, availableAppointments[doctorWorkDay.Id], doctor));
             }
             return result;
         }

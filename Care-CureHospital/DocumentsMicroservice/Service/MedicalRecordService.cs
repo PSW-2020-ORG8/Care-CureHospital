@@ -29,10 +29,10 @@ namespace DocumentsMicroservice.Service
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID);
         }
 
-        /*public MedicalRecord FindPatientMedicalRecordByUsername(string username)
+        public MedicalRecord FindPatientMedicalRecordByUsername(string username)
         {
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.Patient.Username.Equals(username));
-        }*/
+        }
 
         /// <summary> This method activates patient medical record after click on email verification link. </summary>
         public void ActivatePatientMedicalRecord(int medicalRecordId)
@@ -42,11 +42,16 @@ namespace DocumentsMicroservice.Service
             UpdateEntity(medicalRecord);
         }
 
-        /*public MedicalRecord CreatePatientMedicalRecord(MailAddress email, MedicalRecord medicalRecord)
+        public MedicalRecord CreatePatientMedicalRecord(MailAddress email, MedicalRecord medicalRecord)
         {
             emailVerificationService.SendVerificationEmailLink(email, medicalRecord.Patient.Username);
             return AddEntity(medicalRecord);
-        }*/
+        }
+
+        public MedicalRecord GetMedicalRecordByPatient(Patient patient)
+        {
+            return medicalRecordRepository.GetMedicalRecordByPatient(patient);
+        }
 
         public MedicalRecord GetEntity(int id)
         {
@@ -72,11 +77,6 @@ namespace DocumentsMicroservice.Service
         {
             medicalRecordRepository.DeleteEntity(entity);
         }
-
-        /*public MedicalRecord GetMedicalRecordByPatient(Patient patient)
-        {
-            return medicalRecordRepository.GetMedicalRecordByPatient(patient);
-        }*/
 
         public void WritePatientProfilePictureInFile(string patientUsername, string profilePicture)
         {
