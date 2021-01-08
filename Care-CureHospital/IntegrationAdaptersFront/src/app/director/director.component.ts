@@ -68,4 +68,8 @@ export class DirectorComponent implements OnInit {
   showOffers(){
     this.router.navigate(['showOffers']);
   }
+
+  closeT(){
+    this.router.navigate(['closeTender']);
+  }
 }

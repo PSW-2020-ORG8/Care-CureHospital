@@ -2,6 +2,7 @@
 using System.Linq;
 using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Dto;
+using FeedbackMicroservice.Gateway.Interface;
 using FeedbackMicroservice.Mapper;
 using FeedbackMicroservice.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,19 @@ namespace FeedbackMicroservice.Controllers
     public class PatientFeedbackController : ControllerBase
     {
         private IPatientFeedbackService patientFeedbackService;
+        private IPatientGateway patientGateway;
 
-        public PatientFeedbackController(IPatientFeedbackService patientFeedbackService) 
+        public PatientFeedbackController(IPatientFeedbackService patientFeedbackService, IPatientGateway patientGateway) 
         {
             this.patientFeedbackService = patientFeedbackService;
+            this.patientGateway = patientGateway;
         }
 
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
-            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
-            
-            this.patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
+            List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();           
+            this.patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback, patientGateway.GetPatientById(feedback.PatientId))));
             return Ok(result);
         }
 
@@ -32,7 +34,7 @@ namespace FeedbackMicroservice.Controllers
         public IActionResult GetPublishedFeedbacks()
         {
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
-            this.patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback)));
+            this.patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback, patientGateway.GetPatientById(feedback.PatientId))));
             return Ok(result);
         }
 
@@ -56,7 +58,7 @@ namespace FeedbackMicroservice.Controllers
             {
                 return NotFound();
             }
-            return Ok(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(result));
+            return Ok(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(result, patientGateway.GetPatientById(result.PatientId)));
         }
     }
 }

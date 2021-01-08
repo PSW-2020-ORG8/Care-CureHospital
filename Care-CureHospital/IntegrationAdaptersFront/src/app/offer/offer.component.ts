@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DirectorServiceService } from '../director-service.service';
 import { DoctorService } from '../doctor.service';
+import { HttpClient } from '@angular/common/http'; 
 import { Offer } from '../models/Offer';
 
 @Component({
@@ -10,10 +11,12 @@ import { Offer } from '../models/Offer';
 })
 export class OfferComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService) { }
+  constructor(private service:DirectorServiceService, public http: HttpClient) { }
 
   @Input() off:Offer;
-  medicamentId:number;
+  
+  pharmacyName:string;
+  pharmacyEmail:string;
   price:number;
   quantity:number;
   commnet:string;
@@ -21,23 +24,26 @@ export class OfferComponent implements OnInit {
   OfferList:any=[];
 
   ngOnInit(): void {
-   /* this.price = this.off.price;
+    this.pharmacyName = this.off.pharmacyName;
+    this.pharmacyEmail = this.off.pharmacyEmail;
+    this.price = this.off.price;
     this.quantity = this.off.quantity;
-    this.commnet = this.off.comment;*/
+    this.commnet = this.off.comment;
   }
   
   addOffer(){
     var val = {
-      medicamentId:this.OfferList.medicamentId,
+      pharmacyName:this.OfferList.pharmacyName,
+      pharmacyEmail:this.OfferList.pharmacyEmail,
       price:this.OfferList.price,
       quantity:this.OfferList.quantity,
       comment:this.OfferList.comment
     };
 
     console.log(this.OfferList);
-
     this.service.addOffers(val).subscribe(res => {
       alert(res.toString())});
+      
     alert("You have successfully added your offer!");
   }
 }

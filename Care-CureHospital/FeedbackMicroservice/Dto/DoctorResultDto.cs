@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using FeedbackMicroservice.Domain;
+using System.Collections.Generic;
 
 
 namespace FeedbackMicroservice.Dto
 {
     public class DoctorResultDto
     {
-        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
 
         public List<QuestionResultDto> QuestionResults { get; set; }
 
-
         public DoctorResultDto() { }
 
-        public DoctorResultDto(int doctorId, List<QuestionResultDto> questionResults)
+        public DoctorResultDto(Doctor doctor, List<QuestionResultDto> questionResults)
         {
-            DoctorId = doctorId;
+            Doctor = doctor;
             QuestionResults = questionResults;
         }
     }

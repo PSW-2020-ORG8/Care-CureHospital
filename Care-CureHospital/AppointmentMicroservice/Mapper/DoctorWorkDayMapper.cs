@@ -1,9 +1,6 @@
-﻿using AppointmentMicroservice.Dto;
-using Model.Term;
-using System;
+﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Dto;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Mapper
 {
@@ -21,8 +18,8 @@ namespace AppointmentMicroservice.Mapper
                 dto.DoctorId = doctorWorkDay.DoctorId;
                 dto.RoomId = doctorWorkDay.RoomId;
                 dto.AvailableAppointments = availableAppointments;
-                dto.Specialization = doctorWorkDay.Doctor.Specialitation.SpecialitationForDoctor;
-                dto.DoctorFullName = "Dr " + doctorWorkDay.Doctor.Name + " " + doctorWorkDay.Doctor.Surname;
+             //   dto.Specialization = doctorWorkDay.Doctor.Specialitation.SpecialitationForDoctor;
+             //   dto.DoctorFullName = "Dr " + doctorWorkDay.Doctor.Name + " " + doctorWorkDay.Doctor.Surname;
             }
 
             return dto;

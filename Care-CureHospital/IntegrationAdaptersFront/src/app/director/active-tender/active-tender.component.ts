@@ -30,13 +30,9 @@ export class ActiveTenderComponent implements OnInit {
   }
 
   choose(){
+    this.tenderService.chooseTender().subscribe(data=>{
+      console.log("")
+    })
     alert("Successfully choosen!");
-  }
-
-  closeTender(){
-   /* this.tenderService.closeTender().subscribe(data =>{
-      console.log(data);
-    })*/
-    alert("Successfully closed!");
   }
 }

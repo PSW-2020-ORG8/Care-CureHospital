@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 namespace UserMicroservice.Domain.Enum
 {
     public enum Gender
-{
-    Male,
-    Female
-}
+    {
+        Male,
+        Female
+    }
 }

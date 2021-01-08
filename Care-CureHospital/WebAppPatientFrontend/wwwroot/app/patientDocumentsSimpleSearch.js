@@ -18,7 +18,8 @@ Vue.component("patientDocumentsSimpleSearch", {
 			prescriptionsButtonSelected : false,
 			reportsResult: [],
 			prescriptionsResult: [],
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -192,9 +193,9 @@ Vue.component("patientDocumentsSimpleSearch", {
 		simpleSearch: function () {
 		
 			if (this.reportsButtonSelected === true) {
-				axios.get('api/medicalExaminationReport/simpleSearchReportsForPatient', {
+				axios.get('gateway/medicalExaminationReport/simpleSearchReportsForPatient', {
 					params: {
-						patientId: 1,
+						patientId: this.loggedUserId,
 						doctor: this.reportDoctorInput,
 						date: this.reportDateInput,
 						comment: this.reportCommentInput,
@@ -212,9 +213,9 @@ Vue.component("patientDocumentsSimpleSearch", {
 					}
 				});
 			} else if (this.prescriptionsButtonSelected == true) {
-				axios.get('api/prescription/simpleSearchPrescriptionForPatient', {
+				axios.get('gateway/prescription/simpleSearchPrescriptionForPatient', {
 					params: {
-						patientId: 1,
+						patientId: this.loggedUserId,
 						doctor: this.prescriptionDoctorInput,
 						date: this.prescriptionDateInput,
 						comment: this.prescriptionCommentInput,
@@ -262,7 +263,18 @@ Vue.component("patientDocumentsSimpleSearch", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		axios.get('api/medicalExaminationReport/getForPatient/' + 1, {
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/medicalExaminationReport/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
@@ -275,7 +287,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 				this.$router.push({ name: 'userLogin' })
 			}
 		});
-		axios.get('api/prescription/getForPatient/' + 1, {
+		axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
@@ -288,5 +300,6 @@ Vue.component("patientDocumentsSimpleSearch", {
 				this.$router.push({ name: 'userLogin' })
 			}
 		});
+
 	}
 });

@@ -18,13 +18,11 @@ namespace FeedbackMicroservice.Domain
         {
         }
 
-
         public Question(int id, string questionText, QuestionType questionType) : this(id)
         {
             QuestionText = questionText;
             QuestionType = questionType;
         }
-
 
         public Question(string questionText)
         {

@@ -1,9 +1,7 @@
-﻿using Backend.Model.PatientDoctor;
+﻿using DocumentsMicroservice.Domain;
 using DocumentsMicroservice.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Service
 {
@@ -16,7 +14,7 @@ namespace DocumentsMicroservice.Service
             this.medicalExaminationReportRepository = medicalExaminationReportRepository;
         }
 
-        public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID)
+        /*public List<MedicalExaminationReport> GetMedicalExaminationReportsForPatient(int patientID)
         {
             List<MedicalExaminationReport> medicalExaminationReportsForPatient = new List<MedicalExaminationReport>();
             foreach (MedicalExaminationReport report in medicalExaminationReportRepository.GetAllEntities().ToList())
@@ -190,7 +188,7 @@ namespace DocumentsMicroservice.Service
             {
                 return FindReportsForRoomParameter(patientId, room);
             }
-        }
+        }*/
 
         public MedicalExaminationReport GetEntity(int id)
         {

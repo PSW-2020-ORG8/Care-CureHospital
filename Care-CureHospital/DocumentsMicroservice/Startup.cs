@@ -1,4 +1,4 @@
-using Backend.Model.PatientDoctor;
+using DocumentsMicroservice.Domain;
 using DocumentsMicroservice.Repository;
 using DocumentsMicroservice.Repository.MySQL.Stream;
 using DocumentsMicroservice.Service;
@@ -8,13 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Model.AllActors;
-using Model.PatientDoctor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice
 {
@@ -37,8 +30,6 @@ namespace DocumentsMicroservice
             services.AddSingleton<IMedicalExaminationReportService, MedicalExaminationReportService>(service => new MedicalExaminationReportService(new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>())));
             services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>())));
             services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>())));
-            services.AddSingleton<IPatientService, PatientService>(service => new PatientService(new PatientRepository(new MySQLStream<Patient>())));
-
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
         }

@@ -1,12 +1,18 @@
+using FeedbackMicroservice.DataBase;
 using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Gateway;
+using FeedbackMicroservice.Gateway.Interface;
 using FeedbackMicroservice.Repository;
 using FeedbackMicroservice.Repository.MySQL.Stream;
 using FeedbackMicroservice.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+
 namespace FeedbackMicroservice
 {
     public class Startup
@@ -24,10 +30,31 @@ namespace FeedbackMicroservice
             services.AddCors();
 
             services.AddSingleton<IPatientFeedbackService, PatientFeedbackService>(patientFeedback => new PatientFeedbackService(new PatientFeedbackRepository(new MySQLStream<PatientFeedback>())));
-            services.AddSingleton<ISurveyService, SurveyService>(survey => new SurveyService(new SurveyRepository(new MySQLStream<Survey>()), new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>())))));
+            services.AddSingleton<ISurveyService, SurveyService>(survey => new SurveyService(new SurveyRepository(new MySQLStream<Survey>()), new MedicalExaminationGateway(),
+                new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))))); 
             services.AddSingleton<IAnswerService, AnswerService>(answer => new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))));
+            services.AddSingleton<IDoctorGateway, DoctorGateway>();
+            services.AddSingleton<IAppointmentGateway, AppointmentGateway>();
+            services.AddSingleton<IPatientGateway, PatientGateway>();
 
+            services.AddDbContext<FeedBackDataBaseContext>(options =>
+                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddControllers();
+        }
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "HealthClinicDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            Console.WriteLine(server);
+            Console.WriteLine(port);
+            Console.WriteLine(user);
+            Console.WriteLine(password);
+            Console.WriteLine(database);
+            return $"server={server};port={port};database={database};user={user};password={password};";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

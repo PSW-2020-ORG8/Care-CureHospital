@@ -8,7 +8,8 @@ import { DoctorComponent } from './doctor/doctor.component'
 import { TenderComponent } from './doctor/tender/tender.component';
 import { ListofPharmaciesComponent } from './listofpharmacies/listofpharmacies.component'
 import { MedicamentTenderComponent } from './medicament-tender/medicament-tender.component';
-import { PharmacyComponent } from './pharmacies/pharmacies.component'
+import { PharmacyComponent } from './pharmacies/pharmacies.component';
+import { CloseTenderComponent } from './director/close-tender/close-tender.component';
 import { UrgentProcurementComponent } from './urgent-procurement/urgent-procurement.component';
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
 {path: 'medicamentTender', component:MedicamentTenderComponent},
 {path: 'showOffers', component:ShowOfferComponent},
 {path: 'activeTender', component:ActiveTenderComponent},
-{path: 'inactiveTender', component:InactiveTenderComponent}
+{path: 'inactiveTender', component:InactiveTenderComponent},
+{path: 'closeTender', component:CloseTenderComponent}
 ];
 
 @NgModule({

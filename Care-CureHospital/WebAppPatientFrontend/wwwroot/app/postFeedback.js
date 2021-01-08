@@ -6,7 +6,8 @@ Vue.component("postFeedback", {
 			isAnonymous: false,
 			isForPublishing: false,
 			feedbackError: false,
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -92,12 +93,12 @@ Vue.component("postFeedback", {
 			}
 
 			if (empty === false) {
-				axios.post('/api/patientFeedback', {
+				axios.post('gateway/patientFeedback', {
 					text: this.text,
 					isForPublishing: this.isForPublishing,
 					isPublished: false,
 					isAnonymous: this.isAnonymous,
-					patientID: 1,
+					patientID: this.loggedUserId,
 					patient: null,
 					publishingDate: null
 				}, {
@@ -122,8 +123,18 @@ Vue.component("postFeedback", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
 
-		axios.get('/api/doctor/getAllSpecialization', {
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/doctor/getAllSpecialization', {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

@@ -1,10 +1,6 @@
-﻿using Backend.Model.PatientDoctor;
+﻿using DocumentsMicroservice.Domain;
 using DocumentsMicroservice.Repository;
-using Model.DoctorMenager;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Service
 {
@@ -17,7 +13,7 @@ namespace DocumentsMicroservice.Service
             this.prescriptionRepository = prescriptionRepository;
         }
 
-        public List<Prescription> GetPrescriptionsForPatient(int patientID)
+        /*public List<Prescription> GetPrescriptionsForPatient(int patientID)
         {
             List<Prescription> prescriptionsForPatient = new List<Prescription>();
             foreach (Prescription prescription in prescriptionRepository.GetAllEntities().ToList())
@@ -194,7 +190,7 @@ namespace DocumentsMicroservice.Service
             {
                 return FindPrescriptionsForMedicamentsParameter(patientId, medicaments);
             }
-        }
+        }*/
 
         public Prescription GetEntity(int id)
         {

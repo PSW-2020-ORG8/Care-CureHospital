@@ -9,10 +9,6 @@ namespace UserMicroservice.Repository
 
         List<Patient> GetAllPatients();
 
-        List<Secretary> GetAllSecretaries();
-
-        List<Manager> GetAllManagers();
-
         User GetUserByUsername(string username);
 
         List<Doctor> GetDoctorBySpecialitation(Specialitation specialitation);

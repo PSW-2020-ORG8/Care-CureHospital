@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UserMicroservice.Domain.Enum;
 
 namespace UserMicroservice.Domain
@@ -20,12 +17,13 @@ namespace UserMicroservice.Domain
         public string ContactNumber { get; set; }
         public string EMail { get; set; }
         public int CityId { get; set; }
+        public virtual City City { get; set; }
 
         public Person()
         {
         }
 
-        public Person(string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress)
+        public Person(string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
         {
             Name = name;
             Surname = surname;
@@ -33,10 +31,10 @@ namespace UserMicroservice.Domain
             DateOfBirth = dateOfBirth;
             ContactNumber = contactNumber;
             EMail = emailAddress;
-        
+            City = city;
         }
 
-        public Person(string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress)
+        public Person(string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string emailAddress, City city)
         {
             Name = name;
             ParentName = parentName;
@@ -49,8 +47,8 @@ namespace UserMicroservice.Domain
             DateOfBirth = dateOfBirth;
             ContactNumber = contactNumber;
             EMail = emailAddress;
+            City = city;
         }
-
     }
 }
 

@@ -1,5 +1,7 @@
 export class Offer{
-    medicamentId:number;
+   
+    pharmacyName:string;
+    pharmacyEmail:string;
     price:number;
     quantity:number;
     comment:string;
