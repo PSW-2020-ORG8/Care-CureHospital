@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using UserMicroservice.Dto;
-using UserMicroservice.Mapper;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserMicroservice.Service;
 
 namespace UserMicroservice.Controllers

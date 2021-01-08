@@ -27,7 +27,7 @@ namespace EventSourcingMicroservice.DataBase
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "EventSourcingDB";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENT") ?? "EventSourcingDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";

@@ -26,15 +26,12 @@ namespace UserMicroservice.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthenticateDto model)
         {
-            eventService.Save(new LoginEvent("Cao djole", 999));
-            return Ok();
-
             var user = userService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(appSettings.Secret));
             if (user == null)
             {
                 return Forbid();
             }
-           
+            eventService.Save(new LoginEvent(user.Username,user.Id));
             return Ok(user);
         }
     }
