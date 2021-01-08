@@ -1,3 +1,7 @@
+using EventSourcingMicroservice.DataBase;
+using EventSourcingMicroservice.Repository;
+using EventSourcingMicroservice.Repository.MySQL;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +30,13 @@ namespace UserMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            //services.AddDbContext<UserDataBaseContext>(options =>
+            //    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+            services.AddControllers();
             services.AddSingleton<IDoctorService, DoctorService>(service =>
                     new DoctorService(new DoctorRepository(new MySQLStream<Doctor>())));
             services.AddSingleton<IPatientService, PatientService>(service =>
-                    new PatientService(new PatientRepository(new MySQLStream<Patient>())));
+                   new PatientService(new PatientRepository(new MySQLStream<Patient>())));
             services.AddSingleton<ISpecializationService, SpecializationService>(service =>
                     new SpecializationService(new SpecializationRepository(new MySQLStream<Specialitation>())));
             services.AddSingleton<ISystemAdministratorService, SystemAdministratorService>(service =>
@@ -38,10 +45,12 @@ namespace UserMicroservice
                     new UserService(new UserRepository(new MySQLStream<User>()),
                         new PatientService(new PatientRepository(new MySQLStream<Patient>())),
                             new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>()))));
-            services.AddDbContext<UserDataBaseContext>(options =>
-                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+            services.AddDbContext<ESDataBaseContext>(option => 
+            option.UseMySql(CreateConnectionStringFromEnvironmentEventStore()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+            services.AddSingleton<IDomainEventService, DomainEventService>(services => new DomainEventService(new MySQLRepository(new ESDataBaseContext())));
+            //services.AddScoped<IDomainEventService, DomainEventService>();
+            //services.AddScoped<IRepository, MySQLRepository>();
 
-            services.AddControllers();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -58,26 +67,37 @@ namespace UserMicroservice
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
-            Console.WriteLine(server);
-            Console.WriteLine(port);
-            Console.WriteLine(user);
-            Console.WriteLine(password);
-            Console.WriteLine(database);
+            Console.WriteLine(database + " ******************************************************************************");
+            return $"server={server};port={port};database={database};user={user};password={password};";
+        }
+
+        private string CreateConnectionStringFromEnvironmentEventStore()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENET") ?? "EventSourcingDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
+            Console.WriteLine(database + " $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ESDataBaseContext esContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            //context.Database.EnsureCreated();
+
+            esContext.Database.EnsureCreated();
+
             app.UseRouting();
 
-            app.UseAuthorization();
-
-            app.UseAuthentication();
+           app.UseAuthorization();
+           app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
