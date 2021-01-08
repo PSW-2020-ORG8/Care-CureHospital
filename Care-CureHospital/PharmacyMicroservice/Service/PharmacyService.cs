@@ -1,14 +1,10 @@
-﻿using Backend.Model.Pharmacy;
-using Backend.Repository.PharmacyRepository;
-using Service;
-using System;
+﻿using PharmacyMicroservice.Domain;
+using PharmacyMicroservice.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Backend.Service.PharmaciesService
+namespace PharmacyMicroservice.Service
 {
-    public class PharmacyService : IService<Pharmacies, int>
+    public class PharmacyService : IPharmacyService
     {
         public IPharmacyRepository pharmacyRepository;
 
@@ -61,6 +57,6 @@ namespace Backend.Service.PharmaciesService
                 if (pharmacy.Key.Equals(key))
                     return true;
             return false;
-        }   
+        }
     }
 }
