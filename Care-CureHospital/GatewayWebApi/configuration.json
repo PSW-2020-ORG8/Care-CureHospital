@@ -116,7 +116,7 @@
       }
     },
 
-    // AllergiesController 
+    // AllergiesController
     {
       "DownstreamPathTemplate": "/api/allergies",
       "DownstreamScheme": "http",
@@ -378,33 +378,11 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/report/send",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-
-    //PharmacyController
-    {
-      "DownstreamPathTemplate": "/api/pharmacy/getPharmacies",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 50511 //PROVERI PORTTTTTTTTTTTTTT
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/pharmacy/getPharmacies",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/pharmacy/addPharmacy",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 50511 //PROVERI PORTTTTTTTTTTTTTT
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/pharmacy/addPharmacy",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Key",
+        "AllowedScopes": []
+      }
     },
 
     //PrescriptionController
@@ -827,6 +805,57 @@
         "UserRole": "Patient"
       }
     },
+
+    //EPrescription
+    {
+      "DownstreamPathTemplate": "/api/eprescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription/getForPatient/{patientID}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription/getForPatient/{patientID}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
 
     // UserController
     {
