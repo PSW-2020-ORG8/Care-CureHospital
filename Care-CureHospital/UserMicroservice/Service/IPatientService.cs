@@ -9,7 +9,7 @@ namespace UserMicroservice.Service
         public Patient BlockMaliciousPatient(int patientId);
         public Patient SetMaliciousPatient(int patientId);
         public List<Patient> GetMaliciousPatients();
-        public Patient GetUserByUsername(string username);
+        public Patient GetPatientByUsername(string username);
         public bool DoesUsernameExist(string username);
     }
 }

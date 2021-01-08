@@ -44,6 +44,10 @@ namespace UserMicroservice
             services.AddDbContext<UserDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
+            services.AddControllersWithViews()
+               .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddControllers();
 
             // configure strongly typed settings objects
