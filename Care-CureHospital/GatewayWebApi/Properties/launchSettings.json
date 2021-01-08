@@ -29,9 +29,11 @@
       "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "Frontend_host": "http://localhost:5000"
+        // "Frontend_host": "http://localhost:5000"
+        "Frontend_host": "http://localhost:4200"
       },
-      "applicationUrl": "http://localhost:5000"
+      //"applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:4200"
     }
   }
 }

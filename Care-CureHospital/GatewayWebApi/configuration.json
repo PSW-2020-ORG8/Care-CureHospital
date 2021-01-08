@@ -350,7 +350,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 50858 //PROVERI PORTTTTTTTTTTTTTT
+          "Port": 50858
         }
       ],
       "UpstreamPathTemplate": "/gateway/report",
@@ -362,7 +362,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 50858 //PORTTTTTTTTTTTTTTTTTTTTTTT???
+          "Port": 50858
         }
       ],
       "UpstreamPathTemplate": "/gateway/report",
@@ -374,7 +374,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 50858 //PORTTTTTTTTTTTTTTTTTTTTTTT???
+          "Port": 50858
         }
       ],
       "UpstreamPathTemplate": "/gateway/report/send",
@@ -856,6 +856,31 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
 
+    //PharmacyController
+    {
+      "DownstreamPathTemplate": "/api/pharmacy/getPharmacies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50511
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/pharmacy/getPharmacies",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/pharmacy/addPharmacy",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50511
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/pharmacy/addPharmacy",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
 
     // UserController
     {

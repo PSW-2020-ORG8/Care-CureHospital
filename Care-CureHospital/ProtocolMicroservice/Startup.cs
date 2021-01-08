@@ -1,14 +1,10 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
 
-namespace IntegrationAdapters
+namespace ProtocolMicroservice
 {
     public class Startup
     {
@@ -21,18 +17,8 @@ namespace IntegrationAdapters
 
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddCors(options =>
-             {
-                 options.AddPolicy("CorsPolicy",
-                     builder => builder.WithOrigins("http://localhost:4200")
-                     .AllowAnyMethod()
-                     .AllowAnyHeader());
-             });
-            services.AddControllers();
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,10 +32,7 @@ namespace IntegrationAdapters
 
             app.UseRouting();
 
-            app.UseCors("CorsPolicy");
-
             app.UseAuthorization();
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

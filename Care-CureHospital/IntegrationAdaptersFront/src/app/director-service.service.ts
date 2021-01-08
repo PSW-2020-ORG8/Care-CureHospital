@@ -10,7 +10,8 @@ import { Offer } from './models/Offer';
 })
 
 export class DirectorServiceService {
-  readonly APIUrl = "http://localhost:51492/api";
+ /* readonly APIUrl = "http://localhost:51492/api";*/
+ readonly APIUrl = "http://localhost:60370/gateway";
 
   constructor(private http:HttpClient) { this.getReportList() }
 
@@ -48,7 +49,7 @@ export class DirectorServiceService {
     return this.http.post<any[]>(this.APIUrl+'/report', val);
   }
 
-  publishTender(){
+  /*publishTender(){
     return this.http.get<any[]>(this.APIUrl+'/tender');
-  }
+  }*/
 }
