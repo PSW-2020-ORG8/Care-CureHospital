@@ -26,9 +26,9 @@ export class CloseTenderComponent implements OnInit {
     this.reresh();
   }
   
-  closeTender(id:number){
-    console.log(id);
-    this.tenderService.closeTender(id).subscribe(data =>{
+  closeTender(id2:number){
+    console.log(id2);
+    this.tenderService.closeTender(id2).subscribe(data =>{
        console.log(data);
      })
      alert("Successfully closed!");

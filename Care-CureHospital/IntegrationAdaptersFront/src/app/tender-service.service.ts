@@ -31,7 +31,8 @@ export class TenderServiceService {
     return this.http.get<any[]>(this.APIUrl+'/offer/winner');
   }
 
-  closeTender(id:number):Observable<Tender>{
-    return this.http.put<Tender>(this.APIUrl+ '/tender/closeTender/{tenderId}', id); //'offer/notWinner
+  closeTender(tenderId):Observable<Tender>{
+    console.log(tenderId);
+    return this.http.put<Tender>(this.APIUrl+ '/tender/closeTender/{tenderId}', JSON.stringify(tenderId)); 
   }
 }
