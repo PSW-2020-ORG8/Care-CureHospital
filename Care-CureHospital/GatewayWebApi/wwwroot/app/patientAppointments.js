@@ -121,7 +121,11 @@ Vue.component("patientAppointments", {
 				}
 			}).then(response => {
 				if (response.status !== 204) {
-					axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId).then(response => {
+					axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
 						toast('Uspešno ste otkazali pregled')
 						this.scheduledAppointments = response.data;
 					});

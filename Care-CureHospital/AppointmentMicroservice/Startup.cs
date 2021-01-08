@@ -39,6 +39,9 @@ namespace AppointmentMicroservice
                     new MedicalExaminationService(new MedicalExaminationRepository(new MySQLStream<MedicalExamination>())));
 
             services.AddControllers();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<AppointmentDataBaseContext>(options =>
                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
         }

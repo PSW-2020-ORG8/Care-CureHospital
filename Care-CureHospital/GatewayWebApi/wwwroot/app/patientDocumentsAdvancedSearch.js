@@ -513,7 +513,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
             }
         });
 
-		axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
+		/*axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
@@ -525,6 +525,6 @@ Vue.component("patientDocumentsAdvancedSearch", {
 				toast('Nemate pravo pristupa stranici!')
 				this.$router.push({ name: 'userLogin' })
 			}
-		});
+		});*/
 	}
 });
