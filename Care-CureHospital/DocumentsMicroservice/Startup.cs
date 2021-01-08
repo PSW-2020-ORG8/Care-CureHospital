@@ -1,4 +1,6 @@
 using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Gateway;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Repository;
 using DocumentsMicroservice.Repository.MySQL.Stream;
 using DocumentsMicroservice.Service;
@@ -30,6 +32,9 @@ namespace DocumentsMicroservice
             services.AddSingleton<IMedicalExaminationReportService, MedicalExaminationReportService>(service => new MedicalExaminationReportService(new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>())));
             services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>())));
             services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>())));
+            services.AddSingleton<IMedicalExaminationGateway, MedicalExaminationGateway>();
+            services.AddSingleton<IPatientGateway, PatientGateway>();
+
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
         }

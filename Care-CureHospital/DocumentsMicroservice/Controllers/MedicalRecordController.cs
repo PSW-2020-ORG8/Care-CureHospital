@@ -1,4 +1,6 @@
-﻿using DocumentsMicroservice.Dto;
+﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Dto;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
 using DocumentsMicroservice.Validation;
@@ -12,17 +14,18 @@ namespace DocumentsMicroservice.Controllers
     public class MedicalRecordController : ControllerBase
     {
         private IMedicalRecordService medicalRecordService;
-        //private IPatientService patientService;
+        private IPatientGateway patientGateway;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService) 
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, IPatientGateway patientGateway) 
         {
             this.medicalRecordService = medicalRecordService;
+            this.patientGateway = patientGateway;
         }
 
-        /*[HttpPost]      // POST /api/medicalRecord
+        [HttpPost]      // POST /api/medicalRecord
         public IActionResult RegisterPatient(MedicalRecordDto dto)
         {
-            MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation(this.patientService);
+            MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation(this.patientGateway);
             if (!medicalRecordValidation.ValidateMedicalRecord(dto))
             {
                 return BadRequest("The data which were entered are incorrect!");
@@ -55,7 +58,7 @@ namespace DocumentsMicroservice.Controllers
                 return BadRequest();
             }
             this.medicalRecordService.ActivatePatientMedicalRecord(medicalRecord.Id);
-            return Redirect("http://localhost:51182/index.html#/");
-        }*/
+            return Redirect("http://localhost:60370/index.html#/");
+        }
     }
 }

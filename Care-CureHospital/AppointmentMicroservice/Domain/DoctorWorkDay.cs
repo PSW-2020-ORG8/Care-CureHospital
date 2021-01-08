@@ -1,6 +1,7 @@
 ﻿using AppointmentMicroservice.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppointmentMicroservice.Domain
 {
@@ -9,6 +10,8 @@ namespace AppointmentMicroservice.Domain
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int DoctorId { get; set; }
+        [NotMapped]
+        public virtual Doctor Doctor { get; set; }
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
         public virtual List<Appointment> ScheduledAppointments { get; set; }
@@ -17,11 +20,12 @@ namespace AppointmentMicroservice.Domain
         {
         }
 
-        public DoctorWorkDay(int id, DateTime date, int doctorId, int roomId, Room room, List<Appointment> scheduledAppointments)
+        public DoctorWorkDay(int id, DateTime date, int doctorId, Doctor doctor, int roomId, Room room, List<Appointment> scheduledAppointments)
         {
             Id = id;
             Date = date;
             DoctorId = doctorId;
+            Doctor = doctor;
             RoomId = roomId;
             Room = room;
             ScheduledAppointments = scheduledAppointments;

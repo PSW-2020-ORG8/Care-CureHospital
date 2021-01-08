@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using UserMicroservice.DataBase;
 using UserMicroservice.Domain;
+using UserMicroservice.Gateway;
+using UserMicroservice.Interface.Gateway;
 using UserMicroservice.Repository;
 using UserMicroservice.Repository.MySQL.Stream;
 using UserMicroservice.Service;
@@ -38,6 +40,7 @@ namespace UserMicroservice
                     new UserService(new UserRepository(new MySQLStream<User>()),
                         new PatientService(new PatientRepository(new MySQLStream<Patient>())),
                             new SystemAdministratorService(new SystemAdministratorRepository(new MySQLStream<SystemAdministrator>()))));
+            services.AddSingleton<IAppointmentGateway, AppointmentGateway>();
             services.AddDbContext<UserDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 

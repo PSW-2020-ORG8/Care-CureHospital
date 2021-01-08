@@ -13,7 +13,7 @@ namespace FeedbackMicroservice.DataBase
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-       
+        public DbSet<Advertisement> Advertisement { get; set; }
 
         public FeedBackDataBaseContext() : base() { }
         public FeedBackDataBaseContext(DbContextOptions<FeedBackDataBaseContext> options) : base(options) { }
@@ -94,6 +94,12 @@ namespace FeedbackMicroservice.DataBase
                new Answer { Id = 17, Grade = GradeOfQuestion.Excellent, QuestionId = 8, SurveyId = 2 },
                new Answer { Id = 18, Grade = GradeOfQuestion.VeryGood, QuestionId = 9, SurveyId = 2 }
            );
+
+            modelBuilder.Entity<Advertisement>().HasData(
+                new Advertisement { Id = 1, PharmacyName = "Janković", Percent = 10, Period = "01.01.2021. - 02.02.2021.", Manufacturer = "Sandoz lekovi" },
+                new Advertisement { Id = 2, PharmacyName = "Sarić", Percent = 15, Period = "05.01.2021. - 12.03.2021.", Manufacturer = "Galenika lekovi" },
+                new Advertisement { Id = 3, PharmacyName = "Zegin", Percent = 25, Period = "08.01.2021. - 22.04.2021.", Manufacturer = "Pfizer lekovi" }
+            );
         }
     }
 }

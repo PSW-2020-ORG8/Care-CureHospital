@@ -1,5 +1,4 @@
-﻿
-using AppointmentMicroservice.Domain;
+﻿using AppointmentMicroservice.Domain;
 using static AppointmentMicroservice.Repository.IRepository;
 
 namespace AppointmentMicroservice.Repository

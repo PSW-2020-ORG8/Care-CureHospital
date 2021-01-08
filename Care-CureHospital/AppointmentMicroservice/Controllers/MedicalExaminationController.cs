@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppointmentMicroservice.Domain;
 using AppointmentMicroservice.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +17,13 @@ namespace AppointmentMicroservice.Controllers
 
         [HttpGet("getMedicalExamination/{id}")]
         public IActionResult GetMedicalExamination(int id)
-        {   
-            return Ok(medicalExaminationService.GetEntity(id));
+        {
+            MedicalExamination medicalExamination = medicalExaminationService.GetEntity(id);
+            if (medicalExamination == null)
+            {
+                return NotFound();
+            }
+            return Ok(medicalExamination);
         }
     }
 }

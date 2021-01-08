@@ -6,7 +6,7 @@ namespace DocumentsMicroservice.Mapper
 {
     public class MedicalRecordMapper
     {
-        /*public static MedicalRecord MedicalRecordDtoToMedicalRecord(MedicalRecordDto dto)
+        public static MedicalRecord MedicalRecordDtoToMedicalRecord(MedicalRecordDto dto)
         {
             MedicalRecord medicalRecord = new MedicalRecord(new Patient(), new Anamnesis(), new List<Allergies>(), new List<Medicament>());
 
@@ -36,6 +36,6 @@ namespace DocumentsMicroservice.Mapper
             dto.ProfilePicture = medicalRecord.Patient.Username + ".png";
 
             return dto;
-        }*/
+        }
     }
 }

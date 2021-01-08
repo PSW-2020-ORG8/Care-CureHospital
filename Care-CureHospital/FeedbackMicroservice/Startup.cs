@@ -33,6 +33,7 @@ namespace FeedbackMicroservice
             services.AddSingleton<ISurveyService, SurveyService>(survey => new SurveyService(new SurveyRepository(new MySQLStream<Survey>()), new MedicalExaminationGateway(),
                 new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))))); 
             services.AddSingleton<IAnswerService, AnswerService>(answer => new AnswerService(new AnswerRepository(new MySQLStream<Answer>()), new QuestionService(new QuestionRepository(new MySQLStream<Question>()))));
+            services.AddSingleton<IAdvertisementService, AdvertisementService>(answer => new AdvertisementService(new AdvertisementRepository(new MySQLStream<Advertisement>())));
             services.AddSingleton<IDoctorGateway, DoctorGateway>();
             services.AddSingleton<IAppointmentGateway, AppointmentGateway>();
             services.AddSingleton<IPatientGateway, PatientGateway>();
