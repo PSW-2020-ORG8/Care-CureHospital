@@ -36,7 +36,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportMicroservice", "Repor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPrescriptionMicroservice", "EPrescriptionMicroservice\EPrescriptionMicroservice.csproj", "{4C69C357-EED0-4981-AD8F-7300B8F19119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyMicroservice", "PharmacyMicroservice\PharmacyMicroservice.csproj", "{AE848DE7-1D03-4A43-848F-48685F592DA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyMicroservice", "PharmacyMicroservice\PharmacyMicroservice.csproj", "{AE848DE7-1D03-4A43-848F-48685F592DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderMicroservice", "TenderMicroservice\TenderMicroservice.csproj", "{103E0424-28B8-4837-8842-681177D8624A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +110,10 @@ Global
 		{AE848DE7-1D03-4A43-848F-48685F592DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE848DE7-1D03-4A43-848F-48685F592DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE848DE7-1D03-4A43-848F-48685F592DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{103E0424-28B8-4837-8842-681177D8624A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103E0424-28B8-4837-8842-681177D8624A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103E0424-28B8-4837-8842-681177D8624A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103E0424-28B8-4837-8842-681177D8624A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
