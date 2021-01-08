@@ -3,12 +3,7 @@ using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
 using DocumentsMicroservice.Validation;
 using Microsoft.AspNetCore.Mvc;
-using Model.PatientDoctor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Controllers
 {
@@ -17,15 +12,14 @@ namespace DocumentsMicroservice.Controllers
     public class MedicalRecordController : ControllerBase
     {
         private IMedicalRecordService medicalRecordService;
-        private IPatientService patientService;
+        //private IPatientService patientService;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, IPatientService patientService) 
+        public MedicalRecordController(IMedicalRecordService medicalRecordService) 
         {
             this.medicalRecordService = medicalRecordService;
-            this.patientService = patientService;
         }
 
-        [HttpPost]      // POST /api/medicalRecord
+        /*[HttpPost]      // POST /api/medicalRecord
         public IActionResult RegisterPatient(MedicalRecordDto dto)
         {
             MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation(this.patientService);
@@ -62,6 +56,6 @@ namespace DocumentsMicroservice.Controllers
             }
             this.medicalRecordService.ActivatePatientMedicalRecord(medicalRecord.Id);
             return Redirect("http://localhost:51182/index.html#/");
-        }
+        }*/
     }
 }

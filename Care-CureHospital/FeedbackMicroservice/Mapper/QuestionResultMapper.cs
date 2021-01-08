@@ -1,4 +1,5 @@
-﻿using FeedbackMicroservice.Dto;
+﻿using FeedbackMicroservice.Domain;
+using FeedbackMicroservice.Dto;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace FeedbackMicroservice.Mapper
             return questionResults;
         }
 
-      /*  public static List<DoctorResultDto> CreateDoctorResultsDto(Dictionary<int, Dictionary<int, List<int>>> results, IEnumerable<Doctor> doctors)
+        public static List<DoctorResultDto> CreateDoctorResultsDto(Dictionary<int, Dictionary<int, List<int>>> results, IEnumerable<Doctor> doctors)
         {
             List<DoctorResultDto> doctorResults = new List<DoctorResultDto>();
             foreach (int key in results.Keys)
@@ -27,6 +28,6 @@ namespace FeedbackMicroservice.Mapper
             }
 
             return doctorResults;
-        }*/
+        }
     }
 }

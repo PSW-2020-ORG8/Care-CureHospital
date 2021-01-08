@@ -28,7 +28,7 @@ namespace DocumentsMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getForPatient/{patientID}")]       // GET /api/prescription/getForPatient/{id}
+        /*[HttpGet("getForPatient/{patientID}")]       // GET /api/prescription/getForPatient/{id}
         public IActionResult GetPrescriptionsForPatient(int patientID)
         {
             List<PrescriptionDto> prescriptionsForPatient = new List<PrescriptionDto>();
@@ -82,6 +82,6 @@ namespace DocumentsMicroservice.Controllers
             List<PrescriptionDto> result = new List<PrescriptionDto>();
             this.prescriptionService.FindPrescriptionsUsingSimpleSearch(patientId, doctor, date, comment, medicaments).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
             return Ok(result);
-        }
+        }*/
     }
 }

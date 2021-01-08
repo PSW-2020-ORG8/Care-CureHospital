@@ -34,5 +34,12 @@ namespace UserMicroservice.Controllers
             specializationService.GetAllEntities().ToList().ForEach(specialization => result.Add(SpecializationMapper.SpecializationToSpecializationDto(specialization)));
             return Ok(result);
         }
+
+        [HttpGet("getAllDoctors")]       // GET /api/doctor/getAllDoctors
+        public IActionResult GetAllDoctors()
+        {
+            return Ok(doctorService.GetAllEntities());
+        }
+
     }
 }

@@ -113,14 +113,15 @@
 	,
 	methods: {
 		logOut: function () {
-			localStorage.removeItem("validToken");
+			localStorage.removeItem('validToken');
+			this.userRole = '';
 		}
 	},
 	mounted() {
 		this.userRole = '';
 		this.userToken = localStorage.getItem('validToken');
 
-		axios.get('/gateway/patientFeedback/getPublishedFeedbacks').then(response => {
+		axios.get('gateway/patientFeedback/getPublishedFeedbacks').then(response => {
 			this.patientFeedbacks = response.data;
 		});
 
@@ -133,8 +134,6 @@
 
 			this.decodedToken = JSON.parse(jsonPayload);
 			this.userRole = this.decodedToken.role;
-        }
-		
+        }	
 	}
-
 });

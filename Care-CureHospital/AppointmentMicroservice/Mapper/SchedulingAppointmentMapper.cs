@@ -1,9 +1,6 @@
-﻿using AppointmentMicroservice.Dto;
-using Model.Term;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppointmentMicroservice.Domain;
+using AppointmentMicroservice.Dto;
+
 
 namespace AppointmentMicroservice.Mapper
 {
@@ -18,7 +15,6 @@ namespace AppointmentMicroservice.Mapper
             appointment.StartTime = dto.StartTime;
             appointment.EndTime = dto.EndTime;
             appointment.MedicalExamination = dto.MedicalExamination;
-            appointment.MedicalExamination.PatientId = 1;
 
             return appointment;
         }

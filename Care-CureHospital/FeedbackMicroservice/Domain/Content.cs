@@ -2,8 +2,7 @@
 
 namespace FeedbackMicroservice.Domain
 {
-    public class Content
-    
+    public class Content  
     {
         public string Text { get; set; }
         public DateTime PublishingDate { get; set; }

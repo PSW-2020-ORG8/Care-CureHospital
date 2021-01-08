@@ -26,7 +26,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			prescriptionsResult: [],
 			paramInputDict: {},
 			logicOperatorsList: [],
-			userToken: null
+			userToken: null,
+			loggedUserId: 0
 		}
 	},
 	template: `
@@ -368,8 +369,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			}
 				
 			if (this.reportsButtonSelected === true) {
-				axios.post('api/medicalExaminationReport/advancedSearchReportsForPatient', {
-					patientId: 1,
+				axios.post('gateway/medicalExaminationReport/advancedSearchReportsForPatient', {
+					patientId: this.loggedUserId,
 					searchParams: this.paramInputDict,
 					logicOperators: this.logicOperatorsList
 				}, {
@@ -385,8 +386,8 @@ Vue.component("patientDocumentsAdvancedSearch", {
 					}
 				});
 			} else if (this.prescriptionsButtonSelected === true) {
-				axios.post('api/prescription/advancedSearchPrescriptionsForPatient', {
-					patientId: 1,
+				axios.post('gateway/prescription/advancedSearchPrescriptionsForPatient', {
+					patientId: this.loggedUserId,
 					searchParams: this.paramInputDict,
 					logicOperators: this.logicOperatorsList
 				}, {
@@ -486,7 +487,19 @@ Vue.component("patientDocumentsAdvancedSearch", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		axios.get('api/medicalExaminationReport/getForPatient/' + 1, {
+
+		if (this.userToken !== null) {
+			var base64Url = this.userToken.split('.')[1];
+			var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+			var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			}).join(''));
+
+			this.decodedToken = JSON.parse(jsonPayload);
+			this.loggedUserId = this.decodedToken.id;
+		}
+
+		axios.get('gateway/medicalExaminationReport/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}
@@ -500,7 +513,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
             }
         });
 
-		axios.get('api/prescription/getForPatient/' + 1, {
+		axios.get('gateway/prescription/getForPatient/' + this.loggedUserId, {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

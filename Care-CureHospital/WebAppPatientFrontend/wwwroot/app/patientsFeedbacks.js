@@ -127,7 +127,6 @@ Vue.component("patientsFeedbacks", {
 							this.$router.push({ name: 'userLogin' })
 						}
 					});
-					//this.$router.go();
 				}).catch(error => {
 					if (error.response.status === 401 || error.response.status === 403) {
 						toast('Nemate pravo pristupa stranici!')
@@ -155,7 +154,7 @@ Vue.component("patientsFeedbacks", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		axios.get('/gateway/patientFeedback', {
+		axios.get('gateway/patientFeedback', {
 			headers: {
 				'Authorization': 'Bearer ' + this.userToken
 			}

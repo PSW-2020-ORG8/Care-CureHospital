@@ -5,10 +5,10 @@
             "DownstreamPathTemplate": "/api/appointment/getAvailableAppointments",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment/getAvailableAppointments",
             "UpstreamHttpMethod": [ "GET" ],
@@ -24,10 +24,10 @@
             "DownstreamPathTemplate": "/api/appointment",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment",
             "UpstreamHttpMethod": [ "POST" ],
@@ -43,10 +43,10 @@
             "DownstreamPathTemplate": "/api/appointment/getPreviousAppointmetsByPatient/{patientId}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment/getPreviousAppointmetsByPatient/{patientId}",
             "UpstreamHttpMethod": [ "GET" ],
@@ -62,10 +62,10 @@
             "DownstreamPathTemplate": "/api/appointment/getScheduledAppointmetsByPatient/{patientId}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment/getScheduledAppointmetsByPatient/{patientId}",
             "UpstreamHttpMethod": [ "GET" ],
@@ -81,10 +81,10 @@
             "DownstreamPathTemplate": "/api/appointment/cancelAppointment/{appointmentId}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment/cancelAppointment/{appointmentId}",
             "UpstreamHttpMethod": [ "PUT" ],
@@ -100,10 +100,10 @@
             "DownstreamPathTemplate": "/api/appointment/getAllRecommendedTerms",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 51164
-                }
+              {
+                "Host": "localhost",
+                "Port": 5171
+              }
             ],
             "UpstreamPathTemplate": "/gateway/appointment/getAllRecommendedTerms",
             "UpstreamHttpMethod": [ "GET" ],
