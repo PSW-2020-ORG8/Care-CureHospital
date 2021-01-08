@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Backend.Model.AllActors;
-using Microsoft.AspNetCore.Authorization;
+using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using UserMicroservice.Domain;
@@ -16,12 +16,13 @@ namespace UserMicroservice.Controllers
         private IUserService userService;
         private IPatientService patientService;
         private readonly AppSettings appSettings;
-
-        public UserController(IUserService userService, IPatientService patientService, IOptions<AppSettings> appSettings)
+        private readonly IDomainEventService eventService;
+        public UserController(IUserService userService, IPatientService patientService, IOptions<AppSettings> appSettings, IDomainEventService eventService)
         {
             this.userService = userService;
             this.patientService = patientService;
             this.appSettings = appSettings.Value;
+            this.eventService = eventService;
         }
 
         [HttpPost("login")]
@@ -33,6 +34,7 @@ namespace UserMicroservice.Controllers
             {
                 return Forbid();
             }
+            eventService.Save(new LoginEvent(user.Username,user.Id));
             return Ok(user);
         }
     }
