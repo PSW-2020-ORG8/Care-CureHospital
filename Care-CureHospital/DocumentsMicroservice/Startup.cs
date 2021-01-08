@@ -27,13 +27,13 @@ namespace DocumentsMicroservice
         {
             services.AddCors();
 
+            services.AddSingleton<IPatientGateway, PatientGateway>();
+            services.AddSingleton<IMedicalExaminationGateway, MedicalExaminationGateway>();
             services.AddSingleton<IAllergiesService, AllergiesService>(service => new AllergiesService(new AllergiesRepository(new MySQLStream<Allergies>())));
             services.AddSingleton<IEmailVerificationService, EmailVerificationService>(service => new EmailVerificationService());
-            services.AddSingleton<IMedicalExaminationReportService, MedicalExaminationReportService>(service => new MedicalExaminationReportService(new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>())));
-            services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>())));
+            services.AddSingleton<IMedicalExaminationReportService, MedicalExaminationReportService>(service => new MedicalExaminationReportService(new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>()), new MedicalExaminationGateway()));
+            services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>()), new MedicalExaminationGateway()));
             services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>())));
-            services.AddSingleton<IMedicalExaminationGateway, MedicalExaminationGateway>();
-            services.AddSingleton<IPatientGateway, PatientGateway>();
 
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();

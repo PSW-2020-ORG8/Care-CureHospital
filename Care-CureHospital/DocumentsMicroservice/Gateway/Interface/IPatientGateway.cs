@@ -9,5 +9,6 @@ namespace DocumentsMicroservice.Gateway.Interface
     public interface IPatientGateway
     {
         public bool DoesUsernameExist(string username);
+        public Patient GetPatientById(int patientId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Repository;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,12 @@ namespace DocumentsMicroservice.Service
     public class PrescriptionService : IPrescriptionService
     {
         public IPrescriptionRepository prescriptionRepository;
+        public IMedicalExaminationGateway medicalExaminationGateway;
 
-        public PrescriptionService(IPrescriptionRepository prescriptionRepository)
+        public PrescriptionService(IPrescriptionRepository prescriptionRepository, IMedicalExaminationGateway medicalExaminationGateway)
         {
             this.prescriptionRepository = prescriptionRepository;
+            this.medicalExaminationGateway = medicalExaminationGateway;
         }
 
         public List<Prescription> GetPrescriptionsForPatient(int patientID)
@@ -19,7 +22,8 @@ namespace DocumentsMicroservice.Service
             List<Prescription> prescriptionsForPatient = new List<Prescription>();
             foreach (Prescription prescription in prescriptionRepository.GetAllEntities().ToList())
             {
-                if (prescription.MedicalExamination.PatientId == patientID)
+                MedicalExamination medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId);
+                if (medicalExamination.PatientId == patientID)
                 {
                     prescriptionsForPatient.Add(prescription);
                 }
@@ -58,7 +62,8 @@ namespace DocumentsMicroservice.Service
             List<Prescription> searchResult = new List<Prescription>();
             foreach (Prescription prescription in GetPrescriptionsForPatient(patientID))
             {
-                if (doctorFullName.Contains(prescription.MedicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(prescription.MedicalExamination.Doctor.Surname.ToString()))
+                MedicalExamination medicalExamination = medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId);
+                if (doctorFullName.Contains(medicalExamination.Doctor.Name.ToString()) || doctorFullName.Contains(medicalExamination.Doctor.Surname.ToString()))
                 {
                     searchResult.Add(prescription);
                 }
