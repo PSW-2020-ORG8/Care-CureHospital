@@ -10,19 +10,19 @@ namespace IntegrationAdapters.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OfferController : ControllerBase
+    public class OfferController:ControllerBase
     {
         public OfferController() { }
 
-        [HttpGet] //api/offer
+        [HttpGet()] //api/offer
         public IActionResult GetAllOffers()
         {
             List<OfferDto> result = new List<OfferDto>();
             App.Instance().OfferService.GetAllEntities().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
             return Ok(result);
         }
-       
-        [HttpGet("activeTender")] 
+
+       [HttpGet("activeTender")] 
         public IActionResult GetAllOffersActiveTender()
         {
             List<OfferDto> result = new List<OfferDto>();
@@ -45,5 +45,20 @@ namespace IntegrationAdapters.Controllers
             App.Instance().OfferService.AddEntity(offer);
             return Ok();
         }
+
+        [HttpGet("winner")]
+        public IActionResult ChooseTender()
+        {
+            App.Instance().EmailService.TenderWinner();
+            return Ok();
+        }
+
+        [HttpGet("notWinner")]
+        public IActionResult ClosedTender()
+        {
+            App.Instance().EmailService.NotTenderWinner();
+            return Ok();
+        }
+
     }
 }

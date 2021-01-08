@@ -7,7 +7,11 @@ namespace Backend.Model.Tender
     {
         public int Id { get; set; }
 
-        public int MedicamentId { get; set; }
+        public int TenderId { get; set; }
+
+        public String PharmacyName { get; set; }
+
+        public String PharmacyEmail { get; set; }
 
         public double Price { get; set; }
 
@@ -22,10 +26,12 @@ namespace Backend.Model.Tender
 
         }
 
-        public Offer(int id, int medicamentId, double price, int quantity, String comment, bool activeTender)
+        public Offer(int id, int tenderId, string pharmacyName, string pharmacyEmail, double price, int quantity, string comment, bool activeTender)
         {
             Id = id;
-            MedicamentId = medicamentId;
+            TenderId = tenderId;
+            PharmacyName = pharmacyName;
+            PharmacyEmail = pharmacyEmail;
             Price = price;
             Quantity = quantity;
             Comment = comment;
@@ -34,12 +40,12 @@ namespace Backend.Model.Tender
 
         public int GetId()
         {
-            throw new NotImplementedException();
+            return Id;
         }
 
         public void SetId(int id)
         {
-            throw new NotImplementedException();
+            Id = id;
         }
     }
 }

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51492/",
+      "applicationUrl": "http://localhost:51999/",
       "sslPort": 0
     }
   },
@@ -22,7 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_PORT": "3306"
       },
-      "applicationUrl": "http://localhost:51492/"
+      "applicationUrl": "http://localhost:51999/"
     },
     "IntegrationAdapters": {
       "commandName": "Project",
@@ -37,7 +37,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_PORT": "3306"
       },
-      "applicationUrl": "https://localhost:51492/"
+      "applicationUrl": "https://localhost:51999/"
     }
   }
 }

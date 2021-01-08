@@ -18,7 +18,16 @@ namespace Backend.Service.TenderService
 
         public Offer AddEntity(Offer entity)
         {
+            Tender tender = new Tender();
             entity.ActiveTender = true;
+            if (tender.Id == 1)
+            {
+                entity.TenderId = 1;
+            }
+            else
+            {
+                entity.TenderId = 2;
+            }
             return offerRepository.AddEntity(entity);
         }
 
@@ -34,12 +43,12 @@ namespace Backend.Service.TenderService
 
         public Offer GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return offerRepository.GetEntity(id);
         }
 
         public void UpdateEntity(Offer entity)
         {
-            throw new NotImplementedException();
+            offerRepository.UpdateEntity(entity);
         }
 
         public List<Offer> GetAllOffersForActiveTender()

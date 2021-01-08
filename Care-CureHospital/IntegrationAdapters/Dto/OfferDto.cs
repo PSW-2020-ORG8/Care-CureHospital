@@ -9,13 +9,15 @@ namespace IntegrationAdapters.Dto
     {
         public int Id { get; set; }
 
-        public int MedicamentId { get; set; }
+        public int TenderId { get; set; }
 
         public double Price { get; set; }
 
         public int Quantity { get; set; }
 
-        public String Comment { get; set; }
+        public string Comment { get; set; }
+        public string PharmacyName { get; set; }
+        public string PharmacyEmail { get;  set; }
 
         public OfferDto() { }
     }

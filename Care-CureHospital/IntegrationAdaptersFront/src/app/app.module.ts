@@ -22,6 +22,7 @@ import { OfferComponent } from './offer/offer.component';
 import { ShowOfferComponent } from './director/show-offer/show-offer.component';
 import { ActiveTenderComponent } from './director/active-tender/active-tender.component';
 import { InactiveTenderComponent } from './director/inactive-tender/inactive-tender.component';
+import { CloseTenderComponent } from './director/close-tender/close-tender.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { InactiveTenderComponent } from './director/inactive-tender/inactive-ten
     OfferComponent,
     ShowOfferComponent,
     ActiveTenderComponent,
-    InactiveTenderComponent
+    InactiveTenderComponent,
+    CloseTenderComponent
   ],
   imports: [
     BrowserModule,
