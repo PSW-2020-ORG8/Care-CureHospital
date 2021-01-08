@@ -354,11 +354,7 @@
           }
         ],
         "UpstreamPathTemplate": "/gateway/report",
-        "UpstreamHttpMethod": [ "GET" ],
-        "AuthenticationOptions": {
-          "AuthenticationProviderKey": "Key",
-          "AllowedScopes": []
-        }
+        "UpstreamHttpMethod": [ "GET" ]
       },
       {
         "DownstreamPathTemplate": "/api/report",
@@ -370,11 +366,7 @@
           }
         ],
         "UpstreamPathTemplate": "/gateway/report",
-        "UpstreamHttpMethod": [ "POST" ],
-        "AuthenticationOptions": {
-          "AuthenticationProviderKey": "Key",
-          "AllowedScopes": []
-        }
+        "UpstreamHttpMethod": [ "POST" ] 
       },
       {
         "DownstreamPathTemplate": "/api/report/send",

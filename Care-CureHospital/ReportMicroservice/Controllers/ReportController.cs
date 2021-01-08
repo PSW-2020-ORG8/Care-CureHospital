@@ -19,8 +19,6 @@ namespace ReportMicroservice.Controllers
             this.reportService = reportService;
         }
 
-        public ReportController() { }
-
         [HttpGet]   //GET /api/report
         public IActionResult GetAllReports()
         {

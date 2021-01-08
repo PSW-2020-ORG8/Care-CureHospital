@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMicroservice", "UserMic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppPatientFrontend", "WebAppPatientFrontend\WebAppPatientFrontend.csproj", "{C18D985B-152A-48AD-BCA2-1E9B63F986D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportMicroservice", "ReportMicroservice\ReportMicroservice.csproj", "{1D76DFCB-2E4F-4B02-9147-95FFD1C817D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportMicroservice", "ReportMicroservice\ReportMicroservice.csproj", "{1D76DFCB-2E4F-4B02-9147-95FFD1C817D2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{00A5B08B-D2A2-4050-B40E-606AB89209A0} = {00A5B08B-D2A2-4050-B40E-606AB89209A0}
 	EndProjectSection
