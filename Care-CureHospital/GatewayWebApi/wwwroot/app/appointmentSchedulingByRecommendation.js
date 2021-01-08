@@ -16,7 +16,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
             specializations: [],
             doctorsBySpecialization : [],
             workDaysRecommendedTerms: [],
-            userToken: null
+            userToken: null,
+            loggedUserId: 0
 		}
 	},
 	template: `
@@ -259,7 +260,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
                         shortDescription: '',
                         urgency: false,
                         roomId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].roomId,
-                        doctorId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].doctorId
+                        doctorId: this.workDaysRecommendedTerms[splitedSelectedAppointment[0]].doctorId,
+                        patientId: this.loggedUserId
                     }}, {
                     headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
@@ -304,6 +306,17 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	},
     mounted() {
         this.userToken = localStorage.getItem('validToken');
+
+        if (this.userToken !== null) {
+            var base64Url = this.userToken.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            this.decodedToken = JSON.parse(jsonPayload);
+            this.loggedUserId = parseInt(this.decodedToken.unique_name);
+        }
 
         axios.get('gateway/doctor/getAllSpecialization', {
             headers: {
