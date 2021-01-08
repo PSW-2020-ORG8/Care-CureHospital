@@ -1,12 +1,10 @@
-﻿using Backend;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Shouldly;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using Xunit;
+using IntegrationAdapters;
 
 namespace IntegrationTests.IntegrationAdaptersIntegrationTest
 {

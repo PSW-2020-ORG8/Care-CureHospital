@@ -1,8 +1,6 @@
 ﻿using Shouldly;
 using System;
-using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
 using Xunit;
 
 namespace IntegrationTests.IntegrationAdaptersIntegrationTest
@@ -46,7 +44,6 @@ namespace IntegrationTests.IntegrationAdaptersIntegrationTest
                 return true;
             }
             catch { return false; }
-
         }
     }
 }

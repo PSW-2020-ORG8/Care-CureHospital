@@ -31,7 +31,7 @@ export class OfferComponent implements OnInit {
       medicamentId:this.OfferList.medicamentId,
       price:this.OfferList.price,
       quantity:this.OfferList.quantity,
-      comment:this.OfferList.commnet
+      comment:this.OfferList.comment
     };
 
     console.log(this.OfferList);
