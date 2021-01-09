@@ -1,3 +1,6 @@
+using EventSourcingMicroservice.DataBase;
+using EventSourcingMicroservice.Repository.MySQL;
+using EventSourcingMicroservice.Services;
 using FeedbackMicroservice.DataBase;
 using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Gateway;
@@ -40,6 +43,12 @@ namespace FeedbackMicroservice
 
             services.AddDbContext<FeedBackDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+
+            services.AddDbContext<ESDataBaseContext>(option =>
+            option.UseMySql(CreateConnectionStringFromEnvironmentEventStore()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+            services.AddSingleton<IDomainEventService, DomainEventService>(services => new DomainEventService(new MySQLRepository(new ESDataBaseContext())));
+
+
             services.AddControllers();
             services.AddControllersWithViews()
                .AddNewtonsoftJson(options =>
@@ -58,6 +67,17 @@ namespace FeedbackMicroservice
             Console.WriteLine(user);
             Console.WriteLine(password);
             Console.WriteLine(database);
+            return $"server={server};port={port};database={database};user={user};password={password};";
+        }
+
+        private string CreateConnectionStringFromEnvironmentEventStore()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENT") ?? "EventSourcingDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
 

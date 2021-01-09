@@ -17,7 +17,9 @@ namespace EventSourcingMicroservice.Repository.MySQL
         public IEnumerable<DomainEvent> Load(EventType eventType)
         {
             if (eventType.Equals(EventType.LOGIN_EVENT))
-                return _context.LoginEvent.ToList();
+                return _context.LoginEvents.ToList();
+            else if (eventType.Equals(EventType.URL_EVENT))
+                return _context.URLEvents.ToList();
 
             return null;
         }
@@ -25,7 +27,8 @@ namespace EventSourcingMicroservice.Repository.MySQL
         public DomainEvent Save(DomainEvent domainEvent)
         {
             var @event = (dynamic)domainEvent;
-            if (@event is LoginEvent) _context.LoginEvent.Add(@event);
+            if (@event is LoginEvent) _context.LoginEvents.Add(@event);
+            if (@event is URLEvent) _context.URLEvents.Add(@event);
             
             _context.SaveChanges();
             return domainEvent;

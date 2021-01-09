@@ -1,6 +1,8 @@
 ﻿using AppointmentMicroservice.Domain;
 using AppointmentMicroservice.Gateway.Interface;
 using AppointmentMicroservice.Service;
+using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppointmentMicroservice.Controllers
@@ -12,17 +14,21 @@ namespace AppointmentMicroservice.Controllers
         private IMedicalExaminationService medicalExaminationService;
         private IDoctorGateway doctorGateway;
         private IPatientGateway patientGateway;
+        private IDomainEventService domainEventService;
 
-        public MedicalExaminationController(IMedicalExaminationService medicalExaminationService, IDoctorGateway doctorGateway, IPatientGateway patientGateway)
+        public MedicalExaminationController(IMedicalExaminationService medicalExaminationService, IDoctorGateway doctorGateway, IPatientGateway patientGateway, IDomainEventService domainEventService)
         {
             this.medicalExaminationService = medicalExaminationService;
             this.doctorGateway = doctorGateway;
             this.patientGateway = patientGateway;
+            this.domainEventService = domainEventService;
         }
 
         [HttpGet("getMedicalExamination/{id}")]
         public IActionResult GetMedicalExamination(int id)
         {
+            domainEventService.Save(new URLEvent("/api/Appointment/getMedicalExamination/" + id, "GET"));
+
             MedicalExamination medicalExamination = medicalExaminationService.GetEntity(id);
             if (medicalExamination == null)
             {
