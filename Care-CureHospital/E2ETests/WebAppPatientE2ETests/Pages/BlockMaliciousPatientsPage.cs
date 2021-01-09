@@ -10,7 +10,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class BlockMaliciousPatientsPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/blockMaliciousPatients";
+        public const string URI = "http://localhost:60370/index.html#/blockMaliciousPatients";
         private IWebElement blockMaliciousPatientButton => driver.FindElement(By.ClassName("block-malicious-patient-btn"));
         private ReadOnlyCollection<IWebElement> patientsForBlocking => driver.FindElements(By.ClassName("patient-for-blocking"));
         private IWebElement blockedPatientTd => driver.FindElement(By.ClassName("blocked-patient-td"));
