@@ -55,7 +55,7 @@ export class DirectorComponent implements OnInit {
     console.log(this.ReportList);
   }
 
-  /*publishT(){
+  publishT(){
     this.service.publishTender().subscribe(data=>{
       console.log("Successfully sent!");
       alert("Successfully sent!");
@@ -63,7 +63,7 @@ export class DirectorComponent implements OnInit {
     Error => {
       console.log("Error");
     });
-  }*/
+  }
 
   showOffers(){
     this.router.navigate(['showOffers']);

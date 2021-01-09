@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using TenderMicroservice.Domain;
 using TenderMicroservice.Dto;
 
 namespace TenderMicroservice.Mapper

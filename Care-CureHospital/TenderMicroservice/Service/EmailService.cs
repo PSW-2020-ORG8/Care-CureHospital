@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Threading.Tasks;
 using TenderMicroservice.Domain;
 using TenderMicroservice.Repository;
 
 namespace TenderMicroservice.Service
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
+        public EmailService()
+        {
+
+        }
+
         public ITenderRepository tenderRepository;
         string hospital = "hospitalssystem@gmail.com";
         string hospitalPassword = "bolnica123";
@@ -39,7 +41,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
 
@@ -70,7 +72,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
 
@@ -94,7 +96,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TenderMicroservice.Service
 {
@@ -11,16 +8,11 @@ namespace TenderMicroservice.Service
 
         IEnumerable<E> GetAllEntities();
 
-        IEnumerable<E> GetEPrescriptionsForPatient(int patientID);
-
-        IEnumerable<E> FindEPrescriptionsForDateParameter(int patientId, DateTime date);
-
-        IEnumerable<E> FindEPrescriptionsForCommentParameter(int patientID, string comment);
-
         E AddEntity(E entity);
 
         void UpdateEntity(E entity);
 
         void DeleteEntity(E entity);
+
     }
 }

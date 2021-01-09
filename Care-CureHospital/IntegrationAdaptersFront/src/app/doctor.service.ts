@@ -8,7 +8,8 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DoctorService {
-  readonly APIUrl = "http://localhost:51492/api";
+ // readonly APIUrl = "http://localhost:51492/api";
+ readonly APIUrl = "http://localhost:60370/gateway";
 
   constructor(private http:HttpClient) {
     this.getEPrescriptionList();

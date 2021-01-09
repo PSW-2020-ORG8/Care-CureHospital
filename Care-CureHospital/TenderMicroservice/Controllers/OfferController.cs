@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TenderMicroservice.Domain;
 using TenderMicroservice.Dto;
+using TenderMicroservice.Mapper;
+using TenderMicroservice.Service;
 
 namespace TenderMicroservice.Controllers
 {
@@ -11,13 +12,20 @@ namespace TenderMicroservice.Controllers
     [ApiController]
     public class OfferController : ControllerBase
     {
-        public OfferController() { }
+        private IOfferService offerService;
+        private IEmailService emailService;
+
+        public OfferController(IOfferService offerService, IEmailService emailService)
+        {
+            this.offerService = offerService;
+            this.emailService = emailService;
+        }
 
         [HttpGet()] //api/offer
         public IActionResult GetAllOffers()
         {
             List<OfferDto> result = new List<OfferDto>();
-            this.OfferService.GetAllEntities().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
+            this.offerService.GetAllEntities().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
             return Ok(result);
         }
 
@@ -25,7 +33,7 @@ namespace TenderMicroservice.Controllers
         public IActionResult GetAllOffersActiveTender()
         {
             List<OfferDto> result = new List<OfferDto>();
-           this.OfferService.GetAllOffersForActiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
+           this.offerService.GetAllOffersForActiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
             return Ok(result);
         }
 
@@ -33,7 +41,7 @@ namespace TenderMicroservice.Controllers
         public IActionResult GetAllOffersInactiveTender()
         {
             List<OfferDto> result = new List<OfferDto>();
-            this.OfferService.GetAllOffersForInactiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
+            this.offerService.GetAllOffersForInactiveTender().ToList().ForEach(offer => result.Add(OfferMapper.OfferToOfferDto(offer)));
             return Ok(result);
         }
 
@@ -41,23 +49,22 @@ namespace TenderMicroservice.Controllers
         public IActionResult AddOffer(OfferDto dto)
         {
             Offer offer = OfferMapper.OfferDtoToOffer(dto);
-            this.OfferService.AddEntity(offer);
+            this.offerService.AddEntity(offer);
             return Ok();
         }
 
         [HttpGet("winner")]
         public IActionResult ChooseTender()
         {
-            this.EmailService.TenderWinner();
+            this.emailService.TenderWinner();
             return Ok();
         }
 
         [HttpGet("notWinner")]
         public IActionResult ClosedTender()
         {
-            this.EmailService.NotTenderWinner();
+            this.emailService.NotTenderWinner();
             return Ok();
         }
-
     }
 }

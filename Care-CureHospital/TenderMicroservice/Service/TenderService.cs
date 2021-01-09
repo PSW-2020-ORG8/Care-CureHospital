@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TenderMicroservice.Domain;
+using TenderMicroservice.Repository;
 
 namespace TenderMicroservice.Service
 {
-    public class TenderService : IService<Tender, int>
+    public class TenderService : ITenderService
     {
         public ITenderRepository tenderRepository;
+        public EmailService emailService;
+
+        public TenderService(ITenderRepository tenderRepository)
+        {
+            this.tenderRepository = tenderRepository;
+        }
+
+        public TenderService(ITenderRepository tenderRepository, EmailService emailService)
+        {
+            this.tenderRepository = tenderRepository;
+            this.emailService = emailService;
+        }
 
         public IEnumerable<Tender> GetActiveTenders()
         {
@@ -17,11 +30,6 @@ namespace TenderMicroservice.Service
         public IEnumerable<Tender> GetInactiveTenders()
         {
             return tenderRepository.GetAllEntities().Where(inactiveTender => inactiveTender.Active.Equals(false));
-        }
-
-        public TenderService(ITenderRepository tenderRepository)
-        {
-            this.tenderRepository = tenderRepository;
         }
 
         public Tender AddEntity(Tender entity)

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TenderMicroservice.Dto;
+using TenderMicroservice.Mapper;
+using TenderMicroservice.Service;
 
 namespace TenderMicroservice.Controllers
 {
@@ -10,20 +11,27 @@ namespace TenderMicroservice.Controllers
     [ApiController]
     public class TenderController : ControllerBase
     {
-        public TenderController() { }
+        private ITenderService tenderService;
+        private IEmailService emailService;
+  
+        public TenderController(ITenderService tenderService, IEmailService emailService)
+        {
+            this.tenderService = tenderService;
+            this.emailService = emailService;
+        }
 
         [HttpGet] //tender
         public IActionResult PublishTender()
         {
-           this.EmailService.SendNotification();
-            return Ok();
+           this.emailService.SendNotification();
+           return Ok();
         }
 
         [HttpGet("getActiveTender")]
         public IActionResult GetActiveTender()
         {
             List<TenderDto> result = new List<TenderDto>();
-            this.TenderService.GetActiveTenders().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
+            this.tenderService.GetActiveTenders().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
             return Ok(result);
         }
 
@@ -31,7 +39,7 @@ namespace TenderMicroservice.Controllers
         public IActionResult GetInactiveTender()
         {
             List<TenderDto> result = new List<TenderDto>();
-            this.TenderService.GetInactiveTenders().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
+            this.tenderService.GetInactiveTenders().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
             return Ok(result);
         }
 
@@ -39,14 +47,14 @@ namespace TenderMicroservice.Controllers
         public IActionResult GetAllTenders()
         {
             List<TenderDto> result = new List<TenderDto>();
-            this.TenderService.GetAllEntities().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
+            this.tenderService.GetAllEntities().ToList().ForEach(tender => result.Add(TenderMapper.TenderToTenderDto(tender)));
             return Ok(result);
         }
 
         [HttpPut("closeTender/{tenderId}")]
         public IActionResult CloseTender(int tenderId)
         {
-            return Ok(this.TenderService.CloseTender(tenderId));
+            return Ok(this.tenderService.CloseTender(tenderId));
         }
     }
 }

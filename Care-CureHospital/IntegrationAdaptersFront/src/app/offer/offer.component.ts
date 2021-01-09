@@ -42,8 +42,9 @@ export class OfferComponent implements OnInit {
 
     console.log(this.OfferList);
     this.service.addOffers(val).subscribe(res => {
-      alert(res.toString())});
-      
-    alert("You have successfully added your offer!");
-  }
+      alert(res.toString())
+    });
+      alert("You have successfully added your offer!");
+    }
+    
 }

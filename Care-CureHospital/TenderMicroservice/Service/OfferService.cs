@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TenderMicroservice.Domain;
+using TenderMicroservice.Repository;
 
 namespace TenderMicroservice.Service
 {
-    public class OfferService : IService<Offer, int>
+    public class OfferService : IOfferService
     {
         public IOfferRepository offerRepository;
 

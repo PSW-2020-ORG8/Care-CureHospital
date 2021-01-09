@@ -10,20 +10,9 @@ namespace TenderMicroservice.Repository
 {
     public class TenderRepository : MySQLRepository<Tender, int>, ITenderRepository
     {
-        private static TenderRepository instance;
-
-        public static TenderRepository Instance()
+        public TenderRepository(IMySQLStream<Tender> stream)
+            : base(stream)
         {
-            if (instance == null)
-            {
-                instance = new TenderRepository(new MySQLStream<Tender>());
-            }
-            return instance;
-        }
-
-        public TenderRepository(IMySQLStream<Tender> stream) : base(stream)
-        {
-
         }
     }
 }

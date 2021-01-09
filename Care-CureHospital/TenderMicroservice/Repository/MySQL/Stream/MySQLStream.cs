@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using TenderMicroservice.DataBase;
 
 namespace TenderMicroservice.Repository.MySQL.Stream
 {
     public class MySQLStream<E> : IMySQLStream<E>
         where E : class
     {
-        private readonly EPrescriptionDataBaseContext dbContext;
+        private readonly TenderDataBaseContext dbContext;
 
         public MySQLStream()
         {
-            this.dbContext = new EPrescriptionDataBaseContext();
+            this.dbContext = new TenderDataBaseContext();
         }
 
         public void Add(E entity)

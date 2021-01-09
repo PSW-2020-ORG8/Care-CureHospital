@@ -36,7 +36,7 @@ namespace Backend.Service.EmailService
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Backend.Service.EmailService
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Backend.Service.EmailService
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
     }
