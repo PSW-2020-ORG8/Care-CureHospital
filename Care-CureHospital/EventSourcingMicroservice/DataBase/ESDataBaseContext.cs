@@ -6,7 +6,8 @@ namespace EventSourcingMicroservice.DataBase
 {
     public class ESDataBaseContext : DbContext
     {
-        public DbSet<LoginEvent> LoginEvent { get; set; }
+        public DbSet<LoginEvent> LoginEvents { get; set; }
+        public DbSet<URLEvent> URLEvents { get; set; }
         public ESDataBaseContext()
         {
         }

@@ -28,6 +28,7 @@ namespace UserMicroservice.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthenticateDto model)
         {
+            eventService.Save(new URLEvent("/api/user/login", "GET"));
             User user = userService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(appSettings.Secret));
             Patient patient = patientService.GetPatientByUsername(model.Username);
             if (user == null || patient.Blocked == true)

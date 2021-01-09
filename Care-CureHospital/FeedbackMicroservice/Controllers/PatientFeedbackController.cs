@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Services;
 using FeedbackMicroservice.Domain;
 using FeedbackMicroservice.Dto;
 using FeedbackMicroservice.Gateway.Interface;
@@ -15,16 +17,19 @@ namespace FeedbackMicroservice.Controllers
     {
         private IPatientFeedbackService patientFeedbackService;
         private IPatientGateway patientGateway;
+        private IDomainEventService domainEventService;
 
-        public PatientFeedbackController(IPatientFeedbackService patientFeedbackService, IPatientGateway patientGateway) 
+        public PatientFeedbackController(IPatientFeedbackService patientFeedbackService, IPatientGateway patientGateway, IDomainEventService domainEventService) 
         {
             this.patientFeedbackService = patientFeedbackService;
             this.patientGateway = patientGateway;
+            this.domainEventService = domainEventService;
         }
 
         [HttpGet]       // GET /api/patientFeedback
         public IActionResult GetAllFeedbacks()
         {
+            domainEventService.Save(new URLEvent("/api/patientFeedback", "GET"));
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();           
             this.patientFeedbackService.GetAllEntities().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback, patientGateway.GetPatientById(feedback.PatientId))));
             return Ok(result);
@@ -33,6 +38,7 @@ namespace FeedbackMicroservice.Controllers
         [HttpGet("getPublishedFeedbacks")]       // GET /api/patientFeedback/getPublishedFeedbacks
         public IActionResult GetPublishedFeedbacks()
         {
+            domainEventService.Save(new URLEvent("/api/patientFeedback/getPublishedFeedbacks", "GET"));
             List<PatientFeedbackDto> result = new List<PatientFeedbackDto>();
             this.patientFeedbackService.GetPublishedFeedbacks().ToList().ForEach(feedback => result.Add(PatientFeedbackMapper.PatientFeedbackToPatientFeedbackDto(feedback, patientGateway.GetPatientById(feedback.PatientId))));
             return Ok(result);
@@ -41,6 +47,7 @@ namespace FeedbackMicroservice.Controllers
         [HttpPost("postPatientFeedback")]      // POST /api/patientFeedback/postPatientFeedback
         public IActionResult Add(PatientFeedbackDto dto)
         {
+            domainEventService.Save(new URLEvent("/api/patientFeedback/postPatientFeedback", "POST"));
             if (dto.Text.Length <= 0)
             {
                 return BadRequest();
@@ -53,6 +60,7 @@ namespace FeedbackMicroservice.Controllers
         [HttpPut("publishFeedback/{id}")]       // PUT /api/patientFeedback/publishFeedback/{id}
         public IActionResult PublishFeedback(int id)
         {
+            domainEventService.Save(new URLEvent("/api/publishFeedback/" + id, "PUT"));
             PatientFeedback result = this.patientFeedbackService.PublishPatientFeedback(id);
             if (result == null)
             {
