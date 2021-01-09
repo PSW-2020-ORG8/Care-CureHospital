@@ -102,6 +102,6 @@ Vue.component("userLogin", {
         }		
 	},
 	mounted(){
-
+        localStorage.removeItem("validToken");  
 	}
 });

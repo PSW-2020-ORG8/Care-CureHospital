@@ -14,6 +14,7 @@ const patientAppointments = { template: '<patientAppointments></patientAppointme
 const blockMaliciousPatients = { template: '<blockMaliciousPatients></blockMaliciousPatients>' }
 const patientMainPage = { template: '<patientMainPage></patientMainPage>' }
 const userLogin = { template: '<userLogin></userLogin>' }
+const pageNotFound = { template: '<pageNotFound></pageNotFound>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -33,7 +34,8 @@ const router = new VueRouter({
 		{ path: '/patientAppointments', name: 'patientAppointments', component: patientAppointments },
 		{ path: '/blockMaliciousPatients', name: 'blockMaliciousPatients', component: blockMaliciousPatients },
 		{ path: '/patientMainPage', name: 'patientMainPage', component: patientMainPage },
-		{ path: '/userLogin', name: 'userLogin', component: userLogin }
+		{ path: '/userLogin', name: 'userLogin', component: userLogin },
+		{ path: '*', name: 'userLogin', component: pageNotFound }
 	]
 });
 
