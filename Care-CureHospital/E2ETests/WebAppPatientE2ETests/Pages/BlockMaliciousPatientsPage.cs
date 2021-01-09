@@ -14,8 +14,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         private IWebElement blockMaliciousPatientButton => driver.FindElement(By.ClassName("block-malicious-patient-btn"));
         private ReadOnlyCollection<IWebElement> patientsForBlocking => driver.FindElements(By.ClassName("patient-for-blocking"));
         private IWebElement blockedPatientTd => driver.FindElement(By.ClassName("blocked-patient-td"));
-
-
+        private IWebElement maliciousPatientsLinkElement => driver.FindElement(By.Id("block-malicious-patients-link"));
 
         public BlockMaliciousPatientsPage(IWebDriver driver)
         {
@@ -91,6 +90,22 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         public void ResolveAlertDialog()
         {
             driver.SwitchTo().Alert().Accept();
+        }
+
+        public bool MaliciousPatientsLinkElementDisplayed()
+        {
+            return maliciousPatientsLinkElement.Displayed;
+        }
+
+        public void ClickMaliciousPatientsLink()
+        {
+            maliciousPatientsLinkElement.Click();
+        }
+
+        public void WaitForMaliciousPatientsPage()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(URI));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);

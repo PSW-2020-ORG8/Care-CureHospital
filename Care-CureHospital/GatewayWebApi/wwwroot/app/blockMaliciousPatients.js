@@ -23,7 +23,7 @@ Vue.component("blockMaliciousPatients", {
 	         <ul class="menu-contents">
 				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
 				<li><a href="#/surveyResults">Rezultati anketa</a></li>
-				<li class="active"><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
+				<li class="active"><a href="#/blockMaliciousPatients" id="block-malicious-patients-link">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  

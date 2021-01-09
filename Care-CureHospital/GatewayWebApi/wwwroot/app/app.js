@@ -35,7 +35,7 @@ const router = new VueRouter({
 		{ path: '/blockMaliciousPatients', name: 'blockMaliciousPatients', component: blockMaliciousPatients },
 		{ path: '/patientMainPage', name: 'patientMainPage', component: patientMainPage },
 		{ path: '/userLogin', name: 'userLogin', component: userLogin },
-		{ path: '*', name: 'userLogin', component: pageNotFound }
+		{ path: '*', name: 'pageNotFound', component: pageNotFound }
 	]
 });
 

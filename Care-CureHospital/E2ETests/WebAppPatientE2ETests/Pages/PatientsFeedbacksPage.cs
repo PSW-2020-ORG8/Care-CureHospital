@@ -55,6 +55,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));
         }
 
+        public void WaitForPublishFeedbackButton()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("publishFeedbackButton")));
+        }
+
         public void Navigate() => driver.Navigate().GoToUrl(URI);
     }
 }

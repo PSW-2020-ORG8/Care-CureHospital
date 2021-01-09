@@ -1,15 +1,13 @@
-﻿
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Shouldly;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using WebAppPatient;
-using WebAppPatient.Dto;
 using Xunit;
+using UserMicroservice;
+using UserMicroservice.Dto;
 
 namespace IntegrationTests.WebAppPatientIntegrationTests
 {
@@ -47,8 +45,8 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public static IEnumerable<object[]> PatientData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new AuthenticateDto("pera", "123") , HttpStatusCode.OK });
-            retVal.Add(new object[] { new AuthenticateDto("pera", "321") , HttpStatusCode.Unauthorized });
+            retVal.Add(new object[] { new AuthenticateDto("zika", "123") , HttpStatusCode.OK });
+            retVal.Add(new object[] { new AuthenticateDto("zika", "321") , HttpStatusCode.Unauthorized });
             retVal.Add(new object[] { new AuthenticateDto("minja", "123") , HttpStatusCode.Unauthorized });
             return retVal;
         }
