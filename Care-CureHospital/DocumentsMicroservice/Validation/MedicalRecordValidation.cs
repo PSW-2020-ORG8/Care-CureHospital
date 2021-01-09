@@ -1,4 +1,5 @@
 ﻿using DocumentsMicroservice.Dto;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Service;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,14 @@ namespace DocumentsMicroservice.Validation
         private Regex contactNumberRegex = new Regex(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$");
         private Regex eMailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
 
-        /*private IPatientService patientService;
+        private IPatientGateway patientGateway;
 
-        public MedicalRecordValidation(IPatientService patientService)
+        public MedicalRecordValidation(IPatientGateway patientGateway)
         {
-            this.patientService = patientService;
-        }*/
+            this.patientGateway = patientGateway;
+        }
 
-        /*public bool ValidateMedicalRecord(MedicalRecordDto medicalRecordDto)
+        public bool ValidateMedicalRecord(MedicalRecordDto medicalRecordDto)
         {
             if (!ValidateUsername(medicalRecordDto.Patient.Username) || !ValidatePassword(medicalRecordDto.Patient.Password, medicalRecordDto.ConfirmedPassword)
                 || !ValidateLettersOnly(medicalRecordDto) || !ValidateJmbg(medicalRecordDto.Patient.Jmbg) || !ValidateIdentityCard(medicalRecordDto.Patient.IdentityCard)
@@ -43,12 +44,12 @@ namespace DocumentsMicroservice.Validation
             {
                 return false;
             }
-            else if (this.patientService.DoesUsernameExist(username))
+            else if (this.patientGateway.DoesUsernameExist(username))
             {
                 return false;
             }
             return true;
-        }*/
+        }
 
         private bool ValidatePassword(string password, string confirmedPassword)
         {
@@ -102,7 +103,6 @@ namespace DocumentsMicroservice.Validation
         private bool EmptyAddress(MedicalRecordDto medicalRecordDto)
         {
             if (!BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Name)
-                || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.PostCode.ToString())
                     || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Address)
                         || !BasicValidation.CheckIfStringIsEmptyOrNull(medicalRecordDto.Patient.City.Country.Name))
             {

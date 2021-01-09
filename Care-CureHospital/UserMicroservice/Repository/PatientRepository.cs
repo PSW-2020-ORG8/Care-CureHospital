@@ -16,7 +16,9 @@ namespace UserMicroservice.Repository
             foreach (Patient patient in GetAllEntities())
             {
                 if (patient.Username.Equals(username))
+                {
                     return patient;
+                }
             }
             return null;
         }

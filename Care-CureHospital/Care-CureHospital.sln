@@ -43,6 +43,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtocolMicroservice", "ProtocolMicroservice\ProtocolMicroservice.csproj", "{540EE8B1-7027-41F2-A987-FAEA20FC50CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayIntegrationApi", "GatewayIntegrationApi\GatewayIntegrationApi.csproj", "{7030CC28-1036-4300-8F0B-9B43655A16C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcingMicroservice", "EventSourcingMicroservice\EventSourcingMicroservice.csproj", "{0906EDBB-FFBB-4BE6-8C95-ACB0E4893682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -126,6 +127,10 @@ Global
 		{7030CC28-1036-4300-8F0B-9B43655A16C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7030CC28-1036-4300-8F0B-9B43655A16C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7030CC28-1036-4300-8F0B-9B43655A16C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0906EDBB-FFBB-4BE6-8C95-ACB0E4893682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0906EDBB-FFBB-4BE6-8C95-ACB0E4893682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0906EDBB-FFBB-4BE6-8C95-ACB0E4893682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0906EDBB-FFBB-4BE6-8C95-ACB0E4893682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

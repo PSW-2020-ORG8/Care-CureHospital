@@ -11,7 +11,7 @@ namespace DocumentsMicroservice.Repository
         {
         }
 
-        /*public MedicalRecord GetMedicalRecordByPatient(Patient patient)
+        public MedicalRecord GetMedicalRecordByPatient(Patient patient)
         {
             foreach (MedicalRecord medicalRecord in GetAllEntities())
             {
@@ -19,6 +19,6 @@ namespace DocumentsMicroservice.Repository
                     return medicalRecord;
             }            
             return null;
-        }*/
+        }
     }
 }

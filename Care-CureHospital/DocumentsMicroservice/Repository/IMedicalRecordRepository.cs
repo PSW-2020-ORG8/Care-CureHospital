@@ -4,6 +4,6 @@ namespace DocumentsMicroservice.Repository
 {
     public interface IMedicalRecordRepository : IRepository<MedicalRecord, int>
     {
-        //MedicalRecord GetMedicalRecordByPatient(Patient patient);
+        MedicalRecord GetMedicalRecordByPatient(Patient patient);
     }
 }

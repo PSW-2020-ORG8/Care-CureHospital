@@ -1,6 +1,4 @@
-﻿using Model.AllActors;
-using Model.DoctorMenager;
-using Model.PatientDoctor;
+﻿using DocumentsMicroservice.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

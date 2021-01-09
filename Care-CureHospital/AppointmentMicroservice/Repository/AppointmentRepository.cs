@@ -2,7 +2,6 @@
 using AppointmentMicroservice.Repository.MySQL;
 using AppointmentMicroservice.Repository.MySQL.Stream;
 
-
 namespace AppointmentMicroservice.Repository
 {
     public class AppointmentRepository : MySQLRepository<Appointment, int>, IAppointmentRepository

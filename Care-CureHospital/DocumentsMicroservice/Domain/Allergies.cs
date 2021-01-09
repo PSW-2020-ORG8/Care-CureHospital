@@ -7,14 +7,10 @@ namespace DocumentsMicroservice.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public int MedicalRecordId { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
 
         public Allergies()
         {
-        }
-
-        public Allergies(string name)
-        {
-            Name = name;
         }
 
         public Allergies(int id, string name)

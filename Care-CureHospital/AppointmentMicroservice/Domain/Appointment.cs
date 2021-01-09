@@ -13,7 +13,7 @@ namespace AppointmentMicroservice.Domain
         public int MedicalExaminationId { get; set; }
         public virtual MedicalExamination MedicalExamination { get; set; }
         public int DoctorWorkDayId { get; set; }
-      
+        public virtual DoctorWorkDay DoctorWorkDay { get; set; }
 
         public Appointment()
         {
@@ -30,7 +30,7 @@ namespace AppointmentMicroservice.Domain
             DoctorWorkDayId = doctorWorkDayId;
         }
 
-        public Appointment(int id, bool canceled, DateTime cancellationDate, DateTime startTime, int medicalExaminationId, MedicalExamination medicalExamination, int doctorWorkDayId)
+        public Appointment(int id, bool canceled, DateTime cancellationDate, DateTime startTime, int medicalExaminationId, MedicalExamination medicalExamination, int doctorWorkDayId, DoctorWorkDay doctorWorkDay)
         {
             Id = id;
             Canceled = canceled;
@@ -40,6 +40,7 @@ namespace AppointmentMicroservice.Domain
             MedicalExaminationId = medicalExaminationId;
             MedicalExamination = medicalExamination;
             DoctorWorkDayId = doctorWorkDayId;
+            DoctorWorkDay = doctorWorkDay;
            
         }
 

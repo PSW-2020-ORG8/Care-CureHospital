@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroservice.Domain;
 using UserMicroservice.Dto;
 using UserMicroservice.Mapper;
 using UserMicroservice.Service;
@@ -41,5 +42,15 @@ namespace UserMicroservice.Controllers
             return Ok(doctorService.GetAllEntities());
         }
 
+        [HttpGet("getDoctor/{doctorId}")]       // GET /api/doctor/getDoctor/{doctorId}
+        public IActionResult GetDoctor(int doctorId)
+        {
+            Doctor doctor = doctorService.GetEntity(doctorId);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return Ok(doctor);
+        }
     }
 }

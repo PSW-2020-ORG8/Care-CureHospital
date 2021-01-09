@@ -1,4 +1,5 @@
 ﻿using DocumentsMicroservice.Dto;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -14,25 +15,29 @@ namespace DocumentsMicroservice.Controllers
     public class PrescriptionController : ControllerBase
     {
         private IPrescriptionService prescriptionService;
+        private IMedicalExaminationGateway medicalExaminationGateway;
 
-        public PrescriptionController(IPrescriptionService prescriptionService) 
+        public PrescriptionController(IPrescriptionService prescriptionService, IMedicalExaminationGateway medicalExaminationGateway) 
         {
             this.prescriptionService = prescriptionService;
+            this.medicalExaminationGateway = medicalExaminationGateway;
         }
 
         [HttpGet]       // GET /api/prescription
         public IActionResult GetAllPrescriptions()
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.GetAllEntities().ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.GetAllEntities().ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
-        /*[HttpGet("getForPatient/{patientID}")]       // GET /api/prescription/getForPatient/{id}
+        [HttpGet("getForPatient/{patientID}")]       // GET /api/prescription/getForPatient/{id}
         public IActionResult GetPrescriptionsForPatient(int patientID)
         {
             List<PrescriptionDto> prescriptionsForPatient = new List<PrescriptionDto>();
-            this.prescriptionService.GetPrescriptionsForPatient(patientID).ToList().ForEach(prescription => prescriptionsForPatient.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.GetPrescriptionsForPatient(patientID).ToList().ForEach(prescription => 
+                prescriptionsForPatient.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(prescriptionsForPatient);
         }
 
@@ -40,7 +45,8 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsByDoctor([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "doctor")] string doctor)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsForDoctorParameter(patientId, doctor).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsForDoctorParameter(patientId, doctor).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
@@ -48,7 +54,8 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsByDate([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "date")] string date)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsForDateParameter(patientId, date).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsForDateParameter(patientId, date).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
@@ -56,7 +63,8 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsByComment([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "comment")] string comment)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsForCommentParameter(patientId, comment).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsForCommentParameter(patientId, comment).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
@@ -64,7 +72,8 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsByMedicaments([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "medicaments")] string medicaments)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsForMedicamentsParameter(patientId, medicaments).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsForMedicamentsParameter(patientId, medicaments).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
@@ -72,7 +81,8 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsForPatient(PrescriptionDto dto)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsUsingAdvancedSearch(dto.PatientId, dto.SearchParams, dto.LogicOperators).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
         }
 
@@ -80,8 +90,9 @@ namespace DocumentsMicroservice.Controllers
         public IActionResult FindPrescriptionsForPatientUsingSimpleSearch([FromQuery(Name = "patientId")] int patientId, [FromQuery(Name = "doctor")] string doctor, [FromQuery(Name = "date")] string date, [FromQuery(Name = "comment")] string comment, [FromQuery(Name = "medicaments")] string medicaments)
         {
             List<PrescriptionDto> result = new List<PrescriptionDto>();
-            this.prescriptionService.FindPrescriptionsUsingSimpleSearch(patientId, doctor, date, comment, medicaments).ToList().ForEach(prescription => result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription)));
+            this.prescriptionService.FindPrescriptionsUsingSimpleSearch(patientId, doctor, date, comment, medicaments).ToList().ForEach(prescription => 
+                result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
-        }*/
+        }
     }
 }
