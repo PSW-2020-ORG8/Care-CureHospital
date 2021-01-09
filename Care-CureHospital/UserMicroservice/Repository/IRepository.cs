@@ -1,5 +1,4 @@
-﻿using HealthClinic.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace UserMicroservice.Repository

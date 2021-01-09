@@ -4,6 +4,8 @@ using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
 using DocumentsMicroservice.Validation;
+using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 
@@ -15,16 +17,18 @@ namespace DocumentsMicroservice.Controllers
     {
         private IMedicalRecordService medicalRecordService;
         private IPatientGateway patientGateway;
-
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, IPatientGateway patientGateway) 
+        private IDomainEventService domainEventService;
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, IPatientGateway patientGateway, IDomainEventService domainEventService) 
         {
             this.medicalRecordService = medicalRecordService;
             this.patientGateway = patientGateway;
+            this.domainEventService = domainEventService;
         }
 
         [HttpPost]      // POST /api/medicalRecord
         public IActionResult RegisterPatient(MedicalRecordDto dto)
         {
+            domainEventService.Save(new URLEvent("/api/medicalRecord", "POST"));
             MedicalRecordValidation medicalRecordValidation = new MedicalRecordValidation(this.patientGateway);
             if (!medicalRecordValidation.ValidateMedicalRecord(dto))
             {
@@ -38,6 +42,7 @@ namespace DocumentsMicroservice.Controllers
         [HttpGet("getForPatient/{patientID}")]       // GET /api/medicalRecord/getForPatient/{id}
         public IActionResult GetMedicalRecordForPatient(int patientID)
         {
+            domainEventService.Save(new URLEvent("/api/medicalRecord/getForPatient/" + patientID, "GET"));
             MedicalRecord medicalRecord = this.medicalRecordService.GetMedicalRecordForPatient(patientID);
             if (medicalRecord == null)
             {
@@ -52,7 +57,8 @@ namespace DocumentsMicroservice.Controllers
         [HttpGet("activatePatientMedicalRecord/{username}")]       // GET /api/medicalRecord/activatePatientMedicalRecord/{username}
         public IActionResult ActivatePatientMedicalRecord(string username)
         {
-            MedicalRecord medicalRecord = this.medicalRecordService.FindPatientMedicalRecordByUsername(this.patientGateway.GetPatientByUsername(username));
+            domainEventService.Save(new URLEvent("/api/medicalRecord/activatePatientMedicalRecord/" + username, "GET"));
+            MedicalRecord medicalRecord = this.medicalRecordService.FindPatientMedicalRecord(this.patientGateway.GetPatientByUsername(username));
             if (medicalRecord == null)
             {
                 return BadRequest();

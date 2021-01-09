@@ -1,8 +1,7 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 using UserMicroservice.Domain;
 using UserMicroservice.Dto;
@@ -18,17 +17,20 @@ namespace UserMicroservice.Controllers
     {
         private IPatientService patientService;
         private IAppointmentGateway appointmentGateway;
+        private IDomainEventService domainEventService;
 
-        public PatientController(IPatientService patientService, IAppointmentGateway appointmentGateway) {
+        public PatientController(IPatientService patientService, IAppointmentGateway appointmentGateway, IDomainEventService domainEventService) {
      
             this.patientService = patientService;
             this.appointmentGateway = appointmentGateway;
+            this.domainEventService = domainEventService;
         }
 
         
         [HttpGet()]       // GET /api/patient
         public IActionResult GetAllPatients(int patientId)
         {
+            domainEventService.Save(new URLEvent("/api/patient", "GET"));
             List<PatientDto> result = new List<PatientDto>();
             patientService.GetAllEntities().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient,
                 appointmentGateway.CountCancelledAppointmentsForPatient(patient.Id))));
@@ -38,6 +40,7 @@ namespace UserMicroservice.Controllers
         [HttpGet("getMaliciousPatients")]       // GET /api/patient/getMaliciousPatients
         public IActionResult GetMaliciousPatients()
         {
+            domainEventService.Save(new URLEvent("/api/patient/getMaliciousPatients", "GET"));
             List<PatientDto> result = new List<PatientDto>();
             patientService.GetMaliciousPatients().ToList().ForEach(patient => result.Add(PatientMapper.PatientToPatientDto(patient,
                 appointmentGateway.CountCancelledAppointmentsForPatient(patient.Id))));
@@ -47,12 +50,14 @@ namespace UserMicroservice.Controllers
         [HttpPut("blockMaliciousPatient/{patientId}")]       // PUT /api/patient/blockMaliciousPatient/{patientId}
         public IActionResult BlockMaliciousPatient(int patientId)
         {
+            domainEventService.Save(new URLEvent("/api/patient/blockMaliciousPatient/" + patientId, "PUT"));
             return Ok(patientService.BlockMaliciousPatient(patientId));
         }
 
         [HttpGet("getPatient/{patientId}")]    // GET /api/patient/getPatient/{patientId}
         public IActionResult GetPatientById(int patientId)
         {
+            domainEventService.Save(new URLEvent("/api/patient/getPatient/" + patientId, "GET"));
             Patient patient = patientService.GetEntity(patientId);
             if (patient == null)
             {
@@ -75,12 +80,15 @@ namespace UserMicroservice.Controllers
         [HttpPut("setMaliciousPatient/{patientId}")]       // PUT /api/patient/setMaliciousPatient/{patientId}
         public IActionResult SetMaliciousPatient(int patientId)
         {
+            domainEventService.Save(new URLEvent("/api/patient/setMaliciousPatient/" + patientId, "PUT"));
             return Ok(patientService.SetMaliciousPatient(patientId));
         }
 
         [HttpGet("doesUsernameExist/{username}")]    // GET /api/patient/doesUsernameExist/{username}
         public IActionResult DoesUsernameExist(string username)
         {
+            domainEventService.Save(new URLEvent("/api/patient/doesUsernameExist/" +  username, "GET"));
+
             return Ok(patientService.DoesUsernameExist(username));
         }
 

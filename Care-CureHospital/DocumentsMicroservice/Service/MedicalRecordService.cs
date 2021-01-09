@@ -32,7 +32,7 @@ namespace DocumentsMicroservice.Service
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID);
         }
 
-        public MedicalRecord FindPatientMedicalRecordByUsername(Patient patient)
+        public MedicalRecord FindPatientMedicalRecord(Patient patient)
         {
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId.Equals(patient.Id));
         }
