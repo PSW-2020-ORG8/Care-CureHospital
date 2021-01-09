@@ -295,14 +295,7 @@
                 }
             ],
             "UpstreamPathTemplate": "/gateway/medicalRecord",
-            "UpstreamHttpMethod": [ "POST" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
-            }
+            "UpstreamHttpMethod": [ "POST" ]
         },
         {
             "DownstreamPathTemplate": "/api/medicalRecord/getForPatient/{id}",

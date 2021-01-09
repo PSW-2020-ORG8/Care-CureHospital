@@ -87,7 +87,7 @@ Vue.component("userLogin", {
                         this.$router.push({ name: 'patientMainPage' })
                     }
                 }).catch(error => {
-                    if (error.response.status === 403) {
+                    if (error.response.status === 401) {
                         toast('Neuspešno korisničko ime ili lozinka')
                     }
                 });

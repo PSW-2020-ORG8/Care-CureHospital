@@ -42,9 +42,9 @@ namespace DocumentsMicroservice.Service
             UpdateEntity(medicalRecord);
         }
 
-        public MedicalRecord CreatePatientMedicalRecord(MailAddress email, MedicalRecord medicalRecord)
+        public MedicalRecord CreatePatientMedicalRecord(MailAddress email, MedicalRecord medicalRecord, string username)
         {
-            emailVerificationService.SendVerificationEmailLink(email, medicalRecord.Patient.Username);
+            emailVerificationService.SendVerificationEmailLink(email, username);
             return AddEntity(medicalRecord);
         }
 

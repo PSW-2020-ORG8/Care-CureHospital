@@ -48,8 +48,8 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         {
             var retVal = new List<object[]>();
             retVal.Add(new object[] { new AuthenticateDto("pera", "123") , HttpStatusCode.OK });
-            retVal.Add(new object[] { new AuthenticateDto("pera", "321") , HttpStatusCode.Forbidden });
-            retVal.Add(new object[] { new AuthenticateDto("minja", "123") , HttpStatusCode.Forbidden });
+            retVal.Add(new object[] { new AuthenticateDto("pera", "321") , HttpStatusCode.Unauthorized });
+            retVal.Add(new object[] { new AuthenticateDto("minja", "123") , HttpStatusCode.Unauthorized });
             return retVal;
         }
 
@@ -57,8 +57,8 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         {
             var retVal = new List<object[]>();
             retVal.Add(new object[] { new AuthenticateDto("admin1", "admin1"), HttpStatusCode.OK });
-            retVal.Add(new object[] { new AuthenticateDto("admin1", "321"), HttpStatusCode.Forbidden });
-            retVal.Add(new object[] { new AuthenticateDto("minja", "admin1"), HttpStatusCode.Forbidden });
+            retVal.Add(new object[] { new AuthenticateDto("admin1", "321"), HttpStatusCode.Unauthorized });
+            retVal.Add(new object[] { new AuthenticateDto("minja", "admin1"), HttpStatusCode.Unauthorized });
             return retVal;
         }
     }

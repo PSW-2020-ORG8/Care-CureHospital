@@ -30,7 +30,7 @@ namespace DocumentsMicroservice.Controllers
             {
                 return BadRequest("The data which were entered are incorrect!");
             }
-            this.medicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto));
+            this.medicalRecordService.CreatePatientMedicalRecord(new MailAddress(dto.Patient.EMail), MedicalRecordMapper.MedicalRecordDtoToMedicalRecord(dto), dto.Patient.Username);
             this.medicalRecordService.WritePatientProfilePictureInFile(dto.Patient.Username, dto.ProfilePicture);
             return Ok(200);
         }
@@ -58,7 +58,7 @@ namespace DocumentsMicroservice.Controllers
                 return BadRequest();
             }
             this.medicalRecordService.ActivatePatientMedicalRecord(medicalRecord.Id);
-            return Redirect("http://localhost:60370/index.html#/");
+            return Redirect("http://localhost:60370/index.html#/userLogin");
         }
     }
 }

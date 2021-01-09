@@ -34,7 +34,7 @@ namespace WebAppPatient.Controllers
             var user = App.Instance().UserService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(_appSettings.Secret));
             if (user == null)
             {
-                return Forbid();
+                return Unauthorized();
             }
             return Ok(user);
         }
