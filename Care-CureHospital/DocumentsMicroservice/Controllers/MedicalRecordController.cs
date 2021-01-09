@@ -52,7 +52,7 @@ namespace DocumentsMicroservice.Controllers
         [HttpGet("activatePatientMedicalRecord/{username}")]       // GET /api/medicalRecord/activatePatientMedicalRecord/{username}
         public IActionResult ActivatePatientMedicalRecord(string username)
         {
-            MedicalRecord medicalRecord = this.medicalRecordService.FindPatientMedicalRecordByUsername(username);
+            MedicalRecord medicalRecord = this.medicalRecordService.FindPatientMedicalRecordByUsername(this.patientGateway.GetPatientByUsername(username));
             if (medicalRecord == null)
             {
                 return BadRequest();

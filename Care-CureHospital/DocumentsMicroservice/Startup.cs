@@ -34,7 +34,7 @@ namespace DocumentsMicroservice
             services.AddSingleton<IEmailVerificationService, EmailVerificationService>(service => new EmailVerificationService());
             services.AddSingleton<IMedicalExaminationReportService, MedicalExaminationReportService>(service => new MedicalExaminationReportService(new MedicalExaminationReportRepository(new MySQLStream<MedicalExaminationReport>()), new MedicalExaminationGateway()));
             services.AddSingleton<IPrescriptionService, PrescriptionService>(service => new PrescriptionService(new PrescriptionRepository(new MySQLStream<Prescription>()), new MedicalExaminationGateway()));
-            services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>()), new EmailVerificationService()));
+            services.AddSingleton<IMedicalRecordService, MedicalRecordService>(service => new MedicalRecordService(new MedicalRecordRepository(new MySQLStream<MedicalRecord>()), new EmailVerificationService(), new PatientGateway()));
 
             services.AddControllers();
             services.AddControllersWithViews()

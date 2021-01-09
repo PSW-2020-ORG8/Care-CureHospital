@@ -1,4 +1,5 @@
 ﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace DocumentsMicroservice.Service
     {
         public IMedicalRecordRepository medicalRecordRepository;
         public IEmailVerificationService emailVerificationService;
+        public IPatientGateway patientGateway;
 
-        public MedicalRecordService(IMedicalRecordRepository medicalRecordRepository, IEmailVerificationService emailVerificationService)
+        public MedicalRecordService(IMedicalRecordRepository medicalRecordRepository, IEmailVerificationService emailVerificationService, IPatientGateway patientGateway)
         {
             this.medicalRecordRepository = medicalRecordRepository;
             this.emailVerificationService = emailVerificationService;
+            this.patientGateway = patientGateway;
         }
 
         public MedicalRecordService(IMedicalRecordRepository medicalRecordRepository)
@@ -29,9 +32,9 @@ namespace DocumentsMicroservice.Service
             return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId == patientID);
         }
 
-        public MedicalRecord FindPatientMedicalRecordByUsername(string username)
+        public MedicalRecord FindPatientMedicalRecordByUsername(Patient patient)
         {
-            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.Patient.Username.Equals(username));
+            return medicalRecordRepository.GetAllEntities().ToList().Find(medicalRecord => medicalRecord.PatientId.Equals(patient.Id));
         }
 
         /// <summary> This method activates patient medical record after click on email verification link. </summary>
@@ -45,6 +48,7 @@ namespace DocumentsMicroservice.Service
         public MedicalRecord CreatePatientMedicalRecord(MailAddress email, MedicalRecord medicalRecord, string username)
         {
             emailVerificationService.SendVerificationEmailLink(email, username);
+            medicalRecord.PatientId = this.patientGateway.AddPateint(medicalRecord.Patient).Id;
             return AddEntity(medicalRecord);
         }
 

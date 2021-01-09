@@ -61,6 +61,17 @@ namespace UserMicroservice.Controllers
             return Ok(patient);
         }
 
+        [HttpGet("getPatientByUsername/{username}")]    // GET /api/patient/getPatientByUsername/{username}
+        public IActionResult GetPatientByUsername(string username)
+        {
+            Patient patient = patientService.GetPatientByUsername(username);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
+        }
+
         [HttpPut("setMaliciousPatient/{patientId}")]       // PUT /api/patient/setMaliciousPatient/{patientId}
         public IActionResult SetMaliciousPatient(int patientId)
         {
@@ -71,6 +82,12 @@ namespace UserMicroservice.Controllers
         public IActionResult DoesUsernameExist(string username)
         {
             return Ok(patientService.DoesUsernameExist(username));
+        }
+
+        [HttpPost("addPateint")]    // GET /api/patient/addPateint
+        public IActionResult AddPatient(Patient patient)
+        {
+            return Ok(patientService.AddEntity(patient));
         }
     }
 }

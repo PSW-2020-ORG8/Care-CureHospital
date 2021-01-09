@@ -454,7 +454,7 @@ Vue.component("patientRegistration", {
                     }
 
                     axios.post('gateway/medicalRecord', {
-                        "Patient" : {"Username" : this.usernameInputField, "Password" : this.passwordInputField, "GuestAccount" : false,
+                        "Patient" : {"Role" : "Patient", "Username" : this.usernameInputField, "Password" : this.passwordInputField, "GuestAccount" : false,
                         "Name" : this.nameInputField , "ParentName" : this.parentNameInputField, "Surname" : this.surnameInputField,
                         "Jmbg" : this.jmbgInputField, "IdentityCard" : this.personalCardInputField, "HealthInsuranceCard" : this.healthBookletNumberInputField, 
                         "BloodGroup" : this.bloodGroupInputField, "DateOfBirth" : madeDateOfBirth, "Gender" : this.genderSelectField, "ContactNumber" : this.contactNumberField, "EMail" : this.emailField, 

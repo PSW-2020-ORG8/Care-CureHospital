@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Gateway
@@ -32,6 +33,37 @@ namespace DocumentsMicroservice.Gateway
             Patient patient = null;
             using HttpClient client = new HttpClient();
             var task = client.GetAsync(GetPatientService() + "/api/patient/getPatient/" + patientId)
+                .ContinueWith((taskWithResponse) =>
+                {
+                    var message = taskWithResponse.Result;
+                    var json = message.Content.ReadAsStringAsync();
+                    json.Wait();
+                    patient = JsonConvert.DeserializeObject<Patient>(json.Result);
+                });
+            task.Wait();
+            return patient;
+        }
+
+        public Patient AddPateint(Patient patient)
+        {
+            using HttpClient client = new HttpClient();
+            var task = client.PostAsync(GetPatientService() + "/api/patient/addPateint", new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json"))
+                .ContinueWith((taskWithResponse) =>
+                {
+                    var message = taskWithResponse.Result;
+                    var json = message.Content.ReadAsStringAsync();
+                    json.Wait();
+                    patient = JsonConvert.DeserializeObject<Patient>(json.Result);
+                });
+            task.Wait();
+            return patient;
+        }
+
+        public Patient GetPatientByUsername(string username)
+        {
+            Patient patient = null;
+            using HttpClient client = new HttpClient();
+            var task = client.GetAsync(GetPatientService() + "/api/patient/getPatientByUsername/" + username)
                 .ContinueWith((taskWithResponse) =>
                 {
                     var message = taskWithResponse.Result;
