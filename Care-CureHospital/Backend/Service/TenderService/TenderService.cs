@@ -4,12 +4,19 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Backend.Service.TenderService
 {
     public class TenderService : IService<Tender, int>
     {
+        string hospital = "hospitalssystem@gmail.com";
+        string hospitalPassword = "bolnica123";
+        string pharmacy = "pharmacysistem@gmail.com";
+        string benu = "benupharmacy@gmail.com";
+        Offer offer = new Offer();
+        Tender tender = new Tender();
+
         public ITenderRepository tenderRepository;
 
         public IEnumerable<Tender> GetActiveTenders()
@@ -66,12 +73,49 @@ namespace Backend.Service.TenderService
         public Tender CloseTender(int tenderId)
         {
             Tender finishedTender = GetEntity(tenderId);
-            if (finishedTender.Active == true)
+            if (finishedTender.Active == true && finishedTender.ChoosenOffer == true)
             {
                 finishedTender.Active = false;
             }
+            else
+            {
+                finishedTender.Active = true;
+            }
+            NotTenderWinner();
             UpdateEntity(finishedTender);
             return finishedTender;
+        }
+
+        public void NotTenderWinner()
+        {
+            try
+            {
+                Console.WriteLine("E-mail with information about closing tender is sending!");
+                MailMessage email = new MailMessage();
+                SmtpClient smpt = new SmtpClient("smtp.gmail.com");
+
+                email.From = new MailAddress(hospital);
+
+                if(offer.Id == 1) { 
+                    email.To.Add(pharmacy);
+                }
+                else
+                {
+                    email.To.Add(benu);
+                }
+           
+                email.Subject = ("Tender is closed!");
+                email.Body = "We are glad you took part in our tender!";
+
+                smpt.Port = 587;
+                smpt.Credentials = new System.Net.NetworkCredential(hospital, hospitalPassword);
+                smpt.EnableSsl = true;
+                smpt.Send(email);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

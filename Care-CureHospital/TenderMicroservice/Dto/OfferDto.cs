@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TenderMicroservice.Dto
+﻿namespace TenderMicroservice.Dto
 {
     public class OfferDto
     {
@@ -19,6 +14,7 @@ namespace TenderMicroservice.Dto
         public string PharmacyName { get; set; }
         public string PharmacyEmail { get; set; }
 
+        public bool ActiveTender { get; set; }
         public OfferDto() { }
     }
 }

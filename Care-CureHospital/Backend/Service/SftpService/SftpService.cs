@@ -43,7 +43,7 @@ namespace Backend.Service.SftpService
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine(ex);
             }
         }
     }

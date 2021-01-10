@@ -10,7 +10,7 @@ namespace UnitTests.IntegrationAdaptersUnitTests
 {
     public class TenderTest
     {
-        [Fact]
+       /* [Fact]
         public void Get_tenders()
         {
             TenderService tenderService = new TenderService(CreateStubRepository());
@@ -84,6 +84,6 @@ namespace UnitTests.IntegrationAdaptersUnitTests
             stubRepository.Setup(tender => tender.AddEntity(It.IsAny<Tender>())).Returns(new Tender(1, "Vitamin B", new DateTime(2020, 1, 5, 8, 30, 0), new DateTime(2020, 2, 5, 8, 30, 0), false));
 
             return stubRepository.Object;
-        }
+        }*/
     }
 }

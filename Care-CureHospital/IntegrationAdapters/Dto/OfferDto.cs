@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace IntegrationAdapters.Dto
+﻿namespace IntegrationAdapters.Dto
 {
     public class OfferDto
     {
@@ -18,6 +13,8 @@ namespace IntegrationAdapters.Dto
         public string Comment { get; set; }
         public string PharmacyName { get; set; }
         public string PharmacyEmail { get;  set; }
+
+        public bool ActiveTender { get; set; }
 
         public OfferDto() { }
     }

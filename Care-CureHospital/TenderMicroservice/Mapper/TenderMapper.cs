@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TenderMicroservice.Domain;
+﻿using TenderMicroservice.Domain;
 using TenderMicroservice.Dto;
 
 namespace TenderMicroservice.Mapper
@@ -17,9 +13,8 @@ namespace TenderMicroservice.Mapper
             dto.StartDate = tender.StartDate.ToString("dd.MM.yyyy. HH:mm");
             dto.EndDate = tender.EndDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Active = tender.Active;
+            dto.ChoosenOffer = tender.ChoosenOffer;
             return dto;
         }
-
-
     }
 }

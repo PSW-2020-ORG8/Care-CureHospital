@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TenderMicroservice.Domain;
+﻿using TenderMicroservice.Domain;
 using TenderMicroservice.Repository.MySQL;
 using TenderMicroservice.Repository.MySQL.Stream;
 

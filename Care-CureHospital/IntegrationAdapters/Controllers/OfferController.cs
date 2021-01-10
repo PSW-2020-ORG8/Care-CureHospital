@@ -46,11 +46,19 @@ namespace IntegrationAdapters.Controllers
             return Ok();
         }
 
-        [HttpGet("winner")]
-        public IActionResult ChooseTender()
+        /* [HttpGet("winner")]
+         public IActionResult ChooseTender(OfferDto dto)
+         {
+             //App.Instance().EmailService.TenderWinner();
+             Offer offer = OfferMapper.OfferDtoToOffer(dto);
+             App.Instance().OfferService.ChooseOffer(offer);
+             return Ok();
+         }
+        */
+        [HttpPut("chooseO/{id}")]
+        public IActionResult ChooseOffer(int id)
         {
-            App.Instance().EmailService.TenderWinner();
-            return Ok();
+            return Ok(App.Instance().OfferService.ChooseOffer(id));
         }
 
         [HttpGet("notWinner")]

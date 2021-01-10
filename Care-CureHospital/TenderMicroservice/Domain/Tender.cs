@@ -15,18 +15,21 @@ namespace TenderMicroservice.Domain
 
         public bool Active { get; set; }
 
+        public bool ChoosenOffer { get; set; }
+
         public Tender()
         {
 
         }
 
-        public Tender(int id, String medicamentName, DateTime startDate, DateTime endDate, bool active)
+        public Tender(int id, String medicamentName, DateTime startDate, DateTime endDate, bool active, bool choosenOffer)
         {
             Id = id;
             MedicamentName = medicamentName;
             StartDate = startDate;
             EndDate = endDate;
             Active = active;
+            ChoosenOffer = choosenOffer;
         }
 
         public int GetId()
