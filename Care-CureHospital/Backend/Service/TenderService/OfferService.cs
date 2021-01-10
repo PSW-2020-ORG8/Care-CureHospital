@@ -41,12 +41,12 @@ namespace Backend.Service.TenderService
 
         public Offer ChooseOffer(int id)
         {
+            TenderWinner();
             Offer choosen = GetEntity(id);
             if (choosen.Choosen == false)
             {
                 choosen.Choosen = true;
             }
-            TenderWinner();
             UpdateEntity(choosen);
             return choosen;
         }

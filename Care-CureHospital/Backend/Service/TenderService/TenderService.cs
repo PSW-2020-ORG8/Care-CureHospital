@@ -4,10 +4,8 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
-=======
 using System.Net.Mail;
->>>>>>> b10116143c5695dc36a82c8a5e93d7760c23e26a
+
 
 namespace Backend.Service.TenderService
 {

@@ -15,6 +15,7 @@ export class OfferComponent implements OnInit {
 
   @Input() off:Offer;
   
+  id:number;
   pharmacyName:string;
   pharmacyEmail:string;
   price:number;
@@ -24,6 +25,7 @@ export class OfferComponent implements OnInit {
   OfferList:any=[];
 
   ngOnInit(): void {
+    this.id = this.off.id;
     this.pharmacyName = this.off.pharmacyName;
     this.pharmacyEmail = this.off.pharmacyEmail;
     this.price = this.off.price;
@@ -33,6 +35,7 @@ export class OfferComponent implements OnInit {
   
   addOffer(){
     var val = {
+      id:this.OfferList.id,
       pharmacyName:this.OfferList.pharmacyName,
       pharmacyEmail:this.OfferList.pharmacyEmail,
       price:this.OfferList.price,

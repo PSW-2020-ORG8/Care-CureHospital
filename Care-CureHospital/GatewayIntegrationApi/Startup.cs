@@ -24,6 +24,14 @@ namespace GatewayIntegrationApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins(Environment.GetEnvironmentVariable("Frontend_host"))
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -64,7 +72,7 @@ namespace GatewayIntegrationApi
 
             app.UseAuthorization();
             app.UseAuthentication();
-
+            app.UseCors("CorsPolicy");
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>

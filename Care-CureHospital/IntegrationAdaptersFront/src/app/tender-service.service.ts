@@ -11,9 +11,9 @@ import { catchError } from 'rxjs/operators';
 
 export class TenderServiceService {
 
- readonly APIUrl = "http://localhost:50002/api";
+//readonly APIUrl = "http://localhost:50002/api";
 
- //readonly APIUrl = "http://localhost:60370/gateway";
+ readonly APIUrl = "http://localhost:61793/gateway";
 
 
   constructor(private http:HttpClient) {
@@ -33,8 +33,8 @@ export class TenderServiceService {
     return this.http.get<Tender[]>(this.APIUrl+'/tender/getActiveTender');
   }
 
-  chooseTender(){
-    return this.http.get<any[]>(this.APIUrl+'/offer/winner');
+  chooseTender(id:number):Observable<Offer>{
+    return this.http.put<Offer>(this.APIUrl+'/offer/chooseO/${id}', id);
   }
 
   closeTender(id:number):Observable<Tender>{

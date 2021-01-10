@@ -113,7 +113,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/offer/winner",
+      "DownstreamPathTemplate": "/api/offer/chooseO/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -121,8 +121,8 @@
           "Port": 54425
         }
       ],
-      "UpstreamPathTemplate": "/gateway/offer/winner",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamPathTemplate": "/gateway/offer/chooseO/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
     },
     {
       "DownstreamPathTemplate": "/api/offer/notWinner",

@@ -42,11 +42,6 @@ namespace Backend.Service.EmailService
             }
         }
 
-        public Tender GetEntity(int id)
-        {
-            return tenderRepository.GetEntity(id);
-        }
-
         public Tender CloseTender(int tenderId)
         {
             Tender finishedTender = GetEntity(tenderId);
@@ -59,12 +54,12 @@ namespace Backend.Service.EmailService
             return finishedTender;
         }
 
-        public void UpdateEntity(Tender entity)
+        private void TenderWinner()
         {
-            tenderRepository.UpdateEntity(entity);
+            throw new NotImplementedException();
         }
 
-        public void TenderWinner()
+        public void TenderWinner(Offer entity)
 
         {
             try
@@ -130,21 +125,11 @@ namespace Backend.Service.EmailService
             tenderRepository.UpdateEntity(entity);
         }
 
-        public Tender CloseTender(int tenderId)
-        {
-            Tender finishedTender = GetEntity(tenderId);
-            if (finishedTender.Active == true)
-            {
-                finishedTender.Active = false;
-            }
-            UpdateEntity(finishedTender);
-            return finishedTender;
-        }
-
         public Tender GetEntity(int id)
         {
             return tenderRepository.GetEntity(id);
 		}
+        
         public IEnumerable<Tender> GetAllEntities()
         {
             throw new NotImplementedException();

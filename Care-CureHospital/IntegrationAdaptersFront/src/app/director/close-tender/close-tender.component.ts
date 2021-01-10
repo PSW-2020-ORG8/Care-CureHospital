@@ -28,13 +28,13 @@ export class CloseTenderComponent implements OnInit {
     this.reresh();
   }
   
-  /*closeTender(id:number){
+  closeTender(id:number){
     console.log(id);
     this.tenderService.closeTender(id).subscribe(data =>{
        console.log(data);
      })
      alert("Successfully closed!");
-   }*/
+   }
 
    reresh(){
     this.tenderService.getActiveTender().subscribe((data: Tender[]) => {

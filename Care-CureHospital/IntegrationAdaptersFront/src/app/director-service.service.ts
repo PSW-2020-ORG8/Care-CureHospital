@@ -11,9 +11,9 @@ import { Offer } from './models/Offer';
 
 export class DirectorServiceService {
 
-  readonly APIUrl = "http://localhost:50002/api";
+  //readonly APIUrl = "http://localhost:50002/api";
 
-  //readonly APIUrl = "http://localhost:60370/gateway";
+  readonly APIUrl = "http://localhost:61793/gateway";
 
 
   constructor(private http:HttpClient) { this.getReportList() }

@@ -11,6 +11,7 @@ export class ActiveTenderComponent implements OnInit {
 
   constructor(private tenderService:TenderServiceService) { }
 
+  id:number;
   medicamentId:number;
   price:number;
   quantity:number;
@@ -33,12 +34,12 @@ export class ActiveTenderComponent implements OnInit {
     })
   }
 
-  choose(){
-    this.tenderService.chooseTender().subscribe(data=>{
-      console.log("")
+  choose(id:number){
+    alert(id)
+    this.tenderService.chooseTender(id).subscribe(data=>{
+      console.log(data)
+    
     })
-   // this.ModalTitle="Close tender";
-    //this.ActivateAddEditClose=true;
   }
 
   closeClick(){

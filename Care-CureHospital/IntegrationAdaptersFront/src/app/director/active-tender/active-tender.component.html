@@ -1,6 +1,7 @@
 <table class="table table-striped" matTableExporter #exporter="matTableExporter">
     <thead>
         <tr>
+          <th id="Id">Id</th>
           <th id="TenderId">TenderId</th>
           <th id="PharmacyName">PharmacyName</th>
           <th id="Price">Price</th>
@@ -10,13 +11,13 @@
     </thead>
     <tbody>
        <tr *ngFor="let dataItem of OfferList">
+           <td>{{dataItem.id}}</td>
             <td>{{dataItem.tenderId}}</td>
             <td>{{dataItem.pharmacyName}}</td>
             <td>{{dataItem.price}}</td>
             <td>{{dataItem.quantity}}</td>
             <td>{{dataItem.comment}}</td>
-            <button type="button" (click)="choose()" mat-raised-button data-toggle="modal" data-target="#exampleModal"
-             data-backdrop='static' data-keybord="false"class="btn btn-primary float-right m-2">Choose</button>
+            <button type="button" (click)="choose(dataItem.id)" class="btn btn-primary float-right m-2">Choose</button>
         </tr>
     </tbody>
 </table>
