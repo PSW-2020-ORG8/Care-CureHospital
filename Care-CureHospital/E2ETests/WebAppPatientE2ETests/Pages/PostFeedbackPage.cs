@@ -54,9 +54,14 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             textField.SendKeys(text);
         }
 
-        public void EnablePublishedCheckbox(string status)
+        public void EnablePublishedCheckbox()
         {
-            publishedCheckbox.SendKeys(status);
+            publishedCheckbox.Click();
+        }
+
+        public void ResolveAlertDialog()
+        {
+            driver.SwitchTo().Alert().Accept();
         }
 
         public void WaitForAlertDialog()
