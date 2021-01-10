@@ -23,7 +23,6 @@ namespace TenderMicroservice.Domain
 
         public Offer()
         {
-
         }
 
         public Offer(int id, int tenderId, string pharmacyName, string pharmacyEmail, double price, int quantity, string comment, bool activeTender)

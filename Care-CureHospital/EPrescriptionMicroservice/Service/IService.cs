@@ -9,12 +9,6 @@ namespace EPrescriptionMicroservice.Service
 
         IEnumerable<E> GetAllEntities();
 
-        IEnumerable<E> GetEPrescriptionsForPatient(int patientID);
-
-        IEnumerable<E> FindEPrescriptionsForDateParameter(int patientId, DateTime date);
-
-        IEnumerable<E> FindEPrescriptionsForCommentParameter(int patientID, string comment);
-
         E AddEntity(E entity);
 
         void UpdateEntity(E entity);

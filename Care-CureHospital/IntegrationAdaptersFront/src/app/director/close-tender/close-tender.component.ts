@@ -19,6 +19,8 @@ export class CloseTenderComponent implements OnInit {
   endDate : Date;
   active: boolean;
 
+  ActivateAddEditRepComp:boolean=false;
+
   TenderList: Tender[];
   //TenderList:any=[];
 
@@ -26,19 +28,27 @@ export class CloseTenderComponent implements OnInit {
     this.reresh();
   }
   
-  closeTender(id:number){
+  /*closeTender(id:number){
     console.log(id);
     this.tenderService.closeTender(id).subscribe(data =>{
        console.log(data);
      })
      alert("Successfully closed!");
-   }
+   }*/
 
    reresh(){
     this.tenderService.getActiveTender().subscribe((data: Tender[]) => {
       console.log(data);
       this.TenderList = data;
     })
+   }
+
+   NoClose(){
+   
+   }
+
+   YesClose(){
+    
    }
 
 }

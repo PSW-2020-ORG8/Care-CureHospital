@@ -20,7 +20,7 @@ namespace TenderMicroservice.Controllers
             this.emailService = emailService;
         }
 
-        [HttpGet] //tender
+        [HttpGet] 
         public IActionResult PublishTender()
         {
            this.emailService.SendNotification();
@@ -43,7 +43,7 @@ namespace TenderMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet("allTender")] //allTender
+        [HttpGet("allTender")] 
         public IActionResult GetAllTenders()
         {
             List<TenderDto> result = new List<TenderDto>();

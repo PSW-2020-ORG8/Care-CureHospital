@@ -22,7 +22,6 @@ namespace ReportMicroservice.Controllers
         [HttpGet]   //GET /api/report
         public IActionResult GetAllReports()
         {
-            //return Ok();
             List<ReportDto> result = new List<ReportDto>();
             this.reportService.GetAllEntities().ToList().ForEach(report => result.Add(ReportMapper.ReportToReportDto(report)));
             return Ok(result);

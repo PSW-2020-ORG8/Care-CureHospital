@@ -16,6 +16,10 @@ export class ActiveTenderComponent implements OnInit {
   quantity:number;
   comment:string;
 
+  ModalTitle:string;
+  ActivateAddEditClose:boolean=false;
+  clo:Offer;
+
   OfferList: Offer[];
 
   ngOnInit(): void {
@@ -33,6 +37,11 @@ export class ActiveTenderComponent implements OnInit {
     this.tenderService.chooseTender().subscribe(data=>{
       console.log("")
     })
-    alert("Successfully choosen!");
+   // this.ModalTitle="Close tender";
+    //this.ActivateAddEditClose=true;
+  }
+
+  closeClick(){
+
   }
 }

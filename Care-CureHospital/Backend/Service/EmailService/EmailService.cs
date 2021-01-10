@@ -40,7 +40,7 @@ namespace Backend.Service.EmailService
             }
         }
 
-        public void TenderWinner()
+        public void TenderWinner(Offer entity)
         {
             try
             {
@@ -49,14 +49,18 @@ namespace Backend.Service.EmailService
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com");
 
                 email.From = new MailAddress(hospital);
-                if (offer.PharmacyName == "Jankovic")
+                /*if (offer.PharmacyName == "Jankovic")
                 {
                     email.To.Add(pharmacy);
+                  //CloseTender(offer.TenderId);
+                    entity.ActiveTender = false;
                 }
                 else
-                {
+                {*/
                     email.To.Add(benu);
-                }
+                    CloseTender(offer.TenderId);
+                    entity.ActiveTender = false;
+                //}
                 email.Subject = ("You are tender winner! Congratulations!");
                 email.Body = "We look forward to your work and successful cooperation.";
 
@@ -93,6 +97,27 @@ namespace Backend.Service.EmailService
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        public void UpdateEntity(Tender entity)
+        {
+            tenderRepository.UpdateEntity(entity);
+        }
+
+        public Tender CloseTender(int tenderId)
+        {
+            Tender finishedTender = GetEntity(tenderId);
+            if (finishedTender.Active == true)
+            {
+                finishedTender.Active = false;
+            }
+            UpdateEntity(finishedTender);
+            return finishedTender;
+        }
+
+        public Tender GetEntity(int id)
+        {
+            return tenderRepository.GetEntity(id);
         }
     }
 }

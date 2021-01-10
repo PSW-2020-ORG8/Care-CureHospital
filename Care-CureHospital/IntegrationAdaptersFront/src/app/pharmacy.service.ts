@@ -9,8 +9,7 @@ import { Medicament } from './models/Medicament';
   })
 
   export class PharmacyService {
-    //readonly APIUrl = "http://localhost:51492/api";
-    readonly APIUrl = "http://localhost:60370/gateway";
+    readonly APIUrl = "http://localhost:61793/gateway";
 
     constructor(private http: HttpClient) { 
       this.generateMedicamentStock();

@@ -17,7 +17,6 @@ namespace TenderMicroservice.Domain
 
         public Tender()
         {
-
         }
 
         public Tender(int id, String medicamentName, DateTime startDate, DateTime endDate, bool active)

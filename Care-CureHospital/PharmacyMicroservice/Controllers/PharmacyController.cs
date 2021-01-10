@@ -3,7 +3,6 @@ using PharmacyMicroservice.Domain;
 using PharmacyMicroservice.Dto;
 using PharmacyMicroservice.Mapper;
 using PharmacyMicroservice.Service;
-using PharmacyMicroservice.Validation;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,11 +23,6 @@ namespace PharmacyMicroservice.Controllers
         [Route("addPharmacy")]
         public IActionResult AddPharmacy([FromBody] PharmaciesDto dto)
         {
-            PharmacyValidation validation = new PharmacyValidation();
-            if (!validation.ValidatePharmacy(dto))
-            {
-                return BadRequest("The data which were entered are incorrect!");
-            }
             Pharmacies pharmacy = PharmacyMapper.PharmacyDtoToPharmacy(dto);
             this.pharmacyService.AddEntity(pharmacy);
             return Ok();

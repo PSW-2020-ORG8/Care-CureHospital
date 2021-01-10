@@ -95,7 +95,7 @@ namespace EPrescriptionMicroservice.Service
         public void SendPrescriptionSftp()
         {
             String prescriptionFile = "Files\\Prescription_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-            System.IO.File.WriteAllText(prescriptionFile, "Prescription:");
+            System.IO.File.WriteAllText(prescriptionFile, "EPrescription:");
             try
             {
                 sftpService.UploadFile(prescriptionFile);
@@ -104,21 +104,6 @@ namespace EPrescriptionMicroservice.Service
             {
                 Console.WriteLine(e);
             }
-        }
-
-        IEnumerable<EPrescription> IService<EPrescription, int>.GetEPrescriptionsForPatient(int patientID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<EPrescription> FindEPrescriptionsForDateParameter(int patientId, DateTime date)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<EPrescription> IService<EPrescription, int>.FindEPrescriptionsForCommentParameter(int patientID, string comment)
-        {
-            throw new NotImplementedException();
         }
     }
 }

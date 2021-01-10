@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
-using System.Net;
 
 namespace Backend.Service.RequestServices
 {
@@ -16,15 +15,6 @@ namespace Backend.Service.RequestServices
             var result = response.Content;
             string jsonRes = JsonConvert.SerializeObject(result);
             return jsonRes;
-            //return result;
-        }
-
-       /* public void SendOrder(String order)
-        {
-            WebClient client = new WebClient();
-            client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadString(new Uri(@"http://localhost:8080/order/urgentHttp", order));
-            client.Dispose();
-        }*/
+        }    
     }
 }

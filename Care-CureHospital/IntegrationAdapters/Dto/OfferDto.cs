@@ -14,11 +14,9 @@ namespace IntegrationAdapters.Dto
         public double Price { get; set; }
 
         public int Quantity { get; set; }
-
         public string Comment { get; set; }
         public string PharmacyName { get; set; }
         public string PharmacyEmail { get;  set; }
-
         public OfferDto() { }
     }
 }

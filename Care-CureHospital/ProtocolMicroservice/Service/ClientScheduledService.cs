@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProtocolMicroservice.Service
 {
-    public class ClientScheduledService //: IHostedService
+    public class ClientScheduledService 
     {
         private Channel channel;
         private SpringGrpcService.SpringGrpcServiceClient client;

@@ -14,14 +14,16 @@ namespace TenderMicroservice.Controllers
     {
         private IOfferService offerService;
         private IEmailService emailService;
+        private ITenderService tenderService;
 
-        public OfferController(IOfferService offerService, IEmailService emailService)
+        public OfferController(IOfferService offerService, IEmailService emailService, ITenderService tenderService)
         {
             this.offerService = offerService;
             this.emailService = emailService;
+            this.tenderService = tenderService;
         }
 
-        [HttpGet()] //api/offer
+        [HttpGet()] 
         public IActionResult GetAllOffers()
         {
             List<OfferDto> result = new List<OfferDto>();

@@ -47,9 +47,9 @@ namespace IntegrationAdapters.Controllers
         }
 
         [HttpGet("winner")]
-        public IActionResult ChooseTender()
+        public IActionResult ChooseTender(Offer entity)
         {
-            App.Instance().EmailService.TenderWinner();
+            App.Instance().EmailService.TenderWinner(entity);
             return Ok();
         }
 
@@ -59,6 +59,5 @@ namespace IntegrationAdapters.Controllers
             App.Instance().EmailService.NotTenderWinner();
             return Ok();
         }
-
     }
 }

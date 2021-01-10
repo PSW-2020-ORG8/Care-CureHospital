@@ -31,7 +31,7 @@ namespace ReportMicroservice
             services.AddDbContext<ReportDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -62,6 +62,7 @@ namespace ReportMicroservice
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

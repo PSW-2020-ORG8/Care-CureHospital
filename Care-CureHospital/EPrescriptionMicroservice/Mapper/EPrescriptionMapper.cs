@@ -1,9 +1,5 @@
 ﻿using EPrescriptionMicroservice.Domain;
 using EPrescriptionMicroservice.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EPrescriptionMicroservice.Mapper
 {

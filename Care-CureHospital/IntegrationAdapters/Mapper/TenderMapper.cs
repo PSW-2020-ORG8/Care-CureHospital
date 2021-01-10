@@ -15,7 +15,5 @@ namespace IntegrationAdapters.Mapper
             dto.Active = tender.Active;
             return dto;
         }
-
-       
     }
 }
