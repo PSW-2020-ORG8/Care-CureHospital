@@ -7,7 +7,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class PatientHomePage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/patientMainPage";
+        public const string URI = "http://localhost:60370/index.html#/patientMainPage";
         private IWebElement appointmetsLinkElement => driver.FindElement(By.Id("appointments-link"));
         private IWebElement feedbacksLinkElement => driver.FindElement(By.Id("feedbacks-link"));
 

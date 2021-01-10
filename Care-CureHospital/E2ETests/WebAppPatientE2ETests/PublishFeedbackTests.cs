@@ -53,7 +53,7 @@ namespace E2ETests.WebAppPatientE2ETests
             publishedFeedbacksPage.WaitForAllFeedbacksPage();
 
             patientsFeedbacksPage = new PatientsFeedbacksPage(driver);
-            Assert.True(patientsFeedbacksPage.PublishFeedbackButtonDisplayed());
+            patientsFeedbacksPage.WaitForPublishFeedbackButton();
             Assert.Equal(driver.Url, PatientsFeedbacksPage.URI);
         }
 

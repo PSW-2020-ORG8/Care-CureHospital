@@ -9,7 +9,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     class PostFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/postFeedback";
+        public const string URI = "http://localhost:60370/index.html#/postFeedback";
         private IWebElement textField => driver.FindElement(By.Id("feedbackID"));
         private IWebElement anonyimusCheckbox => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement publishedCheckbox => driver.FindElement(By.Id("isForPublishing"));
@@ -54,9 +54,14 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
             textField.SendKeys(text);
         }
 
-        public void EnablePublishedCheckbox(string status)
+        public void EnablePublishedCheckbox()
         {
-            publishedCheckbox.SendKeys(status);
+            publishedCheckbox.Click();
+        }
+
+        public void ResolveAlertDialog()
+        {
+            driver.SwitchTo().Alert().Accept();
         }
 
         public void WaitForAlertDialog()

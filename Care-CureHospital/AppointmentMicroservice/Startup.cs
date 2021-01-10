@@ -5,6 +5,9 @@ using AppointmentMicroservice.Gateway.Interface;
 using AppointmentMicroservice.Repository;
 using AppointmentMicroservice.Repository.MySQL.Stream;
 using AppointmentMicroservice.Service;
+using EventSourcingMicroservice.DataBase;
+using EventSourcingMicroservice.Repository.MySQL;
+using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +47,11 @@ namespace AppointmentMicroservice
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<AppointmentDataBaseContext>(options =>
                   options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+
+            services.AddDbContext<ESDataBaseContext>(option =>
+                option.UseMySql(CreateConnectionStringFromEnvironmentEventStore()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+            services.AddSingleton<IDomainEventService, DomainEventService>(services => new DomainEventService(new MySQLRepository(new ESDataBaseContext())));
+
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -59,6 +67,17 @@ namespace AppointmentMicroservice
             Console.WriteLine(user);
             Console.WriteLine(password);
             Console.WriteLine(database);
+            return $"server={server};port={port};database={database};user={user};password={password};";
+        }
+
+        private string CreateConnectionStringFromEnvironmentEventStore()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENT") ?? "EventSourcingDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string sslMode = Environment.GetEnvironmentVariable("DATABASE_SSL_MODE") ?? "None";
             return $"server={server};port={port};database={database};user={user};password={password};";
         }
 

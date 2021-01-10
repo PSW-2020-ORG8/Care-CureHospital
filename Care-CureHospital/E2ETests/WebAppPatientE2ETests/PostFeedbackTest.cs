@@ -73,7 +73,7 @@ namespace E2ETests.WebAppPatientE2ETests
         public void TestUnsuccessfulPostFeedback()
         {
             postFeedbackPage.InsertText("");
-            postFeedbackPage.EnablePublishedCheckbox("true");
+            postFeedbackPage.EnablePublishedCheckbox();
             postFeedbackPage.WaitForButton();
             postFeedbackPage.SubmitForm();
             postFeedbackPage.WaitForAlertDialog();
@@ -84,11 +84,12 @@ namespace E2ETests.WebAppPatientE2ETests
         public void TestSuccessfulPostFeedback()
         {
             postFeedbackPage.InsertText("Sviđa mi se Vaša usluga.");
-            postFeedbackPage.EnablePublishedCheckbox("true");
+            postFeedbackPage.EnablePublishedCheckbox();
             postFeedbackPage.WaitForButton();
             postFeedbackPage.SubmitForm();
             postFeedbackPage.WaitForAlertDialog();
             Assert.Equal(postFeedbackPage.GetDialogMessage(), PostFeedbackPage.ValidMessage);
+            postFeedbackPage.ResolveAlertDialog();
         }
     }
 }

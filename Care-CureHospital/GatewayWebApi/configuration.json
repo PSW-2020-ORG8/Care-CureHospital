@@ -130,6 +130,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
 
+
     // MedicalExaminationReportController
     {
       "DownstreamPathTemplate": "/api/medicalExaminationReport",
@@ -284,64 +285,50 @@
       }
     },
 
-    // MedicalRecordController
-    {
-      "DownstreamPathTemplate": "/api/medicalRecord",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+        // MedicalRecordController
         {
-          "Host": "localhost",
-          "Port": 54772
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/medicalRecord",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Key",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "UserRole": "Patient"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/medicalRecord/getForPatient/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/medicalRecord",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54772
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/medicalRecord",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
         {
-          "Host": "localhost",
-          "Port": 54772
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/medicalRecord/getForPatient/{id}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Key",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "UserRole": "Patient"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/medicalRecord/activatePatientMedicalRecord/{username}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/medicalRecord/getForPatient/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54772
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/medicalRecord/getForPatient/{id}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
         {
-          "Host": "localhost",
-          "Port": 54772
+            "DownstreamPathTemplate": "/api/medicalRecord/activatePatientMedicalRecord/{username}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54772
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/medicalRecord/activatePatientMedicalRecord/{username}",
+            "UpstreamHttpMethod": [ "GET" ]
         }
-      ],
-      "UpstreamPathTemplate": "/gateway/medicalRecord/activatePatientMedicalRecord/{username}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Key",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "UserRole": "Patient"
-      }
-    },
 
     //PrescriptionController
     {

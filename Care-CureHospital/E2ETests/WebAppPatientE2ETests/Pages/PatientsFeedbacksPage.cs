@@ -9,7 +9,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class PatientsFeedbacksPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/patientsFeedbacks";
+        public const string URI = "http://localhost:60370/index.html#/patientsFeedbacks";
         private IWebElement publishFeedbackButton => driver.FindElement(By.Id("publishFeedbackButton"));
         private IWebElement publishedFeedbacksLinkElement => driver.FindElement(By.Id("published-feedbacks-link"));
         private IWebElement maliciousPatientsLinkElement => driver.FindElement(By.Id("malicious-patients-link")); 
@@ -53,6 +53,12 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));
+        }
+
+        public void WaitForPublishFeedbackButton()
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("publishFeedbackButton")));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);

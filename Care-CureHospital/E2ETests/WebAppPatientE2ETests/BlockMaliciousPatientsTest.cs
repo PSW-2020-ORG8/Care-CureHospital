@@ -66,8 +66,13 @@ namespace E2ETests.WebAppPatientE2ETests
             blockMaliciousPatientsPage.WaitForAlertDialog();
             blockMaliciousPatientsPage.ResolveAlertDialog();
 
-            blockMaliciousPatientsPage.EnsureTableDataIsDisplayed();
-            Assert.Equal(patientsForBlockingCount - 1, blockMaliciousPatientsPage.PatientsForBlockingCount());
+            blockMaliciousPatientsPage.ClickMaliciousPatientsLink();
+            blockMaliciousPatientsPage.WaitForMaliciousPatientsPage();
+
+            BlockMaliciousPatientsPage newBlockMaliciousPatientsPage = new BlockMaliciousPatientsPage(driver);
+            newBlockMaliciousPatientsPage.EnsureTableDataIsDisplayed();
+
+            Assert.Equal(patientsForBlockingCount - 1, newBlockMaliciousPatientsPage.PatientsForBlockingCount());
         }
 
     }

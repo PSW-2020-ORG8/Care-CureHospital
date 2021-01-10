@@ -7,7 +7,7 @@ namespace EventSourcingMicroservice.Domain
 {
     public enum EventType
     {
-        LOGIN_EVENT
-
+        LOGIN_EVENT,
+        URL_EVENT
     }
 }
