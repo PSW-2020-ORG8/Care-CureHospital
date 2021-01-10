@@ -1,4 +1,4 @@
-﻿
+
 namespace TenderMicroservice.Dto
 {
     public class TenderDto
@@ -12,6 +12,8 @@ namespace TenderMicroservice.Dto
         public string EndDate { get; set; }
 
         public bool Active { get; set; }
+
+        public bool ChoosenOffer { get; set; }
 
         public TenderDto() { }
     }

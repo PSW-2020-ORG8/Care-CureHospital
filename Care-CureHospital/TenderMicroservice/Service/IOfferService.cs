@@ -7,5 +7,6 @@ namespace TenderMicroservice.Service
     {
         public List<Offer> GetAllOffersForActiveTender();
         public List<Offer> GetAllOffersForInactiveTender();
+        Offer ChooseOffer(int id);
     }
 }

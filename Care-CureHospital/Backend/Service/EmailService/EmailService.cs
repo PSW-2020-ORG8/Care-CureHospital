@@ -1,11 +1,13 @@
 ﻿using Backend.Model.Tender;
 using Backend.Repository.TenderRepository;
+using Service;
 using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 
 namespace Backend.Service.EmailService
 {
-    public class EmailService
+    public class EmailService : IService<Tender, int>
     {
         public ITenderRepository tenderRepository;
         string hospital = "hospitalssystem@gmail.com";
@@ -40,7 +42,30 @@ namespace Backend.Service.EmailService
             }
         }
 
-        public void TenderWinner(Offer entity)
+        public Tender GetEntity(int id)
+        {
+            return tenderRepository.GetEntity(id);
+        }
+
+        public Tender CloseTender(int tenderId)
+        {
+            Tender finishedTender = GetEntity(tenderId);
+            if (finishedTender.Active == true)
+            {
+                finishedTender.Active = false;
+            }
+            UpdateEntity(finishedTender);
+            TenderWinner();
+            return finishedTender;
+        }
+
+        public void UpdateEntity(Tender entity)
+        {
+            tenderRepository.UpdateEntity(entity);
+        }
+
+        public void TenderWinner()
+
         {
             try
             {
@@ -54,6 +79,7 @@ namespace Backend.Service.EmailService
                     email.To.Add(pharmacy);
                   //CloseTender(offer.TenderId);
                     entity.ActiveTender = false;
+                    email.To.Add(pharmacy);  
                 }
                 else
                 {*/
@@ -118,6 +144,20 @@ namespace Backend.Service.EmailService
         public Tender GetEntity(int id)
         {
             return tenderRepository.GetEntity(id);
+		}
+        public IEnumerable<Tender> GetAllEntities()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tender AddEntity(Tender entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(Tender entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

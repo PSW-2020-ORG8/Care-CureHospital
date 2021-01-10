@@ -55,11 +55,17 @@ namespace TenderMicroservice.Controllers
             return Ok();
         }
 
-        [HttpGet("winner")]
-        public IActionResult ChooseTender()
+        /* [HttpGet("winner")]
+         public IActionResult ChooseTender()
+         {
+             this.emailService.TenderWinner();
+             return Ok();
+         }*/
+
+        [HttpPut("chooseO/{id}")]
+        public IActionResult ChooseOffer(int id)
         {
-            this.emailService.TenderWinner();
-            return Ok();
+            return Ok(this.offerService.ChooseOffer(id));
         }
 
         [HttpGet("notWinner")]

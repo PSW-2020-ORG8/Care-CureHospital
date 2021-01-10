@@ -21,12 +21,14 @@ namespace Backend.Model.Tender
 
         public bool ActiveTender { get; set; }
 
+        public bool Choosen { get; set; }
+
         public Offer()
         {
 
         }
 
-        public Offer(int id, int tenderId, string pharmacyName, string pharmacyEmail, double price, int quantity, string comment, bool activeTender)
+        public Offer(int id, int tenderId, string pharmacyName, string pharmacyEmail, double price, int quantity, string comment, bool activeTender, bool choosen)
         {
             Id = id;
             TenderId = tenderId;
@@ -36,6 +38,7 @@ namespace Backend.Model.Tender
             Quantity = quantity;
             Comment = comment;
             ActiveTender = activeTender;
+            Choosen = choosen;
         }
 
         public int GetId()

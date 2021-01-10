@@ -51,6 +51,20 @@ namespace IntegrationAdapters.Controllers
         {
             App.Instance().EmailService.TenderWinner(entity);
             return Ok();
+		}
+        /* [HttpGet("winner")]
+         public IActionResult ChooseTender(OfferDto dto)
+         {
+             //App.Instance().EmailService.TenderWinner();
+             Offer offer = OfferMapper.OfferDtoToOffer(dto);
+             App.Instance().OfferService.ChooseOffer(offer);
+             return Ok();
+         }
+        */
+        [HttpPut("chooseO/{id}")]
+        public IActionResult ChooseOffer(int id)
+        {
+            return Ok(App.Instance().OfferService.ChooseOffer(id));
         }
 
         [HttpGet("notWinner")]

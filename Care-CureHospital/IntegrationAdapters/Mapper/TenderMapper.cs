@@ -13,6 +13,7 @@ namespace IntegrationAdapters.Mapper
             dto.StartDate = tender.StartDate.ToString("dd.MM.yyyy. HH:mm");
             dto.EndDate = tender.EndDate.ToString("dd.MM.yyyy. HH:mm");
             dto.Active = tender.Active;
+            dto.ChoosenOffer = tender.ChoosenOffer;
             return dto;
         }
     }

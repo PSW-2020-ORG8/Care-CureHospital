@@ -15,6 +15,7 @@ namespace TenderMicroservice.Dto
         public string PharmacyName { get; set; }
         public string PharmacyEmail { get; set; }
 
+        public bool ActiveTender { get; set; }
         public OfferDto() { }
     }
 }

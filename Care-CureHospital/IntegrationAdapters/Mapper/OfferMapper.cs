@@ -15,6 +15,7 @@ namespace IntegrationAdapters.Mapper
             dto.Price = offer.Price;
             dto.Quantity = offer.Quantity;
             dto.Comment = offer.Comment;
+            dto.ActiveTender = offer.ActiveTender;
             return dto;
         }
 
@@ -28,6 +29,7 @@ namespace IntegrationAdapters.Mapper
             offer.Price = dto.Price;
             offer.Quantity = dto.Quantity;
             offer.Comment = dto.Comment;
+            offer.ActiveTender = dto.ActiveTender;
             return offer;
         }
     }

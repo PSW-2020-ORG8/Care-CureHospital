@@ -46,7 +46,7 @@ namespace TenderMicroservice.Service
         }
 
         public void TenderWinner()
-        {
+        { 
             try
             {
                 Console.WriteLine("E-mail with information about tender winner is sending!");

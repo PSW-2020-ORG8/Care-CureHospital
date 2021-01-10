@@ -1,4 +1,4 @@
-﻿
+
 namespace IntegrationAdapters.Dto
 {
     public class TenderDto
@@ -12,6 +12,8 @@ namespace IntegrationAdapters.Dto
         public string EndDate { get; set; }
 
         public bool Active { get; set; }
+
+        public bool ChoosenOffer { get; set; }
 
         public TenderDto() { }
     }

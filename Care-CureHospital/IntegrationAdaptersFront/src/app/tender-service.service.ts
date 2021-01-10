@@ -10,7 +10,11 @@ import { catchError } from 'rxjs/operators';
 })
 
 export class TenderServiceService {
+
  readonly APIUrl = "http://localhost:50002/api";
+
+ //readonly APIUrl = "http://localhost:60370/gateway";
+
 
   constructor(private http:HttpClient) {
      this.getOfferListActive() ,

@@ -1,4 +1,4 @@
-﻿
+
 namespace TenderMicroservice.Repository
 {
     public interface IIdentifiable<T>
