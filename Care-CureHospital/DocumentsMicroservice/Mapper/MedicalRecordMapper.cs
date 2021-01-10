@@ -12,7 +12,6 @@ namespace DocumentsMicroservice.Mapper
 
             medicalRecord.Id = dto.Id;
             medicalRecord.Patient = dto.Patient;
-            medicalRecord.PatientId = medicalRecord.Patient.Id;
             medicalRecord.AnamnesisId = dto.AnamnesisId;
             medicalRecord.Anamnesis = new Anamnesis();
             medicalRecord.Allergies = dto.Allergies;

@@ -75,7 +75,7 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
-						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn">
+						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn" id="cancelAppointmentButton">
 							<button type="button" @click="fillSurvey(appointment)">Popuni anketu</button>
 						</div>	
 						<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">

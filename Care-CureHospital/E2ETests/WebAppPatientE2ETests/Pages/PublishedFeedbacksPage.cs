@@ -11,7 +11,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class PublishedFeedbacksPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/";
+        public const string URI = "http://localhost:60370/index.html#/";
         private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));
         private IWebElement postFeedbackLinkElement => driver.FindElement(By.Id("post-feedback-link"));
         private IWebElement allFeedbacksLinkElement => driver.FindElement(By.Id("all-feedbacks-link"));

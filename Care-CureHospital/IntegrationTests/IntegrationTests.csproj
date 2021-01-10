@@ -25,8 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppointmentMicroservice\AppointmentMicroservice.csproj" />
     <ProjectReference Include="..\Backend\Backend.csproj" />
+    <ProjectReference Include="..\DocumentsMicroservice\DocumentsMicroservice.csproj" />
+    <ProjectReference Include="..\FeedbackMicroservice\FeedbackMicroservice.csproj" />
+    <ProjectReference Include="..\GatewayWebApi\GatewayWebApi.csproj" />
     <ProjectReference Include="..\IntegrationAdapters\IntegrationAdapters.csproj" />
+    <ProjectReference Include="..\UserMicroservice\UserMicroservice.csproj" />
     <ProjectReference Include="..\WebAppPatient\WebAppPatient.csproj" />
   </ItemGroup>
 

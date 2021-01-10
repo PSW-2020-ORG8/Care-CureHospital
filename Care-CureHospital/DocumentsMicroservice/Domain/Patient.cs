@@ -1,9 +1,6 @@
 ﻿using DocumentsMicroservice.Domain.Enum;
 using DocumentsMicroservice.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DocumentsMicroservice.Domain
 {
@@ -25,6 +22,7 @@ namespace DocumentsMicroservice.Domain
         public string EMail { get; set; }
         public int CityId { get; set; }
         public virtual City City { get; set; }
+        public string Role { get; set; }
 
         public Patient()
         {
@@ -36,7 +34,7 @@ namespace DocumentsMicroservice.Domain
             Surname = surname;
         }
 
-        public Patient(int id, string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string eMail, int cityId, City city)
+        public Patient(int id, string username, string password, string name, string parentName, string surname, Gender gender, string jmbg, string identityCard, string healthInsuranceCard, BloodGroup bloodGroup, DateTime dateOfBirth, string contactNumber, string eMail, int cityId, City city, string role)
         {
             Id = id;
             Username = username;
@@ -54,6 +52,7 @@ namespace DocumentsMicroservice.Domain
             EMail = eMail;
             CityId = cityId;
             City = city;
+            Role = role;
         }
 
         public int GetId()

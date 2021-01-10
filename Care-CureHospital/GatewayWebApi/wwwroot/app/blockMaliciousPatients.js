@@ -23,7 +23,7 @@ Vue.component("blockMaliciousPatients", {
 	         <ul class="menu-contents">
 				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
 				<li><a href="#/surveyResults">Rezultati anketa</a></li>
-				<li class="active"><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
+				<li class="active"><a href="#/blockMaliciousPatients" id="block-malicious-patients-link">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  
@@ -55,7 +55,7 @@ Vue.component("blockMaliciousPatients", {
 				<td class="patient-for-blocking" v-if="maliciousPatient.blocked === false">
 				<button class="block-malicious-patient-btn" style="width: 130px; height: 40px; font-size: 16px;" type="button" @click="blockUser(maliciousPatient.id)">Blokiraj</button>
 				</td>
-				<td v-if="maliciousPatient.blocked === true" style="color: red">
+				<td v-if="maliciousPatient.blocked === true" style="color: red" class="blocked-patient-td">
 					Pacijent je blokiran
 				</td>
 			</tr>			

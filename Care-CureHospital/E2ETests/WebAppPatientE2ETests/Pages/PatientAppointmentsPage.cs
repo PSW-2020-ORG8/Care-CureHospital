@@ -10,7 +10,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     class PatientAppointmentsPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:5000/index.html#/patientAppointments";
+        public const string URI = "http://localhost:60370/index.html#/patientAppointments";
         private IWebElement cancelAppointmentButton;
         private ReadOnlyCollection<IWebElement> patientAppointments => driver.FindElements(By.XPath("//div[@class='appointments-info']"));
 

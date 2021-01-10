@@ -31,10 +31,10 @@ Vue.component("userLogin", {
                 <form id="form" class="formForLogin" action="#/homePage" method = "GET">
                     <br><h1 style="position: fixed;">Prijava</h1><br>
                     <label style="color:red;" v-if="notification">{{returnData}}</label><br>
-                    <input type="text" name="username" v-model="username" placeholder="Korisničko ime"></input>
+                    <input type="text" name="username" v-model="username" placeholder="Korisničko ime" id="username-input"></input>
                     <label style="color:red;" v-if="usernameInput">Unesite korisničko ime!</label>
                     <label v-if="!usernameInput"></label><br>
-                    <input type="password" name="password" v-model="password" placeholder="Lozinka"></input>
+                    <input type="password" name="password" v-model="password" placeholder="Lozinka" id="password-input"></input>
                     <label style="color:red;" v-if="passwordInput">Unesite lozinku!</label>
                     <label v-if="!passwordInput"></label><br>
                     <button type="submit" id="sign-in-button" v-on:click="onSubmit">Prijavi se</button><br><br>
@@ -87,7 +87,7 @@ Vue.component("userLogin", {
                         this.$router.push({ name: 'patientMainPage' })
                     }
                 }).catch(error => {
-                    if (error.response.status === 403) {
+                    if (error.response.status === 401) {
                         toast('Neuspešno korisničko ime ili lozinka')
                     }
                 });
@@ -102,6 +102,6 @@ Vue.component("userLogin", {
         }		
 	},
 	mounted(){
-
+        localStorage.removeItem("validToken");  
 	}
 });

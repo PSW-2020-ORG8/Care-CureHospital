@@ -30,10 +30,17 @@ namespace UserMicroservice.Controllers
         {
             eventService.Save(new URLEvent("/api/user/login", "GET"));
             User user = userService.Authenticate(model.Username, model.Password, Encoding.ASCII.GetBytes(appSettings.Secret));
-            Patient patient = patientService.GetPatientByUsername(model.Username);
-            if (user == null || patient.Blocked == true)
+            if (user == null)
             {
-                return Forbid();
+                return Unauthorized();
+            } 
+
+            if (user.Role == "Patient")
+            {
+                if (patientService.GetPatientByUsername(model.Username).Blocked == true)
+                {
+                    return Unauthorized();
+                }
             }
             eventService.Save(new LoginEvent(user.Username,user.Id));
             return Ok(user);

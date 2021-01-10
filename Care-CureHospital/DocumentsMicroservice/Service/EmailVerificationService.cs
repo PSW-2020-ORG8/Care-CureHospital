@@ -39,7 +39,7 @@ namespace DocumentsMicroservice.Service
             return new MailMessage(senderEmailAddress, recipientEmailAddress)
             {
                 Subject = "Verifikacija pacijentovog naloga",
-                Body = File.ReadAllText(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\WebAppPatient\\wwwroot\\html\\emailVerification.html").Replace("#username#", username)
+                Body = File.ReadAllText(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\GatewayWebApi\\wwwroot\\html\\emailVerification.html").Replace("#username#", username)
             };
         }
     }
