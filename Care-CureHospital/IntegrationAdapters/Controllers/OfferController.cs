@@ -14,7 +14,7 @@ namespace IntegrationAdapters.Controllers
     {
         public OfferController() { }
 
-        [HttpGet()] //api/offer
+        [HttpGet()] 
         public IActionResult GetAllOffers()
         {
             List<OfferDto> result = new List<OfferDto>();

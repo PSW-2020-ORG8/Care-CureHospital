@@ -205,7 +205,7 @@
       }
     },
 
-    //EPrescription
+    //EPrescriptionController
     {
       "DownstreamPathTemplate": "/api/eprescription",
       "DownstreamScheme": "http",

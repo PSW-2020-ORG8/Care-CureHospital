@@ -16,7 +16,6 @@ namespace IntegrationAdapters.Controllers
     {
         public PharmacyController()
         {
-
         }
 
         [EnableCors("CorsPolicy")]

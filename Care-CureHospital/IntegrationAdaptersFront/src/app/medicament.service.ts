@@ -9,5 +9,4 @@ import { Medicament } from './models/medicament';
 
 export class MedicamentService 
 {
-
 }

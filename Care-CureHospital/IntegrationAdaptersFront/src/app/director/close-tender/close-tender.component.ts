@@ -22,7 +22,6 @@ export class CloseTenderComponent implements OnInit {
   ActivateAddEditRepComp:boolean=false;
 
   TenderList: Tender[];
-  //TenderList:any=[];
 
   ngOnInit(): void {
     this.reresh();
@@ -33,7 +32,6 @@ export class CloseTenderComponent implements OnInit {
     this.tenderService.closeTender(id).subscribe(data =>{
        console.log(data);
      })
-     alert("Successfully closed!");
    }
 
    reresh(){
@@ -41,14 +39,5 @@ export class CloseTenderComponent implements OnInit {
       console.log(data);
       this.TenderList = data;
     })
-   }
-
-   NoClose(){
-   
-   }
-
-   YesClose(){
-    
-   }
-
+  }
 }

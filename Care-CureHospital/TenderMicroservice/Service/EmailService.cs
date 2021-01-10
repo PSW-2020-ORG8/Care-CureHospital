@@ -9,7 +9,6 @@ namespace TenderMicroservice.Service
     {
         public EmailService()
         {
-
         }
 
         public ITenderRepository tenderRepository;
@@ -32,7 +31,7 @@ namespace TenderMicroservice.Service
                 email.To.Add(pharmacy);
                 email.To.Add(benu);
                 email.Subject = ("We published tender!");
-                email.Body = "New tender is published. You can see information and fill the form for participate here - http://localhost:4200/tender";
+                email.Body = "New tender is published. You can see information and fill the form for participate here - http://localhost:4200/medicamentTender";
 
                 smpt.Port = 587;
                 smpt.Credentials = new System.Net.NetworkCredential(hospital, hospitalPassword);

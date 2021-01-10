@@ -14,7 +14,6 @@ namespace TenderMicroservice.Service
         string pharmacy = "pharmacysistem@gmail.com";
         string benu = "benupharmacy@gmail.com";
         Offer offer = new Offer();
-        Tender tender = new Tender();
 
         public ITenderRepository tenderRepository;
         public EmailService emailService;

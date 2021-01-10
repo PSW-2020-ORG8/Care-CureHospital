@@ -19,7 +19,7 @@ namespace ReportMicroservice.Controllers
             this.reportService = reportService;
         }
 
-        [HttpGet]   //GET /api/report
+        [HttpGet]  
         public IActionResult GetAllReports()
         {
             List<ReportDto> result = new List<ReportDto>();

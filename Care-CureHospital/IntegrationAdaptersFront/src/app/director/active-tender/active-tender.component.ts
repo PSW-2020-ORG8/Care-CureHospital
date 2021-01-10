@@ -35,14 +35,9 @@ export class ActiveTenderComponent implements OnInit {
   }
 
   choose(id:number){
-    alert(id)
     this.tenderService.chooseTender(id).subscribe(data=>{
       console.log(data)
-    
     })
-  }
-
-  closeClick(){
-
+    alert("Successfully choosen!")
   }
 }

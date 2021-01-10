@@ -13,7 +13,7 @@ namespace IntegrationAdapters.Controllers
     {
         public TenderController() { }
 
-        [HttpGet] //tender
+        [HttpGet] 
         public IActionResult PublishTender()
         {
             App.Instance().EmailService.SendNotification();
@@ -36,7 +36,7 @@ namespace IntegrationAdapters.Controllers
             return Ok(result);
         }
 
-        [HttpGet("allTender")] //allTender
+        [HttpGet("allTender")] 
         public IActionResult GetAllTenders()
         {
             List<TenderDto> result = new List<TenderDto>();

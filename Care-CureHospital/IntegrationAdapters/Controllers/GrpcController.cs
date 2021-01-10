@@ -9,7 +9,7 @@ namespace IntegrationAdapters.Controllers
         [HttpGet]
         public IActionResult GetMedicamentWithGrpc(string med)
         {
-            return Ok();//ClientScheduledService.SendMessage(med));
+            return Ok();
         }
     }
 }
