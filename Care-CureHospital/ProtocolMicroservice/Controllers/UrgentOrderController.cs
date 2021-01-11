@@ -10,7 +10,10 @@ namespace ProtocolMicroservice.Controllers
         [HttpGet]
         public IActionResult GetMedicament()
         {
-            return Ok(UrgentOrderService.SendRequestForOrder());
+            //return Ok(UrgentOrderService.SendRequestForOrder());
+            return Ok(UrgentOrderService.SendUrgentOrder());
         }
+
+
     }
 }

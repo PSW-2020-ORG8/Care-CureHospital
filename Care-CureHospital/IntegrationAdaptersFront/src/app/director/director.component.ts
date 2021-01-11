@@ -72,4 +72,8 @@ export class DirectorComponent implements OnInit {
   closeT(){
     this.router.navigate(['closeTender']);
   }
+
+  urgent(){
+    this.router.navigate(['urgentProcurement']);
+  }
 }
