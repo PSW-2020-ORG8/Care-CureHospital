@@ -205,6 +205,32 @@
       }
     },
 
+    //UrgentOrderController
+    {
+      "DownstreamPathTemplate": "/api/urgentorder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/urgentorder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
     //EPrescriptionController
     {
       "DownstreamPathTemplate": "/api/eprescription",

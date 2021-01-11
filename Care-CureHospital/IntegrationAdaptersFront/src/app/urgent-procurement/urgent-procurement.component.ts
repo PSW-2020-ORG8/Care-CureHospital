@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
 import { PharmacyService } from 'src/app/pharmacy.service';
+import { MedicamentUrgentOrder } from '../models/MedicamentUrgentOrder';
 
 @Component({
   selector: 'app-urgent-procurement',
@@ -8,18 +10,27 @@ import { PharmacyService } from 'src/app/pharmacy.service';
 })
 export class UrgentProcurementComponent implements OnInit {
 
-  constructor(private service: PharmacyService) { }
+  constructor(private service: PharmacyService, public http: HttpClient) { }
 
-  httpResponse: String="";
+  @Input() med:MedicamentUrgentOrder;
+  name: string;
+  quantity: number;
+
+  MedList:any=[];
 
   ngOnInit(): void {
+   // this.name = this.med.name;
+    //this.quantity = this.med.quantity;
   }
 
   sendHttpRequest(){
-    this.service.sendReqWithHttp().subscribe(res =>{
-      this.httpResponse = res;
-      alert(res);
-      console.log(res);
+    var val = {
+      name: this.MedList.name,
+      quantity: this.MedList.quantity
+    };
+    console.log(this.MedList);
+    this.service.sendReqWithHttp(val).subscribe(res =>{
+      console.log(JSON.stringify(res));
     });
   }
 }

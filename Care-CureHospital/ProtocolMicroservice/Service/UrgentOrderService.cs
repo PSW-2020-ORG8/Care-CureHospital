@@ -1,49 +1,57 @@
-﻿using Newtonsoft.Json;
-using ProtocolMicroservice.Domain;
+﻿using ProtocolMicroservice.Domain;
+using ProtocolMicroservice.Dto;
+using ProtocolMicroservice.Repository;
 using RestSharp;
 using System;
-using System.Net;
+using System.Collections.Generic;
 
 namespace ProtocolMicroservice.Service
 {
-    public class UrgentOrderService
+    public class UrgentOrderService : IUrgentOrderService
     {
-        /*public static String SendRequestForOrder()
+        public IProtocolRepository protocolRepository;
+
+        public UrgentOrderService(IProtocolRepository protocolRepository)
         {
-            var client = new RestSharp.RestClient("http://localhost:8080");
+            this.protocolRepository = protocolRepository;
+        }
+
+        public String SendRequestForOrder(UrgentMedicineOrder medicineOrder) //sklonila static
+        {
+            var client = new RestClient("http://localhost:8080");
             var request = new RestRequest("/urgentOrder/forMedicament");
-            IRestResponse<String> response = client.Get<String>(request);
-            Console.WriteLine("Status: " + response.StatusCode.ToString());
+            request.AddHeader("Content-Type", "application/json; charset=utf-8");
+            request.AddParameter("medicine", medicineOrder.Name);
+            request.AddParameter("quantity", medicineOrder.Quantity);
+            request.RequestFormat = DataFormat.Json;
+            var response = client.Post<UrgentMedicineOrderDto>(request);
             var result = response.Content;
-            string jsonRes = JsonConvert.SerializeObject(result);
-            return jsonRes;
-        }*/
-
-        public String CreateOrder(UrgentMedicineOrder order)
-        {
-            return order.Name + ":" + order.Quantity.ToString();
-
+            return result;
         }
 
-        public void SendUrgentOrder(String order)
+        public UrgentMedicineOrder AddEntity(UrgentMedicineOrder entity)
         {
-            WebClient client = new WebClient();
-            client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadString(new Uri(@"http://localhost:8080/order/urgent/http"), "POST", order);
-            client.Dispose();
+            throw new NotImplementedException();
         }
 
-        public Boolean SendOrderHttp(UrgentMedicineOrder order)
+        public void DeleteEntity(UrgentMedicineOrder entity)
         {
-            try
-            {
-                SendUrgentOrder(CreateOrder(order));
-                return true;
-            }
-            catch (Exception e) 
-            { 
-                return false; 
-            }
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UrgentMedicineOrder> GetAllEntities()
+        {
+            return protocolRepository.GetAllEntities();
+        }
+
+        public UrgentMedicineOrder GetEntity(int id)
+        {
+            return protocolRepository.GetEntity(id);
+        }
+
+        public void UpdateEntity(UrgentMedicineOrder entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

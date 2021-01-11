@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProtocolMicroservice.Dto
 {
@@ -15,7 +12,7 @@ namespace ProtocolMicroservice.Dto
 
         public UrgentMedicineOrderDto(int id, string name, int quantity)
         {
-            id = id;
+            Id = id;
             Name = name;
             Quantity = quantity;
         }

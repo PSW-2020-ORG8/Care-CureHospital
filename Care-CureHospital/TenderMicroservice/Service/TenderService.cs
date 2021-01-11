@@ -86,6 +86,7 @@ namespace TenderMicroservice.Service
             {
                 finishedTender.Active = true;
             }
+            finishedTender.ChoosenOffer = true;
             NotTenderWinner();
             UpdateEntity(finishedTender);
             return finishedTender;
