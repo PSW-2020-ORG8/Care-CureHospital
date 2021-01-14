@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
 import { Report } from '../models/Report';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-director',
@@ -9,7 +10,7 @@ import { Report } from '../models/Report';
 })
 export class DirectorComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService) { }
+  constructor(private service:DirectorServiceService, private router: Router) { }
 
   medicamentName:string;
   quantity:number;
@@ -62,5 +63,13 @@ export class DirectorComponent implements OnInit {
     Error => {
       console.log("Error");
     });
+  }
+
+  showOffers(){
+    this.router.navigate(['showOffers']);
+  }
+
+  closeT(){
+    this.router.navigate(['closeTender']);
   }
 }

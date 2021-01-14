@@ -16,7 +16,7 @@ import { Medicament } from '../models/Medicament';
     constructor(private pharmacyService: PharmacyService) { }
   
     ModalTitle:string;
-    ActivateAddEditRepComp:boolean=false;
+    ActivateAddEditMedComp:boolean=false;
     med:Medicament;
 
     ngOnInit() {
@@ -34,6 +34,10 @@ import { Medicament } from '../models/Medicament';
 
     addStock(){
       this.ModalTitle="Medicament stock";
-      this.ActivateAddEditRepComp=true;
+      this.ActivateAddEditMedComp=true;
+    }
+
+    closeClick(){
+      this.ActivateAddEditMedComp=false;
     }
   }

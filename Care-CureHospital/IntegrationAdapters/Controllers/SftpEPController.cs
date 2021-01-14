@@ -35,7 +35,9 @@ namespace IntegrationAdapters.Controllers
                 Console.WriteLine("E-mail EPrescription se ne salje!");
             }
         }
+
         public EPrescriptionRepository ePrescriptionRepository;
+
         [HttpGet]
         public IActionResult SendFileEP()
         {

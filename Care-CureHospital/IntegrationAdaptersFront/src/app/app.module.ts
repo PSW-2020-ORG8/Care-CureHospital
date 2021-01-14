@@ -17,6 +17,12 @@ import { EprescriptionComponent } from './doctor/eprescription/eprescription.com
 import { MedicamentComponent } from './medicament/medicament.component';
 import { UrgentProcurementComponent } from './urgent-procurement/urgent-procurement.component';
 import { TenderComponent } from './doctor/tender/tender.component';
+import { MedicamentTenderComponent } from './medicament-tender/medicament-tender.component';
+import { OfferComponent } from './offer/offer.component';
+import { ShowOfferComponent } from './director/show-offer/show-offer.component';
+import { ActiveTenderComponent } from './director/active-tender/active-tender.component';
+import { InactiveTenderComponent } from './director/inactive-tender/inactive-tender.component';
+import { CloseTenderComponent } from './director/close-tender/close-tender.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { TenderComponent } from './doctor/tender/tender.component';
     PharmacyComponent,
     MedicamentComponent,
     UrgentProcurementComponent,
-    TenderComponent
+    TenderComponent,
+    MedicamentTenderComponent,
+    OfferComponent,
+    ShowOfferComponent,
+    ActiveTenderComponent,
+    InactiveTenderComponent,
+    CloseTenderComponent
   ],
   imports: [
     BrowserModule,

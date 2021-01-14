@@ -61,8 +61,6 @@ namespace Backend.Service.PharmaciesService
                 if (pharmacy.Key.Equals(key))
                     return true;
             return false;
-        }
-
-        
+        }   
     }
 }

@@ -1,0 +1,30 @@
+<!--<div class="header3">
+    <h3>Do you want to close tender?</h3>
+</div>
+<div class="offers">
+    <button class="btn btn-primary float-left m-2" (click)="YesClose()">Yes</button>
+    <button class="btn btn-primary float-left m-2" (click)="NoClose()">No</button>
+</div>-->
+
+<div class="tender">
+    <table class="table table-striped" matTableExporter #exporter="matTableExporter">
+        <thead>
+            <tr>
+                <th id="Id">TenderId</th>
+                <th id="Medicament">MedicamentName</th>
+                <th id="StartDate">Start date</th>
+                <th id="EndDate">End date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let dataItem of TenderList">
+               <th>{{dataItem.id}}</th>
+                <th>{{dataItem.medicamentName}}</th>
+                <th>{{dataItem.startDate}}</th>
+                <th>{{dataItem.endDate}}</th>
+                <button type="button" mat-raised-button (click)="closeTender(dataItem.id)">Close tender</button>   
+            </tr>
+        </tbody>
+    </table>
+</div>

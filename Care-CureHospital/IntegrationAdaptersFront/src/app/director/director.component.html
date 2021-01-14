@@ -1,7 +1,9 @@
 <div class="director">
   <button type="button" mat-raised-button data-toggle="modal" data-target="#exampleModal"
 (click)="addclick()" data-backdrop='static' data-keybord="false" class="reportButton">Add report</button>
-<button type="button" mat-raised-button (click)="publishT()" class="tenderButton">Publish tender</button>
+  <button type="button" mat-raised-button (click)="publishT()" class="tenderButton">Publish tender</button>
+  <button type="button" mat-raised-button (click)="showOffers()" class="offerButton">Show offers for tender</button>
+  <button type="button" mat-raised-button (click)="closeT()" class="closeTenderButton">Close tender</button>
   <br/>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

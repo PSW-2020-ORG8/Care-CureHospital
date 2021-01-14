@@ -3,6 +3,7 @@ using Backend.Model.BlogAndNotification;
 using Backend.Model.DoctorMenager;
 using Backend.Model.PatientDoctor;
 using Backend.Model.Pharmacy;
+using Backend.Model.Tender;
 using Microsoft.EntityFrameworkCore;
 using Model.AllActors;
 using Model.Doctor;
@@ -47,6 +48,8 @@ namespace Backend.Repository.MySQL
         public DbSet<Answer> Answers { get; set; }
         public DbSet<DoctorWorkDay> DoctorWorkDays { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Tender> Tenders { get; set; }
+        public DbSet<Offer> Offer { get; set; }
         public DbSet<Pharmacies> Pharmacies { get; set; }
         public DbSet<Advertisement> Advertisement { get; set; }
 
@@ -121,6 +124,16 @@ namespace Backend.Repository.MySQL
                 new Report { Id = 2, MedicamentId = 2, MedicamentName = "Panadol", Quantity = 15, FromDate = new DateTime(2020, 10, 30, 10, 30, 0), ToDate = new DateTime(2020, 2, 5, 6, 10, 0) },
                 new Report { Id = 3, MedicamentId = 4, MedicamentName = "Vitamin B", Quantity = 120, FromDate = new DateTime(2019, 1, 10, 3, 30, 0), ToDate = new DateTime(2019, 5, 10, 6, 30, 0) },
                 new Report { Id = 4, MedicamentId = 3, MedicamentName = "Paracetamol", Quantity = 24, FromDate = new DateTime(2020, 1, 5, 8, 30, 0), ToDate = new DateTime(2020, 12, 10, 6, 30, 0) }
+            );
+
+            modelBuilder.Entity<Tender>().HasData(
+                new Tender { Id = 1, MedicamentName = "Vitamin B", StartDate = new DateTime(2020, 1, 5, 8, 30, 0), EndDate = new DateTime(2020, 2, 5, 8, 30, 0), Active = true, ChoosenOffer = true},
+                new Tender { Id = 2, MedicamentName = "Brufen", StartDate = new DateTime(2021, 1, 7, 8, 30, 0), EndDate = new DateTime(2021, 2, 7, 8, 30, 0), Active = true, ChoosenOffer = false }
+            );
+
+            modelBuilder.Entity<Offer>().HasData(
+                new Offer { Id = 1, TenderId = 1, PharmacyName="Jankovic", PharmacyEmail= "pharmacysistem@gmail.com", Price = 205.5, Quantity = 150, Comment = "Ova cena je za preko 100 komada!", ActiveTender = true, Choosen = true},
+                new Offer { Id = 2, TenderId = 1, PharmacyName="Benu", PharmacyEmail="benupharmacy@gmail.com", Price = 202.4, Quantity = 52, Comment = "Fiksna cena!", ActiveTender = true, Choosen = false }
             );
 
             modelBuilder.Entity<Specialitation>().HasData(

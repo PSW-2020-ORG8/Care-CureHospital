@@ -1,0 +1,258 @@
+{
+  "Routes": [
+
+    //TenderController
+    {
+      "DownstreamPathTemplate": "/api/tender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/allTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tender/allTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/getActiveTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tender/getActiveTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/getInactiveTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tender/getInactiveTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/closeTender/{tenderId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tender/closeTender/{tenderId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+
+    //OfferController
+    {
+      "DownstreamPathTemplate": "/api/offer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/offer/activeTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer/activeTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/offer/inactiveTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer/inactiveTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/offer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/offer/chooseO/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer/chooseO/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/offer/notWinner",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54425
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/offer/notWinner",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //PharmacyController
+    {
+      "DownstreamPathTemplate": "/api/pharmacy/getPharmacies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50511
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/pharmacy/getPharmacies",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/pharmacy/addPharmacy",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50511
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/pharmacy/addPharmacy",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    //ReportController
+    {
+      "DownstreamPathTemplate": "/api/report",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50858
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/report",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50858
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/report",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50858
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/report/send",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Key",
+        "AllowedScopes": []
+      }
+    },
+
+    //EPrescriptionController
+    {
+      "DownstreamPathTemplate": "/api/eprescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription/getForPatient/{patientID}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription/getForPatient/{patientID}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/eprescription/send",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61391
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/eprescription/send",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}
