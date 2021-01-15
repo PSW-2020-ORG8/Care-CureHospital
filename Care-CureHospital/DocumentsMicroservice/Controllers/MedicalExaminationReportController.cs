@@ -1,4 +1,5 @@
-﻿using DocumentsMicroservice.Dto;
+﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Dto;
 using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
@@ -104,6 +105,17 @@ namespace DocumentsMicroservice.Controllers
             this.medicalExaminationReportService.FindReportsUsingSimpleSearch(patientId, doctor, date, comment, room).ToList().ForEach(medicalExaminationReport => 
             result.Add(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport, medicalExaminationGateway.GetMedicalExaminationById(medicalExaminationReport.MedicalExaminationId))));
             return Ok(result);
+        }
+
+        [HttpGet("getMediaclExaminationReportByMedicalExaminationId/{medicalExaminationId}")]
+        public IActionResult GetMedicalExaminationReposrtByMedicalExaminationId(int medicalExaminationId)
+        {
+            MedicalExaminationReport medicalExaminationReport = medicalExaminationReportService.GetMedicalExaminationReportByMedicalExaminationId(medicalExaminationId);
+            if (medicalExaminationReport == null)
+            {
+                return NotFound();
+            }
+            return Ok(MedicalExaminationReportMapper.MedicalExaminationReportToMedicalExaminationReportDto(medicalExaminationReport, medicalExaminationGateway.GetMedicalExaminationById(medicalExaminationId)));
         }
     }
 }
