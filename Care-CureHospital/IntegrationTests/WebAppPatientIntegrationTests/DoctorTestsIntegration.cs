@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Shouldly;
 using System.Net;
 using System.Net.Http;
-using WebAppPatient;
 using Xunit;
+using UserMicroservice;
+
+
 
 namespace IntegrationTests.WebAppPatientIntegrationTests
 {

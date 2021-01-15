@@ -88,7 +88,7 @@ namespace AppointmentMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
-
+         
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyMethod()
