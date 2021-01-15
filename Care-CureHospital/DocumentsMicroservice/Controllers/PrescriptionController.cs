@@ -1,4 +1,5 @@
-﻿using DocumentsMicroservice.Dto;
+﻿using DocumentsMicroservice.Domain;
+using DocumentsMicroservice.Dto;
 using DocumentsMicroservice.Gateway.Interface;
 using DocumentsMicroservice.Mapper;
 using DocumentsMicroservice.Service;
@@ -105,6 +106,17 @@ namespace DocumentsMicroservice.Controllers
             this.prescriptionService.FindPrescriptionsUsingSimpleSearch(patientId, doctor, date, comment, medicaments).ToList().ForEach(prescription => 
                 result.Add(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId))));
             return Ok(result);
+        }
+
+        [HttpGet("getPrescriptionByMedicalExaminationId/{medicalExaminationId}")]       // GET /api/prescription/getPrescriptionByMedicalExaminationId/{medicalExaminationId}
+        public IActionResult GetPrescriptionByMedicalExaminationId(int medicalExaminationId)
+        {
+            Prescription prescription = prescriptionService.GetPrescriptionByMedicalExaminationId(medicalExaminationId);
+            if(prescription == null)
+            {
+                return NotFound();
+            }
+            return Ok(PrescriptionMapper.PrescriptionToPrescriptionDto(prescription, medicalExaminationGateway.GetMedicalExaminationById(prescription.MedicalExaminationId)));
         }
     }
 }

@@ -116,7 +116,7 @@
       }
     },
 
-    // AllergiesController
+    // AllergiesController 
     {
       "DownstreamPathTemplate": "/api/allergies",
       "DownstreamScheme": "http",
@@ -129,7 +129,6 @@
       "UpstreamPathTemplate": "/gateway/allergies",
       "UpstreamHttpMethod": [ "GET" ]
     },
-
 
     // MedicalExaminationReportController
     {
@@ -285,50 +284,50 @@
       }
     },
 
-        // MedicalRecordController
+    // MedicalRecordController
+    {
+      "DownstreamPathTemplate": "/api/medicalRecord",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
-            "DownstreamPathTemplate": "/api/medicalRecord",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 54772
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/medicalRecord",
-            "UpstreamHttpMethod": [ "POST" ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/medicalRecord/getForPatient/{id}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 54772
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/medicalRecord/getForPatient/{id}",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/medicalRecord/activatePatientMedicalRecord/{username}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 54772
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/medicalRecord/activatePatientMedicalRecord/{username}",
-            "UpstreamHttpMethod": [ "GET" ]
+          "Host": "localhost",
+          "Port": 54772
         }
+      ],
+      "UpstreamPathTemplate": "/gateway/medicalRecord",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicalRecord/getForPatient/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54772
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/medicalRecord/getForPatient/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Key",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Patient"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicalRecord/activatePatientMedicalRecord/{username}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54772
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/medicalRecord/activatePatientMedicalRecord/{username}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
 
     //PrescriptionController
     {
@@ -483,6 +482,25 @@
         "UserRole": "Patient"
       }
     },
+    {
+      "DownstreamPathTemplate": "/api/prescription/getPrescriptionByMedicalExaminationId/{medicalExaminationId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54772
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/prescription/getPrescriptionByMedicalExaminationId/{medicalExaminationId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Key",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Patient"
+      }
+    },
 
     // PatientFeedbackController
     {
@@ -517,7 +535,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/patientFeedback",
+      "DownstreamPathTemplate": "/api/patientFeedback/postPatientFeedback",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -525,7 +543,7 @@
           "Port": 57733
         }
       ],
-      "UpstreamPathTemplate": "/gateway/patientFeedback",
+      "UpstreamPathTemplate": "/gateway/patientFeedback/postPatientFeedback",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Key",
@@ -652,6 +670,27 @@
       }
     },
 
+    // AdvertisementController
+    {
+      "DownstreamPathTemplate": "/api/advertisement",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 57733
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/advertisement",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Key",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Patient"
+      }
+    },
+
     // DoctorController
     {
       "DownstreamPathTemplate": "/api/doctor/getAllDoctorBySpecializationId/{specializationId}",
@@ -747,200 +786,9 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "UserRole": "Patient"
+        "UserRole": "Admin"
       }
     },
-
-        // PatientFeedbackController
-        {
-            "DownstreamPathTemplate": "/api/patientFeedback",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 57733
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patientFeedback",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Admin"
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/patientFeedback/getPublishedFeedbacks",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 57733
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patientFeedback/getPublishedFeedbacks",
-            "UpstreamHttpMethod": [ "GET" ]
-        },
-        {
-          "DownstreamPathTemplate": "/api/patientFeedback/postPatientFeedback",
-          "DownstreamScheme": "http",
-          "DownstreamHostAndPorts": [
-            {
-              "Host": "localhost",
-              "Port": 57733
-            }
-          ],
-          "UpstreamPathTemplate": "/gateway/patientFeedback/postPatientFeedback",
-          "UpstreamHttpMethod": [ "POST" ],
-          "AuthenticationOptions": {
-            "AuthenticationProviderKey": "Key",
-            "AllowedScopes": []
-          },
-          "RouteClaimsRequirement": {
-            "UserRole": "Patient"
-          }
-        },
-        {
-            "DownstreamPathTemplate": "/api/patientFeedback/publishFeedback/{id}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 57733
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patientFeedback/publishFeedback/{id}",
-            "UpstreamHttpMethod": [ "PUT" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Admin"
-            }
-        },
-
-        // AdvertisementController
-        {
-            "DownstreamPathTemplate": "/api/advertisement",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                  "Host": "localhost",
-                  "Port": 57733
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/advertisement",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
-            }
-        },      
-
-        // DoctorController
-        {
-            "DownstreamPathTemplate": "/api/doctor/getAllDoctorBySpecializationId/{specializationId}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 59947
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/doctor/getAllDoctorBySpecializationId/{specializationId}",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/doctor/getAllSpecialization",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 59947
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/doctor/getAllSpecialization",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Patient"
-            }
-        },
-
-        // PatientController
-        {
-            "DownstreamPathTemplate": "/api/patient",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 59947
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patient",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Admin" //***
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/patient/getMaliciousPatients",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 59947
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patient/getMaliciousPatients",
-            "UpstreamHttpMethod": [ "GET" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Admin"
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/patient/blockMaliciousPatient/{patientId}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 59947
-                }
-            ],
-            "UpstreamPathTemplate": "/gateway/patient/blockMaliciousPatient/{patientId}",
-            "UpstreamHttpMethod": [ "PUT" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Key",
-                "AllowedScopes": []
-            },
-            "RouteClaimsRequirement": {
-                "UserRole": "Admin"
-            }
-        },
 
     // UserController
     {
@@ -956,7 +804,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     }
   ],
-    "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:60370"
-    }
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:60370"
+  }
 }
