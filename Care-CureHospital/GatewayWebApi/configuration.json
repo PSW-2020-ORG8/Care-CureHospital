@@ -284,7 +284,7 @@
             }
         },
         {
-            "DownstreamPathTemplate": "/api/medicalExaminationReport/getMediaclExaminationReportByMedicalExaminationId/{medicalExaminationId}",
+            "DownstreamPathTemplate": "/api/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/{medicalExaminationId}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -292,7 +292,7 @@
                     "Port": 54772
                 }
             ],
-            "UpstreamPathTemplate": "/gateway/medicalExaminationReport/getMediaclExaminationReportByMedicalExaminationId/{medicalExaminationId}",
+            "UpstreamPathTemplate": "/gateway/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/{medicalExaminationId}",
             "UpstreamHttpMethod": [ "GET" ],
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "Key",

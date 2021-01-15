@@ -150,8 +150,24 @@ Vue.component("patientAppointments", {
 			this.$router.push({ name: 'surveyAfterExamination', params: { appointment: selectedAppointment } })
 		},
 
-		displayReport: function (appointmentMedicalExaminationId) {
-			toast('Izvestaj')
+		displayReport: function (medicalExaminationId) {
+			axios.get('/gateway/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/' + medicalExaminationId, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				var reportForAppointment = response.data
+				this.$router.push({ name: 'reportForAppointment', params: { report: reportForAppointment } })
+
+			}).catch(error => {
+				if (error.response.status === 404) {
+					toast('Ne postoji izveštaj za ovaj pregled!')
+				}
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
 		},
 
 		displayPrescription: function (medicalExaminationId) {

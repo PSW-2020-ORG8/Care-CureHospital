@@ -107,7 +107,7 @@ namespace DocumentsMicroservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getMediaclExaminationReportByMedicalExaminationId/{medicalExaminationId}")]
+        [HttpGet("getMedicalExaminationReportByMedicalExaminationId/{medicalExaminationId}")]
         public IActionResult GetMedicalExaminationReposrtByMedicalExaminationId(int medicalExaminationId)
         {
             MedicalExaminationReport medicalExaminationReport = medicalExaminationReportService.GetMedicalExaminationReportByMedicalExaminationId(medicalExaminationId);
