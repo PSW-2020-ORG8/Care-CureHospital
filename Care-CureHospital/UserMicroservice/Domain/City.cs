@@ -7,7 +7,6 @@ namespace UserMicroservice.Domain
 {
     public class City
     {
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -16,14 +15,6 @@ namespace UserMicroservice.Domain
 
         public City()
         {
-        }
-
-        public City(string name, string address, Country country)
-        {
-            Name = name;
-            Address = address;
-            CountryId = country.Id;
-            Country = country;
         }
 
     }

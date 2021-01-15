@@ -24,7 +24,7 @@ namespace UserMicroservice.Service
 
         public User Authenticate(string username, string password, byte[] secretKey)
         {
-            var user = GetAllPatientsAndSystemAdministrators().SingleOrDefault(user => user.Username == username && user.Password == password);
+            var user = GetAllPatientsAndSystemAdministrators().SingleOrDefault(user => user.AccountInfo.Username == username && user.AccountInfo.Password == password);
 
             if (user == null)
             {
@@ -37,8 +37,8 @@ namespace UserMicroservice.Service
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim("UserRole", user.Role)
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    //new Claim("UserRole", user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -60,15 +60,15 @@ namespace UserMicroservice.Service
         public String FindPasswordByUsername(String username)
         {
             foreach (User user in GetAllEntities())
-                if (user.Username.Equals(username))
-                    return user.Password;
+                if (user.CheckUser(username))
+                    return user.AccountInfo.Password;
             return "";
         }
 
         public bool DoesUsernameExist(String username)
         {
             foreach (User user in GetAllEntities())
-                if (user.Username.Equals(username))
+                if (user.CheckUser(username))
                     return true;
 
             return false;

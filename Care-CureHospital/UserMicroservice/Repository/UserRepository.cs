@@ -39,7 +39,7 @@ namespace UserMicroservice.Repository
         {
             foreach (User user in this.GetAllEntities())
             {
-                if (user.Username.Equals(username))
+                if (user.CheckUser(username))
                     return user;
             }
             return null;
@@ -49,7 +49,7 @@ namespace UserMicroservice.Repository
         {
             foreach (User user in this.GetAllEntities())
             {
-                if (user.Jmbg.Equals(jmbg))
+                if (user.HasJMBG(jmbg))
                     return user;
             }
             return null;

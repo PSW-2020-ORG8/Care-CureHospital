@@ -7,25 +7,10 @@ namespace UserMicroservice.Domain
         public int Id { get; set; }
         public string SpecialitationForDoctor { get; set; }
 
-        public Specialitation(int id)
-        {
-            Id = id;
-        }
-
         public Specialitation()
         {
         }
 
-        public Specialitation(int id, string specialitation)
-        {
-            SpecialitationForDoctor = specialitation;
-            Id = id;
-        }
-
-        public Specialitation(string specialitation)
-        {
-            SpecialitationForDoctor = specialitation;
-        }
 
         public int GetId() => Id;
 

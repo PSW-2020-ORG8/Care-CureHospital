@@ -5,28 +5,18 @@ namespace UserMicroservice.Mapper
 {
     public class PatientMapper
     {
-        public static Patient PatientDtoToPatient(PatientDto dto)
-        {
-            Patient patient = new Patient();
-            patient.Id = dto.Id;
-            patient.Username = dto.Username;
-            patient.Name = dto.Name;
-            patient.Surname = dto.Surname;
-            patient.Malicious = dto.Malicious;
-            patient.Blocked = dto.Blocked;
-            return patient;
-        }
+        
 
         public static PatientDto PatientToPatientDto(Patient patient, int numberOfCancelledAppointments)
         {
             PatientDto dto = new PatientDto();
             dto.Id = patient.Id;
-            dto.Username = patient.Username;
-            dto.Name = patient.Name;
-            dto.Surname = patient.Surname;
+            dto.Username = patient.AccountInfo.Username;
+            dto.Name = patient.PersonalInfo.Name;
+            dto.Surname = patient.PersonalInfo.Surname;
             dto.NumberOfCancelledAppointents = numberOfCancelledAppointments;
-            dto.Malicious = patient.Malicious;
-            dto.Blocked = patient.Blocked;
+            dto.Malicious = patient.PatientStatus.Malicious;
+            dto.Blocked = patient.PatientStatus.Blocked;
             return dto;
         }
     }

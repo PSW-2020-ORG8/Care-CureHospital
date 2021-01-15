@@ -1,8 +1,8 @@
-﻿using System.Text;
-using EventSourcingMicroservice.Domain;
+﻿using EventSourcingMicroservice.Domain;
 using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Text;
 using UserMicroservice.Domain;
 using UserMicroservice.Dto;
 using UserMicroservice.Service;
@@ -35,14 +35,14 @@ namespace UserMicroservice.Controllers
                 return Unauthorized();
             } 
 
-            if (user.Role == "Patient")
+            if (user is Patient)
             {
-                if (patientService.GetPatientByUsername(model.Username).Blocked == true)
+                if (patientService.GetPatientByUsername(model.Username).isBlocked())
                 {
                     return Unauthorized();
                 }
             }
-            eventService.Save(new LoginEvent(user.Username,user.Id));
+            eventService.Save(new LoginEvent(user.AccountInfo.Username,user.Id));
             return Ok(user);
         }
     }

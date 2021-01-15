@@ -13,10 +13,5 @@ namespace UserMicroservice.Domain
         public Country()
         {
         }
-
-        public Country(string name)
-        {
-            Name = name;
-        }
     }
 }

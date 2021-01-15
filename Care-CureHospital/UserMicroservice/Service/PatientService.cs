@@ -17,7 +17,7 @@ namespace UserMicroservice.Service
         public Patient BlockMaliciousPatient(int patientId)
         {
             Patient maliciousPatient = GetEntity(patientId);
-            maliciousPatient.Blocked = true;
+            maliciousPatient.PatientStatus.Blocked = true;
             UpdateEntity(maliciousPatient);
             return maliciousPatient;
         }
@@ -25,14 +25,14 @@ namespace UserMicroservice.Service
         public Patient SetMaliciousPatient(int patientId)
         {
             Patient patient = GetEntity(patientId);
-            patient.Malicious = true;
+            patient.PatientStatus.Malicious = true;
             UpdateEntity(patient);
             return patient;
         }
 
         public List<Patient> GetMaliciousPatients()
         {
-            return GetAllEntities().ToList().Where(patient => patient.Malicious == true).ToList();
+            return GetAllEntities().ToList().Where(patient => patient.PatientStatus.Malicious == true).ToList();
         }
 
         public Patient AddEntity(Patient entity)
@@ -68,7 +68,7 @@ namespace UserMicroservice.Service
         public bool DoesUsernameExist(string username)
         {
             foreach (Patient patient in GetAllEntities())
-                if (patient.Username.Equals(username))
+                if (patient.CheckUser(username))
                     return true;
             return false;
         }

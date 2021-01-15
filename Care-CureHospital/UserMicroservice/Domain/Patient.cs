@@ -2,24 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserMicroservice.Domain.ValueObjects;
 
 namespace UserMicroservice.Domain
 {
     public class Patient : User
     {
-        public bool GuestAccount { get; set; }
-        public bool Blocked { get; set; }
-        public bool Malicious { get; set; }
+        public MedicalInfo MedicalInfo { get; set; }
 
-        public Patient(int id, string username, string password, string name, string surname, string jmbg, DateTime dateOfBirth, string contactNumber, string emailAddress, City city,
-            bool guestAccount)
-            : base(id, username, password, name, surname, jmbg, dateOfBirth, contactNumber, emailAddress, city)
-        {
-            GuestAccount = guestAccount;
-        }
+        public PatientStatus PatientStatus { get; set; }
 
         public Patient()
         {
+        }
+
+        public Patient(MedicalInfo medicalInfo, PatientStatus patientStatus)
+        {
+            MedicalInfo = medicalInfo;
+            PatientStatus = patientStatus;
+        }
+
+        public bool isBlocked()
+        {
+            return PatientStatus.Blocked;
         }
     }
 }
