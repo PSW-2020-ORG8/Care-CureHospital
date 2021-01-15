@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: HealthClinicDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./TestScripts:/docker-entrypoint-initdb.d/
+    networks:
+      - public_net
+  # WebAppPatient:
+  #   build: 
+  #     context: .
+  #     dockerfile: WebAppPatient/Dockerfile
+  #   image: astevanovic/webapppatient:latest
+  #   restart: on-failure
+  #   environment:
+  #     DATABASE_USERNAME: user
+  #     DATABASE_PASSWORD: user
+  #     DATABASE_HOST: mysql
+  #     DATABASE_SCHEMA: HealthClinicDB
+  #     SHOW_ENV: 'TRUE'
+  #   depends_on:
+  #     - mysql
+  #   expose: 
+  #     - "80"
+  #   ports:
+  #     - "6002:80"
+  #   networks:
+  #     - public_net
+networks:
+  public_net:
+    driver: bridge
+volumes:
+  mysql-db:

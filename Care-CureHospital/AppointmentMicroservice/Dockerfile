@@ -1,5 +1,3 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
@@ -7,7 +5,6 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["AppointmentMicroservice/AppointmentMicroservice.csproj", "AppointmentMicroservice/"]
-COPY ["Backend/Backend.csproj", "Backend/"]
 COPY ["EventSourcingMicroservice/EventSourcingMicroservice.csproj", "EventSourcingMicroservice/"]
 RUN dotnet restore "AppointmentMicroservice/AppointmentMicroservice.csproj"
 COPY . .
