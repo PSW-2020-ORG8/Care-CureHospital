@@ -86,8 +86,19 @@
 	 </div>
 
 	<div class="listOfFeedbacks" v-if="this.userRole === ''">		 
+		<div class="formForPublishingFeedback" style="margin-left: 8%; margin-top: 0.3%; width: 400px; height: 500px;">
+			<div class="form-title">
+				<h1>Zašto smo mi pravi izbor?</h1>
+				<h4><i>Care-Cure Hospital</i> je zdravstvena ustanova sa dugom tradicijom. <br><br>
+				Naš fokus je da omogućimo pacijentima da na brz i jednostavan način, bez čekanja u redu, koriste usluge koje naša bolnica pruža. <br><br>
+				<i>Vaše zdravlje u našim rukama!</i></h4>
+				<div class="register-btn-in-home-page">
+					<button type="button" @click="$router.push('patientRegistration')">Pridruži se</button>
+				</div>
+			</div>
+		</div>
 		 <div v-for="pf in patientFeedbacks">	 
-			<div class="wrapper" style="margin-left:27.3%">
+			<div class="wrapper" style="margin-left:43.3%">
 				<div class="feedback-img">
 					<img src="./images/satisfaction.png" height="150" width="150" style="margin-left: 18%; margin-top: 21%;">
 				</div>
