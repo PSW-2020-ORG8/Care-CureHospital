@@ -31,8 +31,8 @@ namespace FeedbackMicroservice.Gateway
         }
         public string GetMedicalExaminationService()
         {
-            string origin = Environment.GetEnvironmentVariable("URL") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "5171";
+            string origin = Environment.GetEnvironmentVariable("APPO_URL") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("APPO_PORT") ?? "5171";
 
             return $"http://{origin}:{port}";
         }

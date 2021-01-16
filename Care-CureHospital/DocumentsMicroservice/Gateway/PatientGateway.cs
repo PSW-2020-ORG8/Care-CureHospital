@@ -77,8 +77,8 @@ namespace DocumentsMicroservice.Gateway
 
         public string GetPatientService()
         {
-            string origin = Environment.GetEnvironmentVariable("URL") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "59947";
+            string origin = Environment.GetEnvironmentVariable("USERS_URL") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("USERS_PORT") ?? "59947";
 
             return $"http://{origin}:{port}";
         }

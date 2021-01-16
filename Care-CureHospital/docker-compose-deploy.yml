@@ -19,26 +19,121 @@ services:
       - ./TestScripts:/docker-entrypoint-initdb.d/
     networks:
       - public_net
-  # WebAppPatient:
-  #   build: 
-  #     context: .
-  #     dockerfile: WebAppPatient/Dockerfile
-  #   image: astevanovic/webapppatient:latest
-  #   restart: on-failure
-  #   environment:
-  #     DATABASE_USERNAME: user
-  #     DATABASE_PASSWORD: user
-  #     DATABASE_HOST: mysql
-  #     DATABASE_SCHEMA: HealthClinicDB
-  #     SHOW_ENV: 'TRUE'
-  #   depends_on:
-  #     - mysql
-  #   expose: 
-  #     - "80"
-  #   ports:
-  #     - "6002:80"
-  #   networks:
-  #     - public_net
+  appointment:
+    build: 
+      context: .
+      dockerfile: AppointmentMicroservice/Dockerfile
+    image: astevanovic/appointment:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      USERS_URL: users
+      USERS_PORT: "6005"
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6002:80"
+    networks:
+      - public_net
+  documents:
+    build: 
+      context: .
+      dockerfile: DocumentsMicroservice/Dockerfile
+    image: astevanovic/documents:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      APPO_URL: appointment
+      APPO_PORT: "6002"
+      USERS_URL: users
+      USERS_PORT: "6005"
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6003:80"
+    networks:
+      - public_net
+  feedbacks:
+    build: 
+      context: .
+      dockerfile: FeedbackMicroservice/Dockerfile
+    image: astevanovic/feedbacks:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      APPO_URL: appointment
+      APPO_PORT: "6002"
+      USERS_URL: users
+      USERS_PORT: "6005"
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6004:80"
+    networks:
+      - public_net
+  users:
+    build: 
+      context: .
+      dockerfile: UserMicroservice/Dockerfile
+    image: astevanovic/users:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      APPO_URL: appointment
+      APPO_PORT: "6002"
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6005:80"
+    networks:
+      - public_net
+  gateway:
+    build:
+      context: .
+      dockerfile: GatewayWebApi/Dockerfile
+    image: astevanovic/gateway:latest
+    restart: on-failure
+    environment:
+      PURPOSE: dep 
+    depends_on:
+      - appointment
+      - documents
+      - feedbacks
+      - users
+    expose: 
+      - "80"
+    ports:
+      - "6006:80"
+    networks:
+      - public_net
 networks:
   public_net:
     driver: bridge
