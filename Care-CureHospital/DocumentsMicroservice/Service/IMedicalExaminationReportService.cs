@@ -19,6 +19,7 @@ namespace DocumentsMicroservice.Service
         public List<MedicalExaminationReport> FindReportsByDateUsingSimpleSearch(int patientId, string date);
         public List<MedicalExaminationReport> FindReportsByCommentUsingSimpleSearch(int patientId, string comment);
         public List<MedicalExaminationReport> FindReportsByRoomUsingSimpleSearch(int patientId, string room);
+        public MedicalExaminationReport GetMedicalExaminationReportByMedicalExaminationId(int medicalExaminationId);
 
     }
 }

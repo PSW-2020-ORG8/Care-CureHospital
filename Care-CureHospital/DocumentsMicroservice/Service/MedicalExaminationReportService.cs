@@ -197,6 +197,11 @@ namespace DocumentsMicroservice.Service
             }
         }
 
+        public MedicalExaminationReport GetMedicalExaminationReportByMedicalExaminationId(int medicalExaminationId)
+        {
+            return GetAllEntities().FirstOrDefault(o => o.MedicalExaminationId == medicalExaminationId);
+        }
+
         public MedicalExaminationReport GetEntity(int id)
         {
             return medicalExaminationReportRepository.GetEntity(id);

@@ -283,7 +283,25 @@
                 "UserRole": "Patient"
             }
         },
-
+        {
+            "DownstreamPathTemplate": "/api/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/{medicalExaminationId}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54772
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/{medicalExaminationId}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
         // MedicalRecordController
         {
             "DownstreamPathTemplate": "/api/medicalRecord",
@@ -473,6 +491,25 @@
                 }
             ],
             "UpstreamPathTemplate": "/gateway/prescription/simpleSearchPrescriptionForPatient",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/prescription/getPrescriptionByMedicalExaminationId/{medicalExaminationId}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54772
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/prescription/getPrescriptionByMedicalExaminationId/{medicalExaminationId}",
             "UpstreamHttpMethod": [ "GET" ],
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "Key",
@@ -785,7 +822,7 @@
             "UpstreamHttpMethod": [ "POST" ]
         }
     ],
-    "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:60370"
-    }
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:60370"
+  }
 }

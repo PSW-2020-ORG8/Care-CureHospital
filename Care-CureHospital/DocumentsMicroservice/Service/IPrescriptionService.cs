@@ -19,6 +19,7 @@ namespace DocumentsMicroservice.Service
         public List<Prescription> FindPrescriptionsByDateUsingSimpleSearch(int patientId, string date);
         public List<Prescription> FindPrescriptionsByCommentUsingSimpleSearch(int patientId, string comment);
         public List<Prescription> FindPrescriptionsByMedicamentsUsingSimpleSearch(int patientId, string medicaments);
+        public Prescription GetPrescriptionByMedicalExaminationId(int medicalExaminationId);
 
     }
 }
