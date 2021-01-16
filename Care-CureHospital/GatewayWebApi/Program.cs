@@ -19,9 +19,9 @@ namespace GatewayWebApi
             .ConfigureAppConfiguration((host, config) =>
             {   
                 if (purpose == "dev")
-                    config.AddJsonFile("configuration.json");
+                    config.AddJsonFile("configuration-dep.json");
                 else
-                    config.AddJsonFile($"configuration.{purpose}.json");
+                    config.AddJsonFile($"configuration-{purpose}.json");
             })
             .UseStartup<Startup>();
         }

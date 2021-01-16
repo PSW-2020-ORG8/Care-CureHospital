@@ -32,7 +32,7 @@ services:
       DATABASE_SCHEMA: HealthClinicDB
       DATABASE_SCHEMA_EVENT: EventSourcingDB
       USERS_URL: users
-      USERS_PORT: "6005"
+      USERS_PORT: "80"
       SHOW_ENV: 'TRUE'
     depends_on:
       - mysql
@@ -55,9 +55,9 @@ services:
       DATABASE_SCHEMA: HealthClinicDB
       DATABASE_SCHEMA_EVENT: EventSourcingDB
       APPO_URL: appointment
-      APPO_PORT: "6002"
+      APPO_PORT: "80"
       USERS_URL: users
-      USERS_PORT: "6005"
+      USERS_PORT: "80"
       SHOW_ENV: 'TRUE'
     depends_on:
       - mysql
@@ -80,9 +80,9 @@ services:
       DATABASE_SCHEMA: HealthClinicDB
       DATABASE_SCHEMA_EVENT: EventSourcingDB
       APPO_URL: appointment
-      APPO_PORT: "6002"
+      APPO_PORT: "80"
       USERS_URL: users
-      USERS_PORT: "6005"
+      USERS_PORT: "80"
       SHOW_ENV: 'TRUE'
     depends_on:
       - mysql
@@ -105,7 +105,7 @@ services:
       DATABASE_SCHEMA: HealthClinicDB
       DATABASE_SCHEMA_EVENT: EventSourcingDB
       APPO_URL: appointment
-      APPO_PORT: "6002"
+      APPO_PORT: "80"
       SHOW_ENV: 'TRUE'
     depends_on:
       - mysql
