@@ -75,12 +75,18 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
-						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn" id="cancelAppointmentButton">
+						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn">
 							<button type="button" @click="fillSurvey(appointment)">Popuni anketu</button>
+							<div class="documents-btn">
+							<button type="button" @click="displayReport(appointment.medicalExaminationId)">Izveštaj</button>
+							</div>	
+							<div class="prescriptionss-btn">
+								<button type="button" @click="displayPrescription(appointment.medicalExaminationId)">Recept</button>
+							</div>	
 						</div>	
 						<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">
 							<p>Popunili ste anketu</p>
-						</div>
+						</div>						
 					</div>
 				</div>		
 			</div>
@@ -144,6 +150,46 @@ Vue.component("patientAppointments", {
 			this.$router.push({ name: 'surveyAfterExamination', params: { appointment: selectedAppointment } })
 		},
 
+		displayReport: function (medicalExaminationId) {
+			axios.get('/gateway/medicalExaminationReport/getMedicalExaminationReportByMedicalExaminationId/' + medicalExaminationId, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				var reportForAppointment = response.data
+				this.$router.push({ name: 'reportForAppointment', params: { report: reportForAppointment } })
+
+			}).catch(error => {
+				if (error.response.status === 404) {
+					toast('Ne postoji izveštaj za ovaj pregled!')
+				}
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
+		},
+
+		displayPrescription: function (medicalExaminationId) {
+			axios.get('/gateway/prescription/getPrescriptionByMedicalExaminationId/' + medicalExaminationId, {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				var prescriptionForAppointment = response.data
+				this.$router.push({ name: 'prescriptionForAppointment', params: { prescription: prescriptionForAppointment } })
+
+			}).catch(error => {
+				if (error.response.status === 404) {
+					toast('Ne postoji recept za ovaj pregled!')
+				}
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
+		},
+
 		onChange: function () {
 			if (this.filterAppointments === "Svi pregledi") {
 				axios.get('gateway/appointment/getScheduledAppointmetsByPatient/' + this.loggedUserId, {
@@ -202,7 +248,6 @@ Vue.component("patientAppointments", {
 	},
 	mounted() {
 		this.userToken = localStorage.getItem('validToken');
-		console.log(this.userToken);
 
 		if (this.userToken !== null) {
 			var base64Url = this.userToken.split('.')[1];

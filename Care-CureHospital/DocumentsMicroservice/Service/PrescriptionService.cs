@@ -198,6 +198,11 @@ namespace DocumentsMicroservice.Service
             }
         }
 
+        public Prescription GetPrescriptionByMedicalExaminationId(int medicalExaminationId)
+        {
+            return GetAllEntities().FirstOrDefault(prescription => prescription.MedicalExaminationId == medicalExaminationId);
+        }
+
         public Prescription GetEntity(int id)
         {
             return prescriptionRepository.GetEntity(id);

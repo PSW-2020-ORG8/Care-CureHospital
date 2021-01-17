@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using WebAppPatient;
-using WebAppPatient.Dto;
 using Xunit;
 using Newtonsoft.Json;
+using AppointmentMicroservice;
+using AppointmentMicroservice.Dto;
+using AppointmentMicroservice.Domain;
+using System.Net.Http.Headers;
 
 namespace IntegrationTests.WebAppPatientIntegrationTests
 {
@@ -58,8 +60,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public async void Find_All_Recommended_Appointments()
         {
             HttpClient client = factory.CreateClient();
-
-            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAllRecommendedTerms?startDate=2020-12-19&endDate=2020-12-20&doctorId=2&priority=Doctor");
+            HttpResponseMessage response = await client.GetAsync("/api/appointment/getAllRecommendedTerms?startDate=2021-04-01&endDate=2021-04-10&doctorId=1&priority=Doctor");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
@@ -124,7 +125,7 @@ namespace IntegrationTests.WebAppPatientIntegrationTests
         public static IEnumerable<object[]> ScheduleAppointmentData()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2015, 12, 15, 19, 30, 0), EndTime = new DateTime(2015, 12, 15, 20, 0, 0), DoctorWorkDayId = 1, MedicalExamination = new Model.Term.MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 1 } }, HttpStatusCode.NotFound });
+            retVal.Add(new object[] { new SchedulingAppointmentDto { Canceled = false, StartTime = new DateTime(2015, 12, 15, 19, 30, 0), EndTime = new DateTime(2015, 12, 15, 20, 0, 0), DoctorWorkDayId = 1, MedicalExamination = new MedicalExamination { ShortDescription = "", RoomId = 3, DoctorId = 1 } }, HttpStatusCode.NotFound });
             return retVal;
         }
     }
