@@ -874,7 +874,7 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/patient/getPatient/{patientId}",
-      "UpstreamHttpMethod": [ "PUT" ],
+      "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Key",
         "AllowedScopes": []
