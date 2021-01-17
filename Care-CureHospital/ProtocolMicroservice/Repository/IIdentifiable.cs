@@ -1,5 +1,4 @@
-﻿
-namespace ProtocolMicroservice.Repository
+﻿namespace ProtocolMicroservice.Repository
 {
     public interface IIdentifiable<T>
     {

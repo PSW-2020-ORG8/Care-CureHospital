@@ -29,4 +29,3 @@ namespace PharmacyMicroservice.Repository.MySQL.Stream
         }
     }
 }
-

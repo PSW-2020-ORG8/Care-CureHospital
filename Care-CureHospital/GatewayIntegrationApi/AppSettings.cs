@@ -1,5 +1,4 @@
-﻿
-namespace GatewayIntegrationApi
+﻿namespace GatewayIntegrationApi
 {
     public class AppSettings
     {

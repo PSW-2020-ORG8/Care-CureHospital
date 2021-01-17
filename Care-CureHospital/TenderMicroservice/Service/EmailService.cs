@@ -84,7 +84,6 @@ namespace TenderMicroservice.Service
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com");
 
                 email.From = new MailAddress(hospital);
-                //email.To.Add("pharmacysistem@gmail.com");
                 email.To.Add(pharmacy);
                 email.To.Add(benu);
                 email.Subject = ("Tender is closed!");

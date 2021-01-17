@@ -1,5 +1,4 @@
 ﻿using ProtocolMicroservice.Domain;
-using ProtocolMicroservice.Dto;
 using ProtocolMicroservice.Repository;
 using RestSharp;
 using System;

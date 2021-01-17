@@ -1,7 +1,6 @@
 {
   "Routes": [
 
-    //TenderController
     {
       "DownstreamPathTemplate": "/api/tender",
       "DownstreamScheme": "http",
@@ -62,8 +61,6 @@
       "UpstreamPathTemplate": "/gateway/tender/closeTender/{tenderId}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
-
-    //OfferController
     {
       "DownstreamPathTemplate": "/api/offer",
       "DownstreamScheme": "http",
@@ -136,8 +133,6 @@
       "UpstreamPathTemplate": "/gateway/offer/notWinner",
       "UpstreamHttpMethod": [ "GET" ]
     },
-
-    //PharmacyController
     {
       "DownstreamPathTemplate": "/api/pharmacy/getPharmacies",
       "DownstreamScheme": "http",
@@ -162,8 +157,6 @@
       "UpstreamPathTemplate": "/gateway/pharmacy/addPharmacy",
       "UpstreamHttpMethod": [ "POST" ]
     },
-
-    //ReportController
     {
       "DownstreamPathTemplate": "/api/report",
       "DownstreamScheme": "http",
@@ -204,8 +197,6 @@
         "AllowedScopes": []
       }
     },
-
-    //UrgentOrderController
     {
       "DownstreamPathTemplate": "/api/urgentorder",
       "DownstreamScheme": "http",
@@ -242,8 +233,6 @@
       "UpstreamPathTemplate": "/gateway/urgentorder/requested/{name}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
-
-    //EPrescriptionController
     {
       "DownstreamPathTemplate": "/api/eprescription",
       "DownstreamScheme": "http",
