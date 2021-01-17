@@ -50,6 +50,11 @@ namespace ProtocolMicroservice.Repository.MySQL
             return stream.ReadAll().SingleOrDefault(entity => entity.GetId().CompareTo(id) == 0);
         }
 
+        public E GetEntityByName(E Name)
+        {
+            return stream.ReadAll().SingleOrDefault(entity => entity.GetName().CompareTo(Name) == 0);
+        }
+
         public void UpdateEntity(E entity)
         {
             var entities = stream.ReadAll().ToList();

@@ -33,5 +33,15 @@ namespace ProtocolMicroservice.Domain
         {
             Id = id;
         }
+
+        public int GetName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetName(int Name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace TenderMicroservice.Service
         string hospitalPassword = "bolnica123";
         string pharmacy = "pharmacysistem@gmail.com";
         string benu = "benupharmacy@gmail.com";
-        Offer offer = new Offer();
 
         public ITenderRepository tenderRepository;
         public EmailService emailService;
@@ -81,13 +80,13 @@ namespace TenderMicroservice.Service
             if (finishedTender.Active == true && finishedTender.ChoosenOffer == true)
             {
                 finishedTender.Active = false;
+                NotTenderWinner();
             }
             else
             {
                 finishedTender.Active = true;
             }
             finishedTender.ChoosenOffer = true;
-            NotTenderWinner();
             UpdateEntity(finishedTender);
             return finishedTender;
         }
@@ -100,14 +99,8 @@ namespace TenderMicroservice.Service
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com");
 
                 email.From = new MailAddress(hospital);
-                if (offer.Id == 1)
-                {
-                    email.To.Add(pharmacy);
-                }
-                else
-                {
-                    email.To.Add(benu);
-                }
+                email.To.Add(pharmacy);
+                email.To.Add(benu);
                 email.Subject = ("Tender is closed!");
                 email.Body = "We are glad you took part in our tender!";
 
@@ -118,7 +111,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine(ex);
+                throw new SmtpException("Dear user, something went wrong on server side so it's not possible to send an email now. Please try later.", ex);
             }
         }
     }

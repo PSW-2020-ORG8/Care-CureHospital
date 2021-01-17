@@ -2,6 +2,6 @@
 {
     public interface ISftpService
     {
-        void UploadFile(string file);
+        public void UploadFile(string file);
     }
 }

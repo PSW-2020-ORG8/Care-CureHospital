@@ -26,8 +26,8 @@ namespace EPrescriptionMicroservice
         {
             services.AddCors();
 
-            services.AddSingleton<IEPrescriptionService, EPrescriptionService>(report => new EPrescriptionService(new EPrescriptionRepository(new MySQLStream<EPrescription>())));
             services.AddSingleton<ISftpService, SftpService>(sftp => new SftpService());
+            services.AddSingleton<IEPrescriptionService, EPrescriptionService>(report => new EPrescriptionService(new EPrescriptionRepository(new MySQLStream<EPrescription>()), new SftpService()));
             services.AddDbContext<EPrescriptionDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 

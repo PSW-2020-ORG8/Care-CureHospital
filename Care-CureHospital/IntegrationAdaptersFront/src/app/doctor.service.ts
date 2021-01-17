@@ -15,7 +15,14 @@ export class DoctorService {
    }
 
   getEPrescriptionList():Observable<any>{
-    return this.http.get(this.APIUrl+'/eprescription');
+    return this.http.get(this.APIUrl+'/eprescription').
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'Server is not responding!' );
+      })
+    )
   }
 
   addEPrescription(val:EPrescription):Observable<any>{
@@ -24,7 +31,7 @@ export class DoctorService {
       map((data: any) => {
         return data;
       }), catchError( error => {
-        return throwError( 'Something went wrong!' );
+        return throwError( 'Server is not responding!' );
       })
     )
   }
@@ -34,6 +41,13 @@ export class DoctorService {
   }
 
   generateEP(val:any){
-    return this.http.get<any[]>(this.APIUrl+'/sftpep');
+    return this.http.get<any[]>(this.APIUrl+'/sftpep').
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'You can not sent prescription because server is not responding!' );
+      })
+    )
   }
 }

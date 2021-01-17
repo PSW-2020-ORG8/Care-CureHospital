@@ -230,6 +230,18 @@
       "UpstreamPathTemplate": "/gateway/urgentorder",
       "UpstreamHttpMethod": [ "GET" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/urgentorder/requested/{name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder/requested/{name}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
 
     //EPrescriptionController
     {

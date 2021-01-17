@@ -9,6 +9,8 @@ namespace ProtocolMicroservice.Repository
     {
         E GetEntity(ID id);
 
+        E GetEntityByName(E Name);
+
         IEnumerable<E> GetAllEntities();
 
         IEnumerable<E> GetAllNames();

@@ -19,12 +19,11 @@ export class UrgentProcurementComponent implements OnInit {
   MedList:any=[];
 
   ngOnInit(): void {
-   // this.name = this.med.name;
-    //this.quantity = this.med.quantity;
   }
 
   sendHttpRequest(){
     var val = {
+      id: this.MedList.id,
       name: this.MedList.name,
       quantity: this.MedList.quantity
     };

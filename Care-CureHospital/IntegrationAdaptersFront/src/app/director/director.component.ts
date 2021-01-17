@@ -47,7 +47,10 @@ export class DirectorComponent implements OnInit {
     this.service.getReportList().subscribe((data: Report[]) => {
       console.log(data);
       this.ReportList = data;
-    })
+    }),
+    error => {
+     //console.log("Report list is not possible to load because server isn't responding.");
+    };
   }
 
   generate(){
@@ -60,8 +63,8 @@ export class DirectorComponent implements OnInit {
       console.log("Successfully sent!");
       alert("Successfully sent!");
     },
-    Error => {
-      console.log("Error");
+    error => {
+     //console.log("");
     });
   }
 

@@ -5,5 +5,9 @@ namespace ProtocolMicroservice.Repository
     {
         T GetId();
         void SetId(T id);
+
+        T GetName();
+
+        void SetName(T Name);
     }
 }

@@ -14,8 +14,6 @@ namespace TenderMicroservice.Service
         string hospitalPassword = "bolnica123";
         string pharmacy = "pharmacysistem@gmail.com";
         string benu = "benupharmacy@gmail.com";
-        Offer offer = new Offer();
-        Tender tender = new Tender();
 
         public IOfferRepository offerRepository;
 
@@ -46,12 +44,12 @@ namespace TenderMicroservice.Service
             {
                 choosen.Choosen = true;
             }
-            TenderWinner();
+            TenderWinner(id);
             UpdateEntity(choosen);
             return choosen;
         }
 
-        public void TenderWinner()
+        public void TenderWinner(int id)
         {
             try
             {
@@ -60,12 +58,13 @@ namespace TenderMicroservice.Service
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com");
 
                 email.From = new MailAddress(hospital);
-                if (offer.PharmacyName == "Jankovic")
+                Offer choosen = GetEntity(id);
+                if (choosen.Id == 1)
                 {
                     email.To.Add(pharmacy);
                 }
-                else
-                {
+                else { 
+
                     email.To.Add(benu);
                 }
                 email.Subject = ("You are tender winner! Congratulations!");
@@ -78,7 +77,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine(ex);
+                throw new SmtpException("Dear user, something went wrong on server side so it's not possible to send an email now. Please try later.", ex);
             }
         }
 

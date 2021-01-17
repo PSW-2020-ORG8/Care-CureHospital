@@ -1,11 +1,10 @@
-﻿
-using ProtocolMicroservice.Domain;
-using System;
+﻿using ProtocolMicroservice.Domain;
 
 namespace ProtocolMicroservice.Service
 {
     public interface IUrgentOrderService : IService<UrgentMedicineOrder, int>
     {
-        String SendRequestForOrder(UrgentMedicineOrder medicineOrder);
+        string SendRequestForOrder(UrgentMedicineOrder medicineOrder);
+        //void IsReqSent(UrgentMedicineOrder urgentOrder);
     }
 }

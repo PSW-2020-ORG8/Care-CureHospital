@@ -40,7 +40,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine(ex);
+                throw new SmtpException("Dear user, it's not possible to send an email now. Please try later.", ex);
             }
         }
 
@@ -71,7 +71,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine(ex);
+                throw new SmtpException("Dear user, something went wrong on server side so it's not possible to send an email now. Please try later.", ex);
             }
         }
 
@@ -84,7 +84,9 @@ namespace TenderMicroservice.Service
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com");
 
                 email.From = new MailAddress(hospital);
-                email.To.Add("pharmacysistem@gmail.com");
+                //email.To.Add("pharmacysistem@gmail.com");
+                email.To.Add(pharmacy);
+                email.To.Add(benu);
                 email.Subject = ("Tender is closed!");
                 email.Body = "We are glad you took part in our tender!";
 
@@ -95,7 +97,7 @@ namespace TenderMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine(ex);
+                throw new SmtpException("Dear user, something went wrong on server side so it's not possible to send an email now. Please try later.", ex);
             }
         }
     }

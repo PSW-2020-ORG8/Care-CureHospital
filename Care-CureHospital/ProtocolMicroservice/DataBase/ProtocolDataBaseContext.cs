@@ -39,8 +39,9 @@ namespace ProtocolMicroservice.DataBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UrgentMedicineOrder>().HasData(
-                new UrgentMedicineOrder { Id = 1, Name = "Vitamin B", Quantity = 100 },
-                new UrgentMedicineOrder { Id = 2, Name = "Brufen",  Quantity = 52}
+                new UrgentMedicineOrder { Id = 1, Name = "Aspirin", Quantity = 100 },
+                new UrgentMedicineOrder { Id = 2, Name = "Brufen",  Quantity = 52 },
+                new UrgentMedicineOrder { Id = 3, Name = "Vitamin B", Quantity = 10 }
             );
         }
     }

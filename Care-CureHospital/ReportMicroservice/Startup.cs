@@ -26,8 +26,8 @@ namespace ReportMicroservice
         {
             services.AddCors();
 
-            services.AddSingleton<IReportService, ReportService>(report => new ReportService(new ReportRepository(new MySQLStream<Report>())));
             services.AddSingleton<ISftpService, SftpService>(sftp => new SftpService());
+            services.AddSingleton<IReportService, ReportService>(report => new ReportService(new ReportRepository(new MySQLStream<Report>()), new SftpService()));
             services.AddDbContext<ReportDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 

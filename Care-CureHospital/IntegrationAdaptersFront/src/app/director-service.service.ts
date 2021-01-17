@@ -16,7 +16,14 @@ export class DirectorServiceService {
   constructor(private http:HttpClient) { this.getReportList() }
 
   getReportList():Observable<Report[]>{
-    return this.http.get<Report[]>(this.APIUrl+'/report');
+    return this.http.get<Report[]>(this.APIUrl+'/report').
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'Server is not responding!' );
+      })
+    )
   }
 
   addReports(val:Report):Observable<Report>{
@@ -25,7 +32,7 @@ export class DirectorServiceService {
       map((data: any) => {
         return data;
       }), catchError( error => {
-        return throwError( 'Something went wrong!' );
+        return throwError( 'Server is not responding!' );
       })
     )
   }
@@ -36,7 +43,7 @@ export class DirectorServiceService {
       map((data: any) => {
         return data;
       }), catchError( error => {
-        return throwError( 'Something went wrong!' );
+        return throwError( 'Server is not responding!' );
       })
     )
   }
@@ -46,10 +53,24 @@ export class DirectorServiceService {
   }
 
   generate(val:any){
-    return this.http.post<any[]>(this.APIUrl+'/report', val);
+    return this.http.post<any[]>(this.APIUrl+'/report', val).
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'Server is not responding!' );
+      })
+    )
   }
 
   publishTender(){
-    return this.http.get<any[]>(this.APIUrl+'/tender');
+    return this.http.get<any[]>(this.APIUrl+'/tender').
+    pipe(
+      map((data: any) => {
+        return data;
+      }), catchError( error => {
+        return throwError( 'Tender error!' );
+      })
+    )
   }
 }
