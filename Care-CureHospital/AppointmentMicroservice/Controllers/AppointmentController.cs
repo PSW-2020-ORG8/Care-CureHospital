@@ -8,6 +8,7 @@ using AppointmentMicroservice.Gateway.Interface;
 using AppointmentMicroservice.Mapper;
 using AppointmentMicroservice.Service;
 using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Domain.SchedulingAppointmentEvents;
 using EventSourcingMicroservice.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,13 +22,15 @@ namespace AppointmentMicroservice.Controllers
         private IAppointmentService appointmentService;
         private IDoctorGateway doctorGateway;
         private IDomainEventService domainEventService;
+        private ISchedulingAppointmentEventService schedulingAppointmentEventService;
 
-        public AppointmentController(IDoctorWorkDayService doctorWorkDayService, IAppointmentService appointmentService, IDoctorGateway doctorGateway, IDomainEventService domainEventService) 
+        public AppointmentController(IDoctorWorkDayService doctorWorkDayService, IAppointmentService appointmentService, IDoctorGateway doctorGateway, IDomainEventService domainEventService, ISchedulingAppointmentEventService schedulingAppointmentEventService) 
         {
             this.doctorWorkDayService = doctorWorkDayService;
             this.appointmentService = appointmentService;
             this.doctorGateway = doctorGateway;
             this.domainEventService = domainEventService;
+            this.schedulingAppointmentEventService = schedulingAppointmentEventService;
         }
 
         [HttpGet("getAvailableAppointments")]
@@ -126,6 +129,27 @@ namespace AppointmentMicroservice.Controllers
         {
             domainEventService.Save(new URLEvent("/api/Appointment/countCancelledAppointmentsForPatient/" + patientId, "GET"));
             return Ok(appointmentService.CountCancelledAppointmentsForPatient(patientId, DateTime.Now));
+        }
+
+        [HttpPost("saveStartSchedulingAppointmentEvent")]       // POST /api/appointment/saveStartSchedulingAppointmentEvent
+        public IActionResult SaveStartSchedulingAppointmentEvent([FromBody] StartSchedulingAppointmentEvent startSchedulingAppointmentEvent)
+        {
+            schedulingAppointmentEventService.Save(startSchedulingAppointmentEvent);
+            return Ok();
+        }
+
+        [HttpPost("saveEndSchedulingAppointmentEvent")]       // POST /api/appointment/saveEndSchedulingAppointmentEvent
+        public IActionResult SaveEndSchedulingAppointmentEvent([FromBody] EndSchedulingAppointmentEvent endSchedulingAppointmentEvent)
+        {
+            schedulingAppointmentEventService.Save(endSchedulingAppointmentEvent);
+            return Ok();
+        }
+
+        [HttpPost("saveSchedulingAppointmentStepEvent")]       // POST /api/appointment/saveSchedulingAppointmentStepEvent
+        public IActionResult SaveSchedulingAppointmentStepEvent([FromBody] SchedulingAppointmentStepEvent schedulingAppointmentStepEvent)
+        {
+            schedulingAppointmentEventService.Save(schedulingAppointmentStepEvent);
+            return Ok();
         }
     }
 }

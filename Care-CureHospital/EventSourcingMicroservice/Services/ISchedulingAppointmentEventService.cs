@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EventSourcingMicroservice.Repository
+namespace EventSourcingMicroservice.Services
 {
-     public interface IRepository
-     {
+    public interface ISchedulingAppointmentEventService
+    {
         DomainEvent Save(DomainEvent domainEvent);
         IEnumerable<DomainEvent> Load(EventType eventType);
-     }
+    }
 }

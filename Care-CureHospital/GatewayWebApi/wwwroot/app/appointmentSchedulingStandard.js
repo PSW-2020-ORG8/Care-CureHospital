@@ -14,7 +14,8 @@ Vue.component("appointmentSchedulingStandard", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            doctorWorkDay : null,
+            doctorWorkDay: null,
+            patient: null,
             userToken: null,
             loggedUserId: 0
 		}
@@ -207,6 +208,7 @@ Vue.component("appointmentSchedulingStandard", {
         backRecommendationStep : function() {
             if(this.recommendationStep >= 2) {
                 this.recommendationStep -= 1;
+
             }
         },
         scheduleTerm : function() {
@@ -286,12 +288,23 @@ Vue.component("appointmentSchedulingStandard", {
             headers: { 'Authorization': 'Bearer ' + this.userToken }
         }).then(response => {
             this.specializations = response.data;
+            axios.get('gateway/patient/getPatient/' + this.loggedUserId, {
+                headers: { 'Authorization': 'Bearer ' + this.userToken }
+            }).then(response => {
+                this.patient = response.data;
+            }).catch(error => {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Nemate pravo pristupa stranici!')
+                    this.$router.push({ name: 'userLogin' })
+                }
+            });
         }).catch(error => {
 			if (error.response.status === 401 || error.response.status === 403) {
 				toast('Nemate pravo pristupa stranici!')
 				this.$router.push({ name: 'userLogin' })
 			}
-		});
+        });
+
 	}
 
 });

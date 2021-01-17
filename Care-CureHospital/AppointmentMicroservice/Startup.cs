@@ -51,7 +51,7 @@ namespace AppointmentMicroservice
             services.AddDbContext<ESDataBaseContext>(option =>
                 option.UseMySql(CreateConnectionStringFromEnvironmentEventStore()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddSingleton<IDomainEventService, DomainEventService>(services => new DomainEventService(new MySQLRepository(new ESDataBaseContext())));
-
+            services.AddSingleton<ISchedulingAppointmentEventService, SchedulingAppointmentEventService>(services => new SchedulingAppointmentEventService(new MySQLRepository(new ESDataBaseContext())));
         }
 
         private string CreateConnectionStringFromEnvironment()

@@ -8,8 +8,8 @@ namespace EventSourcingMicroservice.Domain
     public class LoginEvent : DomainEvent
     {
         public EventType EventType;
-        public String UserName { get; private set; }
-        public int UserId { get; private set; }
+        public String UserName { get; set; }
+        public int UserId { get; set; }
 
         public LoginEvent(String userName, int userId) : base() 
         {
