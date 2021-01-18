@@ -13,7 +13,7 @@ namespace ReportMicroservice.Service
 
         public void UploadFile(string file)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.13", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "tester", "password")))
             {
                 client.Connect();
                 client.UploadFile(File.OpenRead(file), @"" + Path.GetFileName(file), x => { Console.WriteLine(x); });
