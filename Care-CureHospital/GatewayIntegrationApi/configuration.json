@@ -191,11 +191,7 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/report/send",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Key",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/urgentorder",

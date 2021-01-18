@@ -54,10 +54,11 @@ namespace ReportMicroservice.Service
             reportRepository.DeleteEntity(entity);
         }
 
-        public void SendReportSftp()
+        public void SendReportSftp(Report report)
         {
             String reportFile = "Files\\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-            System.IO.File.WriteAllText(reportFile, "Report about medicament consumption:");
+            //  System.IO.File.WriteAllText(reportFile, "Report about medicament consumption:");
+            System.IO.File.WriteAllText(reportFile, enterReport(report));
             try
             {
                 sftpService.UploadFile(reportFile);
@@ -66,6 +67,11 @@ namespace ReportMicroservice.Service
             {
                 throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
             }
+        }
+
+        public String enterReport(Report report)
+        {
+            return "Report: \n\n" + "Medicament name: " + report.MedicamentName + "\nQuantity: " + report.Quantity + "\nFrom date: " + report.FromDate + "\nTo date: " + report.ToDate;
         }
     }
 }
