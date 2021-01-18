@@ -1,4 +1,3 @@
-
 namespace TenderMicroservice.Dto
 {
     public class TenderDto

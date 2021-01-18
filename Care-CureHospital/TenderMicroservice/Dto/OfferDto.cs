@@ -1,5 +1,4 @@
-﻿
-namespace TenderMicroservice.Dto
+﻿namespace TenderMicroservice.Dto
 {
     public class OfferDto
     {

@@ -39,9 +39,9 @@ namespace PharmacyMicroservice.DataBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pharmacies>().HasData(
-                new Pharmacies { Id = 1, Name = "Apoteka1", Key = "1234", Link = "apoteka1.com" },
-                new Pharmacies { Id = 2, Name = "Apoteka2", Key = "5678", Link = "apoteka2.com" },
-                new Pharmacies { Id = 3, Name = "Apoteka3", Key = "9101112", Link = "apoteka3.com" }
+                new Pharmacies { Id = 1, Name = "Jankovic", Key = "1234", Link = "jankovic.com" },
+                new Pharmacies { Id = 2, Name = "Benu", Key = "5678", Link = "benu.com" },
+                new Pharmacies { Id = 3, Name = "Tilia", Key = "9101112", Link = "tilia.com" }
             );
         }
     }

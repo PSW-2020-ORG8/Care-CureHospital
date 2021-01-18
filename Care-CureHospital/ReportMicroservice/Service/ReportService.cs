@@ -8,8 +8,8 @@ namespace ReportMicroservice.Service
 {
     public class ReportService : IReportService
     {
-        public IReportRepository reportRepository;
         public ISftpService sftpService;
+        public IReportRepository reportRepository;
 
         public ReportService(IReportRepository reportRepository)
         {
@@ -18,8 +18,8 @@ namespace ReportMicroservice.Service
 
         public ReportService(IReportRepository reportRepository, ISftpService sftpService)
         {
-            this.reportRepository = reportRepository;
             this.sftpService = sftpService;
+            this.reportRepository = reportRepository;
         }
 
         public Report GetEntity(int id)
@@ -64,7 +64,7 @@ namespace ReportMicroservice.Service
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
             }
         }
     }

@@ -40,12 +40,12 @@ namespace TenderMicroservice.DataBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tender>().HasData(
-                new Tender { Id = 1, MedicamentName = "Vitamin B", StartDate = new DateTime(2020, 1, 5, 8, 30, 0), EndDate = new DateTime(2020, 2, 5, 8, 30, 0), Active = true, ChoosenOffer = true },
+                new Tender { Id = 1, MedicamentName = "Aspirin", StartDate = new DateTime(2020, 1, 5, 8, 30, 0), EndDate = new DateTime(2020, 2, 5, 8, 30, 0), Active = true, ChoosenOffer = false },
                 new Tender { Id = 2, MedicamentName = "Brufen", StartDate = new DateTime(2021, 1, 7, 8, 30, 0), EndDate = new DateTime(2021, 2, 7, 8, 30, 0), Active = true, ChoosenOffer = false }
             );
 
             modelBuilder.Entity<Offer>().HasData(
-                new Offer { Id = 1, TenderId = 1, PharmacyName = "Jankovic", PharmacyEmail = "pharmacysistem@gmail.com", Price = 205.5, Quantity = 150, Comment = "Ova cena je za preko 100 komada!", ActiveTender = true, Choosen = true },
+                new Offer { Id = 1, TenderId = 1, PharmacyName = "Jankovic", PharmacyEmail = "pharmacysistem@gmail.com", Price = 205.5, Quantity = 150, Comment = "Ova cena je za preko 100 komada!", ActiveTender = true, Choosen = false },
                 new Offer { Id = 2, TenderId = 1, PharmacyName = "Benu", PharmacyEmail = "benupharmacy@gmail.com", Price = 202.4, Quantity = 52, Comment = "Fiksna cena!", ActiveTender = true, Choosen = false }
             );
         }

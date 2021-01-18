@@ -102,7 +102,7 @@ namespace EPrescriptionMicroservice.Service
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
             }
         }
     }

@@ -5,6 +5,8 @@ namespace TenderMicroservice.Domain
 {
     public class Tender : IIdentifiable<int>
     {
+        private int tenderId;
+
         public int Id { get; set; }
 
         public String MedicamentName { get; set; }
@@ -29,6 +31,11 @@ namespace TenderMicroservice.Domain
             EndDate = endDate;
             Active = active;
             ChoosenOffer = choosenOffer;
+        }
+
+        public Tender(int tenderId)
+        {
+            this.tenderId = tenderId;
         }
 
         public int GetId()

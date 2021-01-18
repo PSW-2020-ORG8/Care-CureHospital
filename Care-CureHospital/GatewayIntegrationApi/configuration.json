@@ -1,7 +1,6 @@
 {
   "Routes": [
 
-    //TenderController
     {
       "DownstreamPathTemplate": "/api/tender",
       "DownstreamScheme": "http",
@@ -62,8 +61,6 @@
       "UpstreamPathTemplate": "/gateway/tender/closeTender/{tenderId}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
-
-    //OfferController
     {
       "DownstreamPathTemplate": "/api/offer",
       "DownstreamScheme": "http",
@@ -136,8 +133,6 @@
       "UpstreamPathTemplate": "/gateway/offer/notWinner",
       "UpstreamHttpMethod": [ "GET" ]
     },
-
-    //PharmacyController
     {
       "DownstreamPathTemplate": "/api/pharmacy/getPharmacies",
       "DownstreamScheme": "http",
@@ -162,8 +157,6 @@
       "UpstreamPathTemplate": "/gateway/pharmacy/addPharmacy",
       "UpstreamHttpMethod": [ "POST" ]
     },
-
-    //ReportController
     {
       "DownstreamPathTemplate": "/api/report",
       "DownstreamScheme": "http",
@@ -204,8 +197,42 @@
         "AllowedScopes": []
       }
     },
-
-    //EPrescriptionController
+    {
+      "DownstreamPathTemplate": "/api/urgentorder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/urgentorder",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/urgentorder/requested/{name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 51767
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/urgentorder/requested/{name}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
     {
       "DownstreamPathTemplate": "/api/eprescription",
       "DownstreamScheme": "http",

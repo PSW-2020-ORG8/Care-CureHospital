@@ -12,6 +12,7 @@ namespace ReportMicroservice.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
+        private ISftpService sftpService;
         private IReportService reportService;
 
         public ReportController(IReportService reportService)
