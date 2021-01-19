@@ -14,7 +14,8 @@ Vue.component("appointmentSchedulingStandard", {
             selectedAppointment: null,
             specializations: [],
             doctorsBySpecialization : [],
-            doctorWorkDay : null,
+            doctorWorkDay: null,
+            patient: null,
             userToken: null,
             loggedUserId: 0
 		}
@@ -34,11 +35,11 @@ Vue.component("appointmentSchedulingStandard", {
 	 
 				<div class="main-appointment-scheduling-by-recommendation">     
 					<ul class="menu-contents">
-                        <li class="active"><a href="#/patientAppointments">Pregledi</a></li>
-                        <li><a href="#/">Utisci</a></li>
-                        <li><a href="#/patientMainPage">Početna</a></li>
-                        <li><a href="#/medicalRecordReview">Moj karton</a></li>
-                        <li><a href="#/patientDocumentsSimpleSearch">Dokumenti</a></li>
+                        <li class="active"><a href="#/patientAppointments" @click="clickUnsuccessfullScheduling()">Pregledi</a></li>
+                        <li><a href="#/" @click="clickUnsuccessfullScheduling()">Utisci</a></li>
+                        <li><a href="#/patientMainPage" @click="clickUnsuccessfullScheduling()">Početna</a></li>
+                        <li><a href="#/medicalRecordReview" @click="clickUnsuccessfullScheduling()">Moj karton</a></li>
+                        <li><a href="#/patientDocumentsSimpleSearch" @click="clickUnsuccessfullScheduling()">Dokumenti</a></li>
 					</ul>
 				</div>
  
@@ -138,9 +139,9 @@ Vue.component("appointmentSchedulingStandard", {
 	
 	 <div class="sideComponents">      
          <ul class="ulForSideComponents">
-         <div><li><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
-         <div><li class="active"><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
-         <div><li><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
+         <div><li><a href="#/patientAppointments" @click="clickUnsuccessfullScheduling()">Moji pregledi</a></li></div><br/>
+         <div><li class="active"><a href="#/appointmentSchedulingStandard" @click="clickUnsuccessfullScheduling()">Obično zakazivanje</a></li></div><br/>
+         <div><li><a href="#/appointmentSchedulingByRecommendation" @click="clickUnsuccessfullScheduling()">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div>
 	 	  
@@ -165,6 +166,20 @@ Vue.component("appointmentSchedulingStandard", {
         nextRecommendationStep : function() {
             if(this.recommendationStep === 1 && this.dateModel !== ''){
                 this.recommendationStep += 1;
+                axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                    patientUsername: this.patient.username,
+                    stepNumber: this.recommendationStep,
+                    stepType: "FORWARD"
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                });
             } else if (this.recommendationStep === 1 && this.dateModel === '') {
                 toast('Morate izabrati datum')
             } else if (this.recommendationStep === 2 && this.specialization !== '0') {
@@ -173,6 +188,20 @@ Vue.component("appointmentSchedulingStandard", {
                     headers: { 'Authorization': 'Bearer ' + this.userToken }
                 }).then(response => {
                     this.doctorsBySpecialization = response.data;
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                });
+                axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                    patientUsername: this.patient.username,
+                    stepNumber: this.recommendationStep,
+                    stepType: "FORWARD"
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
                 }).catch(error => {
                     if (error.response.status === 401 || error.response.status === 403) {
                         toast('Nemate pravo pristupa stranici!')
@@ -200,6 +229,20 @@ Vue.component("appointmentSchedulingStandard", {
                         this.doctorWorkDay = null;
                     }
                 });
+                axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                    patientUsername: this.patient.username,
+                    stepNumber: this.recommendationStep,
+                    stepType: "FORWARD"
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                });
             } else if (this.recommendationStep === 3 && this.doctorId === '0') {
                 toast('Morate izabrati doktora')
             }   
@@ -207,6 +250,21 @@ Vue.component("appointmentSchedulingStandard", {
         backRecommendationStep : function() {
             if(this.recommendationStep >= 2) {
                 this.recommendationStep -= 1;
+                axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                    patientUsername: this.patient.username,
+                    stepNumber: this.recommendationStep,
+                    stepType: "BACKWARD"
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                });
+
             }
         },
         scheduleTerm : function() {
@@ -266,6 +324,22 @@ Vue.component("appointmentSchedulingStandard", {
         },
         logOut: function () {
             localStorage.removeItem("validToken");
+            this.clickUnsuccessfullScheduling();
+        },
+        clickUnsuccessfullScheduling: function() {
+            axios.post('gateway/appointment/saveEndSchedulingAppointmentEvent', {
+                patientUsername: this.patient.username,
+                schedulingResultType: 'UNSUCCESSFUL'
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + this.userToken
+                }
+            }).catch(error => {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Nemate pravo pristupa stranici!')
+                    this.$router.push({ name: 'userLogin' })
+                }
+            });
         }
 	},
 	mounted() {
@@ -286,12 +360,33 @@ Vue.component("appointmentSchedulingStandard", {
             headers: { 'Authorization': 'Bearer ' + this.userToken }
         }).then(response => {
             this.specializations = response.data;
+            axios.get('gateway/patient/getPatient/' + this.loggedUserId, {
+                headers: { 'Authorization': 'Bearer ' + this.userToken }
+            }).then(response => {
+                this.patient = response.data;
+                axios.post('gateway/appointment/saveStartSchedulingAppointmentEvent', {
+                    patientUsername: this.patient.username
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.userToken
+                    }
+                }).catch(error => {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        toast('Nemate pravo pristupa stranici!')
+                        this.$router.push({ name: 'userLogin' })
+                    }
+                });
+            }).catch(error => {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Nemate pravo pristupa stranici!')
+                    this.$router.push({ name: 'userLogin' })
+                }
+            });
         }).catch(error => {
 			if (error.response.status === 401 || error.response.status === 403) {
 				toast('Nemate pravo pristupa stranici!')
 				this.$router.push({ name: 'userLogin' })
 			}
-		});
+        });
 	}
-
 });
