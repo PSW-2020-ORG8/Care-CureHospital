@@ -17,7 +17,8 @@ Vue.component("appointmentSchedulingByRecommendation", {
             doctorsBySpecialization : [],
             workDaysRecommendedTerms: [],
             userToken: null,
-            loggedUserId: 0
+            loggedUserId: 0,
+            patient: null
 		}
 	},
 	template: `
@@ -163,7 +164,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
 	 <div class="sideComponents">      
          <ul class="ulForSideComponents">
             <div><li><a href="#/patientAppointments">Moji pregledi</a></li></div><br/>
-			<div><li><a href="#/appointmentSchedulingStandard">Obično zakazivanje</a></li></div><br/>
+			<div><li><a href="#/appointmentSchedulingStandard" @click="clickSchedulingStandard()">Obično zakazivanje</a></li></div><br/>
 		    <div><li class="active"><a href="#/appointmentSchedulingByRecommendation">Preporuka termina</a></li></div><br/>
 	     </ul>
 	 </div>
@@ -302,6 +303,22 @@ Vue.component("appointmentSchedulingByRecommendation", {
         },
         logOut: function () {
             localStorage.removeItem("validToken");
+        },
+        clickSchedulingStandard: function() {
+            axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                patientUsername: this.patient.username,
+                stepNumber: 1,
+                stepType: "FORWARD"
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + this.userToken
+                }
+            }).catch(error => {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Nemate pravo pristupa stranici!')
+                    this.$router.push({ name: 'userLogin' })
+                }
+            });
         }
 	},
     mounted() {
@@ -324,6 +341,16 @@ Vue.component("appointmentSchedulingByRecommendation", {
             }
         }).then(response => {
             this.specializations = response.data;
+            axios.get('gateway/patient/getPatient/' + this.loggedUserId, {
+                headers: { 'Authorization': 'Bearer ' + this.userToken }
+            }).then(response => {
+                this.patient = response.data;
+            }).catch(error => {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Nemate pravo pristupa stranici!')
+                    this.$router.push({ name: 'userLogin' })
+                }
+            });
         }).catch(error => {
             if (error.response.status === 401 || error.response.status === 403) {
                 toast('Nemate pravo pristupa stranici!')
