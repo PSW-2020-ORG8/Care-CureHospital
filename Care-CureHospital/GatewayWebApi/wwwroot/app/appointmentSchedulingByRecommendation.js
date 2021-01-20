@@ -305,7 +305,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
             localStorage.removeItem("validToken");
         },
         clickSchedulingStandard: function() {
-            axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+            /*axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
                 patientUsername: this.patient.username,
                 stepNumber: 1,
                 stepType: "FORWARD"
@@ -318,7 +318,7 @@ Vue.component("appointmentSchedulingByRecommendation", {
                     toast('Nemate pravo pristupa stranici!')
                     this.$router.push({ name: 'userLogin' })
                 }
-            });
+            });*/
         }
 	},
     mounted() {

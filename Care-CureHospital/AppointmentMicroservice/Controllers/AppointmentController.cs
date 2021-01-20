@@ -151,6 +151,36 @@ namespace AppointmentMicroservice.Controllers
             schedulingAppointmentEventService.Save(schedulingAppointmentStepEvent);
             return Ok();
         }
+
+        [HttpGet("getSuccessfulSchedulingPercentage")]       // GET /api/appointment/getSuccessfulSchedulingPercentage
+        public IActionResult GetSuccessfulSchedulingPercentage()
+        {
+            return Ok(schedulingAppointmentEventService.GetSuccessfulSchedulingPercentage());
+        }
+
+        [HttpGet("getAverageSuccessfulSchedulingTime")]       // GET /api/appointment/getAverageSuccessfulSchedulingTime
+        public IActionResult GetAverageSuccessfulSchedulingTime()
+        {
+            return Ok(schedulingAppointmentEventService.GetAverageSchedulingTime(SchedulingResultType.SUCCESSFUL));
+        }
+
+        [HttpGet("getAverageUnsuccessfulSchedulingTime")]       // GET /api/appointment/getAverageUnsuccessfulSchedulingTime
+        public IActionResult GetAverageUnsuccessfulSchedulingTime()
+        {
+            return Ok(schedulingAppointmentEventService.GetAverageSchedulingTime(SchedulingResultType.UNSUCCESSFUL));
+        }
+
+        [HttpGet("getMostOftenQuitingStep")]       // GET /api/appointment/getMostOftenQuitingStep
+        public IActionResult GetMostOftenQuitingStep()
+        {
+            return Ok(schedulingAppointmentEventService.GetMostOftenQuitingStep());
+        }
+
+        [HttpGet("getAverageTimeSpentPerStep")]       // GET /api/appointment/getAverageTimeSpentPerStep
+        public IActionResult GetAverageTimeSpentPerStep()
+        {
+            return Ok(schedulingAppointmentEventService.GetAverageTimeSpentPerStep());
+        }
     }
 }
 

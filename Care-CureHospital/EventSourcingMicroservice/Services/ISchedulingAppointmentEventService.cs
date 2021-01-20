@@ -1,4 +1,5 @@
 ﻿using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Domain.SchedulingAppointmentEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,9 @@ namespace EventSourcingMicroservice.Services
     {
         DomainEvent Save(DomainEvent domainEvent);
         IEnumerable<DomainEvent> Load(EventType eventType);
+        public double GetSuccessfulSchedulingPercentage();
+        public double GetAverageSchedulingTime(SchedulingResultType schedulingResultType);
+        public Dictionary<int, double> GetAverageTimeSpentPerStep();
+        public int GetMostOftenQuitingStep();
     }
 }

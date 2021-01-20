@@ -288,6 +288,19 @@ Vue.component("appointmentSchedulingStandard", {
                 }).then(response => {
                     if (response.status === 200) {
                         toast('Termin je uspešno zakazan!')
+                        axios.post('gateway/appointment/saveEndSchedulingAppointmentEvent', {
+                            patientUsername: this.patient.username,
+                            schedulingResultType: 'SUCCESSFUL'
+                        }, {
+                            headers: {
+                                'Authorization': 'Bearer ' + this.userToken
+                            }
+                        }).catch(error => {
+                            if (error.response.status === 401 || error.response.status === 403) {
+                                toast('Nemate pravo pristupa stranici!')
+                                this.$router.push({ name: 'userLogin' })
+                            }
+                        });
                         this.resetData()
                         this.$router.push('patientAppointments')
                     }
@@ -370,6 +383,21 @@ Vue.component("appointmentSchedulingStandard", {
                     headers: {
                         'Authorization': 'Bearer ' + this.userToken
                     }
+                }).then(response => {
+                    axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
+                        patientUsername: this.patient.username,
+                        stepNumber: 1,
+                        stepType: "FORWARD"
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + this.userToken
+                        }
+                    }).catch(error => {
+                        if (error.response.status === 401 || error.response.status === 403) {
+                            toast('Nemate pravo pristupa stranici!')
+                            this.$router.push({ name: 'userLogin' })
+                        }
+                    });
                 }).catch(error => {
                     if (error.response.status === 401 || error.response.status === 403) {
                         toast('Nemate pravo pristupa stranici!')
