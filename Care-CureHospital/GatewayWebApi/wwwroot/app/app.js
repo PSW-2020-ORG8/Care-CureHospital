@@ -17,6 +17,7 @@ const userLogin = { template: '<userLogin></userLogin>' }
 const pageNotFound = { template: '<pageNotFound></pageNotFound>' }
 const prescriptionForAppointment = { template: '<prescriptionForAppointment></prescriptionForAppointment>' }
 const reportForAppointment = { template: '<reportForAppointment></reportForAppointment>' }
+const eventSourcingStatistic = { template: '<eventSourcingStatistic></eventSourcingStatistic>' }
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -39,6 +40,7 @@ const router = new VueRouter({
 		{ path: '/userLogin', name: 'userLogin', component: userLogin },
 		{ path: '/prescriptionForAppointment', name: 'prescriptionForAppointment', component: prescriptionForAppointment },
 		{ path: '/reportForAppointment', name: 'reportForAppointment', component: reportForAppointment },
+		{ path: '/eventSourcingStatistic', name: 'eventSourcingStatistic', component: eventSourcingStatistic },
 		{ path: '*', name: 'pageNotFound', component: pageNotFound }
 	]
 });
