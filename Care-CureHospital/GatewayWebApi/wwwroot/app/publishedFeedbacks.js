@@ -23,10 +23,10 @@
 	     <div class="main">     
 	         <ul class="menu-contents">
 				<li v-if="this.userRole === ''"><h1 style="color:white">Dobrodošli u Care-Cure Hospital</h1></li>
-	            <li class="active"><a href="#/patientsFeedbacks" style="margin-left:-38%">Utisci pacijenata</a></li>
-				<li><a href="#/surveyResults" style="margin-left:-46%">Rezultati anketa</a></li>
-				<li style="margin-left:-12.5%"><a href="#/eventSourcingStatistic">Praćenje događaja</a></li>
-				<li><a href="#/blockMaliciousPatients" style="margin-left:-6%">Zlonamerni korisnici</a></li>
+	            <li v-if="this.userRole === 'Admin'" class="active" ><a href="#/patientsFeedbacks" style="margin-left:-38%">Utisci pacijenata</a></li>
+				<li v-if="this.userRole === 'Admin'"><a href="#/surveyResults" style="margin-left:-46%">Rezultati anketa</a></li>
+				<li v-if="this.userRole === 'Admin'" style="margin-left:-12.5%"><a href="#/eventSourcingStatistic">Praćenje događaja</a></li>
+				<li v-if="this.userRole === 'Admin'"><a href="#/blockMaliciousPatients" style="margin-left:-6%">Zlonamerni korisnici</a></li>
 				<li v-if="this.userRole === 'Patient'"><a href="#/patientAppointments">Pregledi</a></li>
                 <li v-if="this.userRole === 'Patient'" class="active"><a href="#/">Utisci</a></li>
                 <li v-if="this.userRole === 'Patient'"><a href="#/patientMainPage">Početna</a></li>

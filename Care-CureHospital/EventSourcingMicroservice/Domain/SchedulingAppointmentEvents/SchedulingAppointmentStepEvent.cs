@@ -21,5 +21,13 @@ namespace EventSourcingMicroservice.Domain.SchedulingAppointmentEvents
             StepType = stepType;
             EventType = EventType.SCHEDULING_APPOINTMENT_STEP_EVENT;
         }
+
+        public SchedulingAppointmentStepEvent(String patientUsername, int stepNumber, StepType stepType, DateTime timeStamp) : base(timeStamp)
+        {
+            PatientUsername = patientUsername;
+            StepNumber = stepNumber;
+            StepType = stepType;
+            EventType = EventType.SCHEDULING_APPOINTMENT_STEP_EVENT;
+        }
     }
 }

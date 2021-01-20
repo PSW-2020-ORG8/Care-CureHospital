@@ -19,5 +19,12 @@ namespace EventSourcingMicroservice.Domain.SchedulingAppointmentEvents
             SchedulingResultType = schedulingResultType;
             EventType = EventType.END_SCHEDULING_APPOINTMENT_EVENT;
         }
+
+        public EndSchedulingAppointmentEvent(String patientUsername, SchedulingResultType schedulingResultType, DateTime timeStamp) : base(timeStamp)
+        {
+            PatientUsername = patientUsername;
+            SchedulingResultType = schedulingResultType;
+            EventType = EventType.END_SCHEDULING_APPOINTMENT_EVENT;
+        }
     }
 }

@@ -55,12 +55,7 @@ Vue.component("eventSourcingStatistic", {
 			
 		</table> 
 
-	</div>
-	
-	 
-	 
-
-	     
+	</div>	     
 	</div>	  
 	</div>
         
@@ -86,11 +81,7 @@ Vue.component("eventSourcingStatistic", {
 
 			this.decodedToken = JSON.parse(jsonPayload);
 			this.loggedUserId = parseInt(this.decodedToken.unique_name);
-		}
-
-
-		
- 
+		}	
 	}
 
 });

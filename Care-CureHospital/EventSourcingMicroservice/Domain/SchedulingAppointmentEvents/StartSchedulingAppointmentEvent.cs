@@ -11,7 +11,14 @@ namespace EventSourcingMicroservice.Domain.SchedulingAppointmentEvents
         public String PatientUsername { get; set; }
 
         public StartSchedulingAppointmentEvent() {}
+
         public StartSchedulingAppointmentEvent(String patientUsername) : base()
+        {
+            PatientUsername = patientUsername;
+            EventType = EventType.START_SCHEDULING_APPOINTMENT_EVENT;
+        }
+
+        public StartSchedulingAppointmentEvent(String patientUsername, DateTime timeStamp) : base(timeStamp)
         {
             PatientUsername = patientUsername;
             EventType = EventType.START_SCHEDULING_APPOINTMENT_EVENT;

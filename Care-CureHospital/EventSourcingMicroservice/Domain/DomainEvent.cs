@@ -16,6 +16,11 @@ namespace EventSourcingMicroservice.Domain
             TimeStamp =  DateTime.UtcNow;
         }
 
+        public DomainEvent(DateTime timeStamp)
+        {
+            Id = new Guid();
+            TimeStamp = timeStamp;
+        }
 
     }
 }
