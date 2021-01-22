@@ -1,6 +1,11 @@
 Vue.component("eventSourcingStatistic", {
 	data: function () {
 		return {
+			successfullyPercentage: 0,
+			successfullyAvgTime: 0,
+			unsuccessfullyAvgTime: 0,
+			mostOftenQuitingStep: 0,
+			dictAvgTimePerStep: [],
 			userToken: null,
 			loggedUserId: 0
 		}
@@ -38,21 +43,51 @@ Vue.component("eventSourcingStatistic", {
 		</div>
 	
     <div class="event-sourcing-questions" style="margin-left:14.5%">
-		<h3>Statistika praćenja događaja pri zakazivanju pregleda</h3>
-		<table class="event-sourcing-statistic-table" style="margin-bottom : 40px">
+		<h3 style="color: #324960">Statistika praćenja događaja pri zakazivanju pregleda</h3>
+		<table class="event-sourcing-statistic-table" style="margin-bottom:40px">
 			<tr>
-				<th style="min-width:430px;">Statistički parametar</th>
-				<th style="min-width:90px;">Vrednost</th>			
+				<th style="min-width:430px;height:29px">Statistički parametar</th>
+				<th style="min-width:90px;height:29px">Vrednost</th>			
 			</tr>
 			<tr>
-				<td>Prosečna uspešnost zakazivanja pregleda</td>
-				<td>85%</td>
+				<td style="height:29px">Procenat uspešnog zakazivanja pregleda</td>
+				<td style="height:29px">{{this.successfullyPercentage.toFixed(2) * 100}}%</td>
 			</tr>
 			<tr>
-				<td>Prosečno vreme zakazivanja</td>
-				<td>125.24s</td>
+				<td style="height:29px">Procenat neuspešnog zakazivanja pregleda</td>
+				<td style="height:29px">{{(1.0 - this.successfullyPercentage.toFixed(2)) * 100}}%</td>
 			</tr>
-			
+			<tr>
+				<td style="height:29px">Prosečno vreme uspešnog zakazivanja pregleda</td>
+				<td style="height:29px">{{this.successfullyAvgTime.toFixed(2)}}s</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Prosečno vreme neuspešnog zakazivanja pregleda</td>
+				<td style="height:29px">{{this.unsuccessfullyAvgTime.toFixed(2)}}s</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Korak na kom se najčešće odustaje</td>
+				<td v-if="this.mostOftenQuitingStep === 1" style="height:29px">Izbor datuma</td>
+				<td v-if="this.mostOftenQuitingStep === 2" style="height:29px">Izbor specijalizacije</td>
+				<td v-if="this.mostOftenQuitingStep === 3" style="height:29px">Izbor doktora</td>
+				<td v-if="this.mostOftenQuitingStep === 4" style="height:29px">Izbor termina</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Prosešno vreme provedeno na izboru datuma</td>
+				<td style="height:29px">{{this.dictAvgTimePerStep[1].toFixed(2)}}s</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Prosešno vreme provedeno na izboru specijalizacije doktora</td>
+				<td style="height:29px">{{this.dictAvgTimePerStep[2].toFixed(2)}}s</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Prosešno vreme provedeno na izboru doktora</td>
+				<td style="height:29px">{{this.dictAvgTimePerStep[3].toFixed(2)}}s</td>
+			</tr>
+			<tr>
+				<td style="height:29px">Prosešno vreme provedeno na izboru određenog termina</td>
+				<td style="height:29px">{{this.dictAvgTimePerStep[4].toFixed(2)}}s</td>
+			</tr>		
 		</table> 
 
 	</div>	     
@@ -82,6 +117,67 @@ Vue.component("eventSourcingStatistic", {
 			this.decodedToken = JSON.parse(jsonPayload);
 			this.loggedUserId = parseInt(this.decodedToken.unique_name);
 		}	
+
+		axios.get('gateway/appointment/getSuccessfulSchedulingPercentage', {
+			headers: {
+				'Authorization': 'Bearer ' + this.userToken
+			}
+		}).then(response => {
+			this.successfullyPercentage = response.data;
+			axios.get('gateway/appointment/getAverageSuccessfulSchedulingTime', {
+				headers: {
+					'Authorization': 'Bearer ' + this.userToken
+				}
+			}).then(response => {
+				this.successfullyAvgTime = response.data;
+				axios.get('gateway/appointment/getAverageUnsuccessfulSchedulingTime', {
+					headers: {
+						'Authorization': 'Bearer ' + this.userToken
+					}
+				}).then(response => {
+					this.unsuccessfullyAvgTime = response.data;
+					axios.get('gateway/appointment/getMostOftenQuitingStep', {
+						headers: {
+							'Authorization': 'Bearer ' + this.userToken
+						}
+					}).then(response => {
+						this.mostOftenQuitingStep = response.data;
+						axios.get('gateway/appointment/getAverageTimeSpentPerStep', {
+							headers: {
+								'Authorization': 'Bearer ' + this.userToken
+							}
+						}).then(response => {
+							this.dictAvgTimePerStep = response.data;
+						}).catch(error => {
+							if (error.response.status === 401 || error.response.status === 403) {
+								toast('Nemate pravo pristupa stranici!')
+								this.$router.push({ name: 'userLogin' })
+							}
+						});
+					}).catch(error => {
+						if (error.response.status === 401 || error.response.status === 403) {
+							toast('Nemate pravo pristupa stranici!')
+							this.$router.push({ name: 'userLogin' })
+						}
+					});
+				}).catch(error => {
+					if (error.response.status === 401 || error.response.status === 403) {
+						toast('Nemate pravo pristupa stranici!')
+						this.$router.push({ name: 'userLogin' })
+					}
+				});
+			}).catch(error => {
+				if (error.response.status === 401 || error.response.status === 403) {
+					toast('Nemate pravo pristupa stranici!')
+					this.$router.push({ name: 'userLogin' })
+				}
+			});
+		}).catch(error => {
+			if (error.response.status === 401 || error.response.status === 403) {
+				toast('Nemate pravo pristupa stranici!')
+				this.$router.push({ name: 'userLogin' })
+			}
+		});
 	}
 
 });

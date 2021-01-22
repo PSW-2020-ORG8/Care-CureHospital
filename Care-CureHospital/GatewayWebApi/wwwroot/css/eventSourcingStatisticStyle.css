@@ -9,7 +9,6 @@
 }
 
 .event-sourcing-questions {
-    overflow-y: scroll;
     position: fixed;
     height: 60%;
     background-color: #afd0c7;
@@ -39,10 +38,10 @@
     background-color: white;
 }
 
-h3 {
-    color: #324960;
-    margin-left: 0%;
-    margin-top: 0px;
+.event-sourcing-statistic-table td.min {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .event-sourcing-statistic-table td, .event-sourcing-statistic-table th {
@@ -68,7 +67,6 @@ h3 {
 .event-sourcing-statistic-table tr:nth-child(even) {
     background: rgb(230, 227, 227);
 }
-
 
 .wrapper-form-survey-after-examination {
     position: fixed;
