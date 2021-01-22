@@ -115,6 +115,158 @@
                 "UserRole": "Patient"
             }
         },
+        {
+            "DownstreamPathTemplate": "/api/appointment/saveStartSchedulingAppointmentEvent",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/saveStartSchedulingAppointmentEvent",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/saveEndSchedulingAppointmentEvent",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/saveEndSchedulingAppointmentEvent",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/saveSchedulingAppointmentStepEvent",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/saveSchedulingAppointmentStepEvent",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/getSuccessfulSchedulingPercentage",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/getSuccessfulSchedulingPercentage",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Admin"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/getAverageSuccessfulSchedulingTime",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/getAverageSuccessfulSchedulingTime",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+          "RouteClaimsRequirement": {
+            "UserRole": "Admin"
+          }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/getAverageUnsuccessfulSchedulingTime",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/getAverageUnsuccessfulSchedulingTime",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+          "RouteClaimsRequirement": {
+            "UserRole": "Admin"
+          }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/getMostOftenQuitingStep",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/getMostOftenQuitingStep",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+          "RouteClaimsRequirement": {
+            "UserRole": "Admin"
+          }
+        },
+        {
+            "DownstreamPathTemplate": "/api/appointment/getAverageTimeSpentPerStep",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5171
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/appointment/getAverageTimeSpentPerStep",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+          "RouteClaimsRequirement": {
+            "UserRole": "Admin"
+          }
+        },
 
         // AllergiesController 
         {
@@ -805,6 +957,25 @@
             },
             "RouteClaimsRequirement": {
                 "UserRole": "Admin"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/patient/getPatient/{patientId}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 59947
+                }
+            ],
+            "UpstreamPathTemplate": "/gateway/patient/getPatient/{patientId}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Key",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "UserRole": "Patient"
             }
         },
 
