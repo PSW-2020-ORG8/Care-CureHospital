@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  appointment:
+  appointments:
     build: 
       context: .
       dockerfile: AppointmentMicroservice/Dockerfile
