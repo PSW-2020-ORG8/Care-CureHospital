@@ -7,6 +7,7 @@ namespace PharmacyMicroservice.DataBase
     public class PharmacyDataBaseContext : DbContext
     {
         public DbSet<Pharmacies> Pharmacies { get; set; }
+        public DbSet<EndPoint> EndPoints { get; set; }
         public PharmacyDataBaseContext() : base() { }
         public PharmacyDataBaseContext(DbContextOptions<PharmacyDataBaseContext> options) : base(options) { }
 
@@ -39,10 +40,22 @@ namespace PharmacyMicroservice.DataBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pharmacies>().HasData(
-                new Pharmacies { Id = 1, Name = "Apoteka1", Key = "1234", Link = "apoteka1.com" },
-                new Pharmacies { Id = 2, Name = "Apoteka2", Key = "5678", Link = "apoteka2.com" },
-                new Pharmacies { Id = 3, Name = "Apoteka3", Key = "9101112", Link = "apoteka3.com" }
+                new Pharmacies { Id = 1, Name = "Jankovic", Key = new APIKey() , Link = new EndPoint()},
+                new Pharmacies { Id = 2, Name = "Benu", Key = new APIKey(), Link = new EndPoint() },
+                new Pharmacies { Id = 3, Name = "Tilia", Key = new APIKey(), Link = new EndPoint() }
             );
+
+            modelBuilder.Entity<EndPoint>().HasData(
+               new EndPoint { Link = "jankovic.com" },
+               new EndPoint { Link = "benu.com" },
+               new EndPoint { Link = "tilia.com" }
+            );
+
+            modelBuilder.Entity<APIKey>().HasData(
+                new APIKey { Key = "1234" },
+                new APIKey { Key = "5678" },
+                new APIKey { Key = "9101112" }
+                );
         }
     }
 }

@@ -5,6 +5,7 @@ using EPrescriptionMicroservice.Mapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EPrescriptionMicroservice.Controllers
 {
@@ -12,6 +13,8 @@ namespace EPrescriptionMicroservice.Controllers
     [ApiController]
     public class EPrescriptionController : ControllerBase
     {
+        private readonly IWebHostEnvironment env;
+
         private IEPrescriptionService ePrescriptionService;
         public EPrescriptionController(IEPrescriptionService ePrescriptionService) 
         {
@@ -51,11 +54,10 @@ namespace EPrescriptionMicroservice.Controllers
         }
 
         [HttpPost("send")]
-        public IActionResult SendPrescription()
+        public IActionResult SendPrescription(EPrescription ePrescription)
         {
-            this.ePrescriptionService.SendPrescriptionSftp();
+            this.ePrescriptionService.SendPrescriptionSftp(ePrescription);
             return Ok();
         }
     }
 }
-

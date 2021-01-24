@@ -54,7 +54,8 @@ namespace TenderMicroservice.Controllers
         [HttpPut("closeTender/{tenderId}")]
         public IActionResult CloseTender(int tenderId)
         {
-            return Ok(this.tenderService.CloseTender(tenderId));
+            this.tenderService.CloseTender(tenderId);
+            return Ok();
         }
     }
 }

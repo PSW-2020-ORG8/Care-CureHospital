@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DirectorServiceService } from 'src/app/director-service.service';
 import { Report } from '../models/Report';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-director',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DirectorComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService, private router: Router) { }
+  constructor(private service:DirectorServiceService, private router: Router, public snackBar: MatSnackBar) { }
 
   medicamentName:string;
   quantity:number;
@@ -22,6 +23,7 @@ export class DirectorComponent implements OnInit {
   ModalTitle:string;
   ActivateAddEditRepComp:boolean=false;
   rep:Report;
+  val:any;
 
   ngOnInit(): void {
     this.refreshReportList();
@@ -47,12 +49,17 @@ export class DirectorComponent implements OnInit {
     this.service.getReportList().subscribe((data: Report[]) => {
       console.log(data);
       this.ReportList = data;
-    })
+    }),
+    error => {
+     //console.log("Report list is not possible to load because server isn't responding.");
+    };
   }
 
   generate(){
-    alert("Report saved!");
-    console.log(this.ReportList);
+    this.service.generate(this.val).subscribe(data => {
+      alert("Report saved!");
+      console.log(this.ReportList);
+    })
   }
 
   publishT(){
@@ -60,8 +67,8 @@ export class DirectorComponent implements OnInit {
       console.log("Successfully sent!");
       alert("Successfully sent!");
     },
-    Error => {
-      console.log("Error");
+    error => {
+     //console.log("");
     });
   }
 
@@ -71,5 +78,9 @@ export class DirectorComponent implements OnInit {
 
   closeT(){
     this.router.navigate(['closeTender']);
+  }
+
+  urgent(){
+    this.router.navigate(['urgentProcurement']);
   }
 }

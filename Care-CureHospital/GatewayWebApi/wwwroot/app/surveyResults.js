@@ -24,9 +24,10 @@ Vue.component("surveyResults", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
-				<li class="active"><a href="#/surveyResults">Rezultati anketa</a></li>
-				<li><a href="#/blockMaliciousPatients">Zlonamerni korisnici</a></li>
+				<li><a href="#/patientsFeedbacks" style="margin-left:-37%">Utisci pacijenata</a></li>
+				<li class="active"><a href="#/surveyResults" style="margin-left:-44%">Rezultati anketa</a></li>
+				<li style="margin-left:-12%"><a href="#/eventSourcingStatistic">Praćenje događaja</a></li>
+				<li><a href="#/blockMaliciousPatients" style="margin-left:-6%">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  

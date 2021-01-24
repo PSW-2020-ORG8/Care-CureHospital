@@ -1,0 +1,87 @@
+.boundaryForScrollSurvey {
+    position: fixed;
+    width: 100%;
+    height: 185px;
+    padding: 20px;
+    margin-top:  0px;
+    background-color: #6d989a;
+    z-index: 4;
+}
+
+.event-sourcing-questions {
+    position: fixed;
+    height: 60%;
+    background-color: #afd0c7;
+    width: 1100px;
+    padding: 35px;
+    border-radius: 30px 30px 30px 30px;
+    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    margin-right: -35%;
+    margin-top: 10%;
+}
+
+
+.event-sourcing-statistic-table {
+    margin-top: 2%;
+    margin-right: 22%;
+    counter-reset: serial-number;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    background-color: white;
+}
+
+.event-sourcing-statistic-table td.min {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-sourcing-statistic-table td, .event-sourcing-statistic-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.event-sourcing-statistic-table td {
+    border-right: 1px solid #204264c0;
+    font-size: 16px;
+}
+
+.event-sourcing-statistic-table th {
+    color: #ffffff;
+    background: #204264c0;
+}
+
+.event-sourcing-statistic-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.event-sourcing-statistic-table tr:nth-child(even) {
+    background: rgb(230, 227, 227);
+}
+
+.wrapper-form-survey-after-examination {
+    position: fixed;
+    z-index: 1;
+    height: 700px;
+    width: 854px;
+    margin: 50px auto;
+    margin-left: 21%;
+    margin-top: 0%;
+    border-radius: 7px 7px 7px 7px;
+    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    transition: 2.3 ease;
+    cursor: pointer;
+}
+
+

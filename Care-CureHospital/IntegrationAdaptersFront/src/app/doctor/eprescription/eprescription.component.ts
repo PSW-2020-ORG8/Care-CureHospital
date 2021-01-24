@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DoctorService } from 'src/app/doctor.service';
 import { EPrescription } from '../../models/EPrescription';
 import { HttpClient } from '@angular/common/http'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-eprescription',
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EprescriptionComponent implements OnInit {
 
-  constructor(private service:DoctorService, public http: HttpClient) { }
+  constructor(private service:DoctorService, public http: HttpClient, private toastr: ToastrService) { }
 
   @Input() ep:EPrescription;
    patientName:string;
@@ -34,11 +35,23 @@ export class EprescriptionComponent implements OnInit {
             publishingDate:this.EPrescriptionList.publishingDate
             };
     this.service.addEPrescription(val).subscribe(
-      epr => {alert(epr.toString())});
-  alert("Successfully added medication!");
+      epr => {
+        console.log(epr.toString())
+      });
+      this.toastr.success("Successfully sent!")
   }
 
   generateEP(){
-    alert("EPrescription saved!");
+    var val = {patientName:this.EPrescriptionList.patientName,
+      comment:this.EPrescriptionList.comment,
+      medicamentName:this.EPrescriptionList.medicamentName,
+      publishingDate:this.EPrescriptionList.publishingDate
+      };
+    
+    this.service.generateEP(val).subscribe(
+      epr => {
+        console.log(epr.toString())
+      });
+      this.toastr.success("Successfully sent!")
   }
 }

@@ -14,11 +14,13 @@ namespace TenderMicroservice.Controllers
     {
         private IOfferService offerService;
         private IEmailService emailService;
+        private ITenderService tenderService;
 
-        public OfferController(IOfferService offerService, IEmailService emailService)
+        public OfferController(IOfferService offerService, IEmailService emailService, ITenderService tenderService)
         {
             this.offerService = offerService;
             this.emailService = emailService;
+            this.tenderService = tenderService;
         }
 
         [HttpGet()] 
@@ -54,9 +56,10 @@ namespace TenderMicroservice.Controllers
         }
 
         [HttpPut("chooseO/{id}")]
-        public IActionResult ChooseOffer(int id)
+        public IActionResult ChooseOffer(int id, int tenderId)
         {
-            return Ok(this.offerService.ChooseOffer(id));
+            this.offerService.ChooseOffer(id);
+            return Ok();
         }
 
         [HttpGet("notWinner")]

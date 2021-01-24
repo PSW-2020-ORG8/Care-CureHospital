@@ -74,12 +74,12 @@ namespace AppointmentMicroservice.DataBase
                 new Appointment { Id = 6, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 09, 15, 30, 0), EndTime = new DateTime(2020, 12, 09, 16, 00, 0), DoctorWorkDayId = 4, MedicalExaminationId = 11 },
                 new Appointment { Id = 7, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2020, 12, 18, 15, 30, 0), EndTime = new DateTime(2020, 12, 18, 16, 0, 0), DoctorWorkDayId = 2, MedicalExaminationId = 5 },
                 new Appointment { Id = 8, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2021, 12, 21, 8, 30, 0), EndTime = new DateTime(2021, 12, 21, 9, 0, 0), DoctorWorkDayId = 5, MedicalExaminationId = 3 },
-                new Appointment { Id = 9, Canceled = true, CancellationDate = new DateTime(2020, 11, 18, 8, 0, 0), StartTime = new DateTime(2020, 11, 21, 8, 0, 0), EndTime = new DateTime(2020, 11, 21, 8, 30, 0), DoctorWorkDayId = 6, MedicalExaminationId = 7 },
-                new Appointment { Id = 10, Canceled = true, CancellationDate = new DateTime(2020, 11, 20, 8, 0, 0), StartTime = new DateTime(2020, 11, 23, 8, 0, 0), EndTime = new DateTime(2020, 11, 23, 8, 30, 0), DoctorWorkDayId = 7, MedicalExaminationId = 8 },
-                new Appointment { Id = 11, Canceled = true, CancellationDate = new DateTime(2020, 11, 25, 8, 0, 0), StartTime = new DateTime(2020, 11, 28, 8, 0, 0), EndTime = new DateTime(2020, 11, 28, 8, 30, 0), DoctorWorkDayId = 8, MedicalExaminationId = 9 },
-                new Appointment { Id = 12, Canceled = true, CancellationDate = new DateTime(2020, 11, 26, 8, 0, 0), StartTime = new DateTime(2020, 11, 29, 8, 0, 0), EndTime = new DateTime(2020, 11, 29, 8, 30, 0), DoctorWorkDayId = 9, MedicalExaminationId = 10 },
-                new Appointment { Id = 13, Canceled = true, CancellationDate = new DateTime(2020, 11, 27, 8, 0, 0), StartTime = new DateTime(2020, 11, 30, 8, 0, 0), EndTime = new DateTime(2020, 11, 30, 8, 30, 0), DoctorWorkDayId = 10, MedicalExaminationId = 11 },
-                new Appointment { Id = 14, Canceled = true, CancellationDate = new DateTime(2020, 11, 18, 8, 0, 0), StartTime = new DateTime(2020, 11, 21, 9, 0, 0), EndTime = new DateTime(2020, 11, 21, 9, 30, 0), DoctorWorkDayId = 6, MedicalExaminationId = 12 },
+                new Appointment { Id = 9, Canceled = true, CancellationDate = new DateTime(2021, 1, 20, 8, 0, 0), StartTime = new DateTime(2021, 11, 21, 8, 0, 0), EndTime = new DateTime(2021, 11, 21, 8, 30, 0), DoctorWorkDayId = 6, MedicalExaminationId = 7 },
+                new Appointment { Id = 10, Canceled = true, CancellationDate = new DateTime(2021, 1, 19, 8, 0, 0), StartTime = new DateTime(2021, 11, 23, 8, 0, 0), EndTime = new DateTime(2021, 11, 23, 8, 30, 0), DoctorWorkDayId = 7, MedicalExaminationId = 8 },
+                new Appointment { Id = 11, Canceled = true, CancellationDate = new DateTime(2021, 1, 18, 8, 0, 0), StartTime = new DateTime(2021, 11, 28, 8, 0, 0), EndTime = new DateTime(2021, 11, 28, 8, 30, 0), DoctorWorkDayId = 8, MedicalExaminationId = 9 },
+                new Appointment { Id = 12, Canceled = true, CancellationDate = new DateTime(2021, 1, 17, 8, 0, 0), StartTime = new DateTime(2021, 11, 29, 8, 0, 0), EndTime = new DateTime(2021, 11, 29, 8, 30, 0), DoctorWorkDayId = 9, MedicalExaminationId = 10 },
+                new Appointment { Id = 13, Canceled = true, CancellationDate = new DateTime(2021, 1, 16, 8, 0, 0), StartTime = new DateTime(2021, 11, 30, 8, 0, 0), EndTime = new DateTime(2021, 11, 30, 8, 30, 0), DoctorWorkDayId = 10, MedicalExaminationId = 11 },
+                new Appointment { Id = 14, Canceled = true, CancellationDate = new DateTime(2021, 1, 15, 8, 0, 0), StartTime = new DateTime(2021, 11, 21, 9, 0, 0), EndTime = new DateTime(2021, 11, 21, 9, 30, 0), DoctorWorkDayId = 6, MedicalExaminationId = 12 },
                 new Appointment { Id = 15, Canceled = false, CancellationDate = new DateTime(), StartTime = new DateTime(2021, 4, 4, 9, 0, 0), EndTime = new DateTime(2021, 4, 4, 9, 30, 0), DoctorWorkDayId = 14, MedicalExaminationId = 13 }
             );
 
@@ -95,7 +95,7 @@ namespace AppointmentMicroservice.DataBase
                 new MedicalExamination { Id = 9, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 2, DoctorId = 7, PatientId = 5 },
                 new MedicalExamination { Id = 10, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 6, PatientId = 6 },
                 new MedicalExamination { Id = 11, SurveyFilled = false, ShortDescription = "Sve je bilo u redu na pregledu", RoomId = 3, DoctorId = 5, PatientId = 6 },
-                new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 1 },
+                new MedicalExamination { Id = 12, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 9, PatientId = 6 },
                 new MedicalExamination { Id = 13, SurveyFilled = false, ShortDescription = "Pacijenta je boleo stomak", RoomId = 1, DoctorId = 1, PatientId = 1 }
             );
         }

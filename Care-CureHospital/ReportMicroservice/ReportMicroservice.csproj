@@ -22,9 +22,5 @@
     <ProjectReference Include="..\Backend\Backend.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Files\" />
-  </ItemGroup>
-
 
 </Project>

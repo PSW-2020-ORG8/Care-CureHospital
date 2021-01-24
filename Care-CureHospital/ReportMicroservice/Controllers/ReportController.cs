@@ -12,6 +12,7 @@ namespace ReportMicroservice.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
+        private ISftpService sftpService;
         private IReportService reportService;
 
         public ReportController(IReportService reportService)
@@ -36,9 +37,9 @@ namespace ReportMicroservice.Controllers
         }
 
         [HttpPost("send")]
-        public IActionResult SendReport()
+        public IActionResult SendReport(Report report)
         {
-            this.reportService.SendReportSftp();
+            this.reportService.SendReportSftp(report);
             return Ok();
         }
     }

@@ -21,10 +21,11 @@ Vue.component("blockMaliciousPatients", {
 	 
 	     <div class="main">     
 	         <ul class="menu-contents">
-				<li><a href="#/patientsFeedbacks">Utisci pacijenata</a></li>
-				<li><a href="#/surveyResults">Rezultati anketa</a></li>
-				<li class="active"><a href="#/blockMaliciousPatients" id="block-malicious-patients-link">Zlonamerni korisnici</a></li>
-	         </ul>
+				<li><a href="#/patientsFeedbacks" style="margin-left:-37%">Utisci pacijenata</a></li>
+				<li><a href="#/surveyResults" style="margin-left:-44%">Rezultati anketa</a></li>
+				<li style="margin-left:-12%"><a href="#/eventSourcingStatistic">Praćenje događaja</a></li>
+				<li class="active"><a href="#/blockMaliciousPatients" style="margin-left:-6%" id="block-malicious-patients-link">Zlonamerni korisnici</a></li>
+			</ul>
 	     </div>
  
 	     <div class="dropdown">

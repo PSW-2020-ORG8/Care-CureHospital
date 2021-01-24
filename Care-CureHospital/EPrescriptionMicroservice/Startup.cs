@@ -26,12 +26,13 @@ namespace EPrescriptionMicroservice
         {
             services.AddCors();
 
-            services.AddSingleton<IEPrescriptionService, EPrescriptionService>(report => new EPrescriptionService(new EPrescriptionRepository(new MySQLStream<EPrescription>())));
             services.AddSingleton<ISftpService, SftpService>(sftp => new SftpService());
+            services.AddSingleton<IEPrescriptionService, EPrescriptionService>(report => new EPrescriptionService(new EPrescriptionRepository(new MySQLStream<EPrescription>()), new SftpService()));
             services.AddDbContext<EPrescriptionDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
             services.AddControllers();
+            services.AddRazorPages();
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -56,16 +57,21 @@ namespace EPrescriptionMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -13,10 +13,10 @@ namespace ReportMicroservice.Service
 
         public void UploadFile(string file)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.7", "tester", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "tester", "password")))
             {
                 client.Connect();
-                client.UploadFile(File.OpenRead(file), @"\public\" + Path.GetFileName(file), x => { Console.WriteLine(x); });
+                client.UploadFile(File.OpenRead(file), @"" + Path.GetFileName(file), x => { Console.WriteLine(x); });
                 SendNotification();
                 client.Disconnect();
             }
@@ -42,7 +42,7 @@ namespace ReportMicroservice.Service
             }
             catch (SmtpException ex)
             {
-                Console.WriteLine("ERROR!");
+                throw new SmtpException("Dear user, something went wrong on server side so it's not possible to send an email now. Please try later.", ex);
             }
         }
     }

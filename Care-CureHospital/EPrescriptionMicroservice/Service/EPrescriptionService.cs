@@ -8,8 +8,8 @@ namespace EPrescriptionMicroservice.Service
 {
     public class EPrescriptionService : IEPrescriptionService
     {
-        public IEPrescriptionRepository eprescriptionRepository;
         public ISftpService sftpService;
+        public IEPrescriptionRepository eprescriptionRepository;
 
         public static object Assert { get; set; }
 
@@ -20,8 +20,8 @@ namespace EPrescriptionMicroservice.Service
 
         public EPrescriptionService(IEPrescriptionRepository eprescriptionRepository, ISftpService sftpService)
         {
-            this.eprescriptionRepository = eprescriptionRepository;
             this.sftpService = sftpService;
+            this.eprescriptionRepository = eprescriptionRepository;
         }
 
         public EPrescription AddEntity(EPrescription entity)
@@ -92,18 +92,23 @@ namespace EPrescriptionMicroservice.Service
             return searchResult;
         }
 
-        public void SendPrescriptionSftp()
+        public void SendPrescriptionSftp(EPrescription ePrescription)
         {
             String prescriptionFile = "Files\\Prescription_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-            System.IO.File.WriteAllText(prescriptionFile, "EPrescription:");
+            System.IO.File.WriteAllText(prescriptionFile, enterPrescription(ePrescription));
             try
             {
                 sftpService.UploadFile(prescriptionFile);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
             }
+        }
+
+        public String enterPrescription(EPrescription ePrescription)
+        {
+            return "Prescription for patient: \n\n" + "Patient name: " + ePrescription.PatientName + "\nMedicamentName: " + ePrescription.MedicamentName + "\nDate: " + ePrescription.PublishingDate + "\nComment: " + ePrescription.Comment;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace ReportMicroservice.Service
 {
     public class ReportService : IReportService
     {
-        public IReportRepository reportRepository;
         public ISftpService sftpService;
+        public IReportRepository reportRepository;
 
         public ReportService(IReportRepository reportRepository)
         {
@@ -18,8 +18,8 @@ namespace ReportMicroservice.Service
 
         public ReportService(IReportRepository reportRepository, ISftpService sftpService)
         {
-            this.reportRepository = reportRepository;
             this.sftpService = sftpService;
+            this.reportRepository = reportRepository;
         }
 
         public Report GetEntity(int id)
@@ -54,18 +54,23 @@ namespace ReportMicroservice.Service
             reportRepository.DeleteEntity(entity);
         }
 
-        public void SendReportSftp()
+        public void SendReportSftp(Report report)
         {
             String reportFile = "Files\\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-            System.IO.File.WriteAllText(reportFile, "Report about medicament consumption:");
+            System.IO.File.WriteAllText(reportFile, enterReport(report));
             try
             {
                 sftpService.UploadFile(reportFile);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
             }
+        }
+
+        public String enterReport(Report report)
+        {
+            return "Report about medicament consumption: \n\n" + "Medicament name: " + report.MedicamentName + "\nQuantity: " + report.Quantity + "\nFrom date: " + report.FromDate + "\nTo date: " + report.ToDate;
         }
     }
 }

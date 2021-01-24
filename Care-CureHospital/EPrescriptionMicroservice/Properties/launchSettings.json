@@ -32,6 +32,15 @@
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true
+    },
+
+    "IISX-Production": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "Error",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
     }
   }
 }

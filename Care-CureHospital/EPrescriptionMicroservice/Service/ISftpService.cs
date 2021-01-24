@@ -1,5 +1,4 @@
-﻿
-namespace EPrescriptionMicroservice.Service
+﻿namespace EPrescriptionMicroservice.Service
 {
     public interface ISftpService
     {

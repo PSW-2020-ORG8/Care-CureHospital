@@ -1,5 +1,4 @@
-﻿
-namespace EPrescriptionMicroservice.Repository
+﻿namespace EPrescriptionMicroservice.Repository
 {
     public interface IIdentifiable<T>
     {

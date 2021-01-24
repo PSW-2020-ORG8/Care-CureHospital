@@ -1,4 +1,5 @@
 ﻿using EventSourcingMicroservice.Domain;
+using EventSourcingMicroservice.Domain.SchedulingAppointmentEvents;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -8,6 +9,10 @@ namespace EventSourcingMicroservice.DataBase
     {
         public DbSet<LoginEvent> LoginEvents { get; set; }
         public DbSet<URLEvent> URLEvents { get; set; }
+        public DbSet<StartSchedulingAppointmentEvent> StartSchedulingAppointmentEvents { get; set; }
+        public DbSet<EndSchedulingAppointmentEvent> EndSchedulingAppointmentEvents { get; set; }
+        public DbSet<SchedulingAppointmentStepEvent> SchedulingAppointmentStepEvents { get; set; }
+
         public ESDataBaseContext()
         {
         }
@@ -15,6 +20,7 @@ namespace EventSourcingMicroservice.DataBase
         public ESDataBaseContext(DbContextOptions<DbContext> options) : base(options)
         {
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {  
             if (!optionsBuilder.IsConfigured)

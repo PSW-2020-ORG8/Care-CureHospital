@@ -1,5 +1,6 @@
 ﻿using PharmacyMicroservice.Repository;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PharmacyMicroservice.Domain
 {
@@ -9,11 +10,13 @@ namespace PharmacyMicroservice.Domain
 
         public String Name { get; set; }
 
-        public String Key { get; set; }
+        [NotMapped]
+        public virtual EndPoint Link { get; set; }
 
-        public String Link { get; set; }
+        [NotMapped]
+        public virtual APIKey Key { get; set; }
 
-        public Pharmacies(int id, String name, String key, String link)
+        public Pharmacies(int id, String name, EndPoint link, APIKey key)
         {
             Id = id;
             Name = name;
@@ -21,7 +24,7 @@ namespace PharmacyMicroservice.Domain
             Link = link;
         }
 
-        public Pharmacies(String name, String key, String link)
+        public Pharmacies(String name, EndPoint link, APIKey key)
         {
             Name = name;
             Key = key;
@@ -58,24 +61,6 @@ namespace PharmacyMicroservice.Domain
             Name = name;
         }
 
-        public String GetKey()
-        {
-            return Key;
-        }
-
-        public void SetKey(String key)
-        {
-            Key = key;
-        }
-
-        public String GetLink()
-        {
-            return Link;
-        }
-
-        public void SetLink(String link)
-        {
-            Link = link;
-        }
+       
     }
 }

@@ -12,10 +12,13 @@ namespace ProtocolMicroservice.Service
             var client = new RestSharp.RestClient("http://localhost:8080");
             var request = new RestRequest("/medicament/Aspirin", DataFormat.Json);
             IRestResponse<List<MedicamentDto>> response = client.Get<List<MedicamentDto>>(request);
-            Console.WriteLine("Status: " + response.StatusCode.ToString());
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new Exception($"Error occured while sending request. {response.Content}" +
+                    $"{response.StatusDescription}");
+            }
             response.Data.ForEach(medicament =>
             Console.WriteLine(medicament.ToString()));
-            Console.WriteLine(response.Content);
             var result = response.Content;
             return result;
         }
