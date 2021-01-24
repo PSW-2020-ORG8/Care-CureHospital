@@ -41,7 +41,7 @@ export class DoctorService {
   }
 
   generateEP(val:EPrescription):Observable<EPrescription>{
-    return this.http.post<EPrescription>(this.APIUrl+'/eprescription/send', val)/*.
+    return this.http.post<EPrescription>(this.APIUrl+'/eprescription/send', val).
     pipe(
       map((data: any) => {
         return data;
@@ -49,6 +49,6 @@ export class DoctorService {
        // window.alert(error);
         return throwError( 'You can not sent prescription because server is not responding!' );
       })
-    )*/
+    )
   }
 }
