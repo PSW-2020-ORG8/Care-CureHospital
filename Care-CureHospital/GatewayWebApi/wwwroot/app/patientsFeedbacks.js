@@ -24,7 +24,7 @@ Vue.component("patientsFeedbacks", {
 	            <li class="active"><a href="#/patientsFeedbacks" style="margin-left:-38%">Utisci pacijenata</a></li>
 				<li><a href="#/surveyResults" style="margin-left:-46%">Rezultati anketa</a></li>
 				<li style="margin-left:-12.5%"><a href="#/eventSourcingStatistic">Praćenje događaja</a></li>
-				<li><a href="#/blockMaliciousPatients" style="margin-left:-6%">Zlonamerni korisnici</a></li>
+				<li><a href="#/blockMaliciousPatients" style="margin-left:-6%" id="malicious-patients-link">Zlonamerni korisnici</a></li>
 	         </ul>
 	     </div>
  

@@ -1,10 +1,8 @@
 ﻿using EventSourcingMicroservice.Domain;
 using EventSourcingMicroservice.Domain.SchedulingAppointmentEvents;
 using EventSourcingMicroservice.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EventSourcingMicroservice.Services
 {
@@ -26,7 +24,7 @@ namespace EventSourcingMicroservice.Services
 
         public double GetSuccessfulSchedulingPercentage()
         {
-            IEnumerable<EndSchedulingAppointmentEvent> endSchedulingAppointmenEvents = (IEnumerable<EndSchedulingAppointmentEvent>) Load(EventType.END_SCHEDULING_APPOINTMENT_EVENT);
+            IEnumerable<EndSchedulingAppointmentEvent> endSchedulingAppointmenEvents = (IEnumerable<EndSchedulingAppointmentEvent>)Load(EventType.END_SCHEDULING_APPOINTMENT_EVENT);
             double sum = 0;
             foreach (EndSchedulingAppointmentEvent e in endSchedulingAppointmenEvents)
             {
@@ -35,7 +33,7 @@ namespace EventSourcingMicroservice.Services
                     sum++;
                 }
             }
-            return sum / (double) endSchedulingAppointmenEvents.Count();
+            return sum / (double)endSchedulingAppointmenEvents.Count();
         }
 
         public double GetAverageSchedulingTime(SchedulingResultType schedulingResult)
@@ -51,7 +49,7 @@ namespace EventSourcingMicroservice.Services
                     successfulSchedulingsCount++;
                 }
             }
-            return sum / (double) successfulSchedulingsCount;
+            return sum / (double)successfulSchedulingsCount;
         }
 
         public Dictionary<int, double> GetAverageTimeSpentPerStep()
@@ -63,7 +61,7 @@ namespace EventSourcingMicroservice.Services
                 Dictionary<int, double> currentPairs = GetAverageTimeSpentPerStepForSingleScheduling(startEvent, endEvent);
                 InsertOneDictionaryToAnother(pairs, currentPairs);
             }
-            return CalculateAverageDictionaryValues(pairs); 
+            return CalculateAverageDictionaryValues(pairs);
         }
 
         public void InsertOneDictionaryToAnother(Dictionary<int, List<double>> first, Dictionary<int, double> second)
@@ -72,7 +70,7 @@ namespace EventSourcingMicroservice.Services
             {
                 if (!first.ContainsKey(key))
                 {
-                    first.Add(key, new List<double>()); 
+                    first.Add(key, new List<double>());
                 }
                 first[key].Add(second[key]);
             }
@@ -83,7 +81,7 @@ namespace EventSourcingMicroservice.Services
             Dictionary<int, double> ret = new Dictionary<int, double> { { 1, 0.0 }, { 2, 0.0 }, { 3, 0.0 }, { 4, 0.0 } };
             foreach (int key in pairs.Keys)
             {
-                ret[key] = pairs[key].Sum() / (double) pairs[key].Count();
+                ret[key] = pairs[key].Sum() / (double)pairs[key].Count();
             }
             return ret;
         }
@@ -94,11 +92,10 @@ namespace EventSourcingMicroservice.Services
             IEnumerable<SchedulingAppointmentStepEvent> steps = GetStepEventsForSingleScheduling(startEvent, endEvent);
             for (int i = 1; i < 5; i++)
             {
-                IEnumerable<SchedulingAppointmentStepEvent> currentSteps = steps.Where(s => s.StepNumber == i);
-                foreach (SchedulingAppointmentStepEvent s in currentSteps)
+                if (steps.Where(s => s.StepNumber == i).Any())
                 {
                     pairs.Add(i, GetAverageTimeSpentPerSingleStep(i, steps, endEvent));
-                }    
+                }
             }
             return pairs;
         }
@@ -118,7 +115,7 @@ namespace EventSourcingMicroservice.Services
                     sum += (endStep.TimeStamp - step.TimeStamp).TotalSeconds;
                 }
             }
-            return sum / (double) currentSteps.Count();
+            return sum == 0 ? 0 : sum / (double)currentSteps.Count();
         }
 
         public EndSchedulingAppointmentEvent GetEndSchedulingAppointmentEventForStartAppointmentEvent(StartSchedulingAppointmentEvent startEvent)
