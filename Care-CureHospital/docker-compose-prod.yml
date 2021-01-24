@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       dockerfile: AppointmentMicroservice/Dockerfile
-    image: astevanovic/appointment:latest
+    image: astevanovic/appointments:latest
     restart: on-failure
     environment:
       DATABASE_USERNAME: b3d96cd31e111f
@@ -25,7 +25,7 @@ services:
     build: 
       context: .
       dockerfile: DocumentsMicroservice/Dockerfile
-    image: documents:latest
+    image:  astevanovic/documents:latest
     restart: on-failure
     environment:
       DATABASE_USERNAME: b3d96cd31e111f
@@ -47,7 +47,7 @@ services:
     build: 
       context: .
       dockerfile: FeedbackMicroservice/Dockerfile
-    image: feedbacks:latest
+    image:  astevanovic/feedbacks:latest
     restart: on-failure
     environment:
       DATABASE_USERNAME: b3d96cd31e111f
@@ -69,7 +69,7 @@ services:
     build: 
       context: .
       dockerfile: UserMicroservice/Dockerfile
-    image: users:latest
+    image:  astevanovic/users:latest
     restart: on-failure
     environment:
       DATABASE_USERNAME: b3d96cd31e111f
@@ -89,7 +89,7 @@ services:
     build:
       context: .
       dockerfile: GatewayWebApi/Dockerfile
-    image: gateway:latest
+    image:  astevanovic/gateway:latest
     restart: on-failure
     environment:
       PURPOSE: prod 
