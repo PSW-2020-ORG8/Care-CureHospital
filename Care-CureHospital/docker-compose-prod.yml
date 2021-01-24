@@ -72,7 +72,7 @@ services:
     image: users:latest
     restart: on-failure
     environment:
-     DATABASE_USERNAME: b3d96cd31e111f
+      DATABASE_USERNAME: b3d96cd31e111f
       DATABASE_PASSWORD: 093b1653
       DATABASE_HOST: eu-cdbr-west-03.cleardb.net
       DATABASE_SCHEMA: heroku_2eb25381370a0b7
