@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace EPrescriptionMicroservice.Controllers
 {
@@ -55,12 +54,9 @@ namespace EPrescriptionMicroservice.Controllers
         }
 
         [HttpPost("send")]
-        public IActionResult SendPrescription()
+        public IActionResult SendPrescription(EPrescription ePrescription)
         {
-            if (env.IsDevelopment())
-            {
-                this.ePrescriptionService.SendPrescriptionSftp();
-            }
+            this.ePrescriptionService.SendPrescriptionSftp(ePrescription);
             return Ok();
         }
     }

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Mvc;
 using ReportMicroservice.Domain;
 using ReportMicroservice.Dto;
 using ReportMicroservice.Mapper;
@@ -16,7 +14,6 @@ namespace ReportMicroservice.Controllers
     {
         private ISftpService sftpService;
         private IReportService reportService;
-        private readonly IWebHostEnvironment env;
 
         public ReportController(IReportService reportService)
         {
@@ -42,10 +39,7 @@ namespace ReportMicroservice.Controllers
         [HttpPost("send")]
         public IActionResult SendReport(Report report)
         {
-            if (env.IsDevelopment())
-            {
-                 this.reportService.SendReportSftp(report);
-            }
+            this.reportService.SendReportSftp(report);
             return Ok();
         }
     }

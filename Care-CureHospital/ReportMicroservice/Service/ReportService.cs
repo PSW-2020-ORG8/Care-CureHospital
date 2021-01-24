@@ -57,7 +57,6 @@ namespace ReportMicroservice.Service
         public void SendReportSftp(Report report)
         {
             String reportFile = "Files\\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-            //  System.IO.File.WriteAllText(reportFile, "Report about medicament consumption:");
             System.IO.File.WriteAllText(reportFile, enterReport(report));
             try
             {
@@ -71,7 +70,7 @@ namespace ReportMicroservice.Service
 
         public String enterReport(Report report)
         {
-            return "Report: \n\n" + "Medicament name: " + report.MedicamentName + "\nQuantity: " + report.Quantity + "\nFrom date: " + report.FromDate + "\nTo date: " + report.ToDate;
+            return "Report about medicament consumption: \n\n" + "Medicament name: " + report.MedicamentName + "\nQuantity: " + report.Quantity + "\nFrom date: " + report.FromDate + "\nTo date: " + report.ToDate;
         }
     }
 }
