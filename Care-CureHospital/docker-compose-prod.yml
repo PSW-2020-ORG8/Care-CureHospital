@@ -1,0 +1,145 @@
+version: "3.8"
+
+services:
+  mysql:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: db:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: HealthClinicDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./TestScripts:/docker-entrypoint-initdb.d/
+    networks:
+      - public_net
+  appointments:
+    build: 
+      context: .
+      dockerfile: AppointmentMicroservice/Dockerfile
+    image: appointments:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: care-cure-db.herokuapp.com
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      DATABASE_PORT: 3306
+      USERS_URL: care-cure-users.herokuapp.com
+      USERS_PORT: "80"
+      SHOW_ENV: 'TRUE'
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6002:80"
+    networks:
+      - public_net
+  documents:
+    build: 
+      context: .
+      dockerfile: DocumentsMicroservice/Dockerfile
+    image: documents:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: care-cure-db.herokuapp.com
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      DATABASE_PORT: 3306
+      USERS_URL: care-cure-users.herokuapp.com
+      USERS_PORT: "80"
+      APPO_URL: care-cure-appointments.herokuapp.com
+      APPO_PORT: "80"
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6003:80"
+    networks:
+      - public_net
+  feedbacks:
+    build: 
+      context: .
+      dockerfile: FeedbackMicroservice/Dockerfile
+    image: feedbacks:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: care-cure-db.herokuapp.com
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      DATABASE_PORT: 3306
+      USERS_URL: care-cure-users.herokuapp.com
+      USERS_PORT: "80"
+      APPO_URL: care-cure-appointments.herokuapp.com
+      APPO_PORT: "80"
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6004:80"
+    networks:
+      - public_net
+  users:
+    build: 
+      context: .
+      dockerfile: UserMicroservice/Dockerfile
+    image: users:latest
+    restart: on-failure
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_HOST: care-cure-db.herokuapp.com
+      DATABASE_SCHEMA: HealthClinicDB
+      DATABASE_SCHEMA_EVENT: EventSourcingDB
+      DATABASE_PORT: 3306
+      APPO_URL: care-cure-appointments.herokuapp.com
+      APPO_PORT: "80"
+    depends_on:
+      - mysql
+    expose: 
+      - "80"
+    ports:
+      - "6005:80"
+    networks:
+      - public_net
+  gateway:
+    build:
+      context: .
+      dockerfile: GatewayWebApi/Dockerfile
+    image: gateway:latest
+    restart: on-failure
+    environment:
+      PURPOSE: prod 
+    depends_on:
+      - appointments
+      - documents
+      - feedbacks
+      - users
+    expose: 
+      - "80"
+    ports:
+      - "6006:80"
+    networks:
+      - public_net
+networks:
+  public_net:
+    driver: bridge
+volumes:
+  mysql-db:

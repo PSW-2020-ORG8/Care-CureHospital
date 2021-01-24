@@ -17,4 +17,4 @@ RUN dotnet publish "UserMicroservice.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "UserMicroservice.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet UserMicroservice.dll
