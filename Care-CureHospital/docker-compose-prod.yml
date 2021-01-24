@@ -1,45 +1,20 @@
 version: "3.8"
 
 services:
-  mysql:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    image: db:latest
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_DATABASE: HealthClinicDB
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - mysql-db:/var/lib/mysql
-      - ./TestScripts:/docker-entrypoint-initdb.d/
-    networks:
-      - public_net
-  appointments:
+  appointment:
     build: 
       context: .
       dockerfile: AppointmentMicroservice/Dockerfile
-    image: appointments:latest
+    image: astevanovic/appointment:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: care-cure-db.herokuapp.com
-      DATABASE_SCHEMA: HealthClinicDB
-      DATABASE_SCHEMA_EVENT: EventSourcingDB
-      DATABASE_PORT: 3306
+      DATABASE_USERNAME: b3d96cd31e111f
+      DATABASE_PASSWORD: 093b1653
+      DATABASE_HOST: eu-cdbr-west-03.cleardb.net
+      DATABASE_SCHEMA: heroku_2eb25381370a0b7
+      DATABASE_SCHEMA_EVENT: heroku_2eb25381370a0b7
       USERS_URL: care-cure-users.herokuapp.com
       USERS_PORT: "80"
-      SHOW_ENV: 'TRUE'
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -53,18 +28,15 @@ services:
     image: documents:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: care-cure-db.herokuapp.com
-      DATABASE_SCHEMA: HealthClinicDB
-      DATABASE_SCHEMA_EVENT: EventSourcingDB
-      DATABASE_PORT: 3306
+      DATABASE_USERNAME: b3d96cd31e111f
+      DATABASE_PASSWORD: 093b1653
+      DATABASE_HOST: eu-cdbr-west-03.cleardb.net
+      DATABASE_SCHEMA: heroku_2eb25381370a0b7
+      DATABASE_SCHEMA_EVENT: heroku_2eb25381370a0b7
       USERS_URL: care-cure-users.herokuapp.com
       USERS_PORT: "80"
       APPO_URL: care-cure-appointments.herokuapp.com
       APPO_PORT: "80"
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -78,18 +50,15 @@ services:
     image: feedbacks:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: care-cure-db.herokuapp.com
-      DATABASE_SCHEMA: HealthClinicDB
-      DATABASE_SCHEMA_EVENT: EventSourcingDB
-      DATABASE_PORT: 3306
+      DATABASE_USERNAME: b3d96cd31e111f
+      DATABASE_PASSWORD: 093b1653
+      DATABASE_HOST: eu-cdbr-west-03.cleardb.net
+      DATABASE_SCHEMA: heroku_2eb25381370a0b7
+      DATABASE_SCHEMA_EVENT: heroku_2eb25381370a0b7
       USERS_URL: care-cure-users.herokuapp.com
       USERS_PORT: "80"
       APPO_URL: care-cure-appointments.herokuapp.com
       APPO_PORT: "80"
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -103,16 +72,13 @@ services:
     image: users:latest
     restart: on-failure
     environment:
-      DATABASE_USERNAME: user
-      DATABASE_PASSWORD: user
-      DATABASE_HOST: care-cure-db.herokuapp.com
-      DATABASE_SCHEMA: HealthClinicDB
-      DATABASE_SCHEMA_EVENT: EventSourcingDB
-      DATABASE_PORT: 3306
+     DATABASE_USERNAME: b3d96cd31e111f
+      DATABASE_PASSWORD: 093b1653
+      DATABASE_HOST: eu-cdbr-west-03.cleardb.net
+      DATABASE_SCHEMA: heroku_2eb25381370a0b7
+      DATABASE_SCHEMA_EVENT: heroku_2eb25381370a0b7
       APPO_URL: care-cure-appointments.herokuapp.com
       APPO_PORT: "80"
-    depends_on:
-      - mysql
     expose: 
       - "80"
     ports:
@@ -141,5 +107,3 @@ services:
 networks:
   public_net:
     driver: bridge
-volumes:
-  mysql-db:
