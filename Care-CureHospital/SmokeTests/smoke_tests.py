@@ -22,5 +22,8 @@ def smoke_test(url):
 
 
 if __name__ == "__main__":
-    smoke_test('https://carecurehospitalwebapp.herokuapp.com/api/doctor/getAllSpecialization')
-    smoke_test('https://carecurehospitalwebapp.herokuapp.com/api/patientFeedback')
+    smoke_test('https://care-cure-appointments.herokuapp.com/')
+    smoke_test('http://care-cure-documents.herokuapp.com/')
+    smoke_test('https://care-cure-feedbacks.herokuapp.com/')
+    smoke_test('https://care-cure-gateway.herokuapp.com/index.html#/')
+    smoke_test('https://care-cure-users.herokuapp.com/')
