@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using ProtocolMicroservice.Domain;
 using ProtocolMicroservice.Dto;
 using ProtocolMicroservice.Mapper;
@@ -13,9 +14,11 @@ namespace ProtocolMicroservice.Controllers
     public class UrgentOrderController : ControllerBase
     {
         private IUrgentOrderService urgentOrderService;
+        private IWebHostEnvironment env;
 
-        public UrgentOrderController(IUrgentOrderService urgentOrderService)
+        public UrgentOrderController(IWebHostEnvironment env, IUrgentOrderService urgentOrderService)
         {
+            this.env = env;
             this.urgentOrderService = urgentOrderService;
         }
 
@@ -31,6 +34,13 @@ namespace ProtocolMicroservice.Controllers
         public IActionResult GetMedicament(UrgentMedicineOrder medicineOrder)
         {
             this.urgentOrderService.SendRequestForOrder(medicineOrder);
+            return Ok();
+        }
+
+        [HttpPost("sftp")]
+        public IActionResult GetMedicamentSftp(UrgentMedicineOrder medicineOrder)
+        {
+            this.urgentOrderService.SendRequestForOrderSftp(medicineOrder);
             return Ok();
         }
     }

@@ -32,6 +32,8 @@ namespace ReportMicroservice
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
             services.AddControllers().AddNewtonsoftJson();
+            services.AddRazorPages();
+
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -57,9 +59,15 @@ namespace ReportMicroservice
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseRouting();
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
             app.UseAuthentication();
@@ -67,6 +75,7 @@ namespace ReportMicroservice
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }

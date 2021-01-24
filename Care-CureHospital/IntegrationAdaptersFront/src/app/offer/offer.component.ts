@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DirectorServiceService } from '../director-service.service';
-import { DoctorService } from '../doctor.service';
+import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http'; 
 import { Offer } from '../models/Offer';
 
@@ -11,7 +11,7 @@ import { Offer } from '../models/Offer';
 })
 export class OfferComponent implements OnInit {
 
-  constructor(private service:DirectorServiceService, public http: HttpClient) { }
+  constructor(private service:DirectorServiceService, public http: HttpClient, private toastr: ToastrService) { }
 
   @Input() off:Offer;
   
@@ -45,9 +45,9 @@ export class OfferComponent implements OnInit {
 
     console.log(this.OfferList);
     this.service.addOffers(val).subscribe(res => {
-      alert(res.toString())
-    });
-      alert("You have successfully added your offer!");
+      console.log(res.toString())
+   });
+    this.toastr.success("Successfully added!")
     }
     
 }

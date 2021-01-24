@@ -32,6 +32,7 @@ namespace EPrescriptionMicroservice
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
             services.AddControllers();
+            services.AddRazorPages();
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -56,16 +57,21 @@ namespace EPrescriptionMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }

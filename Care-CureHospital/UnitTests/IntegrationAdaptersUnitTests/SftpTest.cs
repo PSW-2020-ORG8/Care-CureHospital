@@ -21,5 +21,13 @@ namespace UnitTests.IntegrationAdaptersUnitTests
             var file = mockService.Setup(searchResult => searchResult.UploadFile("Files\\Prescription.json"));
             Assert.NotNull(file);
         }
+
+        [Fact]
+        public void Upload_request()
+        {
+            var mockService = new Mock<ISftpService>();
+            var file = mockService.Setup(searchResult => searchResult.UploadFile("Files\\UrgentOrder.json"));
+            Assert.NotNull(file);
+        }
     }
 }

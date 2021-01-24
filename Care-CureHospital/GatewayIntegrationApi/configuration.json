@@ -191,11 +191,7 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/report/send",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Key",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/urgentorder",
@@ -222,7 +218,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/urgentorder/requested/{name}",
+      "DownstreamPathTemplate": "/api/urgentorder/sftp",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -230,8 +226,8 @@
           "Port": 51767
         }
       ],
-      "UpstreamPathTemplate": "/gateway/urgentorder/requested/{name}",
-      "UpstreamHttpMethod": [ "PUT" ]
+      "UpstreamPathTemplate": "/gateway/urgentorder/sftp",
+      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/eprescription",

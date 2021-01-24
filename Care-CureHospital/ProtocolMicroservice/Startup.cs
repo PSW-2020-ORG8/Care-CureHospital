@@ -25,7 +25,8 @@ namespace ProtocolMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddSingleton<IUrgentOrderService, UrgentOrderService>(order => new UrgentOrderService(new ProtocolRepository(new MySQLStream<UrgentMedicineOrder>())));
+            services.AddSingleton<ISftpService, SftpService>(sftp => new SftpService());
+            services.AddSingleton<IUrgentOrderService, UrgentOrderService>(order => new UrgentOrderService(new ProtocolRepository(new MySQLStream<UrgentMedicineOrder>()), new SftpService()));
             services.AddDbContext<ProtocolDataBaseContext>(options =>
                    options.UseMySql(CreateConnectionStringFromEnvironment()).UseLazyLoadingProxies(), ServiceLifetime.Transient);
             services.AddControllers().AddNewtonsoftJson();

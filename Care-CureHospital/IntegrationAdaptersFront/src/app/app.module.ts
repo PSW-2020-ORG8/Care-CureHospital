@@ -12,6 +12,7 @@ import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { EprescriptionComponent } from './doctor/eprescription/eprescription.component';
 import { MedicamentComponent } from './medicament/medicament.component';
@@ -23,6 +24,8 @@ import { ShowOfferComponent } from './director/show-offer/show-offer.component';
 import { ActiveTenderComponent } from './director/active-tender/active-tender.component';
 import { InactiveTenderComponent } from './director/inactive-tender/inactive-tender.component';
 import { CloseTenderComponent } from './director/close-tender/close-tender.component';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { CloseTenderComponent } from './director/close-tender/close-tender.compo
     FormsModule, 
     ReactiveFormsModule,
     MatTableExporterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [ DirectorServiceService],
   bootstrap: [AppComponent]

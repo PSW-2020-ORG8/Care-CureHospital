@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyMicroservice.Domain;
+using System;
 
 namespace PharmacyMicroservice.Dto
 {
@@ -8,9 +9,9 @@ namespace PharmacyMicroservice.Dto
 
         public String Name { get; set; }
 
-        public String Key { get; set; }
+        public APIKey Key { get; set; }
 
-        public String Link { get; set; }
+        public EndPoint Link { get; set; }
 
         public PharmaciesDto()
         {
