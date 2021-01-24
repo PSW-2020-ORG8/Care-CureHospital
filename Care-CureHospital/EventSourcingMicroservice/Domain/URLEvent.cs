@@ -8,8 +8,9 @@ namespace EventSourcingMicroservice.Domain
     public class URLEvent : DomainEvent
     {
         public EventType EventType;
-        public string Url { get; private set; }
-        public string Method { get; private set; }
+        public string Url { get; set; }
+        public string Method { get; set; }
+
         public URLEvent(string url, string method) : base()
         { 
             Url = url;
