@@ -1,7 +1,7 @@
 export class Pharmacy {
     constructor(
         public  name: string,
-        public key: string,
+        public key: number,
         public link: string,
     ){}
 }

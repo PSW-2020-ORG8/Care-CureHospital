@@ -5,7 +5,8 @@ namespace EPrescriptionMicroservice.Service
 {
     public interface IEPrescriptionService : IService<EPrescription, int>
     {
-        public void SendPrescriptionSftp();
+        public void SendPrescriptionSftp(EPrescription ePrescription);
+
         public List<EPrescription> GetEPrescriptionsForPatient(int patientID);
 
         public List<EPrescription> FindEPrescriptionsForDateParameter(int patientID, string publishingDate);

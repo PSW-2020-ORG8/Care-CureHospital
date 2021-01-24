@@ -8,10 +8,17 @@ namespace ProtocolMicroservice.Service
 {
     public class UrgentOrderService : IUrgentOrderService
     {
+        public ISftpService sftpService;
         public IProtocolRepository protocolRepository;
 
         public UrgentOrderService(IProtocolRepository protocolRepository)
         {
+            this.protocolRepository = protocolRepository;
+        }
+
+        public UrgentOrderService(IProtocolRepository protocolRepository, ISftpService sftpService)
+        {
+            this.sftpService = sftpService;
             this.protocolRepository = protocolRepository;
         }
 
@@ -55,6 +62,25 @@ namespace ProtocolMicroservice.Service
         public void UpdateEntity(UrgentMedicineOrder entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void SendRequestForOrderSftp(UrgentMedicineOrder medicineOrder)
+        {
+            String orderFile = "Files\\UrgentOrder_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json";
+            System.IO.File.WriteAllText(orderFile, enterOrder(medicineOrder));
+            try
+            {
+                sftpService.UploadFile(orderFile);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("The file can not be uploaded, because there where errors on the server side. Please try again later!", e);
+            }
+        }
+
+        public String enterOrder(UrgentMedicineOrder medicineOrder)
+        {
+            return "Urgent order: \n\n" + "Medicament id: " + medicineOrder.Id +  "\nMedicament name: " + medicineOrder.Name + "\nQuantity: " + medicineOrder.Quantity;
         }
     }
 }

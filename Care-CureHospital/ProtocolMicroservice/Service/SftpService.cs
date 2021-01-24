@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Net.Mail;
 
-namespace ReportMicroservice.Service
+namespace ProtocolMicroservice.Service
 {
     public class SftpService : ISftpService
     {
@@ -13,7 +13,7 @@ namespace ReportMicroservice.Service
 
         public void UploadFile(string file)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.19", "tester", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.13", "user", "password")))
             {
                 client.Connect();
                 client.UploadFile(File.OpenRead(file), @"" + Path.GetFileName(file), x => { Console.WriteLine(x); });

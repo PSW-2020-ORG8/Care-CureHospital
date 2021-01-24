@@ -13,8 +13,9 @@
             <br/>
             <br/>
             <div  style="text-align:center" >
-              <button mat-raised-button class="buttonHttp" (click)="sendHttpRequest()">Send-Http</button>
-              <button mat-raised-button class="buttonGrpc">Send-Grpc</button>
+                <!--SLANJE ZAHTEVA PREKO JEDNOG DUGMETA, KAO SFTP ILI KAO HTTP U ZAVISNOSTI OD END POINTA APOTEKE-->
+              <button mat-raised-button class="buttonHttp" (click)="sendRequest()">Send</button>
+            <!--<button mat-raised-button class="buttonGrpc">Send-Grpc</button>-->  
             </div>
             </form>
     </div>
