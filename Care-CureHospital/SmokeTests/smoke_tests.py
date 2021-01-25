@@ -19,7 +19,7 @@ def smoke_test(url):
         sys.exit(-1)
 
 
-if name == "main":
+if __name__ == "__main__":
     smoke_test('https://care-cure-appointments.herokuapp.com/')
     smoke_test('http://care-cure-documents.herokuapp.com/')
     smoke_test('https://care-cure-feedbacks.herokuapp.com/')
