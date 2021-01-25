@@ -9,7 +9,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class UserLoginPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/userLogin";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/userLogin";
         private IWebElement usernameElement => driver.FindElement(By.Id("username-input"));
         private IWebElement passwordElement => driver.FindElement(By.Id("password-input"));
         private IWebElement submitButtonElement => driver.FindElement(By.Id("sign-in-button"));
@@ -51,13 +51,13 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForPatientHomePage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientHomePage.URI));
         }
 
         public void WaitForAdministratorHomePage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientsFeedbacksPage.URI));
         }
 

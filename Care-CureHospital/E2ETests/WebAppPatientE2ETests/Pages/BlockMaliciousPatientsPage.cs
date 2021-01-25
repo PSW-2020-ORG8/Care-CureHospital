@@ -10,7 +10,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class BlockMaliciousPatientsPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/blockMaliciousPatients";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/blockMaliciousPatients";
         private IWebElement blockMaliciousPatientButton => driver.FindElement(By.ClassName("block-malicious-patient-btn"));
         private ReadOnlyCollection<IWebElement> patientsForBlocking => driver.FindElements(By.ClassName("patient-for-blocking"));
         private IWebElement blockedPatientTd => driver.FindElement(By.ClassName("blocked-patient-td"));
@@ -23,7 +23,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(condition =>
             {
                 try
@@ -43,7 +43,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void EnsureTableDataIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(condition =>
             {
                 try
@@ -83,7 +83,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForAlertDialog()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
@@ -104,7 +104,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForMaliciousPatientsPage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(URI));
         }
 

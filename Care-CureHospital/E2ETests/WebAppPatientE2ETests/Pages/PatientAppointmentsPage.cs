@@ -10,7 +10,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     class PatientAppointmentsPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/patientAppointments";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/patientAppointments";
         private IWebElement cancelAppointmentButton;
         private ReadOnlyCollection<IWebElement> patientAppointments => driver.FindElements(By.XPath("//div[@class='appointments-info']"));
 
@@ -57,7 +57,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(condition =>
             {
                 try
@@ -77,7 +77,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForButtonClick()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientAppointmentsPage.URI));
         }
 

@@ -7,7 +7,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class PatientHomePage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/patientMainPage";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/patientMainPage";
         private IWebElement appointmetsLinkElement => driver.FindElement(By.Id("appointments-link"));
         private IWebElement feedbacksLinkElement => driver.FindElement(By.Id("feedbacks-link"));
 
@@ -28,13 +28,13 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForPublishedFeedbacksPage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PublishedFeedbacksPage.URI));
         }
 
         public void WaitForAppointmentsPage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientAppointmentsPage.URI));
         }
 

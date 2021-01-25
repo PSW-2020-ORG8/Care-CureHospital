@@ -11,7 +11,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     public class PublishedFeedbacksPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/";
         private ReadOnlyCollection<IWebElement> publishedFeedbacks => driver.FindElements(By.XPath("//div[@class='feedback-info']"));
         private IWebElement postFeedbackLinkElement => driver.FindElement(By.Id("post-feedback-link"));
         private IWebElement allFeedbacksLinkElement => driver.FindElement(By.Id("all-feedbacks-link"));
@@ -23,7 +23,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(condition =>
             {
                 try
@@ -68,13 +68,13 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForAllFeedbacksPage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PatientsFeedbacksPage.URI));
         }
 
         public void WaitForPostFeedbacksPage()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(PostFeedbackPage.URI));
         }
 
