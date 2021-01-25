@@ -9,7 +9,7 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
     class PostFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:60370/index.html#/postFeedback";
+        public const string URI = "https://care-cure-gateway.herokuapp.com/index.html#/postFeedback";
         private IWebElement textField => driver.FindElement(By.Id("feedbackID"));
         private IWebElement anonyimusCheckbox => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement publishedCheckbox => driver.FindElement(By.Id("isForPublishing"));
@@ -66,13 +66,13 @@ namespace E2ETests.WebAppPatientE2ETests.Pages
 
         public void WaitForAlertDialog()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
         public void WaitForButton()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(condition =>
             {
                 try
