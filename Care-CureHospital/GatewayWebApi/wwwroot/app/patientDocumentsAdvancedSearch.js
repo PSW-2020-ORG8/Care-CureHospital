@@ -223,7 +223,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 									{{report.comment}}
 								</div>
 								<div class="reviewReport-btn">
-										<button type="button" @click="">Prikaži</button>
+										<button type="button" @click="showReport()">Prikaži</button>
 								</div>
 							</div>
 						</div>		
@@ -247,7 +247,7 @@ Vue.component("patientDocumentsAdvancedSearch", {
 								{{prescription.comment}}
 							</div>
 							<div class="reviewReport-btn">
-									<button type="button" @click="">Prikaži</button>
+									<button type="button" @click="showPrescription()">Prikaži</button>
 							</div>
 						</div>
 					</div>		
@@ -476,6 +476,14 @@ Vue.component("patientDocumentsAdvancedSearch", {
 			this.paramInputDict = {},
 			this.logicOperatorsList = [],
 			this.prescriptionsResult = this.prescriptionsForPatient					
+		},
+
+		showReport: function () {
+			toast('Prikaz izveštaja nije dostupan');
+		},
+
+		showPrescription: function () {
+			toast('Prikaz recepta nije dostupan');
 		},
 
 		logOut: function () {

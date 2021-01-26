@@ -75,7 +75,7 @@ Vue.component("patientAppointments", {
 						<h3 style="margin-top:8px"><i>Ordinacija:</i> {{appointment.room}}</h3>
 						<h3 style="margin-top:8px"><i>Vreme:</i> {{appointment.period}}</h3>
 						<p>{{appointment.date}}</p>
-						<div v-if="appointment.surveyFilled === false" class="cancelAppointment-btn">
+						<div class="cancelAppointment-btn">
 							<button type="button" @click="fillSurvey(appointment)">Popuni anketu</button>
 							<div class="documents-btn">
 							<button type="button" @click="displayReport(appointment.medicalExaminationId)">Izveštaj</button>
@@ -84,9 +84,9 @@ Vue.component("patientAppointments", {
 								<button type="button" @click="displayPrescription(appointment.medicalExaminationId)">Recept</button>
 							</div>	
 						</div>	
-						<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">
+						<!--<div v-if="appointment.surveyFilled === true" class="appointmentsParagraph1">
 							<p>Popunili ste anketu</p>
-						</div>						
+						</div>-->					
 					</div>
 				</div>		
 			</div>
@@ -147,7 +147,11 @@ Vue.component("patientAppointments", {
 		},
 
 		fillSurvey: function (selectedAppointment) {
-			this.$router.push({ name: 'surveyAfterExamination', params: { appointment: selectedAppointment } })
+			if (selectedAppointment.surveyFilled === true) {
+				toast('Već ste popunili anketu za ovaj pregled')
+			} else {
+				this.$router.push({ name: 'surveyAfterExamination', params: { appointment: selectedAppointment } })
+            }		
 		},
 
 		displayReport: function (medicalExaminationId) {
@@ -242,20 +246,7 @@ Vue.component("patientAppointments", {
 			localStorage.removeItem("validToken");
 		},
 		clickSchedulingStandard: function() {
-			/*axios.post('gateway/appointment/saveSchedulingAppointmentStepEvent', {
-				patientUsername: this.patient.username,
-				stepNumber: 1,
-				stepType: "FORWARD"
-			}, {
-				headers: {
-					'Authorization': 'Bearer ' + this.userToken
-				}
-			}).catch(error => {
-				if (error.response.status === 401 || error.response.status === 403) {
-					toast('Nemate pravo pristupa stranici!')
-					this.$router.push({ name: 'userLogin' })
-				}
-			});*/
+			
         }
 	},
 	computed: {

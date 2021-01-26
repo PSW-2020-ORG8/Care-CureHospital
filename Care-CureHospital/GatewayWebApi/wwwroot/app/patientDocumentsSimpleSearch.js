@@ -144,7 +144,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 									{{report.comment}}
 								</div>
 								<div class="reviewReport-btn">
-										<button type="button" @click="">Prikaži</button>
+										<button type="button" @click="showReport()">Prikaži</button>
 								</div>
 							</div>
 						</div>		
@@ -168,7 +168,7 @@ Vue.component("patientDocumentsSimpleSearch", {
 								{{prescription.comment}}
 							</div>
 							<div class="reviewReport-btn">
-									<button type="button" @click="">Prikaži</button>
+									<button type="button" @click="showPrescription()">Prikaži</button>
 							</div>
 						</div>
 					</div>		
@@ -254,6 +254,15 @@ Vue.component("patientDocumentsSimpleSearch", {
 			this.publishingDate = '',
 			this.prescriptionsResult = this.prescriptionsForPatient
 		},
+
+		showReport: function () {
+			toast('Prikaz izveštaja nije dostupan');
+		},
+
+		showPrescription: function () {
+			toast('Prikaz recepta nije dostupan');
+		},
+
 		logOut: function () {
 			localStorage.removeItem("validToken");
 		}
