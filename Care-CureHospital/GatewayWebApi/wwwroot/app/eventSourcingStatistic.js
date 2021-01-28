@@ -73,19 +73,19 @@ Vue.component("eventSourcingStatistic", {
 				<td v-if="this.mostOftenQuitingStep === 4" style="height:29px">Izbor termina</td>
 			</tr>
 			<tr>
-				<td style="height:29px">Prosešno vreme provedeno na izboru datuma</td>
+				<td style="height:29px">Prosečno vreme provedeno na izboru datuma</td>
 				<td style="height:29px">{{this.dictAvgTimePerStep[1].toFixed(2)}}s</td>
 			</tr>
 			<tr>
-				<td style="height:29px">Prosešno vreme provedeno na izboru specijalizacije doktora</td>
+				<td style="height:29px">Prosečno vreme provedeno na izboru specijalizacije doktora</td>
 				<td style="height:29px">{{this.dictAvgTimePerStep[2].toFixed(2)}}s</td>
 			</tr>
 			<tr>
-				<td style="height:29px">Prosešno vreme provedeno na izboru doktora</td>
+				<td style="height:29px">Prosečno vreme provedeno na izboru doktora</td>
 				<td style="height:29px">{{this.dictAvgTimePerStep[3].toFixed(2)}}s</td>
 			</tr>
 			<tr>
-				<td style="height:29px">Prosešno vreme provedeno na izboru određenog termina</td>
+				<td style="height:29px">Prosečno vreme provedeno na izboru određenog termina</td>
 				<td style="height:29px">{{this.dictAvgTimePerStep[4].toFixed(2)}}s</td>
 			</tr>		
 		</table> 
